@@ -1,0 +1,66 @@
+<resources>
+    <string name="app_name">Klik Sembuh</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_term_and_policy">Syarat dan Ketentuan</string>
+    <string name="title_activity_login">Sign in</string>
+    <string name="title_activity_register">Sign Up</string>
+    <string name="title_activity_forgot_password">Forgot Password</string>
+    <string name="title_activity_verification">Verification</string>
+    <string name="title_activity_reset_passwoord" translatable="false">Reset Password</string>
+
+    <!-- Strings related to login -->
+    <string name="screen1">Melihat jadwal dan membuat janji dengan dokter menjadi mudah dengan KlikSembuh. Pilih spesialisasi dan Instansi Keseharan dengan detail.</string>
+    <string name="forgot_password">Masukan alamat email
+        atau no. handphone anda dan kami akan mengirimkan instruksi untuk mengganti password.</string>
+    <string name="prompt_email">Email</string>
+    <string name="kode_verifikasi">Kode verifikasi dikirimkan melalui sms</string>
+    <string name="ketentuan">Ketentuan Penggunaan</string>
+    <string name="lbl_kode_verify">Kode Verifikasi</string>
+    <string name="ketentuan1">Dengan mengunduh, memasang, dan/atau menggunakan
+Aplikasi KLIKSEMBUH("Aplikasi"), Anda setuju bahwa
+telah membaca, memahami, menerima dan menyetujui ketentuan penggunaan ini
+("Ketentuan Penggunaan"). Ketentuan Penggunaan ini merupakan susatu perjanjian
+sah antara Anda dan PT KLIKSEMBUH Indonesia dan layanan dan Aplikasi
+(sebagaimana didefinisikan dibawah ini) berlaku pada kunjungan dan
+penggunaan anda pada situs web kamu di www.kliksembuh.com("Situs Web").</string>
+    <string name="ketentuan2">Silahkan membatalkan akun Anda (jika Anda telah mendaftar untuk aplikasi)
+dan secara permanen menghapus aplikasi dari perangkat anda jika anda tidak setuju
+atau tidak ingin masuk kedalam ketentuan penggunaan.
+</string>
+    <string name="ketentuan3">MOHON Anda MEMERIKSA KETENTUAN PENGGUNAAN
+DAN KEBIJAKAN PRIVASI KAMI DENGAN SEKSAMA SEBELUM MENGUNDUH APLIKASI ATAU
+MENGGUNAKAN LAYANAN KAMI UNTUK PERTAMA KALI.</string>
+    <string name="prompt_password">Password</string>
+    <string name="forgot_password_text"><u>Forgot Your Password ?</u></string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="first_name">First Name</string>
+    <string name="promo">Kirimkan saya penawaran dan promo.</string>
+    <string name="last_name">Last Name</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_forgot_password">Reset Password</string>
+    <string name="verify">Verify</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="action_create_account">Create Account</string>
+    <string name="action_search">Search</string>
+    <string name="action_favorite">Favorite</string>
+    <string name="action_myappointment">My Appointment</string>
+    <string name="action_sign_in_facebook">Continue With Facebook</string>
+    <string name="action_already_login">Already have an account? Login</string>
+    <string name="action_sign_in_google">Continue With Google+</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+    <string name="title_activity_home">HomeActivity</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+    <string name="title_activity_appointment_detail">Map</string>
+
+    <!--facebook-->
+    <string name="facebook_app_id">633914953464978</string>
+</resources>

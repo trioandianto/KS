@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title="My Account">
+        <menu>
+            <item
+                android:id="@+id/nav_search"
+                android:icon="@drawable/ic_account_balance_24dp"
+                android:title="Search" />
+            <item
+                android:id="@+id/nav_favorite"
+                android:icon="@drawable/ic_favorite_24dp"
+                android:title="Favorite" />
+            <item
+                android:id="@+id/nav_appointment"
+                android:icon="@drawable/ic_my_library_books_24dp"
+                android:title="My Appointment" />
+        </menu>
+    </item>
+    <item android:title="Vital Sign">
+        <menu>
+            <item
+                android:id="@+id/nav_tek_darah"
+                android:icon="@drawable/ic_public_24dp"
+                android:title="Tekanan Darah" />
+            <item
+                android:id="@+id/nav_det_jantung"
+                android:icon="@drawable/ic_public_24dp"
+                android:title="Detak Jantung" />
+            <item
+                android:id="@+id/nav_temp"
+                android:icon="@drawable/ic_public_24dp"
+                android:title="Temperature" />
+        </menu>
+    </item>
+    <item android:title="Setting">
+        <menu>
+            <item
+                android:id="@+id/nav_bahasa"
+                android:icon="@drawable/ic_public_24dp"
+                android:title="Bahasa"/>
+            <item
+                android:id="@+id/nav_bug_reporter"
+                android:icon="@drawable/ic_error_24dp"
+                android:title="Bug Reporter"/>
+        </menu>
+    </item>
+
+</menu>
