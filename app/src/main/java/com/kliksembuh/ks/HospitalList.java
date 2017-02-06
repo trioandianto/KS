@@ -1,6 +1,7 @@
 package com.kliksembuh.ks;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -49,6 +50,24 @@ public class HospitalList extends Activity {
                 // Do something
                 // Ex. display msg with hospital id from view.getTag
                 Toast.makeText(getApplicationContext(), "Clicked hospital id = " + view.getTag(), Toast.LENGTH_SHORT).show();
+
+                // Go to another activity
+                if (position == 0){
+                    Intent myIntent = new Intent(view.getContext(),DoctorList.class);
+                    startActivityForResult(myIntent, 0);
+                }
+                if (position == 1){
+                    Intent myIntent = new Intent(view.getContext(),DoctorList.class);
+                    startActivityForResult(myIntent, 1);
+                }
+                if (position == 2){
+                    Intent myIntent = new Intent(HospitalList.this,DoctorList.class);
+                    startActivityForResult(myIntent, 0);
+                }
+                if (position == 3){
+                    Intent myIntent = new Intent(view.getContext(),DoctorList.class);
+                    startActivityForResult(myIntent, 2);
+                }
             }
 
         });
