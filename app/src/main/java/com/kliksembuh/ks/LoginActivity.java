@@ -3,24 +3,24 @@ package com.kliksembuh.ks;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
-import android.app.ProgressDialog;
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.support.annotation.NonNull;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
 import android.app.LoaderManager.LoaderCallbacks;
-
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.CursorLoader;
+import android.content.Intent;
 import android.content.Loader;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.AsyncTask;
-
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
-import android.support.v7.widget.Toolbar;
+import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
+import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
@@ -31,24 +31,36 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
-import com.facebook.appevents.AppEventsLogger;
-import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.kliksembuh.ks.models.DatabaseHandler;
+import com.kliksembuh.ks.models.UserFunctions;
 
-import org.w3c.dom.Text;
+import org.json.JSONException;
+import org.json.JSONObject;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import java.lang.Object;
+
+import javax.net.ssl.HttpsURLConnection;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
@@ -62,13 +74,18 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
      */
     private static final int REQUEST_READ_CONTACTS = 0;
 
+    private static String KEY_SUCCESS = "success";
+    private static String KEY_UID = "uid";
+    private static String KEY_USERNAME = "uname";
+    private static String KEY_FIRSTNAME = "fname";
+    private static String KEY_LASTNAME = "lname";
+    private static String KEY_EMAIL = "email";
+    private static String KEY_CREATED_AT = "created_at";
+
     /**
      * A dummy authentication store containing known user names and passwords.
      * TODO: remove after connecting to a real authentication system.
      */
-    private static final String[] DUMMY_CREDENTIALS = new String[]{
-            "foo@example.com:hello", "bar@example.com:world"
-    };
     /**
      * Keep track of the login task to ensure we can cancel it if requested.
      */
@@ -121,7 +138,25 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         mEmailSignInButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                attemptLogin();
+                if (  ( !mEmailView.getText().toString().equals("")) && ( !mPasswordView.getText().toString().equals("")) )
+                {
+                    NetAsync(view);
+                }
+                else if ( ( !mEmailView.getText().toString().equals("")) )
+                {
+                    Toast.makeText(getApplicationContext(),
+                            "Password field empty", Toast.LENGTH_SHORT).show();
+                }
+                else if ( ( !mPasswordView.getText().toString().equals("")) )
+                {
+                    Toast.makeText(getApplicationContext(),
+                            "Email field empty", Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    Toast.makeText(getApplicationContext(),
+                            "Email and Password field are empty", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -161,6 +196,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         //Login Google
 
     }
+
     private void initializeControls(){
         btnsign = (SignInButton)findViewById(R.id.btnwithgplus);
         btnsign.setOnClickListener((OnClickListener) this);
@@ -385,6 +421,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         private final String mEmail;
         private final String mPassword;
 
+        HttpURLConnection urlConnection = null;
+        BufferedReader reader = null;
+
         UserLoginTask(String email, String password) {
             mEmail = email;
             mPassword = password;
@@ -393,25 +432,74 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         @Override
         protected Boolean doInBackground(Void... params) {
             // TODO: attempt authentication against a network service.
-
-            try {
-                // Simulate network access.
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
+            ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo netInfo = cm.getActiveNetworkInfo();
+            if(netInfo==null || !netInfo.isConnected()) {
                 return false;
             }
+                try {
+                    // Simulate network access.
+                    URL url = new URL("http://192.168.1.6/UserAPI/api/users/login");
+                    urlConnection = (HttpsURLConnection) url.openConnection();
+                    urlConnection.setReadTimeout(10000);
+                    urlConnection.setConnectTimeout(15000);
+                    urlConnection.setRequestMethod("POST");
+                    urlConnection.setDoInput(true);
+                    urlConnection.setDoOutput(true);
 
-            for (String credential : DUMMY_CREDENTIALS) {
-                String[] pieces = credential.split(":");
-                if (pieces[0].equals(mEmail)) {
-                    // Account exists, return true if the password matches.
-                    return pieces[1].equals(mPassword);
+                    Uri.Builder builder = new Uri.Builder()
+                            .appendQueryParameter("username", mEmail)
+                            .appendQueryParameter("password", mPassword);
+                    String query = builder.build().getEncodedQuery();
+
+                    OutputStream os = urlConnection.getOutputStream();
+                    BufferedWriter writer = new BufferedWriter(
+                            new OutputStreamWriter(os, "UTF-8"));
+                    writer.write(query);
+                    writer.flush();
+                    writer.close();
+                    os.close();
+
+                    urlConnection.connect();
+
+                    // Read the input stream into a String
+                    InputStream inputStream = urlConnection.getInputStream();
+                    StringBuffer buffer = new StringBuffer();
+                    if (inputStream == null) {
+                        // Nothing to do.
+                        return false;
+                    }
+                    // reader = new BufferedReader(new InputStreamReader(inputStream));
+
+                    if (buffer.length() == 0) {
+                        // Stream was empty.  No point in parsing.
+                        return false;
+                    }
+
+                    String jsonString = buffer.toString();
+
+
+                    urlConnection.setConnectTimeout(3000);
+                    urlConnection.connect();
+                    if (urlConnection.getResponseCode() == 200) {
+//                        try {
+//
+//                        }
+                        return true;
+                    }
+
+                }catch (MalformedURLException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
-            }
 
             // TODO: register the new account here.
-            return true;
+            Intent i = new Intent(LoginActivity.this, HomeActivity.class);
+            startActivity(i);
+            return false;
         }
+
 
         @Override
         protected void onPostExecute(final Boolean success) {
@@ -419,7 +507,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             showProgress(false);
 
             if (success) {
-                finish();
+                Intent i = new Intent(LoginActivity.this, HomeActivity.class);
+                startActivity(i);
             } else {
                 mPasswordView.setError(getString(R.string.error_incorrect_password));
                 mPasswordView.requestFocus();
@@ -430,6 +519,133 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         protected void onCancelled() {
             mAuthTask = null;
             showProgress(false);
+        }
+    }
+
+    private class NetCheck extends AsyncTask<String, Void, Boolean>{
+        private ProgressDialog nDialog;
+
+        @Override
+        protected void onPreExecute(){
+            super.onPreExecute();
+            nDialog = new ProgressDialog(LoginActivity.this);
+            nDialog.setMessage("Loading..");
+            nDialog.setTitle("Checking Network");
+            nDialog.setIndeterminate(false);
+            nDialog.setCancelable(true);
+            nDialog.show();
+        }
+
+        @Override
+        protected Boolean doInBackground(String... args  ) {
+            ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo netInfo = cm.getActiveNetworkInfo();
+            if (netInfo != null && netInfo.isConnected()) {
+                try {
+                    URL url = new URL("http://192.168.1.29/UserAPI/api/users/login");
+                    HttpURLConnection urlc = (HttpURLConnection) url.openConnection();
+                    urlc.setConnectTimeout(3000);
+                    urlc.connect();
+                    if (urlc.getResponseCode() == 200) {
+                        return true;
+                    }
+                } catch (MalformedURLException e1) {
+                    // TODO Auto-generated catch block
+                    e1.printStackTrace();
+                } catch (IOException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            }
+            return true;
+        }
+
+        @Override
+        protected void onPostExecute(Boolean th){
+
+            if(th == true){
+                nDialog.dismiss();
+                new ProcessLogin().execute();
+            }
+            else{
+                nDialog.dismiss();
+                mPasswordView.setText("Error in Network Connection");
+            }
+        }
+    }
+    public void NetAsync(View view){
+        new NetCheck().execute();
+    }
+    private class ProcessLogin extends AsyncTask<String, String, JSONObject> {
+
+        private ProgressDialog pDialog;
+
+        String email,password;
+
+
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+            mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
+            mPasswordView = (EditText) findViewById(R.id.password);
+            email = mEmailView.getText().toString();
+            password = mPasswordView.getText().toString();
+            pDialog = new ProgressDialog(LoginActivity.this);
+            pDialog.setTitle("Contacting Servers");
+            pDialog.setMessage("Logging in ...");
+            pDialog.setIndeterminate(false);
+            pDialog.setCancelable(true);
+            pDialog.show();
+        }
+
+
+        @Override
+        protected JSONObject doInBackground(String... args) {
+
+            UserFunctions userFunction = new UserFunctions();
+            JSONObject json = userFunction.loginUser(email, password);
+            return json;
+        }
+        @Override
+        protected void onPostExecute(JSONObject json) {
+            try {
+                if (json.getString(KEY_SUCCESS) != null) {
+
+                    String res = json.getString(KEY_SUCCESS);
+
+                    if (Integer.parseInt(res) == 1) {
+                        pDialog.setMessage("Loading User Space");
+                        pDialog.setTitle("Getting Data");
+                        DatabaseHandler db = new DatabaseHandler(getApplicationContext());
+                        JSONObject json_user = json.getJSONObject("user");
+                        /**
+                         * Clear all previous data in SQlite database.
+                         **/
+                        UserFunctions logout = new UserFunctions();
+                        logout.logoutUser(getApplicationContext());
+                        db.addUser(json_user.getString(KEY_FIRSTNAME), json_user.getString(KEY_LASTNAME), json_user.getString(KEY_EMAIL), json_user.getString(KEY_USERNAME), json_user.getString(KEY_UID), json_user.getString(KEY_CREATED_AT));
+                        /**
+                         *If JSON array details are stored in SQlite it launches the User Panel.
+                         **/
+                        Intent upanel = new Intent(getApplicationContext(), HomeActivity.class);
+                        upanel.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        pDialog.dismiss();
+                        startActivity(upanel);
+                        /**
+                         * Close Login Screen
+                         **/
+                        finish();
+                    } else {
+
+                        pDialog.dismiss();
+                        mPasswordView.setText("Incorrect username/password");
+                    }
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         }
     }
 }
