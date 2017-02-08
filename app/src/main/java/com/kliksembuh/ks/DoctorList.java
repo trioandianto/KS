@@ -1,5 +1,6 @@
 package com.kliksembuh.ks;
 
+import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -10,7 +11,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DoctorList extends AppCompatActivity {
+public class DoctorList extends Activity {
 
     private ListView lvDoctor;
     private DoctorListAdapter dAdapter;

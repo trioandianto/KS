@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -44,6 +45,7 @@ public class HospitalListAdapter extends BaseAdapter {
         ImageView imgView = (ImageView)newView.findViewById(R.id.iv_hospital_pic);
         TextView tvName = (TextView)newView.findViewById(R.id.tv_name);
         TextView tvAddress = (TextView)newView.findViewById(R.id.tv_address);
+        Button btnBpjs = (Button)newView.findViewById(R.id.btn_bpjs); 
         // Set text for TextView
         imgView.setImageResource(mHospitalList.get(position).getHospital_pic_id());
         tvName.setText(mHospitalList.get(position).getName());

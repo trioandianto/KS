@@ -44,7 +44,7 @@ public class HospitalList extends Activity {
         hAdapter = new HospitalListAdapter(getApplicationContext(), mHospitalList);
         lvHospital.setAdapter(hAdapter);
 
-        lvHospital.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+            lvHospital.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 // Do something
@@ -58,7 +58,7 @@ public class HospitalList extends Activity {
                 }
                 if (position == 1){
                     Intent myIntent = new Intent(view.getContext(),DoctorList.class);
-                    startActivityForResult(myIntent, 1);
+                    startActivityForResult(myIntent, 0);
                 }
                 if (position == 2){
                     Intent myIntent = new Intent(HospitalList.this,DoctorList.class);
