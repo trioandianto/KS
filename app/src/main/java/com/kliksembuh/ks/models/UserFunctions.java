@@ -14,7 +14,7 @@ public class UserFunctions {
     private JSONParser jsonParser;
 
     //URL of the PHP API WORKING!!!!!!
-    private static String loginURL = "http://unps.comli.com/learn2crack_login_api/index.php";
+    private static String loginURL = "http://192.168.1.29/UserAPI/api/users/login";
     private static String registerURL = "http://unps.comli.com/learn2crack_login_api/index.php";
     private static String forpassURL = "http://unps.comli.com/learn2crack_login_api/index.php";
     private static String chgpassURL = "http://unps.comli.com/learn2crack_login_api/index.php";
@@ -32,7 +32,6 @@ public class UserFunctions {
     public JSONObject loginUser(String email, String password){
         // Building Parameters
         List<NameValuePair> params = new ArrayList<NameValuePair>();
-        params.add(new BasicNameValuePair("tag", login_tag));
         params.add(new BasicNameValuePair("email", email));
         params.add(new BasicNameValuePair("password", password));
         JSONObject json = jsonParser.getJSONFromUrl(loginURL,params);

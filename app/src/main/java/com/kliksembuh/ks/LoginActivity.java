@@ -31,7 +31,6 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -51,13 +50,15 @@ import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
-import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.net.ssl.HttpsURLConnection;
@@ -73,6 +74,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
      * Id to identity READ_CONTACTS permission request.
      */
     private static final int REQUEST_READ_CONTACTS = 0;
+    String response = null;
+    private ProgressDialog nDialog;
 
     private static String KEY_SUCCESS = "success";
     private static String KEY_UID = "uid";
@@ -123,12 +126,12 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 return false;
             }
         });
-        TextView textView = (TextView)findViewById(R.id.linkforgotpassword);
+        TextView textView = (TextView) findViewById(R.id.linkforgotpassword);
         textView.setOnClickListener(new OnClickListener() {
 
             @Override
             public void onClick(View view) {
-                Intent myIntent = new Intent(view.getContext(),ResetPasswordActivity.class);
+                Intent myIntent = new Intent(view.getContext(), ResetPasswordActivity.class);
                 startActivityForResult(myIntent, 0);
             }
 
@@ -138,25 +141,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         mEmailSignInButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (  ( !mEmailView.getText().toString().equals("")) && ( !mPasswordView.getText().toString().equals("")) )
-                {
-                    NetAsync(view);
-                }
-                else if ( ( !mEmailView.getText().toString().equals("")) )
-                {
-                    Toast.makeText(getApplicationContext(),
-                            "Password field empty", Toast.LENGTH_SHORT).show();
-                }
-                else if ( ( !mPasswordView.getText().toString().equals("")) )
-                {
-                    Toast.makeText(getApplicationContext(),
-                            "Email field empty", Toast.LENGTH_SHORT).show();
-                }
-                else
-                {
-                    Toast.makeText(getApplicationContext(),
-                            "Email and Password field are empty", Toast.LENGTH_SHORT).show();
-                }
+                attemptLogin();
             }
         });
 
@@ -167,7 +152,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         btnregister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent myIntent = new Intent(view.getContext(),RegisterActivity.class);
+                Intent myIntent = new Intent(view.getContext(), RegisterActivity.class);
                 startActivityForResult(myIntent, 0);
             }
         });
@@ -197,11 +182,21 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
     }
 
-    private void initializeControls(){
-        btnsign = (SignInButton)findViewById(R.id.btnwithgplus);
+    public void onLogin(View view) {
+        String email = mEmailView.getText().toString();
+        String password = mPasswordView.getText().toString();
+        String type = "login";
+        ConnectionCheck connectionCheck = new ConnectionCheck(this);
+        connectionCheck.execute(type, email, password);
+
+    }
+
+    private void initializeControls() {
+        btnsign = (SignInButton) findViewById(R.id.btnwithgplus);
         btnsign.setOnClickListener((OnClickListener) this);
     }
-    private void signIn(){
+
+    private void signIn() {
         Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
         startActivityForResult(signInIntent, 0);
     }
@@ -211,7 +206,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         callbackManager.onActivityResult(requestCode, resultCode, data);
     }
 
-    public void startRegister(View view){
+    public void startRegister(View view) {
         startActivity(new Intent(this, RegisterActivity.class));
     }
 
@@ -308,7 +303,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             // perform the user login attempt.
             showProgress(true);
             mAuthTask = new UserLoginTask(email, password);
-            mAuthTask.execute((Void) null);
+            mAuthTask.execute((String) null);
         }
     }
 
@@ -416,7 +411,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
      * Represents an asynchronous login/registration task used to authenticate
      * the user.
      */
-    public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
+    public class UserLoginTask extends AsyncTask<String, Void, Boolean> {
 
         private final String mEmail;
         private final String mPassword;
@@ -430,85 +425,113 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         }
 
         @Override
-        protected Boolean doInBackground(Void... params) {
+        protected Boolean doInBackground(String ... params) {
             // TODO: attempt authentication against a network service.
             ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
             NetworkInfo netInfo = cm.getActiveNetworkInfo();
-            if(netInfo==null || !netInfo.isConnected()) {
-                return false;
-            }
+            if (netInfo != null && netInfo.isConnected()) {
                 try {
-                    // Simulate network access.
-                    URL url = new URL("http://192.168.1.6/UserAPI/api/users/login");
-                    urlConnection = (HttpsURLConnection) url.openConnection();
-                    urlConnection.setReadTimeout(10000);
-                    urlConnection.setConnectTimeout(15000);
-                    urlConnection.setRequestMethod("POST");
-                    urlConnection.setDoInput(true);
-                    urlConnection.setDoOutput(true);
-
-                    Uri.Builder builder = new Uri.Builder()
-                            .appendQueryParameter("username", mEmail)
-                            .appendQueryParameter("password", mPassword);
-                    String query = builder.build().getEncodedQuery();
-
-                    OutputStream os = urlConnection.getOutputStream();
+                    URL url = new URL("http://192.168.1.29/UserAPI/api/users/login");
+                    HttpURLConnection urlc = (HttpURLConnection) url.openConnection();
+                    JSONObject jsonObject = new JSONObject();
+                    jsonObject.put("Email",mEmail);
+                    jsonObject.put("Password",mPassword);
+                    urlc.setConnectTimeout(3000);
+                    urlc.setRequestMethod("POST");
+                    urlc.setDoInput(true);
+                    urlc.setDoOutput(true);
+                    OutputStream os = urlc.getOutputStream();
                     BufferedWriter writer = new BufferedWriter(
                             new OutputStreamWriter(os, "UTF-8"));
-                    writer.write(query);
+                    writer.write(getPostDataString(jsonObject));
+
                     writer.flush();
                     writer.close();
                     os.close();
 
-                    urlConnection.connect();
+                    int responseCode=urlc.getResponseCode();
 
-                    // Read the input stream into a String
-                    InputStream inputStream = urlConnection.getInputStream();
-                    StringBuffer buffer = new StringBuffer();
-                    if (inputStream == null) {
-                        // Nothing to do.
-                        return false;
-                    }
-                    // reader = new BufferedReader(new InputStreamReader(inputStream));
+                    if (responseCode == HttpsURLConnection.HTTP_OK) {
 
-                    if (buffer.length() == 0) {
-                        // Stream was empty.  No point in parsing.
-                        return false;
-                    }
+                        BufferedReader in=new BufferedReader(
+                                new InputStreamReader(
+                                        urlc.getInputStream()));
+                        StringBuffer sb = new StringBuffer("");
+                        String line="";
 
-                    String jsonString = buffer.toString();
+                        while((line = in.readLine()) != null) {
 
+                            sb.append(line);
+                            break;
+                        }
 
-                    urlConnection.setConnectTimeout(3000);
-                    urlConnection.connect();
-                    if (urlConnection.getResponseCode() == 200) {
-//                        try {
-//
-//                        }
+                        in.close();
                         return true;
+
+                    }
+                    else {
+                        return false;
                     }
 
-                }catch (MalformedURLException e) {
-                    e.printStackTrace();
+//                    urlc.connect();
+//                    if (urlc.getResponseCode() == 200) {
+//                        return true;
+//                    }
+                } catch (MalformedURLException e1) {
+                    // TODO Auto-generated catch block
+                    e1.printStackTrace();
+                    return false;
                 } catch (IOException e) {
+                    // TODO Auto-generated catch block
                     e.printStackTrace();
+                    return false;
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    return false;
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    return false;
                 }
+            }else {
+                return false;
+            }
 
-            // TODO: register the new account here.
-            Intent i = new Intent(LoginActivity.this, HomeActivity.class);
-            startActivity(i);
-            return false;
+
         }
+        public String getPostDataString(JSONObject params) throws Exception {
 
+            StringBuilder result = new StringBuilder();
+            boolean first = true;
+
+            Iterator<String> itr = params.keys();
+
+            while(itr.hasNext()){
+
+                String key= itr.next();
+                Object value = params.get(key);
+
+                if (first)
+                    first = false;
+                else
+                    result.append("&");
+
+                result.append(URLEncoder.encode(key, "UTF-8"));
+                result.append("=");
+                result.append(URLEncoder.encode(value.toString(), "UTF-8"));
+
+            }
+            return result.toString();
+        }
 
         @Override
         protected void onPostExecute(final Boolean success) {
             mAuthTask = null;
             showProgress(false);
-
             if (success) {
-                Intent i = new Intent(LoginActivity.this, HomeActivity.class);
-                startActivity(i);
+                Intent i = new Intent(getApplicationContext(), HomeActivity.class);
+                startActivityForResult(i, 0);
+                finish();
+
             } else {
                 mPasswordView.setError(getString(R.string.error_incorrect_password));
                 mPasswordView.requestFocus();
@@ -522,8 +545,10 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         }
     }
 
+
+
     private class NetCheck extends AsyncTask<String, Void, Boolean>{
-        private ProgressDialog nDialog;
+
 
         @Override
         protected void onPreExecute(){
@@ -557,7 +582,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                     e.printStackTrace();
                 }
             }
-            return true;
+            return false;
         }
 
         @Override
@@ -574,7 +599,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         }
     }
     public void NetAsync(View view){
-        new NetCheck().execute();
+        new ConnectionCheck(getApplicationContext()).execute();
     }
     private class ProcessLogin extends AsyncTask<String, String, JSONObject> {
 
