@@ -8,8 +8,6 @@ public class Hospital {
     private int hospital_pic_id;
     private String name;
     private String address;
-    //private String bpjs;
-
 
     // Constructor
 
@@ -18,7 +16,6 @@ public class Hospital {
         this.hospital_pic_id = hospital_pic_id;
         this.name = name;
         this.address = address;
-        //this.bpjs = bpjs;
     }
 
 
@@ -56,11 +53,4 @@ public class Hospital {
         this.address = address;
     }
 
-//    public String getBpjs() {
-//        return bpjs;
-//    }
-//
-//    public void setBpjs(String bpjs) {
-//        this.bpjs = bpjs;
-//    }
 }

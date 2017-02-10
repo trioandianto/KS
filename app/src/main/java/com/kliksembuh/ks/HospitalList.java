@@ -68,6 +68,7 @@ public class HospitalList extends Activity {
                     Intent myIntent = new Intent(view.getContext(),DoctorList.class);
                     startActivityForResult(myIntent, 2);
                 }
+
             }
 
         });
