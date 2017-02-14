@@ -263,6 +263,7 @@ public class RegisterActivity extends AppCompatActivity {
                     Intent i = new Intent(getApplicationContext(), VerifikasiActivity.class);
                     Bundle b = new Bundle();
                     b.putString("userID", userID); //Your id
+                    //.putExtra("userID",userID);
                     i.putExtras(b);
                     startActivityForResult(i, 0);
                     finish();

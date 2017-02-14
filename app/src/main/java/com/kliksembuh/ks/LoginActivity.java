@@ -393,7 +393,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
      * Represents an asynchronous login/registration task used to authenticate
      * the user.
      */
-    public class UserLoginTask extends AsyncTask<String, Void, Boolean> {
+    public class UserLoginTask extends AsyncTask<String, Void, String> {
 
         private final String mEmail;
         private final String mPassword;
@@ -407,7 +407,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         }
 
         @Override
-        protected Boolean doInBackground(String ... params) {
+        protected String doInBackground(String ... params) {
             // TODO: attempt authentication against a network service.
             ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
             NetworkInfo netInfo = cm.getActiveNetworkInfo();
@@ -448,29 +448,29 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                         }
 
                         in.close();
-                        return true;
+                        return sb.toString();
 
                     }
                     else {
-                        return false;
+                        return "";
                     }
                 } catch (MalformedURLException e1) {
                     // TODO Auto-generated catch block
                     e1.printStackTrace();
-                    return false;
+                    return "";
                 } catch (IOException e) {
                     // TODO Auto-generated catch block
                     e.printStackTrace();
-                    return false;
+                    return "";
                 } catch (JSONException e) {
                     e.printStackTrace();
-                    return false;
+                    return "";
                 } catch (Exception e) {
                     e.printStackTrace();
-                    return false;
+                    return "";
                 }
             }else {
-                return false;
+                return "";
             }
 
 
@@ -501,13 +501,37 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         }
 
         @Override
-        protected void onPostExecute(final Boolean success) {
+        protected void onPostExecute(final String success) {
             mAuthTask = null;
             showProgress(false);
-            if (success) {
-                Intent i = new Intent(getApplicationContext(), HomeActivity.class);
-                startActivityForResult(i, 0);
-                finish();
+            if (success!="") {
+                JSONObject jsonObj = null;
+                try {
+                    jsonObj = new JSONObject(success);
+                    Boolean active = jsonObj.getBoolean("Active");
+                    String userID = jsonObj.getString("Id");
+                    if(active==true){
+                        Intent i = new Intent(getApplicationContext(), HomeActivity.class);
+                        startActivityForResult(i, 0);
+                        finish();
+                    }else {
+                        Intent i = new Intent(getApplicationContext(), VerifikasiActivity.class);
+                        Bundle b = new Bundle();
+                        b.putString("userID", userID); //Your id
+                        //.putExtra("userID",userID);
+                        i.putExtras(b);
+                        startActivityForResult(i, 0);
+                        finish();
+                    }
+
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+
 
             } else {
                 mPasswordView.setError(getString(R.string.error_incorrect_password));
