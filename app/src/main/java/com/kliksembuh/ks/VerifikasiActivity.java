@@ -8,11 +8,25 @@ import android.widget.Button;
 import android.widget.TextView;
 
 public class VerifikasiActivity extends AppCompatActivity {
+    public String getUserID() {
+        return userID;
+    }
+
+    public void setUserID(String userID) {
+        this.userID = userID;
+    }
+
+    private String userID;
+//    public VerifikasiActivity(String userID){
+//        this.setUserID(userID);
+//    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_verifikasi);
+
 
 
         Button btnVerify = (Button)findViewById(R.id.btnverify);
@@ -34,5 +48,10 @@ public class VerifikasiActivity extends AppCompatActivity {
                 startActivityForResult(myIntent, 0);
             }
         });
+
+        Bundle b = getIntent().getExtras();
+        int value = -1; // or other values
+        if(b != null)
+            value = b.getInt("userID");
     }
 }
