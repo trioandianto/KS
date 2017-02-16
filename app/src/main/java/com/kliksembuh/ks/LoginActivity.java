@@ -41,6 +41,8 @@ import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.kliksembuh.ks.models.DatabaseHandler;
+import com.kliksembuh.ks.models.UserFunctions;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -179,6 +181,16 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         //Login Google
 
     }
+
+    public void onLogin(View view) {
+        String email = mEmailView.getText().toString();
+        String password = mPasswordView.getText().toString();
+        String type = "login";
+        ConnectionCheck connectionCheck = new ConnectionCheck(this);
+        connectionCheck.execute(type, email, password);
+
+    }
+
     private void initializeControls() {
         btnsign = (SignInButton) findViewById(R.id.btnwithgplus);
         btnsign.setOnClickListener((OnClickListener) this);
@@ -242,6 +254,12 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         }
     }
 
+
+    /**
+     * Attempts to sign in or register the account specified by the login form.
+     * If there are form errors (invalid email, missing fields, etc.), the
+     * errors are presented and no actual login attempt is made.
+     */
     private void attemptLogin() {
         if (mAuthTask != null) {
             return;
@@ -296,7 +314,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
     private boolean isPasswordValid(String password) {
         //TODO: Replace this with your own logic
-        return password.length() >= 8;
+        return password.length() > 4;
     }
 
     /**
@@ -393,7 +411,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
      * Represents an asynchronous login/registration task used to authenticate
      * the user.
      */
-    public class UserLoginTask extends AsyncTask<String, Void, String> {
+    public class UserLoginTask extends AsyncTask<String, Void, Boolean> {
 
         private final String mEmail;
         private final String mPassword;
@@ -407,13 +425,13 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         }
 
         @Override
-        protected String doInBackground(String ... params) {
+        protected Boolean doInBackground(String ... params) {
             // TODO: attempt authentication against a network service.
             ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
             NetworkInfo netInfo = cm.getActiveNetworkInfo();
             if (netInfo != null && netInfo.isConnected()) {
                 try {
-                    URL url = new URL("http://192.168.1.5/UserAPI/api/users/login");
+                    URL url = new URL("http://192.168.1.29/UserAPI/api/users/login");
                     HttpURLConnection urlc = (HttpURLConnection) url.openConnection();
                     JSONObject jsonObject = new JSONObject();
                     jsonObject.put("Email",mEmail);
@@ -448,29 +466,34 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                         }
 
                         in.close();
-                        return sb.toString();
+                        return true;
 
                     }
                     else {
-                        return "";
+                        return false;
                     }
+
+//                    urlc.connect();
+//                    if (urlc.getResponseCode() == 200) {
+//                        return true;
+//                    }
                 } catch (MalformedURLException e1) {
                     // TODO Auto-generated catch block
                     e1.printStackTrace();
-                    return "";
+                    return false;
                 } catch (IOException e) {
                     // TODO Auto-generated catch block
                     e.printStackTrace();
-                    return "";
+                    return false;
                 } catch (JSONException e) {
                     e.printStackTrace();
-                    return "";
+                    return false;
                 } catch (Exception e) {
                     e.printStackTrace();
-                    return "";
+                    return false;
                 }
             }else {
-                return "";
+                return false;
             }
 
 
@@ -501,37 +524,13 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         }
 
         @Override
-        protected void onPostExecute(final String success) {
+        protected void onPostExecute(final Boolean success) {
             mAuthTask = null;
             showProgress(false);
-            if (success!="") {
-                JSONObject jsonObj = null;
-                try {
-                    jsonObj = new JSONObject(success);
-                    Boolean active = jsonObj.getBoolean("Active");
-                    String userID = jsonObj.getString("Id");
-                    if(active==true){
-                        Intent i = new Intent(getApplicationContext(), HomeActivity.class);
-                        startActivityForResult(i, 0);
-                        finish();
-                    }else {
-                        Intent i = new Intent(getApplicationContext(), VerifikasiActivity.class);
-                        Bundle b = new Bundle();
-                        b.putString("userID", userID); //Your id
-                        //.putExtra("userID",userID);
-                        i.putExtras(b);
-                        startActivityForResult(i, 0);
-                        finish();
-                    }
-
-
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-
-
+            if (success) {
+                Intent i = new Intent(getApplicationContext(), HomeActivity.class);
+                startActivityForResult(i, 0);
+                finish();
 
             } else {
                 mPasswordView.setError(getString(R.string.error_incorrect_password));
@@ -543,6 +542,135 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         protected void onCancelled() {
             mAuthTask = null;
             showProgress(false);
+        }
+    }
+
+
+
+    private class NetCheck extends AsyncTask<String, Void, Boolean>{
+
+
+        @Override
+        protected void onPreExecute(){
+            super.onPreExecute();
+            nDialog = new ProgressDialog(LoginActivity.this);
+            nDialog.setMessage("Loading..");
+            nDialog.setTitle("Checking Network");
+            nDialog.setIndeterminate(false);
+            nDialog.setCancelable(true);
+            nDialog.show();
+        }
+
+        @Override
+        protected Boolean doInBackground(String... args  ) {
+            ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo netInfo = cm.getActiveNetworkInfo();
+            if (netInfo != null && netInfo.isConnected()) {
+                try {
+                    URL url = new URL("http://192.168.1.29/UserAPI/api/users/login");
+                    HttpURLConnection urlc = (HttpURLConnection) url.openConnection();
+                    urlc.setConnectTimeout(3000);
+                    urlc.connect();
+                    if (urlc.getResponseCode() == 200) {
+                        return true;
+                    }
+                } catch (MalformedURLException e1) {
+                    // TODO Auto-generated catch block
+                    e1.printStackTrace();
+                } catch (IOException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            }
+            return false;
+        }
+
+        @Override
+        protected void onPostExecute(Boolean th){
+
+            if(th == true){
+                nDialog.dismiss();
+                new ProcessLogin().execute();
+            }
+            else{
+                nDialog.dismiss();
+                mPasswordView.setText("Error in Network Connection");
+            }
+        }
+    }
+    public void NetAsync(View view){
+        new ConnectionCheck(getApplicationContext()).execute();
+    }
+    private class ProcessLogin extends AsyncTask<String, String, JSONObject> {
+
+        private ProgressDialog pDialog;
+
+        String email,password;
+
+
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+            mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
+            mPasswordView = (EditText) findViewById(R.id.password);
+            email = mEmailView.getText().toString();
+            password = mPasswordView.getText().toString();
+            pDialog = new ProgressDialog(LoginActivity.this);
+            pDialog.setTitle("Contacting Servers");
+            pDialog.setMessage("Logging in ...");
+            pDialog.setIndeterminate(false);
+            pDialog.setCancelable(true);
+            pDialog.show();
+        }
+
+
+        @Override
+        protected JSONObject doInBackground(String... args) {
+
+            UserFunctions userFunction = new UserFunctions();
+            JSONObject json = userFunction.loginUser(email, password);
+            return json;
+        }
+        @Override
+        protected void onPostExecute(JSONObject json) {
+            try {
+                if (json.getString(KEY_SUCCESS) != null) {
+
+                    String res = json.getString(KEY_SUCCESS);
+
+                    if (Integer.parseInt(res) == 1) {
+                        pDialog.setMessage("Loading User Space");
+                        pDialog.setTitle("Getting Data");
+                        DatabaseHandler db = new DatabaseHandler(getApplicationContext());
+                        JSONObject json_user = json.getJSONObject("user");
+                        /**
+                         * Clear all previous data in SQlite database.
+                         **/
+                        UserFunctions logout = new UserFunctions();
+                        logout.logoutUser(getApplicationContext());
+                        db.addUser(json_user.getString(KEY_FIRSTNAME), json_user.getString(KEY_LASTNAME), json_user.getString(KEY_EMAIL), json_user.getString(KEY_USERNAME), json_user.getString(KEY_UID), json_user.getString(KEY_CREATED_AT));
+                        /**
+                         *If JSON array details are stored in SQlite it launches the User Panel.
+                         **/
+                        Intent upanel = new Intent(getApplicationContext(), HomeActivity.class);
+                        upanel.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        pDialog.dismiss();
+                        startActivity(upanel);
+                        /**
+                         * Close Login Screen
+                         **/
+                        finish();
+                    } else {
+
+                        pDialog.dismiss();
+                        mPasswordView.setText("Incorrect username/password");
+                    }
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         }
     }
 }

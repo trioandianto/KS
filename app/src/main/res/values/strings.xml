@@ -39,14 +39,14 @@ MENGGUNAKAN LAYANAN KAMI UNTUK PERTAMA KALI.</string>
     <string name="action_sign_in">Sign in or register</string>
     <string name="action_forgot_password">Reset Password</string>
     <string name="verify">Verify</string>
-    <string name="action_sign_in_short">Sign in</string>
+    <string name="action_sign_in_short">Login</string>
     <string name="action_create_account">Create Account</string>
     <string name="action_search">Search</string>
     <string name="action_favorite">Favorite</string>
     <string name="action_myappointment">My Appointment</string>
-    <string name="action_sign_in_facebook">Continue With Facebook</string>
+    <string name="action_sign_in_facebook">Log In with Facebook</string>
     <string name="action_already_login">Already have an account? Login</string>
-    <string name="action_sign_in_google">Continue With Google+</string>
+    <string name="action_sign_in_google">Log In with Google+</string>
     <string name="error_invalid_email">This email address is invalid</string>
     <string name="error_invalid_password">This password is too short</string>
     <string name="error_incorrect_password">This password is incorrect</string>
@@ -63,4 +63,15 @@ MENGGUNAKAN LAYANAN KAMI UNTUK PERTAMA KALI.</string>
 
     <!--facebook-->
     <string name="facebook_app_id">633914953464978</string>
+
+    <!--validation on TextView-->
+    <string name="default_required_validation_message">This field is required.</string>
+    <string name="default_required_length_message_min_max">The input must have length between %1$d
+        and %2$d.</string>
+    <string name="default_required_length_message_min">The input length must be greater than
+        or equal to %1$d.</string>
+    <string name="default_required_length_message_max">The input length must be less than or
+        equal to %1$d.</string>
+    <string name="default_regex_validation_message">The field value does not match the
+        required format.</string>
 </resources>
