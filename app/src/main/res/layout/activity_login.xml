@@ -9,6 +9,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@drawable/people_wallpaper"
     tools:context="com.kliksembuh.ks.LoginActivity">
 
     <!-- Stop auto focussing the EditText -->
@@ -159,7 +160,7 @@
                         android:layout_marginRight="10dp"
                         android:layout_margin="20dp"
                         android:text="or"
-                        android:textColor="#000000"/>
+                        android:textColor="#ffffff"/>
 
                     <View
                         android:layout_width="match_parent"
@@ -167,7 +168,7 @@
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="16dp"
                         android:layout_toLeftOf="@id/tvText"
-                        android:background="#000000"
+                        android:background="#ffffff"
                         />
 
                     <View
@@ -176,7 +177,7 @@
                         android:layout_centerVertical="true"
                         android:layout_marginRight="16dp"
                         android:layout_toRightOf="@id/tvText"
-                        android:background="#000000"
+                        android:background="#ffffff"
                         />
 
                 </RelativeLayout>
