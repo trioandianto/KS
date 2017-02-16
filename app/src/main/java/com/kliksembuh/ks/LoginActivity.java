@@ -41,7 +41,6 @@ import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.kliksembuh.ks.library.PasswordEditText;
 import com.kliksembuh.ks.models.DatabaseHandler;
 import com.kliksembuh.ks.models.UserFunctions;
 
@@ -107,7 +106,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private GoogleApiClient mGoogleApiClient;
     private ProgressDialog mProgressDialog;
 
-    PasswordEditText pwText;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -119,7 +118,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
         populateAutoComplete();
 
-        pwText = (PasswordEditText)findViewById(R.id.password);
         mPasswordView = (EditText) findViewById(R.id.password);
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
