@@ -43,7 +43,8 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".LoginActivity"
-            android:label="@string/title_activity_login" />
+            android:label="@string/title_activity_login"
+            android:gravity="center"/>
         <activity
             android:name=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
@@ -56,6 +57,7 @@
         <activity
             android:name=".RegisterActivity"
             android:label="@string/title_activity_register"
+            android:gravity="center"
             android:parentActivityName=".LoginActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -64,6 +66,7 @@
         <activity
             android:name=".ResetPasswordActivity"
             android:label="@string/title_activity_reset_passwoord"
+            android:gravity="center"
             android:parentActivityName=".LoginActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -72,6 +75,7 @@
         <activity
             android:name=".VerifikasiActivity"
             android:label="@string/title_activity_verification"
+            android:gravity="center"
             android:parentActivityName=".ResetPasswordActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -90,6 +94,7 @@
         <activity
             android:name=".TermAndPolicyActivity"
             android:label="@string/title_activity_term_and_policy"
+            android:gravity="center"
             android:parentActivityName=".RegisterActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

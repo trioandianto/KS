@@ -2,7 +2,7 @@
     <string name="app_name">Klik Sembuh</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_term_and_policy">Syarat dan Ketentuan</string>
-    <string name="title_activity_login">Sign in</string>
+    <string name="title_activity_login">Login</string>
     <string name="title_activity_register">Sign Up</string>
     <string name="title_activity_forgot_password">Forgot Password</string>
     <string name="title_activity_verification">Verification</string>

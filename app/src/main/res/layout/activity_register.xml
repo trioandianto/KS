@@ -7,7 +7,7 @@
     android:orientation="vertical"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"    
+    android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.kliksembuh.ks.RegisterActivity">
     <!-- Stop auto focussing the EditText -->
@@ -81,7 +81,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="No HP"
-                    android:inputType="textEmailAddress"
+                    android:inputType="phone"
                     android:maxLines="1"
                     android:singleLine="true" />
 
@@ -142,7 +142,8 @@
                 android:text="@string/action_create_account"
                 android:textStyle="bold"
                 android:textAllCaps="false"
-                android:background="@color/login_color" />
+                android:background="@drawable/shape"
+                android:backgroundTint="@color/login_color" />
             <Button
                 android:id="@+id/btnlogin"
                 style="@style/MyCustomTextAppearance"
@@ -153,13 +154,14 @@
                 android:text="@string/action_already_login"
                 android:textAllCaps="false"
                 android:textStyle="bold"
-                android:background="@color/signup_color" />
+                android:background="@drawable/shape"
+                android:backgroundTint="@color/signup_color" />
             <TextView
                 android:id="@+id/termsandpol"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:textSize="9dp"
+                android:textSize="12dp"
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
                 android:autoLink="phone"
