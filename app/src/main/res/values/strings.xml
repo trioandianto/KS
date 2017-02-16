@@ -74,4 +74,16 @@ MENGGUNAKAN LAYANAN KAMI UNTUK PERTAMA KALI.</string>
         equal to %1$d.</string>
     <string name="default_regex_validation_message">The field value does not match the
         required format.</string>
+    <string name="snoozing">snoozing</string>
+    <string name="done_snoozing">done_snoozing</string>
+    <string name="notification">notification</string>
+    <string name="ping">ping</string>
+    <string name="snooze" />
+    <string name="timer_start">timer_start</string>
+    <string name="sleep_error">sleep_error</string>
+    <string name="timer_finished">timer_finished</string>
+    <string name="error_invalid_confirm_password">Konfirmasi password tidak sama</string>
+    <string name="error_invalid_confirm_password_not_null">Tidak boleh kosong</string>
+    <string name="error_invalid_nohp">Tidak boleh kosong</string>
+    <string name="error_active_code">Tidak boleh kosong</string>
 </resources>

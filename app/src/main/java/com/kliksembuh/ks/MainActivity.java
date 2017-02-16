@@ -1,17 +1,18 @@
 package com.kliksembuh.ks;
 
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
+import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.NotificationCompat;
 import android.text.Html;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -19,8 +20,6 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
-import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -62,14 +61,14 @@ public class MainActivity extends AppCompatActivity {
         viewPagerAdapter = new ViewPagerAdapter();
         viewPager.setAdapter(viewPagerAdapter);
         viewPager.addOnPageChangeListener(viewListener);
-        skip.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(MainActivity.this, LoginActivity.class);
-                startActivity(i);
-                finish();
-            }
-        });
+//        skip.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent i = new Intent(MainActivity.this, LoginActivity.class);
+//                startActivity(i);
+//                finish();
+//            }
+//        });
 
         next.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -170,5 +169,28 @@ ViewPager.OnPageChangeListener viewListener = new ViewPager.OnPageChangeListener
             View view = (View)object;
             container.removeView(view);
         }
+    }
+    public void sendNotification(View view) {
+        NotificationCompat.Builder mBuilder =
+                new NotificationCompat.Builder(this);
+
+        Intent intent = new Intent(getApplicationContext(),LoginActivity.class);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
+
+
+        mBuilder.setContentIntent(pendingIntent);
+
+        mBuilder.setSmallIcon(R.mipmap.ic_launcher_ksbeta);
+        mBuilder.setContentTitle("Klik Sembuh");
+        mBuilder.setContentText("Selamat anda telah bergabung dengan kami.");
+
+        NotificationManager mNotificationManager =
+
+                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+
+        mNotificationManager.notify(001, mBuilder.build());
+        startActivity(intent);
+        finish();
+
     }
 }

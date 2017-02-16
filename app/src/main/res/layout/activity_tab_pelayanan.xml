@@ -30,6 +30,7 @@
             android:layout_marginTop="10dp"
             android:textColor="@color/black"
             android:text="Pilih Tanggal"
+            android:onClick="sendNotification"
             android:textStyle="bold"
             android:background="@color/white" />
         <Button
