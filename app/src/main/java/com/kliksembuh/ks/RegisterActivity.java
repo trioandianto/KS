@@ -59,7 +59,7 @@ public class RegisterActivity extends AppCompatActivity {
         btncreate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                attemptLogin();
+                attemptRegister();
             }
         });
 
@@ -87,7 +87,7 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
     }
-    private void attemptLogin() {
+    private void attemptRegister() {
         if (mAuthTask!= null) {
             return;
         }
@@ -124,6 +124,17 @@ public class RegisterActivity extends AppCompatActivity {
             mEmail.setError(getString(R.string.error_invalid_email));
             focusView = mEmail;
             cancel = true;
+        }
+        //Check for a Valid No Hp
+        if(mNoHp==null){
+            mNoHp.setError(getString(R.string.error_invalid_nohp));
+        }
+        //Check for a Valid Confirmasi Password
+        if(confirmPassword==null){
+            mConfirmPasswordView.setError(getString(R.string.error_invalid_confirm_password_not_null));
+        }
+        else if(confirmPassword != password){
+            mConfirmPasswordView.setError(getString(R.string.error_invalid_confirm_password));
         }
         if (cancel) {
             // There was an error; don't attempt login and focus the first

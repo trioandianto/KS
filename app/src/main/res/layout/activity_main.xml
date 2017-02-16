@@ -45,6 +45,7 @@
         android:layout_alignParentLeft="true"
         android:background="@null"
         android:text="SKIP"
+        android:onClick="sendNotification"
         android:textColor="@android:color/white"/>
 
 </RelativeLayout>
