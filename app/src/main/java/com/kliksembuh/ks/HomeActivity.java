@@ -267,7 +267,7 @@ public class HomeActivity extends AppCompatActivity
         public CharSequence getPageTitle(int position) {
             switch (position) {
                 case 0:
-                    return "SPESIALISAI";
+                    return "SPESIALISASI";
                 case 1:
                     return "PELAYANAN";
             }
