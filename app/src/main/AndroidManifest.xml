@@ -44,6 +44,7 @@
         <activity
             android:name=".LoginActivity"
             android:label="@string/title_activity_login"
+            android:windowSoftInputMode="adjustPan"
             android:gravity="center"/>
         <activity
             android:name=".MainActivity"
@@ -58,6 +59,7 @@
             android:name=".RegisterActivity"
             android:label="@string/title_activity_register"
             android:gravity="center"
+            android:windowSoftInputMode="adjustPan"
             android:parentActivityName=".LoginActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -161,8 +163,11 @@
 
         <activity android:name=".HospitalList" />
         <activity android:name=".CobaListJSON" />
+        <activity android:name=".TimeSlotList" />
         <activity android:name=".DoctorList" />
-        <activity android:name=".BookingActivity"></activity>
+        <activity android:name=".BookingActivity">
+
+        </activity>
     </application>
 
 </manifest>

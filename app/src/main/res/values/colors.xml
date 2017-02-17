@@ -41,6 +41,9 @@
     <color name="dot_dark_screen3">#80CBC4</color>
     <color name="dot_dark_screen4">#A1887F</color>
 
+    <!--Light Grey Custom-->
+    <color name="light_grey">#cccccc</color>
+
 <array name="dot_inactive">
     <item>@color/dot_light_screen1</item>
     <item>@color/dot_light_screen2</item>

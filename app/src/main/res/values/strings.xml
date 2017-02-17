@@ -86,4 +86,14 @@ MENGGUNAKAN LAYANAN KAMI UNTUK PERTAMA KALI.</string>
     <string name="error_invalid_confirm_password_not_null">Tidak boleh kosong</string>
     <string name="error_invalid_nohp">Tidak boleh kosong</string>
     <string name="error_active_code">Tidak boleh kosong</string>
+
+    <string-array name="day_name">
+        <item>Senin</item>
+        <item>Selasa</item>
+        <item>Rabu</item>
+        <item>Kamis</item>
+        <item>Jumat</item>
+        <item>Sabtu</item>
+        <item>Minggu</item>
+    </string-array>
 </resources>
