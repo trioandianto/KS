@@ -22,6 +22,7 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -39,6 +40,8 @@ import com.facebook.FacebookSdk;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.kliksembuh.ks.models.DatabaseHandler;
@@ -69,12 +72,14 @@ import static android.Manifest.permission.READ_CONTACTS;
 /**
  * A login screen that offers login via email/password.
  */
-public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<Cursor> {
+public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<Cursor>,GoogleApiClient.OnConnectionFailedListener{
 
     /**
      * Id to identity READ_CONTACTS permission request.
      */
+    private static final String TAG = LoginActivity.class.getSimpleName();
     private static final int REQUEST_READ_CONTACTS = 0;
+    private static final int RC_SIGN_IN = 007;
     String response = null;
     private ProgressDialog nDialog;
 
@@ -105,6 +110,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private SignInButton btnsign;
     private GoogleApiClient mGoogleApiClient;
     private ProgressDialog mProgressDialog;
+    private SignInButton btnSignGoogle;
 
 
 
@@ -183,6 +189,28 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         });
 
         //Login Google
+
+        btnSignGoogle = (SignInButton) findViewById(R.id.btnwithgplus);
+        btnSignGoogle.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                signIn();
+            }
+
+            GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                    .requestEmail()
+                    .build();
+
+//            mGoogleApiClient = new GoogleApiClient.Builder(this)
+//                    .enableAutoManage(this, this)
+//            .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
+//            .build();
+
+
+
+
+        });
+
 
     }
 
@@ -398,6 +426,12 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                         android.R.layout.simple_dropdown_item_1line, emailAddressCollection);
 
         mEmailView.setAdapter(adapter);
+    }
+
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+        Log.d(TAG, "onConnectionFailed:" + connectionResult);
+
     }
 
 
