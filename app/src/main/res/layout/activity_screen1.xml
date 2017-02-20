@@ -4,12 +4,13 @@
     android:layout_width="match_parent"
     android:orientation="vertical"
     android:layout_height="match_parent"
-    android:background="@color/screen1">
+    android:background="@drawable/photo1">
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:gravity="center_horizontal"
+        android:background="@color/cardview_shadow_start_color"
         android:orientation="vertical">
 
         <TextView
@@ -17,12 +18,14 @@
             android:layout_height="wrap_content"
             android:textStyle="bold"
             android:textSize="20dp"
+            android:textColor="@color/cardview_light_background"
             android:text="BOOK AN APPOINTMENT"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textStyle="normal"
+            android:textColor="@color/cardview_light_background"
             android:layout_marginTop="20dp"
             android:textAlignment="center"
             android:text="@string/screen1"/>
