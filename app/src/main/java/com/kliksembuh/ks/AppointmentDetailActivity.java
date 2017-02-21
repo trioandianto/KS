@@ -41,6 +41,6 @@ public class AppointmentDetailActivity extends FragmentActivity implements OnMap
         // Add a marker in Sydney and move the camera
         LatLng bogor = new LatLng(-6.595038, 106.816635);
         mMap.addMarker(new MarkerOptions().position(bogor).title("Bogor"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(bogor));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(bogor, 20.0f));
     }
 }

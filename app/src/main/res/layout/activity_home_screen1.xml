@@ -11,8 +11,17 @@
         android:layout_centerInParent="true"
         android:gravity="center_horizontal"
         android:orientation="vertical">
-
-
     </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:textSize="30dp"
+        android:textColor="@color/white"
+        android:layout_height="wrap_content"
+        android:text="Diskon 50 % di RS PMI"
+        android:gravity="center_horizontal"
+        android:layout_marginBottom="77dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>

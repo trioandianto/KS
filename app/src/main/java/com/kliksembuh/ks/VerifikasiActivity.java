@@ -65,7 +65,9 @@ public class VerifikasiActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View view) {
-                attemptVerify();
+//                attemptVerify();
+                Intent myIntent = new Intent(view.getContext(), HomeActivity.class);
+                startActivityForResult(myIntent, 0);
             }
         });
 

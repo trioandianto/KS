@@ -59,7 +59,9 @@ public class RegisterActivity extends AppCompatActivity {
         btncreate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                attemptRegister();
+//                attemptRegister();
+                Intent myIntent = new Intent(view.getContext(), HomeActivity.class);
+                startActivityForResult(myIntent, 0);
             }
         });
 
@@ -133,9 +135,9 @@ public class RegisterActivity extends AppCompatActivity {
         if(confirmPassword==null){
             mConfirmPasswordView.setError(getString(R.string.error_invalid_confirm_password_not_null));
         }
-        else if(confirmPassword != password){
-            mConfirmPasswordView.setError(getString(R.string.error_invalid_confirm_password));
-        }
+//        else if(confirmPassword != password){
+//            mConfirmPasswordView.setError(getString(R.string.error_invalid_confirm_password));
+//        }
         if (cancel) {
             // There was an error; don't attempt login and focus the first
             // form field with an error.
@@ -177,7 +179,7 @@ public class RegisterActivity extends AppCompatActivity {
             NetworkInfo netInfo = cm.getActiveNetworkInfo();
             if (netInfo != null && netInfo.isConnected()) {
                 try{
-                    URL url = new URL("http://192.168.1.5/UserAPI/api/users/register");
+                    URL url = new URL("http://192.168.1.9/kliksembuhapi/api/users/register");
                     HttpURLConnection urlc = (HttpURLConnection) url.openConnection();
                     JSONObject jsonObject = new JSONObject();
                     jsonObject.put("Email",mEmail);

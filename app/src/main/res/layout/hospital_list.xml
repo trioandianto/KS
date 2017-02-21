@@ -13,6 +13,8 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:text="Name"
+
+        style="@style/MyCustomTextAppearance"
         android:textSize="20dp"
         android:textColor="@color/black"
         android:layout_alignTop="@+id/iv_hospital_pic"
@@ -37,6 +39,8 @@
         android:id="@+id/tv_address"
         android:layout_width="wrap_content"
         android:layout_marginLeft="10dp"
+
+        style="@style/MyCustomTextAppearance"
         android:layout_height="wrap_content"
         android:text="Address"
         android:textSize="14dp"

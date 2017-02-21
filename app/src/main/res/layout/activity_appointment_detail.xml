@@ -19,17 +19,20 @@
         android:orientation="vertical">
         <Button
             android:layout_width="match_parent"
+            style="@style/MyCustomTextAppearance"
             android:layout_margin="10dp"
             android:text="MENUNGGU KONFIRMASI"
+            android:textColor="@color/white"
             android:layout_height="wrap_content"
-            android:background="@color/google_color"/>
+            android:background="@drawable/shape"
+            android:backgroundTint="@color/red"/>
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <AutoCompleteTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Nama detail"
+                android:text="Trio Andianto"
                 android:layout_marginRight="10dp"
                 android:layout_marginLeft="10dp">
             </AutoCompleteTextView>
@@ -43,7 +46,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="10dp"
                 android:layout_marginLeft="10dp"
-                android:text="detail date">
+                android:text="Sabtu, 10 September 2017">
             </AutoCompleteTextView>
 
         </android.support.design.widget.TextInputLayout>
@@ -55,7 +58,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="10dp"
                 android:layout_marginLeft="10dp"
-                android:text="jam">
+                android:text="10:00">
             </AutoCompleteTextView>
 
         </android.support.design.widget.TextInputLayout>

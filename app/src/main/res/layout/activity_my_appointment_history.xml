@@ -59,7 +59,9 @@
             android:textSize="20dp"
             android:text="COMPLETE"
             android:textStyle="bold"
-            android:background="@color/green"
+            android:background="@drawable/shape"
+            style="@style/MyCustomTextAppearance"
+            android:backgroundTint="@color/green"
             android:textColor="@color/white"/>
     </LinearLayout>
 </LinearLayout>

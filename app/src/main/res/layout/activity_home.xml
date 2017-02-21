@@ -5,7 +5,6 @@
     android:id="@+id/drawer_layout"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:fitsSystemWindows="true"
     tools:openDrawer="start">
     <android.support.v4.view.ViewPager
         android:layout_width="fill_parent"
@@ -16,14 +15,15 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
+        android:gravity="top|center"
         android:orientation="horizontal">
 
         <FrameLayout
             android:layout_width="300dp"
-            android:layout_height="370dp"
+            android:layout_height="280dp"
+            android:layout_marginTop="100dp"
             android:id="@+id/ndh"
-            android:gravity="center"
+            android:foregroundGravity="center"
             android:background="@color/bluegrayopacity"
             android:orientation="vertical">
             <LinearLayout
@@ -32,6 +32,7 @@
                 android:orientation="vertical">
                 <android.support.design.widget.TabLayout
                     android:id="@+id/tabshome"
+                    android:layout_margin="10dp"
                     android:layout_width="match_parent"
                     app:tabBackground="@drawable/tab_color_selector"
                     app:tabTextColor="@color/black"
@@ -44,7 +45,7 @@
                 <android.support.v4.view.ViewPager
                     android:id="@+id/containerhome"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="200dp"
                     app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
             </LinearLayout>
@@ -71,16 +72,12 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:alpha=".5"
             android:layout_above="@+id/layoutdotshome"
             android:background="@android:color/white">
 
         </View>
 
     </RelativeLayout>
-
-
-
 
     <include
         layout="@layout/app_bar_home"

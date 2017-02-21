@@ -29,7 +29,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/profile_name"
-            android:text="Hi, Mantan"
+            android:text="Hi, Tiara"
             android:textSize="16dp"
             android:textStyle="bold"/>
 
@@ -44,7 +44,7 @@
             android:layout_width="wrap_content"
             android:id="@+id/profile_email"
             android:layout_height="wrap_content"
-            android:text="mantankekasih@mail.com"/>
+            android:text="tiara@basajans.com"/>
         <TextView
             android:layout_width="wrap_content"
             android:id="@+id/profile_nohp"

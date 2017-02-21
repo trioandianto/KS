@@ -27,14 +27,6 @@ public class TabSpesialisasi extends Fragment{
             }
         });
 
-        Button btntanggal = (Button)rootView.findViewById(R.id.btndatespesialis);
-        btntanggal.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent myIntent = new Intent(view.getContext(),CobaListJSON.class);
-                startActivityForResult(myIntent, 0);
-            }
-        });
 
 
         return rootView;
