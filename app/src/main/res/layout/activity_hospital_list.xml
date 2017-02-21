@@ -37,7 +37,7 @@
         <ListView
             android:layout_width="match_parent"
             android:background="@drawable/shape"
-            android:backgroundTint="@color/white"
+            android:backgroundTint="@color/transparent"
             style="@style/ListView"
             android:layout_height="wrap_content"
             android:id="@+id/listview_hospital"

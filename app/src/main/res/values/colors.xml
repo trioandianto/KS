@@ -43,8 +43,9 @@
 
     <!--Light Grey Custom-->
     <color name="light_grey">#cccccc</color>
+    <color name="transparent">#00000000</color>
 
-<array name="dot_inactive">
+    <array name="dot_inactive">
     <item>@color/dot_light_screen1</item>
     <item>@color/dot_light_screen2</item>
     <item>@color/dot_light_screen3</item>
