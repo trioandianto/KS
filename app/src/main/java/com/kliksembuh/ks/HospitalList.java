@@ -52,19 +52,19 @@ public class HospitalList extends Activity {
 
                 // Go to another activity
                 if (position == 0){
-                    Intent myIntent = new Intent(view.getContext(),DoctorList.class);
+                    Intent myIntent = new Intent(view.getContext(),TestScroolView.class);
                     startActivityForResult(myIntent, 0);
                 }
                 else if (position == 1){
-                    Intent myIntent = new Intent(view.getContext(),DoctorList.class);
+                    Intent myIntent = new Intent(view.getContext(),TestScroolView.class);
                     startActivityForResult(myIntent, 0);
                 }
                 else if (position == 2){
-                    Intent myIntent = new Intent(HospitalList.this,DoctorList.class);
+                    Intent myIntent = new Intent(HospitalList.this,TestScroolView.class);
                     startActivityForResult(myIntent, 0);
                 }
                 else {
-                    Intent myIntent = new Intent(view.getContext(),DoctorList.class);
+                    Intent myIntent = new Intent(view.getContext(),TestScroolView.class);
                     startActivityForResult(myIntent, 0);
                 }
 
