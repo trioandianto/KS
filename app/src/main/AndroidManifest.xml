@@ -5,6 +5,7 @@
     <uses-feature
         android:glEsVersion="0x00020000"
         android:required="true" />
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -161,10 +162,13 @@
         <activity android:name=".HospitalList" />
         <activity android:name=".CobaListJSON" />
         <activity android:name=".DoctorList" />
-        <activity android:name=".BookingActivity" />
-        <activity android:name=".TestScroolView"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
+        <activity
+            android:name=".BookingActivity"
+            android:label="Jadwal" />
+        <activity
+            android:name=".TestScroolView"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".KonfirmasiJanjiActivity"></activity>
     </application>
 
 </manifest>

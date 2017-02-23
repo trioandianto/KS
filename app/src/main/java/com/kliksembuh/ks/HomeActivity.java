@@ -42,11 +42,26 @@ public class HomeActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//
         setContentView(R.layout.activity_home);
+//        getTheme().applyStyle(R.style.ConOver, true);
+//        getWindow().requestFeature(Window.FEATURE_ACTION_BAR_OVERLAY);
+//        getActionBar().setDisplayHomeAsUpEnabled(true);
+//        getActionBar().setDisplayShowHomeEnabled(false);
+//        ActionBar actionBar = getActionBar();
+//        actionBar.setBackgroundDrawable(new
+//                ColorDrawable(android.graphics.Color.TRANSPARENT));
+//        actionBar.setStackedBackgroundDrawable(new
+//                ColorDrawable(android.graphics.Color.TRANSPARENT));
+//
+
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setDrawingCacheBackgroundColor(Color.TRANSPARENT);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
+
+
+
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
 //

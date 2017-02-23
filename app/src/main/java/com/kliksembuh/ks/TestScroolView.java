@@ -1,11 +1,13 @@
 package com.kliksembuh.ks;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,6 +41,7 @@ public class TestScroolView extends ActionBarActivity implements OnMapReadyCallb
     private LinearLayout dotsLayout;
     private TextView[] dots;
     private ViewPagerAdapter viewPagerAdapter;
+    private CardView cardView;
     private CollapsingToolbarLayout collapsingToolbarLayout;
 
     private ListView lvDoctor;
@@ -74,6 +77,14 @@ public class TestScroolView extends ActionBarActivity implements OnMapReadyCallb
         viewPager.setAdapter(viewPagerAdapter);
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.mapdoctorlistcoba);
         mapFragment.getMapAsync(this);
+        cardView = (CardView)findViewById(R.id.cvdoktera);
+        cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent myIntent = new Intent(view.getContext(), BookingActivity.class);
+                startActivityForResult(myIntent, 0);
+            }
+        });
         //toolbar.addView(spinner);
 
 

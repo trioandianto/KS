@@ -7,10 +7,71 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
+    <style name="Theme.Transparent" parent="android:Theme">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:backgroundDimEnabled">false</item>
+    </style>
+    <!-- Your main theme with ActionBar shadow. -->
+    <style name="MyAppTheme" parent="android:Theme.Holo.Light">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
 
+    </style>
+    <style name="MyAppTheme.NoShadow" parent="MyAppTheme">
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
+    <style name="AppBaseTheme" parent="android:Theme.Holo.Light.DarkActionBar"></style>
+    <style name="CustomActionBarTheme" parent="@android:style/Theme.Holo"></style>
+    <style name="YourAppTheme.Light" parent="@style/Theme.AppCompat.Light">
+    </style>
+
+    <style name="ConOver">
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
+
+
+    <!-- Transparent ActionBar Style -->
+    <style name="YourAppTheme.Light.ActionBar.Transparent" parent="@style/Widget.AppCompat.Light.ActionBar">
+        <item name="android:background">@android:color/transparent</item>
+        <item name="background">@android:color/transparent</item>
+    </style>
+
+    <!-- Activity Theme with transparent ActionBar -->
+    <style name="YourAppTheme.TransparentActionBar.Light" parent="@style/YourAppTheme.Light">
+        <item name="android:actionBarStyle">@style/YourAppTheme.Light.ActionBar.Transparent</item>
+        <item name="actionBarStyle">@style/YourAppTheme.Light.ActionBar.Transparent</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:backgroundDimEnabled">false</item>
+        <item name="android:windowActionBarOverlay">true</item>
+        <item name="windowActionBarOverlay">true</item>
+    </style>
+    <!-- Theme without ActionBar shadow (inherits main theme) -->
+    <style name="MyNoActionBarShadowTheme" parent="MyAppTheme">
+
+    </style>
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:background">@android:color/transparent</item>
+        <!--For compatibility-->
+        <item name="background">@android:color/transparent</item>
+    </style>
+    <style name="AppTheme.Custom" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowActionBarOverlay">true</item>
+    </style>
+    <style name="MyActionBar" parent="Base.Widget.AppCompat.ActionBar">
+        <item name="android:background">@android:color/transparent</item>
+        <!--For compatibility-->
+        <item name="background">@android:color/transparent</item>
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Light">
