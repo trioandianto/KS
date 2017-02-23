@@ -6,6 +6,7 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     tools:openDrawer="start">
+
     <android.support.v4.view.ViewPager
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
@@ -76,13 +77,15 @@
             android:background="@android:color/white">
 
         </View>
+        <include
+            layout="@layout/app_bar_home"
+            android:background="@android:color/transparent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
     </RelativeLayout>
 
-    <include
-        layout="@layout/app_bar_home"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+
 
     <android.support.design.widget.NavigationView
         android:id="@+id/nav_view"

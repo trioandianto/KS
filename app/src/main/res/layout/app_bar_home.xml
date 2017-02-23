@@ -4,21 +4,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/transparent"
     android:fitsSystemWindows="true"
     tools:context="com.kliksembuh.ks.HomeActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#00000000">
+        android:background="@color/transparent"
+        android:elevation="0dp"
+        android:layout_height="?attr/actionBarSize">
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
-            android:background="#00000000"
+            android:background="@color/transparent"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize" >
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            android:layout_height="?attr/actionBarSize">
             <ImageView
                 android:layout_width="60dp"
-                android:layout_height="match_parent"
+                android:layout_height="60dp"
+                android:background="@color/transparent"
                 android:layout_marginRight="20dp"
                 android:layout_gravity="right"
                 android:src="@drawable/logo2"/>
@@ -27,9 +31,9 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_home"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+    <!--<include layout="@layout/content_home"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"/>-->
 
 
 </android.support.design.widget.CoordinatorLayout>
