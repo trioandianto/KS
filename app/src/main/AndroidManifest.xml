@@ -168,7 +168,9 @@
         <activity
             android:name=".TestScroolView"
             android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".KonfirmasiJanjiActivity"></activity>
+        <activity android:name=".KonfirmasiJanjiActivity"
+            android:label="Buat Janji"
+            android:parentActivityName=".BookingActivity"></activity>
     </application>
 
 </manifest>

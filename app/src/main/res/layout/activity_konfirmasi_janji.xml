@@ -1,13 +1,152 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/activity_konfirmasi_janji"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:orientation="vertical"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.kliksembuh.ks.KonfirmasiJanjiActivity">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/linearLayout3">
+        <LinearLayout
+        android:layout_width="match_parent"
+        android:background="@color/white"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <ImageView
+            android:layout_width="20dp"
+            android:id="@+id/iveditjadwal"
+            android:src="@drawable/ic_edit_24dp"
+            android:layout_height="20dp"
+            android:layout_gravity="right"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_height="wrap_content"
+            android:text="Sabtu"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:textColor="@color/blue"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:textStyle="normal"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:textSize="15dp"
+            android:textColor="@color/blue"
+            android:layout_height="wrap_content"
+            android:text="25 Februari 2017 @ 10.00 Pagi"/>
 
+    </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:background="@color/white"
+            android:layout_marginTop="20dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <ImageView
+                android:layout_width="20dp"
+                android:id="@+id/iveditdokter"
+                android:src="@drawable/ic_edit_24dp"
+                android:layout_height="20dp"
+                android:layout_gravity="right"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Nama Dokter"
+                android:layout_marginLeft="10dp"
+                android:textStyle="bold"
+                android:textSize="20dp"
+                android:textColor="@color/blue"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="10dp"
+                android:layout_height="wrap_content"
+                android:text="MSc. Sp. MK"
+                android:textSize="15dp"
+                android:textColor="@color/black"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="10dp"
+                android:layout_height="wrap_content"
+                android:text="Dokter Umum"
+                android:textSize="15dp"
+                android:textColor="@color/black"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="Rumah Sakit PMI Bogor"
+                android:textStyle="bold"
+                android:layout_marginTop="10dp"
+                android:textSize="20dp"
+                android:textColor="@color/blue"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_marginTop="5dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="Jalan Jendral Sudirman"
+                android:textSize="15dp"
+                android:textColor="@color/black"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_height="wrap_content"
+                android:text="Jawa Barat 12494"
+                android:textSize="15dp"
+                android:textColor="@color/black"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <com.kliksembuh.ks.models.MaterialFavoriteButton
+        android:id="@+id/favorite_nice"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        app:mfb_rotation_duration="400"
+        app:mfb_rotation_angle="216"
+        app:mfb_bounce_duration="700"
+        android:layout_alignBottom="@+id/linearLayout3"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="50dp"
+        android:layout_marginRight="40dp"/>
+
+    <RadioButton
+        android:text="Saya membuat janji untuk orang lain"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:textColor="@color/red"
+        android:textSize="18dp"
+        android:id="@+id/radioButton"
+        android:layout_below="@+id/linearLayout3"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:id="@+id/btnbuatjanji"
+        style="@style/MyCustomTextAppearance"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:text="Buat Janji"
+        android:layout_marginTop="10dp"
+        android:textStyle="bold"
+        android:textAllCaps="false"
+        android:background="@drawable/shape"
+        android:backgroundTint="@color/login_color"
+        android:layout_below="@+id/radioButton"
+        android:layout_alignParentStart="true" />
 </RelativeLayout>
