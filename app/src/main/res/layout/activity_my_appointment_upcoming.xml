@@ -16,12 +16,14 @@
             android:orientation="horizontal">
             <FrameLayout
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"    >
+                android:layout_marginRight="10dp"
+                android:layout_height="match_parent" >
                 <ImageView
                     android:id="@+id/image_favorite_dokter"
-                    android:layout_width="80dp"
+                    android:layout_width="100dp"
                     android:layout_height="match_parent"
-                    android:src="@drawable/dokter" />
+                    android:scaleType="fitXY"
+                    android:src="@drawable/dr_indah_kusuma" />
             </FrameLayout>
             <LinearLayout
                 android:orientation="vertical"
@@ -29,27 +31,31 @@
                 android:layout_height="wrap_content">
                 <TextView
                     android:layout_width="wrap_content"
+                    android:layout_marginBottom="5dp"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:text="Anda Memiliki janji dengan"/>
                 <TextView
                     android:layout_width="match_parent"
+                    android:layout_marginBottom="5dp"
                     android:layout_height="wrap_content"
                     android:textColor="@color/blue"
                     android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:text="NAMA DOKTER"
+                    android:text="dr Indah Kusuma"
                     android:id="@+id/tvnamainstansi" />
                 <TextView
                     android:layout_width="wrap_content"
+                    android:layout_marginBottom="5dp"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="Alamat"
+                    android:text="Jalan Rumah Sakit I"
                     android:id="@+id/tvalamathistorydokter" />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="Tanggal"
+                    android:text="Jumat, 24 Februari 2017"
+
                     android:id="@+id/tvtanggalhistorydokter" />
             </LinearLayout>
         </LinearLayout>

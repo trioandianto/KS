@@ -30,6 +30,7 @@
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         android:fitsSystemWindows="true">
 
+
         <android.support.design.widget.CollapsingToolbarLayout
             android:id="@+id/collapsing_toolbar"
             android:layout_width="match_parent"
@@ -44,9 +45,10 @@
                 android:layout_height="@dimen/detail_backdrop_height"
                 android:scaleType="centerCrop"
                 android:fitsSystemWindows="true"
-                app:layout_collapseMode="pin"
+                app:layout_collapseMode="parallax"
                 android:id="@+id/backdrop">
             </android.support.v4.view.ViewPager>
+
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"
@@ -78,9 +80,6 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:paddingTop="24dp">
-
-
-
             <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
@@ -165,7 +164,6 @@
 
 
             </android.support.v7.widget.CardView>
-
             <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -220,6 +218,7 @@
                         android:layout_width="250px"
                         android:layout_height="300px"
                         android:src="@drawable/dr_indah_kusuma"
+                        android:scaleType="fitXY"
                         android:adjustViewBounds="true"
                         android:layout_below="@+id/linearLayout2"
                         android:layout_alignParentStart="true"/>
@@ -288,67 +287,67 @@
 
 
             </android.support.v7.widget.CardView>
-            <android.support.v7.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="@dimen/card_margin"
-                android:layout_marginBottom="@dimen/card_margin"
-                android:layout_marginLeft="@dimen/card_margin"
-                android:layout_marginRight="@dimen/card_margin">
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-                    <TextView
-                        android:id="@+id/tv_drname3"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:text="Dr. Juniarty"
-                        android:textSize="20dp"
-                        android:textColor="@color/blue"
-                        android:layout_alignTop="@+id/iv_doc_pic3"
-                        android:layout_toRightOf="@+id/iv_doc_pic3"
-                        android:layout_toEndOf="@+id/iv_doc_pic3" />
+            <!--<android.support.v7.widget.CardView-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:layout_marginTop="@dimen/card_margin"-->
+                <!--android:layout_marginBottom="@dimen/card_margin"-->
+                <!--android:layout_marginLeft="@dimen/card_margin"-->
+                <!--android:layout_marginRight="@dimen/card_margin">-->
+                <!--<RelativeLayout-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="match_parent">-->
+                    <!--<TextView-->
+                        <!--android:id="@+id/tv_drname3"-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_marginLeft="10dp"-->
+                        <!--android:text="Dr. Juniarty"-->
+                        <!--android:textSize="20dp"-->
+                        <!--android:textColor="@color/blue"-->
+                        <!--android:layout_alignTop="@+id/iv_doc_pic3"-->
+                        <!--android:layout_toRightOf="@+id/iv_doc_pic3"-->
+                        <!--android:layout_toEndOf="@+id/iv_doc_pic3" />-->
 
-                    <RatingBar
-                        android:id="@+id/ratingBar3"
-                        android:layout_marginLeft="10dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        style= "@style/CustomRatingBar"
-                        android:numStars="5"
-                        android:rating="3.5"
-                        android:stepSize="0.5"
-                        android:isIndicator="true"
-                        android:layout_below="@+id/tv_drname3"
-                        android:layout_toRightOf="@+id/iv_doc_pic3"
-                        android:layout_toEndOf="@+id/iv_doc_pic3" />
+                    <!--<RatingBar-->
+                        <!--android:id="@+id/ratingBar3"-->
+                        <!--android:layout_marginLeft="10dp"-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--style= "@style/CustomRatingBar"-->
+                        <!--android:numStars="5"-->
+                        <!--android:rating="3.5"-->
+                        <!--android:stepSize="0.5"-->
+                        <!--android:isIndicator="true"-->
+                        <!--android:layout_below="@+id/tv_drname3"-->
+                        <!--android:layout_toRightOf="@+id/iv_doc_pic3"-->
+                        <!--android:layout_toEndOf="@+id/iv_doc_pic3" />-->
 
-                    <TextView
-                        android:id="@+id/tv_specialty3"
-                        android:layout_width="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_height="wrap_content"
-                        android:text="Dokter Umum"
-                        android:textSize="14dp"
-                        android:textColor="#5C5C5C"
-                        android:layout_below="@+id/ratingBar3"
-                        android:layout_toRightOf="@+id/iv_doc_pic3"
-                        android:layout_toEndOf="@+id/iv_doc_pic3" />
+                    <!--<TextView-->
+                        <!--android:id="@+id/tv_specialty3"-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_marginLeft="10dp"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:text="Dokter Umum"-->
+                        <!--android:textSize="14dp"-->
+                        <!--android:textColor="#5C5C5C"-->
+                        <!--android:layout_below="@+id/ratingBar3"-->
+                        <!--android:layout_toRightOf="@+id/iv_doc_pic3"-->
+                        <!--android:layout_toEndOf="@+id/iv_doc_pic3" />-->
 
-                    <ImageView
-                        android:id="@+id/iv_doc_pic3"
-                        android:layout_width="250px"
-                        android:layout_height="300px"
-                        android:src="@drawable/drgigiayu"
-                        android:scaleType="fitXY"
-                        android:adjustViewBounds="true"
-                        android:layout_below="@+id/linearLayout2"
-                        android:layout_alignParentStart="true"/>
-                </RelativeLayout>
+                    <!--<ImageView-->
+                        <!--android:id="@+id/iv_doc_pic3"-->
+                        <!--android:layout_width="250px"-->
+                        <!--android:layout_height="300px"-->
+                        <!--android:src="@drawable/drgigiayu"-->
+                        <!--android:scaleType="fitXY"-->
+                        <!--android:adjustViewBounds="true"-->
+                        <!--android:layout_below="@+id/linearLayout2"-->
+                        <!--android:layout_alignParentStart="true"/>-->
+                <!--</RelativeLayout>-->
 
 
-            </android.support.v7.widget.CardView>
+            <!--</android.support.v7.widget.CardView>-->
 
         </LinearLayout>
 

@@ -167,10 +167,14 @@
             android:label="Jadwal" />
         <activity
             android:name=".TestScroolView"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".KonfirmasiJanjiActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".KonfirmasiJanjiActivity"
             android:label="Buat Janji"
-            android:parentActivityName=".BookingActivity"></activity>
+            android:parentActivityName=".BookingActivity" />
+        <activity
+            android:name=".ListMapActivity"
+            android:label="@string/title_activity_list_map"></activity>
     </application>
 
 </manifest>
