@@ -1,0 +1,46 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:map="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:name="com.google.android.gms.maps.SupportMapFragment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.kliksembuh.ks.ListMapActivity" >
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/my_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_margin="5dp"
+        android:padding="5dp"
+        android:background="@color/bluegrayopacity"
+        android:orientation="horizontal"
+        android:weightSum="1">
+        <Button
+            android:layout_width="150dp"
+            android:text="List"
+            android:id="@+id/btnlist"
+            android:layout_height="wrap_content"
+            android:background="@color/white"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:text="Filter"
+            android:layout_marginLeft="10dp"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:id="@+id/btnfilter"/>
+
+    </LinearLayout>
+    <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:map="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></fragment>
+</LinearLayout>

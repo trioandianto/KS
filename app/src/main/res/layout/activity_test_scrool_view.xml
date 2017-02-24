@@ -30,6 +30,7 @@
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         android:fitsSystemWindows="true">
 
+
         <android.support.design.widget.CollapsingToolbarLayout
             android:id="@+id/collapsing_toolbar"
             android:layout_width="match_parent"
@@ -44,9 +45,10 @@
                 android:layout_height="@dimen/detail_backdrop_height"
                 android:scaleType="centerCrop"
                 android:fitsSystemWindows="true"
-                app:layout_collapseMode="pin"
+                app:layout_collapseMode="parallax"
                 android:id="@+id/backdrop">
             </android.support.v4.view.ViewPager>
+
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"
@@ -220,6 +222,7 @@
                         android:layout_width="250px"
                         android:layout_height="300px"
                         android:src="@drawable/dr_indah_kusuma"
+                        android:scaleType="fitXY"
                         android:adjustViewBounds="true"
                         android:layout_below="@+id/linearLayout2"
                         android:layout_alignParentStart="true"/>
