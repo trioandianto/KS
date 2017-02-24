@@ -1,6 +1,7 @@
 package com.kliksembuh.ks;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -18,6 +19,7 @@ public class BookingActivity extends AppCompatActivity {
         jadwal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                jadwal.setBackgroundColor(Color.LTGRAY);
                 Intent myIntent = new Intent(view.getContext(), KonfirmasiJanjiActivity.class);
                 startActivityForResult(myIntent, 0);
             }
