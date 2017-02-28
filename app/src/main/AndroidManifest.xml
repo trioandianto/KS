@@ -58,6 +58,8 @@
             android:name=".RegisterActivity"
             android:gravity="center"
             android:label="@string/title_activity_register"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustPan"
             android:parentActivityName=".LoginActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -67,6 +69,8 @@
             android:name=".ResetPasswordActivity"
             android:gravity="center"
             android:label="@string/title_activity_reset_passwoord"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustPan"
             android:parentActivityName=".LoginActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -76,6 +80,8 @@
             android:name=".VerifikasiActivity"
             android:gravity="center"
             android:label="@string/title_activity_verification"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustPan"
             android:parentActivityName=".ResetPasswordActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

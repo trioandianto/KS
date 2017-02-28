@@ -9,8 +9,9 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@drawable/hospital_background_login"
     android:fitsSystemWindows="true"
-    android:background="@drawable/rsz_people_wallpaper"
+
     tools:context="com.kliksembuh.ks.LoginActivity">
 
     <!-- Stop auto focussing the EditText -->
@@ -21,7 +22,6 @@
         android:focusable="true"
         android:focusableInTouchMode="true">
     </LinearLayout>
-
     <!-- Login progress --> 
 
     <ProgressBar
@@ -45,6 +45,14 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:weightSum="1">
+            <ImageView
+                android:id="@+id/kliksembuh_logo"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/logo_landscape_v2"/>
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
@@ -161,7 +169,7 @@
                         android:layout_marginRight="10dp"
                         android:layout_margin="20dp"
                         android:text="or"
-                        android:textColor="#ffffff"/>
+                        android:textColor="@color/colorPrimaryDark"/>
 
                     <View
                         android:layout_width="match_parent"
@@ -169,7 +177,7 @@
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="16dp"
                         android:layout_toLeftOf="@id/tvText"
-                        android:background="#ffffff"
+                        android:background="@color/colorPrimaryDark"
                         />
 
                     <View
@@ -178,7 +186,7 @@
                         android:layout_centerVertical="true"
                         android:layout_marginRight="16dp"
                         android:layout_toRightOf="@id/tvText"
-                        android:background="#ffffff"
+                        android:background="@color/colorPrimaryDark"
                         />
 
                 </RelativeLayout>

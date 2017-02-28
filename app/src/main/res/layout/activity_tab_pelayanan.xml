@@ -6,7 +6,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-        <AutoCompleteTextView
+        <AutoCompleteTextViewzz
             android:id="@+id/tvsearchspesialis"
             android:layout_width="match_parent"
             android:layout_height="40dp"
