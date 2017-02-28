@@ -60,7 +60,7 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 //                attemptRegister();
-                Intent myIntent = new Intent(view.getContext(), HomeActivity.class);
+                Intent myIntent = new Intent(view.getContext(), VerifikasiActivity.class);
                 startActivityForResult(myIntent, 0);
             }
         });
