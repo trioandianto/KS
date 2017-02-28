@@ -7,6 +7,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@color/com_facebook_button_background_color_focused"
     tools:context="com.kliksembuh.ks.VerifikasiActivity">
     <!-- Stop auto focussing the EditText -->
     <LinearLayout
@@ -25,10 +26,11 @@
 
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:id="@+id/verification"
-            android:src="@drawable/logo2"
-            android:layout_gravity="center_horizontal" />
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="15dp"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/logo_landscape_v2" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -51,6 +53,7 @@
             android:textAlignment="center"
             android:layout_gravity="center_horizontal"
             android:text="@string/kode_verifikasi"/>
+
         <Button
             android:id="@+id/btnverify"
             android:layout_width="match_parent"
@@ -60,8 +63,8 @@
             android:background="@drawable/shape"
             style="@style/MyCustomTextAppearance"
             android:backgroundTint="@color/login_color"
-            android:text="@string/verify"
-            android:textStyle="bold" />
+            android:text="@string/verify"/>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"

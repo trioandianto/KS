@@ -70,6 +70,7 @@ public class HomeActivity extends AppCompatActivity
         layouts = new int[]{
                 R.layout.activity_home_screen1,
                 R.layout.activity_home_screen2,
+                R.layout.activity_home_screen3,
                 R.layout.activity_home_screen4};
         addBottomDots(0);
         changeStatusBarColor();
