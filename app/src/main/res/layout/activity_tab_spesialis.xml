@@ -10,11 +10,12 @@
         <AutoCompleteTextView
             android:id="@+id/tvsearchspesialis"
             android:layout_width="match_parent"
-            android:drawableLeft="@drawable/ic_youtube_searched_for_black_24dp"
+            android:drawableLeft="@drawable/ic_search_black_24dp"
             android:layout_height="40dp"
             android:layout_margin="10dp"
             android:padding="5dp"
             android:hint="Search"
+            style="@style/MyCustomTextAppearance"
             android:inputType=""
             android:background="@drawable/shape"
             android:backgroundTint="@color/white"
@@ -22,11 +23,12 @@
             android:singleLine="true" />
         <AutoCompleteTextView
             android:id="@+id/tvsearchtypespesialis"
-            android:drawableLeft="@drawable/ic_youtube_searched_for_black_24dp"
+            android:drawableLeft="@drawable/ic_search_black_24dp"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:background="@drawable/shape"
             android:backgroundTint="@color/white"
+            style="@style/MyCustomTextAppearance"
             android:padding="5dp"
             android:layout_margin="10dp"
             android:hint="Pilih Spesialisasi"
