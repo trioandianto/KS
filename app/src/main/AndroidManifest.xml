@@ -165,14 +165,18 @@
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
 
-        <activity android:name=".HospitalList" />
+        <activity
+            android:name=".HospitalList"
+            android:parentActivityName=".HomeActivity" />
         <activity android:name=".CobaListJSON" />
         <activity android:name=".DoctorList" />
         <activity
             android:name=".BookingActivity"
-            android:label="Jadwal" />
+            android:label="Jadwal"
+            android:parentActivityName=".TestScroolView" />
         <activity
             android:name=".TestScroolView"
+            android:parentActivityName=".HospitalList"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".KonfirmasiJanjiActivity"
@@ -180,7 +184,10 @@
             android:parentActivityName=".BookingActivity" />
         <activity
             android:name=".ListMapActivity"
-            android:label="@string/title_activity_list_map"></activity>
+            android:label="@string/title_activity_list_map"
+            android:parentActivityName=".HospitalList" />
+        <activity android:name=".ProfileManagementActivity" />
+        <activity android:name=".ReviewActivity"></activity>
     </application>
 
 </manifest>
