@@ -63,7 +63,7 @@
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:background">@android:color/transparent</item>
         <item name="android:windowTranslucentStatus">true</item>
-        <item name="android:windowTranslucentNavigation">true</item>
+        <!--<item name="android:windowTranslucentNavigation">true</item>-->
         <!--For compatibility-->
         <item name="background">@android:color/transparent</item>
     </style>

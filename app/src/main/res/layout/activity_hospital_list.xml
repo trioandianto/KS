@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:descendantFocusability="blocksDescendants">
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_margin="1dp"
@@ -23,29 +23,43 @@
                 android:drawableLeft="@drawable/ic_peta_black_24dp"
                 android:text="Peta"
                 android:id="@+id/btnpeta"
+                android:textAllCaps="false"
                 style="@style/MyCustomTextAppearance"
                 android:layout_height="wrap_content"
                 android:background="@color/white"/>
 
             <Button
                 android:layout_width="match_parent"
+                android:layout_toRightOf="@id/btnpeta"
                 android:text="Urutkan Berdasarkan"
                 android:drawableLeft="@drawable/ic_sorting_black_24dp"
                 android:layout_marginLeft="1.5dp"
+                android:textAllCaps="false"
                 style="@style/MyCustomTextAppearance"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
                 android:id="@+id/btnsort"/>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <View
+                android:id="@+id/line_pink"
+                android:layout_marginTop="0dp"
+                android:layout_width="match_parent"
+                android:layout_height="4dp"
+                android:background="@drawable/line_color"
+                />
 
-        </LinearLayout>
+        </RelativeLayout>
+
         <ListView
             android:layout_width="match_parent"
             android:background="@drawable/shape"
-            android:backgroundTint="@color/transparent"
             style="@style/ListView"
             android:layout_height="wrap_content"
             android:id="@+id/listview_hospital"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="15dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             >

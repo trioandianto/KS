@@ -58,9 +58,9 @@
             android:name=".RegisterActivity"
             android:gravity="center"
             android:label="@string/title_activity_register"
+            android:parentActivityName=".LoginActivity"
             android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="adjustPan"
-            android:parentActivityName=".LoginActivity">
+            android:windowSoftInputMode="adjustPan">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".LoginActivity" />
@@ -69,9 +69,9 @@
             android:name=".ResetPasswordActivity"
             android:gravity="center"
             android:label="@string/title_activity_reset_passwoord"
+            android:parentActivityName=".LoginActivity"
             android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="adjustPan"
-            android:parentActivityName=".LoginActivity">
+            android:windowSoftInputMode="adjustPan">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".LoginActivity" />
@@ -80,9 +80,9 @@
             android:name=".VerifikasiActivity"
             android:gravity="center"
             android:label="@string/title_activity_verification"
+            android:parentActivityName=".ResetPasswordActivity"
             android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="adjustPan"
-            android:parentActivityName=".ResetPasswordActivity">
+            android:windowSoftInputMode="adjustPan">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ResetPasswordActivity" />
@@ -187,7 +187,8 @@
             android:label="@string/title_activity_list_map"
             android:parentActivityName=".HospitalList" />
         <activity android:name=".ProfileManagementActivity" />
-        <activity android:name=".ReviewActivity"></activity>
+        <activity android:name=".ReviewActivity" />
+        <activity android:name=".Screen1Fragment"></activity>
     </application>
 
 </manifest>

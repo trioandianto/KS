@@ -6,20 +6,22 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+
         <AutoCompleteTextView
             android:id="@+id/tvsearchspesialis"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:background="@drawable/shape"
-            android:backgroundTint="@color/white"
+            android:background="@drawable/search_box"
             android:layout_margin="10dp"
             android:alpha="0.97"
-            android:padding="5dp"
+            android:padding="8dp"
             android:drawableLeft="@drawable/places_ic_search"
             android:hint="Search"
             android:inputType=""
             android:maxLines="1"
+            android:textSize="18sp"
             android:singleLine="true" />
+
         <AutoCompleteTextView
             android:id="@+id/tvsearchtypespesialis"
             android:layout_width="match_parent"
@@ -27,16 +29,17 @@
             android:drawableLeft="@drawable/places_ic_search"
             android:layout_margin="10dp"
             android:alpha="0.97"
-            android:background="@drawable/shape"
-            android:backgroundTint="@color/white"
-            android:padding="5dp"
+            android:background="@drawable/search_box"
+            android:padding="8dp"
             android:hint="Pilih Pelayanan"
             android:inputType=""
             android:maxLines="1"
+            android:textSize="18sp"
             android:singleLine="true" />
 
         <Button
             android:id="@+id/btnsearchpelayanan"
+            style="@style/MyCustomTextAppearance"
             android:layout_margin="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -44,9 +47,7 @@
             android:textColor="@color/white"
             android:textSize="18dp"
             android:text="@string/action_search"
-            android:background="@drawable/shape"
-            style="@style/MyCustomTextAppearance"
-            android:backgroundTint="@color/login_color"/>
+            android:background="@drawable/blue_button"/>
     </LinearLayout>
 
 

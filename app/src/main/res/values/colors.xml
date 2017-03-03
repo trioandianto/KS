@@ -15,6 +15,19 @@
     <color name="google_color">#eb3812</color>
     <color name="tab_color">#e03a96</color>
 
+    <!-- white with transparent circle inactive color -->
+    <color name="circleDisabled">#88ffffff</color>
+
+    <!-- white with transparent circle active color -->
+    <color name="circleEnabled">#ffffff</color>
+
+
+    <!-- Blue A700 -->
+    <color name="buttonBlue">#2962ff</color>
+
+    <!-- Grey 800 -->
+    <color name="frameBackground">#99424242</color>
+
     <!--Opacity 80%-->
     <color name="opacitywhite">#CCffffff</color>
     <color name="opacityblue">#3f51b5</color>
