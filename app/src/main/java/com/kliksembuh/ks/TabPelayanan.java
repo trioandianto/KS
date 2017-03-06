@@ -23,7 +23,7 @@ public class TabPelayanan extends Fragment{
         btnsearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent myIntent = new Intent(view.getContext(),TestScroolView.class);
+                Intent myIntent = new Intent(view.getContext(),ProfileManagementActivity.class);
                 startActivityForResult(myIntent, 0);
             }
         });

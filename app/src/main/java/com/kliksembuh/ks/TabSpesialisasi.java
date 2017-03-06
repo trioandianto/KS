@@ -22,8 +22,8 @@ public class TabSpesialisasi extends Fragment{
         btnsearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent myIntent = new Intent(view.getContext(),HospitalList.class);
-                startActivityForResult(myIntent, 0);
+                Intent myIntent = new Intent(getActivity(),HospitalList.class);
+                startActivity(myIntent);
             }
         });
 
