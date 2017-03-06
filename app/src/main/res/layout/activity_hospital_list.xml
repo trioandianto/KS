@@ -19,26 +19,42 @@
             android:orientation="horizontal"
             android:weightSum="1">
             <Button
-                android:layout_width="wrap_content"
+                android:layout_width="160dp"
                 android:drawableLeft="@drawable/ic_peta_black_24dp"
+                android:drawableStart="@drawable/ic_peta_black_24dp"
                 android:text="Peta"
                 android:id="@+id/btnpeta"
                 android:textAllCaps="false"
                 style="@style/MyCustomTextAppearance"
                 android:layout_height="wrap_content"
-                android:background="@color/white"/>
+                android:background="@color/white"
+                android:gravity="center"
+                android:padding="8dp"
+                android:inputType=""
+                android:maxLines="1"
+                android:textSize="18sp"
+                android:singleLine="true"
+                />
 
             <Button
                 android:layout_width="match_parent"
                 android:layout_toRightOf="@id/btnpeta"
                 android:text="Urutkan Berdasarkan"
                 android:drawableLeft="@drawable/ic_sorting_black_24dp"
+                android:drawableStart="@drawable/ic_sorting_black_24dp"
+                android:gravity="center_vertical"
                 android:layout_marginLeft="1.5dp"
                 android:textAllCaps="false"
                 style="@style/MyCustomTextAppearance"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
-                android:id="@+id/btnsort"/>
+                android:id="@+id/btnsort"
+
+                android:padding="8dp"
+                android:inputType=""
+                android:maxLines="1"
+                android:textSize="18sp"
+                android:singleLine="true"/>
         </RelativeLayout>
         <RelativeLayout
             android:layout_width="match_parent"

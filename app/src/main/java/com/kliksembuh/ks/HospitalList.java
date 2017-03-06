@@ -45,10 +45,10 @@ public class HospitalList extends Activity {
         mHospitalList = new ArrayList<>();
         // Add sample data
         // We can get data by DB, or web service
-        mHospitalList.add(new Hospital(1, R.drawable.rs_pmi_bogor , "RS PMI Bogor", "Jalan Rumah Sakit I, Kota Bogor, Jawa Barat 16129"));
-        mHospitalList.add(new Hospital(2, R.drawable.rs_pmi_bogor, "RSUD Cibinong Bogor", "Jalan KSR Dadi Kusmayadi No. 27, Bogor, Jawa Barat 16914"));
-        mHospitalList.add(new Hospital(3, R.drawable.rs_pmi_bogor, "RS Medika Darmaga", "Jl. Raya Dramaga KM. 7.3, Bogor Barat, Kota Bogor, Jawa Barat 16680"));
-        mHospitalList.add(new Hospital(4, R.drawable.rs_pmi_bogor, "RS Bogor Medical Centre", "Jl. Pajajaran Indah V No. 97, Kota Bogor, Jawa Barat 16143"));
+        mHospitalList.add(new Hospital(1, R.drawable.rs_pmi_bogor , "RS PMI Bogor", "Kota Bogor, Jawa Barat 16129"));
+        mHospitalList.add(new Hospital(2, R.drawable.rs_pmi_bogor, "RSUD Cibinong Bogor", "Kota Bogor, Jawa Barat 16914"));
+        mHospitalList.add(new Hospital(3, R.drawable.rs_pmi_bogor, "RS Medika Darmaga", "Bogor Barat, Kota Bogor, Jawa Barat 16680"));
+        mHospitalList.add(new Hospital(4, R.drawable.rs_pmi_bogor, "RS Bogor Medical Centre", "Kota Bogor, Jawa Barat 16143"));
 
         // Test adapter
         hAdapter = new HospitalListAdapter(getApplicationContext(), mHospitalList);
