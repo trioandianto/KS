@@ -4,8 +4,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.FragmentActivity;
-import android.support.v7.widget.Toolbar;
-
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -22,8 +20,8 @@ public class ListMapActivity extends FragmentActivity implements OnMapReadyCallb
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_map);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.my_toolbar);
-        toolbar.setTitle("Jumat, 24 Februari 2017");
+//        Toolbar toolbar = (Toolbar) findViewById(R.id.my_toolbar);
+//        toolbar.setTitle("Jumat, 24 Februari 2017");
 
 //        Calendar c = Calendar.getInstance(TimeZone.getTimeZone("GMT"),Locale.getDefault());
 //        SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");

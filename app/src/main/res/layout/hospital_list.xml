@@ -16,7 +16,7 @@
 
         style="@style/MyCustomTextAppearance"
         android:textSize="20dp"
-        android:textColor="@color/blue"
+        android:textColor="@color/login_color"
         android:layout_alignTop="@+id/iv_hospital_pic"
         android:layout_toRightOf="@+id/iv_hospital_pic"
         android:layout_toEndOf="@+id/iv_hospital_pic" />
@@ -40,6 +40,8 @@
         android:layout_width="wrap_content"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="15dp"
+        android:drawableLeft="@drawable/ic_place_black_24dp"
+        android:drawableStart="@drawable/ic_place_black_24dp"
         style="@style/MyCustomTextAppearance"
         android:layout_height="wrap_content"
         android:text="Address"
