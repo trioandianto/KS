@@ -14,6 +14,8 @@ import android.widget.SimpleAdapter;
 import android.widget.ListAdapter;
 import android.widget.Toast;
 
+import com.kliksembuh.ks.library.HttpHandler;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;

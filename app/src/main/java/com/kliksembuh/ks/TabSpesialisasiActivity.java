@@ -11,7 +11,7 @@ import android.widget.Button;
 /**
  * Created by Trio Andianto on 1/23/2017.
  */
-public class TabSpesialisasi extends Fragment{
+public class TabSpesialisasiActivity extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle saveInstanceState){

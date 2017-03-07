@@ -179,7 +179,7 @@ public class HomeActivity extends AppCompatActivity
 //
 //        if (id == R.id.nav_search) {
 //            // Handle the camera action
-//            Fragment nes = new TabPelayanan();
+//            Fragment nes = new TabPelayananActivity();
 //        } else if (id == R.id.nav_favorite) {
 //
 //        } else if (id == R.id.nav_appointment) {
@@ -263,10 +263,10 @@ public class HomeActivity extends AppCompatActivity
         public Fragment getItem(int position) {
             switch (position){
                 case 0:
-                    TabSpesialisasi tabSpesialisasi= new TabSpesialisasi();
+                    TabSpesialisasiActivity tabSpesialisasi= new TabSpesialisasiActivity();
                     return tabSpesialisasi;
                 case 1:
-                    TabPelayanan tabPelayanan = new TabPelayanan();
+                    TabPelayananActivity tabPelayanan = new TabPelayananActivity();
                     return tabPelayanan;
                 default:
                     return null;

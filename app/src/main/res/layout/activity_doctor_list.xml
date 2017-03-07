@@ -4,7 +4,7 @@
     android:layout_width="fill_parent"
     android:id="@+id/scrollViewdoctorlist"
     android:layout_height="fill_parent"
-    tools:context="com.kliksembuh.ks.DoctorList">
+    tools:context="com.kliksembuh.ks.DoctorListActivity">
 
     <LinearLayout
         android:layout_width="match_parent"

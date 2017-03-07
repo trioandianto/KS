@@ -1,4 +1,4 @@
-package com.kliksembuh.ks.models;
+package com.kliksembuh.ks.library;
 
 
 import android.app.IntentService;

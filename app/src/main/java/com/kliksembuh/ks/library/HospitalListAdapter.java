@@ -1,14 +1,14 @@
-package com.kliksembuh.ks;
+package com.kliksembuh.ks.library;
 
 import android.content.Context;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import com.kliksembuh.ks.R;
+import com.kliksembuh.ks.models.Hospital;
 
 import java.util.List;
 

@@ -172,7 +172,7 @@
             android:parentActivityName=".HomeActivity"/>
 
         <activity android:name=".CobaListJSON" />
-        <activity android:name=".DoctorList" />
+        <activity android:name=".DoctorListActivity" />
         <activity
             android:name=".BookingActivity"
             android:label="Jadwal"
