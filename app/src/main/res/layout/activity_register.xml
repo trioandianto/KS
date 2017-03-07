@@ -19,16 +19,23 @@
         android:focusable="true"
         android:focusableInTouchMode="true">
     </LinearLayout>
+
     <ScrollView
         android:id="@+id/login_form"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
 
         <LinearLayout
             android:id="@+id/register_form"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="10dp">
             <ImageView
                 android:id="@+id/kliksembuh_logo"
                 android:layout_width="match_parent"
@@ -49,6 +56,7 @@
                     android:hint="@string/first_name"
                     android:inputType=""
                     android:maxLines="1"
+                    android:textSize="18dp"
                     android:singleLine="true" />
 
             </android.support.design.widget.TextInputLayout>
@@ -124,7 +132,7 @@
                     android:id="@+id/confirmpassword"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Confirm Password"
+                    android:hint="Konfirmasi Password"
                     android:imeActionLabel="@string/action_sign_in_short"
                     android:imeOptions="actionUnspecified"
                     android:inputType="textPassword"
@@ -134,11 +142,14 @@
             </android.support.design.widget.TextInputLayout>
 
             <CheckBox
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="30dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/promo"
                 style="?android:textAppearanceSmall"
-                android:textStyle="bold"
+                android:textSize="18dp"
+                android:textColor="@color/black"
                 android:id="@+id/checkBox" />
 
             <Button
@@ -149,10 +160,13 @@
                 android:layout_marginTop="10dp"
                 android:textColor="@color/white"
                 android:text="@string/action_create_account"
-                android:textStyle="bold"
                 android:textAllCaps="false"
                 android:background="@drawable/shape"
-                android:backgroundTint="@color/login_color" />
+                android:backgroundTint="@color/login_color"
+                android:layout_margin="5dp"
+                android:textSize="18dp"
+                />
+
             <Button
                 android:id="@+id/btnlogin"
                 style="@style/MyCustomTextAppearance"
@@ -162,9 +176,64 @@
                 android:textColor="@color/white"
                 android:text="@string/action_already_login"
                 android:textAllCaps="false"
-                android:textStyle="bold"
                 android:background="@drawable/shape"
-                android:backgroundTint="@color/signup_color" />
+                android:backgroundTint="@color/signup_color"
+                android:layout_margin="5dp"
+                android:textSize="18dp"
+                />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_margin="20dp"
+                    android:text="atau"
+                    android:textColor="@color/colorPrimaryDark"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="16dp"
+                    android:layout_toLeftOf="@id/tvText"
+                    android:background="@color/colorPrimaryDark"
+                    />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="16dp"
+                    android:layout_toRightOf="@id/tvText"
+                    android:background="@color/colorPrimaryDark"
+                    />
+
+            </RelativeLayout>
+
+            <com.facebook.login.widget.LoginButton
+                xmlns:fb="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/login_button"
+                style="@style/MyCustomTextAppearance"
+                android:textColor="@color/white"
+                android:textSize="16dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                fb:com_facebook_login_text="Login dengan Facebook"
+                android:paddingTop="15dp"
+                android:paddingBottom="15dp"
+                android:layout_margin="10dp"/>
+
             <TextView
                 android:id="@+id/termsandpol"
                 android:layout_width="match_parent"
@@ -176,6 +245,7 @@
                 android:autoLink="phone"
                 android:gravity="center"
                 android:linksClickable="true" />
+
         </LinearLayout>
     </ScrollView>
 

@@ -18,7 +18,7 @@
             android:layout_margin="10dp"
             android:alpha="0.97"
             android:padding="8dp"
-            android:hint="Search"
+            android:hint="Pilih Lokasi"
             android:inputType=""
             android:background="@drawable/shape"
             android:backgroundTint="@color/white"
