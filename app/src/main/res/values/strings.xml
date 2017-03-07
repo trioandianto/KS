@@ -32,21 +32,21 @@ atau tidak ingin masuk kedalam ketentuan penggunaan.
 DAN KEBIJAKAN PRIVASI KAMI DENGAN SEKSAMA SEBELUM MENGUNDUH APLIKASI ATAU
 MENGGUNAKAN LAYANAN KAMI UNTUK PERTAMA KALI.</string>
     <string name="prompt_password">Password</string>
-    <string name="forgot_password_text"><u>Forgot Your Password ?</u></string>
+    <string name="forgot_password_text"><u>Lupa Password?</u></string>
     <string name="confirm_password">Confirm Password</string>
-    <string name="first_name">First Name</string>
-    <string name="promo">Kirimkan saya penawaran dan promo.</string>
-    <string name="last_name">Last Name</string>
+    <string name="first_name">Nama Depan</string>
+    <string name="promo">Kirimkan Saya Penawaran dan Promo</string>
+    <string name="last_name">Nama Belakang</string>
     <string name="action_sign_in">Sign in or register</string>
     <string name="action_forgot_password">Reset Password</string>
     <string name="verify">Verify</string>
     <string name="action_sign_in_short">Login</string>
-    <string name="action_create_account">Create Account</string>
+    <string name="action_create_account">Buat Akun</string>
     <string name="action_search">Search</string>
     <string name="action_favorite">Favorite</string>
     <string name="action_myappointment">My Appointment</string>
     <string name="action_sign_in_facebook">Log In with Facebook</string>
-    <string name="action_already_login">Already have an account? Login</string>
+    <string name="action_already_login">Sudah punya akun? Login</string>
     <string name="action_sign_in_google">Log In with Google+</string>
     <string name="error_invalid_email">This email address is invalid</string>
     <string name="error_invalid_password">This password is too short</string>

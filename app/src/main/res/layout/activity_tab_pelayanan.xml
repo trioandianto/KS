@@ -16,7 +16,7 @@
             android:alpha="0.97"
             android:padding="8dp"
             android:drawableLeft="@drawable/places_ic_search"
-            android:hint="Search"
+            android:hint="Pilih Lokasi"
             android:inputType=""
             android:maxLines="1"
             android:textSize="18sp"
