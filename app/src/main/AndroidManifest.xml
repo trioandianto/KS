@@ -37,7 +37,7 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher_ks_new"
+        android:icon="@mipmap/ic_launcher_new"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
@@ -70,6 +70,7 @@
             android:gravity="center"
             android:label="@string/title_activity_reset_passwoord"
             android:parentActivityName=".LoginActivity"
+            android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustPan">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -80,6 +81,7 @@
             android:gravity="center"
             android:label="@string/title_activity_verification"
             android:parentActivityName=".ResetPasswordActivity"
+            android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustPan">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -165,14 +167,10 @@
 
         <activity
             android:name=".HospitalList"
-            android:gravity="center"
-            android:windowSoftInputMode="adjustPan"
-            android:label="@string/title_activity_hospitallist"
-            android:parentActivityName=".HomeActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".HomeActivity" />
-        </activity>
+            android:label="@string/title_activity_list_map"
+            android:launchMode="singleTop"
+            android:parentActivityName=".HomeActivity"/>
+
         <activity android:name=".CobaListJSON" />
         <activity android:name=".DoctorList" />
         <activity
@@ -190,14 +188,14 @@
         <activity
             android:name=".ListMapActivity"
             android:label="@string/title_activity_list_map"
-            android:parentActivityName=".HospitalList"
-            android:windowSoftInputMode="adjustPan">
+            android:launchMode="singleTop"
+            android:parentActivityName=".HospitalList" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".HospitalList" />
+                android:value="com.kliksembuh.ks.HospitalList" />
         </activity>
         <activity android:name=".ProfileManagementActivity" />
-        <activity android:name=".ReviewActivity" />
+        <activity android:name=".ReviewActivity" ></activity>
     </application>
 
 </manifest>

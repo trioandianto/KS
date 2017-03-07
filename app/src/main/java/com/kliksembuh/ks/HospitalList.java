@@ -1,19 +1,18 @@
 package com.kliksembuh.ks;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.RatingBar;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class HospitalList extends Activity {
+public class HospitalList extends AppCompatActivity {
 
     private String JSON_STRING;
     private ListView lvHospital;
@@ -59,7 +58,7 @@ public class HospitalList extends Activity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 // Do something
                 // Ex. display msg with hospital id from view.getTag
-                Toast.makeText(getApplicationContext(), "Clicked hospital id = " + view.getTag(), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(), "Clicked hospital id = " + view.getTag(), Toast.LENGTH_SHORT).show();
 
                 // Go to another activity
                 if (position == 0){

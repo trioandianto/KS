@@ -180,7 +180,7 @@ ViewPager.OnPageChangeListener viewListener = new ViewPager.OnPageChangeListener
 
         mBuilder.setContentIntent(pendingIntent);
 
-        mBuilder.setSmallIcon(R.mipmap.ic_launcher_ksbeta);
+        mBuilder.setSmallIcon(R.mipmap.ic_launcher_new);
         mBuilder.setContentTitle("Klik Sembuh");
         mBuilder.setContentText("Selamat anda telah bergabung dengan kami.");
 
