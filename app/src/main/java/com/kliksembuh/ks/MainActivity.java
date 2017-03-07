@@ -21,6 +21,8 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.kliksembuh.ks.library.Intromanager;
+
 public class MainActivity extends AppCompatActivity {
 
     private ViewPager viewPager;

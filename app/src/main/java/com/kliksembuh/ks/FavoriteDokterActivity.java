@@ -2,11 +2,13 @@ package com.kliksembuh.ks;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
+
+import com.kliksembuh.ks.library.HospitalListAdapter;
+import com.kliksembuh.ks.models.Hospital;
 
 import java.util.List;
 

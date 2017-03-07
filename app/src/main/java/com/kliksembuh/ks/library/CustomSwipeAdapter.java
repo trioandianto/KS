@@ -1,4 +1,4 @@
-package com.kliksembuh.ks;
+package com.kliksembuh.ks.library;
 
 import android.content.Context;
 import android.support.v4.view.PagerAdapter;
@@ -7,6 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+
+import com.kliksembuh.ks.R;
 
 /**
  * Created by trioandianto on 12/21/2016.

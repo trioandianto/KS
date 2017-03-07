@@ -1,6 +1,5 @@
-package com.kliksembuh.ks;
+package com.kliksembuh.ks.library;
 
-import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,9 +9,7 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
-import com.kliksembuh.ks.models.ListImage;
-
-import org.w3c.dom.Text;
+import com.kliksembuh.ks.R;
 
 import java.util.List;
 

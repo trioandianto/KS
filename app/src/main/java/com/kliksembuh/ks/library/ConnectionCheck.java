@@ -1,12 +1,9 @@
-package com.kliksembuh.ks;
+package com.kliksembuh.ks.library;
 
 import android.app.AlertDialog;
 import android.content.Context;
 import android.os.AsyncTask;
-import android.speech.tts.Voice;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;

@@ -11,7 +11,7 @@ import android.widget.Button;
 /**
  * Created by Trio Andianto on 1/23/2017.
  */
-public class TabPelayanan extends Fragment{
+public class TabPelayananActivity extends Fragment{
     int year, month, day;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -38,7 +38,7 @@ public class TabPelayanan extends Fragment{
 //        month = c.get(Calendar.MONTH);
 //        day = c.get(Calendar.DAY_OF_MONTH);
 //        DatePickerDialog datePickerDialog;
-////        datePickerDialog = new DatePickerDialog(Context context, TabPelayanan, year, month, day);
+////        datePickerDialog = new DatePickerDialog(Context context, TabPelayananActivity, year, month, day);
 ////        datePickerDialog.show();
 //
 //    }

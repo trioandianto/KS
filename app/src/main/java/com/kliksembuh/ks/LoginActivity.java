@@ -44,8 +44,9 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.kliksembuh.ks.models.DatabaseHandler;
-import com.kliksembuh.ks.models.UserFunctions;
+import com.kliksembuh.ks.library.ConnectionCheck;
+import com.kliksembuh.ks.library.DatabaseHandler;
+import com.kliksembuh.ks.library.UserFunctions;
 
 import org.json.JSONException;
 import org.json.JSONObject;

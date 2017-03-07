@@ -112,7 +112,7 @@
 
     </LinearLayout>
 
-    <com.kliksembuh.ks.models.MaterialFavoriteButton
+    <com.kliksembuh.ks.library.MaterialFavoriteButton
         android:id="@+id/favorite_nice"
         android:layout_width="100dp"
         android:layout_height="100dp"

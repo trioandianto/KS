@@ -1,4 +1,4 @@
-package com.kliksembuh.ks;
+package com.kliksembuh.ks.models;
 
 /**
  * Created by Trio Andianto on 2/1/2017.

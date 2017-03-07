@@ -9,6 +9,9 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.RatingBar;
 
+import com.kliksembuh.ks.library.HospitalListAdapter;
+import com.kliksembuh.ks.models.Hospital;
+
 import java.util.ArrayList;
 import java.util.List;
 

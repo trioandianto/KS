@@ -26,7 +26,9 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.kliksembuh.ks.models.ObservableScrollView;
+import com.kliksembuh.ks.library.DoctorListAdapter;
+import com.kliksembuh.ks.models.Doctor;
+import com.kliksembuh.ks.library.ObservableScrollView;
 
 import java.util.List;
 

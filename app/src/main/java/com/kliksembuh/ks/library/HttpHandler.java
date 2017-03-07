@@ -1,4 +1,4 @@
-package com.kliksembuh.ks;
+package com.kliksembuh.ks.library;
 
 import android.util.Log;
 
