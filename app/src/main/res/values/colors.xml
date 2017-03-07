@@ -14,6 +14,7 @@
     <color name="signup_color">#d61152</color>
     <color name="google_color">#eb3812</color>
     <color name="tab_color">#e03a96</color>
+    <color name="blue_a400">#2979FF</color>
 
     <!-- white with transparent circle inactive color -->
     <color name="circleDisabled">#88ffffff</color>
