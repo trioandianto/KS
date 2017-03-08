@@ -63,6 +63,7 @@
     <!--Light Grey Custom-->
     <color name="light_grey">#cccccc</color>
     <color name="transparent">#00000000</color>
+    <color name="divider_grey">#f7f7f7</color>
 
     <array name="dot_inactive">
     <item>@color/dot_light_screen1</item>

@@ -22,7 +22,7 @@ import java.net.URLEncoder;
 public class ConnectionCheck extends AsyncTask<String, Void, String>{
     Context context;
     AlertDialog alertDialog;
-    ConnectionCheck(Context ctx){
+    public ConnectionCheck(Context ctx){
         context = ctx;
     }
     @Override
