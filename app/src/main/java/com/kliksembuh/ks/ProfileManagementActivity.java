@@ -1,5 +1,6 @@
 package com.kliksembuh.ks;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
@@ -11,7 +12,10 @@ import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
 import android.view.View;
+import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
@@ -27,7 +31,7 @@ import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class ProfileManagementActivity extends AppCompatActivity implements View.OnClickListener {
+public class ProfileManagementActivity extends AppCompatActivity{
     private static final int RESULT_LOAD_IMAGE=1;
     private static final String SERVER_ADDRESS="";
 
@@ -35,9 +39,22 @@ public class ProfileManagementActivity extends AppCompatActivity implements View
 
     private ImageView imageView;
     private ImageView imageClick;
+    private TextView editDataDiri;
+    private TextView editVitalSign;
+    private TextView gantiPassword;
+    private AutoCompleteTextView namadepan;
+    private AutoCompleteTextView namabelakang;
+    private AutoCompleteTextView nohp;
+    private AutoCompleteTextView email;
     private Drawable drawable;
     private Random random;
     private Drawable [] drawables = null;
+    private TextView datadiri;
+    private TextView vitalsign;
+    private AutoCompleteTextView tekananDarah;
+    private AutoCompleteTextView suhuTubuh;
+    private AutoCompleteTextView denyutNadi;
+    private AutoCompleteTextView pernafasan;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,30 +63,76 @@ public class ProfileManagementActivity extends AppCompatActivity implements View
 
         imageView = (ImageView)findViewById(R.id.profile_image);
         imageClick = (ImageView)findViewById(R.id.cameraupload);
-        imageView.setOnClickListener(this);
+        editDataDiri = (TextView)findViewById(R.id.tvEditProfileManagement);
+        editVitalSign =(TextView)findViewById(R.id.tvEditVitalSignProfileManagement);
+        gantiPassword = (TextView)findViewById(R.id.tvgantipassword);
 
-        imageClick.setOnClickListener(this);
+        editDataDiri.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final AlertDialog.Builder mBuilder = new AlertDialog.Builder(ProfileManagementActivity.this);
+                View mView = getLayoutInflater().inflate(R.layout.profile_data_diri,null);
+                datadiri = (TextView) mView.findViewById(R.id.tvdatadiri);
+                email = (AutoCompleteTextView)mView.findViewById(R.id.tvemail);
+                namadepan = (AutoCompleteTextView) mView.findViewById(R.id.tvnamadepan);
+                namabelakang = (AutoCompleteTextView) mView.findViewById(R.id.tvnamabelakang);
+                nohp = (AutoCompleteTextView) mView.findViewById(R.id.tvnohp);
+                mBuilder.setView(mView);
+                final AlertDialog dialog = mBuilder.create();
+                dialog.show();
 
-    }
+                Button simpan = (Button) mView.findViewById(R.id.btnsimpandatadiri);
+                simpan.setOnClickListener(new View.OnClickListener(){
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                    }
+                });
+            }
+        });
+        editVitalSign.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder mBuilder = new AlertDialog.Builder(ProfileManagementActivity.this);
+                View mView = getLayoutInflater().inflate(R.layout.profile_vital_sign,null);
+                vitalsign = (TextView) mView.findViewById(R.id.tvvitalsign);
+                suhuTubuh = (AutoCompleteTextView) mView.findViewById(R.id.tvsuhu);
+                denyutNadi = (AutoCompleteTextView) mView.findViewById(R.id.tvnadi);
+                tekananDarah = (AutoCompleteTextView) mView.findViewById(R.id.tvtekanandarah);
+                pernafasan = (AutoCompleteTextView)mView.findViewById(R.id.tvpernafasan);
 
-    /**
-     * Called when a view has been clicked.
-     *
-     * @param v The view that was clicked.
-     */
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.profile_image:
+                mBuilder.setView(mView);
+                final AlertDialog dialog = mBuilder.create();
+                dialog.show();
+                Button simpan = (Button) mView.findViewById(R.id.btnsimpandatadiri);
+                simpan.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                    }
+                });
+            }
+        });
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 Intent galleryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 startActivityForResult(galleryIntent, RESULT_LOAD_IMAGE);
-                break;
-            case R.id.cameraupload:
+            }
+        });
+        imageClick.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 Bitmap image = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
                 new UploadImage(image);
-                break;
+            }
+        });
+        gantiPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
-        }
+            }
+        });
 
     }
 

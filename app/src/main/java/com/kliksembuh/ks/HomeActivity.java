@@ -102,6 +102,15 @@ public class HomeActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+//        TextView tveditdatadiri = (TextView)findViewById(R.id.edit_datadiri);
+//        tveditdatadiri.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent datadiri = new Intent(getApplicationContext(), ProfileManagementActivity.class);
+//                startActivity(datadiri);
+//            }
+//        });
+
 
     }
     private void addBottomDots(int position){
