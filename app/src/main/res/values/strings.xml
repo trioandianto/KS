@@ -104,4 +104,14 @@ MENGGUNAKAN LAYANAN KAMI UNTUK PERTAMA KALI.</string>
     the big cheese.</string>
     <string name="checkin">Checkin</string>
     <string name="title_activity_list_map">Jumat, 24 Februari 2017</string>
+    <string name="simpan">Simpan</string>
+    <string name="namadepan">Nama Depan</string>
+    <string name="namabelakang">Nama Belakang</string>
+    <string name="nohp">No. Hp</string>
+    <string name="pernafasan">Tekanan Pernafasan</string>
+    <string name="nadi">Denyut Nadi</string>
+    <string name="suhutubuh">Suhu Tubuh</string>
+    <string name="darah">Tekanan Darah</string>
+    <string name="Datadiri">Data Diri</string>
+    <string name="vitalsign">Vital Sign</string>
 </resources>
