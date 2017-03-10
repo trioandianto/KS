@@ -37,9 +37,8 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginLeft="10dp"
                 android:text="dr. Indah Kusuma"
-                android:textColor="#000000"
+                android:textColor="@color/blue_a400"
                 android:textSize="20sp"
-                android:textStyle="bold"
                 android:layout_alignParentTop="true"
                 android:layout_toEndOf="@+id/iv_doc_picdetail" />
 
@@ -52,7 +51,6 @@
                 android:textSize="14dp"
                 android:textColor="#5C5C5C"
                 android:layout_below="@+id/tv_drname_detail"
-                android:textStyle="bold"
                 android:layout_toEndOf="@+id/iv_doc_picdetail" />
         </LinearLayout>
         <LinearLayout

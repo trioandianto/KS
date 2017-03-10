@@ -180,7 +180,8 @@
         <activity
             android:name=".TestScroolView"
             android:parentActivityName=".HospitalList"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:label="RS PMI Bogor"
+            android:theme="@style/AppTheme2" />
         <activity
             android:name=".KonfirmasiJanjiActivity"
             android:label="Buat Janji"
