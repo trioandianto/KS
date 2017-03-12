@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 
 /**
@@ -13,17 +14,26 @@ import android.widget.Button;
  */
 public class TabPelayananActivity extends Fragment{
     int year, month, day;
+    private AutoCompleteTextView location;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle saveInstanceState) {
         View rootView = inflater.inflate(R.layout.activity_tab_pelayanan, container, false);
+        location = (AutoCompleteTextView) rootView.findViewById(R.id.tvsearchpelayanan);;
+        location.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent myIntent = new Intent(getActivity(),SearchLocationActivity.class);
+                startActivity(myIntent);
+            }
+        });
 
         //Action Button
         Button btnsearch = (Button)rootView.findViewById(R.id.btnsearchpelayanan);
         btnsearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent myIntent = new Intent(view.getContext(),ProfileManagementActivity.class);
+                Intent myIntent = new Intent(view.getContext(),DoctorListActivity.class);
                 startActivityForResult(myIntent, 0);
             }
         });

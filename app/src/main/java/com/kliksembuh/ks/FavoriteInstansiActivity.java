@@ -34,10 +34,10 @@ public class FavoriteInstansiActivity extends Fragment {
         View rootView = inflater.inflate(R.layout.activity_favorite_instansi, container, false);
         lvHospital = (ListView)rootView.findViewById(R.id.listview_hospital_favorite);
         mHospitalList = new ArrayList<>();
-        mHospitalList.add(new Hospital(1, R.drawable.rs_pmi_bogor , "RS PMI Jakarta", "Jalan Rumah Sakit I, Bogor Tengah, Kota Bogor, Jawa Barat 16129"));
-        mHospitalList.add(new Hospital(2, R.drawable.rs_cibinong_bogor, "RSUD Cibinong Bogor", "Jalan KSR Dadi Kusmayadi No. 27, Tengah, Cibinong, Bogor, Jawa Barat 16914"));
-        mHospitalList.add(new Hospital(3, R.drawable.rs_medika_dramaga, "RS Medika Darmaga", "Jl. Raya Dramaga KM. 7.3, Bogor Barat, Margajaya, Bogor Barat, Kota Bogor, Jawa Barat 16680"));
-        mHospitalList.add(new Hospital(4, R.drawable.rs_bogor_medical_centre, "RS Bogor Medical Centre", "Jl. Pajajaran Indah V No. 97, Baranangsiang, Bogor Timur, Kota Bogor, Jawa Barat 16143"));
+//        mHospitalList.add(new Hospital(1, R.drawable.rs_pmi_bogor , "RS PMI Jakarta", "Jalan Rumah Sakit I, Bogor Tengah, Kota Bogor, Jawa Barat 16129"));
+//        mHospitalList.add(new Hospital(2, R.drawable.rs_cibinong_bogor, "RSUD Cibinong Bogor", "Jalan KSR Dadi Kusmayadi No. 27, Tengah, Cibinong, Bogor, Jawa Barat 16914"));
+//        mHospitalList.add(new Hospital(3, R.drawable.rs_medika_dramaga, "RS Medika Darmaga", "Jl. Raya Dramaga KM. 7.3, Bogor Barat, Margajaya, Bogor Barat, Kota Bogor, Jawa Barat 16680"));
+//        mHospitalList.add(new Hospital(4, R.drawable.rs_bogor_medical_centre, "RS Bogor Medical Centre", "Jl. Pajajaran Indah V No. 97, Baranangsiang, Bogor Timur, Kota Bogor, Jawa Barat 16143"));
 
         hAdapter = new HospitalListAdapter(getApplicationContext(), mHospitalList);
         lvHospital.setAdapter(hAdapter);

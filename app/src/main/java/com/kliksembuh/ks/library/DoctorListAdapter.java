@@ -4,6 +4,8 @@ import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -16,7 +18,7 @@ import java.util.List;
  * Created by Ucu Nurul Ulum on 06/02/2017.
  */
 
-public class DoctorListAdapter extends BaseAdapter{
+public class DoctorListAdapter <T> extends BaseAdapter implements Filterable {
     private Context mContext;
     private List<Doctor> mDoctorList;
 
@@ -47,12 +49,12 @@ public class DoctorListAdapter extends BaseAdapter{
         View newDview = View.inflate(mContext, R.layout.doctor_list, null);
 
         // getView for Doctor List
-        ImageView imgDview = (ImageView)newDview.findViewById(R.id.iv_doc_pic);
-        TextView tvDrname = (TextView)newDview.findViewById(R.id.tv_drname);
-        TextView tvDrspecialty = (TextView)newDview.findViewById(R.id.tv_specialty);
+        ImageView imgDview = (ImageView)newDview.findViewById(R.id.iv_doc_pic_list);
+        TextView tvDrname = (TextView)newDview.findViewById(R.id.tv_list_drname);
+        TextView tvDrspecialty = (TextView)newDview.findViewById(R.id.tv_specialty_list);
 
         // Set text and image for View of Doctor
-        imgDview.setImageResource(mDoctorList.get(position).getDoc_pic_id());
+        imgDview.setImageDrawable(mDoctorList.get(position).getDoc_pic_id());
         tvDrname.setText(mDoctorList.get(position).getNameDoc());
         tvDrspecialty.setText(mDoctorList.get(position).getSpecialty());
 
@@ -60,5 +62,9 @@ public class DoctorListAdapter extends BaseAdapter{
         newDview.setTag(mDoctorList.get(position).getDoc_id());
 
         return newDview;
+    }
+    @Override
+    public Filter getFilter() {
+        return null;
     }
 }

@@ -1,0 +1,37 @@
+{
+  "hospital": [
+    {
+      "id": "1",
+      "name": "RS. PMI Bogor",
+      "imgUrl1": "http://kliksembuhbeta.000webhostapp.com/img/rs_pmi_bogor.jpg",
+      "Alamat": "Jl. Padjadjaran No.80, Bantarjati, Bogor Utara, Kota Bogor, Jawa Barat 16153",
+      "spesialisasi": "Dokter Umum",
+      "code": "1"
+    },
+    {
+      "id": "2",
+      "name": "RS. CIBINONG BOGOR",
+      "imgUrl1": "http://kliksembuhbeta.000webhostapp.com/img/rs_cibinong_bogor.jpg",
+      "Alamat": "Jl. Jenderal Sudirman No. 8, Sempur, Bogor Tengah, Kota Bogor, Jawa Barat 16154",
+      "spesialisasi": "Dokter Umum",
+      "code": "2"
+    },
+    {
+      "id": "3",
+      "name": "RS. MEDICAL CENTER",
+      "imgUrl1": "http://kliksembuhbeta.000webhostapp.com/img/rs_bogor_medical_centre.jpg",
+      "Alamat": "Jl. Raya Pajajaran No. 219, Bantarjati, Bogor Utara, Kota Bogor, Jawa Barat 16153",
+      "spesialisasi": "Dokter Umum",
+      "code": "3"
+    }
+  ,
+    {
+      "id": "4",
+      "name": "RS. MEDIKA DERMAGA",
+      "imgUrl1": "http://kliksembuhbeta.000webhostapp.com/img/rs_medika_dramaga.jpg",
+      "Alamat": "Jl. Raya Pajajaran No. 219, Barungbung, Bogor Utara, Bogor Timur, Jawa Barat 16153",
+      "spesialisasi": "Dokter Umum",
+      "code": "4"
+    }
+  ]
+}

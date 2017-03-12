@@ -1,4 +1,5 @@
-[
+{
+	"location"   : [
 	{
 		"name": "Bogor Barat",
 		"code": "AF"
@@ -184,3 +185,4 @@
 		"code": "CO"
 	}
 ]
+}

@@ -6,69 +6,62 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Filter;
 import android.widget.Filterable;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.kliksembuh.ks.R;
-import com.kliksembuh.ks.models.Hospital;
+import com.kliksembuh.ks.models.Location;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Trio Andianto on 2/1/2017.
+ * Created by Trio Andianto on 3/10/2017.
  */
 
-public class HospitalListAdapter<T> extends BaseAdapter implements Filterable {
+public class SearchAdapter<T> extends BaseAdapter implements Filterable {
     private Context mContext;
-    private List<Hospital> mHospitalList;
+    private List<Location> mLocation;
     private ArrayList<T> mOriginalValues;
     private ArrayFilter mFilter;
     private final Object mLock = new Object();
     private List<T> mObjects;
-
-    // Constructor
-    public HospitalListAdapter(Context mContext, List<Hospital> mHospitalList) {
+    public SearchAdapter(Context mContext, List<Location> mLocation) {
         this.mContext = mContext;
-        this.mHospitalList = mHospitalList;
+        this.mLocation = mLocation;
     }
 
     @Override
     public int getCount() {
-        return mHospitalList.size();
+        return mLocation.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return mHospitalList.get(position);
+        return mLocation.get(position);
     }
 
     @Override
     public long getItemId(int position) {
         return position;
     }
-
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        View newView = View.inflate(mContext, R.layout.hospital_list, null);
-        ImageView imgView = (ImageView)newView.findViewById(R.id.iv_hospital_pic);
-        TextView tvName = (TextView)newView.findViewById(R.id.tv_name);
-        TextView tvAddress = (TextView)newView.findViewById(R.id.tv_address);
+        View newView = View.inflate(mContext, R.layout.list_item, null);
+        TextView tvName = (TextView)newView.findViewById(R.id.name);
+        TextView tvCode = (TextView)newView.findViewById(R.id.email);
 
-        imgView.setImageDrawable(mHospitalList.get(position).getHospital_pic_id());
-        tvName.setText(mHospitalList.get(position).getName());
-        tvAddress.setText(mHospitalList.get(position).getAddress());
+        tvName.setText(mLocation.get(position).getName());;
+        tvCode.setText(mLocation.get(position).getId());
 
-
-        // Save hospital id to tag
-        newView.setTag(mHospitalList.get(position).getId());
+        newView.setTag(mLocation.get(position).getId());
 
         return newView;
     }
+
     @Override
     public Filter getFilter() {
         if (mFilter == null) {
-            mFilter = new ArrayFilter();
+            mFilter = new SearchAdapter.ArrayFilter();
         }
         return mFilter;
     }

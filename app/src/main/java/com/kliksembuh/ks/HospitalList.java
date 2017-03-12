@@ -1,18 +1,33 @@
 package com.kliksembuh.ks;
 
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.SearchView;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.RatingBar;
 
 import com.kliksembuh.ks.library.HospitalListAdapter;
+import com.kliksembuh.ks.library.HttpHandler;
 import com.kliksembuh.ks.models.Hospital;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class HospitalList extends AppCompatActivity {
@@ -22,6 +37,11 @@ public class HospitalList extends AppCompatActivity {
     private HospitalListAdapter hAdapter;
     private List<Hospital> mHospitalList;
     private Button btnpeta;
+    private ProgressDialog pDialog;
+    private ListAdapter adapter;
+    ArrayList<HashMap<String, String>> formList;
+    private SearchView searchView;
+    private int[] rumahSakitID;
 
     RatingBar rb;
 
@@ -45,16 +65,15 @@ public class HospitalList extends AppCompatActivity {
             }
         });
         mHospitalList = new ArrayList<>();
+        new GetContacts().execute();
         // Add sample data
         // We can get data by DB, or web service
-        mHospitalList.add(new Hospital(1, R.drawable.rs_pmi_bogor , "RS PMI Bogor", "Kota Bogor, Jawa Barat 16129"));
-        mHospitalList.add(new Hospital(2, R.drawable.rs_pmi_bogor, "RSUD Cibinong Bogor", "Kota Bogor, Jawa Barat 16914"));
-        mHospitalList.add(new Hospital(3, R.drawable.rs_pmi_bogor, "RS Medika Darmaga", "Kota Bogor, Jawa Barat 16680"));
-        mHospitalList.add(new Hospital(4, R.drawable.rs_pmi_bogor, "RS Bogor Medical Centre", "Kota Bogor, Jawa Barat 16143"));
+        //mHospitalList.add(new Hospital(3, R.drawable.rs_pmi_bogor , "RS PMI Bogor", "Kota Bogor, Jawa Barat 16129"));
+//        mHospitalList.add(new Hospital(4, R.drawable.rs_pmi_bogor, "RSUD Cibinong Bogor", "Kota Bogor, Jawa Barat 16914"));
+//        mHospitalList.add(new Hospital(5, R.drawable.rs_pmi_bogor, "RS Medika Darmaga", "Kota Bogor, Jawa Barat 16680"));
+//        mHospitalList.add(new Hospital(3, R.drawable.rs_pmi_bogor, "RS Bogor Medical Centre", "Kota Bogor, Jawa Barat 16143"));
 
-        // Test adapter
-        hAdapter = new HospitalListAdapter(getApplicationContext(), mHospitalList);
-        lvHospital.setAdapter(hAdapter);
+
 
             lvHospital.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
@@ -65,20 +84,36 @@ public class HospitalList extends AppCompatActivity {
 
                 // Go to another activity
                 if (position == 0){
-                    Intent myIntent = new Intent(HospitalList.this,TestScroolView.class);
-                    startActivity(myIntent);
+                    Intent myIntent = new Intent(getApplicationContext(),TestScroolView.class);
+                    Bundle b = new Bundle();
+                    b.putString("rumahSakitID", "1"); //Your id
+                    //.putExtra("userID",userID);
+                    myIntent.putExtras(b);
+                    startActivityForResult(myIntent, 0);
                 }
                 else if (position == 1){
-                    Intent myIntent = new Intent(HospitalList.this,TestScroolView.class);
-                    startActivity(myIntent);
+                    Intent myIntent = new Intent(getApplicationContext(),TestScroolView.class);
+                    Bundle b = new Bundle();
+                    b.putString("rumahSakitID", "2"); //Your id
+                    //.putExtra("userID",userID);
+                    myIntent.putExtras(b);
+                    startActivityForResult(myIntent, 0);
                 }
                 else if (position == 2){
-                    Intent myIntent = new Intent(HospitalList.this,TestScroolView.class);
-                    startActivity(myIntent);
+                    Intent myIntent = new Intent(getApplicationContext(),TestScroolView.class);
+                    Bundle b = new Bundle();
+                    b.putString("rumahSakitID", "3"); //Your id
+                    //.putExtra("userID",userID);
+                    myIntent.putExtras(b);
+                    startActivityForResult(myIntent, 0);
                 }
                 else {
-                    Intent myIntent = new Intent(HospitalList.this,TestScroolView.class);
-                    startActivity(myIntent);
+                    Intent myIntent = new Intent(getApplicationContext(),TestScroolView.class);
+                    Bundle b = new Bundle();
+                    b.putString("rumahSakitID", "4"); //Your id
+                    //.putExtra("userID",userID);
+                    myIntent.putExtras(b);
+                    startActivityForResult(myIntent, 0);
                 }
 
             }
@@ -86,5 +121,98 @@ public class HospitalList extends AppCompatActivity {
         });
 
         // Set Ratingbar
+    }
+    public String loadJSONFromAsset() {
+        String json = null;
+        try {
+            InputStream is = this.getAssets().open("hospital.json");
+            int size = is.available();
+            byte[] buffer = new byte[size];
+            is.read(buffer);
+            is.close();
+            json = new String(buffer, "UTF-8");
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            return null;
+        }
+        return json;
+    }
+    private class GetContacts extends AsyncTask<Void, Void, Void> {
+        private Context context;
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            // Showing progress dialog
+            pDialog = new ProgressDialog(HospitalList.this);
+            pDialog.setMessage("Please wait...");
+            pDialog.setCancelable(false);
+            pDialog.show();
+        }
+
+        @Override
+        protected Void doInBackground(Void... args0) {
+            HttpHandler sh = new HttpHandler();
+
+            // Making a request to url and getting response
+            try{
+                JSONObject obj = new JSONObject(loadJSONFromAsset());
+
+                // Getting JSON Array node
+                JSONArray contacts = obj.getJSONArray("hospital");
+
+                // looping through All Contacts
+                for (int i = 0; i < contacts.length(); i++) {
+                    JSONObject c = contacts.getJSONObject(i);
+
+
+                    String name = c.getString("name");
+                    String id = c.getString("id");
+                    String image = c.getString("imgUrl1");
+                    Drawable image1 = LoadImageFromWebOperations(image);
+                    String alamat = c.getString("Alamat");
+
+//                        da =new ArrayList<>();
+//                        da.add( name );
+//                        da.add( code );
+
+
+                    // Phone node is JSON Object
+//                    JSONObject phone = c.getJSONObject("phone");
+//                    String mobile = phone.getString("mobile");
+//                    String home = phone.getString("home");
+//                    String office = phone.getString("office");
+
+                    // tmp hash map for single contact
+                    HashMap<String, String> contact = new HashMap<>();
+                    mHospitalList.add(new Hospital(Integer.parseInt(id), image1, name, alamat));
+
+
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void result) {
+            super.onPostExecute(result);
+            if (pDialog.isShowing())
+                pDialog.dismiss();
+            hAdapter = new HospitalListAdapter(getApplicationContext(), mHospitalList);
+//            hAdapter.getFilter().filter(searchView);
+
+            lvHospital.setAdapter(hAdapter);
+        }
+    }
+    public Drawable LoadImageFromWebOperations(String url) {
+        try {
+            InputStream is = (InputStream) new URL(url).getContent();
+            Drawable d = Drawable.createFromStream(is, "src name");
+            return d;
+        } catch (Exception e) {
+            return null;
+        }
     }
 }

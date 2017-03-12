@@ -39,6 +39,16 @@ public class HomeActivity extends AppCompatActivity
     private LinearLayout dotsLayout;
     private int[] layouts;
 
+
+    public class MyLayout{
+        public MyLayout(int layoutId, int imgId){
+            this.layoutId = layoutId;
+            this.imgId = imgId;
+        }
+        public int layoutId;
+        public int imgId;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,11 +77,20 @@ public class HomeActivity extends AppCompatActivity
 //
         viewPager = (ViewPager)findViewById(R.id.view_pager_home);
         dotsLayout=(LinearLayout)findViewById(R.id.layoutdotshome);
+//        layouts = new int[]{
+//                R.layout.activity_home_screen1,
+//                R.layout.activity_home_screen2,
+//                R.layout.activity_home_screen3,
+//                R.layout.activity_home_screen4};
+
         layouts = new int[]{
-                R.layout.activity_home_screen1,
+                    R.layout.activity_home_screen1,
                 R.layout.activity_home_screen2,
                 R.layout.activity_home_screen3,
                 R.layout.activity_home_screen4};
+
+
+
         addBottomDots(0);
         changeStatusBarColor();
         viewPagerAdapter = new ViewPagerAdapter();
@@ -238,6 +257,11 @@ public class HomeActivity extends AppCompatActivity
         public Object instantiateItem(ViewGroup container, int position){
             layoutInflater = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             View view = layoutInflater.inflate(layouts[position],container,false);
+
+
+
+            //ImageView img = (ImageView)view.findViewById(layouts[position].imgId);
+//            img.setImageDrawable(HospitalList.LoadImageFromWebOperations("http://kliksembuhbeta.000webhostapp.com/img/homescreen1.jpg"));
             container.addView(view);
             return view;
 

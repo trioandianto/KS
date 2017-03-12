@@ -8,7 +8,7 @@
         android:orientation="vertical">
 
         <AutoCompleteTextView
-            android:id="@+id/tvsearchspesialis"
+            android:id="@+id/tvsearchpelayanan"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:background="@drawable/search_box"
@@ -23,7 +23,7 @@
             android:singleLine="true" />
 
         <AutoCompleteTextView
-            android:id="@+id/tvsearchtypespesialis"
+            android:id="@+id/tvsearchtypepelayanan"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:drawableLeft="@drawable/places_ic_search"

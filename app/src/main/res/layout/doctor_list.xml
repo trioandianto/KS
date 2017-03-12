@@ -3,95 +3,103 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:background="@drawable/border_listview"
     android:weightSum="1">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:id="@+id/linearLayout2">
-
-    </LinearLayout>
-
     <TextView
-        android:id="@+id/tv_drname"
+        android:id="@+id/tv_list_drname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/iv_doc_pic_list"
         android:layout_marginLeft="10dp"
-        android:text="Name"
-        android:textSize="20dp"
-        android:textColor="@color/black"
-        android:layout_alignTop="@+id/iv_doc_pic"
-        android:layout_toRightOf="@+id/iv_doc_pic"
-        android:layout_toEndOf="@+id/iv_doc_pic" />
+        android:layout_toEndOf="@+id/iv_doc_pic_list"
+        android:layout_toRightOf="@+id/iv_doc_pic_list"
+        android:text="dr. Ilma Surya"
+        android:textColor="@color/blue_a400"
+        android:textSize="20dp" />
 
     <RatingBar
-        android:id="@+id/ratingBar"
-        android:layout_marginLeft="10dp"
+        android:id="@+id/ratingBar_list"
+        style="@style/CustomRatingBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        style= "@style/CustomRatingBar"
+        android:layout_below="@+id/tv_list_drname"
+        android:layout_marginLeft="10dp"
+        android:layout_toEndOf="@+id/iv_doc_pic_list"
+        android:layout_toRightOf="@+id/iv_doc_pic_list"
+        android:isIndicator="true"
         android:numStars="5"
         android:rating="3.5"
-        android:stepSize="0.5"
-        android:isIndicator="true"
-        android:layout_below="@+id/tv_drname"
-        android:layout_toRightOf="@+id/iv_doc_pic"
-        android:layout_toEndOf="@+id/iv_doc_pic" />
+        android:stepSize="0.5" />
 
     <TextView
-        android:id="@+id/tv_specialty"
+        android:id="@+id/tv_specialty_list"
         android:layout_width="wrap_content"
-        android:layout_marginLeft="10dp"
         android:layout_height="wrap_content"
-        android:text="Specialty"
-        android:textSize="14dp"
+        android:layout_below="@+id/ratingBar_list"
+        android:layout_marginLeft="10dp"
+        android:layout_toEndOf="@+id/iv_doc_pic_list"
+        android:layout_toRightOf="@+id/iv_doc_pic_list"
+        android:text="Dokter Umum"
         android:textColor="#5C5C5C"
-        android:layout_below="@+id/ratingBar"
-        android:layout_toRightOf="@+id/iv_doc_pic"
-        android:layout_toEndOf="@+id/iv_doc_pic" />
+        android:textSize="14dp" />
+
+    <TextView
+        android:id="@+id/tv_calendar_list"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_specialty_list"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_toEndOf="@+id/iv_doc_pic_list"
+        android:layout_toRightOf="@+id/iv_doc_pic_list"
+        android:drawableLeft="@drawable/ic_date_range_blue_14dp"
+        android:drawablePadding="2dp"
+        android:drawableStart="@drawable/ic_date_range_blue_14dp"
+        android:text="Senin - Jumat"
+        android:textColor="#5C5C5C"
+        android:textSize="14dp" />
+
+    <TextView
+        android:id="@+id/tv_clock_list"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_calendar_list"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_toEndOf="@+id/iv_doc_pic_list"
+        android:layout_toRightOf="@+id/iv_doc_pic_list"
+        android:drawableLeft="@drawable/ic_access_time_blue_14dp"
+        android:drawablePadding="2dp"
+        android:drawableStart="@drawable/ic_access_time_blue_14dp"
+        android:text="09.00 - 14.00"
+        android:textColor="#5C5C5C"
+        android:textSize="14dp" />
 
     <ImageView
-        android:id="@+id/iv_doc_pic"
+        android:id="@+id/iv_doc_pic_list"
         android:layout_width="250px"
-        android:layout_height="250px"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:scaleType="fitXY"
-        android:adjustViewBounds="true"
-        android:layout_below="@+id/linearLayout2"
+        android:layout_height="300px"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="10dp"/>
+        android:layout_below="@+id/linearLayout2"
+        android:adjustViewBounds="true"
+        android:scaleType="fitXY" />
 
-    <com.kliksembuh.ks.library.MaterialFavoriteButton
-        android:id="@+id/favorite_nice"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        app:mfb_rotation_duration="400"
-        app:mfb_rotation_angle="216"
-        app:mfb_bounce_duration="700" />
-
-    <!--<LinearLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="35dp"-->
-        <!--android:orientation="horizontal"-->
-        <!--android:layout_margin="10dp"-->
-        <!--android:gravity="right"-->
-        <!--android:layout_below="@+id/iv_doc_pic"-->
-        <!--android:layout_alignParentStart="true">-->
-        <!--<Button-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:id="@+id/btn_next"-->
-            <!--android:layout_alignParentBottom="true"-->
-            <!--android:layout_alignParentRight="true"-->
-            <!--android:background="@color/blue"-->
-            <!--android:text="BPJS"-->
-            <!--android:textColor="@color/white"/>-->
-    <!--</LinearLayout>-->
+    <Button
+        android:id="@+id/bookBtn_list"
+        style="@style/MyCustomTextAppearance"
+        android:layout_width="70dp"
+        android:layout_height="30dp"
+        android:background="@drawable/shape"
+        android:backgroundTint="@color/login_color"
+        android:text="BOOK"
+        android:textColor="@color/white"
+        android:textSize="14dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginEnd="23dp"
+        android:layout_below="@+id/tv_clock_list"
+        android:layout_alignParentEnd="true" />
 
 
 </RelativeLayout>

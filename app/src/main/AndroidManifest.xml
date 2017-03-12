@@ -180,7 +180,6 @@
         <activity
             android:name=".TestScroolView"
             android:parentActivityName=".HospitalList"
-            android:label="RS PMI Bogor"
             android:theme="@style/AppTheme2" />
         <activity
             android:name=".KonfirmasiJanjiActivity"
@@ -197,6 +196,13 @@
         </activity>
         <activity android:name=".ProfileManagementActivity" />
         <activity android:name=".ReviewActivity" ></activity>
+        <activity
+            android:name=".SearchLocationActivity"
+            android:windowSoftInputMode="adjustPan">
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

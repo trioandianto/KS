@@ -21,6 +21,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -36,7 +38,6 @@ public class FavoritePelayananActivity extends Fragment {
     private ListView lv;
 
     // URL to get contacts JSON
-    private static String url = "http://api.androidhive.info/contacts/";
 
     ArrayList<HashMap<String, String>> contactList;
 
@@ -74,71 +75,52 @@ public class FavoritePelayananActivity extends Fragment {
             HttpHandler sh = new HttpHandler();
 
             // Making a request to url and getting response
-            String jsonStr = sh.makeServiceCall(url);
+            try{
+                JSONObject obj = new JSONObject(loadJSONFromAsset());
 
-            Log.e(TAG, "Response from url: " + jsonStr);
-            if (jsonStr != null) {
-                try{
-                    JSONObject jsonObj = new JSONObject(jsonStr);
+                // Getting JSON Array node
+                JSONArray contacts = obj.getJSONArray("contacts");
 
-                    // Getting JSON Array node
-                    JSONArray contacts = jsonObj.getJSONArray("contacts");
+                // looping through All Contacts
+                for (int i = 0; i < contacts.length(); i++) {
+                    JSONObject c = contacts.getJSONObject(i);
 
-                    // looping through All Contacts
-                    for (int i = 0; i < contacts.length(); i++) {
-                        JSONObject c = contacts.getJSONObject(i);
+                    String id = c.getString("id");
+                    String name = c.getString("name");
+                    String email = c.getString("email");
+                    String address = c.getString("address");
+                    String gender = c.getString("gender");
 
-                        String id = c.getString("id");
-                        String name = c.getString("name");
-                        String email = c.getString("email");
-                        String address = c.getString("address");
-                        String gender = c.getString("gender");
+                    // Phone node is JSON Object
+                    JSONObject phone = c.getJSONObject("phone");
+                    String mobile = phone.getString("mobile");
+                    String home = phone.getString("home");
+                    String office = phone.getString("office");
 
-                        // Phone node is JSON Object
-                        JSONObject phone = c.getJSONObject("phone");
-                        String mobile = phone.getString("mobile");
-                        String home = phone.getString("home");
-                        String office = phone.getString("office");
+                    // tmp hash map for single contact
+                    HashMap<String, String> contact = new HashMap<>();
 
-                        // tmp hash map for single contact
-                        HashMap<String, String> contact = new HashMap<>();
+                    // adding each child node to HashMap key => value
+                    contact.put("id", id);
+                    contact.put("name", name);
+                    contact.put("email", email);
+                    contact.put("mobile", mobile);
 
-                        // adding each child node to HashMap key => value
-                        contact.put("id", id);
-                        contact.put("name", name);
-                        contact.put("email", email);
-                        contact.put("mobile", mobile);
-
-                        // adding contact to contact list
-                        contactList.add(contact);
-
+                    // adding contact to contact list
+                    contactList.add(contact);
                 }
             } catch (final JSONException e) {
-                   // e.printStackTrace();
-                    Log.e(TAG, "Json parsing error: " + e.getMessage());
-                    getActivity().runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            Toast.makeText(getApplicationContext(),
-                                    "Json parsing error: " + e.getMessage(),
-                                    Toast.LENGTH_LONG)
-                                    .show();
-                        }
-                    });
-                }
-            }
-            else {
-                Log.e(TAG, "Couldn't get json from server.");
+               // e.printStackTrace();
+                Log.e(TAG, "Json parsing error: " + e.getMessage());
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
                         Toast.makeText(getApplicationContext(),
-                                "Couldn't get json from server. Check LogCat for possible errors!",
+                                "Json parsing error: " + e.getMessage(),
                                 Toast.LENGTH_LONG)
                                 .show();
                     }
                 });
-
             }
             return null;
         }
@@ -156,5 +138,20 @@ public class FavoritePelayananActivity extends Fragment {
 
             lv.setAdapter(adapter);
         }
+    }
+    public String loadJSONFromAsset() {
+        String json = null;
+        try {
+            InputStream is = getActivity().getAssets().open("contact.json");
+            int size = is.available();
+            byte[] buffer = new byte[size];
+            is.read(buffer);
+            is.close();
+            json = new String(buffer, "UTF-8");
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            return null;
+        }
+        return json;
     }
 }

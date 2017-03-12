@@ -1,17 +1,19 @@
 package com.kliksembuh.ks.models;
 
+import android.graphics.drawable.Drawable;
+
 /**
  * Created by Trio Andianto on 2/1/2017.
  */
 public class Hospital {
     private int id;
-    private int hospital_pic_id;
+    private Drawable hospital_pic_id;
     private String name;
     private String address;
 
     // Constructor
 
-    public Hospital(int id, int hospital_pic_id, String name, String address) {
+    public Hospital(int id, Drawable hospital_pic_id, String name, String address) {
         this.id = id;
         this.hospital_pic_id = hospital_pic_id;
         this.name = name;
@@ -29,11 +31,11 @@ public class Hospital {
         this.id = id;
     }
 
-    public int getHospital_pic_id() {
+    public Drawable getHospital_pic_id() {
         return hospital_pic_id;
     }
 
-    public void setHospital_pic_id(int hospital_pic_id) {
+    public void setHospital_pic_id(Drawable hospital_pic_id) {
         this.hospital_pic_id = hospital_pic_id;
     }
 

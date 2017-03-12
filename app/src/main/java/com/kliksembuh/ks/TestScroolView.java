@@ -1,7 +1,9 @@
 package com.kliksembuh.ks;
 
+import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
+import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.view.PagerAdapter;
@@ -28,10 +30,20 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.kliksembuh.ks.library.DoctorListAdapter;
-import com.kliksembuh.ks.models.Doctor;
+import com.kliksembuh.ks.library.HttpHandler;
 import com.kliksembuh.ks.library.ObservableScrollView;
+import com.kliksembuh.ks.models.Doctor;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
+
 
 
 public class TestScroolView extends ActionBarActivity implements OnMapReadyCallback,AdapterView.OnItemSelectedListener {
@@ -43,15 +55,19 @@ public class TestScroolView extends ActionBarActivity implements OnMapReadyCallb
     private ObservableScrollView mScrollView;
     private LinearLayout dotsLayout;
     private TextView[] dots;
+    private List<Doctor> mDokterList;
     private ViewPagerAdapter viewPagerAdapter;
     private CardView cardView;
     private CollapsingToolbarLayout collapsingToolbarLayout;
-
-    private ListView lvDoctor;
+    private ListView lvDokter;
     private DoctorListAdapter dAdapter;
-    private List<Doctor> mDoctorList;
+    private ProgressDialog pDialog;
     private Spinner spinner;
+    private String rumahSakitID;
+    private String toolbarTitle;
+
     private static final String[]paths = {"Dokter Umum", "Dokter Gigi", "Dokter Mata"};
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,14 +75,20 @@ public class TestScroolView extends ActionBarActivity implements OnMapReadyCallb
         setContentView(R.layout.activity_test_scrool_view);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-//        ViewCompat.setTransitionName(findViewById(R.id.appbar),"");
-//        supportPostponeEnterTransition();
-//        setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
-//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-//        collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
-//        collapsingToolbarLayout.setExpandedTitleColor(getResources().getColor(android.R.color.transparent));
+        Bundle title = getIntent().getExtras();
+        if (title!=null){
+            toolbarTitle = title.getString("toolbarTitle");
+        }
+        toolbar.setTitle(toolbarTitle);
+        setSupportActionBar(toolbar);
+        Bundle b = getIntent().getExtras();
+        if(b != null) {
+            rumahSakitID = b.getString("rumahSakitID");
+        }
 
-
+        mDokterList = new ArrayList<>();
+        lvDokter = (ListView)findViewById(R.id.lvDetailRumahSakit);
+        //lvDokter.setNestedScrollingEnabled(true);
         spinner = (Spinner)findViewById(R.id.dplistdokter);
         ArrayAdapter<String>adapter = new ArrayAdapter<String>(TestScroolView.this,
                 android.R.layout.simple_spinner_item,paths);
@@ -82,15 +104,17 @@ public class TestScroolView extends ActionBarActivity implements OnMapReadyCallb
         viewPager.setAdapter(viewPagerAdapter);
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.mapdoctorlistcoba);
         mapFragment.getMapAsync(this);
-        cardView = (CardView)findViewById(R.id.cvdoktera);
-        cardView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent myIntent = new Intent(view.getContext(), BookingActivity.class);
-                startActivityForResult(myIntent, 0);
-            }
-        });
+//        cardView = (CardView)findViewById(R.id.cvdoktera);
+//        cardView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent myIntent = new Intent(view.getContext(), BookingActivity.class);
+//                startActivityForResult(myIntent, 0);
+//            }
+//        });
         //toolbar.addView(spinner);
+
+        new GetContacts().execute();
 
 
 
@@ -177,6 +201,109 @@ public class TestScroolView extends ActionBarActivity implements OnMapReadyCallb
         @Override
         public void destroyItem(ViewGroup container, int position, Object object) {
             container.removeView((LinearLayout) object);
+        }
+    }
+    private class GetContacts extends AsyncTask<Void, Void, Void> {
+        private Context context;
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            // Showing progress dialog
+            pDialog = new ProgressDialog(TestScroolView.this);
+            pDialog.setMessage("Please wait...");
+            pDialog.setCancelable(false);
+            pDialog.show();
+        }
+
+        @Override
+        protected Void doInBackground(Void... args0) {
+            HttpHandler sh = new HttpHandler();
+
+            // Making a request to url and getting response
+            try{
+                JSONObject obj = new JSONObject(loadJSONFromAsset());
+
+                // Getting JSON Array node
+                JSONArray contacts = obj.getJSONArray("dokter");
+
+                // looping through All Contacts
+                for (int i = 0; i < contacts.length(); i++) {
+                    JSONObject c = contacts.getJSONObject(i);
+
+
+
+                    String name = c.getString("name");
+                    String id = c.getString("id");
+                    String image = c.getString("imgUrl");
+
+                    Drawable image1 = LoadImageFromWebOperations(image);
+                    String alamat = c.getString("alamat");
+
+//                        da =new ArrayList<>();
+//                        da.add( name );
+//                        da.add( code );
+
+
+                    // Phone node is JSON Object
+//                    JSONObject phone = c.getJSONObject("phone");
+//                    String mobile = phone.getString("mobile");
+//                    String home = phone.getString("home");
+//                    String office = phone.getString("office");
+
+                    // tmp hash map for single contact
+                    String rs = c.getString("Rs");
+
+//                    if(rs == rumahSakitID){
+//
+//
+//                    }
+                    mDokterList.add(new Doctor(Integer.parseInt(id), image1, name, alamat));
+
+
+
+
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+
+        @Override
+        protected void onPostExecute(Void result) {
+            super.onPostExecute(result);
+            if (pDialog.isShowing())
+                pDialog.dismiss();
+            dAdapter = new DoctorListAdapter(getApplicationContext(), mDokterList);
+//            hAdapter.getFilter().filter(searchView);
+
+            lvDokter.setAdapter(dAdapter);
+        }
+    }
+    public String loadJSONFromAsset() {
+        String json = null;
+        try {
+            InputStream is = this.getAssets().open("dokter.json");
+            int size = is.available();
+            byte[] buffer = new byte[size];
+            is.read(buffer);
+            is.close();
+            json = new String(buffer, "UTF-8");
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            return null;
+        }
+        return json;
+    }
+    public Drawable LoadImageFromWebOperations(String url) {
+        try {
+            InputStream is = (InputStream) new URL(url).getContent();
+            Drawable d = Drawable.createFromStream(is, "src name");
+            return d;
+        } catch (Exception e) {
+            return null;
         }
     }
 

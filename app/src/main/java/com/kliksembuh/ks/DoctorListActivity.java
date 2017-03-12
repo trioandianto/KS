@@ -1,10 +1,13 @@
 package com.kliksembuh.ks;
 
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -26,13 +29,22 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.kliksembuh.ks.library.DoctorListAdapter;
-import com.kliksembuh.ks.models.Doctor;
+import com.kliksembuh.ks.library.HttpHandler;
 import com.kliksembuh.ks.library.ObservableScrollView;
+import com.kliksembuh.ks.models.Doctor;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DoctorListActivity extends FragmentActivity implements OnMapReadyCallback,View.OnTouchListener {
+
+public class DoctorListActivity extends AppCompatActivity implements OnMapReadyCallback,View.OnTouchListener {
 
     private GoogleMap mMap;
     ViewPager viewPager;
@@ -42,20 +54,23 @@ public class DoctorListActivity extends FragmentActivity implements OnMapReadyCa
     private LinearLayout dotsLayout;
     private TextView[] dots;
     private ViewPagerAdapter viewPagerAdapter;
-
-    private ListView lvDoctor;
+    private ListView lvDokter;
+    private List<Doctor> mDokterList;
     private DoctorListAdapter dAdapter;
-    private List<Doctor> mDoctorList;
+    private ProgressDialog pDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_doctor_list);
+        lvDokter = (ListView)findViewById(R.id.listview_doctor);
+        mDokterList = new ArrayList<>();
 
         scrollView = (ScrollView)findViewById(R.id.scrollViewdoctorlist);
         dotsLayout=(LinearLayout)findViewById(R.id.layoutslideshow);
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.mapdoctorlist);
         mapFragment.getMapAsync(this);
+
 
 
 
@@ -71,22 +86,21 @@ public class DoctorListActivity extends FragmentActivity implements OnMapReadyCa
         viewPager.setAdapter(viewPagerAdapter);
         //viewPager.addOnPageChangeListener(viewListener);
 
-        lvDoctor = (ListView)findViewById(R.id.listview_doctor);
-        mDoctorList = new ArrayList<>();
+
         // Add sample data
         // We can get data by DB, or web service
-        mDoctorList.add(new Doctor(1, R.drawable.rs_bogor_medical_centre , "dr. Ilma Suraya", "Dokter Umum"));
-        mDoctorList.add(new Doctor(2, R.drawable.rs_pmi_bogor , "dr. Indah Kusuma", "Dokter Umum"));
+//        mDoctorList.add(new Doctor(1, R.drawable.rs_bogor_medical_centre , "dr. Ilma Suraya", "Dokter Umum"));
+//        mDoctorList.add(new Doctor(2, R.drawable.rs_pmi_bogor , "dr. Indah Kusuma", "Dokter Umum"));
 
         // Test adapter
-        dAdapter = new DoctorListAdapter(getApplicationContext(), mDoctorList);
-        lvDoctor.setAdapter(dAdapter);
+//        dAdapter = new DoctorListAdapter(getApplicationContext(), mDoctorList);
+//        lvDoctor.setAdapter(dAdapter);
 
 
 
         scrollView.getViewTreeObserver().addOnScrollChangedListener(new ScrollPositionObserver());
 
-        lvDoctor.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+        lvDokter.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 // Do something
@@ -95,6 +109,7 @@ public class DoctorListActivity extends FragmentActivity implements OnMapReadyCa
             }
 
         });
+        //new GetContacts().execute();
     }
     private class ScrollPositionObserver implements ViewTreeObserver.OnScrollChangedListener {
 
@@ -249,6 +264,99 @@ public class DoctorListActivity extends FragmentActivity implements OnMapReadyCa
         @Override
         public void destroyItem(ViewGroup container, int position, Object object) {
             container.removeView((LinearLayout) object);
+        }
+    }
+    private class GetContacts extends AsyncTask<Void, Void, Void> {
+        private Context context;
+
+//        @Override
+//        protected void onPreExecute() {
+//            super.onPreExecute();
+//            // Showing progress dialog
+//            pDialog = new ProgressDialog(DoctorListActivity.this);
+//            pDialog.setMessage("Please wait...");
+//            pDialog.setCancelable(false);
+//            pDialog.show();
+//        }
+
+        @Override
+        protected Void doInBackground(Void... args0) {
+            HttpHandler sh = new HttpHandler();
+
+            // Making a request to url and getting response
+            try{
+                JSONObject obj = new JSONObject(loadJSONFromAsset());
+
+                // Getting JSON Array node
+                JSONArray contacts = obj.getJSONArray("dokter");
+
+                // looping through All Contacts
+                for (int i = 0; i < contacts.length(); i++) {
+                    JSONObject c = contacts.getJSONObject(i);
+
+
+                    String name = c.getString("name");
+                    String id = c.getString("id");
+                    String image = c.getString("imgUrl");
+                    Drawable image1 = LoadImageFromWebOperations(image);
+                    String alamat = c.getString("alamat");
+
+//                        da =new ArrayList<>();
+//                        da.add( name );
+//                        da.add( code );
+
+
+                    // Phone node is JSON Object
+//                    JSONObject phone = c.getJSONObject("phone");
+//                    String mobile = phone.getString("mobile");
+//                    String home = phone.getString("home");
+//                    String office = phone.getString("office");
+
+                    // tmp hash map for single contact
+                    mDokterList.add(new Doctor(Integer.parseInt(id), image1, name, alamat));
+
+
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+
+        @Override
+        protected void onPostExecute(Void result) {
+            super.onPostExecute(result);
+            if (pDialog.isShowing())
+                pDialog.dismiss();
+            dAdapter = new DoctorListAdapter(getApplicationContext(), mDokterList);
+//            hAdapter.getFilter().filter(searchView);
+
+            lvDokter.setAdapter(dAdapter);
+        }
+    }
+    public String loadJSONFromAsset() {
+        String json = null;
+        try {
+            InputStream is = this.getAssets().open("dokter.json");
+            int size = is.available();
+            byte[] buffer = new byte[size];
+            is.read(buffer);
+            is.close();
+            json = new String(buffer, "UTF-8");
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            return null;
+        }
+        return json;
+    }
+    public Drawable LoadImageFromWebOperations(String url) {
+        try {
+            InputStream is = (InputStream) new URL(url).getContent();
+            Drawable d = Drawable.createFromStream(is, "src name");
+            return d;
+        } catch (Exception e) {
+            return null;
         }
     }
 
