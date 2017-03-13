@@ -46,7 +46,7 @@ import java.util.List;
 
 
 
-public class TestScroolView extends ActionBarActivity implements OnMapReadyCallback,AdapterView.OnItemSelectedListener {
+public class TestScroolView extends ActionBarActivity implements OnMapReadyCallback {
     public static final String EXTRA_NAME = "cheese_name";
     private GoogleMap mMap;
     ViewPager viewPager;
@@ -56,6 +56,7 @@ public class TestScroolView extends ActionBarActivity implements OnMapReadyCallb
     private LinearLayout dotsLayout;
     private TextView[] dots;
     private List<Doctor> mDokterList;
+    List<String> list;
     private ViewPagerAdapter viewPagerAdapter;
     private CardView cardView;
     private CollapsingToolbarLayout collapsingToolbarLayout;
@@ -65,6 +66,11 @@ public class TestScroolView extends ActionBarActivity implements OnMapReadyCallb
     private Spinner spinner;
     private String rumahSakitID;
     private String toolbarTitle;
+    private String [] idDokter;
+    private int [] idDokterInt;
+    private int[] listArr;
+
+    int a =0;
 
     private static final String[]paths = {"Dokter Umum", "Dokter Gigi", "Dokter Mata"};
 
@@ -89,6 +95,7 @@ public class TestScroolView extends ActionBarActivity implements OnMapReadyCallb
 
 
         mDokterList = new ArrayList<>();
+        list = new ArrayList<String>();
         lvDokter = (ListView)findViewById(R.id.lvDetailRumahSakit);
         lvDokter.setNestedScrollingEnabled(true);
         spinner = (Spinner)findViewById(R.id.dplistdokter);
@@ -96,7 +103,17 @@ public class TestScroolView extends ActionBarActivity implements OnMapReadyCallb
                 android.R.layout.simple_spinner_item,paths);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
-        spinner.setOnItemSelectedListener(this);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
         layouts = new int[]{
                 R.drawable.doctorlist1,
                 R.drawable.doctorlist2,
@@ -136,29 +153,6 @@ public class TestScroolView extends ActionBarActivity implements OnMapReadyCallb
         mMap.getUiSettings().setZoomControlsEnabled(true);
     }
 
-    /**
-     * <p>Callback method to be invoked when an item in this view has been
-     * selected. This callback is invoked only when the newly selected
-     * position is different from the previously selected position or if
-     * there was no selected item.</p>
-     * <p>
-     * Impelmenters can call getItemAtPosition(position) if they need to access the
-     * data associated with the selected item.
-     *
-     * @param parent   The AdapterView where the selection happened
-     * @param view     The view within the AdapterView that was clicked
-     * @param position The position of the view in the adapter
-     * @param id       The row id of the item that is selected
-     */
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-
-    }
 
     public class ViewPagerAdapter extends PagerAdapter {
 
@@ -228,11 +222,14 @@ public class TestScroolView extends ActionBarActivity implements OnMapReadyCallb
 
                     if(c.getString("Rs").equals(rumahSakitID)){
                         String name = c.getString("name");
+//                        idDokter[a] = c.getString("id");
+//                        idDokterInt[a]=a;
                         String id = c.getString("id");
                         String image = c.getString("imgUrl");
                         Drawable image1 = LoadImageFromWebOperations(image);
                         String alamat = c.getString("alamat");
                         mDokterList.add(new Doctor(Integer.parseInt(id), image1, name, alamat));
+                        a++;
                     }
 
 
