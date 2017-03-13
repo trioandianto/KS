@@ -72,19 +72,20 @@ public class TestScroolView extends ActionBarActivity implements OnMapReadyCallb
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Bundle b = getIntent().getExtras();
+        if(b != null) {
+            String userID = b.getString("userID");
+            rumahSakitID = userID;
+            toolbarTitle = b.getString("tol");
+        }
+
         setContentView(R.layout.activity_test_scrool_view);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        Bundle title = getIntent().getExtras();
-        if (title!=null){
-            toolbarTitle = title.getString("toolbarTitle");
-        }
+
         toolbar.setTitle(toolbarTitle);
         setSupportActionBar(toolbar);
-        Bundle b = getIntent().getExtras();
-        if(b != null) {
-            rumahSakitID = b.getString("rumahSakitID");
-        }
+
 
         mDokterList = new ArrayList<>();
         lvDokter = (ListView)findViewById(R.id.lvDetailRumahSakit);
@@ -153,13 +154,6 @@ public class TestScroolView extends ActionBarActivity implements OnMapReadyCallb
 
     }
 
-    /**
-     * Callback method to be invoked when the selection disappears from this
-     * view. The selection can disappear for instance when touch is activated
-     * or when the adapter becomes empty.
-     *
-     * @param parent The AdapterView that now contains no selected item.
-     */
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
 
@@ -231,36 +225,14 @@ public class TestScroolView extends ActionBarActivity implements OnMapReadyCallb
                 for (int i = 0; i < contacts.length(); i++) {
                     JSONObject c = contacts.getJSONObject(i);
 
-
-
-                    String name = c.getString("name");
-                    String id = c.getString("id");
-                    String image = c.getString("imgUrl");
-
-                    Drawable image1 = LoadImageFromWebOperations(image);
-                    String alamat = c.getString("alamat");
-
-//                        da =new ArrayList<>();
-//                        da.add( name );
-//                        da.add( code );
-
-
-                    // Phone node is JSON Object
-//                    JSONObject phone = c.getJSONObject("phone");
-//                    String mobile = phone.getString("mobile");
-//                    String home = phone.getString("home");
-//                    String office = phone.getString("office");
-
-                    // tmp hash map for single contact
-                    String rs = c.getString("Rs");
-
-//                    if(rs == rumahSakitID){
-//
-//
-//                    }
-                    mDokterList.add(new Doctor(Integer.parseInt(id), image1, name, alamat));
-
-
+                    if(c.getString("Rs").equals(rumahSakitID)){
+                        String name = c.getString("name");
+                        String id = c.getString("id");
+                        String image = c.getString("imgUrl");
+                        Drawable image1 = LoadImageFromWebOperations(image);
+                        String alamat = c.getString("alamat");
+                        mDokterList.add(new Doctor(Integer.parseInt(id), image1, name, alamat));
+                    }
 
 
                 }
