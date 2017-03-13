@@ -6,11 +6,12 @@
     android:layout_height="wrap_content" >
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_marginRight="5dp"
+        android:layout_marginRight="4dp"
         android:layout_marginTop="10dp"
-        android:layout_marginLeft="5dp"
+        android:layout_marginLeft="4dp"
         android:layout_height="wrap_content"
-        android:background="@color/white"
+        android:background="@drawable/border_listview"
+
         android:orientation="horizontal">
         <LinearLayout
             android:layout_width="wrap_content"
@@ -22,8 +23,7 @@
                 android:layout_marginRight="10dp"
                 android:scaleType="fitXY"
                 android:src="@drawable/dr_indah_kusuma"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentStart="true" />
+                android:layout_alignParentStart="true"/>
         </LinearLayout>
 
         <LinearLayout
@@ -75,150 +75,167 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
         android:layout_below="@+id/iv_doc_picdetail"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="4dp"
+        android:layout_marginRight="4dp"
+        android:background="@drawable/border_listview"
         android:orientation="vertical">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
             android:layout_marginTop="10dp"
-            android:layout_marginLeft="5dp"
-            android:background="@color/white"
+            android:background="@drawable/border_listview"
             android:orientation="horizontal">
+
             <TextView
                 android:id="@+id/tvText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_margin="15dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:layout_margin="15dp"
                 android:text="Pilih Hari :"
-                android:textColor="#000000"/>
+                android:textColor="#000000" />
 
             <Spinner
                 android:id="@+id/btnSenin"
                 style="@style/MyCustomTextAppearance"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/tvText"
-                android:layout_margin="15dp"
-                android:textColor="@color/white"
                 android:layout_alignBaseline="@id/tvText"
+                android:layout_margin="15dp"
+                android:layout_toRightOf="@+id/tvText"
+                android:entries="@array/day_name"
+                android:textColor="@color/white"
                 android:textStyle="bold"
-                android:entries="@array/day_name"/>
+                android:popupBackground="#f7f7f7"
+                android:theme="@style/ThemeOverlay.AppCompat.Light"
+                android:spinnerMode="dropdown"/>
 
         </LinearLayout>
+
         <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:orientation="horizontal">
-        <Button
-            android:id="@+id/btnMingguDepan"
-            style="@style/MyCustomTextAppearance"
-            android:layout_width="170dp"
-            android:layout_height="50dp"
-            android:layout_marginLeft="5dp"
-            android:textColor="@color/white"
-            android:text="Minggu Depan"
-            android:textStyle="bold"
-            android:background="@drawable/shape"
-            android:backgroundTint="@color/signup_color"
-            android:layout_toRightOf="@+id/btnMingguIni"
-            android:layout_marginRight="5dp"
-            android:layout_alignBaseline="@+id/btnMingguIni"/>
-        <Button
-            android:id="@+id/btnMingguIni"
-            style="@style/MyCustomTextAppearance"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginLeft="5dp"
-            android:textColor="@color/white"
-            android:text="Minggu Ini"
-            android:textStyle="bold"
-            android:background="@drawable/shape"
-            android:backgroundTint="@color/signup_color"
-            android:layout_marginRight="5dp"
-            android:layout_below="@+id/tvText"
-            android:layout_alignParentStart="true" />
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnMingguDepan"
+                style="@style/MyCustomTextAppearance"
+                android:layout_width="170dp"
+                android:layout_height="50dp"
+                android:layout_alignBaseline="@+id/btnMingguIni"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="5dp"
+                android:layout_toRightOf="@+id/btnMingguIni"
+                android:background="@drawable/shape"
+                android:backgroundTint="@color/signup_color"
+                android:text="Minggu Ini"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/btnMingguIni"
+                style="@style/MyCustomTextAppearance"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/tvText"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/shape"
+                android:backgroundTint="@color/signup_color"
+                android:text="Minggu Depan"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
 
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:background="@color/white"
             android:layout_height="match_parent"
             android:layout_marginTop="10dp"
+            android:background="@drawable/shape_listview"
             android:orientation="vertical">
 
             <TextView
-                android:layout_width="match_parent"
                 android:id="@+id/tvjadwal"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginLeft="10dp"
-                android:layout_height="50dp"
-                android:background="@color/white"
-                android:textSize="20dp"
-                android:textStyle="bold"
-                android:text="08.00 - 10.00"
-                android:gravity="center"/>
-            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:background="@color/white"
-                android:textSize="20dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="10dp"
                 android:layout_marginLeft="10dp"
-                android:textStyle="bold"
-                android:text="13.00 - 16.00"
-                android:gravity="center"/>
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/border_listview"
+                android:gravity="center"
+                android:text="08.00 - 10.00"
+                android:textSize="20dp"
+                android:textStyle="bold" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:background="@color/white"
-                android:textSize="20dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="10dp"
                 android:layout_marginLeft="10dp"
-                android:textStyle="bold"
-                android:text="19.00 - 21.00"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/border_listview"
                 android:gravity="center"
-                android:layout_marginBottom="10dp"/>
+                android:text="13.00 - 16.00"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/border_listview"
+                android:gravity="center"
+                android:text="19.00 - 21.00"
+                android:textSize="20dp"
+                android:textStyle="bold" />
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:background="@color/transparent">
+            android:background="@color/transparent"
+            android:orientation="vertical">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:text="Dr Indah Kusuma juga praktek di :"
-                android:textSize="14dp"
                 android:textColor="#5C5C5C"
-                android:textStyle="bold"/>
+                android:textSize="14dp"
+                android:textStyle="bold" />
+
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_marginTop="5dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
+                android:layout_marginTop="5dp"
                 android:text="RS Cibinong"
-                android:textSize="16dp"
                 android:textColor="@color/blue"
-                android:textStyle="bold"/>
+                android:textSize="16dp"
+                android:textStyle="bold" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="5dp"
                 android:text="RS Melania"
-                android:textSize="16dp"
                 android:textColor="@color/blue"
-                android:textStyle="bold"/>
+                android:textSize="16dp"
+                android:textStyle="bold" />
 
         </LinearLayout>
 
