@@ -41,7 +41,8 @@ public class HospitalList extends AppCompatActivity {
     private ListAdapter adapter;
     ArrayList<HashMap<String, String>> formList;
     private SearchView searchView;
-    private int[] rumahSakitID;
+    private String rumahSakitID;
+    private String [] nameRumahSakit;
 
     RatingBar rb;
 
@@ -54,6 +55,11 @@ public class HospitalList extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         // Hospital Screen Logic (created by Ucu on 24012017)
         setContentView(R.layout.activity_hospital_list);
+        Bundle b = getIntent().getExtras();
+        if(b != null) {
+            String userID = b.getString("userID");
+        }
+
         lvHospital = (ListView)findViewById(R.id.listview_hospital);
         btnpeta = (Button)findViewById(R.id.btnpeta);
         btnpeta.setOnClickListener(new View.OnClickListener() {
@@ -81,20 +87,32 @@ public class HospitalList extends AppCompatActivity {
                 // Do something
                 // Ex. display msg with hospital id from view.getTag
                 //Toast.makeText(getApplicationContext(), "Clicked hospital id = " + view.getTag(), Toast.LENGTH_SHORT).show();
+//                Class<? extends Activity> activityToStart = null;
+//                switch (position) {
+//                case 0:
+//                    activityToStart = TestScroolView.class;
+//                }
+//                Intent i = new Intent(getApplicationContext(), activityToStart);
+//                startActivity(i);
 
                 // Go to another activity
                 if (position == 0){
                     Intent myIntent = new Intent(getApplicationContext(),TestScroolView.class);
                     Bundle b = new Bundle();
-                    b.putString("rumahSakitID", "1"); //Your id
+                    b.putString("userID", "1");
+                    b.putString("tol","RS PMI BOGOR");//Your id
                     //.putExtra("userID",userID);
                     myIntent.putExtras(b);
+                    //.putExtra("userID",userID);
                     startActivityForResult(myIntent, 0);
                 }
                 else if (position == 1){
                     Intent myIntent = new Intent(getApplicationContext(),TestScroolView.class);
+                    //Your id
                     Bundle b = new Bundle();
-                    b.putString("rumahSakitID", "2"); //Your id
+                    //.putExtra("userID",userID);
+                    b.putString("userID", "2");
+                    b.putString("tol","RS CIBINGONG BOGOR");//Your id
                     //.putExtra("userID",userID);
                     myIntent.putExtras(b);
                     startActivityForResult(myIntent, 0);
@@ -102,7 +120,9 @@ public class HospitalList extends AppCompatActivity {
                 else if (position == 2){
                     Intent myIntent = new Intent(getApplicationContext(),TestScroolView.class);
                     Bundle b = new Bundle();
-                    b.putString("rumahSakitID", "3"); //Your id
+                    //.putExtra("userID",userID);
+                    b.putString("userID", "3");
+                    b.putString("tol","RS BOGOR MEDICA CENTRE");//Your id
                     //.putExtra("userID",userID);
                     myIntent.putExtras(b);
                     startActivityForResult(myIntent, 0);
@@ -110,7 +130,9 @@ public class HospitalList extends AppCompatActivity {
                 else {
                     Intent myIntent = new Intent(getApplicationContext(),TestScroolView.class);
                     Bundle b = new Bundle();
-                    b.putString("rumahSakitID", "4"); //Your id
+                    //.putExtra("userID",userID);
+                    b.putString("userID", "4");
+                    b.putString("tol","RS MEDICA DERMAGA");//Your id
                     //.putExtra("userID",userID);
                     myIntent.putExtras(b);
                     startActivityForResult(myIntent, 0);
@@ -171,6 +193,9 @@ public class HospitalList extends AppCompatActivity {
                     String image = c.getString("imgUrl1");
                     Drawable image1 = LoadImageFromWebOperations(image);
                     String alamat = c.getString("Alamat");
+
+
+
 
 //                        da =new ArrayList<>();
 //                        da.add( name );
