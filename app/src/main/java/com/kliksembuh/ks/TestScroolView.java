@@ -86,6 +86,7 @@ public class TestScroolView extends ActionBarActivity implements OnMapReadyCallb
         }
 
         setContentView(R.layout.activity_test_scrool_view);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -96,7 +97,7 @@ public class TestScroolView extends ActionBarActivity implements OnMapReadyCallb
         mDokterList = new ArrayList<>();
         list = new ArrayList<String>();
         lvDokter = (ListView)findViewById(R.id.lvDetailRumahSakit);
-        //lvDokter.setNestedScrollingEnabled(true);
+        lvDokter.setNestedScrollingEnabled(true);
         spinner = (Spinner)findViewById(R.id.dplistdokter);
         ArrayAdapter<String>adapter = new ArrayAdapter<String>(TestScroolView.this,
                 android.R.layout.simple_spinner_item,paths);
