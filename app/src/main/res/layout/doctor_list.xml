@@ -99,11 +99,11 @@
     <ImageView
         android:id="@+id/iv_doc_pic_list"
         android:layout_width="100dp"
-        android:layout_height="135dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
+        android:layout_height="142dp"
         android:adjustViewBounds="true"
-        android:scaleType="fitXY" />
+        android:scaleType="fitXY"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
 
     <Button
         android:id="@+id/bookBtn_list"

@@ -32,6 +32,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -40,7 +41,9 @@ import com.facebook.FacebookSdk;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -69,14 +72,16 @@ import static android.Manifest.permission.READ_CONTACTS;
 /**
  * A login screen that offers login via email/password.
  */
-public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<Cursor>,GoogleApiClient.OnConnectionFailedListener{
+public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<Cursor>,
+        GoogleApiClient.OnConnectionFailedListener, View.OnClickListener{
 
     /**
      * Id to identity READ_CONTACTS permission request.
      */
     private static final String TAG = LoginActivity.class.getSimpleName();
     private static final int REQUEST_READ_CONTACTS = 0;
-    private static final int RC_SIGN_IN = 007;
+    private static final int RC_SIGN_IN = 9001;
+    //private static final int RC_SIGN_IN = 007;
     String response = null;
     private ProgressDialog nDialog;
 
@@ -87,6 +92,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private static String KEY_LASTNAME = "lname";
     private static String KEY_EMAIL = "email";
     private static String KEY_CREATED_AT = "created_at";
+
 
     /**
      * A dummy authentication store containing known user names and passwords.
@@ -116,6 +122,18 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         super.onCreate(savedInstanceState);
         FacebookSdk.sdkInitialize(getApplicationContext());
         setContentView(R.layout.activity_login);
+
+        // Added by Ucu (13032017)
+        findViewById(R.id.gSign_in_button).setOnClickListener(LoginActivity.this);
+
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build();
+
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .enableAutoManage(this, this)
+                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
+                .build();
 
         // Set up the login form.
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
@@ -186,30 +204,40 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             }
         });
 
-        //Login Google
+        // Login Google
+        // Updated by Ucu (13032017)
 
-        btnSignGoogle = (SignInButton) findViewById(R.id.btnwithgplus);
-        btnSignGoogle.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                signIn();
-            }
+//        btnSignGoogle = (SignInButton) findViewById(R.id.btnwithgplus);
+//        btnSignGoogle.setOnClickListener(new OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                signIn();
+//            }
+//
+//            GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+//                    .requestEmail()
+//                    .build();
+//
+////            mGoogleApiClient = new GoogleApiClient.Builder(this)
+////                    .enableAutoManage(this, this)
+////            .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
+////            .build();
+//
+//
+//
+//
+//        });
 
-            GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                    .requestEmail()
-                    .build();
 
-//            mGoogleApiClient = new GoogleApiClient.Builder(this)
-//                    .enableAutoManage(this, this)
-//            .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
-//            .build();
+    }
 
-
-
-
-        });
-
-
+    // Added by Ucu (13032017)
+    @Override
+    public void onClick(View v) {
+        int i = v.getId();
+        if (i == R.id.gSign_in_button) {
+            signIn();
+        }
     }
 
     public void onLogin(View view) {
@@ -221,10 +249,10 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
     }
 
-    private void initializeControls() {
-        btnsign = (SignInButton) findViewById(R.id.btnwithgplus);
-        btnsign.setOnClickListener((OnClickListener) this);
-    }
+//    private void initializeControls() {
+//        btnsign = (SignInButton) findViewById(R.id.btnwithgplus);
+//        btnsign.setOnClickListener((OnClickListener) this);
+//    }
 
     private void signIn() {
         Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
@@ -234,6 +262,24 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         callbackManager.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == RC_SIGN_IN) {
+            GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
+            handleSignInResult(result);
+        }
+    }
+
+    private void handleSignInResult(GoogleSignInResult result) {
+        Log.d(TAG, "handleSignInResult:" + result.isSuccess());
+        if (result.isSuccess()) {
+            GoogleSignInAccount acct = result.getSignInAccount();
+            KEY_FIRSTNAME=acct.getGivenName();
+            KEY_LASTNAME=acct.getFamilyName();
+            KEY_EMAIL=acct.getEmail();
+            Log.d("FULL Name", ""+acct.getDisplayName());
+        } else {
+            Toast.makeText(this, "Sign-in Failed", Toast.LENGTH_SHORT).show();
+        }
     }
 
     public void startRegister(View view) {
@@ -426,10 +472,18 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         mEmailView.setAdapter(adapter);
     }
 
+//    @Override
+//    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+//        Log.d(TAG, "onConnectionFailed:" + connectionResult);
+//
+//    }
+
+    // Added by Ucu (13032017)
+
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
         Log.d(TAG, "onConnectionFailed:" + connectionResult);
-
+        Toast.makeText(this, "Google Play Services error.", Toast.LENGTH_SHORT).show();
     }
 
 
