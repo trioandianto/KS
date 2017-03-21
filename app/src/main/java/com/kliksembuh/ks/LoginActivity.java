@@ -45,18 +45,14 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.kliksembuh.ks.library.ConnectionCheck;
-import com.kliksembuh.ks.library.DatabaseHandler;
-import com.kliksembuh.ks.library.UserFunctions;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -151,9 +147,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         mEmailSignInButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-//                attemptLogin();
-                Intent myIntent = new Intent(view.getContext(), HomeActivity.class);
-                startActivityForResult(myIntent, 0);
+                attemptLogin();
+//                Intent myIntent = new Intent(view.getContext(), HomeActivity.class);
+//                startActivityForResult(myIntent, 0);
             }
         });
 
@@ -471,7 +467,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             NetworkInfo netInfo = cm.getActiveNetworkInfo();
             if (netInfo != null && netInfo.isConnected()) {
                 try {
-                    URL url = new URL("http://192.168.1.29/UserAPI/api/users/login");
+                    URL url = new URL("http://basajans/KlikSembuhAPI/api/users/login");
                     HttpURLConnection urlc = (HttpURLConnection) url.openConnection();
                     JSONObject jsonObject = new JSONObject();
                     jsonObject.put("Email",mEmail);
@@ -480,14 +476,11 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                     urlc.setRequestMethod("POST");
                     urlc.setDoInput(true);
                     urlc.setDoOutput(true);
-                    OutputStream os = urlc.getOutputStream();
-                    BufferedWriter writer = new BufferedWriter(
-                            new OutputStreamWriter(os, "UTF-8"));
-                    writer.write(getPostDataString(jsonObject));
+                    DataOutputStream os = new DataOutputStream(urlc.getOutputStream());
 
-                    writer.flush();
-                    writer.close();
-                    os.close();
+                    os.writeBytes(jsonObject.toString());
+
+
 
                     int responseCode=urlc.getResponseCode();
 
@@ -506,6 +499,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                         }
 
                         in.close();
+                        os.flush();
+                        os.close();
                         return true;
 
                     }
@@ -585,133 +580,5 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         }
     }
 
-
-
-    private class NetCheck extends AsyncTask<String, Void, Boolean>{
-
-
-        @Override
-        protected void onPreExecute(){
-            super.onPreExecute();
-            nDialog = new ProgressDialog(LoginActivity.this);
-            nDialog.setMessage("Loading..");
-            nDialog.setTitle("Checking Network");
-            nDialog.setIndeterminate(false);
-            nDialog.setCancelable(true);
-            nDialog.show();
-        }
-
-        @Override
-        protected Boolean doInBackground(String... args  ) {
-            ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-            NetworkInfo netInfo = cm.getActiveNetworkInfo();
-            if (netInfo != null && netInfo.isConnected()) {
-                try {
-                    URL url = new URL("http://192.168.1.29/UserAPI/api/users/login");
-                    HttpURLConnection urlc = (HttpURLConnection) url.openConnection();
-                    urlc.setConnectTimeout(3000);
-                    urlc.connect();
-                    if (urlc.getResponseCode() == 200) {
-                        return true;
-                    }
-                } catch (MalformedURLException e1) {
-                    // TODO Auto-generated catch block
-                    e1.printStackTrace();
-                } catch (IOException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
-            }
-            return false;
-        }
-
-        @Override
-        protected void onPostExecute(Boolean th){
-
-            if(th == true){
-                nDialog.dismiss();
-                new ProcessLogin().execute();
-            }
-            else{
-                nDialog.dismiss();
-                mPasswordView.setText("Error in Network Connection");
-            }
-        }
-    }
-    public void NetAsync(View view){
-        new ConnectionCheck(getApplicationContext()).execute();
-    }
-    private class ProcessLogin extends AsyncTask<String, String, JSONObject> {
-
-        private ProgressDialog pDialog;
-
-        String email,password;
-
-
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-
-            mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
-            mPasswordView = (EditText) findViewById(R.id.password);
-            email = mEmailView.getText().toString();
-            password = mPasswordView.getText().toString();
-            pDialog = new ProgressDialog(LoginActivity.this);
-            pDialog.setTitle("Contacting Servers");
-            pDialog.setMessage("Logging in ...");
-            pDialog.setIndeterminate(false);
-            pDialog.setCancelable(true);
-            pDialog.show();
-        }
-
-
-        @Override
-        protected JSONObject doInBackground(String... args) {
-
-            UserFunctions userFunction = new UserFunctions();
-            JSONObject json = userFunction.loginUser(email, password);
-            return json;
-        }
-        @Override
-        protected void onPostExecute(JSONObject json) {
-            try {
-                if (json.getString(KEY_SUCCESS) != null) {
-
-                    String res = json.getString(KEY_SUCCESS);
-
-                    if (Integer.parseInt(res) == 1) {
-                        pDialog.setMessage("Loading User Space");
-                        pDialog.setTitle("Getting Data");
-                        DatabaseHandler db = new DatabaseHandler(getApplicationContext());
-                        JSONObject json_user = json.getJSONObject("user");
-                        /**
-                         * Clear all previous data in SQlite database.
-                         **/
-                        UserFunctions logout = new UserFunctions();
-                        logout.logoutUser(getApplicationContext());
-                        db.addUser(json_user.getString(KEY_FIRSTNAME), json_user.getString(KEY_LASTNAME), json_user.getString(KEY_EMAIL), json_user.getString(KEY_USERNAME), json_user.getString(KEY_UID), json_user.getString(KEY_CREATED_AT));
-                        /**
-                         *If JSON array details are stored in SQlite it launches the User Panel.
-                         **/
-                        Intent upanel = new Intent(getApplicationContext(), HomeActivity.class);
-                        upanel.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        pDialog.dismiss();
-                        startActivity(upanel);
-                        /**
-                         * Close Login Screen
-                         **/
-                        finish();
-                    } else {
-
-                        pDialog.dismiss();
-                        mPasswordView.setText("Incorrect username/password");
-                    }
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
-    }
 }
 

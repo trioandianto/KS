@@ -16,11 +16,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -39,8 +37,10 @@ public class VerifikasiActivity extends AppCompatActivity {
     }
 
     private String userID;
+    private String email;
     private EditText activeCode;
     private UserVerifyTask mAuthTask = null;
+    private TextView tvVerifikasi;
     private  UserKirimUlangTask kirimUlangTask =null;
 //    public VerifikasiActivity(String userID){
 //        this.setUserID(userID);
@@ -55,8 +55,11 @@ public class VerifikasiActivity extends AppCompatActivity {
         Bundle b = getIntent().getExtras();
         if(b != null) {
             userID = b.getString("userID");
+            email = b.getString("Email");
         }
         activeCode =(EditText)findViewById(R.id.kd_verifikasi);
+        tvVerifikasi = (TextView) findViewById(R.id.tvVerifikasi);
+        tvVerifikasi.setText("Kode verifikasi telah dikirimkan ke "+email+". Masukan kode untuk melakukan verifikasi akun.");
 
 
 
@@ -65,9 +68,9 @@ public class VerifikasiActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View view) {
-//                attemptVerify();
-                Intent myIntent = new Intent(view.getContext(), HomeActivity.class);
-                startActivityForResult(myIntent, 0);
+                attemptVerify();
+//                Intent myIntent = new Intent(view.getContext(), HomeActivity.class);
+//                startActivityForResult(myIntent, 0);
             }
         });
 
@@ -95,8 +98,15 @@ public class VerifikasiActivity extends AppCompatActivity {
         if(kirimUlangTask!=null){
             return;
         }
+//        activeCode.setError(null);
+//        String active = activeCode.getText().toString();
         boolean cancel = false;
         View focusView = null;
+        if(userID == null){
+            activeCode.setError(getString(R.string.error_active_code));
+            focusView = activeCode;
+            cancel = true;
+        }
         if (cancel) {
             // There was an error; don't attempt login and focus the first
             // form field with an error.
@@ -145,22 +155,19 @@ public class VerifikasiActivity extends AppCompatActivity {
             NetworkInfo netInfo = cm.getActiveNetworkInfo();
             if (netInfo != null && netInfo.isConnected()) {
                 try{
-                    URL url = new URL("http://192.168.1.5/userapi/api/activationcodes/CodeValidation");
+                    URL url = new URL("http://basajans/klikSembuhAPI/api/activationcodes/CodeValidation");
                     HttpURLConnection urlc = (HttpURLConnection) url.openConnection();
                     JSONObject jsonObject = new JSONObject();
                     jsonObject.put("UserID",userID);
                     jsonObject.put("ActivactionCodeCD",code);
                     urlc.setConnectTimeout(3000);
+                    urlc.setRequestProperty("Content-Type","application/json");
                     urlc.setRequestMethod("POST");
                     urlc.setDoInput(true);
                     urlc.setDoOutput(true);
-                    OutputStream os = urlc.getOutputStream();
-                    BufferedWriter writer = new BufferedWriter(
-                            new OutputStreamWriter(os, "UTF-8"));
-                    writer.write(getPostDataString(jsonObject));
-                    writer.flush();
-                    writer.close();
-                    os.close();
+                    DataOutputStream os = new DataOutputStream(urlc.getOutputStream());
+                    os.writeBytes(jsonObject.toString());
+
                     int responseCode=urlc.getResponseCode();
                     if (responseCode == HttpsURLConnection.HTTP_CREATED) {
 
@@ -174,6 +181,8 @@ public class VerifikasiActivity extends AppCompatActivity {
                             break;
                         }
                         in.close();
+                        os.flush();
+                        os.close();
 
                         return sb.toString();
                     }
@@ -226,13 +235,30 @@ public class VerifikasiActivity extends AppCompatActivity {
         }
         @Override
         protected void onPostExecute(final String success) {
+            View focusView = null;
+            activeCode.setError(null);
             mAuthTask = null;
             if (success!="") {
-                Intent i = new Intent(getApplicationContext(), HomeActivity.class);
-                startActivity(i);
-                finish();
+                JSONObject jsonObj = null;
+                try {
+                    jsonObj = new JSONObject(success);
+                    JSONObject jsd = jsonObj.getJSONObject("Result");
+                    String userID = jsd.getString("Id");
+                    Intent i = new Intent(getApplicationContext(), HomeActivity.class);
+                    Bundle b = new Bundle();
+                    b.putString("userID", userID); //Your id
+                    //.putExtra("userID",userID);
+                    i.putExtras(b);
+                    startActivity(i);
+                    finish();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             } else {
                 //:TODO
+                activeCode.setError(getString(R.string.error_active_code_expiret));
+                focusView = activeCode;
+                focusView.requestFocus();
             }
         }
         @Override
@@ -253,7 +279,7 @@ public class VerifikasiActivity extends AppCompatActivity {
             NetworkInfo netInfo = cm.getActiveNetworkInfo();
             if (netInfo != null && netInfo.isConnected()) {
                 try {
-                    URL url = new URL("http://192.168.1.5/api/users/GetNewActivationCode/"+userID);
+                    URL url = new URL("http://basajans/KlikSembuhAPI/api/users/GetNewActivationCode/"+userID);
                     HttpURLConnection urlc = (HttpURLConnection) url.openConnection();
                     urlc.setConnectTimeout(3000);
                     urlc.connect();
@@ -273,11 +299,16 @@ public class VerifikasiActivity extends AppCompatActivity {
         }
 
         protected void onPostExecute(Boolean success) {
+            View focusView = null;
+            activeCode.setError(null);
             mAuthTask = null;
             if (success) {
+                activeCode.setError(getString(R.string.error_active_code_kirim));
+                focusView = activeCode;
+                focusView.requestFocus();
                 //: TODO
             } else {
-                //: TODO
+                kirimUlangTask=null;
             }
         }
         @Override

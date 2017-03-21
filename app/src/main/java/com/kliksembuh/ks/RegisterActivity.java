@@ -19,11 +19,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -59,9 +57,9 @@ public class RegisterActivity extends AppCompatActivity {
         btncreate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                attemptRegister();
-                Intent myIntent = new Intent(view.getContext(), VerifikasiActivity.class);
-                startActivityForResult(myIntent, 0);
+                attemptRegister();
+//                Intent myIntent = new Intent(view.getContext(), VerifikasiActivity.class);
+//                startActivityForResult(myIntent, 0);
             }
         });
 
@@ -118,7 +116,7 @@ public class RegisterActivity extends AppCompatActivity {
             cancel = true;
         }
         // Check for a valid email address.
-        if (TextUtils.isEmpty(email)) {
+        else if (TextUtils.isEmpty(email)) {
             mEmail.setError(getString(R.string.error_field_required));
             focusView = mEmail;
             cancel = true;
@@ -128,12 +126,26 @@ public class RegisterActivity extends AppCompatActivity {
             cancel = true;
         }
         //Check for a Valid No Hp
-        if(mNoHp==null){
+        else if(mNoHp== null){
             mNoHp.setError(getString(R.string.error_invalid_nohp));
+            focusView = mNoHp;
+            cancel = true;
+        }
+        else if(mNoHp.length()< 10 || mNoHp.length()>12){
+            mNoHp.setError(getString(R.string.error_length));
+            focusView = mNoHp;
+            cancel = true;
         }
         //Check for a Valid Confirmasi Password
-        if(confirmPassword==null){
+        else if(confirmPassword==null){
             mConfirmPasswordView.setError(getString(R.string.error_invalid_confirm_password_not_null));
+            cancel = true;
+            focusView = mConfirmPasswordView;
+        }
+        else if(!confirmPassword.equals(password)){
+            mConfirmPasswordView.setError(getString(R.string.error_invalid_confirm_password));
+            focusView = mConfirmPasswordView;
+            cancel = true;
         }
 //        else if(confirmPassword != password){
 //            mConfirmPasswordView.setError(getString(R.string.error_invalid_confirm_password));
@@ -179,7 +191,7 @@ public class RegisterActivity extends AppCompatActivity {
             NetworkInfo netInfo = cm.getActiveNetworkInfo();
             if (netInfo != null && netInfo.isConnected()) {
                 try{
-                    URL url = new URL("http://192.168.1.9/kliksembuhapi/api/users/register");
+                    URL url = new URL("http://basajans/KlikSembuhAPI/api/users/register");
                     HttpURLConnection urlc = (HttpURLConnection) url.openConnection();
                     JSONObject jsonObject = new JSONObject();
                     jsonObject.put("Email",mEmail);
@@ -190,16 +202,15 @@ public class RegisterActivity extends AppCompatActivity {
                     jsonObject.put("LastName",mLastName);
                     jsonObject.put("PhoneNbr",mNoHp);
                     urlc.setConnectTimeout(3000);
+                    urlc.setRequestProperty("Content-Type","application/json");
                     urlc.setRequestMethod("POST");
                     urlc.setDoInput(true);
                     urlc.setDoOutput(true);
-                    OutputStream os = urlc.getOutputStream();
-                    BufferedWriter writer = new BufferedWriter(
-                            new OutputStreamWriter(os, "UTF-8"));
-                    writer.write(getPostDataString(jsonObject));
-                    writer.flush();
-                    writer.close();
-                    os.close();
+                    DataOutputStream os = new DataOutputStream(urlc.getOutputStream());
+
+                    os.writeBytes(jsonObject.toString());
+
+
                     int responseCode=urlc.getResponseCode();
                     if (responseCode == HttpsURLConnection.HTTP_CREATED) {
 
@@ -213,11 +224,14 @@ public class RegisterActivity extends AppCompatActivity {
                             break;
                         }
                         in.close();
+                        os.flush();
+                        os.close();
 
                         return sb.toString();
                     }
                     else {
                         return "";
+
                     }
                 } catch (MalformedURLException e1) {
                     // TODO Auto-generated catch block
@@ -271,11 +285,13 @@ public class RegisterActivity extends AppCompatActivity {
                     JSONObject jsonObj = new JSONObject(success);
                     JSONObject jsd = jsonObj.getJSONObject("Result");
                     String userID = jsd.getString("Id");
+                    String email = jsd.getString("Email");
 
 //                    VerifikasiActivity as = new VerifikasiActivity(userID);
                     Intent i = new Intent(getApplicationContext(), VerifikasiActivity.class);
                     Bundle b = new Bundle();
                     b.putString("userID", userID); //Your id
+                    b.putString("Email", email);
                     //.putExtra("userID",userID);
                     i.putExtras(b);
                     startActivityForResult(i, 0);
