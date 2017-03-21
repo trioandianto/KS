@@ -109,33 +109,46 @@ public class RegisterActivity extends AppCompatActivity {
         boolean cancel = false;
         View focusView = null;
 
-        // Check for a valid password, if the user entered one.
-        if (!TextUtils.isEmpty(password) && !isPasswordValid(password)) {
-            mPasswordView.setError(getString(R.string.error_invalid_password));
-            focusView = mPasswordView;
+        if(firstName.length() < 2){
+            mFirstName.setError(getString(R.string.errro_firstname_ivalid));
+            focusView = mFirstName;
+            cancel =true;
+
+        }
+        else if(lastName.length()<2){
+            mLastName.setError(getString(R.string.errro_lastname_ivalid));
+            focusView = mFirstName;
             cancel = true;
         }
-        // Check for a valid email address.
+        // Check for a valid password, if the user entered one.
         else if (TextUtils.isEmpty(email)) {
             mEmail.setError(getString(R.string.error_field_required));
             focusView = mEmail;
             cancel = true;
-        } else if (!isEmailValid(email)) {
+        }
+
+        else if (!isEmailValid(email)) {
             mEmail.setError(getString(R.string.error_invalid_email));
             focusView = mEmail;
             cancel = true;
         }
         //Check for a Valid No Hp
-        else if(mNoHp== null){
+        else if(NoHp== null){
             mNoHp.setError(getString(R.string.error_invalid_nohp));
             focusView = mNoHp;
             cancel = true;
         }
-        else if(mNoHp.length()< 10 || mNoHp.length()>12){
+        else if(NoHp.length()< 10 || NoHp.length()>12){
             mNoHp.setError(getString(R.string.error_length));
             focusView = mNoHp;
             cancel = true;
         }
+        else if (!TextUtils.isEmpty(password) && !isPasswordValid(password)) {
+            mPasswordView.setError(getString(R.string.error_invalid_password));
+            focusView = mPasswordView;
+            cancel = true;
+        }
+
         //Check for a Valid Confirmasi Password
         else if(confirmPassword==null){
             mConfirmPasswordView.setError(getString(R.string.error_invalid_confirm_password_not_null));
