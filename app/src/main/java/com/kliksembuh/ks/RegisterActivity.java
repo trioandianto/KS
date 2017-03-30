@@ -139,7 +139,8 @@ public class RegisterActivity extends AppCompatActivity {
             cancel = true;
         }
         else if(NoHp.length()< 10 || NoHp.length()>12){
-            mNoHp.setError(getString(R.string.error_length));
+//            mNoHp.setError(getString(R.string.error_length));
+            mNoHp.setError(getString(R.string.error_active_code));
             focusView = mNoHp;
             cancel = true;
         }

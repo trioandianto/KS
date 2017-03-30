@@ -256,7 +256,8 @@ public class VerifikasiActivity extends AppCompatActivity {
                 }
             } else {
                 //:TODO
-                activeCode.setError(getString(R.string.error_active_code_expiret));
+//                activeCode.setError(getString(R.string.error_active_code_expiret));
+                activeCode.setError(getString(R.string.error_active_code));
                 focusView = activeCode;
                 focusView.requestFocus();
             }
@@ -303,7 +304,8 @@ public class VerifikasiActivity extends AppCompatActivity {
             activeCode.setError(null);
             mAuthTask = null;
             if (success) {
-                activeCode.setError(getString(R.string.error_active_code_kirim));
+//                activeCode.setError(getString(R.string.error_active_code_kirim));
+                activeCode.setError(getString(R.string.error_active_code));
                 focusView = activeCode;
                 focusView.requestFocus();
                 //: TODO
