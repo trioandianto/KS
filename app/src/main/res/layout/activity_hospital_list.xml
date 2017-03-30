@@ -33,6 +33,7 @@
                 android:inputType=""
                 android:maxLines="1"
                 android:textSize="16sp"
+                android:textColor="@color/black"
                 android:singleLine="true"
                 />
 
@@ -53,6 +54,7 @@
                 android:inputType=""
                 android:maxLines="1"
                 android:textSize="16sp"
+                android:textColor="@color/black"
                 android:singleLine="true"/>
         </RelativeLayout>
         <RelativeLayout

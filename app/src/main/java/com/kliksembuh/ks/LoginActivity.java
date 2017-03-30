@@ -345,7 +345,9 @@ public class LoginActivity extends BaseActivity implements LoaderCallbacks<Curso
             startActivityForResult(myIntent, 0);
         }
         else if(i==R.id.email_sign_in_button){
-            attemptLogin();
+            Intent myIntent = new Intent(view.getContext(), HomeActivity.class);
+            startActivityForResult(myIntent, 0);
+            //attemptLogin();
         }
         else{
             Intent myIntent = new Intent(view.getContext(), ResetPasswordActivity.class);

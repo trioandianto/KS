@@ -43,6 +43,7 @@
             android:id="@+id/btnsearchspesialisasi"
             android:background="@drawable/blue_button"
             style="@style/MyCustomTextAppearance"
+            android:textAllCaps="false"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
