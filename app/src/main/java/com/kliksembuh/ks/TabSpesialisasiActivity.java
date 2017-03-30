@@ -35,7 +35,9 @@ public class TabSpesialisasiActivity extends Fragment{
             public void onClick(View view) {
                 Intent myIntent = new Intent(getActivity(),HospitalList.class);
                 Bundle b = new Bundle();
-                b.putString("userID", "2"); //Your id
+                b.putString("userID", "2");
+                b.putString("subDistrict","1");
+                b.putString("spesialisasi","1");//Your id
                 //.putExtra("userID",userID);
                 myIntent.putExtras(b);
                 startActivity(myIntent);

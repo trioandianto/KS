@@ -117,4 +117,8 @@ MENGGUNAKAN LAYANAN KAMI UNTUK PERTAMA KALI.</string>
     <string name="darah">Tekanan Darah</string>
     <string name="Datadiri">Data Diri</string>
     <string name="vitalsign">Vital Sign</string>
+    <string name="error_length">No HP tidak valid</string>
+    <string name="error_active_code_expiret">kode verifikasi tidak berlaku</string>
+    <string name="error_active_code_kirim">kode sudah tidak berlaku</string>
+    <string name="loading">Loading…</string>
 </resources>

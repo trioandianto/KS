@@ -1,188 +1,34 @@
-{
-	"location"   : [
+[
 	{
-		"name": "Bogor Barat",
-		"code": "AF"
+		"SubDistrictID":1,
+		"CityID":1,
+		"SubDistrictCD":"AF",
+		"SubDistrictDescription":"Bogor Barat"
 	},
 	{
-		"name": "Bogor Selatan",
-		"code": "AL"
+		"SubDistrictID":2,
+		"CityID":1,
+		"SubDistrictCD":"AL",
+		"SubDistrictDescription":"Bogor Selatan"
 	},
 	{
-		"name": "Bogor Tengah",
-		"code": "DZ"
+		"SubDistrictID":3,"CityID":1,
+		"SubDistrictCD":"DZ",
+		"SubDistrictDescription":"Bogor Tengah"
 	},
 	{
-		"name": "Bogor Timur",
-		"code": "AS"
+		"SubDistrictID":4,"CityID":1,
+		"SubDistrictCD":"AS",
+		"SubDistrictDescription":"Bogor Timur"
 	},
 	{
-		"name": "Bogor Utara",
-		"code": "AD"
+		"SubDistrictID":5,"CityID":1,
+		"SubDistrictCD":"AD",
+		"SubDistrictDescription":"Bogor Utara"
 	},
 	{
-		"name": "Tanah Sareal",
-		"code": "AO"
-	},
-	{
-		"name": "Babakan Madang",
-		"code": "AI"
-	},
-	{
-		"name": "Bojonggede",
-		"code": "AG"
-	},
-	{
-		"name": "Caringin",
-		"code": "AR"
-	},
-	{
-		"name": "Cariu",
-		"code": "AM"
-	},
-	{
-		"name": "Ciampea",
-		"code": "AW"
-	},
-	{
-		"name": "Ciawi",
-		"code": "AU"
-	},
-	{
-		"name": "Cibinong",
-		"code": "AT"
-	},
-	{
-		"name": "Cibungbulang",
-		"code": "AZ"
-	},
-	{
-		"name": "Cigombong",
-		"code": "BS"
-	},
-	{
-		"name": "Cigudeg",
-		"code": "BH"
-	},
-	{
-		"name": "Cijeruk",
-		"code": "BD"
-	},
-	{
-		"name": "Cileungsi",
-		"code": "BB"
-	},
-	{
-		"name": "Ciomas",
-		"code": "BY"
-	},
-	{
-		"name": "Cisarua",
-		"code": "BE"
-	},
-	{
-		"name": "Ciseeng",
-		"code": "BZ"
-	},
-	{
-		"name": "Citeureup",
-		"code": "BJ"
-	},
-	{
-		"name": "Dramaga",
-		"code": "BM"
-	},
-	{
-		"name": "Gunung Putri",
-		"code": "BT"
-	},
-	{
-		"name": "Gunung Sindur",
-		"code": "BO"
-	},
-	{
-		"name": "Jasinga",
-		"code": "BA"
-	},
-	{
-		"name": "Jonggol",
-		"code": "BW"
-	},
-	{
-		"name": "Kemang",
-		"code": "BV"
-	},
-	{
-		"name": "Klapanunggal",
-		"code": "BR"
-	},
-	{
-		"name": "Leuwiliang",
-		"code": "IO"
-	},
-	{
-		"name": "Leuwisadeng",
-		"code": "BN"
-	},
-	{
-		"name": "Megamendung",
-		"code": "BG"
-	},
-	{
-		"name": "Nanggung",
-		"code": "BF"
-	},
-	{
-		"name": "Pamijahan",
-		"code": "BI"
-	},
-	{
-		"name": "Parung Panjang",
-		"code": "KH"
-	},
-	{
-		"name": "Parung",
-		"code": "CM"
-	},
-	{
-		"name": "Ranca Bungur",
-		"code": "CA"
-	},
-	{
-		"name": "Ranca Bungur",
-		"code": "CV"
-	},
-	{
-		"name": "Sukajaya",
-		"code": "KY"
-	},
-	{
-		"name": "Sukamakmur",
-		"code": "CF"
-	},
-	{
-		"name": "Sukaraja",
-		"code": "TD"
-	},
-	{
-		"name": "Tajur Halang",
-		"code": "CL"
-	},
-	{
-		"name": "Tamansari",
-		"code": "CN"
-	},
-	{
-		"name": "Tanjungsari",
-		"code": "CX"
-	},
-	{
-		"name": "Tenjo",
-		"code": "CC"
-	},
-	{
-		"name": "Tenjolaya",
-		"code": "CO"
+		"SubDistrictID":6,"CityID":1,
+		"SubDistrictCD":"AO",
+		"SubDistrictDescription":"Tanah Sareal"
 	}
 ]
-}
