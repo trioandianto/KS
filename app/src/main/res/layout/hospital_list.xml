@@ -23,6 +23,16 @@
         android:focusable="false"
         android:weightSum="1">
 
+        <ImageView
+            android:id="@+id/iv_hospital_pic"
+            android:layout_width="100dp"
+            android:layout_height="120dp"
+            android:scaleType="fitXY"
+            android:adjustViewBounds="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="0dp"/>
+
     <TextView
         android:id="@+id/tv_name"
         android:layout_width="wrap_content"
@@ -36,25 +46,12 @@
         android:layout_toRightOf="@+id/iv_hospital_pic"
         android:layout_toEndOf="@+id/iv_hospital_pic" />
 
-    <RatingBar
-        android:id="@+id/ratingBar"
-        android:layout_marginLeft="0dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        style= "@style/CustomRatingBar"
-        android:numStars="5"
-        android:rating="3.5"
-        android:stepSize="0.5"
-        android:isIndicator="true"
-        android:layout_below="@+id/tv_name"
-        android:layout_toRightOf="@+id/iv_hospital_pic"
-        android:layout_toEndOf="@+id/iv_hospital_pic" />
-
     <TextView
         android:id="@+id/tv_address"
         android:textAppearance="?android:textAppearanceMedium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="15dp"
         android:drawableLeft="@drawable/ic_place_blue_a400_alpha_24dp"
@@ -63,7 +60,7 @@
         android:text="Address"
         android:textSize="14dp"
         android:textColor="#5C5C5C"
-        android:layout_below="@+id/ratingBar"
+        android:layout_below="@+id/tv_name"
         android:layout_toRightOf="@+id/iv_hospital_pic"
         android:layout_toEndOf="@+id/iv_hospital_pic" />
 
@@ -84,15 +81,89 @@
         android:layout_toRightOf="@+id/iv_hospital_pic"
         android:layout_toEndOf="@+id/iv_hospital_pic" />
 
-    <ImageView
-        android:id="@+id/iv_hospital_pic"
-        android:layout_width="100dp"
-        android:layout_height="120dp"
-        android:scaleType="fitXY"
-        android:adjustViewBounds="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="0dp"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/iv_bpjs_ic"
+            android:src="@drawable/bpjs_ic"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_below="@+id/tv_phone"
+            android:layout_toRightOf="@+id/iv_hospital_pic"
+            android:layout_toEndOf="@+id/iv_hospital_pic"
+            />
+
+        <ImageView
+            android:id="@+id/iv_axa_ic"
+            android:src="@drawable/axa_ic"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_below="@+id/tv_phone"
+            android:layout_toRightOf="@+id/iv_bpjs_ic"
+            android:layout_toEndOf="@+id/iv_bpjs_ic"
+            />
+        <ImageView
+            android:id="@+id/iv_zurich_ic"
+            android:src="@drawable/zurich_ic"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_below="@+id/tv_phone"
+            android:layout_toRightOf="@+id/iv_axa_ic"
+            android:layout_toEndOf="@+id/iv_axa_ic"
+            />
+        <TextView
+            android:id="@+id/tv_moreinfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="Lihat Semua Asuransi (20)"
+            style="@style/MyCustomTextAppearance"
+            android:textSize="10sp"
+            android:textColor="@color/blue"
+            android:layout_below="@+id/iv_bpjs_ic"
+            android:layout_toRightOf="@+id/iv_hospital_pic"
+            android:layout_toEndOf="@+id/iv_hospital_pic" />
+
+        <TextView
+            android:id="@+id/tv_IGD"
+            android:background="#7057ff"
+            android:textAppearance="?android:textAppearanceMedium"
+            android:layout_width="49dp"
+            android:layout_height="20dp"
+            android:layout_below="@+id/iv_hospital_pic"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="3dp"
+            android:layout_marginBottom="5dp"
+            android:text="IGD"
+            android:textSize="14dp"
+            android:gravity="center"
+            android:textColor="#ffffff"/>
+
+        <TextView
+            android:id="@+id/tv_24hours"
+            android:background="@color/google_color"
+            android:textAppearance="?android:textAppearanceMedium"
+            android:layout_width="49dp"
+            android:layout_height="20dp"
+            android:layout_below="@+id/iv_hospital_pic"
+            android:layout_toRightOf="@+id/tv_IGD"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="1dp"
+            android:layout_marginRight="15dp"
+            android:text="24"
+            android:textSize="14dp"
+            android:gravity="center"
+            android:textColor="#ffffff"/>
 
     <!--<Button-->
         <!--android:layout_width="80dp"-->
