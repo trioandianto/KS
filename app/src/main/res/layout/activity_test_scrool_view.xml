@@ -58,14 +58,15 @@
 
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="fill_parent"
+        android:layout_height="1000dp"
+        android:clickable="true"
         android:fillViewport="true"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <LinearLayout
             android:layout_width="match_parent"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            android:layout_height="match_parent"
+            android:layout_height="1000dp"
             android:orientation="vertical"
             android:paddingTop="24dp">
 
@@ -82,22 +83,23 @@
                 android:spinnerMode="dropdown">
 
             </Spinner>
-
             <ListView
                 android:layout_width="match_parent"
                 android:divider="#00000000"
                 android:paddingRight="0dip"
+                android:clickable="true"
                 android:paddingLeft="10dip"
                 android:paddingBottom="15dip"
                 android:clipToPadding="false"
                 android:background="@drawable/shape"
-                android:layout_height="fill_parent"
+                android:layout_height="1000dp"
                 android:id="@+id/lvDetailRumahSakit">
 
             </ListView>
 
-        </LinearLayout>
 
+
+        </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
 
 </android.support.design.widget.CoordinatorLayout>

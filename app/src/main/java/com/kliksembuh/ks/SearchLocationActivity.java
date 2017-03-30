@@ -4,12 +4,12 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.res.AssetManager;
 import android.graphics.Color;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -17,7 +17,6 @@ import android.widget.AutoCompleteTextView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
-import com.kliksembuh.ks.library.HttpHandler;
 import com.kliksembuh.ks.library.SearchAdapter;
 import com.kliksembuh.ks.models.Location;
 
@@ -25,11 +24,18 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
+import javax.net.ssl.HttpsURLConnection;
 
 public class SearchLocationActivity extends AppCompatActivity implements ListView.OnItemClickListener{
     private ArrayAdapter<String> listAdapter;
@@ -77,37 +83,37 @@ public class SearchLocationActivity extends AppCompatActivity implements ListVie
 
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        super.onCreateOptionsMenu((menu));
-        SearchView searchView = new SearchView(getSupportActionBar().getThemedContext());
-        searchView.setQueryHint("Search...");
-        menu.add("Search")
-                .setIcon(R.drawable.places_ic_search)
-                .setActionView(searchView)
-                .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM | MenuItem.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW);
-//        MenuInflater inflater = getMenuInflater();
-//        inflater.inflate(R.menu.menu_search, menu);
-//        MenuItem menuItem = menu.findItem(R.id.menusearch);
-//
-//        SearchView searchView = (SearchView) menuItem.getActionView();
-//
-//
-//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-//            @Override
-//            public boolean onQueryTextSubmit(String query) {
-//                return false;
-//            }
-//
-//            @Override
-//            public boolean onQueryTextChange(String newText) {
-//                searchAdapter.getFilter().filter(newText);
-//                return false;
-//            }
-//        });
-        //final ViewGroup parent = (ViewGroup)
-        return true;
-    }
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        super.onCreateOptionsMenu((menu));
+//        SearchView searchView = new SearchView(getSupportActionBar().getThemedContext());
+//        searchView.setQueryHint("Search...");
+//        menu.add("Search")
+//                .setIcon(R.drawable.places_ic_search)
+//                .setActionView(searchView)
+//                .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM | MenuItem.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW);
+////        MenuInflater inflater = getMenuInflater();
+////        inflater.inflate(R.menu.menu_search, menu);
+////        MenuItem menuItem = menu.findItem(R.id.menusearch);
+////
+////        SearchView searchView = (SearchView) menuItem.getActionView();
+////
+////
+////        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+////            @Override
+////            public boolean onQueryTextSubmit(String query) {
+////                return false;
+////            }
+////
+////            @Override
+////            public boolean onQueryTextChange(String newText) {
+////                searchAdapter.getFilter().filter(newText);
+////                return false;
+////            }
+////        });
+//        //final ViewGroup parent = (ViewGroup)
+//        return true;
+//    }
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -139,7 +145,7 @@ public class SearchLocationActivity extends AppCompatActivity implements ListVie
         }
         return json;
     }
-    private class GetContacts extends AsyncTask<Void, Void, Void> {
+    private class GetContacts extends AsyncTask<String, Void, String> {
         private Context context;
 
         @Override
@@ -153,56 +159,75 @@ public class SearchLocationActivity extends AppCompatActivity implements ListVie
         }
 
         @Override
-        protected Void doInBackground(Void... args0) {
-            HttpHandler sh = new HttpHandler();
+        protected String doInBackground(String... params) {
+            ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo netInfo = cm.getActiveNetworkInfo();
+            if (netInfo != null && netInfo.isConnected()) {
+                try {
+                    URL url = new URL("http://basajans/KliksembuhAPI/api/SubDistricts/GetSubDistrict");
+                    HttpURLConnection urlc = (HttpURLConnection) url.openConnection();
+                    urlc.setRequestProperty("Content-Type", "application/json");
+                    urlc.connect();
+                    int responseCode = urlc.getResponseCode();
+                    if (responseCode == HttpsURLConnection.HTTP_OK) {
+                        BufferedReader in = new BufferedReader(
+                                new InputStreamReader(
+                                        urlc.getInputStream()));
+                        StringBuffer sb = new StringBuffer("");
+                        String line = "";
+                        while ((line = in.readLine()) != null) {
+                            sb.append(line);
+                            break;
+                        }
+                        in.close();
 
-            // Making a request to url and getting response
-            try{
-                JSONObject obj = new JSONObject(loadJSONFromAsset());
-
-                    // Getting JSON Array node
-                    JSONArray contacts = obj.getJSONArray("location");
-
-                    // looping through All Contacts
-                    for (int i = 0; i < contacts.length(); i++) {
-                        JSONObject c = contacts.getJSONObject(i);
 
 
-                        String name = c.getString("name");
-                        String code = c.getString("code");
-//                        da =new ArrayList<>();
-                        mLocation.add(new Location(name,code));
-//                        da.add( name );
-//                        da.add( code );
+                        return sb.toString();
+                    } else {
+                        return "";
 
-
-                        // Phone node is JSON Object
-//                    JSONObject phone = c.getJSONObject("phone");
-//                    String mobile = phone.getString("mobile");
-//                    String home = phone.getString("home");
-//                    String office = phone.getString("office");
-
-                        // tmp hash map for single contact
-                        HashMap<String, String> contact = new HashMap<>();
-
-                        // adding each child node to HashMap key => value
-                        contact.put("code", code);
-                        contact.put("name", name);
-
-                    // adding contact to contact list
-                    formList.add(contact);
+                    }
+                } catch (MalformedURLException e1) {
+                    // TODO Auto-generated catch block
+                    e1.printStackTrace();
+                    return "";
+                } catch (IOException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                    return "";
                 }
-            } catch (JSONException e) {
-                e.printStackTrace();
+
+            } else {
+                return "";
             }
-            return null;
         }
 
+
+
         @Override
-        protected void onPostExecute(Void result) {
+        protected void onPostExecute(final String result) {
             super.onPostExecute(result);
             if (pDialog.isShowing())
                 pDialog.dismiss();
+            if(result!=""){
+                try {
+                    JSONArray jsonArray = new JSONArray(result);
+//                    Iterator<String> keys = jsonObj.keys();
+//                    jsonObj.keys();
+
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject jsonObject1 = jsonArray.getJSONObject(i);
+                        String subDistrictCD = jsonObject1.getString("SubDistrictCD");
+                        String subDistrictDescription = jsonObject1.getString("SubDistrictDescription");
+                        mLocation.add(new Location(subDistrictDescription,subDistrictCD));
+
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
 //            adapter = new SimpleAdapter(
 //                    SearchLocationActivity.this,formList,
 //                    R.layout.list_item, new String[]{"name", "code"}, new int[]{R.id.name,

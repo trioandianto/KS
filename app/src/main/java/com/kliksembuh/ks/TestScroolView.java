@@ -4,6 +4,8 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -39,12 +41,19 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
+import javax.net.ssl.HttpsURLConnection;
 
 
 public class TestScroolView extends ActionBarActivity implements OnMapReadyCallback {
@@ -66,8 +75,10 @@ public class TestScroolView extends ActionBarActivity implements OnMapReadyCallb
     private ProgressDialog pDialog;
     private Spinner spinner;
     private String rumahSakitID;
+    private String facility;
     private String toolbarTitle;
     private String [] idDokter;
+    public String [] urlImage;
     private int [] idDokterInt;
     private int[] listArr;
 
@@ -81,9 +92,10 @@ public class TestScroolView extends ActionBarActivity implements OnMapReadyCallb
         super.onCreate(savedInstanceState);
         Bundle b = getIntent().getExtras();
         if(b != null) {
-            String userID = b.getString("userID");
+            String userID = b.getString("institution");
             rumahSakitID = userID;
-            toolbarTitle = b.getString("tol");
+            facility = "1";
+            toolbarTitle = b.getString("tittle");
         }
 
         setContentView(R.layout.activity_test_scrool_view);
@@ -97,6 +109,19 @@ public class TestScroolView extends ActionBarActivity implements OnMapReadyCallb
         mDokterList = new ArrayList<>();
         list = new ArrayList<String>();
         lvDokter = (ListView)findViewById(R.id.lvDetailRumahSakit);
+        lvDokter.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent myIntent = new Intent(getApplicationContext(),BookingActivity.class);
+                Bundle b = new Bundle();
+                b.putString("idDokter", idDokter[position]);
+                b.putString("urlImage",urlImage[position]);//Your id
+                //.putExtra("userID",userID);
+                myIntent.putExtras(b);
+                //.putExtra("userID",userID);
+                startActivityForResult(myIntent, 0);
+            }
+        });
         //lvDokter.setNestedScrollingEnabled(true);
         spinner = (Spinner)findViewById(R.id.dplistdokter);
         ArrayAdapter<String>adapter = new ArrayAdapter<String>(TestScroolView.this,
@@ -133,161 +158,8 @@ public class TestScroolView extends ActionBarActivity implements OnMapReadyCallb
 //        });
         //toolbar.addView(spinner);
 
-        new GetContacts().execute();
-        lvDokter.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                if(toolbarTitle=="RS PMI BOGOR"){
-                    if(position==0){
-                        Intent myIntent = new Intent(getApplicationContext(),BookingActivity.class);
-                        //Your id
-                        Bundle b = new Bundle();
-                        b.putString("dokterid", "1");
-                        b.putString("rs", "1");
-                        myIntent.putExtras(b);
-                        startActivityForResult(myIntent, 0);
-
-                    }
-                    else if(position==1){
-                        Intent myIntent = new Intent(getApplicationContext(),BookingActivity.class);
-                        //Your id
-                        Bundle b = new Bundle();
-                        b.putString("dokterid", "2");
-                        b.putString("rs", "1");
-                        myIntent.putExtras(b);
-                        startActivityForResult(myIntent, 0);
-
-                    }
-                    else {
-                        Intent myIntent = new Intent(getApplicationContext(),BookingActivity.class);
-                        //Your id
-                        Bundle b = new Bundle();
-                        b.putString("dokterid", "4");
-                        b.putString("rs", "1");
-                        //.putExtra("userID",userID);
-                        myIntent.putExtras(b);
-                        startActivityForResult(myIntent, 0);
-
-                    }
-                }
-                else if(toolbarTitle=="RS CIBINGONG BOGOR"){
-                    if(position==0){
-                        Intent myIntent = new Intent(getApplicationContext(),BookingActivity.class);
-                        //Your id
-                        Bundle b = new Bundle();
-                        b.putString("dokterid", "6");
-                        b.putString("rs", "2");
-                        myIntent.putExtras(b);
-                        startActivityForResult(myIntent, 0);
-
-                    }
-                    else if(position==1){
-                        Intent myIntent = new Intent(getApplicationContext(),BookingActivity.class);
-                        //Your id
-                        Bundle b = new Bundle();
-                        b.putString("dokterid", "7");
-                        b.putString("rs", "2");
-                        myIntent.putExtras(b);
-                        startActivityForResult(myIntent, 0);
-
-                    }
-                    else {
-                        Intent myIntent = new Intent(getApplicationContext(),BookingActivity.class);
-                        //Your id
-                        Bundle b = new Bundle();
-                        b.putString("dokterid", "9");
-                        b.putString("rs", "3");
-                        //.putExtra("userID",userID);
-                        myIntent.putExtras(b);
-                        startActivityForResult(myIntent, 0);
-
-                    }
-
-                }
-                else if(toolbarTitle=="RS BOGOR MEDICA CENTRE"){
-                    if(position==0){
-                        Intent myIntent = new Intent(getApplicationContext(),BookingActivity.class);
-                        //Your id
-                        Bundle b = new Bundle();
-                        b.putString("dokterid", "3");
-                        b.putString("rs", "3");
-                        myIntent.putExtras(b);
-                        startActivityForResult(myIntent, 0);
-
-                    }
-                    else if(position==1){
-                        Intent myIntent = new Intent(getApplicationContext(),BookingActivity.class);
-                        //Your id
-                        Bundle b = new Bundle();
-                        b.putString("dokterid", "5");
-                        b.putString("rs", "3");
-                        myIntent.putExtras(b);
-                        startActivityForResult(myIntent, 0);
-
-                    }
-                    else if (position==2) {
-                        Intent myIntent = new Intent(getApplicationContext(),BookingActivity.class);
-                        //Your id
-                        Bundle b = new Bundle();
-                        b.putString("dokterid", "8");
-                        b.putString("rs", "3");
-                        //.putExtra("userID",userID);
-                        myIntent.putExtras(b);
-                        startActivityForResult(myIntent, 0);
-
-                    }
-                    else {
-                        Intent myIntent = new Intent(getApplicationContext(),BookingActivity.class);
-                        //Your id
-                        Bundle b = new Bundle();
-                        b.putString("dokterid", "10");
-                        b.putString("rs", "3");
-                        //.putExtra("userID",userID);
-                        myIntent.putExtras(b);
-                        startActivityForResult(myIntent, 0);
-
-                    }
-
-                }
-                else {
-                    if(position==0){
-                        Intent myIntent = new Intent(getApplicationContext(),BookingActivity.class);
-                        //Your id
-                        Bundle b = new Bundle();
-                        b.putString("dokterid", "1");
-                        b.putString("rs", "1");
-                        myIntent.putExtras(b);
-                        startActivityForResult(myIntent, 0);
-
-                    }
-                    else if(position==1){
-                        Intent myIntent = new Intent(getApplicationContext(),BookingActivity.class);
-                        //Your id
-                        Bundle b = new Bundle();
-                        b.putString("dokterid", "2");
-                        b.putString("rs", "1");
-                        myIntent.putExtras(b);
-                        startActivityForResult(myIntent, 0);
-
-                    }
-                    else {
-                        Intent myIntent = new Intent(getApplicationContext(),BookingActivity.class);
-                        //Your id
-                        Bundle b = new Bundle();
-                        b.putString("dokterid", "4");
-                        b.putString("rs", "1");
-                        //.putExtra("userID",userID);
-                        myIntent.putExtras(b);
-                        startActivityForResult(myIntent, 0);
-
-                    }
-
-                }
-
-            }
-        });
-
+//        new GetContacts().execute();
+        new DokterListAsync(rumahSakitID,facility).execute();
 
     }
 
@@ -424,6 +296,116 @@ public class TestScroolView extends ActionBarActivity implements OnMapReadyCallb
             return d;
         } catch (Exception e) {
             return null;
+        }
+    }
+    public class DokterListAsync extends AsyncTask<String, Void, String> {
+        private String mInstitution;
+        private String mFacility;
+        DokterListAsync(String institution, String facility) {
+            mInstitution = institution;
+            mFacility = facility;
+        }
+
+
+        @Override
+        protected String doInBackground(String... params) {
+            ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo netInfo = cm.getActiveNetworkInfo();
+            if (netInfo != null && netInfo.isConnected()) {
+                try{
+                    URL url = new URL("http://cloud.basajans.com:8868/BS.HealthCare.Application/api/MedicalPersonnel/SearchMedicalPersonnelBasedOnInstitutions?institution="+mInstitution+"&facility="+mFacility);
+                    HttpURLConnection urlc = (HttpURLConnection) url.openConnection();
+                    urlc.setRequestProperty("Content-Type", "application/json");
+                    urlc.connect();
+                    int responseCode=urlc.getResponseCode();
+                    if (responseCode == HttpsURLConnection.HTTP_OK) {
+
+                        BufferedReader in=new BufferedReader(
+                                new InputStreamReader(
+                                        urlc.getInputStream()));
+                        StringBuffer sb = new StringBuffer("");
+                        String line="";
+                        while((line = in.readLine()) != null) {
+                            sb.append(line);
+                            break;
+                        }
+                        in.close();
+                        JSONArray jsonArray = new JSONArray(sb.toString());
+                        idDokter=new String[jsonArray.length()];
+                        urlImage=new String[jsonArray.length()];
+                        for (int i = 0; i < jsonArray.length(); i++) {
+                            JSONObject jsonObject = jsonArray.getJSONObject(i);
+                            String id = jsonObject.getString("MedicalPersonnelID");
+                            String personelCD = jsonObject.getString("MedicalPersonnelID");
+                            idDokter[i]=personelCD;
+                            String name = jsonObject.getString("Name");
+                            String image= jsonObject.getString("ImgUrl");
+                            urlImage[i]=image;
+                            Drawable image1 = LoadImageFromWebOperations(image);
+                            String alamat = jsonObject.getString("Address");
+                            mDokterList.add(new Doctor(Integer.parseInt(id), image1, name, alamat));
+                        }
+
+                        return sb.toString();
+                    }
+                    else {
+                        return "";
+
+                    }
+                } catch (MalformedURLException e1) {
+                    // TODO Auto-generated catch block
+                    e1.printStackTrace();
+                    return "";
+                } catch (IOException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                    return "";
+                }catch (Exception e) {
+                    e.printStackTrace();
+                    return "";
+                }
+            }else {
+                return "";
+            }
+        }
+
+        public String getPostDataString(JSONObject params) throws Exception {
+
+            StringBuilder result = new StringBuilder();
+            boolean first = true;
+
+            Iterator<String> itr = params.keys();
+
+            while(itr.hasNext()){
+
+                String key= itr.next();
+                Object value = params.get(key);
+
+                if (first)
+                    first = false;
+                else
+                    result.append("&");
+
+                result.append(URLEncoder.encode(key, "UTF-8"));
+                result.append("=");
+                result.append(URLEncoder.encode(value.toString(), "UTF-8"));
+
+            }
+            return result.toString();
+        }
+        @Override
+        protected void onPostExecute(final String success) {
+
+            if (success!="") {
+                dAdapter = new DoctorListAdapter<>(getApplicationContext(), mDokterList);
+                lvDokter.setAdapter(dAdapter);
+            } else {
+                //:TODO
+            }
+        }
+        @Override
+        protected void onCancelled() {
+
         }
     }
 

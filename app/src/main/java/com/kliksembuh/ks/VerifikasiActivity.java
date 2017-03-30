@@ -242,8 +242,8 @@ public class VerifikasiActivity extends AppCompatActivity {
                 JSONObject jsonObj = null;
                 try {
                     jsonObj = new JSONObject(success);
-                    JSONObject jsd = jsonObj.getJSONObject("Result");
-                    String userID = jsd.getString("Id");
+                    String userID = jsonObj.getString("Id");
+
                     Intent i = new Intent(getApplicationContext(), HomeActivity.class);
                     Bundle b = new Bundle();
                     b.putString("userID", userID); //Your id
@@ -284,7 +284,7 @@ public class VerifikasiActivity extends AppCompatActivity {
                     HttpURLConnection urlc = (HttpURLConnection) url.openConnection();
                     urlc.setConnectTimeout(3000);
                     urlc.connect();
-                    if (urlc.getResponseCode() == 200) {
+                    if (urlc.getResponseCode() == HttpsURLConnection.HTTP_OK) {
                         return true;
                     }
                 } catch (MalformedURLException e1) {

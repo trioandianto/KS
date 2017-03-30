@@ -1,10 +1,395 @@
-{
-  "jadwal": [
-    {
-      "iddokter":"1",
-      "idrumahsakit":"1",
-      "idminggu":"1"
-
-    }
-  ]
-}
+[
+  {
+    "Sequence": "Minggu 1",
+    "MondayDPID": {
+      "DayProgramDetail": [
+        {
+          "ShiftSchedule": {
+            "DayProgramDetails": [],
+            "ShiftScheduleID": 1,
+            "ShiftScheduleCD": "Pagi",
+            "StartTime": "08:00:00",
+            "EndTime": "12:00:00"
+          },
+          "DPLineID": 1,
+          "InstitutionID": 1,
+          "DPID": 1,
+          "StartTime": "2017-01-01T08:00:00",
+          "EndTime": "2017-01-01T11:00:00",
+          "ShiftScheduleID": 1
+        },
+        {
+          "ShiftSchedule": {
+            "DayProgramDetails": [],
+            "ShiftScheduleID": 2,
+            "ShiftScheduleCD": "Siang",
+            "StartTime": "12:00:00",
+            "EndTime": "17:00:00"
+          },
+          "DPLineID": 2,
+          "InstitutionID": 1,
+          "DPID": 1,
+          "StartTime": "2017-01-01T13:00:00",
+          "EndTime": "2017-01-01T15:00:00",
+          "ShiftScheduleID": 2
+        }
+      ],
+      "DPID": 1,
+      "InstitutionID": 1,
+      "Name": "DP1"
+    },
+    "TuesdayDPID": {
+      "DayProgramDetail": [],
+      "DPID": 2,
+      "InstitutionID": 2,
+      "Name": "DP2"
+    },
+    "WednesdayDPID": {
+      "DayProgramDetail": [
+        {
+          "ShiftSchedule": {
+            "DayProgramDetails": [],
+            "ShiftScheduleID": 1,
+            "ShiftScheduleCD": "Pagi",
+            "StartTime": "08:00:00",
+            "EndTime": "12:00:00"
+          },
+          "DPLineID": 1,
+          "InstitutionID": 1,
+          "DPID": 1,
+          "StartTime": "2017-01-01T08:00:00",
+          "EndTime": "2017-01-01T11:00:00",
+          "ShiftScheduleID": 1
+        },
+        {
+          "ShiftSchedule": {
+            "DayProgramDetails": [],
+            "ShiftScheduleID": 2,
+            "ShiftScheduleCD": "Siang",
+            "StartTime": "12:00:00",
+            "EndTime": "17:00:00"
+          },
+          "DPLineID": 2,
+          "InstitutionID": 1,
+          "DPID": 1,
+          "StartTime": "2017-01-01T13:00:00",
+          "EndTime": "2017-01-01T15:00:00",
+          "ShiftScheduleID": 2
+        }
+      ],
+      "DPID": 1,
+      "InstitutionID": 1,
+      "Name": "DP1"
+    },
+    "ThursdayDPID": {
+      "DayProgramDetail": [],
+      "DPID": 2,
+      "InstitutionID": 2,
+      "Name": "DP2"
+    },
+    "FridayDPID": {
+      "DayProgramDetail": [
+        {
+          "ShiftSchedule": {
+            "DayProgramDetails": [],
+            "ShiftScheduleID": 1,
+            "ShiftScheduleCD": "Pagi",
+            "StartTime": "08:00:00",
+            "EndTime": "12:00:00"
+          },
+          "DPLineID": 1,
+          "InstitutionID": 1,
+          "DPID": 1,
+          "StartTime": "2017-01-01T08:00:00",
+          "EndTime": "2017-01-01T11:00:00",
+          "ShiftScheduleID": 1
+        },
+        {
+          "ShiftSchedule": {
+            "DayProgramDetails": [],
+            "ShiftScheduleID": 2,
+            "ShiftScheduleCD": "Siang",
+            "StartTime": "12:00:00",
+            "EndTime": "17:00:00"
+          },
+          "DPLineID": 2,
+          "InstitutionID": 1,
+          "DPID": 1,
+          "StartTime": "2017-01-01T13:00:00",
+          "EndTime": "2017-01-01T15:00:00",
+          "ShiftScheduleID": 2
+        }
+      ],
+      "DPID": 1,
+      "InstitutionID": 1,
+      "Name": "DP1"
+    },
+    "SaturdayDPID": null,
+    "SundayDPID": null,
+    "WPID": 1,
+    "InstitutionID": 1,
+    "name": "WP1"
+  },
+  {
+    "Sequence": "Minggu 2",
+    "MondayDPID": {
+      "DayProgramDetail": [
+        {
+          "ShiftSchedule": {
+            "DayProgramDetails": [],
+            "ShiftScheduleID": 1,
+            "ShiftScheduleCD": "Pagi",
+            "StartTime": "08:00:00",
+            "EndTime": "12:00:00"
+          },
+          "DPLineID": 1,
+          "InstitutionID": 1,
+          "DPID": 1,
+          "StartTime": "2017-01-01T08:00:00",
+          "EndTime": "2017-01-01T11:00:00",
+          "ShiftScheduleID": 1
+        },
+        {
+          "ShiftSchedule": {
+            "DayProgramDetails": [],
+            "ShiftScheduleID": 2,
+            "ShiftScheduleCD": "Siang",
+            "StartTime": "12:00:00",
+            "EndTime": "17:00:00"
+          },
+          "DPLineID": 2,
+          "InstitutionID": 1,
+          "DPID": 1,
+          "StartTime": "2017-01-01T13:00:00",
+          "EndTime": "2017-01-01T15:00:00",
+          "ShiftScheduleID": 2
+        }
+      ],
+      "DPID": 1,
+      "InstitutionID": 1,
+      "Name": "DP1"
+    },
+    "TuesdayDPID": {
+      "DayProgramDetail": [],
+      "DPID": 2,
+      "InstitutionID": 2,
+      "Name": "DP2"
+    },
+    "WednesdayDPID": {
+      "DayProgramDetail": [
+        {
+          "ShiftSchedule": {
+            "DayProgramDetails": [],
+            "ShiftScheduleID": 1,
+            "ShiftScheduleCD": "Pagi",
+            "StartTime": "08:00:00",
+            "EndTime": "12:00:00"
+          },
+          "DPLineID": 1,
+          "InstitutionID": 1,
+          "DPID": 1,
+          "StartTime": "2017-01-01T08:00:00",
+          "EndTime": "2017-01-01T11:00:00",
+          "ShiftScheduleID": 1
+        },
+        {
+          "ShiftSchedule": {
+            "DayProgramDetails": [],
+            "ShiftScheduleID": 2,
+            "ShiftScheduleCD": "Siang",
+            "StartTime": "12:00:00",
+            "EndTime": "17:00:00"
+          },
+          "DPLineID": 2,
+          "InstitutionID": 1,
+          "DPID": 1,
+          "StartTime": "2017-01-01T13:00:00",
+          "EndTime": "2017-01-01T15:00:00",
+          "ShiftScheduleID": 2
+        }
+      ],
+      "DPID": 1,
+      "InstitutionID": 1,
+      "Name": "DP1"
+    },
+    "ThursdayDPID": {
+      "DayProgramDetail": [],
+      "DPID": 2,
+      "InstitutionID": 2,
+      "Name": "DP2"
+    },
+    "FridayDPID": {
+      "DayProgramDetail": [
+        {
+          "ShiftSchedule": {
+            "DayProgramDetails": [],
+            "ShiftScheduleID": 1,
+            "ShiftScheduleCD": "Pagi",
+            "StartTime": "08:00:00",
+            "EndTime": "12:00:00"
+          },
+          "DPLineID": 1,
+          "InstitutionID": 1,
+          "DPID": 1,
+          "StartTime": "2017-01-01T08:00:00",
+          "EndTime": "2017-01-01T11:00:00",
+          "ShiftScheduleID": 1
+        },
+        {
+          "ShiftSchedule": {
+            "DayProgramDetails": [],
+            "ShiftScheduleID": 2,
+            "ShiftScheduleCD": "Siang",
+            "StartTime": "12:00:00",
+            "EndTime": "17:00:00"
+          },
+          "DPLineID": 2,
+          "InstitutionID": 1,
+          "DPID": 1,
+          "StartTime": "2017-01-01T13:00:00",
+          "EndTime": "2017-01-01T15:00:00",
+          "ShiftScheduleID": 2
+        }
+      ],
+      "DPID": 1,
+      "InstitutionID": 1,
+      "Name": "DP1"
+    },
+    "SaturdayDPID": null,
+    "SundayDPID": null,
+    "WPID": 1,
+    "InstitutionID": 1,
+    "name": "WP1"
+  },
+  {
+    "Sequence": "Minggu 3",
+    "MondayDPID": {
+      "DayProgramDetail": [
+        {
+          "ShiftSchedule": {
+            "DayProgramDetails": [],
+            "ShiftScheduleID": 1,
+            "ShiftScheduleCD": "Pagi",
+            "StartTime": "08:00:00",
+            "EndTime": "12:00:00"
+          },
+          "DPLineID": 1,
+          "InstitutionID": 1,
+          "DPID": 1,
+          "StartTime": "2017-01-01T08:00:00",
+          "EndTime": "2017-01-01T11:00:00",
+          "ShiftScheduleID": 1
+        },
+        {
+          "ShiftSchedule": {
+            "DayProgramDetails": [],
+            "ShiftScheduleID": 2,
+            "ShiftScheduleCD": "Siang",
+            "StartTime": "12:00:00",
+            "EndTime": "17:00:00"
+          },
+          "DPLineID": 2,
+          "InstitutionID": 1,
+          "DPID": 1,
+          "StartTime": "2017-01-01T13:00:00",
+          "EndTime": "2017-01-01T15:00:00",
+          "ShiftScheduleID": 2
+        }
+      ],
+      "DPID": 1,
+      "InstitutionID": 1,
+      "Name": "DP1"
+    },
+    "TuesdayDPID": {
+      "DayProgramDetail": [],
+      "DPID": 2,
+      "InstitutionID": 2,
+      "Name": "DP2"
+    },
+    "WednesdayDPID": {
+      "DayProgramDetail": [
+        {
+          "ShiftSchedule": {
+            "DayProgramDetails": [],
+            "ShiftScheduleID": 1,
+            "ShiftScheduleCD": "Pagi",
+            "StartTime": "08:00:00",
+            "EndTime": "12:00:00"
+          },
+          "DPLineID": 1,
+          "InstitutionID": 1,
+          "DPID": 1,
+          "StartTime": "2017-01-01T08:00:00",
+          "EndTime": "2017-01-01T11:00:00",
+          "ShiftScheduleID": 1
+        },
+        {
+          "ShiftSchedule": {
+            "DayProgramDetails": [],
+            "ShiftScheduleID": 2,
+            "ShiftScheduleCD": "Siang",
+            "StartTime": "12:00:00",
+            "EndTime": "17:00:00"
+          },
+          "DPLineID": 2,
+          "InstitutionID": 1,
+          "DPID": 1,
+          "StartTime": "2017-01-01T13:00:00",
+          "EndTime": "2017-01-01T15:00:00",
+          "ShiftScheduleID": 2
+        }
+      ],
+      "DPID": 1,
+      "InstitutionID": 1,
+      "Name": "DP1"
+    },
+    "ThursdayDPID": {
+      "DayProgramDetail": [],
+      "DPID": 2,
+      "InstitutionID": 2,
+      "Name": "DP2"
+    },
+    "FridayDPID": {
+      "DayProgramDetail": [
+        {
+          "ShiftSchedule": {
+            "DayProgramDetails": [],
+            "ShiftScheduleID": 1,
+            "ShiftScheduleCD": "Pagi",
+            "StartTime": "08:00:00",
+            "EndTime": "12:00:00"
+          },
+          "DPLineID": 1,
+          "InstitutionID": 1,
+          "DPID": 1,
+          "StartTime": "2017-01-01T08:00:00",
+          "EndTime": "2017-01-01T11:00:00",
+          "ShiftScheduleID": 1
+        },
+        {
+          "ShiftSchedule": {
+            "DayProgramDetails": [],
+            "ShiftScheduleID": 2,
+            "ShiftScheduleCD": "Siang",
+            "StartTime": "12:00:00",
+            "EndTime": "17:00:00"
+          },
+          "DPLineID": 2,
+          "InstitutionID": 1,
+          "DPID": 1,
+          "StartTime": "2017-01-01T13:00:00",
+          "EndTime": "2017-01-01T15:00:00",
+          "ShiftScheduleID": 2
+        }
+      ],
+      "DPID": 1,
+      "InstitutionID": 1,
+      "Name": "DP1"
+    },
+    "SaturdayDPID": null,
+    "SundayDPID": null,
+    "WPID": 1,
+    "InstitutionID": 1,
+    "name": "WP1"
+  }
+]
