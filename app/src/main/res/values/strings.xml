@@ -52,6 +52,8 @@ MENGGUNAKAN LAYANAN KAMI UNTUK PERTAMA KALI.</string>
     <string name="error_invalid_password">This password is too short</string>
     <string name="error_incorrect_password">This password is incorrect</string>
     <string name="error_field_required">This field is required</string>
+    <string name="errro_firstname_ivalid">Nama depan minimal 2 huruf!</string>
+    <string name="errro_lastname_ivalid">Nama belakang minimal 3 huruf!</string>
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>

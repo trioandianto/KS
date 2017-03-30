@@ -112,7 +112,7 @@ public class HospitalList extends AppCompatActivity {
                     Bundle b = new Bundle();
                     //.putExtra("userID",userID);
                     b.putString("userID", "2");
-                    b.putString("tol","RS CIBINGONG BOGOR");//Your id
+                    b.putString("tol","RS CIBINONG BOGOR");//Your id
                     //.putExtra("userID",userID);
                     myIntent.putExtras(b);
                     startActivityForResult(myIntent, 0);

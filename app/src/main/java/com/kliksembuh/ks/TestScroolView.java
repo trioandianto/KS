@@ -2,6 +2,7 @@ package com.kliksembuh.ks;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -86,7 +87,6 @@ public class TestScroolView extends ActionBarActivity implements OnMapReadyCallb
         }
 
         setContentView(R.layout.activity_test_scrool_view);
-
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -97,7 +97,7 @@ public class TestScroolView extends ActionBarActivity implements OnMapReadyCallb
         mDokterList = new ArrayList<>();
         list = new ArrayList<String>();
         lvDokter = (ListView)findViewById(R.id.lvDetailRumahSakit);
-        lvDokter.setNestedScrollingEnabled(true);
+        //lvDokter.setNestedScrollingEnabled(true);
         spinner = (Spinner)findViewById(R.id.dplistdokter);
         ArrayAdapter<String>adapter = new ArrayAdapter<String>(TestScroolView.this,
                 android.R.layout.simple_spinner_item,paths);
@@ -134,9 +134,159 @@ public class TestScroolView extends ActionBarActivity implements OnMapReadyCallb
         //toolbar.addView(spinner);
 
         new GetContacts().execute();
+        lvDokter.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
+                if(toolbarTitle=="RS PMI BOGOR"){
+                    if(position==0){
+                        Intent myIntent = new Intent(getApplicationContext(),BookingActivity.class);
+                        //Your id
+                        Bundle b = new Bundle();
+                        b.putString("dokterid", "1");
+                        b.putString("rs", "1");
+                        myIntent.putExtras(b);
+                        startActivityForResult(myIntent, 0);
 
+                    }
+                    else if(position==1){
+                        Intent myIntent = new Intent(getApplicationContext(),BookingActivity.class);
+                        //Your id
+                        Bundle b = new Bundle();
+                        b.putString("dokterid", "2");
+                        b.putString("rs", "1");
+                        myIntent.putExtras(b);
+                        startActivityForResult(myIntent, 0);
 
+                    }
+                    else {
+                        Intent myIntent = new Intent(getApplicationContext(),BookingActivity.class);
+                        //Your id
+                        Bundle b = new Bundle();
+                        b.putString("dokterid", "4");
+                        b.putString("rs", "1");
+                        //.putExtra("userID",userID);
+                        myIntent.putExtras(b);
+                        startActivityForResult(myIntent, 0);
+
+                    }
+                }
+                else if(toolbarTitle=="RS CIBINGONG BOGOR"){
+                    if(position==0){
+                        Intent myIntent = new Intent(getApplicationContext(),BookingActivity.class);
+                        //Your id
+                        Bundle b = new Bundle();
+                        b.putString("dokterid", "6");
+                        b.putString("rs", "2");
+                        myIntent.putExtras(b);
+                        startActivityForResult(myIntent, 0);
+
+                    }
+                    else if(position==1){
+                        Intent myIntent = new Intent(getApplicationContext(),BookingActivity.class);
+                        //Your id
+                        Bundle b = new Bundle();
+                        b.putString("dokterid", "7");
+                        b.putString("rs", "2");
+                        myIntent.putExtras(b);
+                        startActivityForResult(myIntent, 0);
+
+                    }
+                    else {
+                        Intent myIntent = new Intent(getApplicationContext(),BookingActivity.class);
+                        //Your id
+                        Bundle b = new Bundle();
+                        b.putString("dokterid", "9");
+                        b.putString("rs", "3");
+                        //.putExtra("userID",userID);
+                        myIntent.putExtras(b);
+                        startActivityForResult(myIntent, 0);
+
+                    }
+
+                }
+                else if(toolbarTitle=="RS BOGOR MEDICA CENTRE"){
+                    if(position==0){
+                        Intent myIntent = new Intent(getApplicationContext(),BookingActivity.class);
+                        //Your id
+                        Bundle b = new Bundle();
+                        b.putString("dokterid", "3");
+                        b.putString("rs", "3");
+                        myIntent.putExtras(b);
+                        startActivityForResult(myIntent, 0);
+
+                    }
+                    else if(position==1){
+                        Intent myIntent = new Intent(getApplicationContext(),BookingActivity.class);
+                        //Your id
+                        Bundle b = new Bundle();
+                        b.putString("dokterid", "5");
+                        b.putString("rs", "3");
+                        myIntent.putExtras(b);
+                        startActivityForResult(myIntent, 0);
+
+                    }
+                    else if (position==2) {
+                        Intent myIntent = new Intent(getApplicationContext(),BookingActivity.class);
+                        //Your id
+                        Bundle b = new Bundle();
+                        b.putString("dokterid", "8");
+                        b.putString("rs", "3");
+                        //.putExtra("userID",userID);
+                        myIntent.putExtras(b);
+                        startActivityForResult(myIntent, 0);
+
+                    }
+                    else {
+                        Intent myIntent = new Intent(getApplicationContext(),BookingActivity.class);
+                        //Your id
+                        Bundle b = new Bundle();
+                        b.putString("dokterid", "10");
+                        b.putString("rs", "3");
+                        //.putExtra("userID",userID);
+                        myIntent.putExtras(b);
+                        startActivityForResult(myIntent, 0);
+
+                    }
+
+                }
+                else {
+                    if(position==0){
+                        Intent myIntent = new Intent(getApplicationContext(),BookingActivity.class);
+                        //Your id
+                        Bundle b = new Bundle();
+                        b.putString("dokterid", "1");
+                        b.putString("rs", "1");
+                        myIntent.putExtras(b);
+                        startActivityForResult(myIntent, 0);
+
+                    }
+                    else if(position==1){
+                        Intent myIntent = new Intent(getApplicationContext(),BookingActivity.class);
+                        //Your id
+                        Bundle b = new Bundle();
+                        b.putString("dokterid", "2");
+                        b.putString("rs", "1");
+                        myIntent.putExtras(b);
+                        startActivityForResult(myIntent, 0);
+
+                    }
+                    else {
+                        Intent myIntent = new Intent(getApplicationContext(),BookingActivity.class);
+                        //Your id
+                        Bundle b = new Bundle();
+                        b.putString("dokterid", "4");
+                        b.putString("rs", "1");
+                        //.putExtra("userID",userID);
+                        myIntent.putExtras(b);
+                        startActivityForResult(myIntent, 0);
+
+                    }
+
+                }
+
+            }
+        });
 
 
     }
