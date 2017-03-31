@@ -102,8 +102,7 @@
                 android:textColor="#000000" />
 
             <Spinner
-                android:id="@+id/btnSenin"
-                style="@style/MyCustomTextAppearance"
+                android:id="@+id/spnHari"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignBaseline="@id/tvText"
@@ -113,7 +112,6 @@
                 android:textColor="@color/white"
                 android:textStyle="bold"
                 android:popupBackground="#f7f7f7"
-                android:theme="@style/ThemeOverlay.AppCompat.Light"
                 android:spinnerMode="dropdown"/>
 
         </LinearLayout>
@@ -165,6 +163,7 @@
             <ListView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="10dp"
                 android:id="@+id/lvjadwal">
 
             </ListView>

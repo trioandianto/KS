@@ -1,10 +1,7 @@
 package com.kliksembuh.ks;
 
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.drawable.Drawable;
-import android.icu.util.Calendar;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
@@ -13,7 +10,15 @@ import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
+
+import com.kliksembuh.ks.library.JadwalDokterAdapter;
+import com.kliksembuh.ks.models.JadwalDokter;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -26,15 +31,33 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.sql.Date;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Iterator;
+import java.util.List;
 
 import javax.net.ssl.HttpsURLConnection;
 
 public class BookingActivity extends AppCompatActivity {
     private TextView jadwal;
-    private String mPersonalID;
-    private int mYear;
-    private String mWeek;
+    private String personalID;
+    private String year;
+    private String week="1";
+    private List<JadwalDokter> mJadwalDokterList;
+    private JadwalDokterAdapter jAdapter;
+    private ListView lvJadwal;
+    private Button btnMingguIni;
+    private Button btnMingguDepan;
+    private Spinner spnHari;
+    private String sequence="minggu 1";
+
+    private int cDay;
+    private int cMonth;
+    private int cYear;
+    private int day;
+    private int lastDay;
+    private Date tanggal;
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
@@ -44,111 +67,81 @@ public class BookingActivity extends AppCompatActivity {
 
         Bundle b = getIntent().getExtras();
         if(b != null) {
-            mPersonalID = b.getString("userID");
+            personalID = b.getString("userID");
         }
+        lvJadwal = (ListView)findViewById(R.id.lvjadwal);
+        mJadwalDokterList = new ArrayList<>();
+        spnHari = (Spinner)findViewById(R.id.spnHari);
+        List<String> list = new ArrayList<String>();
+        list.add("Minggu");
+        list.add("Senin");
+        list.add("Selasa");
+        list.add("Rabu");
+        list.add("Kamis");
+        list.add("Jumat");
+        list.add("Sabtu");
 
-        jadwal =(TextView)findViewById(R.id.tvjadwal);
-        mWeek = "1";
+        ArrayAdapter arrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,list);
+        spnHari.setAdapter(arrayAdapter);
+
+
 
         Calendar calendar = Calendar.getInstance();
-        mYear = calendar.get(Calendar.YEAR);
+        cDay = calendar.get(Calendar.DAY_OF_MONTH);
+        cMonth = calendar.get(Calendar.MONTH);
+        cYear = calendar.get(Calendar.YEAR);
+        day = calendar.get(Calendar.DAY_OF_WEEK);
+        lastDay = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
+        tanggal = new Date(cYear,cMonth,cDay);
 
-        new JadwalDokterAsync(mPersonalID,mYear,mWeek).execute();
-
-        jadwal.setOnClickListener(new View.OnClickListener() {
+        personalID="MD0001";
+        year = Integer.toString(cYear);
+        spnHari.setSelection(day-1);
+        spnHari.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onClick(View view) {
-                jadwal.setBackgroundColor(Color.LTGRAY);
-                Intent myIntent = new Intent(view.getContext(), KonfirmasiJanjiActivity.class);
-                startActivityForResult(myIntent, 0);
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                mJadwalDokterList = new ArrayList<>();
+                day = position+1;
+                new JadwalDokterAsync(personalID, year, week).execute();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
             }
         });
 
 
+//        new JadwalDokterAsync(personalID, year, week).execute();
+        btnMingguIni = (Button)findViewById(R.id.btnMingguIni);
+        btnMingguIni.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mJadwalDokterList = new ArrayList<>();
+                sequence = "minggu 1";
+                new JadwalDokterAsync(personalID, year, week).execute();
 
+            }
+        });
+        btnMingguDepan = (Button)findViewById(R.id.btnMingguDepan);
+        btnMingguDepan.setOnClickListener(new Button.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                mJadwalDokterList = new ArrayList<>();
+                sequence = "minggu 2";
+                new JadwalDokterAsync(personalID, year, week).execute();
+            }
+        });
 
         //  http://basajans/kliksembuhapi/api/Schedules/GetWeeklySchedule?personnelId=MD0001&year=2017&startweek=1
 
 
     }
-
-//    private class GetContacts extends AsyncTask<Void, Void, Void> {
-//        private Context context;
-//
-//        @Override
-//        protected void onPreExecute() {
-//            super.onPreExecute();
-//            // Showing progress dialog
-//            pDialog = new ProgressDialog(HospitalList.this);
-//            pDialog.setMessage("Please wait...");
-//            pDialog.setCancelable(false);
-//            pDialog.show();
-//        }
-//
-//        @Override
-//        protected Void doInBackground(Void... args0) {
-//            HttpHandler sh = new HttpHandler();
-//
-//            // Making a request to url and getting response
-//            try{
-//                JSONObject obj = new JSONObject(loadJSONFromAsset());
-//
-//                // Getting JSON Array node
-//                JSONArray contacts = obj.getJSONArray("hospital");
-//
-//                // looping through All Contacts
-//                for (int i = 0; i < contacts.length(); i++) {
-//                    JSONObject c = contacts.getJSONObject(i);
-//
-//
-//                    String name = c.getString("name");
-//                    String id = c.getString("id");
-//                    String image = c.getString("imgUrl1");
-//                    Drawable image1 = LoadImageFromWebOperations(image);
-//                    String alamat = c.getString("Alamat");
-//
-//
-//
-//
-////                        da =new ArrayList<>();
-////                        da.add( name );
-////                        da.add( code );
-//
-//
-//                    // Phone node is JSON Object
-////                    JSONObject phone = c.getJSONObject("phone");
-////                    String mobile = phone.getString("mobile");
-////                    String home = phone.getString("home");
-////                    String office = phone.getString("office");
-//
-//                    // tmp hash map for single contact
-//                    HashMap<String, String> contact = new HashMap<>();
-//                    jadwal.add(new Hospital(Integer.parseInt(id), image1, name, alamat));
-//
-//
-//                }
-//            } catch (JSONException e) {
-//                e.printStackTrace();
-//            }
-//            return null;
-//        }
-//
-//        @Override
-//        protected void onPostExecute(Void result) {
-//            super.onPostExecute(result);
-//            if (pDialog.isShowing())
-//                pDialog.dismiss();
-//            hAdapter = new HospitalListAdapter(getApplicationContext(), mHospitalList);
-////            hAdapter.getFilter().filter(searchView);
-//
-//            lvHospital.setAdapter(hAdapter);
-//        }
-//    }
     public class JadwalDokterAsync extends AsyncTask<String, Void, String> {
         private String mPersonilID;
-        private int mYear;
+        private String mYear;
         private String mWeek;
-        JadwalDokterAsync(String personilID, int year, String week) {
+        JadwalDokterAsync(String personilID, String year, String week) {
             mPersonilID = personilID;
             mYear = year;
             mWeek=week;
@@ -179,9 +172,99 @@ public class BookingActivity extends AppCompatActivity {
                         }
                         in.close();
                         JSONArray jsonArray = new JSONArray(sb.toString());
+                        int length  = jsonArray.length();
 
                         for (int i = 0; i < jsonArray.length(); i++) {
+
                             JSONObject jsonObject = jsonArray.getJSONObject(i);
+                            if(jsonObject.getString("Sequence").equals(sequence)){
+                                if(day ==1 ){
+                                    JSONObject sunday = (JSONObject) jsonObject.get("SundayDPID");
+                                    JSONArray detailArray = sunday.getJSONArray("DayProgramDetail");
+                                    for (int j=0;j<detailArray.length();j++){
+                                        JSONObject c = detailArray.getJSONObject(j);
+                                        String starDate = c.getString("StartTime");
+                                        String endDate = c.getString("EndTime");
+                                        String date = starDate+" - "+endDate;
+                                        mJadwalDokterList.add(new JadwalDokter(date));
+                                    }
+
+
+                                }
+                                else if(day==2){
+                                    JSONObject monday = (JSONObject) jsonObject.get("MondayDPID");
+                                    JSONArray detailArray = monday.getJSONArray("DayProgramDetail");
+                                    for (int j=0;j<detailArray.length();j++){
+                                        JSONObject c = detailArray.getJSONObject(j);
+                                        String starDate = c.getString("StartTime");
+                                        String endDate = c.getString("EndTime");
+                                        String date = starDate+" - "+endDate;
+                                        mJadwalDokterList.add(new JadwalDokter(date));
+                                    }
+                                }
+
+                                else if (day ==3 ){
+                                    JSONObject tuesday = (JSONObject) jsonObject.get("TuesdayDPID");
+                                    JSONArray detailArray = tuesday.getJSONArray("DayProgramDetail");
+                                    for (int j=0;j<detailArray.length();j++){
+                                        JSONObject c = detailArray.getJSONObject(j);
+                                        String starDate = c.getString("StartTime");
+                                        String endDate = c.getString("EndTime");
+                                        String date = starDate+" - "+endDate;
+                                        mJadwalDokterList.add(new JadwalDokter(date));
+                                    }
+
+                                }
+                                else if(day ==4 ){
+                                    JSONObject wednesday = (JSONObject) jsonObject.get("WednesdayDPID");
+                                    JSONArray detailArray = wednesday.getJSONArray("DayProgramDetail");
+                                    for (int j=0;j<detailArray.length();j++){
+                                        JSONObject c = detailArray.getJSONObject(j);
+                                        String starDate = c.getString("StartTime");
+                                        String endDate = c.getString("EndTime");
+                                        String date = starDate+" - "+endDate;
+                                        mJadwalDokterList.add(new JadwalDokter(date));
+                                    }
+
+                                }
+                                else if(day ==5 ){
+                                    JSONObject thursday = (JSONObject) jsonObject.get("ThursdayDPID");
+                                    JSONArray detailArray = thursday.getJSONArray("DayProgramDetail");
+                                    for (int j=0;j<detailArray.length();j++){
+                                        JSONObject c = detailArray.getJSONObject(j);
+                                        String starDate = c.getString("StartTime");
+                                        String endDate = c.getString("EndTime");
+                                        String date = starDate+" - "+endDate;
+                                        mJadwalDokterList.add(new JadwalDokter(date));
+                                    }
+
+                                }
+                                else if(day ==6 ){
+                                    JSONObject friday = (JSONObject) jsonObject.get("FridayDPID");
+                                    JSONArray detailArray = friday.getJSONArray("DayProgramDetail");
+                                    for (int j=0;j<detailArray.length();j++){
+                                        JSONObject c = detailArray.getJSONObject(j);
+                                        String starDate = c.getString("StartTime");
+                                        String endDate = c.getString("EndTime");
+                                        String date = starDate+" - "+endDate;
+                                        mJadwalDokterList.add(new JadwalDokter(date));
+                                    }
+
+                                }
+                                else{
+                                    JSONObject saturday = (JSONObject) jsonObject.get("SaturdayDPID");
+                                    JSONArray detailArray = saturday.getJSONArray("DayProgramDetail");
+                                    for (int j=0;j<detailArray.length();j++){
+                                        JSONObject c = detailArray.getJSONObject(j);
+                                        String starDate = c.getString("StartTime");
+                                        String endDate = c.getString("EndTime");
+                                        String date = starDate+" - "+endDate;
+                                        mJadwalDokterList.add(new JadwalDokter(date));
+                                    }
+
+                                }
+
+                            }
                         }
 
                         return sb.toString();
@@ -235,8 +318,14 @@ public class BookingActivity extends AppCompatActivity {
         protected void onPostExecute(final String success) {
 
             if (success!="") {
+
+                jAdapter = new JadwalDokterAdapter(getApplicationContext(),mJadwalDokterList);
+                lvJadwal.setAdapter(jAdapter);
             } else {
                 //:TODO
+                mJadwalDokterList = new ArrayList<>();
+                jAdapter = new JadwalDokterAdapter(getApplicationContext(),mJadwalDokterList);
+                lvJadwal.setAdapter(jAdapter);
             }
         }
         @Override
