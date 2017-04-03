@@ -37,25 +37,13 @@
         android:textColor="@color/blue_a400"
         android:textSize="18sp" />
 
-    <RatingBar
-        android:id="@+id/ratingBar_list"
-        style="@style/CustomRatingBar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tv_list_drname"
-        android:layout_marginLeft="10dp"
-        android:layout_toEndOf="@+id/iv_doc_pic_list"
-        android:layout_toRightOf="@+id/iv_doc_pic_list"
-        android:isIndicator="true"
-        android:numStars="5"
-        android:rating="3.5"
-        android:stepSize="0.5" />
 
     <TextView
         android:id="@+id/tv_specialty_list"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/ratingBar_list"
+        android:layout_below="@+id/tv_list_drname"
+        android:layout_marginTop="5dp"
         android:layout_marginLeft="10dp"
         android:layout_toEndOf="@+id/iv_doc_pic_list"
         android:layout_toRightOf="@+id/iv_doc_pic_list"

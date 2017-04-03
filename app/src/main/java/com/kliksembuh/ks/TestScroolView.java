@@ -122,7 +122,7 @@ public class TestScroolView extends ActionBarActivity implements OnMapReadyCallb
                 startActivityForResult(myIntent, 0);
             }
         });
-        //lvDokter.setNestedScrollingEnabled(true);
+        lvDokter.setNestedScrollingEnabled(true);
         spinner = (Spinner)findViewById(R.id.dplistdokter);
         ArrayAdapter<String>adapter = new ArrayAdapter<String>(TestScroolView.this,
                 android.R.layout.simple_spinner_item,paths);
