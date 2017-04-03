@@ -239,9 +239,8 @@ public class VerifikasiActivity extends AppCompatActivity {
             activeCode.setError(null);
             mAuthTask = null;
             if (success!="") {
-                JSONObject jsonObj = null;
                 try {
-                    jsonObj = new JSONObject(success);
+                    JSONObject jsonObj = new JSONObject(success);
                     String userID = jsonObj.getString("Id");
 
                     Intent i = new Intent(getApplicationContext(), HomeActivity.class);

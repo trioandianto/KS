@@ -9,11 +9,9 @@ import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.SearchView;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.RatingBar;
 
@@ -48,9 +46,6 @@ public class HospitalList extends AppCompatActivity {
     private List<Hospital> mHospitalList;
     private Button btnpeta;
     private ProgressDialog pDialog;
-    private ListAdapter adapter;
-    ArrayList<HashMap<String, String>> formList;
-    private SearchView searchView;
     private String [] rumahSakitID;
     private String [] nameRumahSakit;
     private String subDistrict;
@@ -95,7 +90,7 @@ public class HospitalList extends AppCompatActivity {
 //        mHospitalList.add(new Hospital(5, R.drawable.rs_pmi_bogor, "RS Medika Darmaga", "Kota Bogor, Jawa Barat 16680"));
 //        mHospitalList.add(new Hospital(3, R.drawable.rs_pmi_bogor, "RS Bogor Medical Centre", "Kota Bogor, Jawa Barat 16143"));
 
-            lvHospital.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+        lvHospital.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
