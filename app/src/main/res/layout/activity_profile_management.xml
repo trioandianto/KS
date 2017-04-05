@@ -10,107 +10,170 @@
         android:layout_width="match_parent"
         android:gravity="center"
         android:id="@+id/relativeLayout"
-        android:background="@color/light_grey"
-        android:layout_height="220dp">
+        android:background="@drawable/welcome3"
+        android:layout_height="140dp">
         <de.hdodenhof.circleimageview.CircleImageView
             xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            app:border_width="1dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            app:border_width="2dp"
+            android:src="@mipmap/profile_picture"
             android:id="@+id/profile_image"
-            app:border_color="#FF000000"
+            app:border_color="#FFFFFF"
             android:layout_gravity="center">
         </de.hdodenhof.circleimageview.CircleImageView>
 
         <ImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="70dp"
+            android:gravity="bottom"
+            android:alpha="0.8"
             android:id="@+id/cameraupload"
-            android:src="@drawable/camera"
-            android:layout_alignParentBottom="true"
-            android:layout_alignEnd="@+id/profile_image" />
+            android:layout_toRightOf="@+id/profile_image"
+            android:src="@drawable/camera"/>
 
     </RelativeLayout>
 
+
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_margin="10dp"
         android:orientation="vertical"
         android:id="@+id/relativeLayout2"
         android:background="@color/white"
         android:layout_height="wrap_content"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
         android:paddingLeft="10dp"
         android:layout_below="@+id/relativeLayout"
         android:layout_alignParentStart="true">
 
         <TextView
             android:layout_width="wrap_content"
-            android:textStyle="bold"
-            android:typeface="monospace"
-            android:textSize="18dp"
-            android:textColor="@color/blue"
-            android:id="@+id/tvEditProfileManagement"
+            android:id="@+id/lblFName"
             android:layout_height="wrap_content"
-            android:text="Edit"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true" />
+            android:text="Nama Depan"/>
         <TextView
             android:layout_width="wrap_content"
-            android:textStyle="bold"
-            android:typeface="monospace"
-            android:id="@+id/tvNameProfileManagement"
-            android:layout_below="@+id/tvEditProfileManagement"
+            android:textColor="@color/cardview_dark_background"
             android:layout_height="wrap_content"
-            android:text="Annisa Mutiara"/>
+            android:layout_marginTop="2dp"
+            android:id="@+id/tvFName"
+            android:layout_below="@+id/lblFName"
+            android:textSize="20sp"
+            android:text="Annisa"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginRight="210dp"
+            android:layout_centerVertical="true"
+            android:layout_below="@id/tvFName"
+            android:background="@color/colorPrimaryDark"
+            />
         <TextView
             android:layout_width="wrap_content"
-            android:textStyle="bold"
-            android:typeface="monospace"
+            android:id="@+id/lblLName"
             android:layout_height="wrap_content"
-            android:id="@+id/tvEmailProfileManagement"
-            android:layout_below="@+id/tvNameProfileManagement"
-            android:text="annisamutiara@gmail.com"/>
+            android:layout_toRightOf="@+id/lblFName"
+            android:layout_marginLeft="102dp"
+            android:text="Nama Belakang"
+            android:layout_alignParentEnd="true"/>
         <TextView
             android:layout_width="wrap_content"
-            android:textStyle="bold"
-            android:typeface="monospace"
-            android:id="@+id/tvnopeProfileManagement"
-            android:layout_below="@+id/tvEmailProfileManagement"
+            android:layout_marginTop="2dp"
+            android:textColor="@color/cardview_dark_background"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:text="081801020304"/>
+            android:id="@+id/tvLName"
+            android:layout_toRightOf="@+id/tvFName"
+            android:layout_below="@+id/lblLName"
+            android:layout_marginLeft="120dp"
+            android:textSize="20sp"
+            android:text="Mutiara"
+            android:layout_alignParentEnd="true"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="180dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="2dp"
+            android:layout_centerVertical="true"
+            android:layout_below="@id/tvLName"
+            android:background="@color/colorPrimaryDark"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:id="@+id/lblEmail"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_below="@id/tvFName"
+            android:text="Email"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:textColor="@color/cardview_dark_background"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:id="@+id/tvEditEmail"
+            android:layout_below="@+id/lblEmail"
+            android:textSize="20sp"
+            android:text="wicahyanimutiara@gmail.com"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginRight="10dp"
+            android:layout_centerVertical="true"
+            android:layout_below="@id/tvEditEmail"
+            android:background="@color/colorPrimaryDark"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:id="@+id/lblMobile"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_below="@id/tvEditEmail"
+            android:text="Mobile"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:textColor="@color/cardview_dark_background"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:id="@+id/tvEditMobile"
+            android:layout_below="@+id/lblMobile"
+            android:textSize="20sp"
+            android:text="081318180994"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginRight="10dp"
+            android:layout_centerVertical="true"
+            android:layout_below="@id/tvEditMobile"
+            android:background="@color/colorPrimaryDark"
+            />
 
 
     </RelativeLayout>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:id="@+id/relativeLayout3"
-        android:layout_marginRight="10dp"
         android:paddingLeft="10dp"
-        android:layout_marginLeft="10dp"
         android:background="@color/white"
         android:layout_height="wrap_content"
         android:layout_below="@+id/relativeLayout2"
         android:layout_alignParentStart="true">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:textStyle="bold"
-            android:textColor="@color/blue"
-            android:typeface="monospace"
-            android:layout_height="wrap_content"
-            android:text="Ganti Password"
-            android:layout_centerVertical="true"
-            android:layout_alignParentStart="true"
-            android:id="@+id/tvgantipassword" />
     </RelativeLayout>
     <RelativeLayout
         android:layout_width="match_parent"
         android:id="@+id/relativeLayout4"
-        android:layout_margin="10dp"
+        android:layout_marginTop="10dp"
         android:paddingLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginLeft="10dp"
         android:background="@color/white"
         android:layout_height="wrap_content"
         android:layout_below="@+id/relativeLayout3"

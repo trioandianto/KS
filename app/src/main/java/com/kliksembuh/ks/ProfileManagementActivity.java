@@ -40,6 +40,10 @@ public class ProfileManagementActivity extends AppCompatActivity{
     private ImageView imageView;
     private ImageView imageClick;
     private TextView editDataDiri;
+    private TextView editFname;
+    private TextView editLname;
+    private TextView editEmail;
+    private TextView editMobile;
     private TextView editVitalSign;
     private TextView gantiPassword;
     private AutoCompleteTextView namadepan;
@@ -63,56 +67,61 @@ public class ProfileManagementActivity extends AppCompatActivity{
 
         imageView = (ImageView)findViewById(R.id.profile_image);
         imageClick = (ImageView)findViewById(R.id.cameraupload);
-        editDataDiri = (TextView)findViewById(R.id.tvEditProfileManagement);
-        editVitalSign =(TextView)findViewById(R.id.tvEditVitalSignProfileManagement);
-        gantiPassword = (TextView)findViewById(R.id.tvgantipassword);
+        //editDataDiri = (TextView)findViewById(R.id.tvEditProfileManagement);
+        editFname = (TextView)findViewById(R.id.tvFName);
+        editLname = (TextView)findViewById(R.id.tvLName);
+        editEmail = (TextView)findViewById(R.id.tvEditEmail);
+        editMobile = (TextView)findViewById(R.id.tvEditMobile);
+        //editVitalSign =(TextView)findViewById(R.id.tvEditVitalSignProfileManagement);
+        //gantiPassword = (TextView)findViewById(R.id.tvgantipassword);
 
-        editDataDiri.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final AlertDialog.Builder mBuilder = new AlertDialog.Builder(ProfileManagementActivity.this);
-                View mView = getLayoutInflater().inflate(R.layout.profile_data_diri,null);
-                datadiri = (TextView) mView.findViewById(R.id.tvdatadiri);
-                email = (AutoCompleteTextView)mView.findViewById(R.id.tvemail);
-                namadepan = (AutoCompleteTextView) mView.findViewById(R.id.tvnamadepan);
-                namabelakang = (AutoCompleteTextView) mView.findViewById(R.id.tvnamabelakang);
-                nohp = (AutoCompleteTextView) mView.findViewById(R.id.tvnohp);
-                mBuilder.setView(mView);
-                final AlertDialog dialog = mBuilder.create();
-                dialog.show();
+//        editDataDiri.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                final AlertDialog.Builder mBuilder = new AlertDialog.Builder(ProfileManagementActivity.this);
+//                View mView = getLayoutInflater().inflate(R.layout.profile_data_diri,null);
+//                datadiri = (TextView) mView.findViewById(R.id.tvdatadiri);
+//                email = (AutoCompleteTextView)mView.findViewById(R.id.tvemail);
+//                namadepan = (AutoCompleteTextView) mView.findViewById(R.id.tvnamadepan);
+//                namabelakang = (AutoCompleteTextView) mView.findViewById(R.id.tvnamabelakang);
+//                nohp = (AutoCompleteTextView) mView.findViewById(R.id.tvnohp);
+//                mBuilder.setView(mView);
+//                final AlertDialog dialog = mBuilder.create();
+//                dialog.show();
+//
+//                Button simpan = (Button) mView.findViewById(R.id.btnsimpandatadiri);
+//                simpan.setOnClickListener(new View.OnClickListener(){
+//                    @Override
+//                    public void onClick(View v) {
+//                        dialog.dismiss();
+//                    }
+//                });
+//            }
+//        });
+//        editVitalSign.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                AlertDialog.Builder mBuilder = new AlertDialog.Builder(ProfileManagementActivity.this);
+//                View mView = getLayoutInflater().inflate(R.layout.profile_vital_sign,null);
+//                vitalsign = (TextView) mView.findViewById(R.id.tvvitalsign);
+//                suhuTubuh = (AutoCompleteTextView) mView.findViewById(R.id.tvsuhu);
+//                denyutNadi = (AutoCompleteTextView) mView.findViewById(R.id.tvnadi);
+//                tekananDarah = (AutoCompleteTextView) mView.findViewById(R.id.tvtekanandarah);
+//                pernafasan = (AutoCompleteTextView)mView.findViewById(R.id.tvpernafasan);
+//
+//                mBuilder.setView(mView);
+//                final AlertDialog dialog = mBuilder.create();
+//                dialog.show();
+//                Button simpan = (Button) mView.findViewById(R.id.btnsimpandatadiri);
+//                simpan.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        dialog.dismiss();
+//                    }
+//                });
+//            }
+//        });
 
-                Button simpan = (Button) mView.findViewById(R.id.btnsimpandatadiri);
-                simpan.setOnClickListener(new View.OnClickListener(){
-                    @Override
-                    public void onClick(View v) {
-                        dialog.dismiss();
-                    }
-                });
-            }
-        });
-        editVitalSign.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AlertDialog.Builder mBuilder = new AlertDialog.Builder(ProfileManagementActivity.this);
-                View mView = getLayoutInflater().inflate(R.layout.profile_vital_sign,null);
-                vitalsign = (TextView) mView.findViewById(R.id.tvvitalsign);
-                suhuTubuh = (AutoCompleteTextView) mView.findViewById(R.id.tvsuhu);
-                denyutNadi = (AutoCompleteTextView) mView.findViewById(R.id.tvnadi);
-                tekananDarah = (AutoCompleteTextView) mView.findViewById(R.id.tvtekanandarah);
-                pernafasan = (AutoCompleteTextView)mView.findViewById(R.id.tvpernafasan);
-
-                mBuilder.setView(mView);
-                final AlertDialog dialog = mBuilder.create();
-                dialog.show();
-                Button simpan = (Button) mView.findViewById(R.id.btnsimpandatadiri);
-                simpan.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        dialog.dismiss();
-                    }
-                });
-            }
-        });
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -127,12 +136,13 @@ public class ProfileManagementActivity extends AppCompatActivity{
                 new UploadImage(image);
             }
         });
-        gantiPassword.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-            }
-        });
+//        gantiPassword.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//            }
+//        });
 
     }
 

@@ -29,7 +29,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class HomeActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements View.OnClickListener,NavigationView.OnNavigationItemSelectedListener {
     ViewPager viewPager;
     private ViewPager mViewPager;
 //    private Intromanager intromanager;
@@ -38,7 +38,6 @@ public class HomeActivity extends AppCompatActivity
     private TextView[] dots;
     private LinearLayout dotsLayout;
     private int[] layouts;
-
 
     public class MyLayout{
         public MyLayout(int layoutId, int imgId){
@@ -63,7 +62,6 @@ public class HomeActivity extends AppCompatActivity
 //        actionBar.setStackedBackgroundDrawable(new
 //                ColorDrawable(android.graphics.Color.TRANSPARENT));
 //
-
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setDrawingCacheBackgroundColor(Color.TRANSPARENT);
@@ -132,6 +130,30 @@ public class HomeActivity extends AppCompatActivity
 
 
     }
+
+    // Created by Ucu (3 April 2017)
+    // Textview for edit Profile in activity_home
+    @Override
+    public void onClick(View v) {
+
+        Intent i=new Intent();
+        i.setClass(this,ProfileManagementActivity.class);
+        startActivity(i);
+//
+//        Intent intent;
+//        switch(v.getId()) {
+//            case R.id.edit_datadiri: // R.id.textView1
+//                intent = new Intent(this, ProfileManagementActivity.class);
+//                break;
+//            case R.id.editProfile: // R.id.textView2
+//                intent = new Intent(this, Third.class);
+//                break;
+//            case R.id.editText: // R.id.textView3
+//                intent = new Intent();
+//        }
+//        startActivity(intent);
+    }
+
     private void addBottomDots(int position){
         dots = new TextView[layouts.length];
         int[] colorActive = getResources().getIntArray(R.array.dot_active);

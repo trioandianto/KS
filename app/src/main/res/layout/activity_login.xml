@@ -179,7 +179,7 @@
                         android:layout_marginRight="10dp"
                         android:layout_margin="20dp"
                         android:text="atau"
-                        android:textColor="@color/colorPrimaryDark"/>
+                        android:textColor="@color/cardview_dark_background"/>
 
                     <View
                         android:layout_width="match_parent"
@@ -187,7 +187,7 @@
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="16dp"
                         android:layout_toLeftOf="@id/tvText"
-                        android:background="@color/colorPrimaryDark"
+                        android:background="@color/cardview_dark_background"
                         />
 
                     <View
@@ -196,7 +196,7 @@
                         android:layout_centerVertical="true"
                         android:layout_marginRight="16dp"
                         android:layout_toRightOf="@id/tvText"
-                        android:background="@color/colorPrimaryDark"
+                        android:background="@color/cardview_dark_background"
                         />
 
                 </RelativeLayout>
