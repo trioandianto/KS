@@ -9,13 +9,14 @@ import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.SearchView;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.SearchView;
 
 import com.kliksembuh.ks.library.SearchAdapter;
 import com.kliksembuh.ks.models.Location;
@@ -48,6 +49,7 @@ public class SearchLocationActivity extends AppCompatActivity implements ListVie
     ArrayList<HashMap<String, String>> formList;
     ArrayList<String> da;
     private SearchView searchView;
+    private MenuItem searchMenuItem;
 //    private MaterialSearchView searchView;
 
     private ListView listItem;
@@ -60,9 +62,11 @@ public class SearchLocationActivity extends AppCompatActivity implements ListVie
         getWindow().setStatusBarColor(Color.BLACK);
 
         //location = (AutoCompleteTextView)findViewById(R.id.tvlocation);
+        searchView = (SearchView)findViewById(R.id.svLocation);
         mLocation = new ArrayList<>();
         formList = new ArrayList<>();
         listItem = (ListView) findViewById(R.id.listlocation);
+        listItem.setTextFilterEnabled(true);
 //        location =(AutoCompleteTextView) searchView.findViewById(R.id.tvlocation);
 //        searchView.setOnQueryTextListener( new SearchView.OnQueryTextListener() {
 //            @Override
@@ -80,6 +84,19 @@ public class SearchLocationActivity extends AppCompatActivity implements ListVie
         // Getting JSON Array node
 
         new GetContacts().execute();
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                searchAdapter.filter(newText);
+                return false;
+            }
+        });
+
 
     }
 
@@ -145,6 +162,8 @@ public class SearchLocationActivity extends AppCompatActivity implements ListVie
         }
         return json;
     }
+
+
     private class GetContacts extends AsyncTask<String, Void, String> {
         private Context context;
 
@@ -164,7 +183,7 @@ public class SearchLocationActivity extends AppCompatActivity implements ListVie
             NetworkInfo netInfo = cm.getActiveNetworkInfo();
             if (netInfo != null && netInfo.isConnected()) {
                 try {
-                    URL url = new URL("http://basajans/KliksembuhAPI/api/SubDistricts/GetSubDistrict");
+                    URL url = new URL("http://cloud.basajans.com:8868/BS.HealthCare.Application/api/SubDistricts/GetSubDistrict");
                     HttpURLConnection urlc = (HttpURLConnection) url.openConnection();
                     urlc.setRequestProperty("Content-Type", "application/json");
                     urlc.connect();
@@ -239,6 +258,7 @@ public class SearchLocationActivity extends AppCompatActivity implements ListVie
 
 
             listItem.setAdapter(searchAdapter);
+
         }
     }
 }
