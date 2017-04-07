@@ -7,35 +7,37 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.kliksembuh.ks.R;
-import com.kliksembuh.ks.models.Location;
+import com.kliksembuh.ks.models.Spesialization;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
 /**
- * Created by Trio Andianto on 3/10/2017.
+ * Created by Trio Andianto on 4/6/2017.
  */
 
-public class SearchAdapter<T> extends BaseAdapter{
+public class SearchSpesializationAdapter<T> extends BaseAdapter {
     private Context mContext;
-    private List<Location> mLocation;
-    private ArrayList<Location> mOriginalValues;
-    public SearchAdapter(Context mContext, List<Location> mLocation) {
-        this.mContext = mContext;
-        this.mLocation = mLocation;
-        this.mOriginalValues = new ArrayList<Location>();
-        this.mOriginalValues.addAll(mLocation);
+    private List<Spesialization> mSpesialization;
+    private ArrayList<Spesialization> mOriginalValues;
+
+    public SearchSpesializationAdapter(Context context, List<Spesialization> spesializations){
+        this.mContext = context;
+        this.mSpesialization = spesializations;
+        this.mOriginalValues = new ArrayList<Spesialization>();
+        this.mOriginalValues.addAll(mSpesialization);
+
     }
 
     @Override
     public int getCount() {
-        return mLocation.size();
+        return mSpesialization.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return mLocation.get(position);
+        return mSpesialization.get(position);
     }
 
     @Override
@@ -44,26 +46,21 @@ public class SearchAdapter<T> extends BaseAdapter{
     }
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-
         View newView = View.inflate(mContext, R.layout.list_item, null);
         TextView tvName = (TextView)newView.findViewById(R.id.name);
-        TextView tvCode = (TextView)newView.findViewById(R.id.email);
-        tvName.setText(mLocation.get(position).getName());
-        tvCode.setText(mLocation.get(position).getCode());
-        newView.setTag(mLocation.get(position).getId());
+        tvName.setText(mSpesialization.get(position).getName());
+        newView.setTag(mSpesialization.get(position).getId());
         return newView;
     }
-
-    // Filter Class
     public void filter(String charText) {
         charText = charText.toLowerCase(Locale.getDefault());
-        mLocation.clear();
+        mSpesialization.clear();
         if (charText.length() == 0) {
-            mLocation.addAll(mOriginalValues);
+            mSpesialization.addAll(mOriginalValues);
         } else {
-            for (Location wp : mOriginalValues) {
+            for (Spesialization wp : mOriginalValues) {
                 if (wp.getName().toLowerCase(Locale.getDefault()).contains(charText)) {
-                    mLocation.add(wp);
+                    mSpesialization.add(wp);
                 }
             }
         }

@@ -37,9 +37,9 @@
 
     <application
         android:allowBackup="true"
+        android:hardwareAccelerated="false"
         android:icon="@mipmap/ic_launcher_new"
         android:label="@string/app_name"
-        android:hardwareAccelerated="false"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
@@ -90,10 +90,7 @@
         </activity>
         <activity
             android:name=".SplashScreenActivity"
-            android:theme="@style/AppTheme2">
-
-
-        </activity>
+            android:theme="@style/AppTheme2"></activity>
         <activity android:name=".WelcomeActivity" />
         <activity
             android:name=".TermAndPolicyActivity"
@@ -114,13 +111,12 @@
         </activity>
         <activity
             android:name=".HomeActivity"
-            android:theme="@style/AppTheme.NoActionBar" >
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
         <activity
             android:name=".FavoriteActivity"
@@ -174,8 +170,7 @@
             android:name=".HospitalList"
             android:label="@string/title_activity_list_map"
             android:launchMode="singleTop"
-            android:parentActivityName=".HomeActivity"/>
-
+            android:parentActivityName=".HomeActivity" />
         <activity android:name=".CobaListJSON" />
         <activity android:name=".DoctorListActivity" />
         <activity
@@ -194,15 +189,22 @@
             android:name=".ListMapActivity"
             android:label="@string/title_activity_list_map"
             android:launchMode="singleTop"
-            android:parentActivityName=".HospitalList" >
+            android:parentActivityName=".HospitalList">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.kliksembuh.ks.HospitalList" />
         </activity>
         <activity android:name=".ProfileManagementActivity" />
-        <activity android:name=".ReviewActivity" ></activity>
+        <activity android:name=".ReviewActivity" />
         <activity
             android:name=".SearchLocationActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustPan">
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".SearchSpesializationActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustPan">
             <intent-filter>

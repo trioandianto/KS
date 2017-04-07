@@ -38,6 +38,13 @@ public class HomeActivity extends AppCompatActivity
     private TextView[] dots;
     private LinearLayout dotsLayout;
     private int[] layouts;
+    private int positionTab = 0;
+    private String tab;
+    private String userID;
+    private String facilityID;
+    private String facilityName;
+    private String locationName;
+    private String locationID;
 
     public class MyLayout{
         public MyLayout(int layoutId, int imgId){
@@ -52,87 +59,50 @@ public class HomeActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-//        getTheme().applyStyle(R.style.ConOver, true);
-//        getWindow().requestFeature(Window.FEATURE_ACTION_BAR_OVERLAY);
-//        getActionBar().setDisplayHomeAsUpEnabled(true);
-//        getActionBar().setDisplayShowHomeEnabled(false);
-//        ActionBar actionBar = getActionBar();
-//        actionBar.setBackgroundDrawable(new
-//                ColorDrawable(android.graphics.Color.TRANSPARENT));
-//        actionBar.setStackedBackgroundDrawable(new
-//                ColorDrawable(android.graphics.Color.TRANSPARENT));
-//
-
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setDrawingCacheBackgroundColor(Color.TRANSPARENT);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-
-
+        Bundle b = getIntent().getExtras();
+        if(b != null) {
+            userID = b.getString("userID");
+            facilityID = b.getString("facilityID");
+            facilityName = b.getString("facilityName");
+            locationID = b.getString("SubDistrictCD");
+            locationName = b.getString("SubDistrictDescription");
+            tab = b.getString("tab");
+            if(tab!=null){
+                positionTab = Integer.parseInt(tab);
+            }
+        }
 
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
-
-//
         viewPager = (ViewPager)findViewById(R.id.view_pager_home);
         dotsLayout=(LinearLayout)findViewById(R.id.layoutdotshome);
-//        layouts = new int[]{
-//                R.layout.activity_home_screen1,
-//                R.layout.activity_home_screen2,
-//                R.layout.activity_home_screen3,
-//                R.layout.activity_home_screen4};
-
         layouts = new int[]{
                     R.layout.activity_home_screen1,
                 R.layout.activity_home_screen2,
                 R.layout.activity_home_screen3,
                 R.layout.activity_home_screen4};
-
-
-
         addBottomDots(0);
         changeStatusBarColor();
         viewPagerAdapter = new ViewPagerAdapter();
         viewPager.setAdapter(viewPagerAdapter);
         viewPager.addOnPageChangeListener(viewListener);
-//        AlertDialog.Builder mBuilder = new AlertDialog.Builder(HomeActivity.this);
-//        View mview = getLayoutInflater().inflate(R.layout.activity_home_dialog, null);
-//        mBuilder.setView(mview);
-
-
-
-
-        //Set Tab
-
-
         mViewPager = (ViewPager) findViewById(R.id.containerhome);
         mViewPager.setAdapter(mSectionsPagerAdapter);
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabshome);
         tabLayout.setupWithViewPager(mViewPager);
-
-
+        mViewPager.setCurrentItem(positionTab);
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
-
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
-//        TextView tveditdatadiri = (TextView)findViewById(R.id.edit_datadiri);
-//        tveditdatadiri.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent datadiri = new Intent(getApplicationContext(), ProfileManagementActivity.class);
-//                startActivity(datadiri);
-//            }
-//        });
-
-
     }
 
-    // Created by Ucu (3 April 2017)
-    // Textview for edit Profile in activity_home
     @Override
     public void onClick(View v) {
 
@@ -310,22 +280,42 @@ public class HomeActivity extends AppCompatActivity
 
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
+        public int mState = 0;
+
         public SectionsPagerAdapter(FragmentManager fm) {
             super(fm);
         }
 
         @Override
         public Fragment getItem(int position) {
+            mState = position;
+            String mSpecialization;
             switch (position){
                 case 0:
                     TabSpesialisasiActivity tabSpesialisasi= new TabSpesialisasiActivity();
-                    return tabSpesialisasi;
+                    try{
+                        tabSpesialisasi.setSpesial(facilityName);
+                        tabSpesialisasi.setSpesialID(facilityID);
+                        tabSpesialisasi.setUserID(userID);
+                        tabSpesialisasi.setLokasiID(locationID);
+                        tabSpesialisasi.setLocasi(locationName);
+                    }
+                    catch (Exception ex){
+
+                    }finally {
+
+                    }
+
+
+                     return tabSpesialisasi;
                 case 1:
                     TabPelayananActivity tabPelayanan = new TabPelayananActivity();
                     return tabPelayanan;
+
                 default:
                     return null;
             }
+
         }
 
         @Override
@@ -343,6 +333,9 @@ public class HomeActivity extends AppCompatActivity
                     return "Pelayanan";
             }
             return null;
+        }
+        public void setText(String text){
+
         }
     }
 

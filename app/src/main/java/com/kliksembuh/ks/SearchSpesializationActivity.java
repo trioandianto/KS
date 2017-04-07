@@ -3,8 +3,6 @@ package com.kliksembuh.ks;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.AssetManager;
-import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
@@ -12,11 +10,11 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ListView;
 import android.widget.SearchView;
+import android.widget.ListView;
 
-import com.kliksembuh.ks.library.SearchAdapter;
-import com.kliksembuh.ks.models.Location;
+import com.kliksembuh.ks.library.SearchSpesializationAdapter;
+import com.kliksembuh.ks.models.Spesialization;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -24,7 +22,6 @@ import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
@@ -34,60 +31,32 @@ import java.util.List;
 
 import javax.net.ssl.HttpsURLConnection;
 
-public class SearchLocationActivity extends AppCompatActivity implements ListView.OnItemClickListener{
+public class SearchSpesializationActivity extends AppCompatActivity implements ListView.OnItemClickListener{
 
-    private List<Location> mLocation;
-    private SearchAdapter searchAdapter;
+    private List<Spesialization> mSpesialize;
+    private SearchSpesializationAdapter searchAdapter;
     private ProgressDialog pDialog;
-    private SearchView searchView;
     private ListView listItem;
-    private String idLocation;
-    private String nameLocation;
-    private String nameSpesialisasi;
-    private String idSpesialisasi;
-
-
+    private SearchView searchView;
+    private String [] facilityID;
+    private String [] facilityName;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_search_location);
-        getWindow().setStatusBarColor(Color.BLACK);
-        Bundle b = getIntent().getExtras();
-        if(b!=null){
-            nameSpesialisasi = b.getString("");
-            idSpesialisasi = b.getString("");
+        setContentView(R.layout.activity_search_spesialization);
 
-        }
-
-        //location = (AutoCompleteTextView)findViewById(R.id.tvlocation);
-        searchView = (SearchView)findViewById(R.id.svLocation);
-        mLocation = new ArrayList<>();
-        listItem = (ListView) findViewById(R.id.listlocation);
+        searchView = (SearchView)findViewById(R.id.svSpesialization);
+        mSpesialize = new ArrayList<>();
+        listItem = (ListView)findViewById(R.id.listSpesialization);
         listItem.setTextFilterEnabled(true);
         listItem.setOnItemClickListener(this);
-//        location =(AutoCompleteTextView) searchView.findViewById(R.id.tvlocation);
-//        searchView.setOnQueryTextListener( new SearchView.OnQueryTextListener() {
-//            @Override
-//            public boolean onQueryTextSubmit(String query) {
-//                return false;
-//            }
-//
-//            @Override
-//            public boolean onQueryTextChange(String newText) {
-//                listAdapter.getFilter().filter( newText );
-//                return false;
-//            }
-//        } );
 
-        // Getting JSON Array node
-
-        new GetContacts().execute();
+        new SearchSpesializationTask().execute();
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 return false;
             }
-
             @Override
             public boolean onQueryTextChange(String newText) {
                 searchAdapter.filter(newText);
@@ -95,52 +64,29 @@ public class SearchLocationActivity extends AppCompatActivity implements ListVie
             }
         });
     }
+
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Object object = parent.getAdapter().getItem(position);
-        Location location = (Location) object;
-        idLocation = location.getId();
-        nameLocation = location.getName();
+        Spesialization spesialisasi = (Spesialization)object;
+        String idSpesialisasi = spesialisasi.getId();
+        String nameSpesialisasi = spesialisasi.getName();
         Intent myIntent = new Intent(getApplicationContext(),HomeActivity.class);
         Bundle b = new Bundle();
-        b.putString("SubDistrictCD", idLocation);
-        b.putString("SubDistrictDescription", nameLocation);
+        b.putString("facilityID", idSpesialisasi);
+        b.putString("facilityName", nameSpesialisasi);
         b.putString("tab","0");
         myIntent.putExtras(b);
         startActivity(myIntent);
 
     }
-    public static String AssetJSONFile (String filename, Context context) throws IOException {
-        AssetManager manager = context.getAssets();
-        InputStream file = manager.open(filename);
-        byte[] formArray = new byte[file.available()];
-        file.read(formArray);
-        file.close();
 
-        return new String(formArray);
-    }
-    public String loadJSONFromAsset() {
-        String json = null;
-        try {
-            InputStream is = this.getAssets().open("location.json");
-            int size = is.available();
-            byte[] buffer = new byte[size];
-            is.read(buffer);
-            is.close();
-            json = new String(buffer, "UTF-8");
-        } catch (IOException ex) {
-            ex.printStackTrace();
-            return null;
-        }
-        return json;
-    }
-   private class GetContacts extends AsyncTask<String, Void, String> {
-        private Context context;
+    private class SearchSpesializationTask extends AsyncTask<String, Void, String> {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
             // Showing progress dialog
-            pDialog = new ProgressDialog(SearchLocationActivity.this);
+            pDialog = new ProgressDialog(SearchSpesializationActivity.this);
             pDialog.setMessage("Please wait...");
             pDialog.setCancelable(false);
             pDialog.show();
@@ -151,7 +97,7 @@ public class SearchLocationActivity extends AppCompatActivity implements ListVie
             NetworkInfo netInfo = cm.getActiveNetworkInfo();
             if (netInfo != null && netInfo.isConnected()) {
                 try {
-                    URL url = new URL("http://cloud.basajans.com:8868/BS.HealthCare.Application/api/SubDistricts/GetSubDistrict");
+                    URL url = new URL("http://cloud.basajans.com:8868/BS.HealthCare.Application/api/HealthFacilities/GetHealthFacilities");
                     HttpURLConnection urlc = (HttpURLConnection) url.openConnection();
                     urlc.setRequestProperty("Content-Type", "application/json");
                     urlc.connect();
@@ -167,10 +113,7 @@ public class SearchLocationActivity extends AppCompatActivity implements ListVie
                             break;
                         }
                         in.close();
-
-
-
-                        return sb.toString();
+                     return sb.toString();
                     } else {
                         return "";
 
@@ -194,18 +137,18 @@ public class SearchLocationActivity extends AppCompatActivity implements ListVie
             super.onPostExecute(result);
             if (pDialog.isShowing())
                 pDialog.dismiss();
-            if(result!=""){
+            if(result!="") {
                 try {
                     JSONArray jsonArray = new JSONArray(result);
-//                    Iterator<String> keys = jsonObj.keys();
-//                    jsonObj.keys();
-
+                    facilityName = new String[jsonArray.length()];
+                    facilityID = new String[jsonArray.length()];
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject jsonObject1 = jsonArray.getJSONObject(i);
-                        String subDistrictID = jsonObject1.getString("SubDistrictID");
-                        String subDistrictCD = jsonObject1.getString("SubDistrictCD");
-                        String subDistrictDescription = jsonObject1.getString("SubDistrictDescription");
-                        mLocation.add(new Location(subDistrictDescription,subDistrictID,subDistrictCD));
+                        String healthFacilityID = jsonObject1.getString("HealthFacilityID");
+                        facilityID[i] = healthFacilityID;
+                        String name = jsonObject1.getString("Name");
+                        facilityName[i] = name;
+                        mSpesialize.add(new Spesialization(name, healthFacilityID));
 
                     }
 
@@ -213,18 +156,12 @@ public class SearchLocationActivity extends AppCompatActivity implements ListVie
                     e.printStackTrace();
                 }
             }
-//            adapter = new SimpleAdapter(
-//                    SearchLocationActivity.this,formList,
-//                    R.layout.list_item, new String[]{"name", "code"}, new int[]{R.id.name,
-//                    R.id.email});
-            searchAdapter = new SearchAdapter(getApplicationContext(), mLocation);
-//            listAdapter = new ArrayAdapter<String>(  SearchLocationActivity.this,
-//                    android.R.layout.simple_list_item_1, da);
-//            listItem.setAdapter( listAdapter );
+            searchAdapter = new SearchSpesializationAdapter(getApplicationContext(), mSpesialize);
 
 
             listItem.setAdapter(searchAdapter);
 
         }
     }
+
 }
