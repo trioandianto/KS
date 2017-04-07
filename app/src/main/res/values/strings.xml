@@ -121,4 +121,8 @@ MENGGUNAKAN LAYANAN KAMI UNTUK PERTAMA KALI.</string>
     <string name="error_active_code_expiret">kode verifikasi tidak berlaku</string>
     <string name="error_active_code_kirim">kode sudah tidak berlaku</string>
     <string name="loading">Loading…</string>
+
+    <!-- Strings related to Setting Profile Nav -->
+    <string name="email_nkontak">Email &amp; Kontak</string>
+
 </resources>

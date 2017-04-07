@@ -218,6 +218,10 @@ public class HomeActivity extends AppCompatActivity
                 Intent appointment = new Intent(this, MyAppointmentActivity.class);
                 startActivityForResult(appointment, 0);
                 break;
+            case R.id.nav_setting:
+                Intent setting = new Intent(this, SettingActivity.class);
+                startActivityForResult(setting, 0);
+                break;
 
             default:
                 fragmentClass = HomeActivity.class;

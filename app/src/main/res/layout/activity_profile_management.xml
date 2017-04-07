@@ -41,10 +41,11 @@
         android:orientation="vertical"
         android:id="@+id/relativeLayout2"
         android:background="@color/white"
+        android:layout_marginTop="12dp"
+        android:layout_marginLeft="6dp"
+        android:layout_marginRight="6dp"
         android:layout_height="wrap_content"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
-        android:paddingLeft="10dp"
+        android:padding="10dp"
         android:layout_below="@+id/relativeLayout"
         android:layout_alignParentStart="true">
 
@@ -69,7 +70,7 @@
             android:layout_marginRight="210dp"
             android:layout_centerVertical="true"
             android:layout_below="@id/tvFName"
-            android:background="@color/colorPrimaryDark"
+            android:background="@color/light_grey"
             />
         <TextView
             android:layout_width="wrap_content"
@@ -99,14 +100,14 @@
             android:layout_marginTop="2dp"
             android:layout_centerVertical="true"
             android:layout_below="@id/tvLName"
-            android:background="@color/colorPrimaryDark"
+            android:background="@color/light_grey"
             />
 
         <TextView
             android:layout_width="wrap_content"
             android:id="@+id/lblEmail"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="35dp"
             android:layout_below="@id/tvFName"
             android:text="Email"/>
 
@@ -119,21 +120,33 @@
             android:layout_below="@+id/lblEmail"
             android:textSize="20sp"
             android:text="wicahyanimutiara@gmail.com"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_marginTop="0dp"
+            android:textSize="16sp"
+            android:textColor="@color/blue"
+            android:layout_marginLeft="4dp"
+            android:gravity="right"
+            android:layout_below="@+id/lblEmail"
+            android:layout_toRightOf="@+id/tvEditEmail"
+            android:id="@+id/btnTvEditEmail"
+            android:layout_height="wrap_content"
+            android:text="Ubah Email"/>
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginTop="2dp"
-            android:layout_marginRight="10dp"
+            android:layout_marginRight="80dp"
             android:layout_centerVertical="true"
             android:layout_below="@id/tvEditEmail"
-            android:background="@color/colorPrimaryDark"
+            android:background="@color/light_grey"
             />
 
         <TextView
             android:layout_width="wrap_content"
             android:id="@+id/lblMobile"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="35dp"
             android:layout_below="@id/tvEditEmail"
             android:text="Mobile"/>
 
@@ -146,14 +159,26 @@
             android:layout_below="@+id/lblMobile"
             android:textSize="20sp"
             android:text="081318180994"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_marginTop="0dp"
+            android:textSize="16sp"
+            android:textColor="@color/blue"
+            android:layout_marginLeft="144dp"
+            android:gravity="right"
+            android:layout_below="@+id/lblMobile"
+            android:layout_toRightOf="@+id/tvEditMobile"
+            android:id="@+id/btnTvUbahNomor"
+            android:layout_height="wrap_content"
+            android:text="Ubah Nomor"/>
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginTop="2dp"
-            android:layout_marginRight="10dp"
+            android:layout_marginRight="80dp"
             android:layout_centerVertical="true"
             android:layout_below="@id/tvEditMobile"
-            android:background="@color/colorPrimaryDark"
+            android:background="@color/light_grey"
             />
 
 
@@ -172,66 +197,25 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:id="@+id/relativeLayout4"
-        android:layout_marginTop="10dp"
-        android:paddingLeft="10dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginRight="6dp"
+        android:layout_marginLeft="6dp"
         android:background="@color/white"
         android:layout_height="wrap_content"
         android:layout_below="@+id/relativeLayout3"
         android:layout_alignParentStart="true">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:textStyle="bold"
-            android:typeface="monospace"
+        <Button
+            android:id="@+id/bntSimpanProfile"
+            style="@style/MyCustomTextAppearance"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Simpan"
+            android:textColor="@color/white"
+            android:textAllCaps="false"
             android:textSize="18dp"
-            android:textColor="@color/blue"
-            android:id="@+id/tvEditVitalSignProfileManagement"
-            android:layout_height="wrap_content"
-            android:text="Edit"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:textStyle="bold"
-            android:typeface="monospace"
-            android:id="@+id/tvWeightProfileManagement"
-            android:layout_below="@+id/tvEditVitalSignProfileManagement"
-            android:layout_height="wrap_content"
-            android:text="Weight :"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:textStyle="bold"
-            android:typeface="monospace"
-            android:layout_height="wrap_content"
-            android:id="@+id/tvDetakjantungProfileManagement"
-            android:layout_below="@+id/tvWeightProfileManagement"
-            android:text="Detak Jantung :"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:textStyle="bold"
-            android:typeface="monospace"
-            android:id="@+id/tvTekananDarahProfileManagement"
-            android:layout_below="@+id/tvDetakjantungProfileManagement"
-            android:layout_height="wrap_content"
-            android:text="Tekanan Darah :"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:textStyle="bold"
-            android:typeface="monospace"
-            android:id="@+id/tvTemperaturProfileManagement"
-            android:layout_below="@+id/tvTekananDarahProfileManagement"
-            android:layout_height="wrap_content"
-            android:text="Temperatur :"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:textStyle="bold"
-            android:typeface="monospace"
-            android:id="@+id/tvDenyutNadiProfileManagement"
-            android:layout_below="@+id/tvTemperaturProfileManagement"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:text="Denyut Nadi :"/>
-
+            android:background="@drawable/shape"
+            android:backgroundTint="@color/login_color"
+            />
     </RelativeLayout>
 
 </RelativeLayout>
