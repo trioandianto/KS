@@ -38,12 +38,17 @@ public class SearchSpesializationActivity extends AppCompatActivity implements L
     private ProgressDialog pDialog;
     private ListView listItem;
     private SearchView searchView;
-    private String [] facilityID;
-    private String [] facilityName;
+    private String locationID;
+    private String locationName;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_spesialization);
+        Bundle b = getIntent().getExtras();
+        if(b!=null){
+            locationID = b.getString("SubDistrictCD");
+            locationName = b.getString("SubDistrictDescription");
+        }
 
         searchView = (SearchView)findViewById(R.id.svSpesialization);
         mSpesialize = new ArrayList<>();
@@ -75,6 +80,8 @@ public class SearchSpesializationActivity extends AppCompatActivity implements L
         Bundle b = new Bundle();
         b.putString("facilityID", idSpesialisasi);
         b.putString("facilityName", nameSpesialisasi);
+        b.putString("SubDistrictCD",locationID);
+        b.putString("SubDistrictDescription",locationName);
         b.putString("tab","0");
         myIntent.putExtras(b);
         startActivity(myIntent);
@@ -140,14 +147,11 @@ public class SearchSpesializationActivity extends AppCompatActivity implements L
             if(result!="") {
                 try {
                     JSONArray jsonArray = new JSONArray(result);
-                    facilityName = new String[jsonArray.length()];
-                    facilityID = new String[jsonArray.length()];
+
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject jsonObject1 = jsonArray.getJSONObject(i);
                         String healthFacilityID = jsonObject1.getString("HealthFacilityID");
-                        facilityID[i] = healthFacilityID;
                         String name = jsonObject1.getString("Name");
-                        facilityName[i] = name;
                         mSpesialize.add(new Spesialization(name, healthFacilityID));
 
                     }

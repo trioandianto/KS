@@ -54,9 +54,8 @@ public class SearchLocationActivity extends AppCompatActivity implements ListVie
         getWindow().setStatusBarColor(Color.BLACK);
         Bundle b = getIntent().getExtras();
         if(b!=null){
-            nameSpesialisasi = b.getString("");
-            idSpesialisasi = b.getString("");
-
+            nameSpesialisasi = b.getString("facilityName");
+            idSpesialisasi = b.getString("facilityID");
         }
 
         //location = (AutoCompleteTextView)findViewById(R.id.tvlocation);
@@ -105,6 +104,8 @@ public class SearchLocationActivity extends AppCompatActivity implements ListVie
         Bundle b = new Bundle();
         b.putString("SubDistrictCD", idLocation);
         b.putString("SubDistrictDescription", nameLocation);
+        b.putString("facilityID",idSpesialisasi);
+        b.putString("facilityName",nameSpesialisasi);
         b.putString("tab","0");
         myIntent.putExtras(b);
         startActivity(myIntent);

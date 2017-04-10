@@ -27,6 +27,10 @@ public class DoctorListAdapter <T> extends BaseAdapter implements Filterable {
         this.mContext = mContext;
         this.mDoctorList = mDoctorList;
     }
+    @Override
+    public boolean isEnabled (int position) {
+        return false;
+    }
 
     @Override
     public int getCount() {
