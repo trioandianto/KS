@@ -2,10 +2,9 @@
 <android.support.design.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_content"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="fill_parent"
     android:fitsSystemWindows="true">
 
     <android.support.design.widget.AppBarLayout
@@ -14,8 +13,6 @@
         android:layout_height="@dimen/detail_backdrop_height"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         android:fitsSystemWindows="true">
-
-
         <android.support.design.widget.CollapsingToolbarLayout
             android:id="@+id/collapsing_toolbar"
             android:layout_width="match_parent"
@@ -60,14 +57,13 @@
         android:layout_width="match_parent"
         android:layout_height="fill_parent"
         android:id="@+id/nsDokter"
-        android:clickable="true"
         android:fillViewport="true"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <LinearLayout
             android:layout_width="match_parent"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            android:layout_height="wrap_content"
+            android:layout_height="fill_parent"
             android:orientation="vertical"
             android:paddingTop="24dp">
 
@@ -84,7 +80,6 @@
                 android:spinnerMode="dropdown">
 
             </Spinner>
-
             <ListView
                 android:layout_width="match_parent"
                 android:divider="#00000000"
@@ -93,13 +88,16 @@
                 android:paddingBottom="15dip"
                 android:clipToPadding="false"
                 android:background="@drawable/shape"
-                android:layout_height="fill_parent"
+                android:layout_height="wrap_content"
                 android:id="@+id/lvDetailRumahSakit">
 
             </ListView>
 
 
+
+
         </LinearLayout>
+
     </android.support.v4.widget.NestedScrollView>
 
 </android.support.design.widget.CoordinatorLayout>

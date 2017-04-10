@@ -9,11 +9,13 @@ import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.RatingBar;
+import android.widget.TextView;
 
 import com.kliksembuh.ks.library.HospitalListAdapter;
 import com.kliksembuh.ks.library.HttpHandler;
@@ -49,8 +51,11 @@ public class HospitalList extends AppCompatActivity {
     private String [] rumahSakitID;
     private String [] nameRumahSakit;
     private String subDistrict;
+    private String subDistricDescription;
+    private String facilityName;
     private String spesialisasi;
     private Drawable drawableHospital[];
+    private String userID;
 
     RatingBar rb;
 
@@ -65,10 +70,19 @@ public class HospitalList extends AppCompatActivity {
         setContentView(R.layout.activity_hospital_list);
         Bundle b = getIntent().getExtras();
         if(b != null) {
-            String userID = b.getString("userID");
+            userID = b.getString("userID");
             subDistrict = b.getString("subDistrict");
-            spesialisasi = b.getString("spesialisasi");
+            subDistricDescription = b.getString("SubDistrictDescription");
+            spesialisasi = b.getString("facilityID");
+            facilityName = b.getString("facilityName");
         }
+
+        Toolbar newToolbar = (Toolbar)findViewById(R.id.toolbarHospitalList);
+        setSupportActionBar(newToolbar);
+        newToolbar.setTitle(subDistricDescription);
+        setSupportActionBar(newToolbar);
+        TextView newTextView = (TextView)findViewById(R.id.tvhospitalList);
+        newTextView.setText("Menampilkan 100 instansi kesehatan di "+subDistricDescription+" yang menyediakan Dokter "+facilityName+".");
 
         lvHospital = (ListView)findViewById(R.id.listview_hospital);
         btnpeta = (Button)findViewById(R.id.btnpeta);
@@ -102,12 +116,8 @@ public class HospitalList extends AppCompatActivity {
                 myIntent.putExtras(b);
                 //.putExtra("userID",userID);
                 startActivityForResult(myIntent, 0);
-
-
             }
-
         });
-
         // Set Ratingbar
     }
     public String loadJSONFromAsset() {
@@ -225,9 +235,6 @@ public class HospitalList extends AppCompatActivity {
             pDialog.setCancelable(false);
             pDialog.show();
         }
-
-
-
         @Override
         protected String doInBackground(String... params) {
             ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -250,9 +257,6 @@ public class HospitalList extends AppCompatActivity {
                             break;
                         }
                         in.close();
-
-
-
                         JSONArray jsonArray = new JSONArray(sb.toString());
                         drawableHospital = new Drawable[jsonArray.length()];
                         String image;
@@ -263,8 +267,6 @@ public class HospitalList extends AppCompatActivity {
 
                         }
                         // Drawable image1 = LoadImageFromWebOperations(image);
-
-
                         return sb.toString();
                     }
                     else {

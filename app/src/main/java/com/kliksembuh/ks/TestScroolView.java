@@ -7,6 +7,7 @@ import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.view.PagerAdapter;
@@ -14,10 +15,12 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -55,7 +58,7 @@ import java.util.List;
 import javax.net.ssl.HttpsURLConnection;
 
 
-public class TestScroolView extends AppCompatActivity implements OnMapReadyCallback {
+public class TestScroolView extends AppCompatActivity implements OnMapReadyCallback{
     public static final String EXTRA_NAME = "cheese_name";
     private GoogleMap mMap;
     ViewPager viewPager;
@@ -87,6 +90,7 @@ public class TestScroolView extends AppCompatActivity implements OnMapReadyCallb
     private static final String[]paths = {"Dokter Umum", "Dokter Gigi", "Dokter Mata"};
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -97,13 +101,12 @@ public class TestScroolView extends AppCompatActivity implements OnMapReadyCallb
             facility = "1";
             toolbarTitle = b.getString("tittle");
         }
-
         setContentView(R.layout.activity_test_scrool_view);
-//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-//        setSupportActionBar(toolbar);
-//
-//        toolbar.setTitle(toolbarTitle);
-//        setSupportActionBar(toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        toolbar.setTitle(toolbarTitle);
+        setSupportActionBar(toolbar);
 
 
         mDokterList = new ArrayList<>();
@@ -112,13 +115,17 @@ public class TestScroolView extends AppCompatActivity implements OnMapReadyCallb
 //        nsDokter.setFillViewport(true);
 //        nsDokter.setClickable(true);
         lvDokter = (ListView)findViewById(R.id.lvDetailRumahSakit);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            lvDokter.setNestedScrollingEnabled(true);
+        }
+        lvDokter.setNestedScrollingEnabled(true);
 
         //lvDokter.setNestedScrollingEnabled(true);
-//        spinner = (Spinner)findViewById(R.id.dplistdokter);
-//        ArrayAdapter<String>adapter = new ArrayAdapter<String>(TestScroolView.this,
-//                android.R.layout.simple_spinner_item,paths);
-//        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//        spinner.setAdapter(adapter);
+        spinner = (Spinner)findViewById(R.id.dplistdokter);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(TestScroolView.this,
+                android.R.layout.simple_spinner_item,paths);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
 //        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 //            @Override
 //            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -154,8 +161,7 @@ public class TestScroolView extends AppCompatActivity implements OnMapReadyCallb
         lvDokter.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                Intent myIntent = new Intent(getApplicationContext(),BookingActivity.class);
+                Intent myIntent = new Intent(TestScroolView.this ,BookingActivity.class);
                 Bundle b = new Bundle();
                 b.putString("idDokter", idDokter[position]);
                 b.putString("urlImage",urlImage[position]);//Your id
@@ -165,6 +171,7 @@ public class TestScroolView extends AppCompatActivity implements OnMapReadyCallb
                 startActivityForResult(myIntent, 0);
             }
         });
+
 
     }
 
@@ -178,6 +185,7 @@ public class TestScroolView extends AppCompatActivity implements OnMapReadyCallb
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(bogor,16.0f));
         mMap.setMapType(mMap.MAP_TYPE_TERRAIN);
         mMap.getUiSettings().setZoomControlsEnabled(true);
+
     }
 
 

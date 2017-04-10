@@ -154,22 +154,18 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
-
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-
                 <data android:scheme="@string/facebook_app_id" />
             </intent-filter>
         </activity>
-
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
 
         <activity
             android:name=".HospitalList"
-            android:label="@string/title_activity_list_map"
-            android:launchMode="singleTop"
+            android:theme="@style/AppTheme2"
             android:parentActivityName=".HomeActivity" />
         <activity android:name=".CobaListJSON" />
         <activity android:name=".DoctorListActivity" />
