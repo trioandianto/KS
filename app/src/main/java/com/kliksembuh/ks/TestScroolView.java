@@ -7,14 +7,12 @@ import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -58,7 +56,7 @@ import java.util.List;
 import javax.net.ssl.HttpsURLConnection;
 
 
-public class TestScroolView extends AppCompatActivity implements OnMapReadyCallback{
+public class TestScroolView extends AppCompatActivity implements OnMapReadyCallback {
     public static final String EXTRA_NAME = "cheese_name";
     private GoogleMap mMap;
     ViewPager viewPager;
@@ -70,7 +68,6 @@ public class TestScroolView extends AppCompatActivity implements OnMapReadyCallb
     private List<Doctor> mDokterList;
     List<String> list;
     private ViewPagerAdapter viewPagerAdapter;
-    private CardView cardView;
     private CollapsingToolbarLayout collapsingToolbarLayout;
     private ListView lvDokter;
     private DoctorListAdapter dAdapter;
@@ -115,10 +112,10 @@ public class TestScroolView extends AppCompatActivity implements OnMapReadyCallb
 //        nsDokter.setFillViewport(true);
 //        nsDokter.setClickable(true);
         lvDokter = (ListView)findViewById(R.id.lvDetailRumahSakit);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            lvDokter.setNestedScrollingEnabled(true);
-        }
-        lvDokter.setNestedScrollingEnabled(true);
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+//            lvDokter.setNestedScrollingEnabled(true);
+//        }
+//        lvDokter.setNestedScrollingEnabled(true);
 
         //lvDokter.setNestedScrollingEnabled(true);
         spinner = (Spinner)findViewById(R.id.dplistdokter);
@@ -141,9 +138,9 @@ public class TestScroolView extends AppCompatActivity implements OnMapReadyCallb
                 R.drawable.doctorlist1,
                 R.drawable.doctorlist2,
                 R.drawable.doctorlist3};
-//        viewPagerAdapter = new ViewPagerAdapter(this);
-//        viewPager = (ViewPager)findViewById(R.id.backdrop);
-//        viewPager.setAdapter(viewPagerAdapter);
+        viewPagerAdapter = new ViewPagerAdapter(this);
+        viewPager = (ViewPager)findViewById(R.id.backdrop);
+        viewPager.setAdapter(viewPagerAdapter);
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.mapdoctorlistcoba);
         mapFragment.getMapAsync(this);
 //        cardView = (CardView)findViewById(R.id.cvdoktera);
@@ -161,10 +158,20 @@ public class TestScroolView extends AppCompatActivity implements OnMapReadyCallb
         lvDokter.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Object object = parent.getAdapter().getItem(position);
+                Doctor dokter = (Doctor) object;
+                String idDokter =  dokter.getDoc_id();
+                String namaDokter = dokter.getNameDoc();
+                Drawable imgUrl = dokter.getDoc_pic_id();
+                BookingActivity bookingActivity = new BookingActivity();
+                bookingActivity.setImageDokter(imgUrl);
+
                 Intent myIntent = new Intent(TestScroolView.this ,BookingActivity.class);
                 Bundle b = new Bundle();
-                b.putString("idDokter", idDokter[position]);
-                b.putString("urlImage",urlImage[position]);//Your id
+                b.putString("idDokter", idDokter);
+                b.putString("urlImage",urlImage[position]);
+                b.putString("namaDokter",namaDokter);
+                //Your id
                 //.putExtra("userID",userID);
                 myIntent.putExtras(b);
                 //.putExtra("userID",userID);
@@ -261,9 +268,10 @@ public class TestScroolView extends AppCompatActivity implements OnMapReadyCallb
 //                        idDokterInt[a]=a;
                         String id = c.getString("id");
                         String image = c.getString("imgUrl");
+                        urlImage[i] = image;
                         Drawable image1 = LoadImageFromWebOperations(image);
                         String alamat = c.getString("alamat");
-                        mDokterList.add(new Doctor(Integer.parseInt(id), image1, name, alamat));
+                        mDokterList.add(new Doctor(id, image1, name, alamat));
                         a++;
                     }
 
@@ -319,6 +327,16 @@ public class TestScroolView extends AppCompatActivity implements OnMapReadyCallb
             mFacility = facility;
         }
 
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            // Showing progress dialog
+            pDialog = new ProgressDialog(TestScroolView.this);
+            pDialog.setMessage("Please wait...");
+            pDialog.setCancelable(false);
+            pDialog.show();
+        }
+
 
         @Override
         protected String doInBackground(String... params) {
@@ -356,7 +374,7 @@ public class TestScroolView extends AppCompatActivity implements OnMapReadyCallb
                             urlImage[i]=image;
                             Drawable image1 = LoadImageFromWebOperations(image);
                             String alamat = jsonObject.getString("Address");
-                            mDokterList.add(new Doctor(Integer.parseInt(id), image1, name, alamat));
+                            mDokterList.add(new Doctor(id, image1, name, alamat));
                         }
 
                         return sb.toString();
@@ -408,7 +426,8 @@ public class TestScroolView extends AppCompatActivity implements OnMapReadyCallb
         }
         @Override
         protected void onPostExecute(final String success) {
-
+            if (pDialog.isShowing())
+                pDialog.dismiss();
             if (success!="") {
                 dAdapter = new DoctorListAdapter(getApplicationContext(), mDokterList);
                 lvDokter.setAdapter(dAdapter);

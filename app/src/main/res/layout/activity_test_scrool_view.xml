@@ -2,7 +2,6 @@
 <android.support.design.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/main_content"
     android:layout_width="match_parent"
     android:layout_height="fill_parent"
     android:fitsSystemWindows="true">
@@ -62,9 +61,9 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"
             android:layout_height="fill_parent"
             android:orientation="vertical"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
             android:paddingTop="24dp">
 
             <fragment
@@ -92,10 +91,6 @@
                 android:id="@+id/lvDetailRumahSakit">
 
             </ListView>
-
-
-
-
         </LinearLayout>
 
     </android.support.v4.widget.NestedScrollView>
