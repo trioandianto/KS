@@ -175,26 +175,33 @@ public class HomeActivity extends AppCompatActivity
 
         Fragment fragment = null;
         Class fragmentClass;
-        switch(item.getItemId()) {
-            case R.id.nav_search:
-                Intent home = new Intent(this, HomeActivity.class);
-                startActivityForResult(home, 0);
-                break;
-            case R.id.nav_favorite:
-                Intent favorite = new Intent(this, FavoriteActivity.class);
-                startActivityForResult(favorite, 0);
-                break;
-            case R.id.nav_appointment:
-                Intent appointment = new Intent(this, MyAppointmentActivity.class);
-                startActivityForResult(appointment, 0);
-                break;
-            case R.id.nav_setting:
-                Intent setting = new Intent(this, SettingActivity.class);
-                startActivityForResult(setting, 0);
-                break;
+        int i = item.getItemId();
+        if(i == R.id.nav_setting){
+            fragment = new SettingActivity();
+        }
+        else if (i == R.id.nav_search){
+            Intent home = new Intent(this, HomeActivity.class);
+            startActivityForResult(home, 0);
+        }
+        else if (i == R.id.nav_search){
 
-            default:
-                fragmentClass = HomeActivity.class;
+        }
+        else if (i == R.id.nav_favorite){
+            Intent favorite = new Intent(this, FavoriteActivity.class);
+            startActivityForResult(favorite, 0);
+
+        }
+        else if (i == R.id.nav_appointment){
+            Intent appointment = new Intent(this, MyAppointmentActivity.class);
+            startActivityForResult(appointment, 0);
+
+        }
+        else{
+            fragmentClass = HomeActivity.class;
+        }
+        if(fragment!=null){
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.frame_container,fragment).commit();
         }
 
 
