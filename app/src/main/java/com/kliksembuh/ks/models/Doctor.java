@@ -7,13 +7,13 @@ import android.graphics.drawable.Drawable;
  */
 
 public class Doctor {
-    private int doc_id;
+    private String doc_id;
     private Drawable doc_pic_id;
     private String nameDoc;
     private String specialty;
 
     // Constructor
-    public Doctor(int doc_id, Drawable doc_pic_id, String nameDoc, String specialty) {
+    public Doctor(String doc_id, Drawable doc_pic_id, String nameDoc, String specialty) {
         this.doc_id = doc_id;
         this.doc_pic_id = doc_pic_id;
         this.nameDoc = nameDoc;
@@ -22,11 +22,11 @@ public class Doctor {
 
     // Getter, Setter
 
-    public int getDoc_id() {
+    public String getDoc_id() {
         return doc_id;
     }
 
-    public void setDoc_id(int doc_id) {
+    public void setDoc_id(String doc_id) {
         this.doc_id = doc_id;
     }
 

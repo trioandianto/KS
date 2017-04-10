@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -51,6 +52,9 @@ public class BookingActivity extends AppCompatActivity {
     private Button btnMingguDepan;
     private Spinner spnHari;
     private String sequence="minggu 1";
+    private ImageView imgDokter;
+    private TextView tvNamaDokter;
+    private TextView tvJenisSpesialisasi;
 
     private int cDay;
     private int cMonth;
@@ -58,6 +62,20 @@ public class BookingActivity extends AppCompatActivity {
     private int day;
     private int lastDay;
     private Date tanggal;
+    private String namaDokter;
+    private String idDokter;
+    private String urlImage;
+    private String dokterSpesialisasi;
+
+    public Drawable getImageDokter() {
+        return imageDokter;
+    }
+
+    public void setImageDokter(Drawable imageDokter) {
+        this.imageDokter = imageDokter;
+    }
+
+    private Drawable imageDokter;
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
@@ -68,7 +86,19 @@ public class BookingActivity extends AppCompatActivity {
         Bundle b = getIntent().getExtras();
         if(b != null) {
             personalID = b.getString("userID");
+            namaDokter = b.getString("namaDokter");
+            idDokter = b.getString("idDokter");
+            urlImage = b.getString("urlImage");
+            dokterSpesialisasi = "Dokter Umum";
         }
+        imgDokter = (ImageView)findViewById(R.id.iv_doc_picdetail);
+        Drawable img = LoadImageFromWebOperations(urlImage);
+//        imgDokter.setImageResource();
+        tvNamaDokter = (TextView) findViewById(R.id.tv_drname_detail);
+        tvNamaDokter.setText(namaDokter);
+        tvJenisSpesialisasi = (TextView)findViewById(R.id.tv_drspecialty_detail);
+        tvJenisSpesialisasi.setText(dokterSpesialisasi);
+
         lvJadwal = (ListView)findViewById(R.id.lvjadwal);
         mJadwalDokterList = new ArrayList<>();
         spnHari = (Spinner)findViewById(R.id.spnHari);
@@ -83,7 +113,6 @@ public class BookingActivity extends AppCompatActivity {
 
         ArrayAdapter arrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,list);
         spnHari.setAdapter(arrayAdapter);
-
 
 
         Calendar calendar = Calendar.getInstance();
