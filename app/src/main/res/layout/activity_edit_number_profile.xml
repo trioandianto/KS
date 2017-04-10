@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center_horizontal|center_vertical"
+        android:background="#f0f0f2"
+        android:fitsSystemWindows="true"
+        tools:context="com.kliksembuh.ks.LoginActivity">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/border_listview"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_marginTop="20dp"
+                android:textColor="@color/cardview_dark_background"
+                android:layout_height="wrap_content"
+                android:id="@+id/lblNomorTerdaftar"
+                android:textSize="16sp"
+                android:text="Nomor Terdaftar"
+                android:layout_centerHorizontal="true"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/cardview_dark_background"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/lblNomorTerdaftar"
+                android:id="@+id/tv_NomorTerdaftar"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:text="081318180994"
+                android:layout_centerHorizontal="true"/>
+            <android.support.design.widget.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_marginTop="25dp"
+                android:layout_marginLeft="35dp"
+                android:layout_marginRight="35dp"
+                android:layout_marginBottom="5dp"
+                android:textColor="@color/cardview_dark_background"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_NomorTerdaftar"
+                android:id="@+id/tv_InputNomorBaru"
+                android:textSize="20sp"
+                android:hint="Masukkan Nomor Baru"/>
+
+            <android.support.design.widget.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_marginTop="25dp"
+                android:layout_marginLeft="35dp"
+                android:layout_marginRight="35dp"
+                android:layout_marginBottom="5dp"
+                android:textColor="@color/cardview_dark_background"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_InputNomorBaru"
+                android:id="@+id/tv_InputPasswordProfile"
+                android:textSize="20sp"
+                android:hint="Password"/>
+            <TextView
+                android:id="@+id/linkforgotpassword_profile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="15dp"
+                android:textSize="16sp"
+                android:layout_below="@id/tv_InputPasswordProfile"
+                android:layout_centerHorizontal="true"
+                android:text="@string/forgot_password_text"
+                android:autoLink="all"
+                android:gravity="center"
+                android:linksClickable="true"
+                android:textColor="@color/blue"
+                android:textStyle="bold"/>
+
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_below="@id/linkforgotpassword_profile"-->
+                <!--android:background="@color/light_grey"-->
+                <!--android:orientation="horizontal" >-->
+
+                <!--<Button-->
+                    <!--android:id="@+id/btn_Batal"-->
+                    <!--android:background="@color/white"-->
+                    <!--android:layout_margin="5dp"-->
+                    <!--android:layout_width="170dp"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:clickable="true"-->
+                    <!--android:text="Batal"-->
+                    <!--android:gravity="center"-->
+                    <!--android:textColor="@color/black"-->
+                    <!--android:textAllCaps="false"-->
+                    <!--android:textSize="18sp"/>-->
+
+                <!--<Button-->
+                    <!--android:id="@+id/btn_UbahNomor"-->
+                    <!--android:layout_width="174dp"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_margin="5dp"-->
+                    <!--android:background="@color/white"-->
+                    <!--android:gravity="center"-->
+                    <!--android:clickable="true"-->
+                    <!--android:text="Ubah Nomor"-->
+                    <!--android:textColor="@color/black"-->
+                    <!--android:textAllCaps="false"-->
+                    <!--android:textSize="18sp"/>-->
+            <!--</LinearLayout>-->
+
+        </RelativeLayout>
+    </RelativeLayout>

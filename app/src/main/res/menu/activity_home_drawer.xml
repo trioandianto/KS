@@ -12,11 +12,11 @@
         <item
             android:id="@+id/nav_appointment"
             android:icon="@drawable/ic_my_library_books_24dp"
-            android:title="Appointment" />
+            android:title="Histori Buat Janji" />
         <item
             android:id="@+id/nav_tek_darah"
             android:icon="@drawable/ic_event_note_black_24dp"
-            android:title="Pengingat" />
+            android:title="Pengingat Minum Obat" />
         <item
             android:id="@+id/nav_det_jantung"
             android:icon="@drawable/ic_person_add_black_24dp"

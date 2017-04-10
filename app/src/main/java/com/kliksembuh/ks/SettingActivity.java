@@ -8,39 +8,26 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.TextView;
 
 
-public class SettingActivity extends Fragment{
+public class SettingActivity extends AppCompatActivity{
     private SettingActivity.SectionsPagerAdapter mSectionsPagerAdapter;
     private ViewPager mViewPager;
-//    @Override
-//    protected void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_setting);
-//        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
-//
-//        mViewPager = (ViewPager) findViewById(R.id.containerSetting);
-//        mViewPager.setAdapter(mSectionsPagerAdapter);
-//        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabSetting);
-//        tabLayout.setupWithViewPager(mViewPager);
-//
-//    }
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_setting);
+        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle saveInstanceState){
-        View rootView = inflater.inflate(R.layout.activity_setting, container, false);
-        mSectionsPagerAdapter = new SectionsPagerAdapter(getActivity().getSupportFragmentManager());
-        mViewPager = (ViewPager) rootView.findViewById(R.id.containerSetting);
+        mViewPager = (ViewPager) findViewById(R.id.containerSetting);
         mViewPager.setAdapter(mSectionsPagerAdapter);
-        TabLayout tabLayout = (TabLayout) rootView.findViewById(R.id.tabSetting);
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabSetting);
         tabLayout.setupWithViewPager(mViewPager);
-        return rootView;
 
     }
+
 
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
 

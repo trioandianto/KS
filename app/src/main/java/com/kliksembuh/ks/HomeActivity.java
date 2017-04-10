@@ -177,7 +177,9 @@ public class HomeActivity extends AppCompatActivity
         Class fragmentClass;
         int i = item.getItemId();
         if(i == R.id.nav_setting){
-            fragment = new SettingActivity();
+            Intent home = new Intent(this, SettingActivity.class);
+            startActivityForResult(home, 0);
+            //fragment = new SettingActivity();
         }
         else if (i == R.id.nav_search){
             Intent home = new Intent(this, HomeActivity.class);
