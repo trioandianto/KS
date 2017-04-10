@@ -90,7 +90,13 @@
         </activity>
         <activity
             android:name=".SplashScreenActivity"
-            android:theme="@style/AppTheme2"></activity>
+            android:theme="@style/AppTheme2">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".WelcomeActivity" />
         <activity
             android:name=".TermAndPolicyActivity"
@@ -111,13 +117,7 @@
         </activity>
         <activity
             android:name=".HomeActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".FavoriteActivity"
             android:label="@string/action_favorite"
@@ -190,7 +190,11 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.kliksembuh.ks.HospitalList" />
         </activity>
-        <activity android:name=".ProfileManagementActivity" />
+        <activity android:name=".ProfileManagementActivity"
+            android:label="@string/pengaturan_email"
+            android:launchMode="singleTop"
+            android:parentActivityName=".HomeActivity"
+        />
         <activity android:name=".ReviewActivity" />
         <activity
             android:name=".SearchLocationActivity"
@@ -200,13 +204,12 @@
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
         </activity>
-        <activity android:name=".SearchSpesializationActivity"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="adjustPan">
-            <intent-filter>
-                <action android:name="android.intent.action.SEARCH" />
-            </intent-filter>
-        </activity>
+        <!--<activity android:name=".SettingActivity" />-->
+        <!--<activity android:name=".SettingProfileActivity" />-->
+        <!--<activity android:name=".SettingVitalSignActivity" />-->
+        <!--<activity android:name=".SettingReminderActivity" />-->
+        <activity android:name=".PatientProfileActivity" />
+        <activity android:name=".EditPasswordProfileActivity"></activity>
     </application>
 
 </manifest>
