@@ -1,17 +1,14 @@
 package com.kliksembuh.ks;
 
-import android.content.Intent;
+import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 
 public class SettingActivity extends Fragment{
@@ -33,7 +30,7 @@ public class SettingActivity extends Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle saveInstanceState){
         View rootView = inflater.inflate(R.layout.activity_setting, container, false);
-        mSectionsPagerAdapter = new SectionsPagerAdapter(getActivity().getSupportFragmentManager());
+        mSectionsPagerAdapter = new SectionsPagerAdapter(getFragmentManager());
         mViewPager = (ViewPager) rootView.findViewById(R.id.containerSetting);
         mViewPager.setAdapter(mSectionsPagerAdapter);
         TabLayout tabLayout = (TabLayout) rootView.findViewById(R.id.tabSetting);

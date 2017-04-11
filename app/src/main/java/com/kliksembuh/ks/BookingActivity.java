@@ -93,6 +93,8 @@ public class BookingActivity extends AppCompatActivity {
         }
         imgDokter = (ImageView)findViewById(R.id.iv_doc_picdetail);
         Drawable img = LoadImageFromWebOperations(urlImage);
+        int id = getResources().getIdentifier("com.kliksembuh.ks:drawable/"+urlImage,null,null);
+        imgDokter.setImageResource(id);
 //        imgDokter.setImageResource();
         tvNamaDokter = (TextView) findViewById(R.id.tv_drname_detail);
         tvNamaDokter.setText(namaDokter);

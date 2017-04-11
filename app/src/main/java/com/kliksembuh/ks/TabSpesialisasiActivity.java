@@ -12,7 +12,7 @@ import android.widget.Button;
 /**
  * Created by Trio Andianto on 1/23/2017.
  */
-public class TabSpesialisasiActivity extends Fragment implements View.OnClickListener{
+public class TabSpesialisasiActivity extends Fragment{
 
     private String userID;
     private String spesial;
@@ -61,76 +61,69 @@ public class TabSpesialisasiActivity extends Fragment implements View.OnClickLis
                              Bundle saveInstanceState){
         View rootView = inflater.inflate(R.layout.activity_tab_spesialis, container, false);
         location = (AutoCompleteTextView)rootView.findViewById(R.id.tvsearchlocationspesialis) ;
-        location.setOnClickListener(this);
+        location.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent myIntent = new Intent(getActivity(),SearchLocationActivity.class);
+                Bundle b = new Bundle();
+                b.putString("userID", userID);
+                b.putString("SubDistrictCD",lokasiID);
+                b.putString("SubDistrictDescription",locasi);
+                b.putString("facilityID",spesialID);
+                b.putString("facilityName",spesial);
+                myIntent.putExtras(b);
+                startActivity(myIntent);
+            }
+        });
         location.setText(locasi);
         spesialize = (AutoCompleteTextView)rootView.findViewById(R.id.tvsearchtypespesialis);
+        spesialize.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent myIntent = new Intent(getActivity(),SearchSpesializationActivity.class);
+                Bundle b = new Bundle();
+                b.putString("userID", userID);
+                b.putString("SubDistrictCD",lokasiID);
+                b.putString("facilityID",spesialID);
+                b.putString("facilityName",spesial);
+                b.putString("SubDistrictDescription",locasi);
+                myIntent.putExtras(b);
+                startActivity(myIntent);
+            }
+        });
         spesialize.setText(spesial);
-        spesialize.setOnClickListener(this);
 
         //Action Button
         Button btnsearch = (Button)rootView.findViewById(R.id.btnsearchspesialisasi);
-        btnsearch.setOnClickListener(this);
+        btnsearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(lokasiID!=null && spesialID!=null){
+                    Intent myIntent = new Intent(getActivity(),HospitalList.class);
+                    Bundle b = new Bundle();
+                    b.putString("userID", userID);
+                    b.putString("subDistrict",lokasiID);
+                    b.putString("facilityID",spesialID);
+                    b.putString("facilityName",spesial);
+                    b.putString("SubDistrictDescription",locasi);//Your id
+                    //.putExtra("userID",userID);
+                    myIntent.putExtras(b);
+                    startActivity(myIntent);
+                }else{
+                    if(lokasiID==null){
+                        location.setError("Silahkan Pilih Lokasi.");
+                        focusView = location;
+
+                    }else{
+                        spesialize.setError("Silahkan Pilih Spesialisasi.");
+                        focusView = spesialize;
+                    }
+                }
+            }
+        });
 
 
 
         return rootView;
-    }
-
-    @Override
-    public void onClick(View v) {
-        int i = v.getId();
-        if(i==R.id.tvsearchlocationspesialis){
-            Intent myIntent = new Intent(getActivity(),SearchLocationActivity.class);
-            Bundle b = new Bundle();
-            b.putString("userID", userID);
-            b.putString("SubDistrictCD",lokasiID);
-            b.putString("SubDistrictDescription",locasi);
-            b.putString("facilityID",spesialID);
-            b.putString("facilityName",spesial);
-            myIntent.putExtras(b);
-
-            startActivity(myIntent);
-        }
-        else if(i==R.id.btnsearchspesialisasi){
-            if(lokasiID!=null && spesialID!=null){
-                Intent myIntent = new Intent(getActivity(),HospitalList.class);
-                Bundle b = new Bundle();
-                b.putString("userID", userID);
-                b.putString("subDistrict",lokasiID);
-                b.putString("facilityID",spesialID);
-                b.putString("facilityName",spesial);
-                b.putString("SubDistrictDescription",locasi);//Your id
-                //.putExtra("userID",userID);
-                myIntent.putExtras(b);
-                startActivity(myIntent);
-            }else{
-                if(lokasiID==null){
-                    location.setError("Silahkan Pilih Lokasi.");
-                    focusView = location;
-
-                }else{
-                    spesialize.setError("Silahkan Pilih Spesialisasi.");
-                    focusView = spesialize;
-                }
-            }
-
-
-        }
-        else if(i == R.id.tvsearchtypespesialis){
-            Intent myIntent = new Intent(getActivity(),SearchSpesializationActivity.class);
-            Bundle b = new Bundle();
-            b.putString("userID", userID);
-            b.putString("SubDistrictCD",lokasiID);
-            b.putString("facilityID",spesialID);
-            b.putString("facilityName",spesial);
-            b.putString("SubDistrictDescription",locasi);
-            myIntent.putExtras(b);
-            startActivity(myIntent);
-
-        }
-        else{
-
-        }
-
     }
 }
