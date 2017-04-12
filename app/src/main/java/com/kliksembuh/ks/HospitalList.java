@@ -112,6 +112,8 @@ public class HospitalList extends AppCompatActivity {
                 Bundle b = new Bundle();
                 b.putString("institution", rumahSakitID[position]);
                 b.putString("tittle",nameRumahSakit[position]);//Your id
+                b.putString("facilityID", spesialisasi);
+                b.putString("userID",userID);
                 //.putExtra("userID",userID);
                 myIntent.putExtras(b);
                 //.putExtra("userID",userID);
