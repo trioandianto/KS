@@ -39,6 +39,7 @@ public class KonfirmasiJanjiActivity extends AppCompatActivity {
     private String dayProgramID;
     private String dayProgramDetailID;
     private String personnelID;
+    private String personnelCD;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,18 +48,18 @@ public class KonfirmasiJanjiActivity extends AppCompatActivity {
 
         Bundle b = getIntent().getExtras();
         if(b!=null){
-            userID = b.getString("");
-            customerID = b.getString("");
-            facilityCategoryID = b.getString("");
-            facilityID = b.getString("");
-            status = b.getString("");
-            institutionID = b.getString("");
-            date = b.getString("");
-            weekProgramID = b.getString("");
-            dayProgramID = b.getString("");
-            dayProgramDetailID = b.getString("");
-            personnelID = b.getString("");
-
+            userID = b.getString("userID");
+            customerID = "1";
+            facilityCategoryID = "1";
+            facilityID = b.getString("facilityID");
+            status = "1";
+            institutionID = b.getString("rumahSakitID");
+            date = "4-11-2017";
+            weekProgramID = b.getString("WPID");
+            dayProgramID = b.getString("DPID");
+            dayProgramDetailID = b.getString("DetailID");
+            personnelID = b.getString("idDokter");
+            personnelCD = b.getString("personilID");
         }
 
 
@@ -127,7 +128,7 @@ public class KonfirmasiJanjiActivity extends AppCompatActivity {
             NetworkInfo netInfo = cm.getActiveNetworkInfo();
             if (netInfo != null && netInfo.isConnected()) {
                 try{
-                    URL url = new URL("http://tmoon/kliksembuhapi/api/transactions/PostAppointmentTransaction");
+                    URL url = new URL("http://basajans/KlikSembuhapi/api/transactions/PostAppointmentTransaction");
                     HttpURLConnection urlc = (HttpURLConnection) url.openConnection();
                     JSONObject jsonObject = new JSONObject();
                     jsonObject.put("FacilityCategoryID",mFacilityCategoryID);
@@ -197,7 +198,7 @@ public class KonfirmasiJanjiActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(final String success) {
             if (success!="") {
-                Intent i = new Intent(getApplicationContext(), VerifikasiActivity.class);
+                Intent i = new Intent(getApplicationContext(), MyAppointmentActivity.class);
                 startActivityForResult(i, 0);
                 finish();
 
