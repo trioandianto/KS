@@ -12,7 +12,7 @@
         android:id="@+id/listview_patientProfile"
         android:padding="10dp"/>
     <Button
-        android:id="@+id/email_sign_in_button"
+        android:id="@+id/btnAddNewPatientProf"
         style="@style/MyCustomTextAppearance"
         android:layout_width="match_parent"
         android:layout_height="50dp"
@@ -30,6 +30,8 @@
         android:textAllCaps="false"
         android:textSize="20dp"
         android:background="@drawable/shape"
-        android:backgroundTint="@color/white"/>
+        android:backgroundTint="@color/white"
+        android:clickable="true"
+        android:onClick="onClick"/>
 
 </RelativeLayout>

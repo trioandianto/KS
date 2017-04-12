@@ -1,43 +1,33 @@
 package com.kliksembuh.ks;
 
-import android.os.Bundle;
+import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.view.LayoutInflater;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.view.View;
-import android.view.ViewGroup;
+import android.widget.TextView;
 
 
-public class SettingActivity extends Fragment{
+public class SettingActivity extends AppCompatActivity{
     private SettingActivity.SectionsPagerAdapter mSectionsPagerAdapter;
     private ViewPager mViewPager;
-//    @Override
-//    protected void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_setting);
-//        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
-//
-//        mViewPager = (ViewPager) findViewById(R.id.containerSetting);
-//        mViewPager.setAdapter(mSectionsPagerAdapter);
-//        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabSetting);
-//        tabLayout.setupWithViewPager(mViewPager);
-//
-//    }
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_setting);
+        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle saveInstanceState){
-        View rootView = inflater.inflate(R.layout.activity_setting, container, false);
-        mSectionsPagerAdapter = new SectionsPagerAdapter(getFragmentManager());
-        mViewPager = (ViewPager) rootView.findViewById(R.id.containerSetting);
+        mViewPager = (ViewPager) findViewById(R.id.containerSetting);
         mViewPager.setAdapter(mSectionsPagerAdapter);
-        TabLayout tabLayout = (TabLayout) rootView.findViewById(R.id.tabSetting);
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabSetting);
         tabLayout.setupWithViewPager(mViewPager);
-        return rootView;
 
     }
+
 
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
@@ -72,11 +62,11 @@ public class SettingActivity extends Fragment{
         public CharSequence getPageTitle(int position) {
             switch (position) {
                 case 0:
-                    return "ATUR PROFIL";
+                    return "Atur Profil";
                 case 1:
-                    return "ATUR VITAL SIGN";
+                    return "Atur Vital Sign";
                 case 2:
-                    return "ATUR PENGINGAT";
+                    return "Atur Pengingat";
             }
             return null;
         }

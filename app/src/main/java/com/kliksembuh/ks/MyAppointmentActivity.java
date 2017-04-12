@@ -37,6 +37,12 @@ public class MyAppointmentActivity extends AppCompatActivity {
                     MyAppointmentUpComingActivity myAppointmentUpComingActivity= new MyAppointmentUpComingActivity();
                     return myAppointmentUpComingActivity;
                 case 1:
+                    MyAppointmentConfirmedActivity myAppointmentConfirmedActivity = new MyAppointmentConfirmedActivity();
+                    return myAppointmentConfirmedActivity;
+                case 2:
+                    MyAppointmentSuccessActivity myAppointmentSuccessActivity = new MyAppointmentSuccessActivity();
+                    return myAppointmentSuccessActivity;
+                case 3:
                     MyAppointmentHistoryActivity myAppointmentHistoryActivity = new MyAppointmentHistoryActivity();
                     return myAppointmentHistoryActivity;
                 default:
@@ -46,17 +52,21 @@ public class MyAppointmentActivity extends AppCompatActivity {
 
         @Override
         public int getCount() {
-            // Show 3 total pages.
-            return 2;
+            // Show 4 total pages.
+            return 4;
         }
 
         @Override
         public CharSequence getPageTitle(int position) {
             switch (position) {
                 case 0:
-                    return "UP COMING";
+                    return "Pending";
                 case 1:
-                    return "HISTORY";
+                    return "Confirmed";
+                case 2:
+                    return "Success";
+                case 3:
+                    return "Semua Trx";
             }
             return null;
         }

@@ -48,7 +48,7 @@
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".MainActivity"
-            android:theme="@style/AppTheme2">
+            android:theme="@style/AppTheme3">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -90,7 +90,12 @@
         </activity>
         <activity
             android:name=".SplashScreenActivity"
-            android:theme="@style/AppTheme2">
+            android:theme="@style/AppTheme3">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity android:name=".WelcomeActivity" />
         <activity
@@ -112,18 +117,12 @@
         </activity>
         <activity
             android:name=".HomeActivity"
-            android:theme="@style/AppTheme.NoActionBar" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".FavoriteActivity"
             android:label="@string/action_favorite"
-            android:parentActivityName=".HomeActivity">
+            android:parentActivityName=".HomeActivity"
+            android:theme="@style/AppTheme2">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".HomeActivity" />
@@ -131,7 +130,8 @@
         <activity
             android:name=".MyAppointmentActivity"
             android:label="@string/action_myappointment"
-            android:parentActivityName=".HomeActivity">
+            android:parentActivityName=".HomeActivity"
+            android:theme="@style/AppTheme2">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".HomeActivity" />
@@ -150,31 +150,36 @@
 
         <activity
             android:name=".AppointmentDetailActivity"
-            android:label="@string/title_activity_appointment_detail" />
+            android:label="@string/title_activity_appointment_detail"
+            android:theme="@style/AppTheme2" />
         <activity
             android:name=".LoginWithFacebook"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
+
                 <data android:scheme="@string/facebook_app_id" />
             </intent-filter>
         </activity>
+
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
 
         <activity
             android:name=".HospitalList"
-            android:theme="@style/AppTheme2"
-            android:parentActivityName=".HomeActivity" />
+            android:parentActivityName=".HomeActivity"
+            android:theme="@style/AppTheme2" />
         <activity android:name=".CobaListJSON" />
         <activity android:name=".DoctorListActivity" />
         <activity
             android:name=".BookingActivity"
             android:label="Jadwal"
-            android:parentActivityName=".TestScroolView" />
+            android:parentActivityName=".TestScroolView"
+            android:theme="@style/AppTheme2" />
         <activity
             android:name=".TestScroolView"
             android:parentActivityName=".HospitalList"
@@ -182,21 +187,24 @@
         <activity
             android:name=".KonfirmasiJanjiActivity"
             android:label="Buat Janji"
-            android:parentActivityName=".BookingActivity" />
+            android:parentActivityName=".BookingActivity"
+            android:theme="@style/AppTheme2" />
         <activity
             android:name=".ListMapActivity"
             android:label="@string/title_activity_list_map"
             android:launchMode="singleTop"
-            android:parentActivityName=".HospitalList">
+            android:parentActivityName=".HospitalList"
+            android:theme="@style/AppTheme2">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.kliksembuh.ks.HospitalList" />
         </activity>
-        <activity android:name=".ProfileManagementActivity"
+        <activity
+            android:name=".ProfileManagementActivity"
             android:label="@string/pengaturan_email"
             android:launchMode="singleTop"
-            android:parentActivityName=".HomeActivity"
-        />
+            android:parentActivityName=".SettingActivity"
+            android:theme="@style/AppTheme2" />
         <activity android:name=".ReviewActivity" />
         <activity
             android:name=".SearchLocationActivity"
@@ -206,12 +214,36 @@
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
         </activity>
-        <!--<activity android:name=".SettingActivity" />-->
-        <!--<activity android:name=".SettingProfileActivity" />-->
-        <!--<activity android:name=".SettingVitalSignActivity" />-->
-        <!--<activity android:name=".SettingReminderActivity" />-->
-        <activity android:name=".PatientProfileActivity" />
-        <activity android:name=".EditPasswordProfileActivity"></activity>
+        <activity
+            android:name=".SettingActivity"
+            android:label="@string/pengaturan_base"
+            android:launchMode="singleTop"
+            android:parentActivityName=".HomeActivity"
+            android:theme="@style/AppTheme2" />
+        <!-- <activity android:name=".SettingProfileActivity" /> -->
+        <!-- <activity android:name=".SettingVitalSignActivity" /> -->
+        <!-- <activity android:name=".SettingReminderActivity" /> -->
+        <activity
+            android:name=".PatientProfileActivity"
+            android:label="@string/pengaturan_profil"
+            android:launchMode="singleTop"
+            android:parentActivityName=".SettingActivity"
+            android:theme="@style/AppTheme2" />
+        <activity
+            android:name=".EditPasswordProfileActivity"
+            android:label="@string/pengaturan_password"
+            android:launchMode="singleTop"
+            android:parentActivityName=".SettingActivity"
+            android:theme="@style/AppTheme2" />
+        <activity
+            android:name=".PatientFormActivity"
+            android:label="@string/tambah_profil_pasien"
+            android:launchMode="singleTop"
+            android:parentActivityName=".SettingActivity"
+            android:theme="@style/AppTheme2" />
+        <!-- <activity android:name=".EditNumberProfileActivity"></activity> -->
+        <!--<activity android:name=".MyAppointmentConfirmedActivity" />-->
+        <!--<activity android:name=".MyAppointmentSuccessActivity"></activity>-->
     </application>
 
 </manifest>

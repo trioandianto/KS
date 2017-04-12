@@ -20,6 +20,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.kliksembuh.ks.library.Intromanager;
 
@@ -48,6 +49,11 @@ public class MainActivity extends AppCompatActivity {
             getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE|View.SYSTEM_UI_FLAG_FULLSCREEN);
         }
         setContentView(R.layout.activity_main);
+
+//        if( getIntent().getBooleanExtra("Exit me", false)){
+//            finish();
+//            return; // add this to prevent from doing unnecessary stuffs
+//        }
 
         viewPager =(ViewPager)findViewById(R.id.view_pager);
         dotsLayout=(LinearLayout)findViewById(R.id.layoutdots);
@@ -86,6 +92,20 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
+
+    }
+    private static long back_pressed;
+
+    @Override
+    public void onBackPressed() {
+
+        if (back_pressed + 2000 > System.currentTimeMillis()) {
+            super.onBackPressed();
+        } else {
+            Toast.makeText(this, "Press once again to exit!", Toast.LENGTH_SHORT).show();
+            back_pressed = System.currentTimeMillis();
+        }
 
 
     }

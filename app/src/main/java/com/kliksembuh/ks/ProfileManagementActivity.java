@@ -1,6 +1,8 @@
 package com.kliksembuh.ks;
 
 import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
@@ -9,8 +11,10 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -31,7 +35,7 @@ import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class ProfileManagementActivity extends AppCompatActivity{
+public class ProfileManagementActivity extends AppCompatActivity implements View.OnClickListener {
     private static final int RESULT_LOAD_IMAGE=1;
     private static final String SERVER_ADDRESS="";
 
@@ -59,6 +63,7 @@ public class ProfileManagementActivity extends AppCompatActivity{
     private AutoCompleteTextView suhuTubuh;
     private AutoCompleteTextView denyutNadi;
     private AutoCompleteTextView pernafasan;
+    final Context context = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -154,6 +159,61 @@ public class ProfileManagementActivity extends AppCompatActivity{
             imageView.setImageURI(selectedImage);
         }
     }
+
+    @Override
+    public void onClick(View v) {
+
+//        Intent i=new Intent();
+//        i.setClass(this,EditNumberProfileActivity.class);
+//        startActivity(i);
+//        Intent i = new Intent();
+//        switch(v.getId()) {
+//            case R.id.btnTvUbahNomor: // R.id.textView1
+//                EditNumberProfileActivity dialogEditNumber = new EditNumberProfileActivity(ProfileManagementActivity.this);
+//                dialogEditNumber.show();
+//                break;
+//        }
+//        startActivity(i);
+
+        // get prompts.xml view
+        LayoutInflater li = LayoutInflater.from(context);
+        View promptsView = li.inflate(R.layout.activity_edit_number_profile, null);
+
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                context);
+
+        // set prompts.xml to alertdialog builder
+        alertDialogBuilder.setView(promptsView);
+
+        final TextView userInputNomorBaru = (TextView) promptsView.findViewById(R.id.tv_NomorTerdaftar);
+        final TextView userInputPassword = (TextView) promptsView.findViewById(R.id.tvEditPasswordProf);
+
+
+        // set dialog message
+        alertDialogBuilder
+                .setCancelable(false)
+                .setPositiveButton("OK",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog,int id) {
+                                // get user input and set it to result
+                                // edit text
+//                                result.setText(userInput.getText());
+                            }
+                        })
+                .setNegativeButton("Cancel",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog,int id) {
+                                dialog.cancel();
+                            }
+                        });
+
+        // create alert dialog
+        AlertDialog alertDialog = alertDialogBuilder.create();
+
+        // show it
+        alertDialog.show();
+    }
+
     private class UploadImage extends AsyncTask<Void,Void,Void>{
         Bitmap  image;
         public UploadImage(Bitmap img){
