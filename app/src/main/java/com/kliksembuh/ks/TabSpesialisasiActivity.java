@@ -1,5 +1,6 @@
 package com.kliksembuh.ks;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -14,6 +15,8 @@ import android.widget.Button;
  */
 public class TabSpesialisasiActivity extends Fragment implements View.OnClickListener{
 
+
+    private Context context;
     private String userID;
     private String spesial;
     private String locasi;
@@ -63,9 +66,9 @@ public class TabSpesialisasiActivity extends Fragment implements View.OnClickLis
         location = (AutoCompleteTextView)rootView.findViewById(R.id.tvsearchlocationspesialis) ;
         location.setOnClickListener(this);
         location.setText(locasi);
-        spesialize = (AutoCompleteTextView)rootView.findViewById(R.id.tvsearchtypespesialis);
-        spesialize.setText(spesial);
+        spesialize = (AutoCompleteTextView) rootView.findViewById(R.id.tvspesi);
         spesialize.setOnClickListener(this);
+        spesialize.setText(spesial);
 
         //Action Button
         Button btnsearch = (Button)rootView.findViewById(R.id.btnsearchspesialisasi);
@@ -74,6 +77,9 @@ public class TabSpesialisasiActivity extends Fragment implements View.OnClickLis
 
 
         return rootView;
+    }
+    public void cliked(View v){
+
     }
 
     @Override
@@ -88,8 +94,8 @@ public class TabSpesialisasiActivity extends Fragment implements View.OnClickLis
             b.putString("facilityID",spesialID);
             b.putString("facilityName",spesial);
             myIntent.putExtras(b);
-
             startActivity(myIntent);
+
         }
         else if(i==R.id.btnsearchspesialisasi){
             if(lokasiID!=null && spesialID!=null){
@@ -114,9 +120,8 @@ public class TabSpesialisasiActivity extends Fragment implements View.OnClickLis
                 }
             }
 
-
         }
-        else if(i == R.id.tvsearchtypespesialis){
+        else if (i==R.id.tvspesi){
             Intent myIntent = new Intent(getActivity(),SearchSpesializationActivity.class);
             Bundle b = new Bundle();
             b.putString("userID", userID);
@@ -127,8 +132,8 @@ public class TabSpesialisasiActivity extends Fragment implements View.OnClickLis
             myIntent.putExtras(b);
             startActivity(myIntent);
 
-        }
-        else{
+
+        }else{
 
         }
 

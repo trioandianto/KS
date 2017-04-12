@@ -1,6 +1,7 @@
 package com.kliksembuh.ks;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -32,7 +33,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
-import java.sql.Date;
+import java.util.Date;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Iterator;
@@ -40,10 +41,12 @@ import java.util.List;
 
 import javax.net.ssl.HttpsURLConnection;
 
-public class BookingActivity extends AppCompatActivity {
+public class BookingActivity extends AppCompatActivity implements ListView.OnItemClickListener {
     private TextView jadwal;
     private String personalID;
     private String year;
+    private String month;
+    private String sday;
     private String week="1";
     private List<JadwalDokter> mJadwalDokterList;
     private JadwalDokterAdapter jAdapter;
@@ -55,6 +58,7 @@ public class BookingActivity extends AppCompatActivity {
     private ImageView imgDokter;
     private TextView tvNamaDokter;
     private TextView tvJenisSpesialisasi;
+    private TextView tvDate;
 
     private int cDay;
     private int cMonth;
@@ -66,6 +70,29 @@ public class BookingActivity extends AppCompatActivity {
     private String idDokter;
     private String urlImage;
     private String dokterSpesialisasi;
+    private int seninMingguIni;
+    private int selasaMingguIni;
+    private int rabuMingguIni;
+    private int kamisMingguIni;
+    private int jumatMingguIni;
+    private int sabtuMingguIni;
+    private int mingguMingguIni;
+    private int hariMingguini;
+    private int bulanIni;
+    private int tahunIni;
+    private int seninMingguDepan;
+    private int selasaMingguDepan;
+    private int rabuMingguDepan;
+    private int kamisMingguDepan;
+    private int jumatMingguDepan;
+    private int sabtuMingguDepan;
+    private int mingguMingguDepan;
+    private String weekProgramID;
+    private String dayProgramID;
+    private String programDetailID;
+    private String rumahSakitID;
+    private String facilityID;
+    private String userID;
 
     public Drawable getImageDokter() {
         return imageDokter;
@@ -85,21 +112,25 @@ public class BookingActivity extends AppCompatActivity {
 
         Bundle b = getIntent().getExtras();
         if(b != null) {
-            personalID = b.getString("userID");
+            userID = b.getString("userID");
+            personalID = b.getString("personalID");
             namaDokter = b.getString("namaDokter");
             idDokter = b.getString("idDokter");
             urlImage = b.getString("urlImage");
             dokterSpesialisasi = "Dokter Umum";
+            rumahSakitID = b.getString("rumahSakitID");
+            facilityID = b.getString("facilityID");
+
         }
         imgDokter = (ImageView)findViewById(R.id.iv_doc_picdetail);
-        Drawable img = LoadImageFromWebOperations(urlImage);
-//        imgDokter.setImageResource();
         tvNamaDokter = (TextView) findViewById(R.id.tv_drname_detail);
         tvNamaDokter.setText(namaDokter);
         tvJenisSpesialisasi = (TextView)findViewById(R.id.tv_drspecialty_detail);
         tvJenisSpesialisasi.setText(dokterSpesialisasi);
+        tvDate = (TextView)findViewById(R.id.tvDate);
 
         lvJadwal = (ListView)findViewById(R.id.lvjadwal);
+        lvJadwal.setOnItemClickListener(this);
         mJadwalDokterList = new ArrayList<>();
         spnHari = (Spinner)findViewById(R.id.spnHari);
         List<String> list = new ArrayList<String>();
@@ -114,33 +145,366 @@ public class BookingActivity extends AppCompatActivity {
         ArrayAdapter arrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,list);
         spnHari.setAdapter(arrayAdapter);
 
+        Date dt = new Date();
+        int as = dt.getYear();
+        int ab = dt.getMonth();
+        int at = dt.getDay();
 
         Calendar calendar = Calendar.getInstance();
         cDay = calendar.get(Calendar.DAY_OF_MONTH);
         cMonth = calendar.get(Calendar.MONTH);
         cYear = calendar.get(Calendar.YEAR);
         day = calendar.get(Calendar.DAY_OF_WEEK);
+        hariMingguini = day;
         lastDay = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
-        tanggal = new Date(cYear,cMonth,cDay);
+        bulanIni = cMonth;
+        tahunIni = cYear;
+
+        if(day == 1){
+            mingguMingguIni = cDay;
+            seninMingguIni = mingguMingguIni + 1;
+            if (seninMingguIni > lastDay){
+                seninMingguIni = seninMingguIni - lastDay;
+            }
+            selasaMingguIni = seninMingguIni + 1;
+            rabuMingguIni = selasaMingguIni + 1;
+            kamisMingguIni = rabuMingguIni + 1;
+            jumatMingguIni = kamisMingguIni + 1;
+            sabtuMingguIni = jumatMingguIni + 1;
+
+        }
+        else if(day == 2){
+            seninMingguIni=cDay;
+            seninMingguIni = mingguMingguIni + 1;
+            if (seninMingguIni > lastDay){
+                seninMingguIni = seninMingguIni - lastDay;
+            }
+            selasaMingguIni = seninMingguIni + 1;
+            if (selasaMingguIni > lastDay){
+                selasaMingguIni = selasaMingguIni - lastDay;
+            }
+            rabuMingguIni = selasaMingguIni + 1;
+            if (seninMingguIni > lastDay){
+                seninMingguIni = seninMingguIni - lastDay;
+            }
+            kamisMingguIni = rabuMingguIni + 1;
+            if (seninMingguIni > lastDay){
+                seninMingguIni = seninMingguIni - lastDay;
+            }
+            jumatMingguIni = kamisMingguIni + 1;
+            if (seninMingguIni > lastDay){
+                seninMingguIni = seninMingguIni - lastDay;
+            }
+            sabtuMingguIni = jumatMingguIni + 1;
+            if (seninMingguIni > lastDay){
+                seninMingguIni = seninMingguIni - lastDay;
+            }
+            mingguMingguIni = sabtuMingguIni + 1;
+            if (seninMingguIni > lastDay){
+                seninMingguIni = seninMingguIni - lastDay;
+            }
+        }
+        else if(day == 3){
+            selasaMingguIni = cDay;
+            mingguMingguIni = cDay;
+            seninMingguIni = mingguMingguIni + 1;
+            if (seninMingguIni > lastDay){
+                seninMingguIni = seninMingguIni - lastDay;
+            }
+            selasaMingguIni = seninMingguIni + 1;
+            rabuMingguIni = selasaMingguIni + 1;
+            kamisMingguIni = rabuMingguIni + 1;
+            jumatMingguIni = kamisMingguIni + 1;
+            sabtuMingguIni = jumatMingguIni + 1;
+        }
+        else if(day == 4){
+            rabuMingguIni = cDay;
+            mingguMingguIni = cDay;
+            seninMingguIni = mingguMingguIni + 1;
+            if (seninMingguIni > lastDay){
+                seninMingguIni = seninMingguIni - lastDay;
+            }
+            selasaMingguIni = seninMingguIni + 1;
+            rabuMingguIni = selasaMingguIni + 1;
+            kamisMingguIni = rabuMingguIni + 1;
+            jumatMingguIni = kamisMingguIni + 1;
+            sabtuMingguIni = jumatMingguIni + 1;
+
+        }
+        else if(day == 5){
+            kamisMingguIni =cDay;
+            mingguMingguIni = cDay;
+            seninMingguIni = mingguMingguIni + 1;
+            if (seninMingguIni > lastDay){
+                seninMingguIni = seninMingguIni - lastDay;
+            }
+            selasaMingguIni = seninMingguIni + 1;
+            rabuMingguIni = selasaMingguIni + 1;
+            kamisMingguIni = rabuMingguIni + 1;
+            jumatMingguIni = kamisMingguIni + 1;
+            sabtuMingguIni = jumatMingguIni + 1;
+
+        }
+        else if(day == 6){
+            jumatMingguIni = cDay;
+            mingguMingguIni = cDay;
+            seninMingguIni = mingguMingguIni + 1;
+            if (seninMingguIni > lastDay){
+                seninMingguIni = seninMingguIni - lastDay;
+            }
+            selasaMingguIni = seninMingguIni + 1;
+            rabuMingguIni = selasaMingguIni + 1;
+            kamisMingguIni = rabuMingguIni + 1;
+            jumatMingguIni = kamisMingguIni + 1;
+            sabtuMingguIni = jumatMingguIni + 1;
+
+        }
+        else{
+            sabtuMingguIni = cDay;
+            mingguMingguIni = cDay;
+            seninMingguIni = mingguMingguIni + 1;
+            if (seninMingguIni > lastDay){
+                seninMingguIni = seninMingguIni - lastDay;
+            }
+            selasaMingguIni = seninMingguIni + 1;
+            rabuMingguIni = selasaMingguIni + 1;
+            kamisMingguIni = rabuMingguIni + 1;
+            jumatMingguIni = kamisMingguIni + 1;
+            sabtuMingguIni = jumatMingguIni + 1;
+
+        }
+
+
+
 
         personalID="MD0001";
         year = Integer.toString(cYear);
+        month = Integer.toString(cMonth+1);
+        sday = Integer.toString(cDay);
+        tanggal = new Date(cYear,cMonth,cDay);
+        tvDate.setText(sday+"/"+month+"/"+year);
         spnHari.setSelection(day-1);
         spnHari.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 mJadwalDokterList = new ArrayList<>();
                 day = position+1;
+                if (sequence=="minggu 1"){
+                    if(hariMingguini == 1){
+                        mingguMingguIni = cDay;
+                    }
+                    else if(hariMingguini == 2){
+                        seninMingguIni=cDay;
+                        seninMingguIni = mingguMingguIni + 1;
+                        if (seninMingguIni > lastDay){
+                            seninMingguIni = seninMingguIni - lastDay;
+                            bulanIni = bulanIni + 1;
+                            if(bulanIni > 12){
+                                tahunIni = tahunIni + 1;
+                            }
+                        }
+                        selasaMingguIni = seninMingguIni + 1;
+                        if (selasaMingguIni > lastDay){
+                            selasaMingguIni = selasaMingguIni - lastDay;
+                            bulanIni = bulanIni + 1;
+                            if(bulanIni > 12){
+                                tahunIni = tahunIni + 1;
+                            }
+                        }
+                        rabuMingguIni = selasaMingguIni + 1;
+                        if (seninMingguIni > lastDay){
+                            seninMingguIni = seninMingguIni - lastDay;
+                            bulanIni = bulanIni + 1;
+                            if(bulanIni > 12){
+                                tahunIni = tahunIni + 1;
+                            }
+                        }
+                        kamisMingguIni = rabuMingguIni + 1;
+                        if (seninMingguIni > lastDay){
+                            seninMingguIni = seninMingguIni - lastDay;
+                            bulanIni = bulanIni + 1;
+                            if(bulanIni > 12){
+                                tahunIni = tahunIni + 1;
+                            }
+                        }
+                        jumatMingguIni = kamisMingguIni + 1;
+                        if (seninMingguIni > lastDay){
+                            seninMingguIni = seninMingguIni - lastDay;
+                            bulanIni = bulanIni + 1;
+                            if(bulanIni > 12){
+                                tahunIni = tahunIni + 1;
+                            }
+                        }
+                        sabtuMingguIni = jumatMingguIni + 1;
+                        if (seninMingguIni > lastDay){
+                            seninMingguIni = seninMingguIni - lastDay;
+                            bulanIni = bulanIni + 1;
+                            if(bulanIni > 12){
+                                tahunIni = tahunIni + 1;
+                            }
+                        }
+                        mingguMingguIni = sabtuMingguIni + 1;
+                        if (seninMingguIni > lastDay){
+                            seninMingguIni = seninMingguIni - lastDay;
+                            bulanIni = bulanIni + 1;
+                            if(bulanIni > 12){
+                                tahunIni = tahunIni + 1;
+                            }
+                        }
+                    }
+                    else if(hariMingguini == 3){
+                        selasaMingguIni = cDay;
+                        rabuMingguIni = selasaMingguIni + 1;
+                        if (seninMingguIni > lastDay){
+                            seninMingguIni = seninMingguIni - lastDay;
+                            bulanIni = bulanIni + 1;
+                            if(bulanIni > 12){
+                                tahunIni = tahunIni + 1;
+                            }
+                        }
+                        kamisMingguIni = rabuMingguIni + 1;
+                        if (seninMingguIni > lastDay){
+                            seninMingguIni = seninMingguIni - lastDay;
+                            bulanIni = bulanIni + 1;
+                            if(bulanIni > 12){
+                                tahunIni = tahunIni + 1;
+                            }
+                        }
+                        jumatMingguIni = kamisMingguIni + 1;
+                        if (seninMingguIni > lastDay){
+                            seninMingguIni = seninMingguIni - lastDay;
+                            bulanIni = bulanIni + 1;
+                            if(bulanIni > 12){
+                                tahunIni = tahunIni + 1;
+                            }
+                        }
+                        sabtuMingguIni = jumatMingguIni + 1;
+                        if (seninMingguIni > lastDay){
+                            seninMingguIni = seninMingguIni - lastDay;
+                            bulanIni = bulanIni + 1;
+                            if(bulanIni > 12){
+                                tahunIni = tahunIni + 1;
+                            }
+                        }
+                        mingguMingguIni = sabtuMingguIni + 1;
+                        if (seninMingguIni > lastDay){
+                            seninMingguIni = seninMingguIni - lastDay;
+                            bulanIni = bulanIni + 1;
+                            if(bulanIni > 12){
+                                tahunIni = tahunIni + 1;
+                            }
+                        }
+                    }
+                    else if(hariMingguini == 4){
+                        rabuMingguIni = cDay;
+                        kamisMingguIni = rabuMingguIni + 1;
+                        if (seninMingguIni > lastDay){
+                            seninMingguIni = seninMingguIni - lastDay;
+                            bulanIni = bulanIni + 1;
+                            if(bulanIni > 12){
+                                tahunIni = tahunIni + 1;
+                            }
+                        }
+                        jumatMingguIni = kamisMingguIni + 1;
+                        if (seninMingguIni > lastDay){
+                            seninMingguIni = seninMingguIni - lastDay;
+                            bulanIni = bulanIni + 1;
+                            if(bulanIni > 12){
+                                tahunIni = tahunIni + 1;
+                            }
+                        }
+                        sabtuMingguIni = jumatMingguIni + 1;
+                        if (seninMingguIni > lastDay){
+                            seninMingguIni = seninMingguIni - lastDay;
+                            bulanIni = bulanIni + 1;
+                            if(bulanIni > 12){
+                                tahunIni = tahunIni + 1;
+                            }
+                        }
+                        mingguMingguIni = sabtuMingguIni + 1;
+                        if (seninMingguIni > lastDay){
+                            seninMingguIni = seninMingguIni - lastDay;
+                            bulanIni = bulanIni + 1;
+                            if(bulanIni > 12){
+                                tahunIni = tahunIni + 1;
+                            }
+                        }
+
+
+                    }
+                    else if(hariMingguini == 5){
+                        kamisMingguIni =cDay;
+                        jumatMingguIni = kamisMingguIni + 1;
+                        if (seninMingguIni > lastDay){
+                            seninMingguIni = seninMingguIni - lastDay;
+                            bulanIni = bulanIni + 1;
+                            if(bulanIni > 12){
+                                tahunIni = tahunIni + 1;
+                            }
+                        }
+                        sabtuMingguIni = jumatMingguIni + 1;
+                        if (seninMingguIni > lastDay){
+                            seninMingguIni = seninMingguIni - lastDay;
+                            bulanIni = bulanIni + 1;
+                            if(bulanIni > 12){
+                                tahunIni = tahunIni + 1;
+                            }
+                        }
+                        mingguMingguIni = sabtuMingguIni + 1;
+                        if (seninMingguIni > lastDay){
+                            seninMingguIni = seninMingguIni - lastDay;
+                            bulanIni = bulanIni + 1;
+                            if(bulanIni > 12){
+                                tahunIni = tahunIni + 1;
+                            }
+                        }
+
+                    }
+                    else if(hariMingguini == 6){
+                        jumatMingguIni = cDay;
+                        sabtuMingguIni = jumatMingguIni + 1;
+                        if (seninMingguIni > lastDay){
+                            seninMingguIni = seninMingguIni - lastDay;
+                            bulanIni = bulanIni + 1;
+                            if(bulanIni > 12){
+                                tahunIni = tahunIni + 1;
+                            }
+                        }
+                        mingguMingguIni = sabtuMingguIni + 1;
+                        if (seninMingguIni > lastDay){
+                            seninMingguIni = seninMingguIni - lastDay;
+                            bulanIni = bulanIni + 1;
+                            if(bulanIni > 12){
+                                tahunIni = tahunIni + 1;
+                            }
+                        }
+
+                    }
+                    else{
+                        sabtuMingguIni = cDay;
+                        mingguMingguIni = sabtuMingguIni + 1;
+                        if (seninMingguIni > lastDay){
+                            seninMingguIni = seninMingguIni - lastDay;
+                            bulanIni = bulanIni + 1;
+                            if(bulanIni > 12){
+                                tahunIni = tahunIni + 1;
+                            }
+                        }
+
+                    }
+
+                    tvDate.setText("");
+                }
+                else{
+
+                }
                 new JadwalDokterAsync(personalID, year, week).execute();
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
             }
         });
-
-
 //        new JadwalDokterAsync(personalID, year, week).execute();
         btnMingguIni = (Button)findViewById(R.id.btnMingguIni);
         btnMingguIni.setOnClickListener(new Button.OnClickListener() {
@@ -166,6 +530,32 @@ public class BookingActivity extends AppCompatActivity {
 
 
     }
+    public void jadwal(){
+
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Object object = parent.getAdapter().getItem(position);
+        JadwalDokter jadwalDokter = (JadwalDokter)object;
+        String wpId = jadwalDokter.getWeekProgramID();
+        String dpID = jadwalDokter.getDayProdramID();
+        String dpdetail = jadwalDokter.getDetailProgramID();
+        Intent myIntent = new Intent(getApplicationContext(),KonfirmasiJanjiActivity.class);
+        Bundle b = new Bundle();
+        b.putString("DPID",wpId);
+        b.putString("WPID",dpID);
+        b.putString("DetailID",dpdetail);
+        b.putString("personilID", personalID);
+        b.putString("facilityID", facilityID);
+        b.putString("rumahSakitID", rumahSakitID);
+        b.putString("idDokter", idDokter);
+        b.putString("userID",userID);
+        myIntent.putExtras(b);
+        startActivity(myIntent);
+
+    }
+
     public class JadwalDokterAsync extends AsyncTask<String, Void, String> {
         private String mPersonilID;
         private String mYear;
@@ -202,97 +592,114 @@ public class BookingActivity extends AppCompatActivity {
                         in.close();
                         JSONArray jsonArray = new JSONArray(sb.toString());
                         int length  = jsonArray.length();
+                        imageDokter = LoadImageFromWebOperations(urlImage);
+
 
                         for (int i = 0; i < jsonArray.length(); i++) {
 
                             JSONObject jsonObject = jsonArray.getJSONObject(i);
+
                             if(jsonObject.getString("Sequence").equals(sequence)){
+                                weekProgramID = jsonObject.getString("name");
                                 if(day ==1 ){
                                     JSONObject sunday = (JSONObject) jsonObject.get("SundayDPID");
+                                    dayProgramID = sunday.getString("Name");
                                     JSONArray detailArray = sunday.getJSONArray("DayProgramDetail");
                                     for (int j=0;j<detailArray.length();j++){
                                         JSONObject c = detailArray.getJSONObject(j);
+                                        programDetailID = c.getString("DPLineID");
                                         String starDate = c.getString("StartTime");
                                         String endDate = c.getString("EndTime");
                                         String date = starDate+" - "+endDate;
-                                        mJadwalDokterList.add(new JadwalDokter(date));
+                                        mJadwalDokterList.add(new JadwalDokter(date, dayProgramID,weekProgramID,programDetailID));
                                     }
 
 
                                 }
                                 else if(day==2){
                                     JSONObject monday = (JSONObject) jsonObject.get("MondayDPID");
+                                    dayProgramID = monday.getString("Name");
                                     JSONArray detailArray = monday.getJSONArray("DayProgramDetail");
                                     for (int j=0;j<detailArray.length();j++){
                                         JSONObject c = detailArray.getJSONObject(j);
+                                        programDetailID = c.getString("DPLineID");
                                         String starDate = c.getString("StartTime");
                                         String endDate = c.getString("EndTime");
                                         String date = starDate+" - "+endDate;
-                                        mJadwalDokterList.add(new JadwalDokter(date));
+                                        mJadwalDokterList.add(new JadwalDokter(date, dayProgramID,weekProgramID,programDetailID));
                                     }
                                 }
 
                                 else if (day ==3 ){
                                     JSONObject tuesday = (JSONObject) jsonObject.get("TuesdayDPID");
+                                    dayProgramID = tuesday.getString("Name");
                                     JSONArray detailArray = tuesday.getJSONArray("DayProgramDetail");
                                     for (int j=0;j<detailArray.length();j++){
                                         JSONObject c = detailArray.getJSONObject(j);
+                                        programDetailID = c.getString("DPLineID");
                                         String starDate = c.getString("StartTime");
                                         String endDate = c.getString("EndTime");
                                         String date = starDate+" - "+endDate;
-                                        mJadwalDokterList.add(new JadwalDokter(date));
+                                        mJadwalDokterList.add(new JadwalDokter(date, dayProgramID,weekProgramID,programDetailID));
                                     }
 
                                 }
                                 else if(day ==4 ){
                                     JSONObject wednesday = (JSONObject) jsonObject.get("WednesdayDPID");
+                                    dayProgramID = wednesday.getString("Name");
                                     JSONArray detailArray = wednesday.getJSONArray("DayProgramDetail");
                                     for (int j=0;j<detailArray.length();j++){
                                         JSONObject c = detailArray.getJSONObject(j);
+                                        programDetailID = c.getString("DPLineID");
                                         String starDate = c.getString("StartTime");
                                         String endDate = c.getString("EndTime");
                                         String date = starDate+" - "+endDate;
-                                        mJadwalDokterList.add(new JadwalDokter(date));
+                                        mJadwalDokterList.add(new JadwalDokter(date, dayProgramID,weekProgramID,programDetailID));
                                     }
 
                                 }
                                 else if(day ==5 ){
                                     JSONObject thursday = (JSONObject) jsonObject.get("ThursdayDPID");
+                                    dayProgramID = thursday.getString("Name");
                                     JSONArray detailArray = thursday.getJSONArray("DayProgramDetail");
                                     for (int j=0;j<detailArray.length();j++){
                                         JSONObject c = detailArray.getJSONObject(j);
+                                        programDetailID = c.getString("DPLineID");
                                         String starDate = c.getString("StartTime");
                                         String endDate = c.getString("EndTime");
                                         String date = starDate+" - "+endDate;
-                                        mJadwalDokterList.add(new JadwalDokter(date));
+                                        mJadwalDokterList.add(new JadwalDokter(date, dayProgramID,weekProgramID,programDetailID));
                                     }
 
                                 }
                                 else if(day ==6 ){
                                     JSONObject friday = (JSONObject) jsonObject.get("FridayDPID");
+                                    dayProgramID = friday.getString("Name");
                                     JSONArray detailArray = friday.getJSONArray("DayProgramDetail");
                                     for (int j=0;j<detailArray.length();j++){
                                         JSONObject c = detailArray.getJSONObject(j);
+                                        programDetailID = c.getString("DPLineID");
                                         String starDate = c.getString("StartTime");
                                         String endDate = c.getString("EndTime");
                                         String date = starDate+" - "+endDate;
-                                        mJadwalDokterList.add(new JadwalDokter(date));
+                                        mJadwalDokterList.add(new JadwalDokter(date, dayProgramID,weekProgramID,programDetailID));
                                     }
 
                                 }
                                 else{
                                     JSONObject saturday = (JSONObject) jsonObject.get("SaturdayDPID");
+                                    dayProgramID = saturday.getString("Name");
                                     JSONArray detailArray = saturday.getJSONArray("DayProgramDetail");
                                     for (int j=0;j<detailArray.length();j++){
                                         JSONObject c = detailArray.getJSONObject(j);
+                                        programDetailID = c.getString("DPLineID");
                                         String starDate = c.getString("StartTime");
                                         String endDate = c.getString("EndTime");
                                         String date = starDate+" - "+endDate;
-                                        mJadwalDokterList.add(new JadwalDokter(date));
+                                        mJadwalDokterList.add(new JadwalDokter(date, dayProgramID,weekProgramID,programDetailID));
                                     }
 
                                 }
-
                             }
                         }
 
@@ -345,8 +752,10 @@ public class BookingActivity extends AppCompatActivity {
         }
         @Override
         protected void onPostExecute(final String success) {
+            imgDokter.setImageDrawable(imageDokter);
 
             if (success!="") {
+
 
                 jAdapter = new JadwalDokterAdapter(getApplicationContext(),mJadwalDokterList);
                 lvJadwal.setAdapter(jAdapter);

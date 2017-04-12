@@ -43,6 +43,7 @@ public class JadwalDokterAdapter extends BaseAdapter{
         View newDview = View.inflate(mContext, R.layout.list_jadwal_dokter, null);
         TextView jadwal = (TextView)newDview.findViewById(R.id.tvjadwaldokter);
         jadwal.setText(mJadwalDokter.get(position).getJadwalDokter());
+        newDview.setTag(mJadwalDokter.get(position).getDetailProgramID());
         return newDview;
     }
 }

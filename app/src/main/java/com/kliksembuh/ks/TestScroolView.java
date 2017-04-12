@@ -80,7 +80,9 @@ public class TestScroolView extends AppCompatActivity implements OnMapReadyCallb
     public String [] urlImage;
     private int [] idDokterInt;
     private int[] listArr;
+    private String userID;
     private NestedScrollView nsDokter;
+    private Drawable drawableDokter[];
 
     int a =0;
 
@@ -93,9 +95,9 @@ public class TestScroolView extends AppCompatActivity implements OnMapReadyCallb
         super.onCreate(savedInstanceState);
         Bundle b = getIntent().getExtras();
         if(b != null) {
-            String userID = b.getString("institution");
-            rumahSakitID = userID;
-            facility = "1";
+            userID = b.getString("userID");
+            rumahSakitID = b.getString("institution");
+            facility = b.getString("facilityID");
             toolbarTitle = b.getString("tittle");
         }
         setContentView(R.layout.activity_test_scrool_view);
@@ -160,7 +162,7 @@ public class TestScroolView extends AppCompatActivity implements OnMapReadyCallb
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Object object = parent.getAdapter().getItem(position);
                 Doctor dokter = (Doctor) object;
-                String idDokter =  dokter.getDoc_id();
+                String dokterID =  dokter.getDoc_id();
                 String namaDokter = dokter.getNameDoc();
                 Drawable imgUrl = dokter.getDoc_pic_id();
                 BookingActivity bookingActivity = new BookingActivity();
@@ -168,9 +170,13 @@ public class TestScroolView extends AppCompatActivity implements OnMapReadyCallb
 
                 Intent myIntent = new Intent(TestScroolView.this ,BookingActivity.class);
                 Bundle b = new Bundle();
-                b.putString("idDokter", idDokter);
-                b.putString("urlImage",urlImage[position]);
+                b.putString("idDokter", dokterID);
+                b.putString("userID", userID);
+                b.putString("personalID",idDokter[position]);
                 b.putString("namaDokter",namaDokter);
+                b.putString("urlImage",urlImage[position]);
+                b.putString("rumahSakitID",rumahSakitID);
+                b.putString("facilityID", facility);
                 //Your id
                 //.putExtra("userID",userID);
                 myIntent.putExtras(b);
@@ -272,7 +278,6 @@ public class TestScroolView extends AppCompatActivity implements OnMapReadyCallb
                         Drawable image1 = LoadImageFromWebOperations(image);
                         String alamat = c.getString("alamat");
                         mDokterList.add(new Doctor(id, image1, name, alamat));
-                        a++;
                     }
 
 
@@ -362,19 +367,21 @@ public class TestScroolView extends AppCompatActivity implements OnMapReadyCallb
                         }
                         in.close();
                         JSONArray jsonArray = new JSONArray(sb.toString());
-                        idDokter=new String[jsonArray.length()];
-                        urlImage=new String[jsonArray.length()];
+                        drawableDokter = new Drawable[jsonArray.length()];
+                        urlImage=new String[(jsonArray.length())];
+
                         for (int i = 0; i < jsonArray.length(); i++) {
                             JSONObject jsonObject = jsonArray.getJSONObject(i);
-                            String id = jsonObject.getString("MedicalPersonnelID");
-                            String personelCD = jsonObject.getString("MedicalPersonnelID");
-                            idDokter[i]=personelCD;
-                            String name = jsonObject.getString("Name");
+//                            String id = jsonObject.getString("MedicalPersonnelID");
+//                            String personelCD = jsonObject.getString("MedicalPersonnelID");
+//                            idDokter[i]=personelCD;
+//                            String name = jsonObject.getString("Name");
                             String image= jsonObject.getString("ImgUrl");
+                            drawableDokter[i]=LoadImageFromWebOperations(image);
                             urlImage[i]=image;
-                            Drawable image1 = LoadImageFromWebOperations(image);
-                            String alamat = jsonObject.getString("Address");
-                            mDokterList.add(new Doctor(id, image1, name, alamat));
+//                            Drawable image1 = LoadImageFromWebOperations(image);
+//                            String alamat = jsonObject.getString("Address");
+//                            mDokterList.add(new Doctor(id, image1, name, alamat));
                         }
 
                         return sb.toString();
@@ -429,8 +436,31 @@ public class TestScroolView extends AppCompatActivity implements OnMapReadyCallb
             if (pDialog.isShowing())
                 pDialog.dismiss();
             if (success!="") {
-                dAdapter = new DoctorListAdapter(getApplicationContext(), mDokterList);
-                lvDokter.setAdapter(dAdapter);
+
+                try{
+                    JSONArray jsonArray = new JSONArray(success);
+                    idDokter=new String[jsonArray.length()];
+                    for (int i=0;i<jsonArray.length();i++){
+                        JSONObject jsonObject = jsonArray.getJSONObject(i);
+                        String id = jsonObject.getString("MedicalPersonnelID");
+                        String personelCD = jsonObject.getString("MedicalPersonnelCD");
+                        idDokter[i]=personelCD;
+                        String name = jsonObject.getString("Name");
+                        String alamat = jsonObject.getString("Address");
+                        if(drawableDokter.length <= 0){
+                            mDokterList.add(new Doctor(id, null, name, alamat));
+
+                        }else{
+                            mDokterList.add(new Doctor(id, drawableDokter[i], name, alamat));
+                        }
+                        dAdapter = new DoctorListAdapter(getApplicationContext(), mDokterList);
+                        lvDokter.setAdapter(dAdapter);
+                    }
+
+                }catch (JSONException e){
+                    e.printStackTrace();
+                }
+
             } else {
                 //:TODO
             }

@@ -24,9 +24,11 @@
             android:backgroundTint="@color/white"
             android:maxLines="1"
             android:textSize="18sp"
-            android:singleLine="true" />
+            android:singleLine="true" >
+            <requestFocus/>
+        </AutoCompleteTextView>
         <AutoCompleteTextView
-            android:id="@+id/tvsearchtypespesialis"
+            android:id="@+id/tvspesi"
             android:drawableLeft="@drawable/places_ic_search"
             android:layout_width="match_parent"
             android:layout_height="40dp"
@@ -34,11 +36,13 @@
             android:padding="8dp"
             android:layout_margin="10dp"
             android:alpha="0.97"
-            android:hint="Pilih Spesialisasi"
             android:inputType=""
+            android:hint="Pilih Spesialisasi"
             android:maxLines="1"
             android:textSize="18sp"
-            android:singleLine="true" />
+            android:singleLine="true" >
+        <requestFocus/>
+        </AutoCompleteTextView>
         <Button
             android:id="@+id/btnsearchspesialisasi"
             android:background="@drawable/blue_button"
