@@ -110,7 +110,6 @@
                 android:entries="@array/day_name"
                 android:textColor="@color/white"
                 android:textStyle="bold"
-                android:popupBackground="#f7f7f7"
                 android:spinnerMode="dropdown"/>
 
         </LinearLayout>

@@ -99,6 +99,23 @@ MENGGUNAKAN LAYANAN KAMI UNTUK PERTAMA KALI.</string>
         <item>Sabtu</item>
         <item>Minggu</item>
     </string-array>
+
+    <string-array name="status_patient">
+        <item>Pasien</item>
+        <item>Anak</item>
+        <item>Orang Tua</item>
+        <item>Keluarga / Kerabat</item>
+        <item>Lainnya</item>
+    </string-array>
+
+    <string-array name="insurance_name">
+        <item>BPJS</item>
+        <item>AXA Mandiri</item>
+        <item>Zurich</item>
+        <item>Sunlife</item>
+        <item>Prudential</item>
+    </string-array>
+
     <string name="cheese_ipsum">Jarlsberg lancashire edam. Dolcelatte hard cheese brie st. agur blue
     cheese caerphilly bavarian bergkase cheese and biscuits mascarpone. Cheeseburger swiss bavarian
     bergkase cream cheese fromage frais cheesy feet port-salut airedale. St. agur blue cheese rubber
@@ -125,6 +142,10 @@ MENGGUNAKAN LAYANAN KAMI UNTUK PERTAMA KALI.</string>
     <!-- Strings related to Setting Profile Nav -->
     <string name="email_nkontak">Email &amp; Kontak</string>
     <string name="pengaturan_email">Pengaturan E-Mail &amp; Kontak</string>
+    <string name="pengaturan_profil">Profil Pasien</string>
+    <string name="tambah_profil_pasien">Tambah Data Profil Pasien</string>
+    <string name="pengaturan_password">Password</string>
     <string name="pengaturan_base">Pengaturan</string>
+    <string name="string_label_formPasien">Data ini akan digunakan sebagai data pasien bagi instansi kesehatan, mohon isikan dengan benar.</string>
 
 </resources>

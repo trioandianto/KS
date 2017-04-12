@@ -10,15 +10,15 @@
             android:icon="@drawable/ic_favorite_black_24dp"
             android:title="Favorit" />
         <item
-            android:id="@+id/nav_appointment"
+            android:id="@+id/nav_histori_janji"
             android:icon="@drawable/ic_my_library_books_24dp"
             android:title="Histori Buat Janji" />
         <item
-            android:id="@+id/nav_tek_darah"
+            android:id="@+id/nav_pengingat_minum"
             android:icon="@drawable/ic_event_note_black_24dp"
             android:title="Pengingat Minum Obat" />
         <item
-            android:id="@+id/nav_det_jantung"
+            android:id="@+id/nav_vital_sign"
             android:icon="@drawable/ic_person_add_black_24dp"
             android:title="Vital Sign" />
         <item
@@ -26,11 +26,11 @@
             android:icon="@drawable/ic_settings_black_24dp"
             android:title="Pengaturan" />
         <item
-            android:id="@+id/nav_bahasa"
+            android:id="@+id/nav_hubungi_kami"
             android:icon="@drawable/ic_phone_black_24dp"
             android:title="Hubungi Kami"/>
         <item
-            android:id="@+id/nav_bug_reporter"
+            android:id="@+id/nav_keluar"
             android:icon="@drawable/ic_exit_to_app_black_24dp"
             android:title="Keluar"/>
     </group>

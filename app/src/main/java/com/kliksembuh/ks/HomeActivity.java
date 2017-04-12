@@ -185,18 +185,38 @@ public class HomeActivity extends AppCompatActivity
             Intent home = new Intent(this, HomeActivity.class);
             startActivityForResult(home, 0);
         }
-        else if (i == R.id.nav_search){
-
-        }
         else if (i == R.id.nav_favorite){
             Intent favorite = new Intent(this, FavoriteActivity.class);
             startActivityForResult(favorite, 0);
 
         }
-        else if (i == R.id.nav_appointment){
+        else if (i == R.id.nav_histori_janji){
             Intent appointment = new Intent(this, MyAppointmentActivity.class);
             startActivityForResult(appointment, 0);
 
+        }
+        else if (i == R.id.nav_pengingat_minum){
+            Intent home = new Intent(this, SettingActivity.class);
+            startActivityForResult(home, 0);
+        }
+        else if (i == R.id.nav_vital_sign){
+            Intent home = new Intent(this, SettingActivity.class);
+            startActivityForResult(home, 0);
+        }
+        else if (i == R.id.nav_hubungi_kami){
+            Intent home = new Intent(this, SettingActivity.class);
+            startActivityForResult(home, 0);
+        }
+        else if (i == R.id.nav_keluar){
+//            Intent intent = new Intent(this, MainActivity.class);
+//            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//            intent.putExtra("Exit me", true);
+//            startActivity(intent);
+//            finish();
+            Intent homeIntent = new Intent(Intent.ACTION_MAIN);
+            homeIntent.addCategory( Intent.CATEGORY_HOME );
+            homeIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(homeIntent);
         }
         else{
             fragmentClass = HomeActivity.class;

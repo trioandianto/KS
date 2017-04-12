@@ -10,6 +10,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
         <android.support.design.widget.TabLayout
+            style="@style/TabLayoutTextStyle"
             android:id="@+id/tabSetting"
             android:layout_width="match_parent"
             app:tabBackground="@drawable/tab_color_selector"

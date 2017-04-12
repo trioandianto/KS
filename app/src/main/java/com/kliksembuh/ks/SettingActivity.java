@@ -62,11 +62,11 @@ public class SettingActivity extends AppCompatActivity{
         public CharSequence getPageTitle(int position) {
             switch (position) {
                 case 0:
-                    return "ATUR PROFIL";
+                    return "Atur Profil";
                 case 1:
-                    return "ATUR VITAL SIGN";
+                    return "Atur Vital Sign";
                 case 2:
-                    return "ATUR PENGINGAT";
+                    return "Atur Pengingat";
             }
             return null;
         }
