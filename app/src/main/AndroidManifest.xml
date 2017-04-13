@@ -122,7 +122,7 @@
             android:name=".FavoriteActivity"
             android:label="@string/action_favorite"
             android:parentActivityName=".HomeActivity"
-            android:theme="@style/AppTheme2">
+            android:theme="@style/AppTheme3">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".HomeActivity" />
@@ -131,7 +131,7 @@
             android:name=".MyAppointmentActivity"
             android:label="@string/action_myappointment"
             android:parentActivityName=".HomeActivity"
-            android:theme="@style/AppTheme2">
+            android:theme="@style/AppTheme3">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".HomeActivity" />
