@@ -204,7 +204,7 @@ public class HomeActivity extends AppCompatActivity
             startActivityForResult(home, 0);
         }
         else if (i == R.id.nav_hubungi_kami){
-            Intent home = new Intent(this, SettingActivity.class);
+            Intent home = new Intent(this, ContactUsActivity.class);
             startActivityForResult(home, 0);
         }
         else if (i == R.id.nav_keluar){
@@ -213,10 +213,12 @@ public class HomeActivity extends AppCompatActivity
 //            intent.putExtra("Exit me", true);
 //            startActivity(intent);
 //            finish();
-            Intent homeIntent = new Intent(Intent.ACTION_MAIN);
-            homeIntent.addCategory( Intent.CATEGORY_HOME );
-            homeIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            startActivity(homeIntent);
+            onBackPressed();
+//            Intent homeIntent = new Intent(Intent.ACTION_MAIN);
+//            homeIntent.addCategory( Intent.CATEGORY_HOME );
+//            homeIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//            startActivity(homeIntent);
+
         }
         else{
             fragmentClass = HomeActivity.class;

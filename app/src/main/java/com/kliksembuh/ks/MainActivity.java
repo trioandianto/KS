@@ -3,12 +3,14 @@ package com.kliksembuh.ks;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.NotificationCompat;
 import android.text.Html;
@@ -99,15 +101,28 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-
-        if (back_pressed + 2000 > System.currentTimeMillis()) {
-            super.onBackPressed();
-        } else {
-            Toast.makeText(this, "Press once again to exit!", Toast.LENGTH_SHORT).show();
-            back_pressed = System.currentTimeMillis();
-        }
-
-
+//
+//        if (back_pressed + 2000 > System.currentTimeMillis()) {
+//            super.onBackPressed();
+//        } else {
+//            Toast.makeText(this, "Press once again to exit!", Toast.LENGTH_SHORT).show();
+//            back_pressed = System.currentTimeMillis();
+//        }
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Are you sure you want to exit?")
+                .setCancelable(false)
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        MainActivity.this.finish();
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+        AlertDialog alert = builder.create();
+        alert.show();
     }
     private void addBottomDots(int position){
         dots = new TextView[layouts.length];

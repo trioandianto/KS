@@ -48,7 +48,7 @@
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".MainActivity"
-            android:theme="@style/AppTheme3">
+            android:theme="@style/AppTheme2">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -90,7 +90,7 @@
         </activity>
         <activity
             android:name=".SplashScreenActivity"
-            android:theme="@style/AppTheme3">
+            android:theme="@style/AppTheme2">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -172,6 +172,7 @@
         <activity
             android:name=".HospitalList"
             android:parentActivityName=".HomeActivity"
+            android:label="Bogor"
             android:theme="@style/AppTheme2" />
         <activity android:name=".CobaListJSON" />
         <activity android:name=".DoctorListActivity" />
@@ -204,10 +205,18 @@
             android:label="@string/pengaturan_email"
             android:launchMode="singleTop"
             android:parentActivityName=".SettingActivity"
-            android:theme="@style/AppTheme2" />
+            android:theme="@style/AppTheme3" />
         <activity android:name=".ReviewActivity" />
         <activity
             android:name=".SearchLocationActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustPan">
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".SearchSpesializationActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustPan">
             <intent-filter>
@@ -219,7 +228,7 @@
             android:label="@string/pengaturan_base"
             android:launchMode="singleTop"
             android:parentActivityName=".HomeActivity"
-            android:theme="@style/AppTheme2" />
+            android:theme="@style/AppTheme3" />
         <!-- <activity android:name=".SettingProfileActivity" /> -->
         <!-- <activity android:name=".SettingVitalSignActivity" /> -->
         <!-- <activity android:name=".SettingReminderActivity" /> -->
@@ -228,22 +237,28 @@
             android:label="@string/pengaturan_profil"
             android:launchMode="singleTop"
             android:parentActivityName=".SettingActivity"
-            android:theme="@style/AppTheme2" />
+            android:theme="@style/AppTheme3" />
         <activity
             android:name=".EditPasswordProfileActivity"
             android:label="@string/pengaturan_password"
             android:launchMode="singleTop"
             android:parentActivityName=".SettingActivity"
-            android:theme="@style/AppTheme2" />
+            android:theme="@style/AppTheme3" />
         <activity
             android:name=".PatientFormActivity"
             android:label="@string/tambah_profil_pasien"
             android:launchMode="singleTop"
             android:parentActivityName=".SettingActivity"
-            android:theme="@style/AppTheme2" />
+            android:theme="@style/AppTheme3" />
         <!-- <activity android:name=".EditNumberProfileActivity"></activity> -->
-        <!--<activity android:name=".MyAppointmentConfirmedActivity" />-->
-        <!--<activity android:name=".MyAppointmentSuccessActivity"></activity>-->
+        <!-- <activity android:name=".MyAppointmentConfirmedActivity" /> -->
+        <!-- <activity android:name=".MyAppointmentSuccessActivity"></activity> -->
+        <activity
+            android:name=".ContactUsActivity"
+            android:label="Hubungi Kami"
+            android:parentActivityName=".SettingActivity"
+            android:windowSoftInputMode="adjustPan"
+            android:theme="@style/AppTheme3"></activity>
     </application>
 
 </manifest>

@@ -147,5 +147,6 @@ MENGGUNAKAN LAYANAN KAMI UNTUK PERTAMA KALI.</string>
     <string name="pengaturan_password">Password</string>
     <string name="pengaturan_base">Pengaturan</string>
     <string name="string_label_formPasien">Data ini akan digunakan sebagai data pasien bagi instansi kesehatan, mohon isikan dengan benar.</string>
+    <string name="string_feedback">*Tolong masukkan nomor appointment jika isu ini terkait dengan pelayanan Rumah Sakit.</string>
 
 </resources>
