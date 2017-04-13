@@ -65,7 +65,8 @@ public class HomeActivity extends AppCompatActivity
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         Bundle b = getIntent().getExtras();
         if(b != null) {
-            userID = b.getString("userID");
+//            userID = b.getString("userID");
+
             facilityID = b.getString("facilityID");
             facilityName = b.getString("facilityName");
             locationID = b.getString("SubDistrictCD");
@@ -75,6 +76,8 @@ public class HomeActivity extends AppCompatActivity
                 positionTab = Integer.parseInt(tab);
             }
         }
+        userID = "0b3fc6fe-8736-4900-906a-476cb4db1e90";
+
 
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
         viewPager = (ViewPager)findViewById(R.id.view_pager_home);

@@ -177,6 +177,7 @@ public class TestScroolView extends AppCompatActivity implements OnMapReadyCallb
                 b.putString("urlImage",urlImage[position]);
                 b.putString("rumahSakitID",rumahSakitID);
                 b.putString("facilityID", facility);
+                b.putString("namaRumahSakit", toolbarTitle);
                 //Your id
                 //.putExtra("userID",userID);
                 myIntent.putExtras(b);

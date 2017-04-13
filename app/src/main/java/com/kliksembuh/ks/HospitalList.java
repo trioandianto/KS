@@ -243,7 +243,7 @@ public class HospitalList extends AppCompatActivity {
             NetworkInfo netInfo = cm.getActiveNetworkInfo();
             if (netInfo != null && netInfo.isConnected()) {
                 try{
-                    URL url = new URL("http://cloud.basajans.com:8868/BS.HealthCare.Application/api/Institutions/SearchInstitutionFromAfterLogin?subDistrict="+mSubdistrict+"&facility="+mSpesialisai);
+                    URL url = new URL("http://basajans/klikkembuhapi/api/Institutions/SearchInstitutionFromAfterLogin?subDistrict="+mSubdistrict+"&facility="+mSpesialisai);
                     HttpURLConnection urlc = (HttpURLConnection) url.openConnection();
                     urlc.setRequestProperty("Content-Type", "application/json");
                     urlc.connect();
