@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -28,6 +29,9 @@ public class KonfirmasiJanjiActivity extends AppCompatActivity {
     private Button btnBuatJanji;
     private ImageView editjadwal;
     private ImageView editdokter;
+    private TextView tvNamaDokter;
+    private TextView tvSpesial;
+    private TextView tvNamaRumahSakit;
     private String userID;
     private String customerID;
     private String facilityCategoryID;
@@ -40,6 +44,8 @@ public class KonfirmasiJanjiActivity extends AppCompatActivity {
     private String dayProgramDetailID;
     private String personnelID;
     private String personnelCD;
+    private String namaDokter;
+    private String namaRumahSakit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,9 +66,18 @@ public class KonfirmasiJanjiActivity extends AppCompatActivity {
             dayProgramDetailID = b.getString("DetailID");
             personnelID = b.getString("idDokter");
             personnelCD = b.getString("personilID");
+            namaDokter = b.getString("namaDokter");
+            namaRumahSakit = b.getString("namaRumahSakit");
         }
 
 
+
+        tvNamaDokter = (TextView)findViewById(R.id.tvnamaDokter);
+        tvNamaDokter.setText(namaDokter);
+        tvSpesial =(TextView)findViewById(R.id.tvSpesial);
+        tvSpesial.setText("Dokter Umum");
+        tvNamaRumahSakit=(TextView)findViewById(R.id.tvnamaRumahSakit);
+        tvNamaRumahSakit.setText(namaRumahSakit);
         btnBuatJanji = (Button)findViewById(R.id.btnbuatjanji);
         editdokter = (ImageView)findViewById(R.id.iveditdokter);
         editjadwal = (ImageView)findViewById(R.id.iveditjadwal);

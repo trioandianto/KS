@@ -3,6 +3,8 @@
     <string name="action_settings">Settings</string>
     <string name="title_activity_term_and_policy">Syarat dan Ketentuan</string>
     <string name="title_activity_login">Login</string>
+    <string name="apicloud">http://cloud.basajans.com:8868/BS.HealthCare.Application</string>
+    <string name="apibasajans">http://basajans/klikkembuhapi</string>
     <string name="title_activity_register">Sign Up</string>
     <string name="title_activity_forgot_password">Forgot Password</string>
     <string name="title_activity_verification">Verification</string>

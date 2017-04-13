@@ -324,7 +324,6 @@ public class LoginActivity extends BaseActivity implements LoaderCallbacks<Curso
                             Toast.makeText(LoginActivity.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
                         }
-
                         // ...
                     }
                 });
@@ -640,7 +639,7 @@ public class LoginActivity extends BaseActivity implements LoaderCallbacks<Curso
             NetworkInfo netInfo = cm.getActiveNetworkInfo();
             if (netInfo != null && netInfo.isConnected()) {
                 try {
-                    URL url = new URL("http://basajans/KlikSembuhAPI/api/users/login");
+                    URL url = new URL(R.string.apibasajans+"/api/users/login");
                     HttpURLConnection urlc = (HttpURLConnection) url.openConnection();
                     JSONObject jsonObject = new JSONObject();
                     jsonObject.put("Email",mEmail);

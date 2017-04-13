@@ -93,6 +93,7 @@ public class BookingActivity extends AppCompatActivity implements ListView.OnIte
     private String rumahSakitID;
     private String facilityID;
     private String userID;
+    private String namaRumahSakit;
 
     public Drawable getImageDokter() {
         return imageDokter;
@@ -120,6 +121,7 @@ public class BookingActivity extends AppCompatActivity implements ListView.OnIte
             dokterSpesialisasi = "Dokter Umum";
             rumahSakitID = b.getString("rumahSakitID");
             facilityID = b.getString("facilityID");
+            namaRumahSakit = b.getString("namaRumahSakit");
 
         }
         imgDokter = (ImageView)findViewById(R.id.iv_doc_picdetail);
@@ -551,6 +553,8 @@ public class BookingActivity extends AppCompatActivity implements ListView.OnIte
         b.putString("rumahSakitID", rumahSakitID);
         b.putString("idDokter", idDokter);
         b.putString("userID",userID);
+        b.putString("namaDokter",namaDokter);
+        b.putString("namaRumahSakit",namaRumahSakit);
         myIntent.putExtras(b);
         startActivity(myIntent);
 
@@ -573,7 +577,7 @@ public class BookingActivity extends AppCompatActivity implements ListView.OnIte
             NetworkInfo netInfo = cm.getActiveNetworkInfo();
             if (netInfo != null && netInfo.isConnected()) {
                 try{
-                    URL url = new URL("http://cloud.basajans.com:8868/BS.HealthCare.Application/api/Schedules/GetWeeklySchedule?personnelId="+mPersonilID+"&year="+mYear+"&startweek="+mWeek);
+                    URL url = new URL(R.string.apibasajans+"/api/Schedules/GetWeeklySchedule?personnelId="+mPersonilID+"&year="+mYear+"&startweek="+mWeek);
                     HttpURLConnection urlc = (HttpURLConnection) url.openConnection();
                     urlc.setRequestProperty("Content-Type","application/json");
                     urlc.connect();
