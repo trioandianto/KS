@@ -5,12 +5,13 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.*;
+import android.widget.ListView;
 
 import com.kliksembuh.ks.library.HospitalListAdapter;
 import com.kliksembuh.ks.models.Hospital;
 
 import java.util.List;
+
 
 /**
  * Created by Trio Andianto on 1/24/2017.

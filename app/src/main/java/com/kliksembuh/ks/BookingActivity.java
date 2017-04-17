@@ -10,6 +10,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -33,9 +34,9 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
-import java.util.Date;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -124,6 +125,10 @@ public class BookingActivity extends AppCompatActivity implements ListView.OnIte
             namaRumahSakit = b.getString("namaRumahSakit");
 
         }
+        Toolbar newToolbar = (Toolbar)findViewById(R.id.toolbarHospitalList);
+        setSupportActionBar(newToolbar);
+        newToolbar.setTitle("Jadwal Dokter");
+        setSupportActionBar(newToolbar);
         imgDokter = (ImageView)findViewById(R.id.iv_doc_picdetail);
         tvNamaDokter = (TextView) findViewById(R.id.tv_drname_detail);
         tvNamaDokter.setText(namaDokter);
@@ -532,6 +537,23 @@ public class BookingActivity extends AppCompatActivity implements ListView.OnIte
 
 
     }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1) {
+            if(resultCode == RESULT_OK) {
+                userID = data.getStringExtra("userID");
+                personalID = data.getStringExtra("personalID");
+                namaDokter = data.getStringExtra("namaDokter");
+                idDokter = data.getStringExtra("idDokter");
+                urlImage = data.getStringExtra("urlImage");
+                dokterSpesialisasi = "Dokter Umum";
+                rumahSakitID = data.getStringExtra("rumahSakitID");
+                facilityID = data.getStringExtra("facilityID");
+                namaRumahSakit = data.getStringExtra("namaRumahSakit");
+            }
+        }
+    }
     public void jadwal(){
 
     }
@@ -556,7 +578,7 @@ public class BookingActivity extends AppCompatActivity implements ListView.OnIte
         b.putString("namaDokter",namaDokter);
         b.putString("namaRumahSakit",namaRumahSakit);
         myIntent.putExtras(b);
-        startActivity(myIntent);
+        startActivityForResult(myIntent, 1);
 
     }
 

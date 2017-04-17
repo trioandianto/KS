@@ -1,7 +1,5 @@
 package com.kliksembuh.ks.library;
 
-import android.os.Parcelable;
-
 /**
  * Created by Trio Andianto on 1/24/2017.
  */

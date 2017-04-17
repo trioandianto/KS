@@ -117,10 +117,23 @@ public class HospitalList extends AppCompatActivity {
                 //.putExtra("userID",userID);
                 myIntent.putExtras(b);
                 //.putExtra("userID",userID);
-                startActivityForResult(myIntent, 0);
+                startActivityForResult(myIntent, 1);
             }
         });
         // Set Ratingbar
+    }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1) {
+            if(resultCode == RESULT_OK) {
+                userID = data.getStringExtra("userID");
+                subDistrict = data.getStringExtra("subDistrict");
+                subDistricDescription = data.getStringExtra("SubDistrictDescription");
+                spesialisasi = data.getStringExtra("facilityID");
+                facilityName = data.getStringExtra("facilityName");
+            }
+        }
     }
     public String loadJSONFromAsset() {
         String json = null;
@@ -137,6 +150,7 @@ public class HospitalList extends AppCompatActivity {
         }
         return json;
     }
+
     private class GetContacts extends AsyncTask<Void, Void, Void> {
         private Context context;
 
@@ -243,7 +257,7 @@ public class HospitalList extends AppCompatActivity {
             NetworkInfo netInfo = cm.getActiveNetworkInfo();
             if (netInfo != null && netInfo.isConnected()) {
                 try{
-                    URL url = new URL("http://basajans/klikkembuhapi/api/Institutions/SearchInstitutionFromAfterLogin?subDistrict="+mSubdistrict+"&facility="+mSpesialisai);
+                    URL url = new URL("http://basajans/kliksembuhapi/api/Institutions/SearchInstitutionFromAfterLogin?subDistrict="+mSubdistrict+"&facility="+mSpesialisai);
                     HttpURLConnection urlc = (HttpURLConnection) url.openConnection();
                     urlc.setRequestProperty("Content-Type", "application/json");
                     urlc.connect();

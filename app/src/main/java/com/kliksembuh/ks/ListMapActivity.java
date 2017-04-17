@@ -14,7 +14,6 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.kliksembuh.ks.models.Hospital;
 
 public class ListMapActivity extends FragmentActivity implements OnMapReadyCallback {
 
