@@ -1,75 +1,196 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingRight="10dp"
+    android:background="@drawable/shape_listview">
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:orientation="vertical"
-        android:layout_margin="5dp">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <FrameLayout
-                android:layout_width="wrap_content"
-                android:layout_marginRight="10dp"
-                android:layout_height="match_parent" >
-                <ImageView
-                    android:id="@+id/image_favorite_dokter"
-                    android:layout_width="100dp"
-                    android:layout_height="match_parent"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/dr_indah_kusuma" />
-            </FrameLayout>
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_marginBottom="5dp"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="Anda Memiliki janji dengan"/>
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_marginBottom="5dp"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/blue"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:text="dr Indah Kusuma"
-                    android:id="@+id/tvnamainstansi" />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_marginBottom="5dp"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="Jalan Rumah Sakit I"
-                    android:id="@+id/tvalamathistorydokter" />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="Jumat, 24 Februari 2017"
-
-                    android:id="@+id/tvtanggalhistorydokter" />
-            </LinearLayout>
-        </LinearLayout>
-        <Button
-            android:layout_width="match_parent"
-            android:id="@+id/btnkonfirmasi"
-            android:layout_height="50dp"
-            android:layout_marginTop="10dp"
-            android:textSize="16sp"
-            android:text="Menunggu Konfirmasi"
-            android:textAllCaps="false"
-            android:textStyle="bold"
-            android:background="@drawable/shape"
-            style="@style/MyCustomTextAppearance"
-            android:backgroundTint="@color/red"
-            android:textColor="@color/white"/>
+        android:layout_height="match_parent"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="15dp"
+        android:background="#9900ff00"
+        android:paddingLeft="10dp" >
     </LinearLayout>
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@drawable/border_listview"
+        android:focusable="false"
+        android:weightSum="1">
+
+        <TextView
+            android:id="@+id/lblAppointmentHistory"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="Appointment :"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true"/>
+        <TextView
+            android:id="@+id/tvNoAppointmentHistory"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:text="# 4123123"
+            android:textStyle="bold"
+            android:layout_toRightOf="@+id/lblAppointmentHistory"
+            android:textSize="15sp"/>
+
+        <TextView
+            android:id="@+id/lblStatusHistory"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="49dp"
+            android:text="Status :"
+            android:layout_toRightOf="@id/tvNoAppointmentHistory"/>
+        <TextView
+            android:id="@+id/tvStatusHistory"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginRight="10dp"
+            android:padding="8dp"
+            android:text="Menunggu Konfirmasi"
+            android:background="@color/signup_color"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:layout_below="@id/lblStatusHistory"
+            android:layout_toRightOf="@+id/tvDibuatTanggal"
+            android:textSize="15sp"/>
+
+        <TextView
+            android:id="@+id/lblWaktuBerobat"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="49dp"
+            android:layout_below="@id/tvStatusHistory"
+            android:text="Waktu Berobat :"
+            android:layout_toRightOf="@id/tvNoAppointmentHistory"/>
+
+        <TextView
+            android:id="@+id/tvWaktuBerobat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="3dp"
+            android:background="@drawable/shape"
+            android:layout_marginBottom="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="49dp"
+            android:layout_below="@id/lblWaktuBerobat"
+            android:text="Pagi"
+            android:layout_toRightOf="@id/tvNoAppointmentHistory"/>
+        <TextView
+            android:id="@+id/tvJamBerobat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="3dp"
+            android:layout_marginRight="2dp"
+            android:layout_below="@id/lblWaktuBerobat"
+            android:text="08.00 - 11.00"
+            android:layout_toRightOf="@id/tvWaktuBerobat"/>
+
+        <TextView
+            android:id="@+id/lblDibuatTanggal"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/lblAppointmentHistory"
+            android:layout_marginLeft="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginRight="10dp"
+            android:text="Dibuat Tanggal :"/>
+
+        <TextView
+            android:id="@+id/tvDibuatTanggal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="28-Jan-2017"
+            android:textStyle="bold"
+            android:layout_below="@+id/tvNoAppointmentHistory"
+            android:layout_toRightOf="@+id/lblDibuatTanggal"
+            android:textSize="15sp"/>
+
+        <ImageView
+            android:id="@+id/ivDocPicHistory"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_below="@+id/lblDibuatTanggal"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY"
+            android:src="@drawable/dr_indah_kusuma"/>
+
+        <TextView
+            android:id="@+id/tvHistoryRumahSakit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/MyCustomTextAppearance"
+            android:layout_alignTop="@+id/ivDocPicHistory"
+            android:layout_marginLeft="10dp"
+            android:layout_toEndOf="@+id/ivDocPicHistory"
+            android:layout_toRightOf="@+id/ivDocPicHistory"
+            android:text="RS PMI BOGOR"
+            android:padding="8dp"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:background="@color/colorPrimary"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/tv_Drname_History"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/MyCustomTextAppearance"
+            android:layout_below="@id/tvHistoryRumahSakit"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="10dp"
+            android:layout_toEndOf="@+id/ivDocPicHistory"
+            android:layout_toRightOf="@+id/ivDocPicHistory"
+            android:text="dr. Trio"
+            android:textColor="@color/blue_a400"
+            android:textSize="15sp" />
+
+
+        <TextView
+            android:id="@+id/tv_SpecialtyHistory"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_Drname_History"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="10dp"
+            android:layout_toEndOf="@+id/ivDocPicHistory"
+            android:layout_toRightOf="@+id/ivDocPicHistory"
+            android:text="Dokter Umum"
+            android:textColor="#5C5C5C"
+            android:textSize="12sp" />
+
+        <!--<Button-->
+        <!--android:id="@+id/bookBtn_list"-->
+        <!--style="@style/MyCustomTextAppearance"-->
+        <!--android:layout_width="70dp"-->
+        <!--android:layout_height="30dp"-->
+        <!--android:background="@drawable/shape"-->
+        <!--android:backgroundTint="@color/login_color"-->
+        <!--android:text="BOOK"-->
+        <!--android:textColor="@color/white"-->
+        <!--android:textSize="14dp"-->
+        <!--android:layout_marginLeft="5dp"-->
+        <!--android:layout_marginRight="5dp"-->
+        <!--android:layout_marginEnd="0dp"-->
+        <!--android:layout_below="@+id/tv_clock_list"-->
+        <!--android:layout_alignParentEnd="true" />-->
+    </RelativeLayout>
 </LinearLayout>

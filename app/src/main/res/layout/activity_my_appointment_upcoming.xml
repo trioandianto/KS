@@ -2,81 +2,16 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:orientation="vertical"
-    android:layout_height="wrap_content"
-    android:padding="4dp">
-    <!--<LinearLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:background="@color/white"-->
-        <!--android:orientation="vertical"-->
-        <!--android:layout_margin="5dp">-->
-        <!--<LinearLayout-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:orientation="horizontal">-->
-            <!--<FrameLayout-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_marginRight="10dp"-->
-                <!--android:layout_height="match_parent" >-->
-                <!--<ImageView-->
-                    <!--android:id="@+id/image_favorite_dokter"-->
-                    <!--android:layout_width="100dp"-->
-                    <!--android:layout_height="match_parent"-->
-                    <!--android:scaleType="fitXY"-->
-                    <!--android:src="@drawable/dr_indah_kusuma" />-->
-            <!--</FrameLayout>-->
-            <!--<LinearLayout-->
-                <!--android:orientation="vertical"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content">-->
-                <!--<TextView-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_marginBottom="5dp"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:textAppearance="?android:attr/textAppearanceMedium"-->
-                    <!--android:text="Anda Memiliki janji dengan"/>-->
-                <!--<TextView-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_marginBottom="5dp"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:textColor="@color/blue"-->
-                    <!--android:textAppearance="?android:attr/textAppearanceLarge"-->
-                    <!--android:text="dr Indah Kusuma"-->
-                    <!--android:id="@+id/tvnamainstansi" />-->
-                <!--<TextView-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_marginBottom="5dp"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:textAppearance="?android:attr/textAppearanceMedium"-->
-                    <!--android:text="Jalan Rumah Sakit I"-->
-                    <!--android:id="@+id/tvalamathistorydokter" />-->
-                <!--<TextView-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:textAppearance="?android:attr/textAppearanceMedium"-->
-                    <!--android:text="Jumat, 24 Februari 2017"-->
-
-                    <!--android:id="@+id/tvtanggalhistorydokter" />-->
-            <!--</LinearLayout>-->
-        <!--</LinearLayout>-->
-        <!--<Button-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:id="@+id/btnkonfirmasi"-->
-            <!--android:layout_height="50dp"-->
-            <!--android:layout_marginTop="10dp"-->
-            <!--android:textSize="16sp"-->
-            <!--android:text="Menunggu Konfirmasi"-->
-            <!--android:textAllCaps="false"-->
-            <!--android:textStyle="bold"-->
-            <!--android:background="@drawable/shape"-->
-            <!--style="@style/MyCustomTextAppearance"-->
-            <!--android:backgroundTint="@color/red"-->
-            <!--android:textColor="@color/white"/>-->
-    <!--</LinearLayout>-->
+    android:layout_height="wrap_content">
     <ListView
         android:layout_width="match_parent"
+        android:divider="#00000000"
+        android:paddingRight="0dip"
+        android:paddingLeft="10dip"
+        android:paddingBottom="15dip"
+        android:clipToPadding="false"
+        android:background="@drawable/shape"
         android:layout_height="wrap_content"
         android:id="@+id/lvHistoryUpComing">
-
     </ListView>
 </LinearLayout>

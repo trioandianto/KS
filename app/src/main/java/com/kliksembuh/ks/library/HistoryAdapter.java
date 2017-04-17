@@ -42,15 +42,26 @@ public class HistoryAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         View newHview = View.inflate(mContext, R.layout.list_item_upcoming, null);
 
-        ImageView imgDview = (ImageView)newHview.findViewById(R.id.image_favorite_dokter);
-        TextView tvDrname = (TextView)newHview.findViewById(R.id.tvnamainstansi);
-        TextView tvalamat = (TextView)newHview.findViewById(R.id.tvalamathistorydokter);
-        TextView tvDate = (TextView)newHview.findViewById(R.id.tvtanggalhistorydokter);
+        TextView tvAppointment = (TextView)newHview.findViewById(R.id.tvNoAppointmentHistory);
+        TextView tvDate = (TextView)newHview.findViewById(R.id.tvDibuatTanggal);
+        TextView tvHistoryRumahSakit = (TextView)newHview.findViewById(R.id.tvHistoryRumahSakit);
+        ImageView imgDview = (ImageView)newHview.findViewById(R.id.ivDocPicHistory);
+        TextView tvDrname = (TextView)newHview.findViewById(R.id.tv_Drname_History);
+        TextView tvSpecialty = (TextView)newHview.findViewById(R.id.tv_SpecialtyHistory);
+        TextView tvStatusHistory = (TextView)newHview.findViewById(R.id.tvStatusHistory);
+        TextView tvWaktuBerobat = (TextView)newHview.findViewById(R.id.tvWaktuBerobat);
+        TextView tvJamBerobat = (TextView)newHview.findViewById(R.id.tvJamBerobat);
 
-        imgDview.setImageDrawable(mHistory.get(position).getImage());
+        tvAppointment.setText(mHistory.get(position).getNoAppointment());
         tvDate.setText(mHistory.get(position).getTanggal());
-        tvalamat.setText(mHistory.get(position).getAlamat());
+        tvHistoryRumahSakit.setText(mHistory.get(position).getRumahSakit());
+        imgDview.setImageDrawable(mHistory.get(position).getImage());
         tvDrname.setText(mHistory.get(position).getNamaDokter());
+        tvSpecialty.setText(mHistory.get(position).getAlamat());
+        tvStatusHistory.setText(mHistory.get(position).getStatusHistory());
+        tvWaktuBerobat.setText(mHistory.get(position).getWaktuBerobat());
+        tvJamBerobat.setText(mHistory.get(position).getJamBerobat());
+
         return newHview;
     }
 }

@@ -12,5 +12,16 @@
         android:layout_height="wrap_content"
         android:id="@+id/listview_statusPatientSuccess"
         android:padding="10dp"/>
+    <ListView
+        android:layout_width="match_parent"
+        android:divider="#00000000"
+        android:paddingRight="0dip"
+        android:paddingLeft="10dip"
+        android:paddingBottom="15dip"
+        android:clipToPadding="false"
+        android:background="@drawable/shape"
+        android:layout_height="wrap_content"
+        android:id="@+id/lvHistorySuccess">
+    </ListView>
 
 </RelativeLayout>
