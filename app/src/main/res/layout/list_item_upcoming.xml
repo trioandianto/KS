@@ -28,6 +28,7 @@
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
+            android:textColor="@color/black"
             android:text="Appointment :"
             android:layout_alignParentTop="true"
             android:layout_alignParentStart="true"/>
@@ -39,6 +40,7 @@
             android:layout_marginBottom="10dp"
             android:text="# 4123123"
             android:textStyle="bold"
+            android:textColor="@color/black"
             android:layout_toRightOf="@+id/lblAppointmentHistory"
             android:textSize="15sp"/>
 
@@ -48,6 +50,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
+            android:textColor="@color/black"
             android:layout_marginRight="10dp"
             android:layout_marginLeft="49dp"
             android:text="Status :"
@@ -72,6 +75,7 @@
         <TextView
             android:id="@+id/lblWaktuBerobat"
             android:layout_width="100dp"
+            android:textColor="@color/black"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="10dp"
@@ -83,6 +87,7 @@
 
         <TextView
             android:id="@+id/tvWaktuBerobat"
+            android:textColor="@color/black"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="3dp"
@@ -97,6 +102,7 @@
             android:id="@+id/tvJamBerobat"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/black"
             android:padding="3dp"
             android:layout_marginRight="2dp"
             android:layout_below="@id/lblWaktuBerobat"
@@ -109,6 +115,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/lblAppointmentHistory"
             android:layout_marginLeft="10dp"
+            android:textColor="@color/black"
             android:layout_marginBottom="10dp"
             android:layout_marginRight="10dp"
             android:text="Dibuat Tanggal :"/>
@@ -129,8 +136,7 @@
             android:layout_height="100dp"
             android:layout_below="@+id/lblDibuatTanggal"
             android:adjustViewBounds="true"
-            android:scaleType="fitXY"
-            android:src="@drawable/dr_indah_kusuma"/>
+            android:scaleType="fitXY"/>
 
         <TextView
             android:id="@+id/tvHistoryRumahSakit"

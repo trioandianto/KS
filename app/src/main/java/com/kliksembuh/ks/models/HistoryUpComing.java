@@ -7,11 +7,12 @@ import android.graphics.drawable.Drawable;
  */
 
 public class HistoryUpComing {
+    private int idHistoryUpComing;
     private String namaDokter;
-    private Drawable image;
+    private Drawable imgHistoryDoc;
     private String rumahSakit;
     private String tanggal;
-    private String alamat;
+    // private String alamat;
     // To Do (Ucu)
     // Change data type string to int on noAppointment
     // Change string to date & time date on jadwalBerobat
@@ -21,19 +22,27 @@ public class HistoryUpComing {
     private String waktuBerobat;
     private String jamBerobat;
 
-    public HistoryUpComing(String namaDokter, Drawable image, String rumahSakit, String tanggal, String alamat,
-                           String noAppointment, String specialtyDoc, String statusHistory, String waktuBerobat, String jamBerobat){
+    public HistoryUpComing(int idHistoryUpComing, String namaDokter, Drawable imgHistoryDoc, String rumahSakit, String tanggal,
+                           String noAppointment, String specialtyDoc, String statusHistory, String waktuBerobat, String jamBerobat) {
 
+        this.idHistoryUpComing = idHistoryUpComing;
         this.namaDokter = namaDokter;
-        this.image = image;
+        this.imgHistoryDoc = imgHistoryDoc;
         this.rumahSakit = rumahSakit;
         this.tanggal = tanggal;
-        this.alamat = alamat;
         this.noAppointment = noAppointment;
         this.specialtyDoc = specialtyDoc;
         this.statusHistory = statusHistory;
         this.waktuBerobat = waktuBerobat;
         this.jamBerobat = jamBerobat;
+    }
+
+    public int getIdHistoryUpComing() {
+        return idHistoryUpComing;
+    }
+
+    public void setIdHistoryUpComing(int idHistoryUpComing) {
+        this.idHistoryUpComing = idHistoryUpComing;
     }
 
     public String getNamaDokter() {
@@ -44,12 +53,12 @@ public class HistoryUpComing {
         this.namaDokter = namaDokter;
     }
 
-    public Drawable getImage() {
-        return image;
+    public Drawable getImgHistoryDoc() {
+        return imgHistoryDoc;
     }
 
-    public void setImage(Drawable image) {
-        this.image = image;
+    public void setImgHistoryDoc(Drawable imgHistoryDoc) {
+        this.imgHistoryDoc = imgHistoryDoc;
     }
 
     public String getRumahSakit() {
@@ -66,14 +75,6 @@ public class HistoryUpComing {
 
     public void setTanggal(String tanggal) {
         this.tanggal = tanggal;
-    }
-
-    public String getAlamat() {
-        return alamat;
-    }
-
-    public void setAlamat(String alamat) {
-        this.alamat = alamat;
     }
 
     public String getNoAppointment() {
@@ -115,6 +116,4 @@ public class HistoryUpComing {
     public void setJamBerobat(String jamBerobat) {
         this.jamBerobat = jamBerobat;
     }
-
-
 }
