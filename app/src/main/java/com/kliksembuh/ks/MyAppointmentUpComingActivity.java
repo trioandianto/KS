@@ -12,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 
@@ -83,7 +84,7 @@ public class MyAppointmentUpComingActivity extends Fragment {
 ////        });
         lvUpcoming = (ListView)rootView.findViewById(R.id.lvHistoryUpComing);
         historyUpComingList = new ArrayList<>();
-        new HistoryAppoinmentAsync(userID).execute();
+        new HistoryAppoinmentAsync().execute();
 
 //        imageId = imgIdHosp[1];
 //        Drawable drawHistDoc = getResources().getDrawable(imageId);
@@ -97,10 +98,10 @@ public class MyAppointmentUpComingActivity extends Fragment {
         return rootView;
     }
     public class HistoryAppoinmentAsync extends AsyncTask<String, Void, String> {
-        private String mUserID;
-        HistoryAppoinmentAsync(String userID) {
-            mUserID = userID;
-        }
+        // private String mUserID;
+//        HistoryAppoinmentAsync(String userID) {
+//            mUserID = userID;
+//        }
 
         @Override
         protected void onPreExecute() {
