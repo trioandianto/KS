@@ -205,7 +205,7 @@ public class RegisterActivity extends AppCompatActivity {
             NetworkInfo netInfo = cm.getActiveNetworkInfo();
             if (netInfo != null && netInfo.isConnected()) {
                 try{
-                    URL url = new URL("http://cloud.basajans.com:8868/BS.HealthCare.Application/api/users/register");
+                    URL url = new URL("http://basajans/kliksembuhapi/api/users/register");
                     HttpURLConnection urlc = (HttpURLConnection) url.openConnection();
                     JSONObject jsonObject = new JSONObject();
                     jsonObject.put("Email",mEmail);

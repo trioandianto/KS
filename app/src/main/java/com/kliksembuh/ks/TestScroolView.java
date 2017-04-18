@@ -29,7 +29,6 @@ import android.widget.TextView;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.kliksembuh.ks.library.DoctorListAdapter;
@@ -125,17 +124,17 @@ public class TestScroolView extends AppCompatActivity implements OnMapReadyCallb
                 android.R.layout.simple_spinner_item,paths);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
-//        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-//            @Override
-//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-//
-//            }
-//
-//            @Override
-//            public void onNothingSelected(AdapterView<?> parent) {
-//
-//            }
-//        });
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
         layouts = new int[]{
                 R.drawable.doctorlist1,
                 R.drawable.doctorlist2,
@@ -143,8 +142,8 @@ public class TestScroolView extends AppCompatActivity implements OnMapReadyCallb
         viewPagerAdapter = new ViewPagerAdapter(this);
         viewPager = (ViewPager)findViewById(R.id.backdrop);
         viewPager.setAdapter(viewPagerAdapter);
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.mapdoctorlistcoba);
-        mapFragment.getMapAsync(this);
+//        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.mapdoctorlistcoba);
+//        mapFragment.getMapAsync(this);
 //        cardView = (CardView)findViewById(R.id.cvdoktera);
 //        cardView.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -182,11 +181,22 @@ public class TestScroolView extends AppCompatActivity implements OnMapReadyCallb
                 //.putExtra("userID",userID);
                 myIntent.putExtras(b);
                 //.putExtra("userID",userID);
-                startActivityForResult(myIntent, 0);
+                startActivityForResult(myIntent, 1);
             }
         });
 
 
+    }
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1) {
+            if(resultCode == RESULT_OK) {
+                userID = data.getStringExtra("userID");
+                rumahSakitID = data.getStringExtra("institution");
+                facility = data.getStringExtra("facilityID");
+                toolbarTitle = data.getStringExtra("tittle");
+            }
+        }
     }
 
     @Override

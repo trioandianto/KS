@@ -10,6 +10,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -33,9 +34,9 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
-import java.util.Date;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -78,7 +79,7 @@ public class BookingActivity extends AppCompatActivity implements ListView.OnIte
     private int sabtuMingguIni;
     private int mingguMingguIni;
     private int hariMingguini;
-    private int bulanIni;
+    private String bulanIni;
     private int tahunIni;
     private int seninMingguDepan;
     private int selasaMingguDepan;
@@ -94,6 +95,9 @@ public class BookingActivity extends AppCompatActivity implements ListView.OnIte
     private String facilityID;
     private String userID;
     private String namaRumahSakit;
+    private int tanggala;
+    private int bulan;
+    private int tahun;
 
     public Drawable getImageDokter() {
         return imageDokter;
@@ -124,6 +128,10 @@ public class BookingActivity extends AppCompatActivity implements ListView.OnIte
             namaRumahSakit = b.getString("namaRumahSakit");
 
         }
+        Toolbar newToolbar = (Toolbar)findViewById(R.id.toolbarJadwalDokter);
+        setSupportActionBar(newToolbar);
+        newToolbar.setTitle("Jadwal Dokter");
+        setSupportActionBar(newToolbar);
         imgDokter = (ImageView)findViewById(R.id.iv_doc_picdetail);
         tvNamaDokter = (TextView) findViewById(R.id.tv_drname_detail);
         tvNamaDokter.setText(namaDokter);
@@ -136,13 +144,13 @@ public class BookingActivity extends AppCompatActivity implements ListView.OnIte
         mJadwalDokterList = new ArrayList<>();
         spnHari = (Spinner)findViewById(R.id.spnHari);
         List<String> list = new ArrayList<String>();
-        list.add("Minggu");
         list.add("Senin");
         list.add("Selasa");
         list.add("Rabu");
         list.add("Kamis");
         list.add("Jumat");
         list.add("Sabtu");
+        list.add("Minggu");
 
         ArrayAdapter arrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,list);
         spnHari.setAdapter(arrayAdapter);
@@ -159,24 +167,9 @@ public class BookingActivity extends AppCompatActivity implements ListView.OnIte
         day = calendar.get(Calendar.DAY_OF_WEEK);
         hariMingguini = day;
         lastDay = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
-        bulanIni = cMonth;
-        tahunIni = cYear;
 
         if(day == 1){
             mingguMingguIni = cDay;
-            seninMingguIni = mingguMingguIni + 1;
-            if (seninMingguIni > lastDay){
-                seninMingguIni = seninMingguIni - lastDay;
-            }
-            selasaMingguIni = seninMingguIni + 1;
-            rabuMingguIni = selasaMingguIni + 1;
-            kamisMingguIni = rabuMingguIni + 1;
-            jumatMingguIni = kamisMingguIni + 1;
-            sabtuMingguIni = jumatMingguIni + 1;
-
-        }
-        else if(day == 2){
-            seninMingguIni=cDay;
             seninMingguIni = mingguMingguIni + 1;
             if (seninMingguIni > lastDay){
                 seninMingguIni = seninMingguIni - lastDay;
@@ -186,16 +179,68 @@ public class BookingActivity extends AppCompatActivity implements ListView.OnIte
                 selasaMingguIni = selasaMingguIni - lastDay;
             }
             rabuMingguIni = selasaMingguIni + 1;
-            if (seninMingguIni > lastDay){
-                seninMingguIni = seninMingguIni - lastDay;
+            if (rabuMingguIni > lastDay){
+                rabuMingguIni = rabuMingguIni - lastDay;
             }
             kamisMingguIni = rabuMingguIni + 1;
-            if (seninMingguIni > lastDay){
-                seninMingguIni = seninMingguIni - lastDay;
+            if (kamisMingguIni > lastDay){
+                kamisMingguIni = kamisMingguIni - lastDay;
             }
             jumatMingguIni = kamisMingguIni + 1;
+            if (jumatMingguIni > lastDay){
+                jumatMingguIni = jumatMingguIni - lastDay;
+            }
+            sabtuMingguIni = jumatMingguIni + 1;
+            if (sabtuMingguIni > lastDay){
+                sabtuMingguIni = sabtuMingguIni - lastDay;
+            }
+            mingguMingguDepan = sabtuMingguIni + 1;
+            if (mingguMingguDepan > lastDay){
+                mingguMingguDepan = mingguMingguDepan - lastDay;
+            }
+            seninMingguDepan = mingguMingguDepan + 1;
+            if (seninMingguDepan > lastDay){
+                seninMingguDepan = seninMingguDepan - lastDay;
+            }
+            selasaMingguDepan = seninMingguDepan + 1;
             if (seninMingguIni > lastDay){
-                seninMingguIni = seninMingguIni - lastDay;
+                selasaMingguDepan = selasaMingguDepan - lastDay;
+            }
+            rabuMingguDepan = selasaMingguDepan + 1;
+            if (rabuMingguDepan > lastDay){
+                rabuMingguDepan = rabuMingguDepan - lastDay;
+            }
+            kamisMingguDepan = rabuMingguDepan+ 1;
+            if (kamisMingguDepan > lastDay){
+                kamisMingguDepan = kamisMingguDepan - lastDay;
+            }
+            jumatMingguDepan = kamisMingguDepan + 1;
+            if (jumatMingguDepan > lastDay){
+                jumatMingguDepan = jumatMingguDepan - lastDay;
+            }
+            sabtuMingguDepan = jumatMingguDepan + 1;
+            if (sabtuMingguDepan > lastDay){
+                sabtuMingguDepan = sabtuMingguDepan - lastDay;
+            }
+
+        }
+        else if(day == 2){
+            seninMingguIni=cDay;
+            selasaMingguIni = seninMingguIni + 1;
+            if (selasaMingguIni > lastDay){
+                selasaMingguIni = selasaMingguIni - lastDay;
+            }
+            rabuMingguIni = selasaMingguIni + 1;
+            if (rabuMingguIni > lastDay){
+                rabuMingguIni = rabuMingguIni - lastDay;
+            }
+            kamisMingguIni = rabuMingguIni + 1;
+            if (kamisMingguIni > lastDay){
+                kamisMingguIni = kamisMingguIni - lastDay;
+            }
+            jumatMingguIni = kamisMingguIni + 1;
+            if (jumatMingguIni > lastDay){
+                jumatMingguIni = jumatMingguIni - lastDay;
             }
             sabtuMingguIni = jumatMingguIni + 1;
             if (seninMingguIni > lastDay){
@@ -205,19 +250,89 @@ public class BookingActivity extends AppCompatActivity implements ListView.OnIte
             if (seninMingguIni > lastDay){
                 seninMingguIni = seninMingguIni - lastDay;
             }
+            seninMingguDepan = mingguMingguIni + 1;
+            if (seninMingguDepan > lastDay){
+                seninMingguDepan = seninMingguDepan - lastDay;
+            }
+            selasaMingguDepan = seninMingguDepan + 1;
+            if (seninMingguIni > lastDay){
+                selasaMingguDepan = selasaMingguDepan - lastDay;
+            }
+            rabuMingguDepan = selasaMingguDepan + 1;
+            if (rabuMingguDepan > lastDay){
+                rabuMingguDepan = rabuMingguDepan - lastDay;
+            }
+            kamisMingguDepan = rabuMingguDepan+ 1;
+            if (kamisMingguDepan > lastDay){
+                kamisMingguDepan = kamisMingguDepan - lastDay;
+            }
+            jumatMingguDepan = kamisMingguDepan + 1;
+            if (jumatMingguDepan > lastDay){
+                jumatMingguDepan = jumatMingguDepan - lastDay;
+            }
+            sabtuMingguDepan = jumatMingguDepan + 1;
+            if (sabtuMingguDepan > lastDay){
+                sabtuMingguDepan = sabtuMingguDepan - lastDay;
+            }
+            mingguMingguDepan = sabtuMingguDepan + 1;
+            if(mingguMingguDepan > lastDay){
+                mingguMingguDepan = mingguMingguDepan - lastDay;
+            }
         }
         else if(day == 3){
             selasaMingguIni = cDay;
-            mingguMingguIni = cDay;
-            seninMingguIni = mingguMingguIni + 1;
+            seninMingguIni = selasaMingguIni - 1;
+            if (seninMingguIni < 1){
+                seninMingguIni = seninMingguIni - lastDay;
+            }
+            rabuMingguIni = selasaMingguIni + 1;
+            if (rabuMingguIni > lastDay){
+                rabuMingguIni = rabuMingguIni - lastDay;
+            }
+            kamisMingguIni = rabuMingguIni + 1;
+            if (kamisMingguIni > lastDay){
+                kamisMingguIni = kamisMingguIni - lastDay;
+            }
+            jumatMingguIni = kamisMingguIni + 1;
+            if (jumatMingguIni > lastDay){
+                jumatMingguIni = jumatMingguIni - lastDay;
+            }
+            sabtuMingguIni = jumatMingguIni + 1;
             if (seninMingguIni > lastDay){
                 seninMingguIni = seninMingguIni - lastDay;
             }
-            selasaMingguIni = seninMingguIni + 1;
-            rabuMingguIni = selasaMingguIni + 1;
-            kamisMingguIni = rabuMingguIni + 1;
-            jumatMingguIni = kamisMingguIni + 1;
-            sabtuMingguIni = jumatMingguIni + 1;
+            mingguMingguIni = sabtuMingguIni + 1;
+            if (seninMingguIni > lastDay){
+                seninMingguIni = seninMingguIni - lastDay;
+            }
+            seninMingguDepan = mingguMingguIni + 1;
+            if (seninMingguDepan > lastDay){
+                seninMingguDepan = seninMingguDepan - lastDay;
+            }
+            selasaMingguDepan = seninMingguDepan + 1;
+            if (seninMingguIni > lastDay){
+                selasaMingguDepan = selasaMingguDepan - lastDay;
+            }
+            rabuMingguDepan = selasaMingguDepan + 1;
+            if (rabuMingguDepan > lastDay){
+                rabuMingguDepan = rabuMingguDepan - lastDay;
+            }
+            kamisMingguDepan = rabuMingguDepan+ 1;
+            if (kamisMingguDepan > lastDay){
+                kamisMingguDepan = kamisMingguDepan - lastDay;
+            }
+            jumatMingguDepan = kamisMingguDepan + 1;
+            if (jumatMingguDepan > lastDay){
+                jumatMingguDepan = jumatMingguDepan - lastDay;
+            }
+            sabtuMingguDepan = jumatMingguDepan + 1;
+            if (sabtuMingguDepan > lastDay){
+                sabtuMingguDepan = sabtuMingguDepan - lastDay;
+            }
+            mingguMingguDepan = sabtuMingguDepan + 1;
+            if(mingguMingguDepan > lastDay){
+                mingguMingguDepan = mingguMingguDepan - lastDay;
+            }
         }
         else if(day == 4){
             rabuMingguIni = cDay;
@@ -284,222 +399,185 @@ public class BookingActivity extends AppCompatActivity implements ListView.OnIte
         month = Integer.toString(cMonth+1);
         sday = Integer.toString(cDay);
         tanggal = new Date(cYear,cMonth,cDay);
-        tvDate.setText(sday+"/"+month+"/"+year);
-        spnHari.setSelection(day-1);
+        spnHari.setSelection(day-2);
         spnHari.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 mJadwalDokterList = new ArrayList<>();
-                day = position+1;
+                day = position+2;
+                tahun = cYear;
                 if (sequence=="minggu 1"){
-                    if(hariMingguini == 1){
-                        mingguMingguIni = cDay;
-                    }
-                    else if(hariMingguini == 2){
-                        seninMingguIni=cDay;
-                        seninMingguIni = mingguMingguIni + 1;
-                        if (seninMingguIni > lastDay){
-                            seninMingguIni = seninMingguIni - lastDay;
-                            bulanIni = bulanIni + 1;
-                            if(bulanIni > 12){
-                                tahunIni = tahunIni + 1;
-                            }
+                    if(day ==8){
+                        tanggala = mingguMingguIni;
+                        bulan = cMonth+ 1;
+                        if(tanggala > lastDay){
+                            bulan = bulan + 1;
                         }
-                        selasaMingguIni = seninMingguIni + 1;
-                        if (selasaMingguIni > lastDay){
-                            selasaMingguIni = selasaMingguIni - lastDay;
-                            bulanIni = bulanIni + 1;
-                            if(bulanIni > 12){
-                                tahunIni = tahunIni + 1;
-                            }
-                        }
-                        rabuMingguIni = selasaMingguIni + 1;
-                        if (seninMingguIni > lastDay){
-                            seninMingguIni = seninMingguIni - lastDay;
-                            bulanIni = bulanIni + 1;
-                            if(bulanIni > 12){
-                                tahunIni = tahunIni + 1;
-                            }
-                        }
-                        kamisMingguIni = rabuMingguIni + 1;
-                        if (seninMingguIni > lastDay){
-                            seninMingguIni = seninMingguIni - lastDay;
-                            bulanIni = bulanIni + 1;
-                            if(bulanIni > 12){
-                                tahunIni = tahunIni + 1;
-                            }
-                        }
-                        jumatMingguIni = kamisMingguIni + 1;
-                        if (seninMingguIni > lastDay){
-                            seninMingguIni = seninMingguIni - lastDay;
-                            bulanIni = bulanIni + 1;
-                            if(bulanIni > 12){
-                                tahunIni = tahunIni + 1;
-                            }
-                        }
-                        sabtuMingguIni = jumatMingguIni + 1;
-                        if (seninMingguIni > lastDay){
-                            seninMingguIni = seninMingguIni - lastDay;
-                            bulanIni = bulanIni + 1;
-                            if(bulanIni > 12){
-                                tahunIni = tahunIni + 1;
-                            }
-                        }
-                        mingguMingguIni = sabtuMingguIni + 1;
-                        if (seninMingguIni > lastDay){
-                            seninMingguIni = seninMingguIni - lastDay;
-                            bulanIni = bulanIni + 1;
-                            if(bulanIni > 12){
-                                tahunIni = tahunIni + 1;
-                            }
+                        else if (tanggala < 1){
+                            bulan = bulan -1;
                         }
                     }
-                    else if(hariMingguini == 3){
-                        selasaMingguIni = cDay;
-                        rabuMingguIni = selasaMingguIni + 1;
-                        if (seninMingguIni > lastDay){
-                            seninMingguIni = seninMingguIni - lastDay;
-                            bulanIni = bulanIni + 1;
-                            if(bulanIni > 12){
-                                tahunIni = tahunIni + 1;
-                            }
+                    else if(day ==2){
+                        tanggala = seninMingguIni;
+                        bulan = cMonth+ 1;
+                        if(tanggala > lastDay){
+                            bulan = bulan + 1;
                         }
-                        kamisMingguIni = rabuMingguIni + 1;
-                        if (seninMingguIni > lastDay){
-                            seninMingguIni = seninMingguIni - lastDay;
-                            bulanIni = bulanIni + 1;
-                            if(bulanIni > 12){
-                                tahunIni = tahunIni + 1;
-                            }
-                        }
-                        jumatMingguIni = kamisMingguIni + 1;
-                        if (seninMingguIni > lastDay){
-                            seninMingguIni = seninMingguIni - lastDay;
-                            bulanIni = bulanIni + 1;
-                            if(bulanIni > 12){
-                                tahunIni = tahunIni + 1;
-                            }
-                        }
-                        sabtuMingguIni = jumatMingguIni + 1;
-                        if (seninMingguIni > lastDay){
-                            seninMingguIni = seninMingguIni - lastDay;
-                            bulanIni = bulanIni + 1;
-                            if(bulanIni > 12){
-                                tahunIni = tahunIni + 1;
-                            }
-                        }
-                        mingguMingguIni = sabtuMingguIni + 1;
-                        if (seninMingguIni > lastDay){
-                            seninMingguIni = seninMingguIni - lastDay;
-                            bulanIni = bulanIni + 1;
-                            if(bulanIni > 12){
-                                tahunIni = tahunIni + 1;
-                            }
+                        else if (tanggala < 1){
+                            bulan = bulan -1;
                         }
                     }
-                    else if(hariMingguini == 4){
-                        rabuMingguIni = cDay;
-                        kamisMingguIni = rabuMingguIni + 1;
-                        if (seninMingguIni > lastDay){
-                            seninMingguIni = seninMingguIni - lastDay;
-                            bulanIni = bulanIni + 1;
-                            if(bulanIni > 12){
-                                tahunIni = tahunIni + 1;
-                            }
+                    else if(day ==3){
+                        tanggala = selasaMingguIni;
+                        bulan = cMonth+ 1;
+                        if(tanggala > lastDay){
+                            bulan = bulan + 1;
                         }
-                        jumatMingguIni = kamisMingguIni + 1;
-                        if (seninMingguIni > lastDay){
-                            seninMingguIni = seninMingguIni - lastDay;
-                            bulanIni = bulanIni + 1;
-                            if(bulanIni > 12){
-                                tahunIni = tahunIni + 1;
-                            }
+                        else if (tanggala < 1){
+                            bulan = bulan -1;
                         }
-                        sabtuMingguIni = jumatMingguIni + 1;
-                        if (seninMingguIni > lastDay){
-                            seninMingguIni = seninMingguIni - lastDay;
-                            bulanIni = bulanIni + 1;
-                            if(bulanIni > 12){
-                                tahunIni = tahunIni + 1;
-                            }
-                        }
-                        mingguMingguIni = sabtuMingguIni + 1;
-                        if (seninMingguIni > lastDay){
-                            seninMingguIni = seninMingguIni - lastDay;
-                            bulanIni = bulanIni + 1;
-                            if(bulanIni > 12){
-                                tahunIni = tahunIni + 1;
-                            }
-                        }
-
-
                     }
-                    else if(hariMingguini == 5){
-                        kamisMingguIni =cDay;
-                        jumatMingguIni = kamisMingguIni + 1;
-                        if (seninMingguIni > lastDay){
-                            seninMingguIni = seninMingguIni - lastDay;
-                            bulanIni = bulanIni + 1;
-                            if(bulanIni > 12){
-                                tahunIni = tahunIni + 1;
-                            }
+                    else if(day ==4){
+                        tanggala = rabuMingguIni;
+                        bulan = cMonth+ 1;
+                        if(tanggala > lastDay){
+                            bulan = bulan + 1;
                         }
-                        sabtuMingguIni = jumatMingguIni + 1;
-                        if (seninMingguIni > lastDay){
-                            seninMingguIni = seninMingguIni - lastDay;
-                            bulanIni = bulanIni + 1;
-                            if(bulanIni > 12){
-                                tahunIni = tahunIni + 1;
-                            }
+                        else if (tanggala < 1){
+                            bulan = bulan -1;
                         }
-                        mingguMingguIni = sabtuMingguIni + 1;
-                        if (seninMingguIni > lastDay){
-                            seninMingguIni = seninMingguIni - lastDay;
-                            bulanIni = bulanIni + 1;
-                            if(bulanIni > 12){
-                                tahunIni = tahunIni + 1;
-                            }
-                        }
-
                     }
-                    else if(hariMingguini == 6){
-                        jumatMingguIni = cDay;
-                        sabtuMingguIni = jumatMingguIni + 1;
-                        if (seninMingguIni > lastDay){
-                            seninMingguIni = seninMingguIni - lastDay;
-                            bulanIni = bulanIni + 1;
-                            if(bulanIni > 12){
-                                tahunIni = tahunIni + 1;
-                            }
+                    else if(day ==5){
+                        tanggala = kamisMingguIni;
+                        bulan = cMonth+ 1;
+                        if(tanggala > lastDay){
+                            bulan = bulan + 1;
                         }
-                        mingguMingguIni = sabtuMingguIni + 1;
-                        if (seninMingguIni > lastDay){
-                            seninMingguIni = seninMingguIni - lastDay;
-                            bulanIni = bulanIni + 1;
-                            if(bulanIni > 12){
-                                tahunIni = tahunIni + 1;
-                            }
+                        else if (tanggala < 1){
+                            bulan = bulan -1;
                         }
-
+                    }
+                    else if(day ==6){
+                        tanggala = jumatMingguIni;
+                        bulan = cMonth+ 1;
+                        if(tanggala > lastDay){
+                            bulan = bulan + 1;
+                        }
+                        else if (tanggala < 1){
+                            bulan = bulan -1;
+                        }
                     }
                     else{
-                        sabtuMingguIni = cDay;
-                        mingguMingguIni = sabtuMingguIni + 1;
-                        if (seninMingguIni > lastDay){
-                            seninMingguIni = seninMingguIni - lastDay;
-                            bulanIni = bulanIni + 1;
-                            if(bulanIni > 12){
-                                tahunIni = tahunIni + 1;
-                            }
+                        tanggala = sabtuMingguIni;
+                        bulan = cMonth+ 1;
+                        if(tanggala > lastDay){
+                            bulan = bulan + 1;
                         }
-
+                        else if (tanggala < 1){
+                            bulan = bulan -1;
+                        }
                     }
-
-                    tvDate.setText("");
                 }
                 else{
+                    if(day ==1){
+                        tanggala = mingguMingguDepan;
+                        bulan = cMonth+ 1;
+                        if(tanggala > lastDay){
+                            bulan = bulan + 1;
+                        }
+                        else if (tanggala < 1){
+                            bulan = bulan -1;
+                        }
+                    }
+                    else if(day ==2){
+                        tanggala = seninMingguDepan;
+                        bulan = cMonth+ 1;
+                        if(tanggala > lastDay){
+                            bulan = bulan + 1;
+                        }
+                        else if (tanggala < 1){
+                            bulan = bulan -1;
+                        }
+                    }
+                    else if(day ==3){
+                        tanggala = selasaMingguDepan;
+                        bulan = cMonth+ 1;
+                        if(tanggala > lastDay){
+                            bulan = bulan + 1;
+                        }
+                        else if (tanggala < 1){
+                            bulan = bulan -1;
+                        }
+                    }
+                    else if(day ==4){
+                        tanggala = rabuMingguDepan;
+                        bulan = cMonth+ 1;
+                        if(tanggala > lastDay){
+                            bulan = bulan + 1;
+                        }
+                        else if (tanggala < 1){
+                            bulan = bulan -1;
+                        }
+                    }
+                    else if(day ==5){
+                        tanggala = kamisMingguDepan;
+                        bulan = cMonth+ 1;
+                        if(tanggala > lastDay){
+                            bulan = bulan + 1;
+                        }
+                        else if (tanggala < 1){
+                            bulan = bulan -1;
+                        }
+
+
+                    }
+                    else if(day ==6){
+                        tanggala = jumatMingguDepan;
+                        bulan = cMonth+ 1;
+                        if(tanggala > lastDay){
+                            bulan = bulan + 1;
+                        }
+                        else if (tanggala < 1){
+                            bulan = bulan -1;
+                        }
+
+
+                    }
+                    else {
+                        tanggala = sabtuMingguDepan;
+                        bulan = cMonth + 1;
+                        if (tanggala > lastDay) {
+                            bulan = bulan + 1;
+                        } else if (tanggala < 1) {
+                            bulan = bulan - 1;
+                        }
+                    }
 
                 }
+                if (bulan ==1){
+                    bulanIni ="Januari";
+                }
+                else if(bulan ==2){
+                    bulanIni ="Februari";
+                }
+                else if(bulan ==3){
+
+                    bulanIni ="Maret";
+                }
+                else if(bulan ==4){
+
+                    bulanIni ="April";
+                }
+                else if(bulan ==5){
+
+                    bulanIni ="Mei";
+                }
+                else {
+                    bulanIni ="Juni";
+
+                }
+                tvDate.setText(tanggala+" "+bulanIni+" "+tahun);
+
                 new JadwalDokterAsync(personalID, year, week).execute();
             }
             @Override
@@ -532,8 +610,22 @@ public class BookingActivity extends AppCompatActivity implements ListView.OnIte
 
 
     }
-    public void jadwal(){
 
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1) {
+            if(resultCode == RESULT_OK) {
+                userID = data.getStringExtra("userID");
+                personalID = data.getStringExtra("personalID");
+                namaDokter = data.getStringExtra("namaDokter");
+                idDokter = data.getStringExtra("idDokter");
+                urlImage = data.getStringExtra("urlImage");
+                dokterSpesialisasi = "Dokter Umum";
+                rumahSakitID = data.getStringExtra("rumahSakitID");
+                facilityID = data.getStringExtra("facilityID");
+                namaRumahSakit = data.getStringExtra("namaRumahSakit");
+            }
+        }
     }
 
     @Override
@@ -556,7 +648,7 @@ public class BookingActivity extends AppCompatActivity implements ListView.OnIte
         b.putString("namaDokter",namaDokter);
         b.putString("namaRumahSakit",namaRumahSakit);
         myIntent.putExtras(b);
-        startActivity(myIntent);
+        startActivityForResult(myIntent, 1);
 
     }
 

@@ -1,15 +1,11 @@
 package com.kliksembuh.ks;
 
-import android.provider.MediaStore;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Window;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
-
-import org.w3c.dom.Text;
 
 public class PatientFormActivity extends AppCompatActivity {
     private Spinner spnStatus, spnAsuransi;

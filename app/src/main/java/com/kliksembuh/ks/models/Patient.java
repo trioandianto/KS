@@ -1,7 +1,5 @@
 package com.kliksembuh.ks.models;
 
-import java.util.Date;
-
 /**
  * Created by Ucu Nurul Ulum on 07/04/2017.
  */

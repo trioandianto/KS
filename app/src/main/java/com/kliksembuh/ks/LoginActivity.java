@@ -639,7 +639,7 @@ public class LoginActivity extends BaseActivity implements LoaderCallbacks<Curso
             NetworkInfo netInfo = cm.getActiveNetworkInfo();
             if (netInfo != null && netInfo.isConnected()) {
                 try {
-                    URL url = new URL(R.string.apibasajans+"/api/users/login");
+                    URL url = new URL("http://basajans/kliksembuhapi/api/users/login");
                     HttpURLConnection urlc = (HttpURLConnection) url.openConnection();
                     JSONObject jsonObject = new JSONObject();
                     jsonObject.put("Email",mEmail);
@@ -650,32 +650,22 @@ public class LoginActivity extends BaseActivity implements LoaderCallbacks<Curso
                     urlc.setDoInput(true);
                     urlc.setDoOutput(true);
                     DataOutputStream os = new DataOutputStream(urlc.getOutputStream());
-
                     os.writeBytes(jsonObject.toString());
-
-
-
                     int responseCode=urlc.getResponseCode();
-
                     if (responseCode == HttpsURLConnection.HTTP_OK) {
-
                         BufferedReader in=new BufferedReader(
                                 new InputStreamReader(
                                         urlc.getInputStream()));
                         StringBuffer sb = new StringBuffer("");
                         String line="";
-
                         while((line = in.readLine()) != null) {
-
                             sb.append(line);
                             break;
                         }
-
                         in.close();
                         os.flush();
                         os.close();
                         return true;
-
                     }
                     else {
                         return false;

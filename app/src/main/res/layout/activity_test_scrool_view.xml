@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="fill_parent"
     android:fitsSystemWindows="true">
-
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appbar"
         android:layout_width="match_parent"
@@ -59,18 +58,18 @@
         android:fillViewport="true"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <LinearLayout
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="fill_parent"
             android:orientation="vertical"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
             android:paddingTop="24dp">
 
-            <fragment
-                android:id="@+id/mapdoctorlistcoba"
-                android:name="com.google.android.gms.maps.SupportMapFragment"
-                android:layout_width="match_parent"
-                android:layout_height="150dp" />
+            <!--<fragment-->
+                <!--android:id="@+id/mapdoctorlistcoba"-->
+                <!--android:name="com.google.android.gms.maps.SupportMapFragment"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="150dp" />-->
 
             <Spinner
                 android:id="@+id/dplistdokter"
@@ -87,11 +86,11 @@
                 android:paddingBottom="15dip"
                 android:clipToPadding="false"
                 android:background="@drawable/shape"
-                android:layout_height="wrap_content"
+                android:layout_height="fill_parent"
                 android:id="@+id/lvDetailRumahSakit">
 
             </ListView>
-        </LinearLayout>
+        </FrameLayout>
 
     </android.support.v4.widget.NestedScrollView>
 

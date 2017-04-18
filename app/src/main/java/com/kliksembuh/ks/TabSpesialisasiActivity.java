@@ -10,6 +10,8 @@ import android.view.ViewGroup;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 
+import static android.app.Activity.RESULT_OK;
+
 /**
  * Created by Trio Andianto on 1/23/2017.
  */
@@ -81,6 +83,19 @@ public class TabSpesialisasiActivity extends Fragment implements View.OnClickLis
     public void cliked(View v){
 
     }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1) {
+            if(resultCode == RESULT_OK) {
+                userID = data.getStringExtra("userID");
+                lokasiID = data.getStringExtra("subDistrict");
+                locasi = data.getStringExtra("SubDistrictDescription");
+                spesialID = data.getStringExtra("facilityID");
+                spesial = data.getStringExtra("facilityName");
+            }
+        }
+    }
 
     @Override
     public void onClick(View v) {
@@ -94,7 +109,7 @@ public class TabSpesialisasiActivity extends Fragment implements View.OnClickLis
             b.putString("facilityID",spesialID);
             b.putString("facilityName",spesial);
             myIntent.putExtras(b);
-            startActivity(myIntent);
+            startActivityForResult(myIntent,1);
 
         }
         else if(i==R.id.btnsearchspesialisasi){
@@ -108,7 +123,7 @@ public class TabSpesialisasiActivity extends Fragment implements View.OnClickLis
                 b.putString("SubDistrictDescription",locasi);//Your id
                 //.putExtra("userID",userID);
                 myIntent.putExtras(b);
-                startActivity(myIntent);
+                startActivityForResult(myIntent,1);
             }else{
                 if(lokasiID==null){
                     location.setError("Silahkan Pilih Lokasi.");
@@ -130,7 +145,7 @@ public class TabSpesialisasiActivity extends Fragment implements View.OnClickLis
             b.putString("facilityName",spesial);
             b.putString("SubDistrictDescription",locasi);
             myIntent.putExtras(b);
-            startActivity(myIntent);
+            startActivityForResult(myIntent,1);
 
 
         }else{
