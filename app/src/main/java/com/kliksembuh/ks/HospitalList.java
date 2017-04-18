@@ -8,6 +8,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -18,7 +19,6 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.kliksembuh.ks.library.HospitalListAdapter;
-import com.kliksembuh.ks.library.HttpHandler;
 import com.kliksembuh.ks.models.Hospital;
 
 import org.json.JSONArray;
@@ -34,7 +34,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
@@ -68,6 +67,10 @@ public class HospitalList extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         // Hospital Screen Logic (created by Ucu on 24012017)
         setContentView(R.layout.activity_hospital_list);
+        if (android.os.Build.VERSION.SDK_INT > 9) {
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+        }
         Bundle b = getIntent().getExtras();
         if(b != null) {
             userID = b.getString("userID");
@@ -122,7 +125,6 @@ public class HospitalList extends AppCompatActivity {
         });
         // Set Ratingbar
     }
-    @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 1) {
@@ -135,97 +137,6 @@ public class HospitalList extends AppCompatActivity {
             }
         }
     }
-    public String loadJSONFromAsset() {
-        String json = null;
-        try {
-            InputStream is = this.getAssets().open("hospital.json");
-            int size = is.available();
-            byte[] buffer = new byte[size];
-            is.read(buffer);
-            is.close();
-            json = new String(buffer, "UTF-8");
-        } catch (IOException ex) {
-            ex.printStackTrace();
-            return null;
-        }
-        return json;
-    }
-
-    private class GetContacts extends AsyncTask<Void, Void, Void> {
-        private Context context;
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            // Showing progress dialog
-            pDialog = new ProgressDialog(HospitalList.this);
-            pDialog.setMessage("Please wait...");
-            pDialog.setCancelable(false);
-            pDialog.show();
-        }
-
-        @Override
-        protected Void doInBackground(Void... args0) {
-            HttpHandler sh = new HttpHandler();
-
-            // Making a request to url and getting response
-            try{
-                JSONObject obj = new JSONObject(loadJSONFromAsset());
-
-                // Getting JSON Array node
-                JSONArray contacts = obj.getJSONArray("hospital");
-
-                // looping through All Contacts
-                rumahSakitID = new String[contacts.length()];
-                for (int i = 0; i < contacts.length(); i++) {
-                    JSONObject c = contacts.getJSONObject(i);
-
-
-                    String name = c.getString("name");
-                    nameRumahSakit[i]=name;
-                    String id = c.getString("id");
-                    rumahSakitID[i]=id;
-                    String image = c.getString("imgUrl1");
-                    Drawable image1 = LoadImageFromWebOperations(image);
-                    String alamat = c.getString("Alamat");
-
-
-
-
-//                        da =new ArrayList<>();
-//                        da.add( name );
-//                        da.add( code );
-
-
-                    // Phone node is JSON Object
-//                    JSONObject phone = c.getJSONObject("phone");
-//                    String mobile = phone.getString("mobile");
-//                    String home = phone.getString("home");
-//                    String office = phone.getString("office");
-
-                    // tmp hash map for single contact
-                    HashMap<String, String> contact = new HashMap<>();
-                    mHospitalList.add(new Hospital(Integer.parseInt(id), image1, name, alamat));
-
-
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void result) {
-            super.onPostExecute(result);
-            if (pDialog.isShowing())
-                pDialog.dismiss();
-            hAdapter = new HospitalListAdapter(getApplicationContext(), mHospitalList);
-//            hAdapter.getFilter().filter(searchView);
-
-            lvHospital.setAdapter(hAdapter);
-        }
-    }
     public Drawable LoadImageFromWebOperations(String url) {
         try {
             InputStream is = (InputStream) new URL(url).getContent();
@@ -234,6 +145,7 @@ public class HospitalList extends AppCompatActivity {
         } catch (Exception e) {
             return null;
         }
+
     }
     public class HospitalListAsync extends AsyncTask<String, Void, String> {
         private String mSubdistrict;
@@ -256,19 +168,19 @@ public class HospitalList extends AppCompatActivity {
             ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
             NetworkInfo netInfo = cm.getActiveNetworkInfo();
             if (netInfo != null && netInfo.isConnected()) {
-                try{
-                    URL url = new URL("http://basajans/kliksembuhapi/api/Institutions/SearchInstitutionFromAfterLogin?subDistrict="+mSubdistrict+"&facility="+mSpesialisai);
+                try {
+                    URL url = new URL("http://basajans/kliksembuhapi/api/Institutions/SearchInstitutionFromAfterLogin?subDistrict=" + mSubdistrict + "&facility=" + mSpesialisai);
                     HttpURLConnection urlc = (HttpURLConnection) url.openConnection();
                     urlc.setRequestProperty("Content-Type", "application/json");
                     urlc.connect();
-                    int responseCode=urlc.getResponseCode();
+                    int responseCode = urlc.getResponseCode();
                     if (responseCode == HttpsURLConnection.HTTP_OK) {
-                        BufferedReader in=new BufferedReader(
+                        BufferedReader in = new BufferedReader(
                                 new InputStreamReader(
                                         urlc.getInputStream()));
                         StringBuffer sb = new StringBuffer("");
-                        String line="";
-                        while((line = in.readLine()) != null) {
+                        String line = "";
+                        while ((line = in.readLine()) != null) {
                             sb.append(line);
                             break;
                         }
@@ -281,11 +193,11 @@ public class HospitalList extends AppCompatActivity {
                             image = jsonObject.getString("ImgUrl");
                             drawableHospital[i] = LoadImageFromWebOperations(image);
 
+
                         }
                         // Drawable image1 = LoadImageFromWebOperations(image);
                         return sb.toString();
-                    }
-                    else {
+                    } else {
                         return "";
 
                     }
@@ -297,11 +209,12 @@ public class HospitalList extends AppCompatActivity {
                     // TODO Auto-generated catch block
                     e.printStackTrace();
                     return "";
-                }catch (Exception e) {
+                } catch (Exception e) {
                     e.printStackTrace();
                     return "";
                 }
-            }else {
+            }
+            else {
                 return "";
             }
         }
@@ -345,11 +258,12 @@ public class HospitalList extends AppCompatActivity {
                         JSONObject jsonObject = jsonArray.getJSONObject(i);
                         String id = jsonObject.getString("InstitutionID");
                         String name = jsonObject.getString("InstitutionName");
+                        String image = jsonObject.getString("ImgUrl");
 
                         rumahSakitID[i] = id;
-                        nameRumahSakit[i]=name;
                         // Drawable image1 = LoadImageFromWebOperations(image);
                         String alamat = jsonObject.getString("InstitutionAddress");
+                        Drawable photo = LoadImageFromWebOperations(image);
                         if(drawableHospital.length <= 0){
                             mHospitalList.add(new Hospital(Integer.parseInt(id), null, name, alamat));
                         }else{
