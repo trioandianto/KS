@@ -42,6 +42,7 @@ public class HistoryAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         View newHview = View.inflate(mContext, R.layout.list_item_upcoming, null);
 
+
         TextView tvAppointment = (TextView)newHview.findViewById(R.id.tvNoAppointmentHistory);
         TextView tvDate = (TextView)newHview.findViewById(R.id.tvDibuatTanggal);
         TextView tvHistoryRumahSakit = (TextView)newHview.findViewById(R.id.tvHistoryRumahSakit);
@@ -55,12 +56,13 @@ public class HistoryAdapter extends BaseAdapter {
         tvAppointment.setText(mHistory.get(position).getNoAppointment());
         tvDate.setText(mHistory.get(position).getTanggal());
         tvHistoryRumahSakit.setText(mHistory.get(position).getRumahSakit());
-        imgDview.setImageDrawable(mHistory.get(position).getImage());
+        imgDview.setImageDrawable(mHistory.get(position).getImgHistoryDoc());
         tvDrname.setText(mHistory.get(position).getNamaDokter());
-        tvSpecialty.setText(mHistory.get(position).getAlamat());
+        tvSpecialty.setText(mHistory.get(position).getSpecialtyDoc());
         tvStatusHistory.setText(mHistory.get(position).getStatusHistory());
         tvWaktuBerobat.setText(mHistory.get(position).getWaktuBerobat());
         tvJamBerobat.setText(mHistory.get(position).getJamBerobat());
+        newHview.setTag(mHistory.get(position).getIdHistoryUpComing());
 
         return newHview;
     }
