@@ -344,9 +344,9 @@ public class LoginActivity extends BaseActivity implements LoaderCallbacks<Curso
             startActivityForResult(myIntent, 0);
         }
         else if(i==R.id.email_sign_in_button){
-            Intent myIntent = new Intent(view.getContext(), HomeActivity.class);
-            startActivityForResult(myIntent, 0);
-            //attemptLogin();
+//            Intent myIntent = new Intent(view.getContext(), HomeActivity.class);
+//            startActivityForResult(myIntent, 0);
+            attemptLogin();
         }
         else{
             Intent myIntent = new Intent(view.getContext(), ResetPasswordActivity.class);
@@ -644,6 +644,7 @@ public class LoginActivity extends BaseActivity implements LoaderCallbacks<Curso
                     JSONObject jsonObject = new JSONObject();
                     jsonObject.put("Email",mEmail);
                     jsonObject.put("Password",mPassword);
+
                     urlc.setConnectTimeout(3000);
                     urlc.setRequestProperty("Content-Type","application/json");
                     urlc.setRequestMethod("POST");
@@ -651,6 +652,7 @@ public class LoginActivity extends BaseActivity implements LoaderCallbacks<Curso
                     urlc.setDoOutput(true);
                     DataOutputStream os = new DataOutputStream(urlc.getOutputStream());
                     os.writeBytes(jsonObject.toString());
+
                     int responseCode=urlc.getResponseCode();
                     if (responseCode == HttpsURLConnection.HTTP_OK) {
                         BufferedReader in=new BufferedReader(

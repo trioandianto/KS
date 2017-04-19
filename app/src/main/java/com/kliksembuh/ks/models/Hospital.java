@@ -6,14 +6,14 @@ import android.graphics.drawable.Drawable;
  * Created by Trio Andianto on 2/1/2017.
  */
 public class Hospital {
-    private int id;
+    private String id;
     private Drawable hospital_pic_id;
     private String name;
     private String address;
 
     // Constructor
 
-    public Hospital(int id, Drawable hospital_pic_id, String name, String address) {
+    public Hospital(String id, Drawable hospital_pic_id, String name, String address) {
         this.id = id;
         this.hospital_pic_id = hospital_pic_id;
         this.name = name;
@@ -23,11 +23,11 @@ public class Hospital {
 
     // Getter, setter
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

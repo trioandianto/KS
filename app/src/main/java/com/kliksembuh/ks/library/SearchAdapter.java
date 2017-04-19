@@ -47,9 +47,7 @@ public class SearchAdapter<T> extends BaseAdapter{
 
         View newView = View.inflate(mContext, R.layout.list_item, null);
         TextView tvName = (TextView)newView.findViewById(R.id.name);
-        TextView tvCode = (TextView)newView.findViewById(R.id.email);
         tvName.setText(mLocation.get(position).getName());
-        tvCode.setText(mLocation.get(position).getCode());
         newView.setTag(mLocation.get(position).getId());
         return newView;
     }

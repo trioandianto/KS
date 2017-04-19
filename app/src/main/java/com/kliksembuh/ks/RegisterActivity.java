@@ -37,6 +37,12 @@ public class RegisterActivity extends AppCompatActivity {
     private AutoCompleteTextView mNoHp;
     private EditText mPasswordView;
     private EditText mConfirmPasswordView;
+    private String firstName;
+    private String lastName;
+    private String email;
+    private String noHp;
+    private String password;
+    private String confirmPassword;
 
     private UserRegisterTask mAuthTask = null;
 
@@ -51,6 +57,22 @@ public class RegisterActivity extends AppCompatActivity {
         mNoHp = (AutoCompleteTextView) findViewById(R.id.tvhp);
         mPasswordView =(EditText) findViewById(R.id.password);
         mConfirmPasswordView =(EditText) findViewById(R.id.confirmpassword);
+        Bundle b = getIntent().getExtras();
+        if(b != null) {
+            firstName = b.getString("firstName");
+            mFirstName.setText(firstName);
+            lastName = b.getString("lastName");
+            mLastName.setText(lastName);
+            email = b.getString("email");
+            mEmail.setText(email);
+            noHp = b.getString("noHp");
+            mNoHp.setText(noHp);
+            password = b.getString("password");
+            mPasswordView.setText(password);
+            confirmPassword = b.getString("confirmPassword");
+            mConfirmPasswordView.setText(confirmPassword);
+
+        }
 
 
         Button btncreate = (Button) findViewById(R.id.btncreate);
@@ -73,7 +95,16 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent myIntent = new Intent(view.getContext(), LoginActivity.class);
-                startActivityForResult(myIntent, 0);
+                Bundle b = new Bundle();
+                b.putString("firstName", firstName); //Your id
+                b.putString("lastName", lastName);
+                b.putString("email",email);
+                b.putString("noHp",noHp);
+                b.putString("password",password);
+                b.putString("confirmPassword",confirmPassword);
+                //.putExtra("userID",userID);
+                myIntent.putExtras(b);
+                startActivityForResult(myIntent, 1);
             }
         });
 
@@ -83,9 +114,31 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent myIntent = new Intent(view.getContext(), TermAndPolicyActivity.class);
-                startActivityForResult(myIntent, 0);
+                Bundle b = new Bundle();
+                b.putString("firstName", firstName); //Your id
+                b.putString("lastName", lastName);
+                b.putString("email",email);
+                b.putString("noHp",noHp);
+                b.putString("password",password);
+                b.putString("confirmPassword",confirmPassword);
+                //.putExtra("userID",userID);
+                myIntent.putExtras(b);
+                startActivityForResult(myIntent, 1);
             }
         });
+    }
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1) {
+            if(resultCode == RESULT_OK) {
+                firstName = data.getStringExtra("firstName");
+                lastName = data.getStringExtra("lastName");
+                email = data.getStringExtra("email");
+                noHp = data.getStringExtra("noHp");
+                password = data.getStringExtra("password");
+                confirmPassword = data.getStringExtra("confirmPassword");
+            }
+        }
     }
     private void attemptRegister() {
         if (mAuthTask!= null) {
@@ -308,7 +361,7 @@ public class RegisterActivity extends AppCompatActivity {
                     b.putString("Email", email);
                     //.putExtra("userID",userID);
                     i.putExtras(b);
-                    startActivityForResult(i, 0);
+                    startActivityForResult(i, 1);
                     finish();
                 } catch (JSONException e) {
                     e.printStackTrace();

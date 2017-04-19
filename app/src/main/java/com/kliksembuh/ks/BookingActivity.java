@@ -637,8 +637,8 @@ public class BookingActivity extends AppCompatActivity implements ListView.OnIte
         String dpdetail = jadwalDokter.getDetailProgramID();
         Intent myIntent = new Intent(getApplicationContext(),KonfirmasiJanjiActivity.class);
         Bundle b = new Bundle();
-        b.putString("DPID",wpId);
-        b.putString("WPID",dpID);
+        b.putString("DPID",dpID);
+        b.putString("WPID",wpId);
         b.putString("DetailID",dpdetail);
         b.putString("personilID", personalID);
         b.putString("facilityID", facilityID);
@@ -667,9 +667,10 @@ public class BookingActivity extends AppCompatActivity implements ListView.OnIte
         protected String doInBackground(String... params) {
             ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
             NetworkInfo netInfo = cm.getActiveNetworkInfo();
+            imageDokter = LoadImageFromWebOperations(urlImage);
             if (netInfo != null && netInfo.isConnected()) {
                 try{
-                    URL url = new URL(R.string.apibasajans+"/api/Schedules/GetWeeklySchedule?personnelId="+mPersonilID+"&year="+mYear+"&startweek="+mWeek);
+                    URL url = new URL("http://basajans/kliksembuhapi/api/Schedules/GetWeeklySchedule?personnelId="+mPersonilID+"&year="+mYear+"&startweek="+mWeek);
                     HttpURLConnection urlc = (HttpURLConnection) url.openConnection();
                     urlc.setRequestProperty("Content-Type","application/json");
                     urlc.connect();
@@ -688,7 +689,7 @@ public class BookingActivity extends AppCompatActivity implements ListView.OnIte
                         in.close();
                         JSONArray jsonArray = new JSONArray(sb.toString());
                         int length  = jsonArray.length();
-                        imageDokter = LoadImageFromWebOperations(urlImage);
+
 
 
                         for (int i = 0; i < jsonArray.length(); i++) {

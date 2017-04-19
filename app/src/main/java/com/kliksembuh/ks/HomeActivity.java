@@ -64,6 +64,7 @@ public class HomeActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         Bundle b = getIntent().getExtras();
+//        userID = "93c9e1c3-2c89-40b2-a06f-fae904a64488";
         if(b != null) {
             userID = b.getString("userID");
             facilityID = b.getString("facilityID");
