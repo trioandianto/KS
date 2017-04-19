@@ -31,7 +31,10 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -45,18 +48,8 @@ public class MyAppointmentUpComingActivity extends Fragment {
     private String userID;
     private String [] idHistoryUpComing;
     private String [] namaDokter;
-    private Drawable imgHistoryDoc [];
     private String [] namaRumahSakit;
-    private String tanggalDibuat;
-    // To Do (Ucu)
-    // Change data type string to int on noAppointment
-    // Change string to date & time date on jadwalBerobat
     private String [] noAppointment;
-    private String specialtyDoc;
-    private String statusHistory;
-    private String waktuBerobat;
-    private String jamBerobat;
-
     private ListView lvUpcoming;
     private HistoryAdapter histAdapter;
     private List<HistoryUpComing> historyUpComingList;
@@ -118,7 +111,7 @@ public class MyAppointmentUpComingActivity extends Fragment {
             NetworkInfo netInfo = cm.getActiveNetworkInfo();
             if (netInfo != null && netInfo.isConnected()) {
                 try{
-                    URL url = new URL("http://basajans/KlikSembuhAPI/api/Transactions/GetHistoryAppointment?UserID=6fede7ca-1fa5-4934-94c7-8c95f3d78233");
+                    URL url = new URL("http://192.168.1.2/KlikSembuhAPI/api/Transactions/GetHistoryAppointment?UserID=6fede7ca-1fa5-4934-94c7-8c95f3d78233");
                     HttpURLConnection urlc = (HttpURLConnection) url.openConnection();
                     urlc.setRequestProperty("Content-Type","application/json");
                     urlc.connect();
@@ -140,7 +133,7 @@ public class MyAppointmentUpComingActivity extends Fragment {
                         String imageDoc;
                         for (int i = 0; i < jsonArray.length(); i++){
                             JSONObject jsonObject = jsonArray.getJSONObject(i);
-                            imageDoc = jsonObject.getString("ImgUrl");
+                            imageDoc = jsonObject.getString("MedicalPersonnelImageUrl");
                             drawableDoctor[i] = LoadImageFromWebOperations(imageDoc);
                         }
 
@@ -206,8 +199,7 @@ public class MyAppointmentUpComingActivity extends Fragment {
                     namaRumahSakit = new String[jsonArray.length()];
 
                     for (int i = 0; i < jsonArray.length(); i++){
-//                        historyUpComingList.add(new HistoryUpComing(23, "dr. Trio", drawHistDoc,"RS. Trimitra Bogor", "17-Apr-2017", "Bogor Utara, Jawa Barat","412321", "Dokter Umum", "Completed", "Pagi", "08.00-11.00"));
-//                        historyUpComingList.add(new HistoryUpComing(24, "dr. Indah", drawHistDoc,"RS. Medika Dramaga", "18-Apr-2017", "Bogor Utara, Jawa Barat","412321", "Dokter Umum", "Menunggu Konfirmasi", "Pagi", "08.00-11.00"));
+
                         JSONObject jsonObject = jsonArray.getJSONObject(i);
                         String trxIDHistory = jsonObject.getString("TransactionID");
                         String doctorName = jsonObject.getString("MedicalPersonName");
@@ -217,7 +209,21 @@ public class MyAppointmentUpComingActivity extends Fragment {
                         String specialtyDoc = jsonObject.getString("FacilityDesc");
                         String statusDesc = jsonObject.getString("StatusDesc");
                         String shiftDesc = jsonObject.getString("ShiftDesc");
-                        String scheduleDate = jsonObject.getString("ScheduleDate");
+                        String timeStart = jsonObject.getString("TimeStart");
+                        String timeEnd = jsonObject.getString("TimeEnd");
+//
+//                        //SimpleDateFormat sourceFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS");
+//                        SimpleDateFormat sourceFormat = new SimpleDateFormat("HH:mm:ss");
+//                        // Jan 1, 2016 10:15:55 AM
+//                        // SimpleDateFormat destFormat = new SimpleDateFormat("MMM d, yyyy hh:mm:ss a"); //here 'a' for AM/PM
+//                        SimpleDateFormat destFormat = new SimpleDateFormat("hh:mm");
+//                        Date date = null;
+//                        try {
+//                            date = sourceFormat.parse("08:00:00");
+//                        } catch (ParseException e) {
+//                            e.printStackTrace();
+//                        }
+//                        String formattedDate = destFormat.format(date);
 
                         idHistoryUpComing[i] = trxIDHistory;
                         namaDokter[i] = doctorName;
@@ -225,10 +231,10 @@ public class MyAppointmentUpComingActivity extends Fragment {
                         namaRumahSakit [i] = hospitalName;
 
                         if (drawableDoctor.length <= 0){
-                            historyUpComingList.add(new HistoryUpComing(Integer.parseInt(trxIDHistory), doctorName, null, hospitalName, createdOn, trxNoAppointment, specialtyDoc, statusDesc, shiftDesc, scheduleDate));
+                            historyUpComingList.add(new HistoryUpComing(Integer.parseInt(trxIDHistory), doctorName, null, hospitalName, createdOn, trxNoAppointment, specialtyDoc, statusDesc, shiftDesc, timeStart, timeEnd));
                         }
                         else{
-                            historyUpComingList.add(new HistoryUpComing(Integer.parseInt(trxIDHistory), doctorName, drawableDoctor[i], hospitalName, createdOn, trxNoAppointment, specialtyDoc, statusDesc, shiftDesc, scheduleDate));
+                            historyUpComingList.add(new HistoryUpComing(Integer.parseInt(trxIDHistory), doctorName, drawableDoctor[i], hospitalName, createdOn, trxNoAppointment, specialtyDoc, statusDesc, shiftDesc, timeStart, timeEnd));
                         }
                         histAdapter = new HistoryAdapter(globalContext.getApplicationContext(), historyUpComingList);
                         lvUpcoming.setAdapter(histAdapter);
@@ -255,6 +261,23 @@ public class MyAppointmentUpComingActivity extends Fragment {
             } catch (Exception e) {
                 return null;
             }
+        }
+
+        public String getTime(String Vertrektijd){
+            final SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
+            Date dateObj;
+            String newDateStr = null;
+            try
+            {
+                dateObj = df.parse(Vertrektijd);
+                SimpleDateFormat fd = new SimpleDateFormat("HH:mm");
+                newDateStr = fd.format(dateObj);
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
+            }
+            return newDateStr;
         }
     }
 
