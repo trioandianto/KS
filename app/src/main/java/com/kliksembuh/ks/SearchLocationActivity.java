@@ -45,6 +45,7 @@ public class SearchLocationActivity extends AppCompatActivity implements ListVie
     private String nameLocation;
     private String nameSpesialisasi;
     private String idSpesialisasi;
+    private String userID;
 
 
     @Override
@@ -56,6 +57,7 @@ public class SearchLocationActivity extends AppCompatActivity implements ListVie
         if(b!=null){
             nameSpesialisasi = b.getString("facilityName");
             idSpesialisasi = b.getString("facilityID");
+            userID = b.getString("userID");
         }
 
         //location = (AutoCompleteTextView)findViewById(R.id.tvlocation);
@@ -106,6 +108,7 @@ public class SearchLocationActivity extends AppCompatActivity implements ListVie
         b.putString("SubDistrictDescription", nameLocation);
         b.putString("facilityID",idSpesialisasi);
         b.putString("facilityName",nameSpesialisasi);
+        b.putString("userID", userID);
         b.putString("tab","0");
         myIntent.putExtras(b);
         startActivity(myIntent);

@@ -59,11 +59,11 @@ public class HistoryAdapter extends BaseAdapter {
         tvHistoryRumahSakit.setText(mHistory.get(position).getRumahSakit());
         imgDview.setImageDrawable(mHistory.get(position).getImgHistoryDoc());
         tvDrname.setText(mHistory.get(position).getNamaDokter());
-        tvSpecialty.setText(mHistory.get(position).getSpecialtyDoc());
+        tvSpecialty.setText(mHistory.get(position).getSpecialtyDoc())   ;
         tvStatusHistory.setText(mHistory.get(position).getStatusHistory());
         tvWaktuBerobat.setText(mHistory.get(position).getWaktuBerobat());
-        tvTimeStart.setText(mHistory.get(position).getTimeStart());
-        tvTimeEnd.setText(mHistory.get(position).getTimeEnd());
+//        tvTimeStart.setText(mHistory.get(position).getTimeStart());
+//        tvTimeEnd.setText(mHistory.get(position).getTimeEnd());
         newHview.setTag(mHistory.get(position).getIdHistoryUpComing());
 
         return newHview;

@@ -38,6 +38,7 @@ public class SearchSpesializationActivity extends AppCompatActivity implements L
     private ProgressDialog pDialog;
     private ListView listItem;
     private SearchView searchView;
+    private String userID;
     private String locationID;
     private String locationName;
     @Override
@@ -48,6 +49,7 @@ public class SearchSpesializationActivity extends AppCompatActivity implements L
         if(b!=null){
             locationID = b.getString("SubDistrictCD");
             locationName = b.getString("SubDistrictDescription");
+            userID = b.getString("userID");
         }
 
         searchView = (SearchView)findViewById(R.id.svSpesialization);
@@ -82,6 +84,7 @@ public class SearchSpesializationActivity extends AppCompatActivity implements L
         b.putString("facilityName", nameSpesialisasi);
         b.putString("SubDistrictCD",locationID);
         b.putString("SubDistrictDescription",locationName);
+        b.putString("userID", userID);
         b.putString("tab","0");
         myIntent.putExtras(b);
         startActivity(myIntent);
