@@ -9,6 +9,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,6 +32,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.sql.Time;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -211,33 +213,35 @@ public class MyAppointmentUpComingActivity extends Fragment {
                         String shiftDesc = jsonObject.getString("ShiftDesc");
                         String timeStart = jsonObject.getString("TimeStart");
                         String timeEnd = jsonObject.getString("TimeEnd");
-//
-//                        //SimpleDateFormat sourceFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS");
-//                        SimpleDateFormat sourceFormat = new SimpleDateFormat("HH:mm:ss");
-//                        // Jan 1, 2016 10:15:55 AM
-//                        // SimpleDateFormat destFormat = new SimpleDateFormat("MMM d, yyyy hh:mm:ss a"); //here 'a' for AM/PM
-//                        SimpleDateFormat destFormat = new SimpleDateFormat("hh:mm");
-//                        Date date = null;
-//                        try {
-//                            date = sourceFormat.parse("08:00:00");
-//                        } catch (ParseException e) {
-//                            e.printStackTrace();
-//                        }
-//                        String formattedDate = destFormat.format(date);
 
-                        idHistoryUpComing[i] = trxIDHistory;
-                        namaDokter[i] = doctorName;
-                        noAppointment [i] = trxNoAppointment;
-                        namaRumahSakit [i] = hospitalName;
+                        try {
+                            // Get date from string
+                            SimpleDateFormat dateFormatter = new SimpleDateFormat("HH:mm:ss");
+                            Date dateTimeStart = dateFormatter.parse(timeStart);
+                            Date dateTimeEnd = dateFormatter.parse(timeEnd);
 
-                        if (drawableDoctor.length <= 0){
-                            historyUpComingList.add(new HistoryUpComing(Integer.parseInt(trxIDHistory), doctorName, null, hospitalName, createdOn, trxNoAppointment, specialtyDoc, statusDesc, shiftDesc, timeStart, timeEnd));
+                            // Get time from date
+                            SimpleDateFormat timeFormatter = new SimpleDateFormat("HH:mm");
+                            String timeStartPars = timeFormatter.format(dateTimeStart);
+                            String timeEndPars = timeFormatter.format(dateTimeEnd);
+
+                            idHistoryUpComing[i] = trxIDHistory;
+                            namaDokter[i] = doctorName;
+                            noAppointment [i] = trxNoAppointment;
+                            namaRumahSakit [i] = hospitalName;
+
+                            if (drawableDoctor.length <= 0){
+                                historyUpComingList.add(new HistoryUpComing(Integer.parseInt(trxIDHistory), doctorName, null, hospitalName, createdOn, trxNoAppointment, specialtyDoc, statusDesc, shiftDesc, timeStartPars, timeEndPars));
+                            }
+                            else{
+                                historyUpComingList.add(new HistoryUpComing(Integer.parseInt(trxIDHistory), doctorName, drawableDoctor[i], hospitalName, createdOn, trxNoAppointment, specialtyDoc, statusDesc, shiftDesc, timeStartPars, timeEndPars));
+                            }
+                            histAdapter = new HistoryAdapter(globalContext.getApplicationContext(), historyUpComingList);
+                            lvUpcoming.setAdapter(histAdapter);
+
+                        }catch (ParseException e){
+                            e.printStackTrace();
                         }
-                        else{
-                            historyUpComingList.add(new HistoryUpComing(Integer.parseInt(trxIDHistory), doctorName, drawableDoctor[i], hospitalName, createdOn, trxNoAppointment, specialtyDoc, statusDesc, shiftDesc, timeStart, timeEnd));
-                        }
-                        histAdapter = new HistoryAdapter(globalContext.getApplicationContext(), historyUpComingList);
-                        lvUpcoming.setAdapter(histAdapter);
 
                     }
 

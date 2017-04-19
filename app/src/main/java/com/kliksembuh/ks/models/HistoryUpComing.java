@@ -20,10 +20,11 @@ public class HistoryUpComing {
     private String specialtyDoc;
     private String statusHistory;
     private String waktuBerobat;
-    private String jamBerobat;
+    private String timeStart;
+    private String timeEnd;
 
     public HistoryUpComing(int idHistoryUpComing, String namaDokter, Drawable imgHistoryDoc, String rumahSakit, String tanggal,
-                           String noAppointment, String specialtyDoc, String statusHistory, String waktuBerobat, String jamBerobat) {
+                           String noAppointment, String specialtyDoc, String statusHistory, String waktuBerobat, String timeStart, String timeEnd) {
 
         this.idHistoryUpComing = idHistoryUpComing;
         this.namaDokter = namaDokter;
@@ -34,7 +35,8 @@ public class HistoryUpComing {
         this.specialtyDoc = specialtyDoc;
         this.statusHistory = statusHistory;
         this.waktuBerobat = waktuBerobat;
-        this.jamBerobat = jamBerobat;
+        this.timeStart = timeStart;
+        this.timeEnd = timeEnd;
     }
 
     public int getIdHistoryUpComing() {
@@ -109,11 +111,19 @@ public class HistoryUpComing {
         this.waktuBerobat = waktuBerobat;
     }
 
-    public String getJamBerobat() {
-        return jamBerobat;
+    public String getTimeStart() {
+        return timeStart;
     }
 
-    public void setJamBerobat(String jamBerobat) {
-        this.jamBerobat = jamBerobat;
+    public void setTimeStart(String timeStart) {
+        this.timeStart = timeStart;
+    }
+
+    public String getTimeEnd() {
+        return timeEnd;
+    }
+
+    public void setTimeEnd(String timeEnd) {
+        this.timeEnd = timeEnd;
     }
 }
