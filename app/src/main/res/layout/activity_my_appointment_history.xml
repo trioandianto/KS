@@ -12,6 +12,6 @@
         android:clipToPadding="false"
         android:background="@drawable/shape"
         android:layout_height="wrap_content"
-        android:id="@+id/lvHistoryPending">
+        android:id="@+id/lvHistoryCompleted">
     </ListView>
 </LinearLayout>

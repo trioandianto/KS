@@ -28,15 +28,15 @@
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             android:layout_margin="10dp"
-            android:text="Appointment :"
+            android:text="Appointment    :"
             android:textColor="@color/black" />
 
         <TextView
             android:id="@+id/tvNoAppointmentHistory"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
             android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
             android:layout_toRightOf="@+id/lblAppointmentHistory"
             android:text="# 4123123"
             android:textColor="@color/black"
@@ -45,32 +45,28 @@
 
         <TextView
             android:id="@+id/lblStatusHistory"
-            android:layout_width="100dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="49dp"
+            android:gravity="right"
             android:layout_marginRight="10dp"
             android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_alignParentRight="true"
             android:layout_toRightOf="@id/tvNoAppointmentHistory"
             android:text="Status :"
-            android:textColor="@color/black" />
+            android:textColor="@color/black"/>
 
         <TextView
             android:id="@+id/tvStatusHistory"
-            android:layout_width="100dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/lblStatusHistory"
             android:layout_marginBottom="10dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="5dp"
-            android:layout_toRightOf="@+id/tvDibuatTanggal"
-            android:background="#f7f7f7"
+            android:layout_marginRight="5dp"
+            android:layout_alignParentRight="true"
             android:gravity="left"
-            android:padding="8dp"
             android:text="Menunggu Konfirmasi"
-            android:textColor="@color/red"
-            android:textSize="15sp" />
+            android:textColor="@color/red"/>
 
         <TextView
             android:id="@+id/lblWaktuBerobat"
@@ -78,10 +74,9 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/tvStatusHistory"
             android:layout_marginBottom="10dp"
-            android:layout_marginLeft="49dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="5dp"
-            android:layout_toRightOf="@id/tvNoAppointmentHistory"
+            android:layout_marginRight="5dp"
+            android:layout_alignParentRight="true"
+            android:gravity="left"
             android:text="Waktu Berobat :"
             android:textColor="@color/black" />
 
@@ -91,30 +86,36 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/lblWaktuBerobat"
             android:layout_marginBottom="10dp"
-            android:layout_marginLeft="49dp"
+            android:layout_marginLeft="43dp"
             android:layout_marginRight="10dp"
             android:layout_toRightOf="@id/tvNoAppointmentHistory"
             android:background="@drawable/shape"
             android:padding="3dp"
             android:text="Pagi"
-            android:textColor="@color/black" />
+            android:textColor="@color/black"/>
 
         <TextView
             android:id="@+id/tvTimeStart"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:gravity="left"
+            android:layout_marginRight="10dp"
             android:layout_below="@id/lblWaktuBerobat"
-            android:layout_toRightOf="@id/tvWaktuBerobat"
+            android:layout_toLeftOf="@id/tvTimeEnd"
             android:padding="3dp"
             android:text="08.00"
             android:textColor="@color/black" />
 
         <View
+            android:id="@+id/lineTimeStartEnd"
             android:layout_width="5dp"
             android:layout_height="1dp"
             android:layout_below="@id/lblWaktuBerobat"
+            android:layout_centerInParent="true"
+            android:layout_toLeftOf="@id/tvTimeEnd"
             android:layout_marginTop="10dp"
-            android:layout_toRightOf="@id/tvTimeStart"
+            android:layout_marginLeft="2dp"
+            android:layout_marginRight="2dp"
             android:background="@color/black" />
 
         <TextView
@@ -122,9 +123,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/lblWaktuBerobat"
-            android:layout_marginLeft="4dp"
-            android:layout_marginRight="2dp"
-            android:layout_toRightOf="@id/tvTimeStart"
+            android:layout_marginBottom="10dp"
+            android:layout_marginRight="5dp"
+            android:layout_alignParentRight="true"
+            android:gravity="right"
             android:padding="3dp"
             android:text="11.00"
             android:textColor="@color/black" />
@@ -139,16 +141,14 @@
             android:layout_marginRight="10dp"
             android:text="Dibuat Tanggal :"
             android:textColor="@color/black" />
-
         <TextView
             android:id="@+id/tvDibuatTanggal"
-            android:layout_width="wrap_content"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/tvNoAppointmentHistory"
-            android:layout_toRightOf="@+id/lblDibuatTanggal"
+            android:layout_below="@+id/lblAppointmentHistory"
             android:text="28-Jan-2017"
-            android:textSize="15sp"
-            android:textStyle="bold" />
+            android:layout_toRightOf="@id/lblDibuatTanggal"
+            android:textColor="@color/black" />
 
         <ImageView
             android:id="@+id/ivDocPicHistory"
@@ -161,7 +161,7 @@
         <TextView
             android:id="@+id/tvHistoryRumahSakit"
             style="@style/MyCustomTextAppearance"
-            android:layout_width="120dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignTop="@+id/ivDocPicHistory"
             android:layout_marginLeft="10dp"

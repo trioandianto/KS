@@ -79,7 +79,7 @@ public class MyAppointmentUpComingActivity extends Fragment {
 ////        });
         lvUpcoming = (ListView)rootView.findViewById(R.id.lvHistoryUpComing);
         historyUpComingList = new ArrayList<>();
-        new HistoryAppoinmentAsync().execute();
+        new HistoryAppoinmentUpComingAsync().execute();
 
 //        imageId = imgIdHosp[1];
 //        Drawable drawHistDoc = getResources().getDrawable(imageId);
@@ -92,7 +92,7 @@ public class MyAppointmentUpComingActivity extends Fragment {
 //        //new HistoryAppoinment(userID).execute();
         return rootView;
     }
-    public class HistoryAppoinmentAsync extends AsyncTask<String, Void, String> {
+    public class HistoryAppoinmentUpComingAsync extends AsyncTask<String, Void, String> {
         // private String mUserID;
 //        HistoryAppoinmentAsync(String userID) {
 //            mUserID = userID;
@@ -209,6 +209,7 @@ public class MyAppointmentUpComingActivity extends Fragment {
                         String createdOn = jsonObject.getString("ScheduleDate");
                         String trxNoAppointment = jsonObject.getString("TransactionID");
                         String specialtyDoc = jsonObject.getString("FacilityDesc");
+                        String statusID = jsonObject.getString("Status");
                         String statusDesc = jsonObject.getString("StatusDesc");
                         String shiftDesc = jsonObject.getString("ShiftDesc");
                         String timeStart = jsonObject.getString("TimeStart");
@@ -234,10 +235,13 @@ public class MyAppointmentUpComingActivity extends Fragment {
                                 historyUpComingList.add(new HistoryUpComing(Integer.parseInt(trxIDHistory), doctorName, null, hospitalName, createdOn, trxNoAppointment, specialtyDoc, statusDesc, shiftDesc, timeStartPars, timeEndPars));
                             }
                             else{
-                                historyUpComingList.add(new HistoryUpComing(Integer.parseInt(trxIDHistory), doctorName, drawableDoctor[i], hospitalName, createdOn, trxNoAppointment, specialtyDoc, statusDesc, shiftDesc, timeStartPars, timeEndPars));
+                                if(statusID == String.valueOf(1)){
+                                    historyUpComingList.add(new HistoryUpComing(Integer.parseInt(trxIDHistory), doctorName, drawableDoctor[i], hospitalName, createdOn, trxNoAppointment, specialtyDoc, statusDesc, shiftDesc, timeStartPars, timeEndPars));
+                                }
+                                histAdapter = new HistoryAdapter(globalContext.getApplicationContext(), historyUpComingList);
+                                lvUpcoming.setAdapter(histAdapter);
                             }
-                            histAdapter = new HistoryAdapter(globalContext.getApplicationContext(), historyUpComingList);
-                            lvUpcoming.setAdapter(histAdapter);
+
 
                         }catch (ParseException e){
                             e.printStackTrace();
