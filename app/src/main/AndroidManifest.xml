@@ -178,14 +178,14 @@
             android:name=".HospitalList"
             android:parentActivityName=".HomeActivity"
             android:launchMode="singleInstance"
-            android:theme="@style/AppTheme2" />
+            android:theme="@style/AppTheme4" />
         <activity android:name=".CobaListJSON" />
         <activity android:name=".DoctorListActivity" />
         <activity
             android:name=".BookingActivity"
             android:parentActivityName=".TestScroolView"
             android:launchMode="singleInstance"
-            android:theme="@style/AppTheme2" />
+            android:theme="@style/AppTheme4" />
         <activity
             android:name=".TestScroolView"
             android:parentActivityName=".HospitalList"
@@ -193,10 +193,9 @@
             android:theme="@style/AppTheme2" />
         <activity
             android:name=".KonfirmasiJanjiActivity"
-            android:label="Buat Janji"
             android:launchMode="singleInstance"
             android:parentActivityName=".BookingActivity"
-            android:theme="@style/AppTheme2" />
+            android:theme="@style/AppTheme4" />
         <activity
             android:name=".ListMapActivity"
             android:label="@string/title_activity_list_map"

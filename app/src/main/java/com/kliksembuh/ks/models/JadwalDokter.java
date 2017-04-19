@@ -6,13 +6,16 @@ package com.kliksembuh.ks.models;
 
 public class JadwalDokter {
 
-    private String jadwalDokter;
+
     private String dayProdramID;
     private String weekProgramID;
     private String detailProgramID;
+    private String startDate;
+    private String endDate;
 
-    public JadwalDokter(String jadwalDokter, String dayProdramID, String weekProgramID, String detailProgramID){
-        this.jadwalDokter = jadwalDokter;
+    public JadwalDokter(String startDate, String endDate, String dayProdramID, String weekProgramID, String detailProgramID ){
+        this.startDate = startDate;
+        this.endDate = endDate;
         this.dayProdramID = dayProdramID;
         this.weekProgramID = weekProgramID;
         this.detailProgramID = detailProgramID;
@@ -42,15 +45,22 @@ public class JadwalDokter {
     public void setDetailProgramID(String detailProgramID) {
         this.detailProgramID = detailProgramID;
     }
-
-
-    public String getJadwalDokter() {
-        return jadwalDokter;
+    public String getStartDate() {
+        return startDate;
     }
 
-    public void setJadwalDokter(String jadwalDokter) {
-        this.jadwalDokter = jadwalDokter;
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
     }
+
+    public String getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(String endDate) {
+        this.endDate = endDate;
+    }
+
 
 
 

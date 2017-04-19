@@ -9,6 +9,7 @@ import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -84,6 +85,7 @@ public class HospitalList extends AppCompatActivity {
         setSupportActionBar(newToolbar);
         newToolbar.setTitle(subDistricDescription);
         setSupportActionBar(newToolbar);
+        getWindow().setStatusBarColor(ContextCompat.getColor(HospitalList.this, R.color.colorPrimaryDark));
         TextView newTextView = (TextView)findViewById(R.id.tvhospitalList);
         newTextView.setText("Menampilkan 100 instansi kesehatan di "+subDistricDescription+" yang menyediakan Dokter "+facilityName+".");
 

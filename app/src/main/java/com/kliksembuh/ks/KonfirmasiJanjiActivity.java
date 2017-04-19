@@ -6,7 +6,9 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -32,6 +34,8 @@ public class KonfirmasiJanjiActivity extends AppCompatActivity {
     private TextView tvNamaDokter;
     private TextView tvSpesial;
     private TextView tvNamaRumahSakit;
+    private TextView tvNamaHari;
+    private TextView tvDetailTanggal;
     private String userID;
     private String customerID;
     private String facilityCategoryID;
@@ -46,11 +50,18 @@ public class KonfirmasiJanjiActivity extends AppCompatActivity {
     private String personnelCD;
     private String namaDokter;
     private String namaRumahSakit;
+    private String namaHari;
+    private String jam;
+    private String detailTanggal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_konfirmasi_janji);
+        Toolbar newToolbar = (Toolbar)findViewById(R.id.toolbarKonfirmasiJanji);
+        newToolbar.setTitle("Konfirmasi Janji");
+        setSupportActionBar(newToolbar);
+        getWindow().setStatusBarColor(ContextCompat.getColor(KonfirmasiJanjiActivity.this, R.color.colorPrimaryDark));
 
         Bundle b = getIntent().getExtras();
         if(b!=null){
@@ -60,22 +71,27 @@ public class KonfirmasiJanjiActivity extends AppCompatActivity {
             facilityID = b.getString("facilityID");
             status = "1";
             institutionID = b.getString("rumahSakitID");
-            date = "4-11-2017";
+            date = b.getString("date");
             weekProgramID = b.getString("WPID");
+            namaHari = b.getString("namaHari");
             dayProgramID = b.getString("DPID");
+            detailTanggal = b.getString("namaTanggal");
 //            dayProgramDetailID = b.getString("DetailID");
             dayProgramDetailID = "4";
+            jam = b.getString("jam");
             personnelID = b.getString("idDokter");
             personnelCD = b.getString("personilID");
             namaDokter = b.getString("namaDokter");
             namaRumahSakit = b.getString("namaRumahSakit");
         }
 
-
-
+        tvNamaHari = (TextView)findViewById(R.id.tvNamaHari);
+        tvNamaHari.setText(namaHari);
+        tvDetailTanggal = (TextView) findViewById(R.id.tvDetailTangal);
+        tvDetailTanggal.setText(detailTanggal+" @"+jam);
         tvNamaDokter = (TextView)findViewById(R.id.tvnamaDokter);
         tvNamaDokter.setText(namaDokter);
-        tvSpesial =(TextView)findViewById(R.id.tvSpesial);
+        tvSpesial =(TextView)findViewById(R.id.tvspesial);
         tvSpesial.setText("Dokter Umum");
         tvNamaRumahSakit=(TextView)findViewById(R.id.tvnamaRumahSakit);
         tvNamaRumahSakit.setText(namaRumahSakit);

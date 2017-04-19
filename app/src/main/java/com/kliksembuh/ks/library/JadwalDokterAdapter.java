@@ -42,7 +42,9 @@ public class JadwalDokterAdapter extends BaseAdapter{
     public View getView(int position, View convertView, ViewGroup parent) {
         View newDview = View.inflate(mContext, R.layout.list_jadwal_dokter, null);
         TextView jadwal = (TextView)newDview.findViewById(R.id.tvjadwaldokter);
-        jadwal.setText(mJadwalDokter.get(position).getJadwalDokter());
+        TextView jadwal1 = (TextView)newDview.findViewById(R.id.tvjadwaldokter1);
+        jadwal.setText(mJadwalDokter.get(position).getStartDate());
+        jadwal1.setText(mJadwalDokter.get(position).getEndDate());
         newDview.setTag(mJadwalDokter.get(position).getDetailProgramID());
         return newDview;
     }
