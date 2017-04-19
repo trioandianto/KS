@@ -124,6 +124,18 @@ public class HomeActivity extends AppCompatActivity
 //        }
 //        startActivity(intent);
     }
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1) {
+            if(resultCode == RESULT_OK) {
+                userID = data.getStringExtra("userID");
+                locationID = data.getStringExtra("subDistrict");
+                locationName = data.getStringExtra("SubDistrictDescription");
+                facilityID = data.getStringExtra("facilityID");
+                facilityName = data.getStringExtra("facilityName");
+            }
+        }
+    }
 
     private void addBottomDots(int position){
         dots = new TextView[layouts.length];
