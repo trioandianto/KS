@@ -51,7 +51,8 @@ public class HistoryAdapter extends BaseAdapter {
         TextView tvSpecialty = (TextView)newHview.findViewById(R.id.tv_SpecialtyHistory);
         TextView tvStatusHistory = (TextView)newHview.findViewById(R.id.tvStatusHistory);
         TextView tvWaktuBerobat = (TextView)newHview.findViewById(R.id.tvWaktuBerobat);
-        TextView tvJamBerobat = (TextView)newHview.findViewById(R.id.tvJamBerobat);
+        TextView tvTimeStart = (TextView)newHview.findViewById(R.id.tvTimeStart);
+        TextView tvTimeEnd = (TextView)newHview.findViewById(R.id.tvTimeEnd);
 
         tvAppointment.setText(mHistory.get(position).getNoAppointment());
         tvDate.setText(mHistory.get(position).getTanggal());
@@ -61,7 +62,8 @@ public class HistoryAdapter extends BaseAdapter {
         tvSpecialty.setText(mHistory.get(position).getSpecialtyDoc());
         tvStatusHistory.setText(mHistory.get(position).getStatusHistory());
         tvWaktuBerobat.setText(mHistory.get(position).getWaktuBerobat());
-        tvJamBerobat.setText(mHistory.get(position).getJamBerobat());
+        tvTimeStart.setText(mHistory.get(position).getTimeStart());
+        tvTimeEnd.setText(mHistory.get(position).getTimeEnd());
         newHview.setTag(mHistory.get(position).getIdHistoryUpComing());
 
         return newHview;
