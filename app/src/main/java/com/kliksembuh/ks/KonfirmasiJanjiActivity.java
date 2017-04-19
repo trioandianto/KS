@@ -63,7 +63,8 @@ public class KonfirmasiJanjiActivity extends AppCompatActivity {
             date = "4-11-2017";
             weekProgramID = b.getString("WPID");
             dayProgramID = b.getString("DPID");
-            dayProgramDetailID = b.getString("DetailID");
+//            dayProgramDetailID = b.getString("DetailID");
+            dayProgramDetailID = "4";
             personnelID = b.getString("idDokter");
             personnelCD = b.getString("personilID");
             namaDokter = b.getString("namaDokter");

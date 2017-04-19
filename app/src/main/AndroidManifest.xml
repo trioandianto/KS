@@ -45,6 +45,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".LoginActivity"
+            android:launchMode="singleInstance"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustPan" />
         <activity
@@ -59,6 +60,7 @@
         <activity
             android:name=".RegisterActivity"
             android:gravity="center"
+            android:launchMode="singleInstance"
             android:label="@string/title_activity_register"
             android:parentActivityName=".LoginActivity"
             android:theme="@style/AppTheme.NoActionBar"
@@ -80,6 +82,7 @@
         </activity>
         <activity
             android:name=".VerifikasiActivity"
+            android:launchMode="singleInstance"
             android:gravity="center"
             android:label="@string/title_activity_verification"
             android:parentActivityName=".ResetPasswordActivity"
@@ -102,7 +105,8 @@
         <activity
             android:name=".TermAndPolicyActivity"
             android:gravity="center"
-            android:label="@string/title_activity_term_and_policy"
+            android:launchMode="singleInstance"
+            android:theme="@style/AppTheme2"
             android:parentActivityName=".RegisterActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

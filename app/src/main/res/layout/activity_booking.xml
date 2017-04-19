@@ -39,7 +39,6 @@
                 android:layout_height="100dp"
                 android:layout_marginRight="10dp"
                 android:scaleType="fitXY"
-                android:src="@drawable/dr_indah_kusuma"
                 android:layout_alignParentStart="true"/>
         </LinearLayout>
 

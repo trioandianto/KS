@@ -8,12 +8,9 @@ import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.kliksembuh.ks.library.HistoryAdapter;
@@ -140,7 +137,7 @@ public class MyAppointmentUpComingActivity extends Fragment {
                         String imageDoc;
                         for (int i = 0; i < jsonArray.length(); i++){
                             JSONObject jsonObject = jsonArray.getJSONObject(i);
-                            imageDoc = jsonObject.getString("ImgUrl");
+                            imageDoc = jsonObject.getString("MedicalPersonnelImageUrl");
                             drawableDoctor[i] = LoadImageFromWebOperations(imageDoc);
                         }
 

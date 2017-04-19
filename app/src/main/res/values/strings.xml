@@ -90,7 +90,7 @@ MENGGUNAKAN LAYANAN KAMI UNTUK PERTAMA KALI.</string>
     <string name="error_invalid_confirm_password">Konfirmasi password tidak sama</string>
     <string name="error_invalid_confirm_password_not_null">Tidak boleh kosong</string>
     <string name="error_invalid_nohp">Tidak boleh kosong</string>
-    <string name="error_active_code">Tidak boleh kosong</string>
+    <string name="error_active_code">Minimal 10 angka</string>
 
     <string-array name="day_name">
         <item>Senin</item>

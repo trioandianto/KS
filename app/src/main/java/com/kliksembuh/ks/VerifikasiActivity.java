@@ -241,7 +241,7 @@ public class VerifikasiActivity extends AppCompatActivity {
             if (success!="") {
                 try {
                     JSONObject jsonObj = new JSONObject(success);
-                    String userID = jsonObj.getString("Id");
+                    String userID = jsonObj.getString("UserID");
 
                     Intent i = new Intent(getApplicationContext(), HomeActivity.class);
                     Bundle b = new Bundle();

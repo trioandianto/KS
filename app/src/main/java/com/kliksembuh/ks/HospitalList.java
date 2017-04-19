@@ -111,10 +111,15 @@ public class HospitalList extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
+                Object object = parent.getAdapter().getItem(position);
+                Hospital hospital = (Hospital) object;
+                String idHospital = hospital.getId();
+                String nameHospital = hospital.getName();
+
                 Intent myIntent = new Intent(getApplicationContext(),TestScroolView.class);
                 Bundle b = new Bundle();
-                b.putString("institution", rumahSakitID[position]);
-                b.putString("tittle",nameRumahSakit[position]);//Your id
+                b.putString("institution", idHospital);
+                b.putString("tittle", nameHospital);//Your id
                 b.putString("facilityID", spesialisasi);
                 b.putString("userID",userID);
                 //.putExtra("userID",userID);
@@ -266,9 +271,9 @@ public class HospitalList extends AppCompatActivity {
                         String alamat = jsonObject.getString("InstitutionAddress");
                         Drawable photo = LoadImageFromWebOperations(image);
                         if(drawableHospital.length <= 0){
-                            mHospitalList.add(new Hospital(Integer.parseInt(id), null, name, alamat));
+                            mHospitalList.add(new Hospital(id, null, name, alamat));
                         }else{
-                            mHospitalList.add(new Hospital(Integer.parseInt(id), drawableHospital[i], name, alamat));
+                            mHospitalList.add(new Hospital(id, drawableHospital[i], name, alamat));
                         }
 
                         hAdapter = new HospitalListAdapter(getApplicationContext(), mHospitalList);
