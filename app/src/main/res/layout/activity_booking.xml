@@ -150,14 +150,12 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/btnMingguDepan"
+                android:id="@+id/btnMingguIni"
                 style="@style/MyCustomTextAppearance"
                 android:layout_width="170dp"
                 android:layout_height="50dp"
-                android:layout_alignBaseline="@+id/btnMingguIni"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="5dp"
-                android:layout_toRightOf="@+id/btnMingguIni"
                 android:background="@drawable/shape"
                 android:backgroundTint="@color/signup_color"
                 android:text="Minggu Ini"
@@ -165,10 +163,12 @@
                 android:textStyle="bold" />
 
             <Button
-                android:id="@+id/btnMingguIni"
+                android:id="@+id/btnMingguDepan"
                 style="@style/MyCustomTextAppearance"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
+                android:layout_alignBaseline="@+id/btnMingguIni"
+                android:layout_toRightOf="@+id/btnMingguIni"
                 android:layout_alignParentStart="true"
                 android:layout_below="@+id/tvText"
                 android:layout_marginLeft="5dp"
