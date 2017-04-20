@@ -155,7 +155,7 @@ public class SearchLocationActivity extends AppCompatActivity implements ListVie
             NetworkInfo netInfo = cm.getActiveNetworkInfo();
             if (netInfo != null && netInfo.isConnected()) {
                 try {
-                    URL url = new URL("http://192.168.1.2/kliksembuhapi/api/SubDistricts/GetSubDistrict");
+                    URL url = new URL("http://basajans/kliksembuhapi/api/SubDistricts/GetSubDistrict");
 //                    URL url = new URL("http://cloud.basajans.com:8868/BS.HealthCare.Application/api/SubDistricts/GetSubDistrict");
                     HttpURLConnection urlc = (HttpURLConnection) url.openConnection();
                     urlc.setRequestProperty("Content-Type", "application/json");

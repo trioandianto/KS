@@ -26,11 +26,6 @@ import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
 import com.kliksembuh.ks.library.DoctorListAdapter;
 import com.kliksembuh.ks.library.HttpHandler;
 import com.kliksembuh.ks.library.ObservableScrollView;
@@ -55,9 +50,9 @@ import java.util.List;
 import javax.net.ssl.HttpsURLConnection;
 
 
-public class TestScroolView extends AppCompatActivity implements OnMapReadyCallback {
+public class TestScroolView extends AppCompatActivity{
     public static final String EXTRA_NAME = "cheese_name";
-    private GoogleMap mMap;
+
     ViewPager viewPager;
     private int[] layouts;
     private ScrollView scrollView;
@@ -82,6 +77,9 @@ public class TestScroolView extends AppCompatActivity implements OnMapReadyCallb
     private String userID;
     private NestedScrollView nsDokter;
     private Drawable drawableDokter[];
+    private String [] praktekDokter;
+    private ImageView ivMaps;
+    private String alamat;
 
     int a =0;
 
@@ -98,6 +96,7 @@ public class TestScroolView extends AppCompatActivity implements OnMapReadyCallb
             rumahSakitID = b.getString("institution");
             facility = b.getString("facilityID");
             toolbarTitle = b.getString("tittle");
+            alamat = b.getString("alamat");
         }
         setContentView(R.layout.activity_test_scrool_view);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -119,20 +118,20 @@ public class TestScroolView extends AppCompatActivity implements OnMapReadyCallb
 //        lvDokter.setNestedScrollingEnabled(true);
 
         //lvDokter.setNestedScrollingEnabled(true);
-        spinner = (Spinner)findViewById(R.id.dplistdokter);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(TestScroolView.this,
                 android.R.layout.simple_spinner_item,paths);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        ivMaps = (ImageView)findViewById(R.id.ivMaps);
+        ivMaps.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
+            public void onClick(View v) {
+                Intent myIntent = new Intent(TestScroolView.this ,MapsDetailHospitalActivity.class);
+                Bundle b = new Bundle();
+                b.putString("namaRumahSakit", toolbarTitle);
+                b.putString("alamat", alamat);
+                myIntent.putExtras(b);
+                //.putExtra("userID",userID);
+                startActivityForResult(myIntent, 1);
             }
         });
         layouts = new int[]{
@@ -177,6 +176,7 @@ public class TestScroolView extends AppCompatActivity implements OnMapReadyCallb
                 b.putString("rumahSakitID",rumahSakitID);
                 b.putString("facilityID", facility);
                 b.putString("namaRumahSakit", toolbarTitle);
+                b.putStringArray("praktekDokter", praktekDokter);
                 //Your id
                 //.putExtra("userID",userID);
                 myIntent.putExtras(b);
@@ -198,20 +198,6 @@ public class TestScroolView extends AppCompatActivity implements OnMapReadyCallb
             }
         }
     }
-
-    @Override
-    public void onMapReady(GoogleMap googleMap) {
-        mMap = googleMap;
-
-        // Add a marker in Sydney and move the camera
-        LatLng bogor = new LatLng(-6.595038, 106.816635);
-        mMap.addMarker(new MarkerOptions().position(bogor).title("Bogor"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(bogor,16.0f));
-        mMap.setMapType(mMap.MAP_TYPE_TERRAIN);
-        mMap.getUiSettings().setZoomControlsEnabled(true);
-
-    }
-
 
     public class ViewPagerAdapter extends PagerAdapter {
 
@@ -458,6 +444,13 @@ public class TestScroolView extends AppCompatActivity implements OnMapReadyCallb
                         idDokter[i]=personelCD;
                         String name = jsonObject.getString("Name");
                         String alamat = jsonObject.getString("Address");
+                        JSONArray jsonArray1 = jsonObject.getJSONArray("Institute");
+                        for (int j=0;j<jsonArray1.length();j++){
+                            praktekDokter = new String[jsonArray1.length()];
+                            JSONObject jsonObject1 = jsonArray1.getJSONObject(j);
+                            praktekDokter[j] = jsonObject1.getString("InstitutionName");
+
+                        }
                         if(drawableDokter.length <= 0){
                             mDokterList.add(new Doctor(id, null, name, alamat));
 

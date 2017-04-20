@@ -26,6 +26,7 @@ import android.widget.TextView;
 
 import com.kliksembuh.ks.library.JadwalDokterAdapter;
 import com.kliksembuh.ks.models.JadwalDokter;
+import com.kliksembuh.ks.models.PraktekDokter;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -54,6 +55,9 @@ public class BookingActivity extends AppCompatActivity implements ListView.OnIte
     private String sday;
     private String week="1";
     private List<JadwalDokter> mJadwalDokterList;
+    private List<PraktekDokter> mPraktekDokter;
+    private PraktekDokter pAdapter;
+    private ListView lvPraktekDokter;
     private JadwalDokterAdapter jAdapter;
     private ListView lvJadwal;
     private Button btnMingguIni;
@@ -105,6 +109,7 @@ public class BookingActivity extends AppCompatActivity implements ListView.OnIte
     private int bulan;
     private int tahun;
     private String namaHari;
+    private String[] praktekDokter;
     public Context contextInstance;
     public Drawable getImageDokter() {
         return imageDokter;
@@ -133,6 +138,7 @@ public class BookingActivity extends AppCompatActivity implements ListView.OnIte
             rumahSakitID = b.getString("rumahSakitID");
             facilityID = b.getString("facilityID");
             namaRumahSakit = b.getString("namaRumahSakit");
+            praktekDokter = b.getStringArray("praktekDokter");
 
         }
         Toolbar newToolbar = (Toolbar)findViewById(R.id.toolbarJadwalDokter);
@@ -152,6 +158,8 @@ public class BookingActivity extends AppCompatActivity implements ListView.OnIte
         lvJadwal = (ListView)findViewById(R.id.lvjadwal);
         lvJadwal.setOnItemClickListener(this);
         mJadwalDokterList = new ArrayList<>();
+        lvPraktekDokter = (ListView)findViewById(R.id.lvRumahSakitDokter);
+        mPraktekDokter = new ArrayList<>();
         spnHari = (Spinner)findViewById(R.id.spnHari);
         List<String> list = new ArrayList<String>();
         list.add("Senin");

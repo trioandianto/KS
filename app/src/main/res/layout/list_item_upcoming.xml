@@ -101,7 +101,6 @@
             android:gravity="left"
             android:layout_marginRight="10dp"
             android:layout_below="@id/lblWaktuBerobat"
-            android:layout_toLeftOf="@id/tvTimeEnd"
             android:padding="3dp"
             android:text="08.00"
             android:textColor="@color/black" />
@@ -112,7 +111,6 @@
             android:layout_height="1dp"
             android:layout_below="@id/lblWaktuBerobat"
             android:layout_centerInParent="true"
-            android:layout_toLeftOf="@id/tvTimeEnd"
             android:layout_marginTop="10dp"
             android:layout_marginLeft="2dp"
             android:layout_marginRight="2dp"
