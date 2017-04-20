@@ -167,7 +167,7 @@
                         android:layout_marginRight="10dp"
                         android:layout_margin="20dp"
                         android:text="atau"
-                        android:textColor="@color/cardview_dark_background"/>
+                        android:textColor="@color/black"/>
 
                     <View
                         android:layout_width="match_parent"

@@ -40,7 +40,7 @@ public class ProfileManagementActivity extends AppCompatActivity implements View
 
 
     private ImageView imageView;
-    private ImageView imageClick;
+    private TextView imageClick;
     private TextView editDataDiri;
     private TextView editFname;
     private TextView editLname;
@@ -69,7 +69,7 @@ public class ProfileManagementActivity extends AppCompatActivity implements View
         setContentView(R.layout.activity_profile_management);
 
         imageView = (ImageView)findViewById(R.id.profile_image);
-        imageClick = (ImageView)findViewById(R.id.cameraupload);
+        imageClick = (TextView) findViewById(R.id.tv_AddPhotoProfile);
         //editDataDiri = (TextView)findViewById(R.id.tvEditProfileManagement);
         editFname = (TextView)findViewById(R.id.tvFName);
         editLname = (TextView)findViewById(R.id.tvLName);
@@ -136,6 +136,11 @@ public class ProfileManagementActivity extends AppCompatActivity implements View
             @Override
             public void onClick(View v) {
                 Bitmap image = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
+                Intent galleryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(galleryIntent, RESULT_LOAD_IMAGE);
+                // TO DO - Create Dialog Take a Photo and From Gallery
+//                Intent takePicture = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+//                startActivityForResult(takePicture, 0);
                 new UploadImage(image);
             }
         });

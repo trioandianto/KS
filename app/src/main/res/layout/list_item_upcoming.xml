@@ -60,9 +60,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/lblStatusHistory"
+            android:layout_marginLeft="248dp"
             android:layout_marginBottom="16dp"
             android:layout_marginRight="5dp"
-            android:layout_alignParentRight="true"
             android:gravity="left"
             android:text="Menunggu Konfirmasi"
             android:textColor="@color/red"/>
