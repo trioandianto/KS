@@ -31,7 +31,7 @@
             <AutoCompleteTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Trio Andianto"
+                android:id="@+id/tvNameDetailAppointment"
                 android:layout_marginRight="10dp"
                 android:layout_marginLeft="10dp">
             </AutoCompleteTextView>
@@ -43,9 +43,9 @@
             <AutoCompleteTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:id="@+id/tvDateDetailAppointment"
                 android:layout_marginRight="10dp"
-                android:layout_marginLeft="10dp"
-                android:text="Sabtu, 10 September 2017">
+                android:layout_marginLeft="10dp">
             </AutoCompleteTextView>
         </android.support.design.widget.TextInputLayout>
         <android.support.design.widget.TextInputLayout
@@ -54,9 +54,9 @@
             <AutoCompleteTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:id="@+id/tvTimeDetailAppointment"
                 android:layout_marginRight="10dp"
-                android:layout_marginLeft="10dp"
-                android:text="10:00">
+                android:layout_marginLeft="10dp">
             </AutoCompleteTextView>
         </android.support.design.widget.TextInputLayout>
     </LinearLayout>
