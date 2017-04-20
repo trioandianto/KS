@@ -8,10 +8,15 @@ import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.kliksembuh.ks.library.HistoryAdapter;
 import com.kliksembuh.ks.models.HistoryUpComing;
@@ -28,6 +33,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.sql.Time;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -108,7 +114,7 @@ public class MyAppointmentUpComingActivity extends Fragment {
             NetworkInfo netInfo = cm.getActiveNetworkInfo();
             if (netInfo != null && netInfo.isConnected()) {
                 try{
-                    URL url = new URL("http://basajans/KlikSembuhAPI/api/Transactions/GetHistoryAppointment?UserID=6fede7ca-1fa5-4934-94c7-8c95f3d78233");
+                    URL url = new URL("http://192.168.1.12/KlikSembuhAPI/api/Transactions/GetHistoryAppointment?UserID=6fede7ca-1fa5-4934-94c7-8c95f3d78233");
                     HttpURLConnection urlc = (HttpURLConnection) url.openConnection();
                     urlc.setRequestProperty("Content-Type","application/json");
                     urlc.connect();
@@ -211,7 +217,13 @@ public class MyAppointmentUpComingActivity extends Fragment {
                         String timeEnd = jsonObject.getString("TimeEnd");
 
                         try {
-                            // Get date from string
+                            //yyyy-MM-dd'T'HH:mm:ss
+                            SimpleDateFormat schdlDateFormatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+                            Date scheduleDate = schdlDateFormatter.parse(createdOn);
+                            SimpleDateFormat newSchdlFormat = new SimpleDateFormat("dd-MMM-yyyy");
+                            String schdlDatePars = newSchdlFormat.format(scheduleDate);
+
+                             // Get date from string
                             SimpleDateFormat dateFormatter = new SimpleDateFormat("HH:mm:ss");
                             Date dateTimeStart = dateFormatter.parse(timeStart);
                             Date dateTimeEnd = dateFormatter.parse(timeEnd);
@@ -227,11 +239,11 @@ public class MyAppointmentUpComingActivity extends Fragment {
                             namaRumahSakit [i] = hospitalName;
 
                             if (drawableDoctor.length <= 0){
-                                historyUpComingList.add(new HistoryUpComing(Integer.parseInt(trxIDHistory), doctorName, null, hospitalName, createdOn, trxNoAppointment, specialtyDoc, statusDesc, shiftDesc, timeStartPars, timeEndPars));
+                                historyUpComingList.add(new HistoryUpComing(Integer.parseInt(trxIDHistory), doctorName, null, hospitalName, schdlDatePars, trxNoAppointment, specialtyDoc, statusDesc, shiftDesc, timeStartPars, timeEndPars));
                             }
                             else{
                                 if(statusID == String.valueOf(1)){
-                                    historyUpComingList.add(new HistoryUpComing(Integer.parseInt(trxIDHistory), doctorName, drawableDoctor[i], hospitalName, createdOn, trxNoAppointment, specialtyDoc, statusDesc, shiftDesc, timeStartPars, timeEndPars));
+                                    historyUpComingList.add(new HistoryUpComing(Integer.parseInt(trxIDHistory), doctorName, drawableDoctor[i], hospitalName, schdlDatePars, trxNoAppointment, specialtyDoc, statusDesc, shiftDesc, timeStartPars, timeEndPars));
                                 }
                                 histAdapter = new HistoryAdapter(globalContext.getApplicationContext(), historyUpComingList);
                                 lvUpcoming.setAdapter(histAdapter);
