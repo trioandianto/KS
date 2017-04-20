@@ -1,6 +1,7 @@
 package com.kliksembuh.ks.library;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -61,9 +62,19 @@ public class HistoryAdapter extends BaseAdapter {
         tvDrname.setText(mHistory.get(position).getNamaDokter());
         tvSpecialty.setText(mHistory.get(position).getSpecialtyDoc())   ;
         tvStatusHistory.setText(mHistory.get(position).getStatusHistory());
+        String convColor = tvStatusHistory.getText().toString();
+        if(convColor.equals("Menunggu Konfirmasi")){
+//            tvStatusHistory.setBackgroundResource(R.color.red);}
+            tvStatusHistory.setTextColor(Color.parseColor("#d50000"));}
+        if(convColor.equals("Dikonfirmasi")){
+            tvStatusHistory.setTextColor(Color.parseColor("#eb3812"));}
+        if(convColor.equals("Telah diulas")){
+            tvStatusHistory.setTextColor(Color.parseColor("#FF9800"));}
+        if(convColor.equals("Selesai")){
+            tvStatusHistory.setTextColor(Color.parseColor("#2e7d32"));}
         tvWaktuBerobat.setText(mHistory.get(position).getWaktuBerobat());
-//        tvTimeStart.setText(mHistory.get(position).getTimeStart());
-//        tvTimeEnd.setText(mHistory.get(position).getTimeEnd());
+        tvTimeStart.setText(mHistory.get(position).getTimeStart());
+        tvTimeEnd.setText(mHistory.get(position).getTimeEnd());
         newHview.setTag(mHistory.get(position).getIdHistoryUpComing());
 
         return newHview;
