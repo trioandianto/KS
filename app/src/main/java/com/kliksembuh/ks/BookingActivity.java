@@ -1409,8 +1409,6 @@ public class BookingActivity extends AppCompatActivity implements ListView.OnIte
             imgDokter.setImageDrawable(imageDokter);
 
             if (success!="") {
-
-
                 jAdapter = new JadwalDokterAdapter(getApplicationContext(),mJadwalDokterList);
                 lvJadwal.setAdapter(jAdapter);
             } else {

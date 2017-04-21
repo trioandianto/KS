@@ -231,7 +231,9 @@ public class KonfirmasiJanjiActivity extends AppCompatActivity {
         protected void onPostExecute(final String success) {
             if (success!="") {
                 Intent i = new Intent(getApplicationContext(), MyAppointmentActivity.class);
-                startActivityForResult(i, 0);
+                Bundle b = new Bundle();
+                b.putString("userID", userID);
+                startActivityForResult(i, 1);
                 finish();
 
 

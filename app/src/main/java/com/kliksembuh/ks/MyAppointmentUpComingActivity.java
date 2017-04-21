@@ -58,8 +58,15 @@ public class MyAppointmentUpComingActivity extends Fragment implements ListView.
     private int imageId;
     private Drawable drawableDoctor[];
     private ProgressDialog pDialog;
-    private String userID = "6fede7ca-1fa5-4934-94c7-8c95f3d78233";
+    private String userID;
     private String transaksiID;
+    public String getUserID() {
+        return userID;
+    }
+
+    public void setUserID(String userID) {
+        this.userID = userID;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -143,7 +150,7 @@ public class MyAppointmentUpComingActivity extends Fragment implements ListView.
             NetworkInfo netInfo = cm.getActiveNetworkInfo();
             if (netInfo != null && netInfo.isConnected()) {
                 try{
-                    URL url = new URL("http://192.168.1.12/KlikSembuhAPI/api/Transactions/GetHistoryAppointment?UserID="+userID);
+                    URL url = new URL("http://basajans/KlikSembuhAPI/api/Transactions/GetHistoryAppointment?UserID="+userID);
                     HttpURLConnection urlc = (HttpURLConnection) url.openConnection();
                     urlc.setRequestProperty("Content-Type","application/json");
                     urlc.connect();

@@ -56,6 +56,7 @@ public class HospitalList extends AppCompatActivity {
     private String spesialisasi;
     private Drawable drawableHospital[];
     private String userID;
+    private String alamat[];
 
     RatingBar rb;
 
@@ -95,7 +96,14 @@ public class HospitalList extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent myIntent = new Intent(HospitalList.this,ListMapActivity.class);
-                startActivity(myIntent);
+                Bundle b = new Bundle();
+                b.putString("userID", userID);
+                b.putString("subDistrict",subDistrict);
+                b.putString("facilityID",spesialisasi);
+                b.putString("facilityName",facilityName);
+                b.putString("SubDistrictDescription",subDistricDescription);
+                myIntent.putExtras(b);
+                startActivityForResult(myIntent, 1);
                 overridePendingTransition( R.anim.slide_in_up, R.anim.slide_out_up );
             }
         });
@@ -179,7 +187,7 @@ public class HospitalList extends AppCompatActivity {
             NetworkInfo netInfo = cm.getActiveNetworkInfo();
             if (netInfo != null && netInfo.isConnected()) {
                 try {
-                    URL url = new URL("http://192.168.1.12/kliksembuhapi/api/Institutions/SearchInstitutionFromAfterLogin?subDistrict=" + mSubdistrict + "&facility=" + mSpesialisai);
+                    URL url = new URL("http://basajans/kliksembuhapi/api/Institutions/SearchInstitutionFromAfterLogin?subDistrict=" + mSubdistrict + "&facility=" + mSpesialisai);
                     HttpURLConnection urlc = (HttpURLConnection) url.openConnection();
                     urlc.setRequestProperty("Content-Type", "application/json");
                     urlc.connect();
@@ -263,21 +271,25 @@ public class HospitalList extends AppCompatActivity {
                     JSONArray jsonArray = new JSONArray(success);
                     rumahSakitID =new String[jsonArray.length()];
                     nameRumahSakit = new String[jsonArray.length()];
+                    alamat = new String[jsonArray.length()];
 
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject jsonObject = jsonArray.getJSONObject(i);
                         String id = jsonObject.getString("InstitutionID");
                         String name = jsonObject.getString("InstitutionName");
+                        nameRumahSakit[i] = name;
                         String image = jsonObject.getString("ImgUrl");
 
                         rumahSakitID[i] = id;
                         // Drawable image1 = LoadImageFromWebOperations(image);
-                        String alamat = jsonObject.getString("InstitutionAddress");
+                        String addres = jsonObject.getString("InstitutionAddress");
+                        alamat[i] = addres;
+
                         Drawable photo = LoadImageFromWebOperations(image);
                         if(drawableHospital.length <= 0){
-                            mHospitalList.add(new Hospital(id, null, name, alamat));
+                            mHospitalList.add(new Hospital(id, null, name, addres));
                         }else{
-                            mHospitalList.add(new Hospital(id, drawableHospital[i], name, alamat));
+                            mHospitalList.add(new Hospital(id, drawableHospital[i], name, addres));
                         }
 
                         hAdapter = new HospitalListAdapter(getApplicationContext(), mHospitalList);
