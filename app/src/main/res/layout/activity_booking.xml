@@ -187,11 +187,12 @@
             android:layout_marginTop="10dp"
             android:background="@drawable/shape_listview"
             android:orientation="vertical">
+
             <ListView
+                android:id="@+id/lvjadwal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:id="@+id/lvjadwal">
+                android:layout_margin="10dp">
 
             </ListView>
 
@@ -243,31 +244,18 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:id="@+id/tvnamaDokterPraktek"
                 android:layout_marginLeft="10dp"
-                android:text="Dr Indah Kusuma juga praktek di :"
                 android:textColor="#5C5C5C"
                 android:textSize="14dp"
                 android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="wrap_content"
+            <ListView
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="5dp"
-                android:text="RS Cibinong"
-                android:textColor="@color/blue"
-                android:textSize="16dp"
-                android:textStyle="bold" />
+                android:layout_margin="10dp"
+                android:id="@+id/lvRumahSakitDokter">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="5dp"
-                android:text="RS Melania"
-                android:textColor="@color/blue"
-                android:textSize="16dp"
-                android:textStyle="bold" />
+            </ListView>
 
         </LinearLayout>
 

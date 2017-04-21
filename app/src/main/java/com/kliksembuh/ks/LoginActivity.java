@@ -349,7 +349,7 @@ public class LoginActivity extends BaseActivity implements LoaderCallbacks<Curso
             //attemptLogin();
         }
         else{
-            Intent myIntent = new Intent(view.getContext(), ResetPasswordActivity.class);
+            Intent myIntent = new Intent(view.getContext(), MapsDetailHospitalActivity.class);
             startActivityForResult(myIntent, 0);
 
         }

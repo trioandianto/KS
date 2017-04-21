@@ -58,26 +58,17 @@
         android:fillViewport="true"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <FrameLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            android:paddingTop="24dp">
-
-            <!--<fragment-->
-                <!--android:id="@+id/mapdoctorlistcoba"-->
-                <!--android:name="com.google.android.gms.maps.SupportMapFragment"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="150dp" />-->
-
-            <Spinner
-                android:id="@+id/dplistdokter"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+            <ImageView
                 android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:spinnerMode="dropdown">
-
-            </Spinner>
+                android:layout_height="100dp"
+                android:src="@drawable/maps"
+                android:scaleType="fitXY"
+                android:id="@+id/ivMaps"/>
             <ListView
                 android:layout_width="match_parent"
                 android:divider="#00000000"
@@ -90,7 +81,7 @@
                 android:id="@+id/lvDetailRumahSakit">
 
             </ListView>
-        </FrameLayout>
+        </LinearLayout>
 
     </android.support.v4.widget.NestedScrollView>
 

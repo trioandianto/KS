@@ -117,6 +117,7 @@ public class HospitalList extends AppCompatActivity {
                 Hospital hospital = (Hospital) object;
                 String idHospital = hospital.getId();
                 String nameHospital = hospital.getName();
+                String alamat = hospital.getAddress();
 
                 Intent myIntent = new Intent(getApplicationContext(),TestScroolView.class);
                 Bundle b = new Bundle();
@@ -124,6 +125,7 @@ public class HospitalList extends AppCompatActivity {
                 b.putString("tittle", nameHospital);//Your id
                 b.putString("facilityID", spesialisasi);
                 b.putString("userID",userID);
+                b.putString("alamat", alamat);
                 //.putExtra("userID",userID);
                 myIntent.putExtras(b);
                 //.putExtra("userID",userID);
@@ -177,7 +179,7 @@ public class HospitalList extends AppCompatActivity {
             NetworkInfo netInfo = cm.getActiveNetworkInfo();
             if (netInfo != null && netInfo.isConnected()) {
                 try {
-                    URL url = new URL("http://192.168.1.2/kliksembuhapi/api/Institutions/SearchInstitutionFromAfterLogin?subDistrict=" + mSubdistrict + "&facility=" + mSpesialisai);
+                    URL url = new URL("http://192.168.1.12/kliksembuhapi/api/Institutions/SearchInstitutionFromAfterLogin?subDistrict=" + mSubdistrict + "&facility=" + mSpesialisai);
                     HttpURLConnection urlc = (HttpURLConnection) url.openConnection();
                     urlc.setRequestProperty("Content-Type", "application/json");
                     urlc.connect();
