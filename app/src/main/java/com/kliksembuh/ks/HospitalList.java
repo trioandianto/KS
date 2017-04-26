@@ -179,7 +179,7 @@ public class HospitalList extends AppCompatActivity {
             NetworkInfo netInfo = cm.getActiveNetworkInfo();
             if (netInfo != null && netInfo.isConnected()) {
                 try {
-                    URL url = new URL("http://192.168.1.12/kliksembuhapi/api/Institutions/SearchInstitutionFromAfterLogin?subDistrict=" + mSubdistrict + "&facility=" + mSpesialisai);
+                    URL url = new URL("http://192.168.1.6/kliksembuhapi/api/Institutions/SearchInstitutionFromAfterLogin?subDistrict=" + mSubdistrict + "&facility=" + mSpesialisai);
                     HttpURLConnection urlc = (HttpURLConnection) url.openConnection();
                     urlc.setRequestProperty("Content-Type", "application/json");
                     urlc.connect();

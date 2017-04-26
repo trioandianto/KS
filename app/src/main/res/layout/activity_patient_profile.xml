@@ -32,5 +32,4 @@
         android:backgroundTint="@color/white"
         android:clickable="true"
         android:onClick="onClick"/>
-
 </RelativeLayout>

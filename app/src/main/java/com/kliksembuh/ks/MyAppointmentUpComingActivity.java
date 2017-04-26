@@ -2,18 +2,21 @@ package com.kliksembuh.ks;
 
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.kliksembuh.ks.library.HistoryAdapter;
 import com.kliksembuh.ks.models.HistoryUpComing;
@@ -30,6 +33,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.sql.Time;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -39,14 +43,12 @@ import java.util.List;
 
 import javax.net.ssl.HttpsURLConnection;
 
-import static android.app.Activity.RESULT_OK;
-import static com.facebook.FacebookSdk.getApplicationContext;
-
 /**
  * Created by Trio Andianto on 1/24/2017.
  */
-public class MyAppointmentUpComingActivity extends Fragment implements ListView.OnItemClickListener{
+public class MyAppointmentUpComingActivity extends Fragment {
 
+    private String userID;
     private String [] idHistoryUpComing;
     private String [] namaDokter;
     private String [] namaRumahSakit;
@@ -58,8 +60,6 @@ public class MyAppointmentUpComingActivity extends Fragment implements ListView.
     private int imageId;
     private Drawable drawableDoctor[];
     private ProgressDialog pDialog;
-    private String userID = "6fede7ca-1fa5-4934-94c7-8c95f3d78233";
-    private String transaksiID;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -79,7 +79,6 @@ public class MyAppointmentUpComingActivity extends Fragment implements ListView.
 
 ////        });
         lvUpcoming = (ListView)rootView.findViewById(R.id.lvHistoryUpComing);
-        lvUpcoming.setOnItemClickListener(this);
         historyUpComingList = new ArrayList<>();
         new HistoryAppoinmentUpComingAsync().execute();
 
@@ -94,34 +93,6 @@ public class MyAppointmentUpComingActivity extends Fragment implements ListView.
 //        //new HistoryAppoinment(userID).execute();
         return rootView;
     }
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 1) {
-            if(resultCode == RESULT_OK) {
-                userID = data.getStringExtra("userID");
-                transaksiID = data.getStringExtra("transaksiID");
-
-            }
-        }
-    }
-
-
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Object object = parent.getAdapter().getItem(position);
-        HistoryUpComing historyUpComing = (HistoryUpComing) object;
-        transaksiID = String.valueOf(historyUpComing.getIdHistoryUpComing());
-
-        Intent myIntent = new Intent(getApplicationContext(),AppointmentDetailActivity.class);
-        Bundle b = new Bundle();
-        b.putString("userID",userID);
-        b.putString("transaksiID", transaksiID);
-        //.putExtra("userID",userID);
-        myIntent.putExtras(b);
-        //.putExtra("userID",userID);
-        startActivityForResult(myIntent, 1);
-    }
-
     public class HistoryAppoinmentUpComingAsync extends AsyncTask<String, Void, String> {
         // private String mUserID;
 //        HistoryAppoinmentAsync(String userID) {
@@ -143,7 +114,7 @@ public class MyAppointmentUpComingActivity extends Fragment implements ListView.
             NetworkInfo netInfo = cm.getActiveNetworkInfo();
             if (netInfo != null && netInfo.isConnected()) {
                 try{
-                    URL url = new URL("http://192.168.1.12/KlikSembuhAPI/api/Transactions/GetHistoryAppointment?UserID="+userID);
+                    URL url = new URL("http://192.168.1.6/KlikSembuhAPI/api/Transactions/GetHistoryAppointment?UserID=6fede7ca-1fa5-4934-94c7-8c95f3d78233");
                     HttpURLConnection urlc = (HttpURLConnection) url.openConnection();
                     urlc.setRequestProperty("Content-Type","application/json");
                     urlc.connect();
