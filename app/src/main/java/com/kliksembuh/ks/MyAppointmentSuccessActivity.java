@@ -2,6 +2,7 @@ package com.kliksembuh.ks;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -11,6 +12,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.kliksembuh.ks.library.HistoryAdapter;
@@ -37,7 +39,10 @@ import java.util.List;
 
 import javax.net.ssl.HttpsURLConnection;
 
-public class MyAppointmentSuccessActivity extends Fragment {
+import static android.app.Activity.RESULT_OK;
+import static com.facebook.FacebookSdk.getApplicationContext;
+
+public class MyAppointmentSuccessActivity extends Fragment implements ListView.OnItemClickListener{
     private String [] idHistoryUpComing;
     private String [] namaDokter;
     private String [] namaRumahSakit;
@@ -49,6 +54,15 @@ public class MyAppointmentSuccessActivity extends Fragment {
     private int imageId;
     private Drawable drawableDoctor[];
     private ProgressDialog pDialog;
+    private String userID ;
+    private String transaksiID;
+    public String getUserID() {
+        return userID;
+    }
+
+    public void setUserID(String userID) {
+        this.userID = userID;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle saveInstanceState){
@@ -56,11 +70,39 @@ public class MyAppointmentSuccessActivity extends Fragment {
         globalContext = this.getActivity();
 
         lvUpcoming = (ListView)rootView.findViewById(R.id.lvHistorySuccess);
+        lvUpcoming.setOnItemClickListener(this);
         historyUpComingList = new ArrayList<>();
         new HistoryAppoinmentSuccessAsync().execute();
         return rootView;
 
-    };
+    }
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1) {
+            if(resultCode == RESULT_OK) {
+                userID = data.getStringExtra("userID");
+                transaksiID = data.getStringExtra("transaksiID");
+
+            }
+        }
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Object object = parent.getAdapter().getItem(position);
+        HistoryUpComing historyUpComing = (HistoryUpComing) object;
+        transaksiID = String.valueOf(historyUpComing.getIdHistoryUpComing());
+
+        Intent myIntent = new Intent(getApplicationContext(),AppointmentDetailActivity.class);
+        Bundle b = new Bundle();
+        b.putString("userID",userID);
+        b.putString("transaksiID", transaksiID);
+        //.putExtra("userID",userID);
+        myIntent.putExtras(b);
+        //.putExtra("userID",userID);
+        startActivityForResult(myIntent, 1);
+    }
+
     public class HistoryAppoinmentSuccessAsync extends AsyncTask<String, Void, String> {
         // private String mUserID;
 //        HistoryAppoinmentAsync(String userID) {
@@ -82,7 +124,7 @@ public class MyAppointmentSuccessActivity extends Fragment {
             NetworkInfo netInfo = cm.getActiveNetworkInfo();
             if (netInfo != null && netInfo.isConnected()) {
                 try{
-                    URL url = new URL("http://192.168.1.6/KlikSembuhAPI/api/Transactions/GetHistoryAppointment?UserID=6fede7ca-1fa5-4934-94c7-8c95f3d78233");
+                    URL url = new URL("http://basajans/KlikSembuhAPI/api/Transactions/GetHistoryAppointment?UserID=6"+userID);
                     HttpURLConnection urlc = (HttpURLConnection) url.openConnection();
                     urlc.setRequestProperty("Content-Type","application/json");
                     urlc.connect();

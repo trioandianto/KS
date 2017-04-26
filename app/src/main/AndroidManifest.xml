@@ -123,6 +123,7 @@
         </activity>
         <activity
             android:name=".HomeActivity"
+            android:launchMode="singleInstance"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".FavoriteActivity"
@@ -136,6 +137,7 @@
         <activity
             android:name=".MyAppointmentActivity"
             android:label="@string/action_myappointment"
+            android:launchMode="singleInstance"
             android:parentActivityName=".HomeActivity"
             android:theme="@style/AppTheme3">
             <meta-data
@@ -156,8 +158,7 @@
 
         <activity
             android:name=".AppointmentDetailActivity"
-            android:label="@string/title_activity_appointment_detail"
-            android:theme="@style/AppTheme2" />
+            android:theme="@style/AppTheme4" />
         <activity
             android:name=".LoginWithFacebook"
             android:exported="true">
@@ -199,10 +200,9 @@
             android:theme="@style/AppTheme4" />
         <activity
             android:name=".ListMapActivity"
-            android:label="@string/title_activity_list_map"
             android:launchMode="singleTop"
             android:parentActivityName=".HospitalList"
-            android:theme="@style/AppTheme2">
+            android:theme="@style/AppTheme4">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.kliksembuh.ks.HospitalList" />

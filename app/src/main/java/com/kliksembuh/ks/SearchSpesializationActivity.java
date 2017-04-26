@@ -87,7 +87,7 @@ public class SearchSpesializationActivity extends AppCompatActivity implements L
         b.putString("userID", userID);
         b.putString("tab","0");
         myIntent.putExtras(b);
-        startActivity(myIntent);
+        startActivityForResult(myIntent, 1);
 
     }
 

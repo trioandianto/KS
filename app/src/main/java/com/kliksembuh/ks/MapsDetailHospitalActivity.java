@@ -40,7 +40,7 @@ public class MapsDetailHospitalActivity extends AppCompatActivity implements OnM
 
         Toolbar newToolbar = (Toolbar)findViewById(R.id.toolbarMapsDetails);
         setSupportActionBar(newToolbar);
-        newToolbar.setTitle(namaRumahSakit);
+        newToolbar.setTitle("Peta "+namaRumahSakit);
         setSupportActionBar(newToolbar);
         getWindow().setStatusBarColor(ContextCompat.getColor(MapsDetailHospitalActivity.this, R.color.colorPrimaryDark));
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()

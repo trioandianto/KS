@@ -111,7 +111,7 @@ public class SearchLocationActivity extends AppCompatActivity implements ListVie
         b.putString("userID", userID);
         b.putString("tab","0");
         myIntent.putExtras(b);
-        startActivity(myIntent);
+        startActivityForResult(myIntent, 1);
 
     }
     public static String AssetJSONFile (String filename, Context context) throws IOException {

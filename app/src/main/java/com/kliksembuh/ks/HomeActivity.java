@@ -191,34 +191,37 @@ public class HomeActivity extends AppCompatActivity
         int i = item.getItemId();
         if(i == R.id.nav_setting){
             Intent home = new Intent(this, SettingActivity.class);
-            startActivityForResult(home, 0);
+            startActivityForResult(home, 1);
             //fragment = new SettingActivity();
         }
         else if (i == R.id.nav_search){
             Intent home = new Intent(this, HomeActivity.class);
-            startActivityForResult(home, 0);
+            startActivityForResult(home, 1);
         }
         else if (i == R.id.nav_favorite){
             Intent favorite = new Intent(this, FavoriteActivity.class);
-            startActivityForResult(favorite, 0);
+            startActivityForResult(favorite, 1);
 
         }
         else if (i == R.id.nav_histori_janji){
             Intent appointment = new Intent(this, MyAppointmentActivity.class);
-            startActivityForResult(appointment, 0);
+            Bundle b  = new Bundle();
+            b.putString("userID",userID);
+            appointment.putExtras(b);
+            startActivityForResult(appointment, 1);
 
         }
         else if (i == R.id.nav_pengingat_minum){
             Intent home = new Intent(this, SettingActivity.class);
-            startActivityForResult(home, 0);
+            startActivityForResult(home, 1);
         }
         else if (i == R.id.nav_vital_sign){
             Intent home = new Intent(this, SettingActivity.class);
-            startActivityForResult(home, 0);
+            startActivityForResult(home, 1);
         }
         else if (i == R.id.nav_hubungi_kami){
             Intent home = new Intent(this, ContactUsActivity.class);
-            startActivityForResult(home, 0);
+            startActivityForResult(home, 1);
         }
         else if (i == R.id.nav_keluar){
 //            Intent intent = new Intent(this, MainActivity.class);
