@@ -158,7 +158,7 @@ public class BookingActivity extends AppCompatActivity implements ListView.OnIte
         lvJadwal = (ListView)findViewById(R.id.lvjadwal);
         lvJadwal.setOnItemClickListener(this);
         mJadwalDokterList = new ArrayList<>();
-        lvPraktekDokter = (ListView)findViewById(R.id.lvRumahSakitDokter);
+        //lvPraktekDokter = (ListView)findViewById(R.id.lvRumahSakitDokter);
         mPraktekDokter = new ArrayList<>();
         spnHari = (Spinner)findViewById(R.id.spnHari);
         List<String> list = new ArrayList<String>();

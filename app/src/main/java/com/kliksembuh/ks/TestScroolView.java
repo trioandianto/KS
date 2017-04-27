@@ -8,6 +8,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -46,6 +47,8 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javax.net.ssl.HttpsURLConnection;
 
@@ -80,8 +83,15 @@ public class TestScroolView extends AppCompatActivity{
     private String [] praktekDokter;
     private ImageView ivMaps;
     private String alamat;
+    // Slider for ViewPager
+    int currentPage = 0;
+    int NUM_PAGES = 4;
+    Timer timer;
+    final long DELAY_MS = 400;//delay in milliseconds before task is to be executed
+    final long PERIOD_MS = 1000; // time in milliseconds between successive task executions.
 
-    int a =0;
+
+    int a = 0;
 
     private static final String[]paths = {"Dokter Umum", "Dokter Gigi", "Dokter Mata"};
 
@@ -141,6 +151,26 @@ public class TestScroolView extends AppCompatActivity{
         viewPagerAdapter = new ViewPagerAdapter(this);
         viewPager = (ViewPager)findViewById(R.id.backdrop);
         viewPager.setAdapter(viewPagerAdapter);
+
+        /*After setting the adapter use the timer */
+        final Handler handler = new Handler();
+        final Runnable Update = new Runnable() {
+            public void run() {
+                if (currentPage == NUM_PAGES-1) {
+                    currentPage = 0;
+                }
+                viewPager.setCurrentItem(currentPage++, true);
+            }
+        };
+
+        timer = new Timer(); // This will create a new Thread
+        timer .schedule(new TimerTask() { // task to be scheduled
+
+            @Override
+            public void run() {
+                handler.post(Update);
+            }
+        }, DELAY_MS, PERIOD_MS);
 //        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.mapdoctorlistcoba);
 //        mapFragment.getMapAsync(this);
 //        cardView = (CardView)findViewById(R.id.cvdoktera);
@@ -346,7 +376,7 @@ public class TestScroolView extends AppCompatActivity{
             NetworkInfo netInfo = cm.getActiveNetworkInfo();
             if (netInfo != null && netInfo.isConnected()) {
                 try{
-                    URL url = new URL("http://basajans/kliksembuhapi/api/MedicalPersonnel/SearchMedicalPersonnelBasedOnInstitutions?institution="+mInstitution+"&facility="+mFacility);
+                    URL url = new URL("http://192.168.1.6/kliksembuhapi/api/MedicalPersonnel/SearchMedicalPersonnelBasedOnInstitutions?institution="+mInstitution+"&facility="+mFacility);
                     HttpURLConnection urlc = (HttpURLConnection) url.openConnection();
                     urlc.setRequestProperty("Content-Type", "application/json");
                     urlc.connect();
@@ -443,7 +473,8 @@ public class TestScroolView extends AppCompatActivity{
                         String personelCD = jsonObject.getString("MedicalPersonnelCD");
                         idDokter[i]=personelCD;
                         String name = jsonObject.getString("Name");
-                        String alamat = jsonObject.getString("Address");
+                        // to do; change alamat to Doctor Specialty
+                        String alamat = jsonObject.getString("HealthFacilityDesc");
                         JSONArray jsonArray1 = jsonObject.getJSONArray("Institute");
                         for (int j=0;j<jsonArray1.length();j++){
                             praktekDokter = new String[jsonArray1.length()];

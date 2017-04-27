@@ -107,7 +107,7 @@ public class SearchSpesializationActivity extends AppCompatActivity implements L
             NetworkInfo netInfo = cm.getActiveNetworkInfo();
             if (netInfo != null && netInfo.isConnected()) {
                 try {
-                    URL url = new URL("http://basajans/kliksembuhapi/api/HealthFacilities/GetHealthFacilities");
+                    URL url = new URL("http://192.168.1.6/kliksembuhapi/api/HealthFacilities/GetHealthFacilities");
                     HttpURLConnection urlc = (HttpURLConnection) url.openConnection();
                     urlc.setRequestProperty("Content-Type", "application/json");
                     urlc.connect();

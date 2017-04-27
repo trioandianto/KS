@@ -166,7 +166,7 @@
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
                         android:layout_margin="20dp"
-                        android:text="atau"
+                        android:text="@string/lbl_atau"
                         android:textColor="@color/black"/>
 
                     <View

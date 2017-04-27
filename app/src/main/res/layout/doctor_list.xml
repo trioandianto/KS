@@ -51,46 +51,76 @@
         android:textSize="14dp" />
 
     <TextView
-        android:id="@+id/tv_calendar_list"
+        android:id="@+id/tvLihatKonfirmasi"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tv_specialty_list"
+        android:layout_marginTop="18dp"
         android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
         android:layout_toEndOf="@+id/iv_doc_pic_list"
         android:layout_toRightOf="@+id/iv_doc_pic_list"
-        android:drawableLeft="@drawable/ic_date_range_blue_14dp"
-        android:drawablePadding="2dp"
-        android:drawableStart="@drawable/ic_date_range_blue_14dp"
-        android:text="Senin - Jumat"
-        android:textColor="#5C5C5C"
+        android:text="Lihat Kualifikasi"
+        android:background="#e3e3e3"
+        android:padding="4dp"
+        android:textColor="@color/com_facebook_button_background_color"
+        android:textSize="12dp" />
+
+    <TextView
+        android:id="@+id/tvAppointmentNow"
+        android:layout_width="75dp"
+        android:layout_height="24dp"
+        android:text="Book"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:layout_alignTop="@+id/tv_specialty_list"
+        android:layout_marginTop="22dp"
+        android:layout_marginRight="8dp"
+        android:layout_alignStart="@+id/tvAvailableStatus"
+        android:padding="4dp"
+        android:gravity="center"
+        android:background="#7057ff"
+        android:layout_alignParentRight="true"
         android:textSize="14dp" />
 
     <TextView
-        android:id="@+id/tv_clock_list"
+        android:id="@+id/tvAvailableStatus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tv_calendar_list"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="5dp"
-        android:layout_toEndOf="@+id/iv_doc_pic_list"
-        android:layout_toRightOf="@+id/iv_doc_pic_list"
-        android:drawableLeft="@drawable/ic_access_time_blue_14dp"
-        android:drawablePadding="2dp"
-        android:drawableStart="@drawable/ic_access_time_blue_14dp"
-        android:text="09.00 - 14.00"
-        android:textColor="#5C5C5C"
-        android:textSize="14dp" />
-
+        android:layout_marginRight="8dp"
+        android:padding="2dp"
+        android:text="AVAILABLE TODAY"
+        android:textColor="@color/green"
+        android:textAllCaps="false"
+        android:layout_alignParentRight="true"
+        android:layout_alignBaseline="@+id/tv_specialty_list"
+        android:textSize="12dp"/>
 
     <ImageView
         android:id="@+id/iv_doc_pic_list"
-        android:layout_width="100dp"
-        android:layout_height="142dp"
+        android:layout_width="80dp"
+        android:layout_height="90dp"
+        android:paddingLeft="1dp"
         android:adjustViewBounds="true"
         android:scaleType="fitXY"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true" />
+
+    <TextView
+        android:id="@+id/tvFavouriteDoc"
+        android:textAppearance="?android:textAppearanceMedium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="10dp"
+        android:drawableLeft="@drawable/ic_favorite_24dp"
+        android:drawablePadding="2dp"
+        android:drawableStart="@drawable/ic_favorite_24dp"
+        android:text="50"
+        android:textSize="14dp"
+        android:textColor="#5C5C5C"
+        android:layout_below="@+id/iv_doc_pic_list"/>
 
     <!--<Button-->
         <!--android:id="@+id/bookBtn_list"-->

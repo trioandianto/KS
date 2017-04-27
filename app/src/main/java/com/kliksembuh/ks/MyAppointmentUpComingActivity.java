@@ -150,7 +150,7 @@ public class MyAppointmentUpComingActivity extends Fragment implements ListView.
             NetworkInfo netInfo = cm.getActiveNetworkInfo();
             if (netInfo != null && netInfo.isConnected()) {
                 try{
-                    URL url = new URL("http://basajans/KlikSembuhAPI/api/Transactions/GetHistoryAppointment?UserID="+userID);
+                    URL url = new URL("http://192.168.1.6/KlikSembuhAPI/api/Transactions/GetHistoryAppointment?UserID="+userID);
                     HttpURLConnection urlc = (HttpURLConnection) url.openConnection();
                     urlc.setRequestProperty("Content-Type","application/json");
                     urlc.connect();

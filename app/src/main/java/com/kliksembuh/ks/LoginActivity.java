@@ -344,9 +344,9 @@ public class LoginActivity extends BaseActivity implements LoaderCallbacks<Curso
             startActivityForResult(myIntent, 0);
         }
         else if(i==R.id.email_sign_in_button){
-            Intent myIntent = new Intent(view.getContext(), HomeActivity.class);
-            startActivityForResult(myIntent, 0);
-            //attemptLogin();
+            //Intent myIntent = new Intent(view.getContext(), HomeActivity.class);
+            //startActivityForResult(myIntent, 0);
+            attemptLogin();
         }
         else{
             Intent myIntent = new Intent(view.getContext(), MapsDetailHospitalActivity.class);
@@ -639,7 +639,7 @@ public class LoginActivity extends BaseActivity implements LoaderCallbacks<Curso
             NetworkInfo netInfo = cm.getActiveNetworkInfo();
             if (netInfo != null && netInfo.isConnected()) {
                 try {
-                    URL url = new URL("http://basajans/kliksembuhapi/api/users/login");
+                    URL url = new URL("http://192.168.1.6/kliksembuhapi/api/users/login");
                     HttpURLConnection urlc = (HttpURLConnection) url.openConnection();
                     JSONObject jsonObject = new JSONObject();
                     jsonObject.put("Email",mEmail);

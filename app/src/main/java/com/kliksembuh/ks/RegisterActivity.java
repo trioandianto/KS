@@ -197,7 +197,7 @@ public class RegisterActivity extends AppCompatActivity {
             focusView = mNoHp;
             cancel = true;
         }
-        else if (!TextUtils.isEmpty(password) && !isPasswordValid(password)) {
+        else if (TextUtils.isEmpty(password) && !isPasswordValid(password)) {
             mPasswordView.setError(getString(R.string.error_invalid_password));
             focusView = mPasswordView;
             cancel = true;
@@ -258,7 +258,7 @@ public class RegisterActivity extends AppCompatActivity {
             NetworkInfo netInfo = cm.getActiveNetworkInfo();
             if (netInfo != null && netInfo.isConnected()) {
                 try{
-                    URL url = new URL("http://basajans/kliksembuhapi/api/users/register");
+                    URL url = new URL("http://192.168.1.6/kliksembuhapi/api/users/register");
                     HttpURLConnection urlc = (HttpURLConnection) url.openConnection();
                     JSONObject jsonObject = new JSONObject();
                     jsonObject.put("Email",mEmail);
