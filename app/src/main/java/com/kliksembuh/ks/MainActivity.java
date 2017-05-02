@@ -207,24 +207,24 @@ ViewPager.OnPageChangeListener viewListener = new ViewPager.OnPageChangeListener
         }
     }
     public void sendNotification(View view) {
-        NotificationCompat.Builder mBuilder =
-                new NotificationCompat.Builder(this);
+//        NotificationCompat.Builder mBuilder =
+//                new NotificationCompat.Builder(this);
 
         Intent intent = new Intent(getApplicationContext(),LoginActivity.class);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
-
-
-        mBuilder.setContentIntent(pendingIntent);
-
-        mBuilder.setSmallIcon(R.mipmap.ic_launcher_new);
-        mBuilder.setContentTitle("Klik Sembuh");
-        mBuilder.setContentText("Selamat anda telah bergabung dengan kami.");
-
-        NotificationManager mNotificationManager =
-
-                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-
-        mNotificationManager.notify(001, mBuilder.build());
+//        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
+//
+//
+//        mBuilder.setContentIntent(pendingIntent);
+//
+//        mBuilder.setSmallIcon(R.mipmap.ic_launcher_new);
+//        mBuilder.setContentTitle("Klik Sembuh");
+//        mBuilder.setContentText("Selamat anda telah bergabung dengan kami.");
+//
+//        NotificationManager mNotificationManager =
+//
+//                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+//
+//        mNotificationManager.notify(001, mBuilder.build());
         startActivity(intent);
         finish();
 

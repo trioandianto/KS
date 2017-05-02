@@ -37,6 +37,7 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 
 import javax.net.ssl.HttpsURLConnection;
 
@@ -57,6 +58,7 @@ public class HospitalList extends AppCompatActivity {
     private Drawable drawableHospital[];
     private String userID;
     private String alamat[];
+    private String finalListHospital;
 
     RatingBar rb;
 
@@ -87,8 +89,6 @@ public class HospitalList extends AppCompatActivity {
         newToolbar.setTitle(subDistricDescription);
         setSupportActionBar(newToolbar);
         getWindow().setStatusBarColor(ContextCompat.getColor(HospitalList.this, R.color.colorPrimaryDark));
-        TextView newTextView = (TextView)findViewById(R.id.tvhospitalList);
-        newTextView.setText("Menampilkan 100 instansi kesehatan di "+subDistricDescription+" yang menyediakan Dokter "+facilityName+".");
 
         lvHospital = (ListView)findViewById(R.id.listview_hospital);
         btnpeta = (Button)findViewById(R.id.btnpeta);
@@ -285,12 +285,30 @@ public class HospitalList extends AppCompatActivity {
                         String addres = jsonObject.getString("InstitutionAddress");
                         alamat[i] = addres;
 
+                        String phNumber = jsonObject.getString("InstitutionPhoneNbr");
+                        //phoneNbr[i] = phNumber;
+
+                        String cpblDesc = jsonObject.getString("Capabilities");
+
+                        for (int j = 0; j < cpblDesc.length(); j++) {
+
+                            JSONObject jsonObject2 = jsonArray.getJSONObject(j);
+                            String capabilDesc = jsonObject.getString("CapabilitiesDesc");
+                        }
+
                         Drawable photo = LoadImageFromWebOperations(image);
                         if(drawableHospital.length <= 0){
-                            mHospitalList.add(new Hospital(id, null, name, addres));
-                        }else{
-                            mHospitalList.add(new Hospital(id, drawableHospital[i], name, addres));
+                            mHospitalList.add(new Hospital(id, null, name, addres, phNumber, cpblDesc));
                         }
+                        else
+                        {
+                            mHospitalList.add(new Hospital(id, drawableHospital[i], name, addres, phNumber, cpblDesc));
+                        }
+
+
+                        finalListHospital = String.valueOf(mHospitalList.size());
+                        TextView newTextView = (TextView)findViewById(R.id.tvhospitalList);
+                        newTextView.setText("Menampilkan "+finalListHospital+" instansi kesehatan di "+subDistricDescription+" yang menyediakan Dokter "+facilityName+".");
 
                         hAdapter = new HospitalListAdapter(getApplicationContext(), mHospitalList);
 

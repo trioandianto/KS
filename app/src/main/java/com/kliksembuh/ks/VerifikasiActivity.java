@@ -155,7 +155,7 @@ public class VerifikasiActivity extends AppCompatActivity {
             NetworkInfo netInfo = cm.getActiveNetworkInfo();
             if (netInfo != null && netInfo.isConnected()) {
                 try{
-                    URL url = new URL("http://basajans/klikSembuhAPI/api/activationcodes/CodeValidation");
+                    URL url = new URL("http://192.168.1.6/klikSembuhAPI/api/activationcodes/CodeValidation");
                     HttpURLConnection urlc = (HttpURLConnection) url.openConnection();
                     JSONObject jsonObject = new JSONObject();
                     jsonObject.put("UserID",userID);
@@ -279,7 +279,7 @@ public class VerifikasiActivity extends AppCompatActivity {
             NetworkInfo netInfo = cm.getActiveNetworkInfo();
             if (netInfo != null && netInfo.isConnected()) {
                 try {
-                    URL url = new URL("http://basajans/KlikSembuhAPI/api/users/GetNewActivationCode/"+userID);
+                    URL url = new URL("http://192.168.1.6/KlikSembuhAPI/api/users/GetNewActivationCode/"+userID);
                     HttpURLConnection urlc = (HttpURLConnection) url.openConnection();
                     urlc.setConnectTimeout(3000);
                     urlc.connect();

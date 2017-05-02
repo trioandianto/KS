@@ -41,6 +41,8 @@ public class HomeActivity extends AppCompatActivity
     private int positionTab = 0;
     private String tab;
     private String userID;
+    private String firstName;
+    private String lastName;
     private String facilityID;
     private String facilityName;
     private String locationName;
@@ -67,6 +69,8 @@ public class HomeActivity extends AppCompatActivity
 //        userID = "93c9e1c3-2c89-40b2-a06f-fae904a64488";
         if(b != null) {
             userID = b.getString("userID");
+            firstName = b.getString("firstName");
+            lastName = b.getString("lastName");
             facilityID = b.getString("facilityID");
             facilityName = b.getString("facilityName");
             locationID = b.getString("SubDistrictCD");
@@ -102,6 +106,12 @@ public class HomeActivity extends AppCompatActivity
         toggle.syncState();
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        View navHeader = navigationView.getHeaderView(0);
+        TextView tvFirstName = (TextView) navHeader.findViewById(R.id.tvProfile_FName);
+        tvFirstName.setText(firstName);
+        TextView tvLastName = (TextView) navHeader.findViewById(R.id.tvProfile_LName);
+        tvLastName.setText(lastName);
+
     }
 
     @Override

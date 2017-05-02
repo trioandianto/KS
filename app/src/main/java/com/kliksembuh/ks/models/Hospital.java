@@ -10,16 +10,19 @@ public class Hospital {
     private Drawable hospital_pic_id;
     private String name;
     private String address;
+    private String phoneNbr;
+    private String capabilitiesDesc;
 
     // Constructor
 
-    public Hospital(String id, Drawable hospital_pic_id, String name, String address) {
+    public Hospital(String id, Drawable hospital_pic_id, String name, String address, String phoneNbr, String capabilitiesDesc) {
         this.id = id;
         this.hospital_pic_id = hospital_pic_id;
         this.name = name;
         this.address = address;
+        this.phoneNbr = phoneNbr;
+        this.capabilitiesDesc = capabilitiesDesc;
     }
-
 
     // Getter, setter
 
@@ -54,5 +57,22 @@ public class Hospital {
     public void setAddress(String address) {
         this.address = address;
     }
+
+    public String getPhoneNbr() {
+        return phoneNbr;
+    }
+
+    public void setPhoneNbr(String phoneNbr) {
+        this.phoneNbr = phoneNbr;
+    }
+
+    public String getCapabilitiesDesc() {
+        return capabilitiesDesc;
+    }
+
+    public void setCapabilitiesDesc(String capabilitiesDesc) {
+        this.capabilitiesDesc = capabilitiesDesc;
+    }
+
 
 }

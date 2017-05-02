@@ -72,7 +72,7 @@ public class MyAppointmentSuccessActivity extends Fragment implements ListView.O
         lvUpcoming = (ListView)rootView.findViewById(R.id.lvHistorySuccess);
         lvUpcoming.setOnItemClickListener(this);
         historyUpComingList = new ArrayList<>();
-        new HistoryAppoinmentSuccessAsync().execute();
+        new HistoryAppoinmentSuccessAsync(userID).execute();
         return rootView;
 
     }
@@ -104,10 +104,10 @@ public class MyAppointmentSuccessActivity extends Fragment implements ListView.O
     }
 
     public class HistoryAppoinmentSuccessAsync extends AsyncTask<String, Void, String> {
-        // private String mUserID;
-//        HistoryAppoinmentAsync(String userID) {
-//            mUserID = userID;
-//        }
+        private String mUserID;
+        HistoryAppoinmentSuccessAsync(String userID) {
+            mUserID = userID;
+        }
 
         @Override
         protected void onPreExecute() {
@@ -124,7 +124,7 @@ public class MyAppointmentSuccessActivity extends Fragment implements ListView.O
             NetworkInfo netInfo = cm.getActiveNetworkInfo();
             if (netInfo != null && netInfo.isConnected()) {
                 try{
-                    URL url = new URL("http://192.168.1.6/KlikSembuhAPI/api/Transactions/GetHistoryAppointment?UserID=6"+userID);
+                    URL url = new URL("http://192.168.1.6/KlikSembuhAPI/api/Transactions/GetHistoryAppointment?UserID="+userID);
                     HttpURLConnection urlc = (HttpURLConnection) url.openConnection();
                     urlc.setRequestProperty("Content-Type","application/json");
                     urlc.connect();

@@ -96,30 +96,30 @@ public class KonfirmasiJanjiActivity extends AppCompatActivity {
         tvNamaRumahSakit=(TextView)findViewById(R.id.tvnamaRumahSakit);
         tvNamaRumahSakit.setText(namaRumahSakit);
         btnBuatJanji = (Button)findViewById(R.id.btnbuatjanji);
-        editdokter = (ImageView)findViewById(R.id.iveditdokter);
-        editjadwal = (ImageView)findViewById(R.id.iveditjadwal);
-        editdokter.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent myIntent = new Intent(view.getContext(), TestScroolView.class);
-                startActivityForResult(myIntent, 0);
-            }
-        });
-        editjadwal.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent myIntent = new Intent(view.getContext(), BookingActivity.class);
-                startActivityForResult(myIntent, 0);
-            }
-        });
+//        editdokter = (ImageView)findViewById(R.id.iveditdokter);
+//        editjadwal = (ImageView)findViewById(R.id.iveditjadwal);
+//        editdokter.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent myIntent = new Intent(view.getContext(), TestScroolView.class);
+//                startActivityForResult(myIntent, 0);
+//            }
+//        });
+//        editjadwal.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent myIntent = new Intent(view.getContext(), BookingActivity.class);
+//                startActivityForResult(myIntent, 0);
+//            }
+//        });
 
         btnBuatJanji.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Intent myIntent = new Intent(view.getContext(), MyAppointmentActivity.class);
-//                startActivityForResult(myIntent, 0);
                 new KonfirmasiJanjiTask(userID,customerID,facilityCategoryID,facilityID,status,institutionID,
                         date,weekProgramID,dayProgramID,dayProgramDetailID,personnelID).execute();
+//                Intent myIntent = new Intent(view.getContext(), MyAppointmentActivity.class);
+//                startActivityForResult(myIntent, 0);
             }
         });
     }
@@ -149,8 +149,6 @@ public class KonfirmasiJanjiActivity extends AppCompatActivity {
             this.mDayProgramID = dayProgramID;
             this.mDayProgramDetailID = dayProgramDetailID;
             this.mPersonnelID = personnelID;
-
-
         }
 
 
@@ -160,7 +158,7 @@ public class KonfirmasiJanjiActivity extends AppCompatActivity {
             NetworkInfo netInfo = cm.getActiveNetworkInfo();
             if (netInfo != null && netInfo.isConnected()) {
                 try{
-                    URL url = new URL("http://basajans/KlikSembuhapi/api/transactions/PostAppointmentTransaction");
+                    URL url = new URL("http://192.168.1.6/KlikSembuhapi/api/transactions/PostAppointmentTransaction");
                     HttpURLConnection urlc = (HttpURLConnection) url.openConnection();
                     JSONObject jsonObject = new JSONObject();
                     jsonObject.put("FacilityCategoryID",mFacilityCategoryID);
@@ -230,12 +228,13 @@ public class KonfirmasiJanjiActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(final String success) {
             if (success!="") {
-                Intent i = new Intent(getApplicationContext(), MyAppointmentActivity.class);
-                Bundle b = new Bundle();
-                b.putString("userID", userID);
-                startActivityForResult(i, 1);
+                Intent intent = new Intent(getApplicationContext(), MyAppointmentActivity.class);
+                intent.putExtra("userID",userID);
+//                Bundle b = new Bundle();
+//                b.putString("userID", userID);
+//                startActivityForResult(i, 1);
+                startActivity(intent);
                 finish();
-
 
             } else {
                 //:TODO

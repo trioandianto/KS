@@ -7,8 +7,12 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -24,8 +28,8 @@ public class TabSpesialisasiActivity extends Fragment implements View.OnClickLis
     private String locasi;
     private String spesialID;
     private String lokasiID;
-    private AutoCompleteTextView location;
-    private AutoCompleteTextView spesialize;
+    private TextView location;
+    private TextView spesialize;
     View focusView = null;
 
     public String getSpesial() {
@@ -65,10 +69,10 @@ public class TabSpesialisasiActivity extends Fragment implements View.OnClickLis
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle saveInstanceState){
         View rootView = inflater.inflate(R.layout.activity_tab_spesialis, container, false);
-        location = (AutoCompleteTextView)rootView.findViewById(R.id.tvsearchlocationspesialis) ;
+        location = (TextView) rootView.findViewById(R.id.tvsearchlocationspesialis) ;
         location.setOnClickListener(this);
         location.setText(locasi);
-        spesialize = (AutoCompleteTextView) rootView.findViewById(R.id.tvspesi);
+        spesialize = (TextView) rootView.findViewById(R.id.tvspesi);
         spesialize.setOnClickListener(this);
         spesialize.setText(spesial);
 
@@ -101,6 +105,9 @@ public class TabSpesialisasiActivity extends Fragment implements View.OnClickLis
     public void onClick(View v) {
         int i = v.getId();
         if(i==R.id.tvsearchlocationspesialis){
+//            InputMethodManager inputManager = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+//            inputManager.hideSoftInputFromWindow(v.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+
             Intent myIntent = new Intent(getActivity(),SearchLocationActivity.class);
             Bundle b = new Bundle();
             b.putString("userID", userID);
@@ -137,6 +144,9 @@ public class TabSpesialisasiActivity extends Fragment implements View.OnClickLis
 
         }
         else if (i==R.id.tvspesi){
+//            InputMethodManager inputManager = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+//            inputManager.hideSoftInputFromWindow(v.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+//
             Intent myIntent = new Intent(getActivity(),SearchSpesializationActivity.class);
             Bundle b = new Bundle();
             b.putString("userID", userID);

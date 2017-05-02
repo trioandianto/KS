@@ -51,21 +51,6 @@
         android:textSize="14dp" />
 
     <TextView
-        android:id="@+id/tvLihatKonfirmasi"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tv_specialty_list"
-        android:layout_marginTop="18dp"
-        android:layout_marginLeft="10dp"
-        android:layout_toEndOf="@+id/iv_doc_pic_list"
-        android:layout_toRightOf="@+id/iv_doc_pic_list"
-        android:text="Lihat Kualifikasi"
-        android:background="#e3e3e3"
-        android:padding="4dp"
-        android:textColor="@color/com_facebook_button_background_color"
-        android:textSize="12dp" />
-
-    <TextView
         android:id="@+id/tvAppointmentNow"
         android:layout_width="75dp"
         android:layout_height="24dp"
@@ -75,25 +60,11 @@
         android:layout_alignTop="@+id/tv_specialty_list"
         android:layout_marginTop="22dp"
         android:layout_marginRight="8dp"
-        android:layout_alignStart="@+id/tvAvailableStatus"
         android:padding="4dp"
         android:gravity="center"
         android:background="#7057ff"
         android:layout_alignParentRight="true"
         android:textSize="14dp" />
-
-    <TextView
-        android:id="@+id/tvAvailableStatus"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="8dp"
-        android:padding="2dp"
-        android:text="AVAILABLE TODAY"
-        android:textColor="@color/green"
-        android:textAllCaps="false"
-        android:layout_alignParentRight="true"
-        android:layout_alignBaseline="@+id/tv_specialty_list"
-        android:textSize="12dp"/>
 
     <ImageView
         android:id="@+id/iv_doc_pic_list"

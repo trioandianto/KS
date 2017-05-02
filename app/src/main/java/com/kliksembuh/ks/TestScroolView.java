@@ -7,6 +7,7 @@ import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -63,6 +64,7 @@ public class TestScroolView extends AppCompatActivity{
     private LinearLayout dotsLayout;
     private TextView[] dots;
     private List<Doctor> mDokterList;
+    private List specialtyString;
     List<String> list;
     private ViewPagerAdapter viewPagerAdapter;
     private CollapsingToolbarLayout collapsingToolbarLayout;
@@ -110,6 +112,7 @@ public class TestScroolView extends AppCompatActivity{
         }
         setContentView(R.layout.activity_test_scrool_view);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Spinner spnSpecialty = (Spinner) findViewById(R.id.spn_SpecialtyDoc);
         setSupportActionBar(toolbar);
 
         toolbar.setTitle(toolbarTitle);
@@ -121,13 +124,14 @@ public class TestScroolView extends AppCompatActivity{
 //        nsDokter = (NestedScrollView)findViewById(R.id.nsDokter);
 //        nsDokter.setFillViewport(true);
 //        nsDokter.setClickable(true);
+
         lvDokter = (ListView)findViewById(R.id.lvDetailRumahSakit);
 //        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
 //            lvDokter.setNestedScrollingEnabled(true);
 //        }
 //        lvDokter.setNestedScrollingEnabled(true);
 
-        //lvDokter.setNestedScrollingEnabled(true);
+        lvDokter.setNestedScrollingEnabled(true);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(TestScroolView.this,
                 android.R.layout.simple_spinner_item,paths);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -480,7 +484,8 @@ public class TestScroolView extends AppCompatActivity{
                             praktekDokter = new String[jsonArray1.length()];
                             JSONObject jsonObject1 = jsonArray1.getJSONObject(j);
                             praktekDokter[j] = jsonObject1.getString("InstitutionName");
-
+                            TextView tvNameHosp = (TextView)findViewById(R.id.tvHospitalName);
+                            tvNameHosp.setText(jsonObject1.getString("InstitutionName"));
                         }
                         if(drawableDokter.length <= 0){
                             mDokterList.add(new Doctor(id, null, name, alamat));
@@ -488,6 +493,7 @@ public class TestScroolView extends AppCompatActivity{
                         }else{
                             mDokterList.add(new Doctor(id, drawableDokter[i], name, alamat));
                         }
+
                         dAdapter = new DoctorListAdapter(getApplicationContext(), mDokterList);
                         lvDokter.setAdapter(dAdapter);
                     }

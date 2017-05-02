@@ -12,6 +12,8 @@ import android.widget.TextView;
 import com.kliksembuh.ks.R;
 import com.kliksembuh.ks.models.Hospital;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -54,10 +56,26 @@ public class HospitalListAdapter<T> extends BaseAdapter implements Filterable {
         ImageView imgView = (ImageView)newView.findViewById(R.id.iv_hospital_pic);
         TextView tvName = (TextView)newView.findViewById(R.id.tv_name);
         TextView tvAddress = (TextView)newView.findViewById(R.id.tv_address);
+        TextView tvPhoneNbr = (TextView) newView.findViewById(R.id.tv_phone);
+        // Text view for capabilities (on Backend there is no IGD, but BPJS)
+        TextView tvIGD = (TextView) newView.findViewById(R.id.tv_IGD);
+        TextView tv24hour = (TextView) newView.findViewById(R.id.tv_24hours);
+
 
         imgView.setImageDrawable(mHospitalList.get(position).getHospital_pic_id());
         tvName.setText(mHospitalList.get(position).getName());
         tvAddress.setText(mHospitalList.get(position).getAddress());
+        tvPhoneNbr.setText(mHospitalList.get(position).getPhoneNbr());
+        String getCapabilitiesID = mHospitalList.get(position).getCapabilitiesDesc();
+
+        if(getCapabilitiesID == String.valueOf(1)){
+            tv24hour.setText("24");
+        }
+        else if (getCapabilitiesID == String.valueOf(2)){
+            tvIGD.setText("BPJS");
+        }
+
+
 
 
         // Save hospital id to tag

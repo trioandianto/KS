@@ -45,7 +45,8 @@
                 style="@style/MyCustomTextAppearance"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
-                android:gravity="center"
+                android:gravity="center_vertical"
+                android:drawablePadding="18dp"
                 android:padding="8dp"
                 android:inputType=""
                 android:maxLines="1"
@@ -55,18 +56,19 @@
                 />
 
             <Button
+                android:id="@+id/btnsort"
                 android:layout_width="match_parent"
                 android:layout_toRightOf="@id/btnpeta"
                 android:text="Urutkan Berdasarkan"
                 android:drawableLeft="@drawable/ic_sorting_black_24dp"
                 android:drawableStart="@drawable/ic_sorting_black_24dp"
+                android:drawablePadding="18dp"
                 android:gravity="center_vertical"
                 android:layout_marginLeft="1.5dp"
                 android:textAllCaps="false"
                 style="@style/MyCustomTextAppearance"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
-                android:id="@+id/btnsort"
                 android:padding="8dp"
                 android:inputType=""
                 android:maxLines="1"
@@ -105,8 +107,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginBottom="10dp"
-                android:textAlignment="gravity"
-                android:text="@string/title_activity_filter_hospitallist"/>
+                android:textAlignment="gravity"/>
         </LinearLayout>
 
         <ListView

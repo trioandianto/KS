@@ -88,7 +88,7 @@ public class MyAppointmentUpComingActivity extends Fragment implements ListView.
         lvUpcoming = (ListView)rootView.findViewById(R.id.lvHistoryUpComing);
         lvUpcoming.setOnItemClickListener(this);
         historyUpComingList = new ArrayList<>();
-        new HistoryAppoinmentUpComingAsync().execute();
+        new HistoryAppoinmentUpComingAsync(userID).execute();
 
 //        imageId = imgIdHosp[1];
 //        Drawable drawHistDoc = getResources().getDrawable(imageId);
@@ -130,10 +130,10 @@ public class MyAppointmentUpComingActivity extends Fragment implements ListView.
     }
 
     public class HistoryAppoinmentUpComingAsync extends AsyncTask<String, Void, String> {
-        // private String mUserID;
-//        HistoryAppoinmentAsync(String userID) {
-//            mUserID = userID;
-//        }
+        private String mUserID;
+        HistoryAppoinmentUpComingAsync(String userID) {
+            mUserID = userID;
+        }
 
         @Override
         protected void onPreExecute() {
@@ -243,7 +243,7 @@ public class MyAppointmentUpComingActivity extends Fragment implements ListView.
                         String trxIDHistory = jsonObject.getString("TransactionID");
                         String doctorName = jsonObject.getString("MedicalPersonName");
                         String hospitalName =  jsonObject.getString("InstitutionName");
-                        String createdOn = jsonObject.getString("ScheduleDate");
+                        String createdOn = jsonObject.getString("CreatedDate");
                         String trxNoAppointment = jsonObject.getString("TransactionID");
                         String specialtyDoc = jsonObject.getString("FacilityDesc");
                         String statusID = jsonObject.getString("Status");

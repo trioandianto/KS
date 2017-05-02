@@ -19,40 +19,74 @@
             android:layout_height="?actionBarSize">
         </android.support.v7.widget.Toolbar>
     </android.support.design.widget.AppBarLayout>
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:id="@+id/tab"
-        android:layout_margin="5dp"
+        android:layout_margin="1dp"
         android:layout_below="@+id/appbar"
-        android:padding="5dp"
+        android:padding="1dp"
         android:background="@color/bluegrayopacity"
         android:orientation="horizontal"
         android:weightSum="1">
         <Button
-            android:layout_width="150dp"
+            android:layout_width="160dp"
             android:text="List"
             style="@style/MyCustomTextAppearance"
             android:id="@+id/btnlist"
             android:drawableLeft="@drawable/ic_view_list_black_24dp"
+            android:drawableStart="@drawable/ic_view_list_black_24dp"
+            android:textAllCaps="false"
             android:layout_height="wrap_content"
-            android:background="@color/white"/>
+            android:background="@color/white"
+            android:gravity="center_vertical"
+            android:drawablePadding="18dp"
+            android:padding="8dp"
+            android:inputType=""
+            android:maxLines="1"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:singleLine="true"/>
 
         <Button
+            android:id="@+id/btnfilter"
             android:layout_width="match_parent"
-            android:text="Filter"
+            android:text="Urutkan Berdasarkan"
             android:layout_marginLeft="2dp"
+            android:textAllCaps="false"
+            android:layout_toRightOf="@id/btnlist"
             android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/ic_local_bar_black_24dp"
+            android:drawableLeft="@drawable/ic_sorting_black_24dp"
+            android:drawableStart="@drawable/ic_sorting_black_24dp"
+            android:drawablePadding="18dp"
             style="@style/MyCustomTextAppearance"
             android:background="@color/white"
-            android:id="@+id/btnfilter"/>
+            android:padding="8dp"
+            android:inputType=""
+            android:maxLines="1"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:singleLine="true"/>
 
-    </LinearLayout>
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/rel_ListMap"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tab">
+        <View
+            android:id="@+id/line_pink"
+            android:layout_marginTop="0dp"
+            android:layout_width="match_parent"
+            android:layout_height="2sp"
+            android:background="@drawable/line_color"
+            />
+
+    </RelativeLayout>
 
     <fragment xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/map"
-        android:layout_below="@id/tab"
+        android:layout_below="@id/rel_ListMap"
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"></fragment>

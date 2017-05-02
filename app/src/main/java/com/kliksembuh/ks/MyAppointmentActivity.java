@@ -23,6 +23,7 @@ public class MyAppointmentActivity extends AppCompatActivity {
             userID = b.getString("userID");
         }
 
+
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
         mViewPager = (ViewPager) findViewById(R.id.containermyappointe);
@@ -83,13 +84,13 @@ public class MyAppointmentActivity extends AppCompatActivity {
         public CharSequence getPageTitle(int position) {
             switch (position) {
                 case 0:
-                    return "Pending";
+                    return "Menunggu Konfirmasi";
                 case 1:
-                    return "Confirmed";
+                    return "Dikonfirmasi";
                 case 2:
-                    return "Success";
+                    return "Selesai";
                 case 3:
-                    return "Semua Trx";
+                    return "Semua Transaksi";
             }
             return null;
         }

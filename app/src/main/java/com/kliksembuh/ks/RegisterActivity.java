@@ -197,7 +197,7 @@ public class RegisterActivity extends AppCompatActivity {
             focusView = mNoHp;
             cancel = true;
         }
-        else if (TextUtils.isEmpty(password) && !isPasswordValid(password)) {
+        else if (!TextUtils.isEmpty(password) && !isPasswordValid(password)) {
             mPasswordView.setError(getString(R.string.error_invalid_password));
             focusView = mPasswordView;
             cancel = true;
@@ -233,7 +233,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     private boolean isPasswordValid(String password) {
         //TODO: Replace this with your own logic
-        return password.length() >= 8;
+        return password.length() > 7;
     }
     public class UserRegisterTask extends AsyncTask<String, Void, String> {
         private String mFirstName;

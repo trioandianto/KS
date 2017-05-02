@@ -508,7 +508,7 @@ public class LoginActivity extends BaseActivity implements LoaderCallbacks<Curso
 
     private boolean isPasswordValid(String password) {
         //TODO: Replace this with your own logic
-        return password.length() > 4;
+        return password.length() > 7;
     }
 
     /**
@@ -732,10 +732,14 @@ public class LoginActivity extends BaseActivity implements LoaderCallbacks<Curso
                 JSONObject jsonObj = new JSONObject(success);
                 JSONObject jsd = jsonObj.getJSONObject("Result");
                 String userID = jsd.getString("Id");
+                String firstName = jsd.getString("FirstName");
+                String lastName = jsd.getString("LastName");
 
                 Intent i = new Intent(getApplicationContext(), HomeActivity.class);
                 Bundle b = new Bundle();
                 b.putString("userID", userID); //Your id
+                b.putString("firstName", firstName);
+                b.putString("lastName", lastName);
                 //.putExtra("userID",userID);
                 i.putExtras(b);
                 startActivity(i);

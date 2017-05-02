@@ -76,7 +76,7 @@ public class MyAppointmentHistoryActivity extends Fragment implements ListView.O
         lvUpcoming = (ListView)rootView.findViewById(R.id.lvHistoryCompleted);
         lvUpcoming.setOnItemClickListener(this);
         historyUpComingList = new ArrayList<>();
-        new HistoryAppoinmentAsync().execute();
+        new HistoryAppoinmentAsync(userID).execute();
         return rootView;
     }
 
@@ -108,10 +108,10 @@ public class MyAppointmentHistoryActivity extends Fragment implements ListView.O
     }
 
     public class HistoryAppoinmentAsync extends AsyncTask<String, Void, String> {
-        // private String mUserID;
-//        HistoryAppoinmentAsync(String userID) {
-//            mUserID = userID;
-//        }
+         private String mUserID;
+        HistoryAppoinmentAsync(String userID) {
+            mUserID = userID;
+        }
 
         @Override
         protected void onPreExecute() {

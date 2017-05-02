@@ -86,7 +86,6 @@
                     android:layout_height="wrap_content"
                     android:layout_toRightOf="@+id/ivHospitalIcon"
                     android:padding="1dp"
-                    android:text="RS PMI Bogor"
                     android:layout_marginTop="5dp"
                     android:layout_marginLeft="5dp"
                     style="@style/MyCustomTextAppearance"
@@ -138,7 +137,6 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="4dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:background="@color/white"
@@ -163,7 +161,7 @@
                     android:layout_below="@id/tv_Layanan"
                     android:gravity="center"
                     android:text="Layanan"
-                    android:textColor="@color/black"
+                    android:textColor="@color/grey_light"
                     android:textSize="14sp"/>
                 <View
                     android:id="@+id/line_Layanan"
@@ -197,7 +195,7 @@
                     android:layout_toRightOf="@+id/line_Layanan"
                     android:gravity="center"
                     android:text="Penilaian"
-                    android:textColor="@color/black"
+                    android:textColor="@color/grey_light"
                     android:textSize="14sp"/>
                 <View
                     android:id="@+id/line_Rekanan"
@@ -232,14 +230,14 @@
                     android:layout_toRightOf="@+id/line_Rekanan"
                     android:gravity="center"
                     android:text="Rekanan Asuransi"
-                    android:textColor="@color/black"
+                    android:textColor="@color/grey_light"
                     android:textSize="14sp"/>
 
             </RelativeLayout>
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="2dp"
                 android:layout_marginBottom="4dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
@@ -255,7 +253,7 @@
                     android:drawableLeft="@drawable/ic_wifi_black_24dp"
                     android:text="Fasilitas"
                     android:textSize="13dp"
-                    android:textColor="@color/black"/>
+                    android:textColor="@color/grey_light"/>
                 <View
                     android:id="@+id/line_Fasilitas"
                     android:layout_width="1dp"
@@ -279,7 +277,7 @@
                     android:layout_toRightOf="@+id/line_Fasilitas"
                     android:text="List Kamar"
                     android:textSize="13dp"
-                    android:textColor="@color/black"/>
+                    android:textColor="@color/grey_light"/>
                 <View
                     android:id="@+id/line_Promosi"
                     android:layout_width="1dp"
@@ -303,7 +301,7 @@
                     android:layout_toRightOf="@+id/line_Promosi"
                     android:text="Promosi"
                     android:textSize="13dp"
-                    android:textColor="@color/black"/>
+                    android:textColor="@color/grey_light"/>
             </RelativeLayout>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -324,7 +322,7 @@
                         android:drawableLeft="@drawable/ic_favorite_24dp"
                         android:text="Suka"
                         android:textSize="13dp"
-                        android:textColor="@color/black"
+                        android:textColor="#5C5C5C"
                         android:layout_alignParentTop="true"
                         android:layout_alignParentStart="true" />
                     <TextView
@@ -336,7 +334,7 @@
                         android:layout_toRightOf="@id/lbl_Liked"
                         android:text="50"
                         android:textSize="13dp"
-                        android:textColor="@color/black"/>
+                        android:textColor="@color/grey_light"/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -353,7 +351,7 @@
                         android:drawableLeft="@drawable/ic_chat_black_24dp"
                         android:text="Kirim Pesan"
                         android:textSize="13dp"
-                        android:textColor="@color/black"
+                        android:textColor="@color/grey_light"
                         android:layout_alignParentTop="true"
                         android:layout_alignParentStart="true" />
                 </LinearLayout>
@@ -370,13 +368,63 @@
                         android:padding="8dp"
                         android:drawablePadding="6dp"
                         android:drawableLeft="@drawable/ic_share_black_24dp"
-                        android:text="Kirim Pesan"
+                        android:text="Bagikan"
                         android:textSize="13dp"
-                        android:textColor="@color/black"
+                        android:textColor="@color/grey_light"
                         android:layout_alignParentTop="true"
                         android:layout_alignParentStart="true" />
                 </LinearLayout>
 
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="#d4157e">
+                <LinearLayout
+                    android:layout_width="170dp"
+                    android:layout_height="wrap_content"
+                    android:background="#eb2698"
+                    android:layout_gravity="center"
+                    android:padding="6dp">
+                    <Spinner
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/spn_SpecialtyDoc"
+                        android:gravity="center"
+                        android:textSize="13dp"
+                        android:textColor="@color/white"
+                        android:spinnerMode="dropdown"
+                        android:entries="@array/specialty_name"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentStart="true" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:padding="6dp"
+                    android:gravity="center"
+                    android:background="@drawable/customborder">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/tv_FilterDoc"
+                        android:text="Urutkan Berdasarkan"
+                        android:drawablePadding="8dp"
+                        android:drawableLeft="@drawable/ic_sort_black_16dp"
+                        android:drawableStart="@drawable/ic_sort_black_16dp"
+                        android:gravity="center_vertical"
+                        android:textAllCaps="false"
+                        style="@style/MyCustomTextAppearance"
+                        android:background="#eb2698"
+                        android:padding="8dp"
+                        android:inputType=""
+                        android:maxLines="1"
+                        android:textSize="13dp"
+                        android:textColor="@color/white"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentStart="true" />
+                </LinearLayout>
             </LinearLayout>
 
             <ListView

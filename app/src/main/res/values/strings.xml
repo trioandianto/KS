@@ -1,13 +1,13 @@
 <resources>
     <string name="app_name">Klik Sembuh</string>
-    <string name="action_settings">Settings</string>
+    <string name="action_settings">Pengaturan</string>
     <string name="title_activity_term_and_policy">Syarat dan Ketentuan</string>
     <string name="title_activity_login">Login</string>
     <string name="apicloud">http://cloud.basajans.com:8868/BS.HealthCare.Application</string>
     <string name="apibasajans">http://basajans/klikkembuhapi</string>
-    <string name="title_activity_register">Sign Up</string>
-    <string name="title_activity_forgot_password">Forgot Password</string>
-    <string name="title_activity_verification">Verification</string>
+    <string name="title_activity_register">Daftar Baru</string>
+    <string name="title_activity_forgot_password">Lupa Password</string>
+    <string name="title_activity_verification">Verifikasi</string>
     <string name="title_activity_hospitallist">Sabtu, 10 Desember 2016</string>
     <string name="title_activity_reset_passwoord" translatable="false">Reset Password</string>
 
@@ -36,7 +36,7 @@ DAN KEBIJAKAN PRIVASI KAMI DENGAN SEKSAMA SEBELUM MENGUNDUH APLIKASI ATAU
 MENGGUNAKAN LAYANAN KAMI UNTUK PERTAMA KALI.</string>
     <string name="prompt_password">Password</string>
     <string name="forgot_password_text"><u>Lupa Password?</u></string>
-    <string name="confirm_password">Confirm Password</string>
+    <string name="confirm_password">Konfirmasi Password</string>
     <string name="first_name">Nama Depan</string>
     <string name="promo">Kirimkan Saya Penawaran dan Promo</string>
     <string name="last_name">Nama Belakang</string>
@@ -47,7 +47,7 @@ MENGGUNAKAN LAYANAN KAMI UNTUK PERTAMA KALI.</string>
     <string name="action_create_account">Buat Akun</string>
     <string name="action_search">Search</string>
     <string name="action_favorite">Favorite</string>
-    <string name="action_myappointment">My Appointment</string>
+    <string name="action_myappointment">History Buat Janji</string>
     <string name="action_sign_in_facebook">Log In with Facebook</string>
     <string name="action_already_login">Sudah punya akun? Login</string>
     <string name="action_sign_in_google">Log In with Google+</string>
@@ -91,7 +91,11 @@ MENGGUNAKAN LAYANAN KAMI UNTUK PERTAMA KALI.</string>
     <string name="error_invalid_confirm_password">Konfirmasi password tidak sama</string>
     <string name="error_invalid_confirm_password_not_null">Tidak boleh kosong</string>
     <string name="error_invalid_nohp">Tidak boleh kosong</string>
-    <string name="error_active_code">Minimal 10 angka</string>
+    <string name="error_active_code">Minimal 4 angka</string>
+
+    <string-array name="specialty_name">
+        <item>Dokter Umum</item>
+    </string-array>
 
     <string-array name="day_name">
         <item>Senin</item>
@@ -126,7 +130,6 @@ MENGGUNAKAN LAYANAN KAMI UNTUK PERTAMA KALI.</string>
     the big cheese.</string>
     <string name="checkin">Checkin</string>
     <string name="title_activity_list_map">Dokter Umum di Bogor Utara</string>
-    <string name="title_activity_filter_hospitallist">Menampilkan 100 instansi kesehatan di Bogor Utara yang menyediakan Dokter Umum.</string>
     <string name="simpan">Simpan</string>
     <string name="namadepan">Nama Depan</string>
     <string name="namabelakang">Nama Belakang</string>
@@ -141,6 +144,9 @@ MENGGUNAKAN LAYANAN KAMI UNTUK PERTAMA KALI.</string>
     <string name="error_active_code_expiret">kode verifikasi tidak berlaku</string>
     <string name="error_active_code_kirim">kode sudah tidak berlaku</string>
     <string name="loading">Loading…</string>
+
+    <!-- Strings related to Booking Activity -->
+    <string name="ketentuan_booking">Silahkan pilih hari, tanggal, dan waktu yang anda inginkan untuk melakukan appointment.</string>
 
     <!-- Strings related to Setting Profile Nav -->
     <string name="email_nkontak">Email &amp; Kontak</string>
