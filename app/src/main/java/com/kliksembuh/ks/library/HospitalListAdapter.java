@@ -68,6 +68,16 @@ public class HospitalListAdapter<T> extends BaseAdapter implements Filterable {
         tvPhoneNbr.setText(mHospitalList.get(position).getPhoneNbr());
         String getCapabilitiesID = mHospitalList.get(position).getCapabilitiesDesc();
 
+        if(getCapabilitiesID == String.valueOf(1)){
+            tv24hour.setText("24");
+        }
+        if(getCapabilitiesID == String.valueOf(2)){
+            tvIGD.setText("BPJS");
+        }
+
+
+
+
         // Save hospital id to tag
         newView.setTag(mHospitalList.get(position).getId());
 
