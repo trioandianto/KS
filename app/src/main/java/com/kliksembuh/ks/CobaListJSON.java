@@ -139,13 +139,13 @@ public class CobaListJSON extends AppCompatActivity {
             /**
              * Updating parsed JSON data into ListView
              * */
-            ListAdapter adapter = new SimpleAdapter(
-                    CobaListJSON.this, contactList,
-                    R.layout.list_item, new String[]{"name", "email",
-                    "mobile"}, new int[]{R.id.name,
-                    R.id.email, R.id.mobile});
-
-            lv.setAdapter(adapter);
+//            ListAdapter adapter = new SimpleAdapter(
+//                    CobaListJSON.this, contactList,
+//                    R.layout.list_item, new String[]{"name", "email",
+//                    "mobile"}, new int[]{R.id.name,
+//                    R.id.email, R.id.mobile});
+//
+//            lv.setAdapter(adapter);
         }
 
     }

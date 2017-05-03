@@ -84,9 +84,7 @@ public class TabSpesialisasiActivity extends Fragment implements View.OnClickLis
 
         return rootView;
     }
-    public void cliked(View v){
 
-    }
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

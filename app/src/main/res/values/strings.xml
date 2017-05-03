@@ -148,6 +148,10 @@ MENGGUNAKAN LAYANAN KAMI UNTUK PERTAMA KALI.</string>
     <!-- Strings related to Booking Activity -->
     <string name="ketentuan_booking">Silahkan pilih hari, tanggal, dan waktu yang anda inginkan untuk melakukan appointment.</string>
 
+    <!-- Strings related to Search Activity -->
+    <string name="search_hint">Cari lokasi klinik, rumah sakit terdekat Anda</string>
+    <string name="search_hint_spec">Cari dokter umum, dokter spesialis terdekat Anda</string>
+
     <!-- Strings related to Setting Profile Nav -->
     <string name="email_nkontak">Email &amp; Kontak</string>
     <string name="pengaturan_email">Pengaturan E-Mail &amp; Kontak</string>

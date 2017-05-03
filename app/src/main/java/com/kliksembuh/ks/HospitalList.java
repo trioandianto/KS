@@ -287,24 +287,36 @@ public class HospitalList extends AppCompatActivity {
 
                         String phNumber = jsonObject.getString("InstitutionPhoneNbr");
                         //phoneNbr[i] = phNumber;
+                        String cpblDesc = "";
+                        JSONArray jsonArray2 = jsonObject.getJSONArray("Capabilities");
+                        for (int j = 0 ; j < jsonArray2.length() ; j++){
+                            JSONObject objectInner = jsonArray2.getJSONObject(j);
+                            cpblDesc = objectInner.optString("CapabilitiesID");
 
-                        String cpblDesc = jsonObject.getString("Capabilities");
-
-                        for (int j = 0; j < cpblDesc.length(); j++) {
-
-                            JSONObject jsonObject2 = jsonArray.getJSONObject(j);
-                            String capabilDesc = jsonObject.getString("CapabilitiesDesc");
                         }
 
-                        Drawable photo = LoadImageFromWebOperations(image);
-                        if(drawableHospital.length <= 0){
-                            mHospitalList.add(new Hospital(id, null, name, addres, phNumber, cpblDesc));
+                        if(drawableHospital.length <= 0 && cpblDesc == ""){
+                            mHospitalList.add(new Hospital(id, null, name, addres, phNumber, null));
                         }
                         else
                         {
                             mHospitalList.add(new Hospital(id, drawableHospital[i], name, addres, phNumber, cpblDesc));
                         }
 
+
+                        //String cpblDesc = jsonObject.getString("Capabilities");
+                        // String getCapability= jsonObject.getJSONObject("Capabilities").getString("CapabilitiesID");
+//                        if(jsonObject.has("Capabilities")){
+//                            if(!jsonObject.isNull("Capabilities")){
+//                                JSONObject objCapabilites = jsonObject.getJSONObject("Capabilities");
+//                                JSONArray jsonArray2 = objCapabilites.getJSONArray("Capabilities");
+//                                for (int j = 0 ; j < jsonArray2.length() ; j++){
+//                                    JSONObject objectInner = jsonArray.getJSONObject(j);
+//                                    String cpblDesc = objectInner.optString("CapabilitiesID");
+//                                }
+//                            }
+//                        }
+                        Drawable photo = LoadImageFromWebOperations(image);
 
                         finalListHospital = String.valueOf(mHospitalList.size());
                         TextView newTextView = (TextView)findViewById(R.id.tvhospitalList);

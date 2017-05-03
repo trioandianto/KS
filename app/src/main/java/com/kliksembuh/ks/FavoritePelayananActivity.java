@@ -129,13 +129,13 @@ public class FavoritePelayananActivity extends Fragment {
             super.onPostExecute(result);
             if (pDialog.isShowing())
                 pDialog.dismiss();
-            ListAdapter adapter = new SimpleAdapter(
-                    getActivity(), contactList,
-                    R.layout.list_item, new String[]{"name", "email",
-                    "mobile"}, new int[]{R.id.name,
-                    R.id.email, R.id.mobile});
-
-            lv.setAdapter(adapter);
+//            ListAdapter adapter = new SimpleAdapter(
+//                    getActivity(), contactList,
+//                    R.layout.list_item, new String[]{"name", "email",
+//                    "mobile"}, new int[]{R.id.name,
+//                    R.id.email, R.id.mobile});
+//
+//            lv.setAdapter(adapter);
         }
     }
     public String loadJSONFromAsset() {

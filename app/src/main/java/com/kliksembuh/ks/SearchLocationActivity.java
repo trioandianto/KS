@@ -39,7 +39,7 @@ public class SearchLocationActivity extends AppCompatActivity implements ListVie
     private List<Location> mLocation;
     private SearchAdapter searchAdapter;
     private ProgressDialog pDialog;
-    private SearchView searchView;
+    private android.support.v7.widget.SearchView searchView;
     private ListView listItem;
     private String idLocation;
     private String nameLocation;
@@ -61,7 +61,14 @@ public class SearchLocationActivity extends AppCompatActivity implements ListVie
         }
 
         //location = (AutoCompleteTextView)findViewById(R.id.tvlocation);
-        searchView = (SearchView)findViewById(R.id.svLocation);
+        searchView = (android.support.v7.widget.SearchView)findViewById(R.id.svLocation);
+        searchView.onActionViewExpanded();
+        searchView.setIconifiedByDefault(true);
+        searchView.setFocusable(true);
+        searchView.setIconified(false);
+        searchView.setQueryHint("Cari lokasi klinik, rumah sakit terdekat Anda");
+        searchView.requestFocusFromTouch();
+
         mLocation = new ArrayList<>();
         listItem = (ListView) findViewById(R.id.listlocation);
         listItem.setTextFilterEnabled(true);
@@ -83,7 +90,7 @@ public class SearchLocationActivity extends AppCompatActivity implements ListVie
         // Getting JSON Array node
 
         new GetContacts().execute();
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+        searchView.setOnQueryTextListener(new android.support.v7.widget.SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 return false;

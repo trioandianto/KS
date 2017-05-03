@@ -37,7 +37,7 @@ public class SearchSpesializationActivity extends AppCompatActivity implements L
     private SearchSpesializationAdapter searchAdapter;
     private ProgressDialog pDialog;
     private ListView listItem;
-    private SearchView searchView;
+    private android.support.v7.widget.SearchView searchView;
     private String userID;
     private String locationID;
     private String locationName;
@@ -52,14 +52,21 @@ public class SearchSpesializationActivity extends AppCompatActivity implements L
             userID = b.getString("userID");
         }
 
-        searchView = (SearchView)findViewById(R.id.svSpesialization);
+        searchView = (android.support.v7.widget.SearchView)findViewById(R.id.svSpesialization);
+        searchView.onActionViewExpanded();
+        searchView.setIconifiedByDefault(true);
+        searchView.setFocusable(true);
+        searchView.setIconified(false);
+        searchView.setQueryHint("Cari dokter umum, dokter spesialis terdekat Anda");
+        searchView.requestFocusFromTouch();
+
         mSpesialize = new ArrayList<>();
         listItem = (ListView)findViewById(R.id.listSpesialization);
         listItem.setTextFilterEnabled(true);
         listItem.setOnItemClickListener(this);
 
         new SearchSpesializationTask().execute();
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+        searchView.setOnQueryTextListener(new android.support.v7.widget.SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 return false;
