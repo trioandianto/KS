@@ -36,6 +36,7 @@ import com.kliksembuh.ks.models.Doctor;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -83,7 +84,7 @@ public class TestScroolView extends AppCompatActivity{
     private NestedScrollView nsDokter;
     private Drawable drawableDokter[];
     private String [] praktekDokter;
-    private ImageView ivMaps;
+    private TextView ivMaps;
     private String alamat;
     // Slider for ViewPager
     int currentPage = 0;
@@ -112,7 +113,6 @@ public class TestScroolView extends AppCompatActivity{
         }
         setContentView(R.layout.activity_test_scrool_view);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        Spinner spnSpecialty = (Spinner) findViewById(R.id.spn_SpecialtyDoc);
         setSupportActionBar(toolbar);
 
         toolbar.setTitle(toolbarTitle);
@@ -135,7 +135,7 @@ public class TestScroolView extends AppCompatActivity{
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(TestScroolView.this,
                 android.R.layout.simple_spinner_item,paths);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        ivMaps = (ImageView)findViewById(R.id.ivMaps);
+        ivMaps = (TextView)findViewById(R.id.ivMaps);
         ivMaps.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -479,6 +479,17 @@ public class TestScroolView extends AppCompatActivity{
                         String name = jsonObject.getString("Name");
                         // to do; change alamat to Doctor Specialty
                         String alamat = jsonObject.getString("HealthFacilityDesc");
+
+                        // List specialty doctor in Spinner
+                        Spinner spnSpecialty = (Spinner) findViewById(R.id.spn_SpecialtyDoc);
+                        List<String> allSpecialty = new ArrayList<>();
+                        allSpecialty.add(alamat);
+                        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>
+                                (TestScroolView.this, android.R.layout.simple_spinner_item,allSpecialty );
+                        dataAdapter.setDropDownViewResource
+                                (android.R.layout.simple_spinner_dropdown_item);
+                        spnSpecialty.setAdapter(dataAdapter);
+
                         JSONArray jsonArray1 = jsonObject.getJSONArray("Institute");
                         for (int j=0;j<jsonArray1.length();j++){
                             praktekDokter = new String[jsonArray1.length()];

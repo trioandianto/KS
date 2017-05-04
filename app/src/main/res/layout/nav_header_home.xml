@@ -34,7 +34,6 @@
                 android:id="@+id/tvProfile_FName"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:text="ucu"
                 android:textColor="#333333"
                 android:drawablePadding="8dp"
                 android:textSize="16dp"/>
@@ -43,7 +42,6 @@
                 android:layout_width="wrap_content"
                 android:id="@+id/tvProfile_LName"
                 android:layout_height="wrap_content"
-                android:text="nurul"
                 android:textColor="#333333"
                 android:clickable="true"
                 android:layout_marginLeft="2dp"
