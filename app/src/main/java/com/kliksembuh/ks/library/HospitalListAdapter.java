@@ -12,8 +12,6 @@ import android.widget.TextView;
 import com.kliksembuh.ks.R;
 import com.kliksembuh.ks.models.Hospital;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 import java.util.List;
 

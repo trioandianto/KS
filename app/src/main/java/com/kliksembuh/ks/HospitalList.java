@@ -37,7 +37,6 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Objects;
 
 import javax.net.ssl.HttpsURLConnection;
 
@@ -187,7 +186,7 @@ public class HospitalList extends AppCompatActivity {
             NetworkInfo netInfo = cm.getActiveNetworkInfo();
             if (netInfo != null && netInfo.isConnected()) {
                 try {
-                    URL url = new URL("http://192.168.1.6/kliksembuhapi/api/Institutions/SearchInstitutionFromAfterLogin?subDistrict=" + mSubdistrict + "&facility=" + mSpesialisai);
+                    URL url = new URL("http://cloud.abyor.com:11080/kliksembuhapi/api/Institutions/SearchInstitutionFromAfterLogin?subDistrict=" + mSubdistrict + "&facility=" + mSpesialisai);
                     HttpURLConnection urlc = (HttpURLConnection) url.openConnection();
                     urlc.setRequestProperty("Content-Type", "application/json");
                     urlc.connect();
@@ -292,14 +291,13 @@ public class HospitalList extends AppCompatActivity {
                         for (int j = 0 ; j < jsonArray2.length() ; j++){
                             JSONObject objectInner = jsonArray2.getJSONObject(j);
                             cpblDesc = objectInner.optString("CapabilitiesID");
-
-                            if(drawableHospital.length <= 0 && cpblDesc == ""){
-                                mHospitalList.add(new Hospital(id, null, name, addres, phNumber, null));
-                            }
-                            else
-                            {
-                                mHospitalList.add(new Hospital(id, drawableHospital[i], name, addres, phNumber, cpblDesc));
-                            }
+                        }
+                        if(drawableHospital.length <= 0 && cpblDesc == ""){
+                            mHospitalList.add(new Hospital(id, null, name, addres, phNumber, null));
+                        }
+                        else
+                        {
+                            mHospitalList.add(new Hospital(id, drawableHospital[i], name, addres, phNumber, cpblDesc));
                         }
 
 

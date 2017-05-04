@@ -7,7 +7,6 @@ import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -58,7 +57,7 @@ public class TestScroolView extends AppCompatActivity{
     public static final String EXTRA_NAME = "cheese_name";
 
     ViewPager viewPager;
-    private int[] layouts;
+    private Drawable[] layouts;
     private ScrollView scrollView;
     private ObservableScrollView mScrollView;
     private LinearLayout dotsLayout;
@@ -148,13 +147,8 @@ public class TestScroolView extends AppCompatActivity{
                 startActivityForResult(myIntent, 1);
             }
         });
-        layouts = new int[]{
-                R.drawable.doctorlist1,
-                R.drawable.doctorlist2,
-                R.drawable.doctorlist3};
-        viewPagerAdapter = new ViewPagerAdapter(this);
+        new SlideShowAsync(rumahSakitID).execute();
         viewPager = (ViewPager)findViewById(R.id.backdrop);
-        viewPager.setAdapter(viewPagerAdapter);
 
         /*After setting the adapter use the timer */
         final Handler handler = new Handler();
@@ -248,7 +242,7 @@ public class TestScroolView extends AppCompatActivity{
             View itemView = layoutInflater.inflate(R.layout.doctor_image_slide, container, false);
 
             ImageView imageView = (ImageView) itemView.findViewById(R.id.doctorImageView);
-            imageView.setImageResource(layouts[position]);
+            imageView.setImageDrawable(layouts[position]);
 
             container.addView(itemView);
 
@@ -380,7 +374,7 @@ public class TestScroolView extends AppCompatActivity{
             NetworkInfo netInfo = cm.getActiveNetworkInfo();
             if (netInfo != null && netInfo.isConnected()) {
                 try{
-                    URL url = new URL("http://192.168.1.6/kliksembuhapi/api/MedicalPersonnel/SearchMedicalPersonnelBasedOnInstitutions?institution="+mInstitution+"&facility="+mFacility);
+                    URL url = new URL("http://cloud.abyor.com:11080/kliksembuhapi/api/MedicalPersonnel/SearchMedicalPersonnelBasedOnInstitutions?institution="+mInstitution+"&facility="+mFacility);
                     HttpURLConnection urlc = (HttpURLConnection) url.openConnection();
                     urlc.setRequestProperty("Content-Type", "application/json");
                     urlc.connect();
@@ -511,5 +505,86 @@ public class TestScroolView extends AppCompatActivity{
 
         }
     }
+    public class SlideShowAsync extends AsyncTask<String , Void, String>{
+        String idInstitution;
+        public SlideShowAsync(String idInstitution){
+            this.idInstitution = idInstitution;
+        }
 
+        @Override
+        protected String doInBackground(String... params) {
+            ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo netInfo = cm.getActiveNetworkInfo();
+            if (netInfo != null && netInfo.isConnected()) {
+                try{
+                    URL url = new URL("http://basajans/KlikSembuhAPI/api/Institutions/SearchInstitutionById/"+idInstitution);
+                    HttpURLConnection urlc = (HttpURLConnection) url.openConnection();
+                    urlc.setRequestProperty("Content-Type", "application/json");
+                    urlc.connect();
+                    int responseCode=urlc.getResponseCode();
+                    if (responseCode == HttpsURLConnection.HTTP_OK) {
+
+                        BufferedReader in=new BufferedReader(
+                                new InputStreamReader(
+                                        urlc.getInputStream()));
+                        StringBuffer sb = new StringBuffer("");
+                        String line="";
+                        while((line = in.readLine()) != null) {
+                            sb.append(line);
+                            break;
+                        }
+                        in.close();
+
+                        return sb.toString();
+                    }
+                    else {
+                        return "";
+
+                    }
+                } catch (MalformedURLException e1) {
+                    // TODO Auto-generated catch block
+                    e1.printStackTrace();
+                    return "";
+                } catch (IOException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                    return "";
+                }catch (Exception e) {
+                    e.printStackTrace();
+                    return "";
+                }
+            }else {
+                return "";
+            }
+        }
+        @Override
+        protected void onPostExecute(final String success) {
+            if (success!="") {
+
+                try{
+                    JSONArray jsonArray = new JSONArray(success);
+                    for (int i=0;i<jsonArray.length();i++){
+                        JSONObject jsonObject = jsonArray.getJSONObject(i);
+                        JSONArray jsonArray1 = jsonObject.getJSONArray("InstitutionImages");
+                        layouts = new Drawable[jsonArray1.length()];
+                        for (int j=0;j<jsonArray1.length();j++){
+                            JSONObject jsonObject1 = jsonArray1.getJSONObject(j);
+                            String img = jsonObject1.getString("ImagePath");
+                            layouts[j] = LoadImageFromWebOperations(img);
+                        }
+                    }
+                    viewPagerAdapter = new ViewPagerAdapter(TestScroolView.this);
+                    viewPager.setAdapter(viewPagerAdapter);
+
+                }catch (JSONException e){
+                    e.printStackTrace();
+                }
+
+            } else {
+                //:TODO
+            }
+
+
+        }
+    }
 }
