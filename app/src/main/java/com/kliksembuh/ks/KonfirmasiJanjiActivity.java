@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -118,6 +119,7 @@ public class KonfirmasiJanjiActivity extends AppCompatActivity {
             public void onClick(View view) {
                 new KonfirmasiJanjiTask(userID,customerID,facilityCategoryID,facilityID,status,institutionID,
                         date,weekProgramID,dayProgramID,dayProgramDetailID,personnelID).execute();
+                Toast.makeText(getApplicationContext(), "Telah berhasil membuat janji.", Toast.LENGTH_SHORT).show();
 //                Intent myIntent = new Intent(view.getContext(), MyAppointmentActivity.class);
 //                startActivityForResult(myIntent, 0);
             }
@@ -202,8 +204,8 @@ public class KonfirmasiJanjiActivity extends AppCompatActivity {
                         return sb.toString();
                     }
                     else {
+                        Toast.makeText(getApplicationContext(), "Gagal membuat janji.", Toast.LENGTH_LONG).show();
                         return "";
-
                     }
                 } catch (MalformedURLException e1) {
                     // TODO Auto-generated catch block

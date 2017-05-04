@@ -293,15 +293,15 @@ public class HospitalList extends AppCompatActivity {
                             JSONObject objectInner = jsonArray2.getJSONObject(j);
                             cpblDesc = objectInner.optString("CapabilitiesID");
 
+                            if(drawableHospital.length <= 0 && cpblDesc == ""){
+                                mHospitalList.add(new Hospital(id, null, name, addres, phNumber, null));
+                            }
+                            else
+                            {
+                                mHospitalList.add(new Hospital(id, drawableHospital[i], name, addres, phNumber, cpblDesc));
+                            }
                         }
 
-                        if(drawableHospital.length <= 0 && cpblDesc == ""){
-                            mHospitalList.add(new Hospital(id, null, name, addres, phNumber, null));
-                        }
-                        else
-                        {
-                            mHospitalList.add(new Hospital(id, drawableHospital[i], name, addres, phNumber, cpblDesc));
-                        }
 
 
                         //String cpblDesc = jsonObject.getString("Capabilities");

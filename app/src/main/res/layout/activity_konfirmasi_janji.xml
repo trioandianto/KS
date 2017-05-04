@@ -26,50 +26,85 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"
-        android:paddingTop="@dimen/activity_vertical_margin"
+        android:layout_margin="5dp"
         android:orientation="vertical"
         android:id="@+id/linearLayout3">
+
         <LinearLayout
         android:layout_width="match_parent"
         android:background="@color/white"
         android:layout_height="wrap_content"
+        android:padding="6dp"
         android:orientation="vertical">
 
         <TextView
+            android:layout_width="wrap_content"
+            android:id="@+id/lblBuatJanji"
+            android:layout_marginTop="5dp"
+            android:layout_height="wrap_content"
+            android:text="Jadwal Buat Janji:"
+            android:textColor="@color/cardview_dark_background"/>
+        <View
+            android:layout_width="100dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="5dp"
+            android:layout_centerVertical="true"
+            android:layout_below="@id/lblBuatJanji"
+            android:background="@color/light_grey"/>
+
+        <TextView
             android:layout_width="match_parent"
-            android:layout_marginLeft="10dp"
             android:id="@+id/tvNamaHari"
             android:layout_height="wrap_content"
             android:text="Sabtu"
             android:textStyle="bold"
+            android:layout_marginTop="5dp"
             android:textSize="20dp"
             android:textColor="@color/blue"/>
         <TextView
             android:layout_width="match_parent"
             android:textStyle="normal"
             android:id="@+id/tvDetailTangal"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
             android:textSize="15dp"
             android:textColor="@color/blue"
             android:layout_height="wrap_content"
             android:text="25 Februari 2017 @ 10.00 Pagi"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginBottom="8dp"
+            android:layout_centerVertical="true"
+            android:background="@color/light_grey"/>
 
     </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:background="@color/white"
-            android:layout_marginTop="20dp"
             android:layout_height="wrap_content"
+            android:padding="8dp"
             android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:id="@+id/lblNamaDokter"
+                android:layout_height="wrap_content"
+                android:text="Dengan Dokter :"
+                android:textColor="@color/cardview_dark_background"/>
+            <View
+                android:layout_width="100dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_centerVertical="true"
+                android:background="@color/light_grey"/>
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Nama Dokter"
-                android:layout_marginLeft="10dp"
                 android:textStyle="bold"
                 android:id="@+id/tvnamaDokter"
                 android:textSize="20dp"
@@ -77,28 +112,45 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_marginTop="5dp"
-                android:layout_marginLeft="10dp"
-                android:layout_height="wrap_content"
-                android:text="MSc. Sp. MK"
-                android:id="@+id/tvStatusJabatan"
-                android:textSize="15dp"
-                android:textColor="@color/black"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_marginTop="5dp"
-                android:layout_marginLeft="10dp"
+                android:layout_marginBottom="5dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/tvspesial"
                 android:text="Dokter Umum"
                 android:textSize="15dp"
                 android:textColor="@color/black"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="8dp"
+                android:layout_centerVertical="true"
+                android:background="@color/light_grey"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:background="@color/white"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:id="@+id/lblNamaRS"
+                android:layout_height="wrap_content"
+                android:text="Di Rumah Sakit :"
+                android:textColor="@color/cardview_dark_background"/>
+            <View
+                android:layout_width="100dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_centerVertical="true"
+                android:background="@color/light_grey"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
                 android:text="Rumah Sakit PMI Bogor"
                 android:textStyle="bold"
-                android:layout_marginTop="10dp"
                 android:textSize="20dp"
                 android:id="@+id/tvnamaRumahSakit"
                 android:textColor="@color/blue"/>
@@ -106,20 +158,28 @@
                 android:layout_width="match_parent"
                 android:layout_marginTop="5dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
                 android:text="Jalan Jendral Sudirman"
                 android:textSize="15dp"
                 android:textColor="@color/black"/>
             <TextView
                 android:layout_width="match_parent"
-                android:layout_marginLeft="10dp"
                 android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
                 android:layout_height="wrap_content"
                 android:text="Jawa Barat 12494"
                 android:textSize="15dp"
                 android:textColor="@color/black"/>
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="8dp"
+                android:layout_centerVertical="true"
+                android:background="@color/light_grey"/>
+
+
         </LinearLayout>
+
 
         <Button
             android:id="@+id/btnbuatjanji"
@@ -128,7 +188,7 @@
             android:layout_height="wrap_content"
             android:textColor="@color/white"
             android:text="Buat Janji"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="25dp"
             android:textStyle="bold"
             android:textAllCaps="false"
             android:background="@drawable/shape"
