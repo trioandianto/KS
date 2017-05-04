@@ -21,7 +21,6 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import org.json.JSONArray;
@@ -84,11 +83,13 @@ public class ListMapActivity extends AppCompatActivity implements OnMapReadyCall
         newToolbar.setTitle("Peta Rumah Sakit");
         setSupportActionBar(newToolbar);
         getWindow().setStatusBarColor(ContextCompat.getColor(ListMapActivity.this, R.color.colorPrimaryDark));
+
         new HospitalListAsync(subDistrict,spesialisasi).execute();
-
-
         mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
+
+
+
 
     }
 
@@ -137,13 +138,6 @@ public class ListMapActivity extends AppCompatActivity implements OnMapReadyCall
         }
 
     }
-    protected Marker createMarker(LatLng bogor, String title, BitmapDescriptor iconResID) {
-
-        return mMap.addMarker(new MarkerOptions()
-                .position(bogor).title(title).icon(iconResID));
-
-    }
-
     public class HospitalListAsync extends AsyncTask<String, Void, String> {
         private String mSubdistrict;
         private String mSpesialisai;
