@@ -37,6 +37,9 @@
                 app:layout_collapseMode="pin"
                 app:navigationIcon="@drawable/ic_arrow_back_white_24dp"
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
         </android.support.design.widget.CollapsingToolbarLayout>
 
@@ -107,6 +110,7 @@
                     android:textSize="11sp"
                     android:clickable="true"
                     android:layout_alignParentTop="true"
+                    android:layout_alignBaseline="@+id/tvHospitalName"
                     android:layout_toEndOf="@+id/tvHospitalName"/>
                 <TextView
                     android:id="@+id/tv_IGDHospital"
@@ -162,10 +166,10 @@
                 <TextView
                     android:layout_width="95dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="8dp"
+                    android:layout_marginLeft="10dp"
                     android:id="@+id/lbl_Layanan"
-                    android:layout_below="@id/tv_Layanan"
-                    android:gravity="center"
+                    android:layout_marginTop="25dp"
+                    android:gravity="left"
                     android:text="Layanan"
                     android:textColor="@color/grey_light"
                     android:textSize="14sp"/>
@@ -181,7 +185,7 @@
                     android:background="@color/cardview_dark_background"/>
 
                 <TextView
-                    android:layout_width="100dp"
+                    android:layout_width="90dp"
                     android:layout_height="wrap_content"
                     android:id="@+id/tv_Penilaian"
                     android:padding="8dp"
@@ -193,13 +197,13 @@
                     android:textSize="13dp"
                     android:textColor="#df4056"/>
                 <TextView
-                    android:layout_width="95dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="8dp"
                     android:id="@+id/lbl_Penilaian"
-                    android:layout_below="@id/tv_Penilaian"
+                    android:layout_marginTop="25dp"
                     android:layout_toRightOf="@+id/line_Layanan"
-                    android:gravity="center"
+                    android:gravity="left"
                     android:text="Penilaian"
                     android:textColor="@color/grey_light"
                     android:textSize="14sp"/>
@@ -231,10 +235,10 @@
                     android:layout_width="130dp"
                     android:layout_height="wrap_content"
                     android:id="@+id/lbl_Rekanan"
+                    android:layout_marginTop="25dp"
                     android:layout_marginLeft="8dp"
-                    android:layout_below="@id/tv_Penilaian"
                     android:layout_toRightOf="@+id/line_Rekanan"
-                    android:gravity="center"
+                    android:gravity="left"
                     android:text="Rekanan Asuransi"
                     android:textColor="@color/grey_light"
                     android:textSize="14sp"/>
@@ -243,77 +247,41 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="2dp"
-                android:layout_marginBottom="4dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
                 android:background="@color/white"
-                android:gravity="center_horizontal|center_vertical">
-                <TextView
-                    android:layout_width="90dp"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/tv_Fasilitas"
-                    android:gravity="left"
-                    android:padding="8dp"
-                    android:drawablePadding="6dp"
-                    android:drawableLeft="@drawable/ic_wifi_black_24dp"
-                    android:text="Fasilitas"
-                    android:textSize="13dp"
-                    android:textColor="@color/grey_light"/>
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp">
+
                 <View
                     android:id="@+id/line_Fasilitas"
-                    android:layout_width="1dp"
-                    android:layout_height="25dp"
-                    android:layout_marginTop="4dp"
-                    android:layout_marginLeft="14dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
                     android:layout_centerHorizontal="true"
-                    android:layout_toRightOf="@+id/tv_Fasilitas"
-                    android:background="@color/cardview_dark_background"/>
+                    android:background="@color/grey_light"/>
 
                 <TextView
-                    android:layout_width="100dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/tv_ListKamar"
-                    android:gravity="left"
-                    android:padding="8dp"
-                    android:drawableLeft="@drawable/ic_local_hotel_black_24dp"
-                    android:drawablePadding="6dp"
-                    android:drawableStart="@drawable/ic_local_hotel_black_24dp"
-                    android:layout_toRightOf="@+id/line_Fasilitas"
-                    android:text="List Kamar"
-                    android:textSize="13dp"
-                    android:textColor="@color/grey_light"/>
-                <View
-                    android:id="@+id/line_Promosi"
-                    android:layout_width="1dp"
-                    android:layout_height="25dp"
-                    android:layout_marginTop="4dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="16dp"
-                    android:layout_centerHorizontal="true"
-                    android:layout_toRightOf="@+id/tv_ListKamar"
-                    android:background="@color/cardview_dark_background"/>
-
-                <TextView
-                    android:layout_width="130dp"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/tv_KodePromosi"
-                    android:gravity="left"
-                    android:padding="8dp"
-                    android:drawableLeft="@drawable/ic_local_atm_black_24dp"
-                    android:drawablePadding="6dp"
-                    android:drawableStart="@drawable/ic_local_atm_black_24dp"
-                    android:layout_toRightOf="@+id/line_Promosi"
-                    android:text="Promosi"
-                    android:textSize="13dp"
-                    android:textColor="@color/grey_light"/>
+                    android:id="@+id/tvLihatFasilitas"
+                    android:clickable="true"
+                    android:text="Lihat Fasilitas Lainnya"
+                    android:layout_below="@id/line_Fasilitas"
+                    android:textColor="@color/blue"
+                    android:textSize="13sp"
+                    android:padding="4dp"
+                    android:gravity="center"/>
             </RelativeLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
-                android:layout_margin="10dp">
+                android:layout_marginBottom="5dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp">
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -385,31 +353,44 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginRight="10dp"
                 android:background="#d4157e">
-                <LinearLayout
+                <RelativeLayout
+                    android:id="@+id/relSpinner"
                     android:layout_width="170dp"
                     android:layout_height="wrap_content"
                     android:background="#eb2698"
-                    android:layout_gravity="center"
-                    android:padding="6dp">
+                    android:layout_marginLeft="7dp"
+                    android:layout_gravity="center">
                     <Spinner
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="30dp"
                         android:id="@+id/spn_SpecialtyDoc"
-                        android:gravity="center"
+                        android:gravity="left"
+                        android:background="@drawable/shape"
+                        android:backgroundTint="@color/colorPrimary"
+                        android:popupBackground="#ffffff"
                         android:textSize="13dp"
-                        android:textColor="@color/white"
                         android:spinnerMode="dialog"
                         android:layout_alignParentTop="true"
                         android:layout_alignParentStart="true" />
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="200dp"
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="30dp"
+                        android:layout_alignParentRight="true"
+                        android:paddingBottom="2dp"
+                        android:layout_gravity="center"
+                        android:src="@mipmap/drop_white" />
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="180dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
                     android:padding="6dp"
-                    android:gravity="center"
-                    android:background="@drawable/customborder">
+                    android:gravity="center">
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -421,7 +402,8 @@
                         android:gravity="center_vertical"
                         android:textAllCaps="false"
                         style="@style/MyCustomTextAppearance"
-                        android:background="#eb2698"
+                        android:background="@drawable/shape"
+                        android:backgroundTint="#eb2698"
                         android:padding="8dp"
                         android:inputType=""
                         android:maxLines="1"
@@ -429,7 +411,7 @@
                         android:textColor="@color/white"
                         android:layout_alignParentTop="true"
                         android:layout_alignParentStart="true" />
-                </LinearLayout>
+                </RelativeLayout>
             </LinearLayout>
 
             <ListView

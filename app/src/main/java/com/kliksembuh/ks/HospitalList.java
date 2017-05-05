@@ -337,7 +337,8 @@ public class HospitalList extends AppCompatActivity {
             } else {
                 //:TODO
                 TextView newTextView = (TextView)findViewById(R.id.tvhospitalList);
-                newTextView.setText("Tidak tersedia rumah sakit untuk daerah "+subDistricDescription+".");
+                //newTextView.setText("Tidak tersedia rumah sakit untuk daerah "+subDistricDescription+".");
+                newTextView.setText("Oops hasil pencarian Anda tidak dapat ditemukan. Silahkan melakukan pencarian kembali dengan kata kunci lain.");
             }
         }
         @Override

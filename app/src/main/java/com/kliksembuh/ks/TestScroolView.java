@@ -88,8 +88,8 @@ public class TestScroolView extends AppCompatActivity{
     int currentPage = 0;
     int NUM_PAGES = 4;
     Timer timer;
-    final long DELAY_MS = 400;//delay in milliseconds before task is to be executed
-    final long PERIOD_MS = 1000; // time in milliseconds between successive task executions.
+    final long DELAY_MS = 5000;//delay in milliseconds before task is to be executed
+    final long PERIOD_MS = 10000; // time in milliseconds between successive task executions.
 
 
     int a = 0;
@@ -133,6 +133,15 @@ public class TestScroolView extends AppCompatActivity{
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(TestScroolView.this,
                 android.R.layout.simple_spinner_item,paths);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        TextView tvLhtFasilitas = (TextView) findViewById(R.id.tvLihatFasilitas);
+        tvLhtFasilitas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent();
+                i.setClass(TestScroolView.this,FacilityActivity.class);
+                startActivity(i);
+            }
+        });
         ivMaps = (TextView)findViewById(R.id.ivMaps);
         ivMaps.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -473,15 +482,15 @@ public class TestScroolView extends AppCompatActivity{
                         // to do; change alamat to Doctor Specialty
                         String alamat = jsonObject.getString("HealthFacilityDesc");
 
-                        // List specialty doctor in Spinner
-//                        Spinner spnSpecialty = (Spinner) findViewById(R.id.spn_SpecialtyDoc);
-//                        List<String> allSpecialty = new ArrayList<>();
-//                        allSpecialty.add(alamat);
-//                        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>
-//                                (TestScroolView.this, android.R.layout.simple_spinner_item,allSpecialty );
-//                        dataAdapter.setDropDownViewResource
-//                                (android.R.layout.simple_spinner_dropdown_item);
-//                        spnSpecialty.setAdapter(dataAdapter);
+                         //List specialty doctor in Spinner
+                        Spinner spnSpecialty = (Spinner) findViewById(R.id.spn_SpecialtyDoc);
+                        List<String> allSpecialty = new ArrayList<>();
+                        allSpecialty.add(alamat);
+                        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>
+                                (TestScroolView.this, R.layout.spinner_style, allSpecialty );
+                        dataAdapter.setDropDownViewResource
+                                (android.R.layout.simple_spinner_dropdown_item);
+                        spnSpecialty.setAdapter(dataAdapter);
 
                         JSONArray jsonArray1 = jsonObject.getJSONArray("Institute");
                         for (int j=0;j<jsonArray1.length();j++){
