@@ -379,6 +379,8 @@ public class RegisterActivity extends AppCompatActivity {
 
             } else {
                 //:TODO
+                Intent i = new Intent(getApplicationContext(), EmailTerdaftarActivity.class);
+                startActivityForResult(i, 1);
 
             }
         }
