@@ -23,7 +23,6 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.kliksembuh.ks.library.JadwalDokterAdapter;
 import com.kliksembuh.ks.models.JadwalDokter;
@@ -1230,7 +1229,7 @@ public class BookingActivity extends AppCompatActivity implements ListView.OnIte
             imageDokter = LoadImageFromWebOperations(urlImage);
             if (netInfo != null && netInfo.isConnected()) {
                 try{
-                    URL url = new URL("http://192.168.1.6/kliksembuhapi/api/Schedules/GetWeeklySchedule?personnelId="+mPersonilID+"&year="+mYear+"&startweek="+mWeek);
+                    URL url = new URL("http://cloud.abyor.com:11080/kliksembuhapi/api/Schedules/GetWeeklySchedule?personnelId="+mPersonilID+"&year="+mYear+"&startweek="+mWeek);
                     HttpURLConnection urlc = (HttpURLConnection) url.openConnection();
                     urlc.setRequestProperty("Content-Type","application/json");
                     urlc.connect();

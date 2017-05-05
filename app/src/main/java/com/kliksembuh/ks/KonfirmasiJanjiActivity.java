@@ -160,7 +160,7 @@ public class KonfirmasiJanjiActivity extends AppCompatActivity {
             NetworkInfo netInfo = cm.getActiveNetworkInfo();
             if (netInfo != null && netInfo.isConnected()) {
                 try{
-                    URL url = new URL("http://192.168.1.6/KlikSembuhapi/api/transactions/PostAppointmentTransaction");
+                    URL url = new URL("http://cloud.abyor.com:11080/KlikSembuhapi/api/transactions/PostAppointmentTransaction");
                     HttpURLConnection urlc = (HttpURLConnection) url.openConnection();
                     JSONObject jsonObject = new JSONObject();
                     jsonObject.put("FacilityCategoryID",mFacilityCategoryID);

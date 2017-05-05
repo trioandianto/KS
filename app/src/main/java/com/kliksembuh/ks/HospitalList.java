@@ -176,7 +176,7 @@ public class HospitalList extends AppCompatActivity {
             super.onPreExecute();
             // Showing progress dialog
             pDialog = new ProgressDialog(HospitalList.this);
-            pDialog.setMessage("Please wait...");
+            pDialog.setMessage("Mohon Menunggu...");
             pDialog.setCancelable(false);
             pDialog.show();
         }
@@ -209,8 +209,6 @@ public class HospitalList extends AppCompatActivity {
                             JSONObject jsonObject = jsonArray.getJSONObject(i);
                             image = jsonObject.getString("ImgUrl");
                             drawableHospital[i] = LoadImageFromWebOperations(image);
-
-
                         }
                         // Drawable image1 = LoadImageFromWebOperations(image);
                         return sb.toString();
@@ -271,6 +269,11 @@ public class HospitalList extends AppCompatActivity {
                     rumahSakitID =new String[jsonArray.length()];
                     nameRumahSakit = new String[jsonArray.length()];
                     alamat = new String[jsonArray.length()];
+
+                    if (jsonArray.length()==0){
+                        TextView newTextView = (TextView)findViewById(R.id.tvhospitalList);
+                        newTextView.setText("Tidak tersedia rumah sakit untuk daerah "+subDistricDescription+".");
+                    }
 
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject jsonObject = jsonArray.getJSONObject(i);
@@ -333,6 +336,8 @@ public class HospitalList extends AppCompatActivity {
 
             } else {
                 //:TODO
+                TextView newTextView = (TextView)findViewById(R.id.tvhospitalList);
+                newTextView.setText("Tidak tersedia rumah sakit untuk daerah "+subDistricDescription+".");
             }
         }
         @Override

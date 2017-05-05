@@ -1,5 +1,6 @@
 package com.kliksembuh.ks;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.location.Address;
@@ -49,6 +50,7 @@ public class ListMapActivity extends AppCompatActivity implements OnMapReadyCall
     private String subDistricDescription;
     private String facilityName;
     private String spesialisasi;
+    private ProgressDialog pDialog;
     private String userID;
     private SupportMapFragment mapFragment;
     private ArrayList<String> alamat1;
@@ -87,9 +89,6 @@ public class ListMapActivity extends AppCompatActivity implements OnMapReadyCall
         new HospitalListAsync(subDistrict,spesialisasi).execute();
         mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
-
-
-
 
     }
 
@@ -152,7 +151,7 @@ public class ListMapActivity extends AppCompatActivity implements OnMapReadyCall
             NetworkInfo netInfo = cm.getActiveNetworkInfo();
             if (netInfo != null && netInfo.isConnected()) {
                 try {
-                    URL url = new URL("http://basajans/kliksembuhapi/api/Institutions/SearchInstitutionFromAfterLogin?subDistrict=" + mSubdistrict + "&facility=" + mSpesialisai);
+                    URL url = new URL("http://cloud.abyor.com:11080/kliksembuhapi/api/Institutions/SearchInstitutionFromAfterLogin?subDistrict=" + mSubdistrict + "&facility=" + mSpesialisai);
                     HttpURLConnection urlc = (HttpURLConnection) url.openConnection();
                     urlc.setRequestProperty("Content-Type", "application/json");
                     urlc.connect();
@@ -191,11 +190,22 @@ public class ListMapActivity extends AppCompatActivity implements OnMapReadyCall
                 return "";
             }
         }
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            // Showing progress dialog
+            pDialog = new ProgressDialog(ListMapActivity.this);
+            pDialog.setMessage("Mohon Menunggu...");
+            pDialog.setCancelable(false);
+            pDialog.show();
+        }
 
 
         @Override
         protected void onPostExecute(final String success) {
             String nama;
+            if (pDialog.isShowing())
+                pDialog.dismiss();
 
             if (success!="") {
                 try {

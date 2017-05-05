@@ -35,7 +35,6 @@ import com.kliksembuh.ks.models.Doctor;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -393,7 +392,6 @@ public class TestScroolView extends AppCompatActivity{
                         in.close();
                         JSONArray jsonArray = new JSONArray(sb.toString());
                         drawableDokter = new Drawable[jsonArray.length()];
-                        urlImage=new String[(jsonArray.length())];
 
                         for (int i = 0; i < jsonArray.length(); i++) {
                             JSONObject jsonObject = jsonArray.getJSONObject(i);
@@ -403,7 +401,6 @@ public class TestScroolView extends AppCompatActivity{
 //                            String name = jsonObject.getString("Name");
                             String image= jsonObject.getString("ImgUrl");
                             drawableDokter[i]=LoadImageFromWebOperations(image);
-                            urlImage[i]=image;
 //                            Drawable image1 = LoadImageFromWebOperations(image);
 //                            String alamat = jsonObject.getString("Address");
 //                            mDokterList.add(new Doctor(id, image1, name, alamat));
@@ -469,20 +466,22 @@ public class TestScroolView extends AppCompatActivity{
                         JSONObject jsonObject = jsonArray.getJSONObject(i);
                         String id = jsonObject.getString("MedicalPersonnelID");
                         String personelCD = jsonObject.getString("MedicalPersonnelCD");
+                        String image= jsonObject.getString("ImgUrl");
+                        Drawable drawable = LoadImageFromWebOperations(image);
                         idDokter[i]=personelCD;
                         String name = jsonObject.getString("Name");
                         // to do; change alamat to Doctor Specialty
                         String alamat = jsonObject.getString("HealthFacilityDesc");
 
                         // List specialty doctor in Spinner
-                        Spinner spnSpecialty = (Spinner) findViewById(R.id.spn_SpecialtyDoc);
-                        List<String> allSpecialty = new ArrayList<>();
-                        allSpecialty.add(alamat);
-                        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>
-                                (TestScroolView.this, android.R.layout.simple_spinner_item,allSpecialty );
-                        dataAdapter.setDropDownViewResource
-                                (android.R.layout.simple_spinner_dropdown_item);
-                        spnSpecialty.setAdapter(dataAdapter);
+//                        Spinner spnSpecialty = (Spinner) findViewById(R.id.spn_SpecialtyDoc);
+//                        List<String> allSpecialty = new ArrayList<>();
+//                        allSpecialty.add(alamat);
+//                        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>
+//                                (TestScroolView.this, android.R.layout.simple_spinner_item,allSpecialty );
+//                        dataAdapter.setDropDownViewResource
+//                                (android.R.layout.simple_spinner_dropdown_item);
+//                        spnSpecialty.setAdapter(dataAdapter);
 
                         JSONArray jsonArray1 = jsonObject.getJSONArray("Institute");
                         for (int j=0;j<jsonArray1.length();j++){
@@ -492,13 +491,7 @@ public class TestScroolView extends AppCompatActivity{
                             TextView tvNameHosp = (TextView)findViewById(R.id.tvHospitalName);
                             tvNameHosp.setText(jsonObject1.getString("InstitutionName"));
                         }
-                        if(drawableDokter.length <= 0){
-                            mDokterList.add(new Doctor(id, null, name, alamat));
-
-                        }else{
-                            mDokterList.add(new Doctor(id, drawableDokter[i], name, alamat));
-                        }
-
+                        mDokterList.add(new Doctor(id, drawableDokter[i], name, alamat));
                         dAdapter = new DoctorListAdapter(getApplicationContext(), mDokterList);
                         lvDokter.setAdapter(dAdapter);
                     }
@@ -516,7 +509,7 @@ public class TestScroolView extends AppCompatActivity{
 
         }
     }
-    public class SlideShowAsync extends AsyncTask<String , Void, String>{
+    public class SlideShowAsync extends AsyncTask<String , Void, String>    {
         String idInstitution;
         public SlideShowAsync(String idInstitution){
             this.idInstitution = idInstitution;
@@ -528,7 +521,7 @@ public class TestScroolView extends AppCompatActivity{
             NetworkInfo netInfo = cm.getActiveNetworkInfo();
             if (netInfo != null && netInfo.isConnected()) {
                 try{
-                    URL url = new URL("http://basajans/KlikSembuhAPI/api/Institutions/SearchInstitutionById/"+idInstitution);
+                    URL url = new URL("http://cloud.abyor.com:11080/KlikSembuhAPI/api/Institutions/SearchInstitutionById/"+idInstitution);
                     HttpURLConnection urlc = (HttpURLConnection) url.openConnection();
                     urlc.setRequestProperty("Content-Type", "application/json");
                     urlc.connect();

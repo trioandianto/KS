@@ -51,8 +51,8 @@ MENGGUNAKAN LAYANAN KAMI UNTUK PERTAMA KALI.</string>
     <string name="action_sign_in_facebook">Log In with Facebook</string>
     <string name="action_already_login">Sudah punya akun? Login</string>
     <string name="action_sign_in_google">Log In with Google+</string>
-    <string name="error_invalid_email">This email address is invalid</string>
-    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_invalid_email">Email tidak valid.</string>
+    <string name="error_invalid_password">Password Minimal 8 Karakter.</string>
     <string name="error_incorrect_password">This password is incorrect</string>
     <string name="error_field_required">This field is required</string>
     <string name="errro_firstname_ivalid">Nama depan minimal 2 huruf!</string>
@@ -90,7 +90,8 @@ MENGGUNAKAN LAYANAN KAMI UNTUK PERTAMA KALI.</string>
     <string name="timer_finished">timer_finished</string>
     <string name="error_invalid_confirm_password">Konfirmasi password tidak sama</string>
     <string name="error_invalid_confirm_password_not_null">Tidak boleh kosong</string>
-    <string name="error_invalid_nohp">Tidak boleh kosong</string>
+    <string name="error_invalid_nohp">Minimal 10 angka</string>
+    <string name="not_null">Tidak boleh kosong.</string>
     <string name="error_active_code">Minimal 4 angka</string>
 
     <string-array name="specialty_name">

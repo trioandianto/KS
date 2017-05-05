@@ -11,7 +11,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.SearchView;
 
 import com.kliksembuh.ks.library.SearchSpesializationAdapter;
 import com.kliksembuh.ks.models.Spesialization;
@@ -114,7 +113,7 @@ public class SearchSpesializationActivity extends AppCompatActivity implements L
             NetworkInfo netInfo = cm.getActiveNetworkInfo();
             if (netInfo != null && netInfo.isConnected()) {
                 try {
-                    URL url = new URL("http://192.168.1.6/kliksembuhapi/api/HealthFacilities/GetHealthFacilities");
+                    URL url = new URL("http://cloud.abyor.com:11080/kliksembuhapi/api/HealthFacilities/GetHealthFacilities");
                     HttpURLConnection urlc = (HttpURLConnection) url.openConnection();
                     urlc.setRequestProperty("Content-Type", "application/json");
                     urlc.connect();

@@ -1,5 +1,6 @@
 package com.kliksembuh.ks;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
@@ -41,6 +42,7 @@ public class RegisterActivity extends AppCompatActivity {
     private String lastName;
     private String email;
     private String noHp;
+    private ProgressDialog pDialog;
     private String password;
     private String confirmPassword;
 
@@ -187,13 +189,13 @@ public class RegisterActivity extends AppCompatActivity {
         }
         //Check for a Valid No Hp
         else if(NoHp== null){
-            mNoHp.setError(getString(R.string.error_invalid_nohp));
+            mNoHp.setError(getString(R.string.not_null));
             focusView = mNoHp;
             cancel = true;
         }
         else if(NoHp.length()< 10 || NoHp.length()>12){
 //            mNoHp.setError(getString(R.string.error_length));
-            mNoHp.setError(getString(R.string.error_active_code));
+            mNoHp.setError(getString(R.string.error_invalid_nohp));
             focusView = mNoHp;
             cancel = true;
         }
@@ -253,12 +255,21 @@ public class RegisterActivity extends AppCompatActivity {
 
 
         @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            // Showing progress dialog
+            pDialog = new ProgressDialog(RegisterActivity.this);
+            pDialog.setMessage("Mohon Menunggu...");
+            pDialog.setCancelable(false);
+            pDialog.show();
+        }
+        @Override
         protected String doInBackground(String... params) {
             ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
             NetworkInfo netInfo = cm.getActiveNetworkInfo();
             if (netInfo != null && netInfo.isConnected()) {
                 try{
-                    URL url = new URL("http://192.168.1.6/kliksembuhapi/api/users/register");
+                    URL url = new URL("http://cloud.abyor.com:11080/kliksembuhapi/api/users/register");
                     HttpURLConnection urlc = (HttpURLConnection) url.openConnection();
                     JSONObject jsonObject = new JSONObject();
                     jsonObject.put("Email",mEmail);
@@ -274,13 +285,9 @@ public class RegisterActivity extends AppCompatActivity {
                     urlc.setDoInput(true);
                     urlc.setDoOutput(true);
                     DataOutputStream os = new DataOutputStream(urlc.getOutputStream());
-
                     os.writeBytes(jsonObject.toString());
-
-
                     int responseCode=urlc.getResponseCode();
                     if (responseCode == HttpsURLConnection.HTTP_CREATED) {
-
                         BufferedReader in=new BufferedReader(
                                 new InputStreamReader(
                                         urlc.getInputStream()));
@@ -347,6 +354,8 @@ public class RegisterActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(final String success) {
             mAuthTask = null;
+            if (pDialog.isShowing())
+                pDialog.dismiss();
             if (success!="") {
                 try {
                     JSONObject jsonObj = new JSONObject(success);
@@ -370,6 +379,7 @@ public class RegisterActivity extends AppCompatActivity {
 
             } else {
                 //:TODO
+
             }
         }
         @Override

@@ -639,7 +639,7 @@ public class LoginActivity extends BaseActivity implements LoaderCallbacks<Curso
             NetworkInfo netInfo = cm.getActiveNetworkInfo();
             if (netInfo != null && netInfo.isConnected()) {
                 try {
-                    URL url = new URL("http://192.168.1.6/kliksembuhapi/api/users/login");
+                    URL url = new URL("http://cloud.abyor.com:11080/kliksembuhapi/api/users/login");
                     HttpURLConnection urlc = (HttpURLConnection) url.openConnection();
                     JSONObject jsonObject = new JSONObject();
                     jsonObject.put("Email",mEmail);

@@ -13,7 +13,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.SearchView;
 
 import com.kliksembuh.ks.library.SearchAdapter;
 import com.kliksembuh.ks.models.Location;
@@ -162,7 +161,7 @@ public class SearchLocationActivity extends AppCompatActivity implements ListVie
             NetworkInfo netInfo = cm.getActiveNetworkInfo();
             if (netInfo != null && netInfo.isConnected()) {
                 try {
-                    URL url = new URL("http://192.168.1.6/kliksembuhapi/api/SubDistricts/GetSubDistrict");
+                    URL url = new URL("http://cloud.abyor.com:11080/kliksembuhapi/api/SubDistricts/GetSubDistrict");
 //                    URL url = new URL("http://cloud.basajans.com:8868/BS.HealthCare.Application/api/SubDistricts/GetSubDistrict");
                     HttpURLConnection urlc = (HttpURLConnection) url.openConnection();
                     urlc.setRequestProperty("Content-Type", "application/json");
