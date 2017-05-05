@@ -53,8 +53,8 @@ MENGGUNAKAN LAYANAN KAMI UNTUK PERTAMA KALI.</string>
     <string name="action_sign_in_google">Log In with Google+</string>
     <string name="error_invalid_email">Email tidak valid.</string>
     <string name="error_invalid_password">Password Minimal 8 Karakter.</string>
-    <string name="error_incorrect_password">This password is incorrect</string>
-    <string name="error_field_required">This field is required</string>
+    <string name="error_incorrect_password">email atau password salah.</string>
+    <string name="error_field_required">Tidak boleh kosong.</string>
     <string name="errro_firstname_ivalid">Nama depan minimal 2 huruf!</string>
     <string name="errro_lastname_ivalid">Nama belakang minimal 3 huruf!</string>
     <string name="permission_rationale">"Contacts permissions are needed for providing email
@@ -90,9 +90,10 @@ MENGGUNAKAN LAYANAN KAMI UNTUK PERTAMA KALI.</string>
     <string name="timer_finished">timer_finished</string>
     <string name="error_invalid_confirm_password">Konfirmasi password tidak sama</string>
     <string name="error_invalid_confirm_password_not_null">Tidak boleh kosong</string>
-    <string name="error_invalid_nohp">Minimal 10 angka</string>
+    <string name="error_invalid_nohp">Minimal 7 angka</string>
+    <string name="error_invalid_hp">No HP tidak valid.</string>
     <string name="not_null">Tidak boleh kosong.</string>
-    <string name="error_active_code">Minimal 4 angka</string>
+    <string name="error_active_code">Minimal 4 karakter</string>
 
     <string-array name="specialty_name">
         <item>Dokter Umum</item>
@@ -142,7 +143,7 @@ MENGGUNAKAN LAYANAN KAMI UNTUK PERTAMA KALI.</string>
     <string name="Datadiri">Data Diri</string>
     <string name="vitalsign">Vital Sign</string>
     <string name="error_length">No HP tidak valid</string>
-    <string name="error_active_code_expiret">kode verifikasi tidak berlaku</string>
+    <string name="error_active_code_expiret">kode verifikasi tidak berlaku atau salah.</string>
     <string name="error_active_code_kirim">kode sudah tidak berlaku</string>
     <string name="loading">Loading…</string>
 

@@ -173,7 +173,7 @@ public class LoginActivity extends BaseActivity implements LoaderCallbacks<Curso
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
         populateAutoComplete();
 
-        mPasswordView = (EditText   ) findViewById(R.id.password);
+        mPasswordView = (EditText) findViewById(R.id.password);
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
@@ -348,8 +348,8 @@ public class LoginActivity extends BaseActivity implements LoaderCallbacks<Curso
             //startActivityForResult(myIntent, 0);
             attemptLogin();
         }
-        else{
-            Intent myIntent = new Intent(view.getContext(), MapsDetailHospitalActivity.class);
+        else if (i==R.id.linkforgotpassword){
+            Intent myIntent = new Intent(view.getContext(), ResetPasswordActivity.class);
             startActivityForResult(myIntent, 0);
 
         }
@@ -471,8 +471,13 @@ public class LoginActivity extends BaseActivity implements LoaderCallbacks<Curso
         View focusView = null;
 
         // Check for a valid password, if the user entered one.
-        if (!TextUtils.isEmpty(password) && !isPasswordValid(password)) {
+        if (!isPasswordValid(password)) {
             mPasswordView.setError(getString(R.string.error_invalid_password));
+            focusView = mPasswordView;
+            cancel = true;
+        }
+        if (TextUtils.isEmpty(password)){
+            mPasswordView.setError(getString(R.string.error_field_required));
             focusView = mPasswordView;
             cancel = true;
         }
@@ -729,21 +734,32 @@ public class LoginActivity extends BaseActivity implements LoaderCallbacks<Curso
             showProgress(false);
             if (success!="") {
                 try{
-                JSONObject jsonObj = new JSONObject(success);
-                JSONObject jsd = jsonObj.getJSONObject("Result");
-                String userID = jsd.getString("Id");
-                String firstName = jsd.getString("FirstName");
-                String lastName = jsd.getString("LastName");
+                    JSONObject jsonObj = new JSONObject(success);
+                    JSONObject jsd = jsonObj.getJSONObject("Result");
+                    String userID = jsd.getString("Id");
+                    String firstName = jsd.getString("FirstName");
+                    String lastName = jsd.getString("LastName");
+                    String valid = jsd.getString("Active");
+                    if (valid=="true"){
+                        Intent i = new Intent(getApplicationContext(), HomeActivity.class);
+                        Bundle b = new Bundle();
+                        b.putString("userID", userID); //Your id
+                        b.putString("firstName", firstName);
+                        b.putString("lastName", lastName);
+                        //.putExtra("userID",userID);
+                        i.putExtras(b);
+                        startActivity(i);
+                        finish();
+                    }
+                    else{
+                        Intent i = new Intent(getApplicationContext(), VerifikasiActivity.class);
+                        Bundle b = new Bundle();
+                        b.putString("userID", userID);
+                        i.putExtras(b);
+                        startActivity(i);
+                    }
 
-                Intent i = new Intent(getApplicationContext(), HomeActivity.class);
-                Bundle b = new Bundle();
-                b.putString("userID", userID); //Your id
-                b.putString("firstName", firstName);
-                b.putString("lastName", lastName);
-                //.putExtra("userID",userID);
-                i.putExtras(b);
-                startActivity(i);
-                finish();
+
             }catch (JSONException e) {
                 e.printStackTrace();
             }

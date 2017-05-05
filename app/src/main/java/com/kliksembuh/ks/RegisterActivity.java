@@ -193,9 +193,14 @@ public class RegisterActivity extends AppCompatActivity {
             focusView = mNoHp;
             cancel = true;
         }
-        else if(NoHp.length()< 10 || NoHp.length()>12){
+        else if(NoHp.length()< 8){
 //            mNoHp.setError(getString(R.string.error_length));
             mNoHp.setError(getString(R.string.error_invalid_nohp));
+            focusView = mNoHp;
+            cancel = true;
+        }
+        else if( NoHp.length()>12){
+            mNoHp.setError(getString(R.string.error_invalid_hp));
             focusView = mNoHp;
             cancel = true;
         }
@@ -379,6 +384,11 @@ public class RegisterActivity extends AppCompatActivity {
 
             } else {
                 //:TODO
+                Intent i = new Intent(getApplicationContext(), EmailTerdaftarActivity.class);
+                Bundle b = new Bundle();
+                b.putString("Email", email);
+                i.putExtras(b);
+                startActivityForResult(i, 1);
 
             }
         }

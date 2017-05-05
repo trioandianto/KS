@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -125,7 +126,7 @@ public class VerifikasiActivity extends AppCompatActivity {
 
         boolean cancel = false;
         View focusView = null;
-        if(active == ""){
+        if(!isCodeValid(active)){
             activeCode.setError(getString(R.string.error_active_code));
             focusView = activeCode;
             cancel = true;
@@ -138,6 +139,10 @@ public class VerifikasiActivity extends AppCompatActivity {
             mAuthTask = new UserVerifyTask(userID,active);
             mAuthTask.execute((String) null);
         }
+    }
+    private boolean isCodeValid(String acitve) {
+        //TODO: Replace this with your own logic
+        return acitve.length() > 4;
     }
 
     public class UserVerifyTask extends AsyncTask<String, Void, String> {
@@ -256,7 +261,7 @@ public class VerifikasiActivity extends AppCompatActivity {
             } else {
                 //:TODO
 //                activeCode.setError(getString(R.string.error_active_code_expiret));
-                activeCode.setError(getString(R.string.error_active_code));
+                activeCode.setError(getString(R.string.error_active_code_expiret));
                 focusView = activeCode;
                 focusView.requestFocus();
             }
@@ -279,7 +284,7 @@ public class VerifikasiActivity extends AppCompatActivity {
             NetworkInfo netInfo = cm.getActiveNetworkInfo();
             if (netInfo != null && netInfo.isConnected()) {
                 try {
-                    URL url = new URL("http://192.168.1.6/KlikSembuhAPI/api/users/GetNewActivationCode/"+userID);
+                    URL url = new URL("http://cloud.abyor.com:11080/KlikSembuhAPI/api/users/GetNewActivationCode/"+userID);
                     HttpURLConnection urlc = (HttpURLConnection) url.openConnection();
                     urlc.setConnectTimeout(3000);
                     urlc.connect();
@@ -301,20 +306,17 @@ public class VerifikasiActivity extends AppCompatActivity {
         protected void onPostExecute(Boolean success) {
             View focusView = null;
             activeCode.setError(null);
-            mAuthTask = null;
+            kirimUlangTask = null;
             if (success) {
-//                activeCode.setError(getString(R.string.error_active_code_kirim));
-                activeCode.setError(getString(R.string.error_active_code));
-                focusView = activeCode;
-                focusView.requestFocus();
                 //: TODO
+                Toast.makeText(getApplicationContext(), "Kode telah terkirim, Silahkan cek email anda.", Toast.LENGTH_SHORT).show();
             } else {
                 kirimUlangTask=null;
             }
         }
         @Override
         protected void onCancelled() {
-            mAuthTask = null;
+            kirimUlangTask = null;
         }
     }
 }
