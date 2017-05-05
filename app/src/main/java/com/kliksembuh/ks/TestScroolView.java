@@ -392,6 +392,7 @@ public class TestScroolView extends AppCompatActivity{
                         in.close();
                         JSONArray jsonArray = new JSONArray(sb.toString());
                         drawableDokter = new Drawable[jsonArray.length()];
+                        urlImage=new String[(jsonArray.length())];
 
                         for (int i = 0; i < jsonArray.length(); i++) {
                             JSONObject jsonObject = jsonArray.getJSONObject(i);
@@ -401,6 +402,7 @@ public class TestScroolView extends AppCompatActivity{
 //                            String name = jsonObject.getString("Name");
                             String image= jsonObject.getString("ImgUrl");
                             drawableDokter[i]=LoadImageFromWebOperations(image);
+                            urlImage[i]=image;
 //                            Drawable image1 = LoadImageFromWebOperations(image);
 //                            String alamat = jsonObject.getString("Address");
 //                            mDokterList.add(new Doctor(id, image1, name, alamat));

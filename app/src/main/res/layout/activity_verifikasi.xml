@@ -43,6 +43,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/kd_verifikasi"
+            android:digits="abcdefghijklmnopqrstuvwxyz1234567890"
             android:layout_marginTop="20dp"
             android:maxLines="1"
             android:singleLine="true" />
@@ -95,7 +96,7 @@
                 android:textSize="14dp"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentLeft="true"
-                android:text="Daftar Baru?"
+                android:text="Ganti Email?"
                 android:autoLink="all"
                 android:linksClickable="true"
                 android:textColor="@color/red"

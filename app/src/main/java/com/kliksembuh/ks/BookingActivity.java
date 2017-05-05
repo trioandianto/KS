@@ -23,6 +23,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.kliksembuh.ks.library.JadwalDokterAdapter;
 import com.kliksembuh.ks.models.JadwalDokter;
@@ -1190,24 +1191,30 @@ public class BookingActivity extends AppCompatActivity implements ListView.OnIte
         String dpID = jadwalDokter.getDayProdramID();
         String dpdetail = jadwalDokter.getDetailProgramID();
         String jam = jadwalDokter.getStartDate();
-        Intent myIntent = new Intent(getApplicationContext(),KonfirmasiJanjiActivity.class);
-        Bundle b = new Bundle();
-        b.putString("DPID",dpID);
-        b.putString("WPID",wpId);
-        b.putString("date", date);
-        b.putString("DetailID",dpdetail);
-        b.putString("namaHari", namaHari);
-        b.putString("namaTanggal", namaDate);
-        b.putString("personilID", personalID);
-        b.putString("facilityID", facilityID);
-        b.putString("jam", jam);
-        b.putString("rumahSakitID", rumahSakitID);
-        b.putString("idDokter", idDokter);
-        b.putString("userID",userID);
-        b.putString("namaDokter",namaDokter);
-        b.putString("namaRumahSakit",namaRumahSakit);
-        myIntent.putExtras(b);
-        startActivityForResult(myIntent, 1);
+        if(sequence=="minggu 1" && hariMingguini > day){
+            Toast.makeText(getApplicationContext(), "Jadwal Kadaluarsa", Toast.LENGTH_SHORT).show();
+        }
+        else {
+            Intent myIntent = new Intent(getApplicationContext(),KonfirmasiJanjiActivity.class);
+            Bundle b = new Bundle();
+            b.putString("DPID",dpID);
+            b.putString("WPID",wpId);
+            b.putString("date", date);
+            b.putString("DetailID",dpdetail);
+            b.putString("namaHari", namaHari);
+            b.putString("namaTanggal", namaDate);
+            b.putString("personilID", personalID);
+            b.putString("facilityID", facilityID);
+            b.putString("jam", jam);
+            b.putString("rumahSakitID", rumahSakitID);
+            b.putString("idDokter", idDokter);
+            b.putString("userID",userID);
+            b.putString("namaDokter",namaDokter);
+            b.putString("namaRumahSakit",namaRumahSakit);
+            myIntent.putExtras(b);
+            startActivityForResult(myIntent, 1);
+        }
+
 
     }
 
