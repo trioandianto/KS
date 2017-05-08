@@ -760,8 +760,6 @@ public class LoginActivity extends BaseActivity implements LoaderCallbacks<Curso
                         //.putExtra("userID",userID);
                         i.putExtras(b);
                         startActivityForResult(i, 1);
-                        i.putExtras(b);
-                        startActivity(i);
                     }
 
 
