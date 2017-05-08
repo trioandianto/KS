@@ -753,8 +753,13 @@ public class LoginActivity extends BaseActivity implements LoaderCallbacks<Curso
                     }
                     else{
                         Intent i = new Intent(getApplicationContext(), VerifikasiActivity.class);
+
                         Bundle b = new Bundle();
-                        b.putString("userID", userID);
+                        b.putString("userID", userID); //Your id
+                        b.putString("Email", mEmail);
+                        //.putExtra("userID",userID);
+                        i.putExtras(b);
+                        startActivityForResult(i, 1);
                         i.putExtras(b);
                         startActivity(i);
                     }
