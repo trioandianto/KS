@@ -200,16 +200,16 @@ public class HomeActivity extends AppCompatActivity
     @Override
     public void onBackPressed() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("Are you sure you want to Log Out?")
+        builder.setMessage("Apakah anda yakin mau Logout dari aplikasi ini?")
                 .setCancelable(false)
-                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                .setPositiveButton("Ya", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         session.logoutUser();
                         Toast.makeText(getApplicationContext(),"Anda telah berhasil logout.", Toast.LENGTH_SHORT).show();
                         //alert.showAlertDialog(HomeActivity.this, "Logout Berhasil", "Anda telah berhasil logout. Status: " + session.isLoggedIn(), true);
                     }
                 })
-                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                .setNegativeButton("Tidak", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         dialog.cancel();
                     }
