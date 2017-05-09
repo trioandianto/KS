@@ -3,8 +3,6 @@ package com.kliksembuh.ks;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -129,8 +127,10 @@ public class TestScroolView extends AppCompatActivity{
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 spesial =  parent.getItemAtPosition(position).toString();
-                dAdapter.filter(spesial);
-                lvDokter.setAdapter(dAdapter);
+                if (dAdapter!=null){
+                    dAdapter.filter(spesial);
+                    lvDokter.setAdapter(dAdapter);
+                }
             }
 
             @Override
@@ -204,7 +204,7 @@ public class TestScroolView extends AppCompatActivity{
         //toolbar.addView(spinner);
 
 //        new GetContacts().execute();
-        new DokterListAsync(rumahSakitID,facility).execute();
+        new DokterListAsync(rumahSakitID).execute();
         lvDokter.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -289,35 +289,6 @@ public class TestScroolView extends AppCompatActivity{
         }
     }
 
-    public String loadJSONFromAsset() {
-        String json = null;
-        try {
-            InputStream is = this.getAssets().open("dokter.json");
-            int size = is.available();
-            byte[] buffer = new byte[size];
-            is.read(buffer);
-            is.close();
-            json = new String(buffer, "UTF-8");
-        } catch (IOException ex) {
-            ex.printStackTrace();
-            return null;
-        }
-        return json;
-    }
-    public Bitmap StringToBitMap(String encodedString){
-        try {
-            URL url = new URL(encodedString);
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setDoInput(true);
-            connection.connect();
-            InputStream input = connection.getInputStream();
-            Bitmap myBitmap = BitmapFactory.decodeStream(input);
-            return myBitmap;
-        } catch(Exception e) {
-            e.getMessage();
-            return null;
-        }
-    }
     public Drawable LoadImageFromWebOperations(String url) {
         try {
             InputStream is = (InputStream) new URL(url).getContent();
@@ -329,10 +300,8 @@ public class TestScroolView extends AppCompatActivity{
     }
     public class DokterListAsync extends AsyncTask<String, Void, String> {
         private String mInstitution;
-        private String mFacility;
-        DokterListAsync(String institution, String facility) {
+        DokterListAsync(String institution) {
             mInstitution = institution;
-            mFacility = facility;
         }
 
         @Override

@@ -1,10 +1,9 @@
 package com.kliksembuh.ks;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.ColorStateList;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -17,7 +16,6 @@ import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.Toolbar;
-import android.util.Base64;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -42,12 +40,10 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.net.ssl.HttpsURLConnection;
@@ -63,6 +59,7 @@ public class BookingActivity extends AppCompatActivity implements ListView.OnIte
     private List<PraktekDokter> mPraktekDokter;
     private PraktekDokter pAdapter;
     private ListView lvPraktekDokter;
+    private ProgressDialog pDialog;
     private JadwalDokterAdapter jAdapter;
     private ListView lvJadwal;
     private Button btnMingguIni;
@@ -157,6 +154,8 @@ public class BookingActivity extends AppCompatActivity implements ListView.OnIte
         tvJenisSpesialisasi = (TextView)findViewById(R.id.tv_drspecialty_detail);
         tvJenisSpesialisasi.setText(dokterSpesialisasi);
         tvDate = (TextView)findViewById(R.id.tvDate);
+
+        new ImageDrawable(urlImage).execute();
 
 
 
@@ -1220,16 +1219,6 @@ public class BookingActivity extends AppCompatActivity implements ListView.OnIte
 
 
     }
-    public Bitmap StringToBitMap(String encodedString){
-        try {
-            byte [] encodeByte= Base64.decode(encodedString,Base64.DEFAULT);
-            Bitmap bitmap= BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
-            return bitmap;
-        } catch(Exception e) {
-            e.getMessage();
-            return null;
-        }
-    }
 
     public class JadwalDokterAsync extends AsyncTask<String, Void, String> {
         private String mPersonilID;
@@ -1241,12 +1230,20 @@ public class BookingActivity extends AppCompatActivity implements ListView.OnIte
             mWeek=week;
         }
 
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            // Showing progress dialog
+            pDialog = new ProgressDialog(BookingActivity.this);
+            pDialog.setMessage("Please wait...");
+            pDialog.setCancelable(false);
+            pDialog.show();
+        }
 
         @Override
         protected String doInBackground(String... params) {
             ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
             NetworkInfo netInfo = cm.getActiveNetworkInfo();
-            imageDokter = LoadImageFromWebOperations(urlImage);
             if (netInfo != null && netInfo.isConnected()) {
                 try{
                     URL url = new URL("http://cloud.abyor.com:11080/kliksembuhapi/api/Schedules/GetWeeklySchedule?personnelId="+mPersonilID+"&year="+mYear+"&startweek="+mWeek);
@@ -1267,9 +1264,6 @@ public class BookingActivity extends AppCompatActivity implements ListView.OnIte
                         }
                         in.close();
                         JSONArray jsonArray = new JSONArray(sb.toString());
-                        int length  = jsonArray.length();
-
-
 
                         for (int i = 0; i < jsonArray.length(); i++) {
 
@@ -1458,34 +1452,10 @@ public class BookingActivity extends AppCompatActivity implements ListView.OnIte
             }
         }
 
-        public String getPostDataString(JSONObject params) throws Exception {
-
-            StringBuilder result = new StringBuilder();
-            boolean first = true;
-
-            Iterator<String> itr = params.keys();
-
-            while(itr.hasNext()){
-
-                String key= itr.next();
-                Object value = params.get(key);
-
-                if (first)
-                    first = false;
-                else
-                    result.append("&");
-
-                result.append(URLEncoder.encode(key, "UTF-8"));
-                result.append("=");
-                result.append(URLEncoder.encode(value.toString(), "UTF-8"));
-
-            }
-            return result.toString();
-        }
         @Override
         protected void onPostExecute(final String success) {
-            imgDokter.setImageDrawable(imageDokter);
-
+            if (pDialog.isShowing())
+                pDialog.dismiss();
             if (success!="") {
                 jAdapter = new JadwalDokterAdapter(getApplicationContext(),mJadwalDokterList);
                 lvJadwal.setAdapter(jAdapter);
@@ -1510,19 +1480,25 @@ public class BookingActivity extends AppCompatActivity implements ListView.OnIte
             return null;
         }
     }
-    public String loadJSONFromAsset() {
-        String json = null;
-        try {
-            InputStream is = this.getAssets().open("hospital.json");
-            int size = is.available();
-            byte[] buffer = new byte[size];
-            is.read(buffer);
-            is.close();
-            json = new String(buffer, "UTF-8");
-        } catch (IOException ex) {
-            ex.printStackTrace();
-            return null;
+    public class ImageDrawable extends AsyncTask<String, Void, Drawable>{
+
+        String image;
+        public ImageDrawable(String image){
+            this.image  = image;
         }
-        return json;
+        @Override
+        protected Drawable doInBackground(String... params) {
+            //return null;
+            Drawable imageDrawable = LoadImageFromWebOperations(image);
+
+            return imageDrawable;
+        }
+
+        @Override
+        protected void onPostExecute(Drawable drawable) {
+
+            super.onPostExecute(drawable);
+            imgDokter.setImageDrawable(drawable);
+        }
     }
 }
