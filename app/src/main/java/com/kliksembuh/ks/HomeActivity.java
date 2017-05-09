@@ -20,6 +20,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
+import android.text.LoginFilter;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -29,6 +30,11 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.android.gms.cast.framework.SessionManager;
+
+import java.util.HashMap;
 
 public class HomeActivity extends AppCompatActivity
         implements View.OnClickListener,NavigationView.OnNavigationItemSelectedListener {
@@ -59,10 +65,27 @@ public class HomeActivity extends AppCompatActivity
         public int imgId;
     }
 
+    // Alert Dialog Manager
+    AlertDialogManager alert = new AlertDialogManager();
+
+    // Session Manager Class
+    SessionManagement session;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        // New session manager
+        session = new SessionManagement(getApplicationContext());
+
+        /**
+         * Call this function whenever you want to check user login
+         * This will redirect user to LoginActivity if he is not
+         * logged in
+         * */
+        session.checkLogin();
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setDrawingCacheBackgroundColor(Color.TRANSPARENT);
         setSupportActionBar(toolbar);
@@ -169,11 +192,11 @@ public class HomeActivity extends AppCompatActivity
     @Override
     public void onBackPressed() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("Are you sure you want to exit?")
+        builder.setMessage("Are you sure you want to Log Out?")
                 .setCancelable(false)
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        HomeActivity.this.finish();
+                        session.logoutUser();
                     }
                 })
                 .setNegativeButton("No", new DialogInterface.OnClickListener() {

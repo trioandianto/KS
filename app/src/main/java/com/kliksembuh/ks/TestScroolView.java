@@ -83,7 +83,7 @@ public class TestScroolView extends AppCompatActivity{
     int NUM_PAGES = 4;
     Timer timer;
     final long DELAY_MS = 5000;//delay in milliseconds before task is to be executed
-    final long PERIOD_MS = 10000; // time in milliseconds between successive task executions.
+    final long PERIOD_MS = 5000; // time in milliseconds between successive task executions.
 
 
     int a = 0;
