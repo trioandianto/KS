@@ -524,15 +524,15 @@ public class TestScroolView extends AppCompatActivity{
         protected Drawable doInBackground(String... params) {
             //return null;
             Drawable imageDrawable = LoadImageFromWebOperations(doctor.getImageUrl());
+            this.doctor.setDoc_pic_id(imageDrawable);
 
             return imageDrawable;
         }
 
-        @Override
-        protected void onPostExecute(Drawable drawable) {
-
-            super.onPostExecute(drawable);
-            this.doctor.setDoc_pic_id(drawable);
-        }
+//        @Override
+//        protected void onPostExecute(Drawable drawable) {
+//            super.onPostExecute(drawable);
+//
+//        }
     }
 }
