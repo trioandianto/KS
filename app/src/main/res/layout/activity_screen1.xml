@@ -4,32 +4,52 @@
     android:layout_width="match_parent"
     android:orientation="vertical"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="false"
-    android:background="@drawable/photo1">
-    <LinearLayout
+    android:fitsSystemWindows="false">
+
+    <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:gravity="center_horizontal"
-        android:background="@color/cardview_shadow_start_color"
+        android:layout_height="match_parent"
+        android:background="#f7f7f7"
         android:orientation="vertical">
-
-        <TextView
+        <ImageView
+            android:id="@+id/iv_WcmScreen"
+            android:layout_width="match_parent"
+            android:layout_marginTop="80dp"
+            android:padding="10dp"
+            android:layout_height="200dp"
+            android:src="@drawable/wcm_screen"/>
+        <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:textSize="20dp"
-            android:textColor="@color/cardview_light_background"
-            android:text="BOOK AN APPOINTMENT"/>
+            android:layout_below="@+id/iv_WcmScreen"
+            android:padding="10dp"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/tv_WcmTitle"
+                android:layout_width="match_parent"
+                android:gravity="center_horizontal|center_vertical"
+                android:layout_marginTop="10dp"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="17sp"
+                android:textColor="@color/cardview_dark_background"
+                android:text="@string/screen_title"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textStyle="normal"
-            android:textColor="@color/cardview_light_background"
-            android:layout_marginTop="20dp"
-            android:textAlignment="center"
-            android:text="@string/screen1"/>
-    </LinearLayout>
+            <TextView
+                android:id="@+id/tv_WcmSubTitle"
+                android:padding="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_WcmTitle"
+                android:textSize="14sp"
+                android:textStyle="normal"
+                android:textColor="@color/cardview_dark_background"
+                android:layout_marginTop="10dp"
+                android:textAlignment="center"
+                android:text="@string/screen_subtitile"/>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
 
 </RelativeLayout>

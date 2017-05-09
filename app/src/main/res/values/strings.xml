@@ -11,8 +11,15 @@
     <string name="title_activity_hospitallist">Sabtu, 10 Desember 2016</string>
     <string name="title_activity_reset_passwoord" translatable="false">Reset Password</string>
 
+    <!-- Strings related to Welcome Screen -->
+    <string name="screen_title">CARI INSTANSI KESEHATAN</string>
+    <string name="screen_subtitile">Tentukan lokasi instansi kesehatan di dekat anda, rencanakan jadwal berobat anda, dan Pilih instansi kesehatan yang anda inginkan.</string>
+    <string name="screen_title2">BUAT JANJI DENGAN DOKTER</string>
+    <string name="screen_subtitile2">Pilih layanan kesehatan dan dokter spesialis sesuai yang anda inginkan, serta tentukan waktu kunjungan anda.</string>
+    <string name="screen_title3">DAPATKAN PELAYANAN KESEHATAN</string>
+    <string name="screen_subtitile3">Datangan ke lokasi sesuai waktu yang anda tentukan, serta dapatkan pelayanan kesehatan dari tenaga medis profesional tanpa harus mengantri lama.</string>
+
     <!-- Strings related to login -->
-    <string name="screen1">Melihat jadwal dan membuat janji dengan dokter menjadi mudah dengan KlikSembuh. Pilih spesialisasi dan Instansi Keseharan dengan detail.</string>
     <string name="forgot_password">Masukan alamat email
         atau no. handphone anda dan kami akan mengirimkan instruksi untuk mengganti password.</string>
     <string name="prompt_email">Email</string>
