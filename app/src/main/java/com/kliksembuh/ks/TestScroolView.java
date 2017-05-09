@@ -3,6 +3,8 @@ package com.kliksembuh.ks;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -28,7 +30,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.kliksembuh.ks.library.DoctorListAdapter;
-import com.kliksembuh.ks.library.HttpHandler;
 import com.kliksembuh.ks.library.ObservableScrollView;
 import com.kliksembuh.ks.models.Doctor;
 
@@ -43,9 +44,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.net.URLEncoder;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -70,6 +69,7 @@ public class TestScroolView extends AppCompatActivity{
     private ListView lvDokter;
     private DoctorListAdapter dAdapter;
     private ProgressDialog pDialog;
+    private String spesial;
     private Spinner spinner;
     private String rumahSakitID;
     private String facility;
@@ -81,6 +81,7 @@ public class TestScroolView extends AppCompatActivity{
     private String userID;
     private NestedScrollView nsDokter;
     private Drawable drawableDokter[];
+    private Bitmap bitMapDokter[];
     private String [] praktekDokter;
     private TextView ivMaps;
     private String alamat;
@@ -108,6 +109,7 @@ public class TestScroolView extends AppCompatActivity{
             facility = b.getString("facilityID");
             toolbarTitle = b.getString("tittle");
             alamat = b.getString("alamat");
+            spesial = b.getString("facilityName");
         }
         setContentView(R.layout.activity_test_scrool_view);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -124,6 +126,22 @@ public class TestScroolView extends AppCompatActivity{
 //        nsDokter.setClickable(true);
 
         lvDokter = (ListView)findViewById(R.id.lvDetailRumahSakit);
+        spinner = (Spinner)findViewById(R.id.spn_SpecialtyDoc);
+        List<String> list = new ArrayList<String>();
+        ArrayAdapter arrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,list);
+        spinner.setAdapter(arrayAdapter);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//                spesial =  parent.getItemAtPosition(position).toString();
+//                new DokterListAsync(rumahSakitID,facility).execute();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 //        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
 //            lvDokter.setNestedScrollingEnabled(true);
 //        }
@@ -273,66 +291,7 @@ public class TestScroolView extends AppCompatActivity{
             container.removeView((LinearLayout) object);
         }
     }
-    private class GetContacts extends AsyncTask<Void, Void, Void> {
-        private Context context;
 
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            // Showing progress dialog
-            pDialog = new ProgressDialog(TestScroolView.this);
-            pDialog.setMessage("Please wait...");
-            pDialog.setCancelable(false);
-            pDialog.show();
-        }
-
-        @Override
-        protected Void doInBackground(Void... args0) {
-            HttpHandler sh = new HttpHandler();
-
-            // Making a request to url and getting response
-            try{
-                JSONObject obj = new JSONObject(loadJSONFromAsset());
-
-                // Getting JSON Array node
-                JSONArray contacts = obj.getJSONArray("dokter");
-
-                // looping through All Contacts
-                for (int i = 0; i < contacts.length(); i++) {
-                    JSONObject c = contacts.getJSONObject(i);
-
-                    if(c.getString("Rs").equals(rumahSakitID)){
-                        String name = c.getString("name");
-//                        idDokter[a] = c.getString("id");
-//                        idDokterInt[a]=a;
-                        String id = c.getString("id");
-                        String image = c.getString("imgUrl");
-                        urlImage[i] = image;
-                        Drawable image1 = LoadImageFromWebOperations(image);
-                        String alamat = c.getString("alamat");
-                        mDokterList.add(new Doctor(id, image1, name, alamat));
-                    }
-
-
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-            return null;
-        }
-
-
-        @Override
-        protected void onPostExecute(Void result) {
-            super.onPostExecute(result);
-            if (pDialog.isShowing())
-                pDialog.dismiss();
-            dAdapter = new DoctorListAdapter(getApplicationContext(), mDokterList);
-//            hAdapter.getFilter().filter(searchView);
-
-            lvDokter.setAdapter(dAdapter);
-        }
-    }
     public String loadJSONFromAsset() {
         String json = null;
         try {
@@ -347,6 +306,20 @@ public class TestScroolView extends AppCompatActivity{
             return null;
         }
         return json;
+    }
+    public Bitmap StringToBitMap(String encodedString){
+        try {
+            URL url = new URL(encodedString);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setDoInput(true);
+            connection.connect();
+            InputStream input = connection.getInputStream();
+            Bitmap myBitmap = BitmapFactory.decodeStream(input);
+            return myBitmap;
+        } catch(Exception e) {
+            e.getMessage();
+            return null;
+        }
     }
     public Drawable LoadImageFromWebOperations(String url) {
         try {
@@ -382,7 +355,7 @@ public class TestScroolView extends AppCompatActivity{
             NetworkInfo netInfo = cm.getActiveNetworkInfo();
             if (netInfo != null && netInfo.isConnected()) {
                 try{
-                    URL url = new URL("http://cloud.abyor.com:11080/kliksembuhapi/api/MedicalPersonnel/SearchMedicalPersonnelBasedOnInstitutions?institution="+mInstitution+"&facility="+mFacility);
+                    URL url = new URL("http://cloud.abyor.com:11080/kliksembuhapi/api/MedicalPersonnel/SearchMedicalPersonnelBasedOnInstitutions?institution="+mInstitution+"&facility=");
                     HttpURLConnection urlc = (HttpURLConnection) url.openConnection();
                     urlc.setRequestProperty("Content-Type", "application/json");
                     urlc.connect();
@@ -401,20 +374,16 @@ public class TestScroolView extends AppCompatActivity{
                         in.close();
                         JSONArray jsonArray = new JSONArray(sb.toString());
                         drawableDokter = new Drawable[jsonArray.length()];
+                        bitMapDokter = new Bitmap[jsonArray.length()];
                         urlImage=new String[(jsonArray.length())];
 
                         for (int i = 0; i < jsonArray.length(); i++) {
                             JSONObject jsonObject = jsonArray.getJSONObject(i);
-//                            String id = jsonObject.getString("MedicalPersonnelID");
-//                            String personelCD = jsonObject.getString("MedicalPersonnelID");
-//                            idDokter[i]=personelCD;
-//                            String name = jsonObject.getString("Name");
                             String image= jsonObject.getString("ImgUrl");
-                            drawableDokter[i]=LoadImageFromWebOperations(image);
+                            bitMapDokter[i]=StringToBitMap(image);
+//                            drawableDokter[i]=LoadImageFromWebOperations(image);
                             urlImage[i]=image;
-//                            Drawable image1 = LoadImageFromWebOperations(image);
-//                            String alamat = jsonObject.getString("Address");
-//                            mDokterList.add(new Doctor(id, image1, name, alamat));
+//
                         }
 
                         return sb.toString();
@@ -440,32 +409,9 @@ public class TestScroolView extends AppCompatActivity{
             }
         }
 
-        public String getPostDataString(JSONObject params) throws Exception {
-
-            StringBuilder result = new StringBuilder();
-            boolean first = true;
-
-            Iterator<String> itr = params.keys();
-
-            while(itr.hasNext()){
-
-                String key= itr.next();
-                Object value = params.get(key);
-
-                if (first)
-                    first = false;
-                else
-                    result.append("&");
-
-                result.append(URLEncoder.encode(key, "UTF-8"));
-                result.append("=");
-                result.append(URLEncoder.encode(value.toString(), "UTF-8"));
-
-            }
-            return result.toString();
-        }
         @Override
         protected void onPostExecute(final String success) {
+            List<String> list = new ArrayList<String>();
             if (pDialog.isShowing())
                 pDialog.dismiss();
             if (success!="") {
@@ -477,23 +423,27 @@ public class TestScroolView extends AppCompatActivity{
                         JSONObject jsonObject = jsonArray.getJSONObject(i);
                         String id = jsonObject.getString("MedicalPersonnelID");
                         String personelCD = jsonObject.getString("MedicalPersonnelCD");
-                        String image= jsonObject.getString("ImgUrl");
-                        Drawable drawable = LoadImageFromWebOperations(image);
+                        String image = jsonObject.getString("ImgUrl");
+
+
                         idDokter[i]=personelCD;
                         String name = jsonObject.getString("Name");
                         // to do; change alamat to Doctor Specialty
                         String alamat = jsonObject.getString("HealthFacilityDesc");
 
                          //List specialty doctor in Spinner
-                        Spinner spnSpecialty = (Spinner) findViewById(R.id.spn_SpecialtyDoc);
-                        List<String> allSpecialty = new ArrayList<>();
-                        allSpecialty.add(alamat);
-                        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>
-                                (TestScroolView.this, R.layout.spinner_style, allSpecialty );
-                        dataAdapter.setDropDownViewResource
-                                (android.R.layout.simple_spinner_dropdown_item);
-                        spnSpecialty.setAdapter(dataAdapter);
+                        if(list.contains(alamat)){
+                            //TODO
+                        }
+                        else{
+                            //TODO
+                            list.add(alamat);
+                        }
 
+                        ArrayAdapter arrayAdapter = new ArrayAdapter<String>(getApplicationContext(),R.layout.spinner_style,list);
+                        arrayAdapter.setDropDownViewResource
+                                (R.layout.spinner_dropdown_item);
+                        spinner.setAdapter(arrayAdapter);
                         JSONArray jsonArray1 = jsonObject.getJSONArray("Institute");
                         for (int j=0;j<jsonArray1.length();j++){
                             praktekDokter = new String[jsonArray1.length()];
@@ -502,10 +452,19 @@ public class TestScroolView extends AppCompatActivity{
                             TextView tvNameHosp = (TextView)findViewById(R.id.tvHospitalName);
                             tvNameHosp.setText(jsonObject1.getString("InstitutionName"));
                         }
-                        mDokterList.add(new Doctor(id, drawableDokter[i], name, alamat));
+                        if(spesial.equals(alamat)){
+                            mDokterList.add(new Doctor(id, name, alamat, image));
+                        }
+
                         dAdapter = new DoctorListAdapter(getApplicationContext(), mDokterList);
                         lvDokter.setAdapter(dAdapter);
+                        
+//                        new ImageDrawable(mDokterList).execute();
                     }
+                    for (Doctor currentDokter : mDokterList) {
+                        new ImageDrawable(currentDokter).execute();
+                    }
+
 
                 }catch (JSONException e){
                     e.printStackTrace();
@@ -600,6 +559,27 @@ public class TestScroolView extends AppCompatActivity{
             }
 
 
+        }
+    }
+    public class ImageDrawable extends AsyncTask<String, Void, Drawable>{
+
+        Doctor doctor;
+        public ImageDrawable(Doctor doctor){
+            this.doctor  = doctor;
+        }
+        @Override
+        protected Drawable doInBackground(String... params) {
+            //return null;
+            Drawable imageDrawable = LoadImageFromWebOperations(this.doctor.getImageUrl());
+
+            return imageDrawable;
+        }
+
+        @Override
+        protected void onPostExecute(Drawable drawable) {
+
+            super.onPostExecute(drawable);
+            this.doctor.setDoc_pic_id(drawable);
         }
     }
 }

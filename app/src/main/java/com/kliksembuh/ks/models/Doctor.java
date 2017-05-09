@@ -11,6 +11,7 @@ public class Doctor {
     private Drawable doc_pic_id;
     private String nameDoc;
     private String specialty;
+    private String imageUrl;
 
     // Constructor
     public Doctor(String doc_id, Drawable doc_pic_id, String nameDoc, String specialty) {
@@ -20,10 +21,22 @@ public class Doctor {
         this.specialty = specialty;
     }
 
+    public Doctor(String doc_id, String nameDoc, String specialty, String imageUrl) {
+        this.doc_id = doc_id;
+        //this.doc_pic_id = doc_pic_id;
+        this.nameDoc = nameDoc;
+        this.specialty = specialty;
+        this.imageUrl = imageUrl;
+    }
+
     // Getter, Setter
 
     public String getDoc_id() {
         return doc_id;
+    }
+
+    public String getImageUrl() {
+        return this.imageUrl;
     }
 
     public void setDoc_id(String doc_id) {

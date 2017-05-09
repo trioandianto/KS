@@ -313,7 +313,7 @@ public class DoctorListActivity extends AppCompatActivity implements OnMapReadyC
 //                    String office = phone.getString("office");
 
                     // tmp hash map for single contact
-                    mDokterList.add(new Doctor(id, image1, name, alamat));
+//                    mDokterList.add(new Doctor(id, image1, name, alamat));
 
 
                 }
