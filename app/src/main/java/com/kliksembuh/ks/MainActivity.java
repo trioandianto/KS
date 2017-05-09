@@ -19,6 +19,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.kliksembuh.ks.library.Intromanager;
 
@@ -31,9 +32,23 @@ public class MainActivity extends AppCompatActivity {
     Button next,skip;
     private LinearLayout dotsLayout;
     private int[] layouts;
+    SessionManagement session;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // New session manager
+        session = new SessionManagement(getApplicationContext());
+
+        /**
+         * Call this function whenever you want to check user login
+         * This will redirect user to LoginActivity if he is not
+         * logged in
+         * */
+        session.checkLogin();
+
+
         intromanager = new Intromanager(this);
         if(!intromanager.Check()){
             intromanager.setFirst(false);
@@ -42,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
             finish();
 
         }
+
         if(Build.VERSION.SDK_INT>=25){
 
             getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE|View.SYSTEM_UI_FLAG_FULLSCREEN);

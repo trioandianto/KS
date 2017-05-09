@@ -10,14 +10,19 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
         <android.support.design.widget.TabLayout
-            style="@style/TabLayoutTextStyle"
+            app:tabTextAppearance="@style/TabLayoutTextStyle"
             android:id="@+id/tabSetting"
             android:layout_width="match_parent"
             app:tabBackground="@drawable/tab_color_selector"
             app:tabTextColor="@color/cardview_dark_background"
             app:tabSelectedTextColor="@color/white"
             android:layout_height="wrap_content"
-            android:background="@color/colorPrimary">
+            android:background="@color/colorPrimary"
+            app:tabIndicatorColor="@color/colorPrimary"
+            app:tabIndicatorHeight="2dp"
+            android:divider="@color/red"
+            android:stretchColumns="*"
+            app:tabMode="scrollable">
 
         </android.support.design.widget.TabLayout>
 

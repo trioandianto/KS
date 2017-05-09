@@ -14,13 +14,17 @@
         <android.support.design.widget.TabLayout
             android:id="@+id/tabsmyappoint"
             android:layout_width="match_parent"
-            app:tabBackground="@drawable/tab_color_selector"
-            app:tabTextColor="@color/black"
-            app:tabMode="scrollable"
-            style="@style/TabLayoutTextStyle"
-            app:tabSelectedTextColor="@color/white"
             android:layout_height="wrap_content"
-            android:background="@color/bluegrayopacity">
+            android:divider="@color/red"
+            android:stretchColumns="*"
+            android:background="@color/colorPrimary"
+            app:tabTextAppearance="@style/TabLayoutTextStyle"
+            app:tabBackground="@drawable/tab_color_selector"
+            app:tabTextColor="@color/cardview_dark_background"
+            app:tabMode="scrollable"
+            app:tabSelectedTextColor="@color/white"
+            app:tabIndicatorColor="@color/colorPrimary"
+            app:tabIndicatorHeight="2dp">
         </android.support.design.widget.TabLayout>
 
         <android.support.v4.view.ViewPager

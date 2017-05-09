@@ -8,7 +8,7 @@
     <ImageView
         android:layout_width="match_parent"
         android:id="@+id/home_screen1"
-        android:src="@drawable/homescreen1"
+        android:src="@drawable/home_bg"
         android:layout_height="match_parent"
         android:scaleType="fitXY"/>
     <LinearLayout

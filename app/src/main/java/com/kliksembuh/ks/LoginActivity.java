@@ -42,6 +42,7 @@ import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
+import com.google.android.gms.cast.framework.Session;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -126,6 +127,12 @@ public class LoginActivity extends BaseActivity implements LoaderCallbacks<Curso
     private FirebaseAuth.AuthStateListener mAuthListener;
     private String googleClientId = "123183603892-ggmi3v04paa6jpjgd79msmt3utu30vd0.apps.googleusercontent.com";
 
+    // Alert Dialog Manager
+    AlertDialogManager alert = new AlertDialogManager();
+
+    // Sesion Manager Class
+    SessionManagement session;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -133,6 +140,8 @@ public class LoginActivity extends BaseActivity implements LoaderCallbacks<Curso
         setContentView(R.layout.activity_login);
 
         // Added by Ucu (13032017)
+        session = new SessionManagement(getApplicationContext());
+
         findViewById(R.id.gSign_in_button).setOnClickListener(this);
         Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
         mEmailSignInButton.setOnClickListener(this);
@@ -184,6 +193,7 @@ public class LoginActivity extends BaseActivity implements LoaderCallbacks<Curso
                 return false;
             }
         });
+        Toast.makeText(getApplicationContext(),"User Login Status: " + session.isLoggedIn(), Toast.LENGTH_SHORT).show();
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
 
@@ -470,40 +480,50 @@ public class LoginActivity extends BaseActivity implements LoaderCallbacks<Curso
         boolean cancel = false;
         View focusView = null;
 
-        // Check for a valid password, if the user entered one.
-        if (!isPasswordValid(password)) {
-            mPasswordView.setError(getString(R.string.error_invalid_password));
-            focusView = mPasswordView;
-            cancel = true;
+        // Check if username, password is filled
+        if(email.trim().length() > 0 && password.trim().length()>0)
+        {
+
+            // Check for a valid password, if the user entered one.
+            if (!isPasswordValid(password)) {
+                mPasswordView.setError(getString(R.string.error_invalid_password));
+                focusView = mPasswordView;
+                cancel = true;
+            }
+            if (TextUtils.isEmpty(password)){
+                mPasswordView.setError(getString(R.string.error_field_required));
+                focusView = mPasswordView;
+                cancel = true;
+            }
+
+            // Check for a valid email address.
+            if (TextUtils.isEmpty(email)) {
+                mEmailView.setError(getString(R.string.error_field_required));
+                focusView = mEmailView;
+                cancel = true;
+            } else if (!isEmailValid(email)) {
+                mEmailView.setError(getString(R.string.error_invalid_email));
+                focusView = mEmailView;
+                cancel = true;
+            }
+
+            if (cancel) {
+                // There was an error; don't attempt login and focus the first
+                // form field with an error.
+                focusView.requestFocus();
+            } else {
+                // Show a progress spinner, and kick off a background task to
+                // perform the user login attempt.
+                showProgress(true);
+                mAuthTask = new UserLoginTask(email, password);
+                mAuthTask.execute((String) null);
+            }
+
         }
-        if (TextUtils.isEmpty(password)){
-            mPasswordView.setError(getString(R.string.error_field_required));
-            focusView = mPasswordView;
-            cancel = true;
+        else{
+            alert.showAlertDialog(LoginActivity.this, "Login gagal", "Masukkan Email & Password anda dengan benar.", false);
         }
 
-        // Check for a valid email address.
-        if (TextUtils.isEmpty(email)) {
-            mEmailView.setError(getString(R.string.error_field_required));
-            focusView = mEmailView;
-            cancel = true;
-        } else if (!isEmailValid(email)) {
-            mEmailView.setError(getString(R.string.error_invalid_email));
-            focusView = mEmailView;
-            cancel = true;
-        }
-
-        if (cancel) {
-            // There was an error; don't attempt login and focus the first
-            // form field with an error.
-            focusView.requestFocus();
-        } else {
-            // Show a progress spinner, and kick off a background task to
-            // perform the user login attempt.
-            showProgress(true);
-            mAuthTask = new UserLoginTask(email, password);
-            mAuthTask.execute((String) null);
-        }
     }
 
     private boolean isEmailValid(String email) {
@@ -737,10 +757,12 @@ public class LoginActivity extends BaseActivity implements LoaderCallbacks<Curso
                     JSONObject jsonObj = new JSONObject(success);
                     JSONObject jsd = jsonObj.getJSONObject("Result");
                     String userID = jsd.getString("Id");
+                    String email = jsd.getString("Email");
                     String firstName = jsd.getString("FirstName");
                     String lastName = jsd.getString("LastName");
                     String valid = jsd.getString("Active");
                     if (valid=="true"){
+                        session.createLoginSession(userID,email);
                         Intent i = new Intent(getApplicationContext(), HomeActivity.class);
                         Bundle b = new Bundle();
                         b.putString("userID", userID); //Your id
@@ -765,8 +787,9 @@ public class LoginActivity extends BaseActivity implements LoaderCallbacks<Curso
             }
 
             } else {
-                mPasswordView.setError(getString(R.string.error_incorrect_password));
-                mPasswordView.requestFocus();
+                alert.showAlertDialog(LoginActivity.this, "Login gagal", "Password yang anda masukkan salah.", false);
+//                mPasswordView.setError(getString(R.string.error_incorrect_password));
+//                mPasswordView.requestFocus();
             }
         }
 

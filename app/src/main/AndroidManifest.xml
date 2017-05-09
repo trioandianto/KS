@@ -273,8 +273,13 @@
             android:name=".MapsDetailHospitalActivity"
             android:launchMode="singleInstance"
             android:parentActivityName=".TestScroolView"
-            android:theme="@style/AppTheme4" /></activity>
-        <activity android:name=".FacilityActivity" />
+            android:theme="@style/AppTheme4" />
+        <activity android:name=".FacilityActivity"
+            android:label="@string/lbl_facility"
+            android:launchMode="singleTop"
+            android:parentActivityName=".TestScroolView"
+            android:theme="@style/AppTheme3"
+            android:windowSoftInputMode="adjustPan"/>
         <!--<activity android:name=".FacilityServiceActivity" />-->
         <!--<activity android:name=".FacilityRatingActivity" />-->
         <!--<activity android:name=".FacilityInsuranceActivity"></activity>-->

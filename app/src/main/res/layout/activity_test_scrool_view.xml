@@ -177,12 +177,12 @@
                     android:id="@+id/line_Layanan"
                     android:layout_width="1dp"
                     android:layout_height="25dp"
-                    android:layout_marginTop="12dp"
+                    android:layout_marginTop="11dp"
                     android:layout_marginLeft="14dp"
                     android:layout_marginRight="10dp"
                     android:layout_centerHorizontal="true"
                     android:layout_toRightOf="@+id/tv_Layanan"
-                    android:background="@color/cardview_dark_background"/>
+                    android:background="@color/light_grey"/>
 
                 <TextView
                     android:layout_width="90dp"
@@ -216,7 +216,7 @@
                     android:layout_marginRight="16dp"
                     android:layout_centerHorizontal="true"
                     android:layout_toRightOf="@+id/tv_Penilaian"
-                    android:background="@color/cardview_dark_background"/>
+                    android:background="@color/light_grey"/>
 
                 <TextView
                     android:layout_width="60dp"
@@ -260,7 +260,7 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
                     android:layout_centerHorizontal="true"
-                    android:background="@color/grey_light"/>
+                    android:background="@color/light_grey"/>
 
                 <TextView
                     android:layout_width="match_parent"
@@ -278,9 +278,9 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/white"
                 android:layout_marginBottom="5dp"
                 android:layout_marginRight="10dp"
+                android:gravity="center"
                 android:layout_marginLeft="10dp">
                 <LinearLayout
                     android:layout_width="wrap_content"
