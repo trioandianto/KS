@@ -103,7 +103,7 @@ public class HospitalList extends AppCompatActivity {
                 b.putString("SubDistrictDescription",subDistricDescription);
                 myIntent.putExtras(b);
                 startActivityForResult(myIntent, 1);
-                overridePendingTransition( R.anim.slide_in_up, R.anim.slide_out_up );
+                //overridePendingTransition( R.anim.from_middle, R.anim.to_middle);
             }
         });
         mHospitalList = new ArrayList<>();

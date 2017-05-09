@@ -23,6 +23,8 @@ import android.widget.Toast;
 
 import com.kliksembuh.ks.library.Intromanager;
 
+import java.util.HashMap;
+
 public class MainActivity extends AppCompatActivity {
 
     private ViewPager viewPager;
@@ -39,15 +41,19 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         // New session manager
-        session = new SessionManagement(getApplicationContext());
+        session = new SessionManagement(this);
+        if (session.isLoggedIn()){
+            Intent i= new Intent(MainActivity.this,HomeActivity.class);
+            startActivity(i);
+            finish();
+        }
 
         /**
          * Call this function whenever you want to check user login
          * This will redirect user to LoginActivity if he is not
          * logged in
          * */
-        session.checkLogin();
-
+        //session.checkLogin();
 
         intromanager = new Intromanager(this);
         if(!intromanager.Check()){
@@ -76,8 +82,7 @@ public class MainActivity extends AppCompatActivity {
         layouts = new int[]{
                 R.layout.activity_screen1,
                 R.layout.activity_screen2,
-                R.layout.activity_screen3,
-                R.layout.activity_screen4};
+                R.layout.activity_screen3};
         addBottomDots(0);
         changeStatusBarColor();
         viewPagerAdapter = new ViewPagerAdapter();

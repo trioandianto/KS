@@ -20,7 +20,7 @@
                 android:layout_height="35dp"
                 android:id="@+id/layoutdots"
                 android:gravity="center"
-                android:layout_marginBottom="20dp"
+                android:layout_marginBottom="12dp"
                 android:layout_alignParentBottom="true"
                 android:orientation="horizontal">
 
@@ -41,7 +41,8 @@
                 android:layout_alignParentRight="true"
                 android:background="@null"
                 android:text="NEXT"
-                android:textColor="@android:color/white"/>
+                android:textSize="14sp"
+                android:textColor="@color/cardview_dark_background"/>
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -50,8 +51,9 @@
                 android:layout_alignParentLeft="true"
                 android:background="@null"
                 android:text="SKIP"
+                android:textSize="14sp"
                 android:onClick="sendNotification"
-                android:textColor="@android:color/white"/>
+                android:textColor="@color/cardview_dark_background"/>
 
         </RelativeLayout>
 

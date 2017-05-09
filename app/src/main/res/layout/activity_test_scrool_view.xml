@@ -360,7 +360,7 @@
                 android:background="#d4157e">
                 <RelativeLayout
                     android:id="@+id/relSpinner"
-                    android:layout_width="170dp"
+                    android:layout_width="160dp"
                     android:layout_height="wrap_content"
                     android:background="#eb2698"
                     android:layout_marginLeft="7dp"
@@ -386,13 +386,13 @@
                         android:src="@mipmap/drop_white" />
                 </RelativeLayout>
                 <RelativeLayout
-                    android:layout_width="180dp"
+                    android:layout_width="188dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:padding="6dp"
                     android:gravity="center">
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/tv_FilterDoc"
                         android:text="Urutkan Berdasarkan"

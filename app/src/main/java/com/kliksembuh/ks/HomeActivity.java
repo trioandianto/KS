@@ -105,6 +105,14 @@ public class HomeActivity extends AppCompatActivity
                 positionTab = Integer.parseInt(tab);
             }
         }
+        else
+        {
+            // get user data from session
+            HashMap<String, String> user = session.getUserDetails();
+
+            firstName = user.get(SessionManagement.KEY_FNAME);
+            lastName = user.get(SessionManagement.KEY_LNAME);
+        }
 
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
         viewPager = (ViewPager)findViewById(R.id.view_pager_home);
@@ -197,6 +205,8 @@ public class HomeActivity extends AppCompatActivity
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         session.logoutUser();
+                        Toast.makeText(getApplicationContext(),"Anda telah berhasil logout.", Toast.LENGTH_SHORT).show();
+                        //alert.showAlertDialog(HomeActivity.this, "Logout Berhasil", "Anda telah berhasil logout. Status: " + session.isLoggedIn(), true);
                     }
                 })
                 .setNegativeButton("No", new DialogInterface.OnClickListener() {

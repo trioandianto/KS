@@ -27,8 +27,7 @@
             android:textStyle="normal"
             android:textColor="@color/cardview_light_background"
             android:layout_marginTop="20dp"
-            android:textAlignment="center"
-            android:text="@string/screen1"/>
+            android:textAlignment="center"/>
     </LinearLayout>
 
 

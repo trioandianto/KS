@@ -193,7 +193,7 @@ public class LoginActivity extends BaseActivity implements LoaderCallbacks<Curso
                 return false;
             }
         });
-        Toast.makeText(getApplicationContext(),"User Login Status: " + session.isLoggedIn(), Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getApplicationContext(),"User Login Status: " + session.isLoggedIn(), Toast.LENGTH_SHORT).show();
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
 
@@ -757,13 +757,12 @@ public class LoginActivity extends BaseActivity implements LoaderCallbacks<Curso
                     JSONObject jsonObj = new JSONObject(success);
                     JSONObject jsd = jsonObj.getJSONObject("Result");
                     String userID = jsd.getString("Id");
-                    String email = jsd.getString("Email");
                     String firstName = jsd.getString("FirstName");
                     String lastName = jsd.getString("LastName");
                     String valid = jsd.getString("Active");
                     boolean vld = Boolean.parseBoolean(valid);
                     if (vld==true){
-                        session.createLoginSession(userID,email);
+                        session.createLoginSession(userID,firstName,lastName);
                         Intent i = new Intent(getApplicationContext(), HomeActivity.class);
                         Bundle b = new Bundle();
                         b.putString("userID", userID); //Your id
@@ -791,7 +790,7 @@ public class LoginActivity extends BaseActivity implements LoaderCallbacks<Curso
             }
 
             } else {
-                alert.showAlertDialog(LoginActivity.this, "Login gagal", "Password yang anda masukkan salah.", false);
+                alert.showAlertDialog(LoginActivity.this, "Login gagal", "Email atau Password yang anda masukkan salah.", false);
 //                mPasswordView.setError(getString(R.string.error_incorrect_password));
 //                mPasswordView.requestFocus();
             }

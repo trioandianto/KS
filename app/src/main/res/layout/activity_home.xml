@@ -76,16 +76,8 @@
             android:layout_marginBottom="20dp"
             android:layout_alignParentBottom="true"
             android:orientation="horizontal">
-
         </LinearLayout>
 
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_above="@+id/layoutdotshome"
-            android:background="@android:color/white">
-        </View>
         <include
             layout="@layout/app_bar_home"
             android:background="@android:color/transparent"
