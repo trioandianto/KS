@@ -3,8 +3,6 @@ package com.kliksembuh.ks;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -14,7 +12,6 @@ import android.os.Handler;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
@@ -62,7 +59,6 @@ public class TestScroolView extends AppCompatActivity{
     private LinearLayout dotsLayout;
     private TextView[] dots;
     private List<Doctor> mDokterList;
-    private List specialtyString;
     List<String> list;
     private ViewPagerAdapter viewPagerAdapter;
     private CollapsingToolbarLayout collapsingToolbarLayout;
@@ -75,15 +71,10 @@ public class TestScroolView extends AppCompatActivity{
     private String facility;
     private String toolbarTitle;
     private String [] idDokter;
-    public String [] urlImage;
-    private int [] idDokterInt;
-    private int[] listArr;
     private String userID;
-    private NestedScrollView nsDokter;
-    private Drawable drawableDokter[];
-    private Bitmap bitMapDokter[];
     private String [] praktekDokter;
     private TextView ivMaps;
+    private Drawable load;
     private String alamat;
     // Slider for ViewPager
     int currentPage = 0;
@@ -121,6 +112,7 @@ public class TestScroolView extends AppCompatActivity{
 
         mDokterList = new ArrayList<>();
         list = new ArrayList<String>();
+        load = getResources().getDrawable(R.drawable.loading);
 //        nsDokter = (NestedScrollView)findViewById(R.id.nsDokter);
 //        nsDokter.setFillViewport(true);
 //        nsDokter.setClickable(true);
@@ -128,13 +120,17 @@ public class TestScroolView extends AppCompatActivity{
         lvDokter = (ListView)findViewById(R.id.lvDetailRumahSakit);
         spinner = (Spinner)findViewById(R.id.spn_SpecialtyDoc);
         List<String> list = new ArrayList<String>();
+        list.add(spesial);
         ArrayAdapter arrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,list);
         spinner.setAdapter(arrayAdapter);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-//                spesial =  parent.getItemAtPosition(position).toString();
-//                new DokterListAsync(rumahSakitID,facility).execute();
+                spesial =  parent.getItemAtPosition(position).toString();
+                if (dAdapter!=null){
+                    dAdapter.filter(spesial);
+                    lvDokter.setAdapter(dAdapter);
+                }
             }
 
             @Override
@@ -208,7 +204,7 @@ public class TestScroolView extends AppCompatActivity{
         //toolbar.addView(spinner);
 
 //        new GetContacts().execute();
-        new DokterListAsync(rumahSakitID,facility).execute();
+        new DokterListAsync(rumahSakitID).execute();
         lvDokter.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -216,9 +212,10 @@ public class TestScroolView extends AppCompatActivity{
                 Doctor dokter = (Doctor) object;
                 String dokterID =  dokter.getDoc_id();
                 String namaDokter = dokter.getNameDoc();
-                Drawable imgUrl = dokter.getDoc_pic_id();
+                Drawable imageDr = dokter.getDoc_pic_id();
+                String urlImg = dokter.getImageUrl();
                 BookingActivity bookingActivity = new BookingActivity();
-                bookingActivity.setImageDokter(imgUrl);
+                bookingActivity.setImageDokter(imageDr);
 
                 Intent myIntent = new Intent(TestScroolView.this ,BookingActivity.class);
                 Bundle b = new Bundle();
@@ -226,7 +223,7 @@ public class TestScroolView extends AppCompatActivity{
                 b.putString("userID", userID);
                 b.putString("personalID",idDokter[position]);
                 b.putString("namaDokter",namaDokter);
-                b.putString("urlImage",urlImage[position]);
+                b.putString("urlImage",urlImg);
                 b.putString("rumahSakitID",rumahSakitID);
                 b.putString("facilityID", facility);
                 b.putString("namaRumahSakit", toolbarTitle);
@@ -292,35 +289,6 @@ public class TestScroolView extends AppCompatActivity{
         }
     }
 
-    public String loadJSONFromAsset() {
-        String json = null;
-        try {
-            InputStream is = this.getAssets().open("dokter.json");
-            int size = is.available();
-            byte[] buffer = new byte[size];
-            is.read(buffer);
-            is.close();
-            json = new String(buffer, "UTF-8");
-        } catch (IOException ex) {
-            ex.printStackTrace();
-            return null;
-        }
-        return json;
-    }
-    public Bitmap StringToBitMap(String encodedString){
-        try {
-            URL url = new URL(encodedString);
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setDoInput(true);
-            connection.connect();
-            InputStream input = connection.getInputStream();
-            Bitmap myBitmap = BitmapFactory.decodeStream(input);
-            return myBitmap;
-        } catch(Exception e) {
-            e.getMessage();
-            return null;
-        }
-    }
     public Drawable LoadImageFromWebOperations(String url) {
         try {
             InputStream is = (InputStream) new URL(url).getContent();
@@ -332,10 +300,8 @@ public class TestScroolView extends AppCompatActivity{
     }
     public class DokterListAsync extends AsyncTask<String, Void, String> {
         private String mInstitution;
-        private String mFacility;
-        DokterListAsync(String institution, String facility) {
+        DokterListAsync(String institution) {
             mInstitution = institution;
-            mFacility = facility;
         }
 
         @Override
@@ -372,19 +338,6 @@ public class TestScroolView extends AppCompatActivity{
                             break;
                         }
                         in.close();
-                        JSONArray jsonArray = new JSONArray(sb.toString());
-                        drawableDokter = new Drawable[jsonArray.length()];
-                        bitMapDokter = new Bitmap[jsonArray.length()];
-                        urlImage=new String[(jsonArray.length())];
-
-                        for (int i = 0; i < jsonArray.length(); i++) {
-                            JSONObject jsonObject = jsonArray.getJSONObject(i);
-                            String image= jsonObject.getString("ImgUrl");
-                            bitMapDokter[i]=StringToBitMap(image);
-//                            drawableDokter[i]=LoadImageFromWebOperations(image);
-                            urlImage[i]=image;
-//
-                        }
 
                         return sb.toString();
                     }
@@ -425,19 +378,18 @@ public class TestScroolView extends AppCompatActivity{
                         String personelCD = jsonObject.getString("MedicalPersonnelCD");
                         String image = jsonObject.getString("ImgUrl");
 
-
                         idDokter[i]=personelCD;
                         String name = jsonObject.getString("Name");
                         // to do; change alamat to Doctor Specialty
-                        String alamat = jsonObject.getString("HealthFacilityDesc");
+                        String spesiality = jsonObject.getString("HealthFacilityDesc");
 
                          //List specialty doctor in Spinner
-                        if(list.contains(alamat)){
+                        if(list.contains(spesiality)){
                             //TODO
                         }
                         else{
                             //TODO
-                            list.add(alamat);
+                            list.add(spesiality);
                         }
 
                         ArrayAdapter arrayAdapter = new ArrayAdapter<String>(getApplicationContext(),R.layout.spinner_style,list);
@@ -452,15 +404,16 @@ public class TestScroolView extends AppCompatActivity{
                             TextView tvNameHosp = (TextView)findViewById(R.id.tvHospitalName);
                             tvNameHosp.setText(jsonObject1.getString("InstitutionName"));
                         }
-                        if(spesial.equals(alamat)){
-                            mDokterList.add(new Doctor(id, name, alamat, image));
-                        }
 
-                        dAdapter = new DoctorListAdapter(getApplicationContext(), mDokterList);
-                        lvDokter.setAdapter(dAdapter);
+                        mDokterList.add(new Doctor(id, load, name, spesiality, image));
+
+
                         
 //                        new ImageDrawable(mDokterList).execute();
                     }
+                    dAdapter = new DoctorListAdapter(getApplicationContext(), mDokterList);
+//                        dAdapter.filter(spesial);
+                    lvDokter.setAdapter(dAdapter);
                     for (Doctor currentDokter : mDokterList) {
                         new ImageDrawable(currentDokter).execute();
                     }
@@ -570,7 +523,7 @@ public class TestScroolView extends AppCompatActivity{
         @Override
         protected Drawable doInBackground(String... params) {
             //return null;
-            Drawable imageDrawable = LoadImageFromWebOperations(this.doctor.getImageUrl());
+            Drawable imageDrawable = LoadImageFromWebOperations(doctor.getImageUrl());
 
             return imageDrawable;
         }

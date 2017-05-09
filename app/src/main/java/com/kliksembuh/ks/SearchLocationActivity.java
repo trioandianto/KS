@@ -146,15 +146,15 @@ public class SearchLocationActivity extends AppCompatActivity implements ListVie
     }
    private class GetContacts extends AsyncTask<String, Void, String> {
         private Context context;
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            // Showing progress dialog
-            pDialog = new ProgressDialog(SearchLocationActivity.this);
-            pDialog.setMessage("Please wait...");
-            pDialog.setCancelable(false);
-            pDialog.show();
-        }
+//        @Override
+//        protected void onPreExecute() {
+//            super.onPreExecute();
+//            // Showing progress dialog
+//            pDialog = new ProgressDialog(SearchLocationActivity.this);
+//            pDialog.setMessage("Please wait...");
+//            pDialog.setCancelable(false);
+//            pDialog.show();
+//        }
         @Override
         protected String doInBackground(String... params) {
             ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -203,8 +203,8 @@ public class SearchLocationActivity extends AppCompatActivity implements ListVie
         @Override
         protected void onPostExecute(final String result) {
             super.onPostExecute(result);
-            if (pDialog.isShowing())
-                pDialog.dismiss();
+//            if (pDialog.isShowing())
+//                pDialog.dismiss();
             if(result!=""){
                 try {
                     JSONArray jsonArray = new JSONArray(result);

@@ -98,15 +98,15 @@ public class SearchSpesializationActivity extends AppCompatActivity implements L
     }
 
     private class SearchSpesializationTask extends AsyncTask<String, Void, String> {
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            // Showing progress dialog
-            pDialog = new ProgressDialog(SearchSpesializationActivity.this);
-            pDialog.setMessage("Please wait...");
-            pDialog.setCancelable(false);
-            pDialog.show();
-        }
+//        @Override
+//        protected void onPreExecute() {
+//            super.onPreExecute();
+//            // Showing progress dialog
+//            pDialog = new ProgressDialog(SearchSpesializationActivity.this);
+//            pDialog.setMessage("Please wait...");
+//            pDialog.setCancelable(false);
+//            pDialog.show();
+//        }
         @Override
         protected String doInBackground(String... params) {
             ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -151,8 +151,8 @@ public class SearchSpesializationActivity extends AppCompatActivity implements L
         @Override
         protected void onPostExecute(final String result) {
             super.onPostExecute(result);
-            if (pDialog.isShowing())
-                pDialog.dismiss();
+//            if (pDialog.isShowing())
+//                pDialog.dismiss();
             if(result!="") {
                 try {
                     JSONArray jsonArray = new JSONArray(result);
