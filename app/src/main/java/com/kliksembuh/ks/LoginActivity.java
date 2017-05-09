@@ -740,7 +740,8 @@ public class LoginActivity extends BaseActivity implements LoaderCallbacks<Curso
                     String firstName = jsd.getString("FirstName");
                     String lastName = jsd.getString("LastName");
                     String valid = jsd.getString("Active");
-                    if (valid=="true"){
+                    boolean vld = Boolean.parseBoolean(valid);
+                    if (vld==true){
                         Intent i = new Intent(getApplicationContext(), HomeActivity.class);
                         Bundle b = new Bundle();
                         b.putString("userID", userID); //Your id

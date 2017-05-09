@@ -133,6 +133,7 @@ public class HospitalList extends AppCompatActivity {
                 b.putString("facilityID", spesialisasi);
                 b.putString("userID",userID);
                 b.putString("alamat", alamat);
+                b.putString("facilityName", facilityName);
                 //.putExtra("userID",userID);
                 myIntent.putExtras(b);
                 //.putExtra("userID",userID);

@@ -119,7 +119,7 @@ public class KonfirmasiJanjiActivity extends AppCompatActivity {
             public void onClick(View view) {
                 new KonfirmasiJanjiTask(userID,customerID,facilityCategoryID,facilityID,status,institutionID,
                         date,weekProgramID,dayProgramID,dayProgramDetailID,personnelID).execute();
-                Toast.makeText(getApplicationContext(), "Telah berhasil membuat janji.", Toast.LENGTH_SHORT).show();
+
 //                Intent myIntent = new Intent(view.getContext(), MyAppointmentActivity.class);
 //                startActivityForResult(myIntent, 0);
             }
@@ -204,7 +204,7 @@ public class KonfirmasiJanjiActivity extends AppCompatActivity {
                         return sb.toString();
                     }
                     else {
-                        Toast.makeText(getApplicationContext(), "Gagal membuat janji.", Toast.LENGTH_LONG).show();
+//                        Toast.makeText(getApplicationContext(), "Gagal membuat janji.", Toast.LENGTH_LONG).show();
                         return "";
                     }
                 } catch (MalformedURLException e1) {
@@ -230,11 +230,15 @@ public class KonfirmasiJanjiActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(final String success) {
             if (success!="") {
+                Toast.makeText(getApplicationContext(), "Telah berhasil membuat janji.", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(getApplicationContext(), MyAppointmentActivity.class);
-                intent.putExtra("userID",userID);
+
+                Bundle b = new Bundle();
+                b.putString("userID",userID);
 //                Bundle b = new Bundle();
 //                b.putString("userID", userID);
 //                startActivityForResult(i, 1);
+                intent.putExtras(b);
                 startActivity(intent);
                 finish();
 
