@@ -102,6 +102,9 @@ public class LoginActivity extends BaseActivity implements LoaderCallbacks<Curso
     private static String KEY_EMAIL = "email";
     private static String KEY_CREATED_AT = "created_at";
 
+    private static long back_pressed_time;
+    private static long PERIOD = 2000;
+
 
     /**
      * A dummy authentication store containing known user names and passwords.
@@ -197,9 +200,6 @@ public class LoginActivity extends BaseActivity implements LoaderCallbacks<Curso
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
 
-
-
-
         //login facebook
         loginButton = (LoginButton) findViewById(R.id.login_button);
         callbackManager = CallbackManager.Factory.create();
@@ -268,6 +268,21 @@ public class LoginActivity extends BaseActivity implements LoaderCallbacks<Curso
     private void signIn() {
         Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
         startActivityForResult(signInIntent, RC_SIGN_IN);
+    }
+
+    // Press back button
+    @Override
+    public void onBackPressed() {
+//        Intent homeIntent = new Intent(Intent.ACTION_MAIN);
+//            homeIntent.addCategory( Intent.CATEGORY_HOME );
+//            homeIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//            startActivity(homeIntent);
+
+        if (back_pressed_time + PERIOD > System.currentTimeMillis())
+            super.onBackPressed();
+        else
+            Toast.makeText(getBaseContext(), "Press once again to exit!", Toast.LENGTH_SHORT).show();
+        back_pressed_time = System.currentTimeMillis();
     }
 
     @Override
@@ -521,7 +536,19 @@ public class LoginActivity extends BaseActivity implements LoaderCallbacks<Curso
 
         }
         else{
-            alert.showAlertDialog(LoginActivity.this, "Login gagal", "Masukkan Email & Password anda dengan benar.", false);
+            //alert.showAlertDialog(LoginActivity.this, "Login gagal", "Masukkan Email & Password anda dengan benar.", false);
+            if (TextUtils.isEmpty(password)){
+                mPasswordView.setError(getString(R.string.error_field_required));
+                focusView = mPasswordView;
+                cancel = true;
+            }
+
+            // Check for a valid email address.
+            if (TextUtils.isEmpty(email)) {
+                mEmailView.setError(getString(R.string.error_field_required));
+                focusView = mEmailView;
+                cancel = true;
+            }
         }
 
     }
@@ -789,10 +816,12 @@ public class LoginActivity extends BaseActivity implements LoaderCallbacks<Curso
                 e.printStackTrace();
             }
 
-            } else {
+            }
+
+            else {
                 alert.showAlertDialog(LoginActivity.this, "Login gagal", "Email atau Password yang anda masukkan salah.", false);
-//                mPasswordView.setError(getString(R.string.error_incorrect_password));
-//                mPasswordView.requestFocus();
+                //mPasswordView.setError(getString(R.string.error_incorrect_password));
+                //mPasswordView.requestFocus();
             }
         }
 

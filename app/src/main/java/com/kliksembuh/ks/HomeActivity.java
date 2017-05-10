@@ -55,6 +55,8 @@ public class HomeActivity extends AppCompatActivity
     private String facilityName;
     private String locationName;
     private String locationID;
+    private static long back_pressed_time;
+    private static long PERIOD = 2000;
 
     public class MyLayout{
         public MyLayout(int layoutId, int imgId){
@@ -118,10 +120,10 @@ public class HomeActivity extends AppCompatActivity
         viewPager = (ViewPager)findViewById(R.id.view_pager_home);
         dotsLayout=(LinearLayout)findViewById(R.id.layoutdotshome);
         layouts = new int[]{
-                    R.layout.activity_home_screen1,
+                    R.layout.activity_home_screen4,
                 R.layout.activity_home_screen2,
                 R.layout.activity_home_screen3,
-                R.layout.activity_home_screen4};
+                R.layout.activity_home_screen1};
         addBottomDots(0);
         changeStatusBarColor();
         viewPagerAdapter = new ViewPagerAdapter();
@@ -199,23 +201,16 @@ public class HomeActivity extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("Apakah anda yakin mau Logout dari aplikasi ini?")
-                .setCancelable(false)
-                .setPositiveButton("Ya", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        session.logoutUser();
-                        Toast.makeText(getApplicationContext(),"Anda telah berhasil logout.", Toast.LENGTH_SHORT).show();
-                        //alert.showAlertDialog(HomeActivity.this, "Logout Berhasil", "Anda telah berhasil logout. Status: " + session.isLoggedIn(), true);
-                    }
-                })
-                .setNegativeButton("Tidak", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        dialog.cancel();
-                    }
-                });
-        AlertDialog alert = builder.create();
-        alert.show();
+//        Intent homeIntent = new Intent(Intent.ACTION_MAIN);
+//            homeIntent.addCategory( Intent.CATEGORY_HOME );
+//            homeIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//            startActivity(homeIntent);
+
+        if (back_pressed_time + PERIOD > System.currentTimeMillis())
+            super.onBackPressed();
+        else
+            Toast.makeText(getBaseContext(), "Press once again to exit!", Toast.LENGTH_SHORT).show();
+        back_pressed_time = System.currentTimeMillis();
     }
 
     @Override
@@ -287,7 +282,8 @@ public class HomeActivity extends AppCompatActivity
 //            intent.putExtra("Exit me", true);
 //            startActivity(intent);
 //            finish();
-            onBackPressed();
+            logOutNav();
+//            onBackPressed();
 //            Intent homeIntent = new Intent(Intent.ACTION_MAIN);
 //            homeIntent.addCategory( Intent.CATEGORY_HOME );
 //            homeIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -332,6 +328,28 @@ public class HomeActivity extends AppCompatActivity
             window.setStatusBarColor(Color.TRANSPARENT);
         }
     }
+
+    private void logOutNav(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Apakah anda yakin mau Logout dari aplikasi ini?")
+                .setCancelable(false)
+                .setPositiveButton("Ya", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        session.logoutUser();
+                        Toast.makeText(getApplicationContext(),"Anda telah berhasil logout.", Toast.LENGTH_SHORT).show();
+                        finish();
+                        //alert.showAlertDialog(HomeActivity.this, "Logout Berhasil", "Anda telah berhasil logout. Status: " + session.isLoggedIn(), true);
+                    }
+                })
+                .setNegativeButton("Tidak", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+        AlertDialog alert = builder.create();
+        alert.show();
+    }
+
     ViewPager.OnPageChangeListener viewListener = new ViewPager.OnPageChangeListener(){
 
         @Override

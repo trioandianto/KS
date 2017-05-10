@@ -21,8 +21,7 @@
             app:tabIndicatorColor="@color/colorPrimary"
             app:tabIndicatorHeight="2dp"
             android:divider="@color/red"
-            android:stretchColumns="*"
-            app:tabMode="scrollable">
+            app:tabMode="fixed">
 
         </android.support.design.widget.TabLayout>
 
