@@ -142,6 +142,20 @@ public class PatientFormActivity extends AppCompatActivity {
         if(closeRelativePhoneNbr!=null && closeRelativePhoneNbr!=""){
             etNoHPKerabat.setText(closeRelativePhoneNbr);
         }
+        if(relativeStatus!=null && relativeStatus!="null"){
+            if(relativeStatus == ""){
+
+            }
+            else if(relativeStatus == ""){
+
+            }
+            else if(relativeStatus == ""){
+
+            }
+            else{
+
+            }
+        }
 
     }
     private void attemptSubmit(){
