@@ -6,32 +6,35 @@ package com.kliksembuh.ks.models;
 
 public class Patient {
     private int pat_id;
-    private String pat_medicalR;
-    private String patStatus;
-    private String firstName;
-    private String lastName;
-    private String  patMobile;
+    private String patCloseRelativeName;
+    private String patCloseRelativePhoneNbr;
+    private String patRelativeStatus;
+    private String patFirstName;
+    private String patLastName;
+    private String patCellPhoneNbr;
     private String patGender;
+    private String patAddress;
     //To do, convert int / string to  Date Type
     //private Date patBirthday;
     private String patBirthday;
-    private String noBPJSInsurance;
-    private String patAddress;
+    private String patBPJSNbr;
+
 
 
     // Constructor
-    public Patient(int pat_id, String pat_medicalR, String patStatus, String firstName, String lastName,
-                   String patMobile, String patGender, String patBirthday, String noBPJSInsurance, String patAddress) {
+    public Patient(int pat_id, String patCloseRelativeName, String patStatus, String firstName, String patLastName,
+                   String patMobile, String patGender, String patBirthday, String noBPJSInsurance, String patAddress, String patCloseRelativePhoneNbr) {
         this.pat_id = pat_id;
-        this.pat_medicalR = pat_medicalR;
-        this.patStatus = patStatus;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.patMobile = patMobile;
+        this.patCloseRelativeName = patCloseRelativeName;
+        this.patRelativeStatus = patStatus;
+        this.patFirstName = firstName;
+        this.patLastName = patLastName;
+        this.patCellPhoneNbr = patMobile;
         this.patGender = patGender;
         this.patBirthday = patBirthday;
-        this.noBPJSInsurance = noBPJSInsurance;
+        this.patBPJSNbr = noBPJSInsurance;
         this.patAddress = patAddress;
+        this.patCloseRelativePhoneNbr = patCloseRelativePhoneNbr;
     }
 
     public int getPat_id() {
@@ -42,44 +45,44 @@ public class Patient {
         this.pat_id = pat_id;
     }
 
-    public String getPat_medicalR() {
-        return pat_medicalR;
+    public String getPatCloseRelativeName() {
+        return patCloseRelativeName;
     }
 
-    public void setPat_medicalR(String pat_medicalR) {
-        this.pat_medicalR = pat_medicalR;
+    public void setPatCloseRelativeName(String patCloseRelativeName) {
+        this.patCloseRelativeName = patCloseRelativeName;
     }
 
-    public String getPatStatus() {
-        return patStatus;
+    public String getPatRelativeStatus() {
+        return patRelativeStatus;
     }
 
-    public void setPatStatus(String patStatus) {
-        this.patStatus = patStatus;
+    public void setPatRelativeStatus(String patRelativeStatus) {
+        this.patRelativeStatus = patRelativeStatus;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getPatFirstName() {
+        return patFirstName;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setPatFirstName(String patFirstName) {
+        this.patFirstName = patFirstName;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getPatLastName() {
+        return patLastName;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setPatLastName(String patLastName) {
+        this.patLastName = patLastName;
     }
 
-    public String getPatMobile() {
-        return patMobile;
+    public String getPatCellPhoneNbr() {
+        return patCellPhoneNbr;
     }
 
-    public void setPatMobile(String patMobile) {
-        this.patMobile = patMobile;
+    public void setPatCellPhoneNbr(String patCellPhoneNbr) {
+        this.patCellPhoneNbr = patCellPhoneNbr;
     }
 
     public String getPatGender() {
@@ -98,12 +101,12 @@ public class Patient {
         this.patBirthday = patBirthday;
     }
 
-    public String getNoBPJSInsurance() {
-        return noBPJSInsurance;
+    public String getPatBPJSNbr() {
+        return patBPJSNbr;
     }
 
-    public void setNoBPJSInsurance(String noBPJSInsurance) {
-        this.noBPJSInsurance = noBPJSInsurance;
+    public void setPatBPJSNbr(String patBPJSNbr) {
+        this.patBPJSNbr = patBPJSNbr;
     }
 
     public String getPatAddress() {
@@ -112,5 +115,12 @@ public class Patient {
 
     public void setPatAddress(String patAddress) {
         this.patAddress = patAddress;
+    }
+    public String getPatCloseRelativePhoneNbr() {
+        return patCloseRelativePhoneNbr;
+    }
+
+    public void setPatCloseRelativePhoneNbr(String patCloseRelativePhoneNbr) {
+        this.patCloseRelativePhoneNbr = patCloseRelativePhoneNbr;
     }
 }

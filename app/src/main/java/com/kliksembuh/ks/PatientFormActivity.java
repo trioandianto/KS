@@ -44,6 +44,15 @@ public class PatientFormActivity extends AppCompatActivity {
     private RadioButton rbFemale;
     private Spinner spnStatusSaya;
     private String statusSaya;
+    private String fName;
+    private String lName;
+    private String cellPhoneNbr ;
+    private String bPJSNbr;
+    private String address ;
+    private String closeRelativeName;
+    private String closeRelativePhoneNbr;
+    private String birthOfDate;
+    private String relativeStatus;
 
     @Override
 
@@ -54,6 +63,17 @@ public class PatientFormActivity extends AppCompatActivity {
         Bundle b = getIntent().getExtras();
         if(b != null) {
             userID = b.getString("userID");
+            fName = b.getString("fName");//Your id
+            lName = b.getString("lName");
+            gender = b.getString("gender");
+            cellPhoneNbr = b.getString("cellPhoneNbr");
+            bPJSNbr = b.getString("bPJSNbr");
+            address = b.getString("address");
+            closeRelativeName = b.getString("closeRelativeName");
+            closeRelativePhoneNbr = b.getString("closeRelativePhoneNbr");
+            birthOfDate = b.getString("birthOfDate");
+            relativeStatus = b.getString("relativeStatus");
+
         }
         spnStatus = (Spinner) findViewById(R.id.spnStatusSaya);
         spnAsuransi = (Spinner) findViewById(R.id.spnAsuransi);
@@ -62,8 +82,6 @@ public class PatientFormActivity extends AppCompatActivity {
         etFname = (AutoCompleteTextView)findViewById(R.id.etFNameForm);
         etLname = (AutoCompleteTextView)findViewById(R.id.etLNameForm);
         etMobile= (AutoCompleteTextView)findViewById(R.id.etEditMobileForm);
-        etLname = (AutoCompleteTextView)findViewById(R.id.etLNameForm);
-        etMobile= (AutoCompleteTextView) findViewById(R.id.etEditMobileForm);
         etTanggalLahir = (AutoCompleteTextView) findViewById(R.id.etTanggalLahirForm);
         etNoBPJSKes= (AutoCompleteTextView) findViewById(R.id.etNoBPJSKesehatan);
         etAlamat= (AutoCompleteTextView)findViewById(R.id.etAlamatForm);
@@ -99,6 +117,31 @@ public class PatientFormActivity extends AppCompatActivity {
                 attemptSubmit();
             }
         });
+        setData();
+
+    }
+    private void setData(){
+        if(fName!=null && fName != ""){
+            etFname.setText(fName);
+        }
+        if(lName!=null && lName!=""){
+            etLname.setText(lName);
+        }
+        if(cellPhoneNbr!=null && cellPhoneNbr!=""){
+            etMobile.setText(cellPhoneNbr);
+        }
+        if(birthOfDate!=null && birthOfDate!=""){
+            etTanggalLahir.setText(birthOfDate);
+        }
+        if(address!=null && address!=""){
+            etAlamat.setText(address);
+        }
+        if(closeRelativeName!=null && closeRelativeName!=""){
+            etNamaKerabat.setText(closeRelativeName);
+        }
+        if(closeRelativePhoneNbr!=null && closeRelativePhoneNbr!=""){
+            etNoHPKerabat.setText(closeRelativePhoneNbr);
+        }
 
     }
     private void attemptSubmit(){
@@ -129,7 +172,6 @@ public class PatientFormActivity extends AppCompatActivity {
         else {
             gender = "Male";
         }
-        String fullName = fName+" "+lName;
 
         boolean cancel = false;
         View focusView = null;
@@ -189,7 +231,7 @@ public class PatientFormActivity extends AppCompatActivity {
         } else {
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
-            mAuthTask = new PatientAsyncTask(userID,fullName,gender,mobile,noBPJS,alamat,namaKerabat,
+            mAuthTask = new PatientAsyncTask(userID,fName,lName,gender,mobile,noBPJS,alamat,namaKerabat,
                     noHPKerabat, tanggalLahir, relativeStatus);
             mAuthTask.execute((String) null);
         }
@@ -198,7 +240,8 @@ public class PatientFormActivity extends AppCompatActivity {
 
     public class PatientAsyncTask extends AsyncTask<String, Void, String>{
         String pUserID;
-        String pFullName;
+        String pFName;
+        String pLName;
         String pGender;
         String pCellPhoneNbr;
         String pBPJSNbr;
@@ -208,10 +251,11 @@ public class PatientFormActivity extends AppCompatActivity {
         String pBirthOfDate;
         String pRelativeStatus;
 
-        public PatientAsyncTask(String pUserID, String pFullName, String pGender, String pCellPhoneNbr, String pBPJSNbr, String pAddress,
+        public PatientAsyncTask(String pUserID, String pFName,String pLName, String pGender, String pCellPhoneNbr, String pBPJSNbr, String pAddress,
                            String pCloseRelativeName, String pCloseRelativePhoneNbr, String pBirthOfDate, String pRelativeStatus){
             this.pUserID = pUserID;
-            this.pFullName =pFullName;
+            this.pFName = pFName;
+            this.pLName = pLName;
             this.pGender = pGender;
             this.pBPJSNbr = pBPJSNbr;
             this.pAddress = pAddress;
@@ -232,7 +276,8 @@ public class PatientFormActivity extends AppCompatActivity {
                     HttpURLConnection urlc = (HttpURLConnection) url.openConnection();
                     JSONObject jsonObject = new JSONObject();
                     jsonObject.put("UserID", pUserID);
-                    jsonObject.put("FullName", pFullName);
+                    jsonObject.put("FirstName", pFName);
+                    jsonObject.put("LastName", pLName);
                     jsonObject.put("Gender", pGender);
                     jsonObject.put("CellPhoneNbr", pCellPhoneNbr);
                     jsonObject.put("BPJSNbr", pBPJSNbr);

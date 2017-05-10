@@ -68,16 +68,16 @@ public class PatientProfileActivity extends AppCompatActivity implements View.On
                 Object object = parent.getAdapter().getItem(position);
                 Patient patient = (Patient) object;
                 int personalInfoID = patient.getPat_id();
-                String fName = patient.getFirstName();
-                String lName = patient.getLastName();
+                String fName = patient.getPatFirstName();
+                String lName = patient.getPatLastName();
                 String gender = patient.getPatGender();
-                String cellPhoneNbr = patient.getPatMobile();
-                String bPJSNbr = patient.getNoBPJSInsurance();
+                String cellPhoneNbr = patient.getPatCellPhoneNbr();
+                String bPJSNbr = patient.getPatBPJSNbr();
                 String address = patient.getPatAddress();
-                String closeRelativeName = patient.getPat_medicalR();
-                String closeRelativePhoneNbr = patient.getPat_medicalR();
+                String closeRelativeName = patient.getPatCloseRelativeName();
+                String closeRelativePhoneNbr = patient.getPatCloseRelativePhoneNbr();
                 String birthOfDate = patient.getPatBirthday();
-                String relativeStatus = patient.getPatStatus();
+                String relativeStatus = patient.getPatRelativeStatus();
                 Intent myIntent = new Intent(getApplicationContext(),PatientFormActivity.class);
                 Bundle b = new Bundle();
                 b.putInt("personalInfoID", personalInfoID);
@@ -182,7 +182,8 @@ public class PatientProfileActivity extends AppCompatActivity implements View.On
                     for (int i=0;i<jsonArray.length();i++) {
                         JSONObject jsonObject = jsonArray.getJSONObject(i);
                         String personalInfoID = jsonObject.getString("PersonalInfoID");
-                        String fullName = jsonObject.getString("FullName");
+                        String fName = jsonObject.getString("FirstName");
+                        String lName = jsonObject.getString("LastName");
                         String gender = jsonObject.getString("Gender");
                         String cellPhoneNbr = jsonObject.getString("CellPhoneNbr");
                         String bPJSNbr = jsonObject.getString("BPJSNbr");
@@ -192,8 +193,8 @@ public class PatientProfileActivity extends AppCompatActivity implements View.On
                         String birthOfDate = jsonObject.getString("BirthOfDate");
                         String relativeStatus = jsonObject.getString("RelativeStatus");
 
-                        mPatientList.add(new Patient(Integer.parseInt(personalInfoID),closeRelativeName,relativeStatus,fullName,fullName,
-                               cellPhoneNbr,gender,birthOfDate,bPJSNbr,address));
+                        mPatientList.add(new Patient(Integer.parseInt(personalInfoID),closeRelativeName,relativeStatus,fName,lName,
+                               cellPhoneNbr,gender,birthOfDate,bPJSNbr,address,closeRelativePhoneNbr));
 
                     }
                     pAdapter = new PatientListAdapter(getApplicationContext(),mPatientList);
