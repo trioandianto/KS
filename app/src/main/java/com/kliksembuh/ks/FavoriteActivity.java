@@ -56,11 +56,11 @@ public class FavoriteActivity extends AppCompatActivity {
         public CharSequence getPageTitle(int position) {
             switch (position) {
                 case 0:
-                    return "INSTANSI";
+                    return "Instansi";
                 case 1:
-                    return "DOKTER";
+                    return "Dokter";
                 case 2:
-                    return "PELAYANAN";
+                    return "Pelayanan";
             }
             return null;
         }
