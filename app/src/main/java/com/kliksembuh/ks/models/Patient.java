@@ -6,22 +6,22 @@ package com.kliksembuh.ks.models;
 
 public class Patient {
     private int pat_id;
-    private double pat_medicalR;
+    private String pat_medicalR;
     private String patStatus;
     private String firstName;
     private String lastName;
-    private double patMobile;
-    private boolean patGender;
+    private String  patMobile;
+    private String patGender;
     //To do, convert int / string to  Date Type
     //private Date patBirthday;
-    private int patBirthday;
-    private double noBPJSInsurance;
+    private String patBirthday;
+    private String noBPJSInsurance;
     private String patAddress;
 
 
     // Constructor
-    public Patient(int pat_id, double pat_medicalR, String patStatus, String firstName, String lastName,
-                   double patMobile, boolean patGender, int patBirthday, double noBPJSInsurance, String patAddress) {
+    public Patient(int pat_id, String pat_medicalR, String patStatus, String firstName, String lastName,
+                   String patMobile, String patGender, String patBirthday, String noBPJSInsurance, String patAddress) {
         this.pat_id = pat_id;
         this.pat_medicalR = pat_medicalR;
         this.patStatus = patStatus;
@@ -42,11 +42,11 @@ public class Patient {
         this.pat_id = pat_id;
     }
 
-    public double getPat_medicalR() {
+    public String getPat_medicalR() {
         return pat_medicalR;
     }
 
-    public void setPat_medicalR(double pat_medicalR) {
+    public void setPat_medicalR(String pat_medicalR) {
         this.pat_medicalR = pat_medicalR;
     }
 
@@ -74,35 +74,35 @@ public class Patient {
         this.lastName = lastName;
     }
 
-    public double getPatMobile() {
+    public String getPatMobile() {
         return patMobile;
     }
 
-    public void setPatMobile(int patMobile) {
+    public void setPatMobile(String patMobile) {
         this.patMobile = patMobile;
     }
 
-    public boolean isPatGender() {
+    public String getPatGender() {
         return patGender;
     }
 
-    public void setPatGender(boolean patGender) {
+    public void setPatGender(String patGender) {
         this.patGender = patGender;
     }
 
-    public int getPatBirthday() {
+    public String getPatBirthday() {
         return patBirthday;
     }
 
-    public void setPatBirthday(int patBirthday) {
+    public void setPatBirthday(String patBirthday) {
         this.patBirthday = patBirthday;
     }
 
-    public double getNoBPJSInsurance() {
+    public String getNoBPJSInsurance() {
         return noBPJSInsurance;
     }
 
-    public void setNoBPJSInsurance(int noBPJSInsurance) {
+    public void setNoBPJSInsurance(String noBPJSInsurance) {
         this.noBPJSInsurance = noBPJSInsurance;
     }
 
