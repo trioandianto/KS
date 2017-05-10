@@ -19,11 +19,16 @@ public class PatientProfileActivity extends AppCompatActivity implements View.On
     private List<Patient> mPatientList;
     private PatientListAdapter pAdapter;
     private Button btnAddPatient;
+    private String userID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_patient_profile);
+        Bundle b = getIntent().getExtras();
+        if(b != null) {
+            userID = b.getString("userID");
+        }
         lvPatient = (ListView) findViewById(R.id.listview_patientProfile);
         mPatientList = new ArrayList<>();
 
@@ -46,6 +51,9 @@ public class PatientProfileActivity extends AppCompatActivity implements View.On
     public void onClick(View v) {
         Intent i=new Intent();
         i.setClass(this,PatientFormActivity.class);
+        Bundle b = new Bundle();
+        b.putString("userID", userID);
+        i.putExtras(b);
         startActivity(i);
     }
 }

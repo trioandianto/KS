@@ -12,10 +12,15 @@ import android.support.v7.app.AppCompatActivity;
 public class SettingActivity extends AppCompatActivity{
     private SettingActivity.SectionsPagerAdapter mSectionsPagerAdapter;
     private ViewPager mViewPager;
+    private String userID;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
+        Bundle b = getIntent().getExtras();
+        if(b != null) {
+            userID = b.getString("userID");
+        }
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
         mViewPager = (ViewPager) findViewById(R.id.containerSetting);
@@ -37,6 +42,14 @@ public class SettingActivity extends AppCompatActivity{
             switch (position){
                 case 0:
                     SettingProfileActivity settingProfileActivity= new SettingProfileActivity();
+                    try{
+                        settingProfileActivity.setUserID(userID);
+                    }
+                    catch (Exception ex){
+
+                    }finally {
+
+                    }
                     return settingProfileActivity;
                 case 1:
                     SettingVitalSignActivity settingVitalSignActivity= new SettingVitalSignActivity();

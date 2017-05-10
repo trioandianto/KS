@@ -1207,6 +1207,7 @@ public class BookingActivity extends AppCompatActivity implements ListView.OnIte
             b.putString("namaTanggal", namaDate);
             b.putString("personilID", personalID);
             b.putString("facilityID", facilityID);
+            b.putString("programDetailID", programDetailID);
             b.putString("jam", jam);
             b.putString("rumahSakitID", rumahSakitID);
             b.putString("idDokter", idDokter);
@@ -1499,6 +1500,7 @@ public class BookingActivity extends AppCompatActivity implements ListView.OnIte
 
             super.onPostExecute(drawable);
             imgDokter.setImageDrawable(drawable);
+
         }
     }
 }

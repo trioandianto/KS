@@ -78,7 +78,8 @@ public class KonfirmasiJanjiActivity extends AppCompatActivity {
             dayProgramID = b.getString("DPID");
             detailTanggal = b.getString("namaTanggal");
 //            dayProgramDetailID = b.getString("DetailID");
-            dayProgramDetailID = "4";
+
+            dayProgramDetailID = b.getString("DetailID");
             jam = b.getString("jam");
             personnelID = b.getString("idDokter");
             personnelCD = b.getString("personilID");
@@ -244,6 +245,7 @@ public class KonfirmasiJanjiActivity extends AppCompatActivity {
 
             } else {
                 //:TODO
+                Toast.makeText(getApplicationContext(), "Gagal membuat janji.", Toast.LENGTH_LONG).show();
             }
         }
         @Override

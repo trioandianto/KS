@@ -13,6 +13,18 @@ public class SettingProfileActivity extends Fragment implements View.OnClickList
     private TextView editEmailkontak;
     private TextView editPasswordProf;
     private TextView editProfilPatient;
+    private String userID;
+
+
+    public String getUserID() {
+        return userID;
+    }
+
+    public void setUserID(String userID) {
+        this.userID = userID;
+    }
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -36,7 +48,10 @@ public class SettingProfileActivity extends Fragment implements View.OnClickList
         }
         if(i == R.id.tvEditProfilPatient){
             Intent editProfilPatient = new Intent(v.getContext(), PatientProfileActivity.class);
-            startActivity(editProfilPatient);
+            Bundle b = new Bundle();
+            b.putString("userID", userID);
+            editProfilPatient.putExtras(b);
+            startActivityForResult(editProfilPatient, 1);
         }
         if(i == R.id.tvEditPasswordProf){
             Intent editPasswordProf = new Intent (v.getContext(), EditPasswordProfileActivity.class);
