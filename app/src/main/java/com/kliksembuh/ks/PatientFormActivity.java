@@ -1,6 +1,7 @@
 package com.kliksembuh.ks;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
@@ -8,11 +9,13 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -32,13 +35,15 @@ public class PatientFormActivity extends AppCompatActivity {
     private PatientAsyncTask mAuthTask = null;
     private Spinner spnStatus, spnAsuransi;
     private RadioButton rbJenisKelaminL, rbJenisKelaminP;
-    private EditText etLname, etMobile, etFname, etTanggalLahir,etNoBPJSKes, etAlamat, etNamaKerabat, etNoHPKerabat;
+    private AutoCompleteTextView etLname, etMobile, etFname, etTanggalLahir,etNoBPJSKes, etAlamat, etNamaKerabat, etNoHPKerabat;
     private Button btnSimpan;
     private String userID;
     private String gender;
     private RadioGroup radioGroup;
     private RadioButton rbMale;
     private RadioButton rbFemale;
+    private Spinner spnStatusSaya;
+    private String statusSaya;
 
     @Override
 
@@ -54,19 +59,31 @@ public class PatientFormActivity extends AppCompatActivity {
         spnAsuransi = (Spinner) findViewById(R.id.spnAsuransi);
         rbJenisKelaminL = (RadioButton) findViewById(R.id.radioBtnJenisL);
         rbJenisKelaminP = (RadioButton) findViewById(R.id.radioBtnJenisP);
-        etFname = (EditText)findViewById(R.id.etFNameForm);
-        etLname = (EditText)findViewById(R.id.etLNameForm);
-        etMobile= (EditText)findViewById(R.id.etEditMobileForm);
-        etLname = (EditText)findViewById(R.id.etLNameForm);
-        etMobile= (EditText) findViewById(R.id.etEditMobileForm);
-        etTanggalLahir = (EditText) findViewById(R.id.etTanggalLahirForm);
-        etNoBPJSKes= (EditText) findViewById(R.id.etNoBPJSKesehatan);
-        etAlamat= (EditText)findViewById(R.id.etAlamatForm);
-        etNamaKerabat = (EditText)findViewById(R.id.etNamaKerabatForm);
-        etNoHPKerabat = (EditText)findViewById(R.id.etNoHPKerabat);
+        etFname = (AutoCompleteTextView)findViewById(R.id.etFNameForm);
+        etLname = (AutoCompleteTextView)findViewById(R.id.etLNameForm);
+        etMobile= (AutoCompleteTextView)findViewById(R.id.etEditMobileForm);
+        etLname = (AutoCompleteTextView)findViewById(R.id.etLNameForm);
+        etMobile= (AutoCompleteTextView) findViewById(R.id.etEditMobileForm);
+        etTanggalLahir = (AutoCompleteTextView) findViewById(R.id.etTanggalLahirForm);
+        etNoBPJSKes= (AutoCompleteTextView) findViewById(R.id.etNoBPJSKesehatan);
+        etAlamat= (AutoCompleteTextView)findViewById(R.id.etAlamatForm);
+        etNamaKerabat = (AutoCompleteTextView)findViewById(R.id.etNamaKerabatForm);
+        etNoHPKerabat = (AutoCompleteTextView)findViewById(R.id.etNoHPKerabat);
         radioGroup = (RadioGroup)findViewById(R.id.rgGender);
         rbFemale = (RadioButton)findViewById(R.id.radioBtnJenisP);
         rbMale = (RadioButton)findViewById(R.id.radioBtnJenisL);
+        spnStatusSaya = (Spinner)findViewById(R.id.spnStatusSaya);
+        spnStatusSaya.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                statusSaya = parent.getItemAtPosition(position).toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
         if (rbMale.isChecked()){
             gender = "Male";
         }
@@ -105,6 +122,7 @@ public class PatientFormActivity extends AppCompatActivity {
         String noBPJS = etNoBPJSKes.getText().toString();
         String noHPKerabat = etNoHPKerabat.getText().toString();
         String tanggalLahir = etTanggalLahir.getText().toString();
+        String relativeStatus = statusSaya;
         if(rbFemale.isChecked()){
             gender = "Female";
         }
@@ -116,49 +134,49 @@ public class PatientFormActivity extends AppCompatActivity {
         boolean cancel = false;
         View focusView = null;
 
-        if(!TextUtils.isEmpty(fName)){
+        if(TextUtils.isEmpty(fName)){
             etFname.setError(getString(R.string.not_null));
             focusView = etFname;
             cancel = true;
 
         }
-        else if(!TextUtils.isEmpty(lName)){
+        else if(TextUtils.isEmpty(lName)){
             etLname.setError(getString(R.string.not_null));
             focusView = etLname;
             cancel = true;
 
         }
-        else if(!TextUtils.isEmpty(mobile)){
+        else if(TextUtils.isEmpty(mobile)){
             etMobile.setError(getString(R.string.not_null));
             focusView = etMobile;
             cancel = true;
 
         }
-        else if(!TextUtils.isEmpty(alamat)){
+        else if(TextUtils.isEmpty(alamat)){
             etAlamat.setError(getString(R.string.not_null));
             focusView = etAlamat;
             cancel = true;
 
         }
-        else if(!TextUtils.isEmpty(namaKerabat)){
+        else if(TextUtils.isEmpty(namaKerabat)){
             etNamaKerabat.setError(getString(R.string.not_null));
             focusView = etNamaKerabat;
             cancel = true;
 
         }
-        else if(!TextUtils.isEmpty(noBPJS)){
+        else if(TextUtils.isEmpty(noBPJS)){
             etNoBPJSKes.setError(getString(R.string.not_null));
             focusView = etNoBPJSKes;
             cancel = true;
 
         }
-        else if(!TextUtils.isEmpty(noHPKerabat)){
+        else if(TextUtils.isEmpty(noHPKerabat)){
             etNoHPKerabat.setError(getString(R.string.not_null));
             focusView = etNoHPKerabat;
             cancel = true;
 
         }
-        else if (!TextUtils.isEmpty(tanggalLahir)){
+        else if (TextUtils.isEmpty(tanggalLahir)){
             etTanggalLahir.setError(getString(R.string.not_null));
             focusView = etTanggalLahir;
             cancel = true;
@@ -172,7 +190,7 @@ public class PatientFormActivity extends AppCompatActivity {
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
             mAuthTask = new PatientAsyncTask(userID,fullName,gender,mobile,noBPJS,alamat,namaKerabat,
-                    noHPKerabat, tanggalLahir);
+                    noHPKerabat, tanggalLahir, relativeStatus);
             mAuthTask.execute((String) null);
         }
 
@@ -188,9 +206,10 @@ public class PatientFormActivity extends AppCompatActivity {
         String pCloseRelativeName;
         String pCloseRelativePhoneNbr;
         String pBirthOfDate;
+        String pRelativeStatus;
 
         public PatientAsyncTask(String pUserID, String pFullName, String pGender, String pCellPhoneNbr, String pBPJSNbr, String pAddress,
-                           String pCloseRelativeName, String pCloseRelativePhoneNbr, String pBirthOfDate){
+                           String pCloseRelativeName, String pCloseRelativePhoneNbr, String pBirthOfDate, String pRelativeStatus){
             this.pUserID = pUserID;
             this.pFullName =pFullName;
             this.pGender = pGender;
@@ -200,6 +219,7 @@ public class PatientFormActivity extends AppCompatActivity {
             this.pCloseRelativeName = pCloseRelativeName;
             this.pCloseRelativePhoneNbr = pCloseRelativePhoneNbr;
             this.pBirthOfDate = pBirthOfDate;
+            this.pRelativeStatus = pRelativeStatus;
 
         }
         @Override
@@ -220,6 +240,7 @@ public class PatientFormActivity extends AppCompatActivity {
                     jsonObject.put("CloseRelativeName", pCloseRelativeName);
                     jsonObject.put("CloseRelativePhoneNbr", pCloseRelativePhoneNbr);
                     jsonObject.put("BirthOfDate", pBirthOfDate);
+                    jsonObject.put("RelativeStatus",pRelativeStatus);
 
                     urlc.setConnectTimeout(3000);
                     urlc.setRequestProperty("Content-Type","application/json");
@@ -248,6 +269,7 @@ public class PatientFormActivity extends AppCompatActivity {
                         os.close();
 
                         return sb.toString();
+
                     }
                     else {
 //                        Toast.makeText(getApplicationContext(), "Gagal membuat janji.", Toast.LENGTH_LONG).show();
@@ -271,6 +293,24 @@ public class PatientFormActivity extends AppCompatActivity {
             }else {
                 return "";
             }
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            if(s!=""){
+                Intent i = new Intent(getApplicationContext(), PatientProfileActivity.class);
+                Bundle b = new Bundle();
+                b.putString("userID", userID);
+                i.putExtras(b);
+                startActivityForResult(i, 1);
+
+                Toast.makeText(getApplicationContext(), "Simpan Data Berhasil", Toast.LENGTH_LONG).show();
+            }
+            else {
+                //TODO
+            }
+
         }
     }
 }

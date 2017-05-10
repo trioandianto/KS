@@ -42,7 +42,14 @@ public class SettingActivity extends AppCompatActivity{
             switch (position){
                 case 0:
                     SettingProfileActivity settingProfileActivity= new SettingProfileActivity();
-                    settingProfileActivity.setUserID(userID);
+                    try{
+                        settingProfileActivity.setUserID(userID);
+                    }
+                    catch (Exception ex){
+
+                    }finally {
+
+                    }
                     return settingProfileActivity;
                 case 1:
                     SettingVitalSignActivity settingVitalSignActivity= new SettingVitalSignActivity();

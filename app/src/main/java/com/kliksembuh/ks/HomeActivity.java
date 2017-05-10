@@ -20,7 +20,6 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
-import android.text.LoginFilter;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -31,8 +30,6 @@ import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.google.android.gms.cast.framework.SessionManager;
 
 import java.util.HashMap;
 
@@ -112,6 +109,7 @@ public class HomeActivity extends AppCompatActivity
 
             firstName = user.get(SessionManagement.KEY_FNAME);
             lastName = user.get(SessionManagement.KEY_LNAME);
+            userID = user.get(SessionManagement.KEY_UID);
         }
 
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
@@ -249,15 +247,24 @@ public class HomeActivity extends AppCompatActivity
         int i = item.getItemId();
         if(i == R.id.nav_setting){
             Intent home = new Intent(this, SettingActivity.class);
+            Bundle b = new Bundle();
+            b.putString("userID", userID);
+            home.putExtras(b);
             startActivityForResult(home, 1);
             //fragment = new SettingActivity();
         }
         else if (i == R.id.nav_search){
             Intent home = new Intent(this, HomeActivity.class);
+            Bundle b = new Bundle();
+            b.putString("userID", userID);
+            home.putExtras(b);
             startActivityForResult(home, 1);
         }
         else if (i == R.id.nav_favorite){
             Intent favorite = new Intent(this, FavoriteActivity.class);
+            Bundle b = new Bundle();
+            b.putString("userID", userID);
+            favorite.putExtras(b);
             startActivityForResult(favorite, 1);
 
         }
@@ -271,14 +278,23 @@ public class HomeActivity extends AppCompatActivity
         }
         else if (i == R.id.nav_pengingat_minum){
             Intent home = new Intent(this, SettingActivity.class);
+            Bundle b = new Bundle();
+            b.putString("userID", userID);
+            home.putExtras(b);
             startActivityForResult(home, 1);
         }
         else if (i == R.id.nav_vital_sign){
             Intent home = new Intent(this, SettingActivity.class);
+            Bundle b = new Bundle();
+            b.putString("userID", userID);
+            home.putExtras(b);
             startActivityForResult(home, 1);
         }
         else if (i == R.id.nav_hubungi_kami){
             Intent home = new Intent(this, ContactUsActivity.class);
+            Bundle b = new Bundle();
+            b.putString("userID", userID);
+            home.putExtras(b);
             startActivityForResult(home, 1);
         }
         else if (i == R.id.nav_keluar){

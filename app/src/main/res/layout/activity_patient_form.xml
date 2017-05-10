@@ -70,7 +70,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/lblFullName"
         android:text="Nama Depan"/>
-        <EditText
+        <AutoCompleteTextView
             android:layout_width="wrap_content"
             android:textColor="@color/cardview_dark_background"
             android:layout_height="wrap_content"
@@ -78,15 +78,7 @@
             android:id="@+id/etFNameForm"
             android:layout_below="@+id/lblFNameForm"
             android:textSize="20sp"
-            android:text="Annisa"/>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="2dp"
-            android:layout_marginRight="210dp"
-            android:layout_centerVertical="true"
-            android:layout_below="@id/etFNameForm"
-            android:background="@color/light_grey"/>
+            android:hint="Nama Depan"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -97,7 +89,7 @@
             android:layout_marginLeft="102dp"
             android:text="Nama Belakang"
             android:layout_alignParentEnd="true"/>
-        <EditText
+        <AutoCompleteTextView
             android:layout_width="wrap_content"
             android:layout_marginTop="2dp"
             android:textColor="@color/cardview_dark_background"
@@ -105,19 +97,10 @@
             android:id="@+id/etLNameForm"
             android:layout_toRightOf="@+id/etFNameForm"
             android:layout_below="@+id/lblLName"
-            android:layout_marginLeft="120dp"
+            android:layout_marginLeft="20dp"
             android:textSize="20sp"
-            android:text="Mutiara"
+            android:hint="Nama Belakang"
             android:layout_alignParentEnd="true"/>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginLeft="180dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="2dp"
-            android:layout_centerVertical="true"
-            android:layout_below="@id/etLNameForm"
-            android:background="@color/light_grey"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -127,7 +110,7 @@
             android:layout_below="@id/etFNameForm"
             android:text="Mobile"/>
 
-        <EditText
+        <AutoCompleteTextView
             android:layout_width="wrap_content"
             android:textColor="@color/cardview_dark_background"
             android:layout_height="wrap_content"
@@ -135,15 +118,8 @@
             android:id="@+id/etEditMobileForm"
             android:layout_below="@+id/lblMobileForm"
             android:textSize="20sp"
-            android:text="081318180994"/>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="2dp"
-            android:layout_marginRight="80dp"
-            android:layout_centerVertical="true"
-            android:layout_below="@id/etEditMobileForm"
-            android:background="@color/light_grey"/>
+            android:hint="081318180994"/>
+
         <TextView
             android:layout_width="wrap_content"
             android:id="@+id/lblJenisKelamin"
@@ -182,7 +158,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/rgGender"
             android:text="TANGGAL LAHIR"/>
-        <EditText
+        <AutoCompleteTextView
             android:layout_width="wrap_content"
             android:textColor="@color/cardview_dark_background"
             android:layout_height="wrap_content"
@@ -190,17 +166,10 @@
             android:id="@+id/etTanggalLahirForm"
             android:layout_below="@+id/lblTanggalLahir"
             android:textSize="20sp"
-            android:text="18/09/1994"/>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="2dp"
-            android:layout_marginRight="80dp"
-            android:layout_centerVertical="true"
-            android:layout_below="@id/etTanggalLahirForm"
-            android:background="@color/light_grey"/>
+            android:hint="18/09/1994"/>
 
-        <EditText
+
+        <AutoCompleteTextView
             android:layout_width="wrap_content"
             android:id="@+id/lblAsuransiForm"
             android:layout_marginTop="18dp"
@@ -218,13 +187,7 @@
             android:textColor="@color/white"
             android:textStyle="bold"
             android:spinnerMode="dropdown"/>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="2dp"
-            android:layout_centerVertical="true"
-            android:layout_below="@id/spnAsuransi"
-            android:background="@color/light_grey"/>
+
 
         <TextView
             android:layout_width="wrap_content"
@@ -233,7 +196,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/spnAsuransi"
             android:text="NO. BPJS KESEHATAN *"/>
-        <EditText
+        <AutoCompleteTextView
             android:layout_width="wrap_content"
             android:textColor="@color/cardview_dark_background"
             android:layout_height="wrap_content"
@@ -241,15 +204,8 @@
             android:id="@+id/etNoBPJSKesehatan"
             android:layout_below="@+id/lblNoBPJS"
             android:textSize="20sp"
-            android:text="656217263"/>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="2dp"
-            android:layout_marginRight="80dp"
-            android:layout_centerVertical="true"
-            android:layout_below="@id/etNoBPJSKesehatan"
-            android:background="@color/light_grey"/>
+            android:hint="656217263"/>
+
 
         <TextView
             android:layout_width="wrap_content"
@@ -258,7 +214,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/etNoBPJSKesehatan"
             android:text="ALAMAT"/>
-        <EditText
+        <AutoCompleteTextView
             android:layout_width="wrap_content"
             android:textColor="@color/cardview_dark_background"
             android:layout_height="wrap_content"
@@ -266,15 +222,8 @@
             android:id="@+id/etAlamatForm"
             android:layout_below="@+id/lblAlamatForm"
             android:textSize="20sp"
-            android:text="Jalan Mawar 20"/>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="2dp"
-            android:layout_marginRight="80dp"
-            android:layout_centerVertical="true"
-            android:layout_below="@id/etAlamatForm"
-            android:background="@color/light_grey"/>
+            android:hint="Jalan Mawar 20"/>
+
 
         <TextView
             android:layout_width="wrap_content"
@@ -292,7 +241,7 @@
             android:layout_below="@id/lblKontakKerabatForm"
             android:layout_marginTop="2dp"
             android:text="Nama"/>
-        <EditText
+        <AutoCompleteTextView
             android:layout_width="wrap_content"
             android:textColor="@color/cardview_dark_background"
             android:layout_height="wrap_content"
@@ -300,15 +249,8 @@
             android:id="@+id/etNamaKerabatForm"
             android:layout_below="@+id/lblNamaKerabat"
             android:textSize="20sp"
-            android:text="Maulana"/>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="2dp"
-            android:layout_marginRight="210dp"
-            android:layout_centerVertical="true"
-            android:layout_below="@id/etNamaKerabatForm"
-            android:background="@color/light_grey"/>
+            android:hint="Maulana"/>
+
 
         <TextView
             android:layout_width="wrap_content"
@@ -320,7 +262,7 @@
             android:layout_marginLeft="80dp"
             android:text="NO. HP"
             android:layout_alignParentEnd="true"/>
-        <EditText
+        <AutoCompleteTextView
             android:layout_width="wrap_content"
             android:layout_marginTop="2dp"
             android:textColor="@color/cardview_dark_background"
@@ -330,16 +272,8 @@
             android:layout_below="@+id/lblNoHPKerabat"
             android:layout_marginLeft="80dp"
             android:textSize="20sp"
-            android:text="081213149581"
+            android:hint="081213149581"
             android:layout_alignParentEnd="true"/>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginLeft="158dp"
-            android:layout_marginTop="2dp"
-            android:layout_centerVertical="true"
-            android:layout_below="@id/etNoHPKerabat"
-            android:background="@color/light_grey"/>
 
 
     </RelativeLayout>
