@@ -128,7 +128,7 @@ public class AppointmentDetailActivity extends FragmentActivity implements OnMap
             super.onPreExecute();
             // Showing progress dialog
             pDialog = new ProgressDialog(AppointmentDetailActivity.this);
-            pDialog.setMessage("Please wait...");
+            pDialog.setMessage("Mohon Menunggu...");
             pDialog.setCancelable(false);
             pDialog.show();
         }

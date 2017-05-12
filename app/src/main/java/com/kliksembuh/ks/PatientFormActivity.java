@@ -33,6 +33,7 @@ import javax.net.ssl.HttpsURLConnection;
 public class PatientFormActivity extends AppCompatActivity {
 
     private PatientAsyncTask mAuthTask = null;
+    private UpdatePatientAsyncTask mUpdateAuthTask = null;
     private Spinner spnStatus, spnAsuransi;
     private RadioButton rbJenisKelaminL, rbJenisKelaminP;
     private AutoCompleteTextView etLname, etMobile, etFname, etTanggalLahir,etNoBPJSKes, etAlamat, etNamaKerabat, etNoHPKerabat;
@@ -53,6 +54,7 @@ public class PatientFormActivity extends AppCompatActivity {
     private String closeRelativePhoneNbr;
     private String birthOfDate;
     private String relativeStatus;
+    private int personalInfoID;
 
     @Override
 
@@ -63,6 +65,7 @@ public class PatientFormActivity extends AppCompatActivity {
         Bundle b = getIntent().getExtras();
         if(b != null) {
             userID = b.getString("userID");
+            personalInfoID = b.getInt("personalInfoID");
             fName = b.getString("fName");//Your id
             lName = b.getString("lName");
             gender = b.getString("gender");
@@ -143,17 +146,28 @@ public class PatientFormActivity extends AppCompatActivity {
             etNoHPKerabat.setText(closeRelativePhoneNbr);
         }
         if(relativeStatus!=null && relativeStatus!="null"){
-            if(relativeStatus == ""){
-
+            if(relativeStatus == "Pasien"){
+                spnStatusSaya.setSelection(1);
             }
-            else if(relativeStatus == ""){
-
+            else if(relativeStatus == "Anak"){
+                spnStatusSaya.setSelection(2);
             }
-            else if(relativeStatus == ""){
-
+            else if(relativeStatus == "Orang Tua"){
+                spnStatusSaya.setSelection(3);
+            }
+            else if(relativeStatus=="Keluarga"){
+                spnStatusSaya.setSelection(4);
             }
             else{
-
+                spnStatusSaya.setSelection(5);
+            }
+        }
+        if(gender!=null && gender!="null"){
+            if(gender=="Male"){
+                rbMale.setEnabled(true);
+            }
+            else {
+                rbFemale.setEnabled(true);
             }
         }
 
@@ -245,9 +259,17 @@ public class PatientFormActivity extends AppCompatActivity {
         } else {
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
-            mAuthTask = new PatientAsyncTask(userID,fName,lName,gender,mobile,noBPJS,alamat,namaKerabat,
-                    noHPKerabat, tanggalLahir, relativeStatus);
-            mAuthTask.execute((String) null);
+            if(personalInfoID>0){
+                mUpdateAuthTask = new UpdatePatientAsyncTask(personalInfoID,userID,fName,lName,gender,mobile,noBPJS,alamat,namaKerabat,
+                        noHPKerabat, tanggalLahir, relativeStatus);
+                mUpdateAuthTask.execute((String) null);
+            }
+            else{
+                mAuthTask = new PatientAsyncTask(userID,fName,lName,gender,mobile,noBPJS,alamat,namaKerabat,
+                        noHPKerabat, tanggalLahir, relativeStatus);
+                mAuthTask.execute((String) null);
+            }
+
         }
 
     }
@@ -304,6 +326,129 @@ public class PatientFormActivity extends AppCompatActivity {
                     urlc.setConnectTimeout(3000);
                     urlc.setRequestProperty("Content-Type","application/json");
                     urlc.setRequestMethod("POST");
+                    urlc.setDoInput(true);
+                    urlc.setDoOutput(true);
+                    DataOutputStream os = new DataOutputStream(urlc.getOutputStream());
+
+                    os.writeBytes(jsonObject.toString());
+
+
+                    int responseCode=urlc.getResponseCode();
+                    if (responseCode == HttpsURLConnection.HTTP_CREATED) {
+
+                        BufferedReader in=new BufferedReader(
+                                new InputStreamReader(
+                                        urlc.getInputStream()));
+                        StringBuffer sb = new StringBuffer("");
+                        String line="";
+                        while((line = in.readLine()) != null) {
+                            sb.append(line);
+                            break;
+                        }
+                        in.close();
+                        os.flush();
+                        os.close();
+
+                        return sb.toString();
+
+                    }
+                    else {
+//                        Toast.makeText(getApplicationContext(), "Gagal membuat janji.", Toast.LENGTH_LONG).show();
+                        return "";
+                    }
+                } catch (MalformedURLException e1) {
+                    // TODO Auto-generated catch block
+                    e1.printStackTrace();
+                    return "";
+                } catch (IOException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                    return "";
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    return "";
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    return "";
+                }
+            }else {
+                return "";
+            }
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            if(s!=""){
+                Intent i = new Intent(getApplicationContext(), PatientProfileActivity.class);
+                Bundle b = new Bundle();
+                b.putString("userID", userID);
+                i.putExtras(b);
+                startActivityForResult(i, 1);
+
+                Toast.makeText(getApplicationContext(), "Simpan Data Berhasil", Toast.LENGTH_LONG).show();
+            }
+            else {
+                //TODO
+            }
+
+        }
+    }
+    public class UpdatePatientAsyncTask extends AsyncTask<String, Void, String>{
+        String pUserID;
+        int pPersonalInfoID;
+        String pFName;
+        String pLName;
+        String pGender;
+        String pCellPhoneNbr;
+        String pBPJSNbr;
+        String pAddress;
+        String pCloseRelativeName;
+        String pCloseRelativePhoneNbr;
+        String pBirthOfDate;
+        String pRelativeStatus;
+
+        public UpdatePatientAsyncTask(int pPersonalInfoID, String pUserID, String pFName,String pLName, String pGender, String pCellPhoneNbr, String pBPJSNbr, String pAddress,
+                                String pCloseRelativeName, String pCloseRelativePhoneNbr, String pBirthOfDate, String pRelativeStatus){
+            this.pPersonalInfoID = pPersonalInfoID;
+            this.pUserID = pUserID;
+            this.pFName = pFName;
+            this.pLName = pLName;
+            this.pGender = pGender;
+            this.pBPJSNbr = pBPJSNbr;
+            this.pAddress = pAddress;
+            this.pCellPhoneNbr = pCellPhoneNbr;
+            this.pCloseRelativeName = pCloseRelativeName;
+            this.pCloseRelativePhoneNbr = pCloseRelativePhoneNbr;
+            this.pBirthOfDate = pBirthOfDate;
+            this.pRelativeStatus = pRelativeStatus;
+
+        }
+        @Override
+        protected String doInBackground(String... params) {
+            ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo netInfo = cm.getActiveNetworkInfo();
+            if (netInfo != null && netInfo.isConnected()) {
+                try{
+                    URL url = new URL("http://cloud.abyor.com:11080/KlikSembuhAPI/api/PersonalInfoes/PostPersonalInfo");
+                    HttpURLConnection urlc = (HttpURLConnection) url.openConnection();
+                    JSONObject jsonObject = new JSONObject();
+                    jsonObject.put("personalInfoID",pPersonalInfoID);
+                    jsonObject.put("UserID", pUserID);
+                    jsonObject.put("FirstName", pFName);
+                    jsonObject.put("LastName", pLName);
+                    jsonObject.put("Gender", pGender);
+                    jsonObject.put("CellPhoneNbr", pCellPhoneNbr);
+                    jsonObject.put("BPJSNbr", pBPJSNbr);
+                    jsonObject.put("Address" ,pAddress);
+                    jsonObject.put("CloseRelativeName", pCloseRelativeName);
+                    jsonObject.put("CloseRelativePhoneNbr", pCloseRelativePhoneNbr);
+                    jsonObject.put("BirthOfDate", pBirthOfDate);
+                    jsonObject.put("RelativeStatus",pRelativeStatus);
+
+                    urlc.setConnectTimeout(3000);
+                    urlc.setRequestProperty("Content-Type","application/json");
+                    urlc.setRequestMethod("PUT");
                     urlc.setDoInput(true);
                     urlc.setDoOutput(true);
                     DataOutputStream os = new DataOutputStream(urlc.getOutputStream());
