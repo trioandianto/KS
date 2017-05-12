@@ -147,11 +147,30 @@ public class InsuranceListActivity extends AppCompatActivity {
         }
 
         @Override
-        protected void onPostExecute(String s) {
-            super.onPostExecute(s);
+        protected void onPostExecute(String success) {
+            super.onPostExecute(success);
 
             if (pDialog.isShowing())
                 pDialog.dismiss();
+
+            if (success != ""){
+                try {
+                    JSONArray jsonArray = new JSONArray(success);
+//                    instID = new String[jsonArray.length()];
+//                    instInsuranceID = new String[jsonArray.length()];
+//                    instName = new String[jsonArray.length()];
+
+                    for (int i = 0; i < jsonArray.length(); i++ ){
+                        JSONObject jsonObject = jsonArray.getJSONObject(i);
+
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+
+
 
         }
 

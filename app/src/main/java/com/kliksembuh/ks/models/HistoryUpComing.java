@@ -18,13 +18,14 @@ public class HistoryUpComing {
     // Change string to date & time date on jadwalBerobat
     private String noAppointment;
     private String specialtyDoc;
+    private String appointmentDate;
     private String statusHistory;
     private String waktuBerobat;
     private String timeStart;
     private String timeEnd;
 
     public HistoryUpComing(int idHistoryUpComing, String namaDokter, Drawable imgHistoryDoc, String rumahSakit, String tanggal,
-                           String noAppointment, String specialtyDoc, String statusHistory, String waktuBerobat, String timeStart, String timeEnd) {
+                           String noAppointment, String specialtyDoc, String appointmentDate, String statusHistory, String waktuBerobat, String timeStart, String timeEnd) {
 
         this.idHistoryUpComing = idHistoryUpComing;
         this.namaDokter = namaDokter;
@@ -33,6 +34,8 @@ public class HistoryUpComing {
         this.tanggal = tanggal;
         this.noAppointment = noAppointment;
         this.specialtyDoc = specialtyDoc;
+        this.appointmentDate = appointmentDate;
+
         this.statusHistory = statusHistory;
         this.waktuBerobat = waktuBerobat;
         this.timeStart = timeStart;
@@ -93,6 +96,14 @@ public class HistoryUpComing {
 
     public void setSpecialtyDoc(String specialtyDoc) {
         this.specialtyDoc = specialtyDoc;
+    }
+
+    public String getAppointmentDate() {
+        return appointmentDate;
+    }
+
+    public void setAppointmentDate(String appointmentDate) {
+        this.appointmentDate = appointmentDate;
     }
 
     public String getStatusHistory() {

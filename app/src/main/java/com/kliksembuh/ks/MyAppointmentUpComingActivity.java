@@ -246,6 +246,7 @@ public class MyAppointmentUpComingActivity extends Fragment implements ListView.
                         String createdOn = jsonObject.getString("CreatedDate");
                         String trxNoAppointment = jsonObject.getString("TransactionID");
                         String specialtyDoc = jsonObject.getString("FacilityDesc");
+                        String appointmentDate = jsonObject.getString("ScheduleDate");
                         String statusID = jsonObject.getString("Status");
                         String statusDesc = jsonObject.getString("StatusDesc");
                         String shiftDesc = jsonObject.getString("ShiftDesc");
@@ -258,6 +259,12 @@ public class MyAppointmentUpComingActivity extends Fragment implements ListView.
                             Date scheduleDate = schdlDateFormatter.parse(createdOn);
                             SimpleDateFormat newSchdlFormat = new SimpleDateFormat("dd-MMM-yyyy");
                             String schdlDatePars = newSchdlFormat.format(scheduleDate);
+
+                            // Appointment Schedule Parser
+                            SimpleDateFormat appointDateFormatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+                            Date appointDate = appointDateFormatter.parse(appointmentDate);
+                            SimpleDateFormat newAppointFormat = new SimpleDateFormat("dd-MMM-yyyy");
+                            String appointDatePars = newAppointFormat.format(appointDate);
 
                              // Get date from string
                             SimpleDateFormat dateFormatter = new SimpleDateFormat("HH:mm:ss");
@@ -275,11 +282,11 @@ public class MyAppointmentUpComingActivity extends Fragment implements ListView.
                             namaRumahSakit [i] = hospitalName;
 
                             if (drawableDoctor.length <= 0){
-                                historyUpComingList.add(new HistoryUpComing(Integer.parseInt(trxIDHistory), doctorName, null, hospitalName, schdlDatePars, trxNoAppointment, specialtyDoc, statusDesc, shiftDesc, timeStartPars, timeEndPars));
+                                historyUpComingList.add(new HistoryUpComing(Integer.parseInt(trxIDHistory), doctorName, null, hospitalName, schdlDatePars, trxNoAppointment, specialtyDoc, appointDatePars ,statusDesc, shiftDesc, timeStartPars, timeEndPars));
                             }
                             else{
                                 if(statusID == String.valueOf(1)){
-                                    historyUpComingList.add(new HistoryUpComing(Integer.parseInt(trxIDHistory), doctorName, drawableDoctor[i], hospitalName, schdlDatePars, trxNoAppointment, specialtyDoc, statusDesc, shiftDesc, timeStartPars, timeEndPars));
+                                    historyUpComingList.add(new HistoryUpComing(Integer.parseInt(trxIDHistory), doctorName, drawableDoctor[i], hospitalName, schdlDatePars, trxNoAppointment, specialtyDoc, appointDatePars, statusDesc, shiftDesc, timeStartPars, timeEndPars));
                                 }
                                 histAdapter = new HistoryAdapter(globalContext.getApplicationContext(), historyUpComingList);
                                 lvUpcoming.setAdapter(histAdapter);
