@@ -17,7 +17,7 @@
     <string name="screen_title2">BUAT JANJI DENGAN DOKTER</string>
     <string name="screen_subtitile2">Pilih layanan kesehatan dan dokter spesialis sesuai yang anda inginkan, serta tentukan waktu kunjungan anda.</string>
     <string name="screen_title3">DAPATKAN PELAYANAN KESEHATAN</string>
-    <string name="screen_subtitile3">Datangan ke lokasi sesuai waktu yang anda tentukan, serta dapatkan pelayanan kesehatan dari tenaga medis profesional tanpa harus mengantri lama.</string>
+    <string name="screen_subtitile3">Datang ke lokasi sesuai waktu yang anda tentukan, serta dapatkan pelayanan kesehatan dari tenaga medis profesional tanpa harus mengantri lama.</string>
 
     <!-- Strings related to login -->
     <string name="forgot_password">Masukan alamat email
