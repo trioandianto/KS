@@ -52,8 +52,8 @@ public class PatientListAdapter <I> extends BaseAdapter implements Filterable {
         TextView tvPatStatus = (TextView)newPatView.findViewById(R.id.tvListPatientProfStatus);
 
         // Set text and image for View of Doctor
-        tvPatMame.setText(mPatientList.get(position).getFirstName());
-        tvPatStatus.setText(mPatientList.get(position).getPatStatus());
+        tvPatMame.setText(mPatientList.get(position).getPatFirstName());
+        tvPatStatus.setText(mPatientList.get(position).getPatRelativeStatus());
 
         // Save hospital id to tag
         newPatView.setTag(mPatientList.get(position).getPat_id());

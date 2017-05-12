@@ -54,6 +54,7 @@ public class KonfirmasiJanjiActivity extends AppCompatActivity {
     private String namaHari;
     private String jam;
     private String detailTanggal;
+    private boolean cek=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -206,6 +207,12 @@ public class KonfirmasiJanjiActivity extends AppCompatActivity {
                     }
                     else {
 //                        Toast.makeText(getApplicationContext(), "Gagal membuat janji.", Toast.LENGTH_LONG).show();
+                        if(responseCode == 404){
+                            cek = true;
+                        }
+                        else {
+                            cek =false;
+                        }
                         return "";
                     }
                 } catch (MalformedURLException e1) {
@@ -245,7 +252,18 @@ public class KonfirmasiJanjiActivity extends AppCompatActivity {
 
             } else {
                 //:TODO
-                Toast.makeText(getApplicationContext(), "Gagal membuat janji.", Toast.LENGTH_LONG).show();
+                if(cek==true){
+                    Toast.makeText(getApplicationContext(), "Data pasien belum terisi.", Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(getApplicationContext(), PatientFormActivity.class);
+                    Bundle b = new Bundle();
+                    b.putString("userID",userID);
+                    intent.putExtras(b);
+                    startActivity(intent);
+                }
+                else {
+                    Toast.makeText(getApplicationContext(), "Gagal membuat janji.", Toast.LENGTH_LONG).show();
+                }
+
             }
         }
         @Override
