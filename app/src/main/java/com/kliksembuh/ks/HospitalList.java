@@ -58,6 +58,7 @@ public class HospitalList extends AppCompatActivity {
     private String userID;
     private String alamat[];
     private String finalListHospital;
+    private Drawable load;
 
     RatingBar rb;
 
@@ -88,6 +89,7 @@ public class HospitalList extends AppCompatActivity {
         newToolbar.setTitle(subDistricDescription);
         setSupportActionBar(newToolbar);
         getWindow().setStatusBarColor(ContextCompat.getColor(HospitalList.this, R.color.colorPrimaryDark));
+        load = getResources().getDrawable(R.drawable.loading);
 
         lvHospital = (ListView)findViewById(R.id.listview_hospital);
         btnpeta = (Button)findViewById(R.id.btnpeta);
@@ -203,14 +205,6 @@ public class HospitalList extends AppCompatActivity {
                             break;
                         }
                         in.close();
-                        JSONArray jsonArray = new JSONArray(sb.toString());
-                        drawableHospital = new Drawable[jsonArray.length()];
-                        String image;
-                        for (int i = 0; i < jsonArray.length(); i++) {
-                            JSONObject jsonObject = jsonArray.getJSONObject(i);
-                            image = jsonObject.getString("ImgUrl");
-                            drawableHospital[i] = LoadImageFromWebOperations(image);
-                        }
                         // Drawable image1 = LoadImageFromWebOperations(image);
                         return sb.toString();
                     } else {
@@ -296,39 +290,18 @@ public class HospitalList extends AppCompatActivity {
                             JSONObject objectInner = jsonArray2.getJSONObject(j);
                             cpblDesc = objectInner.optString("CapabilitiesID");
                         }
-                        if(drawableHospital.length <= 0 && cpblDesc == ""){
-                            mHospitalList.add(new Hospital(id, null, name, addres, phNumber, null));
-                        }
-                        else
-                        {
-                            mHospitalList.add(new Hospital(id, drawableHospital[i], name, addres, phNumber, cpblDesc));
-                        }
+                        mHospitalList.add(new Hospital(id, load, name, addres, phNumber, null, image));
 
-
-
-                        //String cpblDesc = jsonObject.getString("Capabilities");
-                        // String getCapability= jsonObject.getJSONObject("Capabilities").getString("CapabilitiesID");
-//                        if(jsonObject.has("Capabilities")){
-//                            if(!jsonObject.isNull("Capabilities")){
-//                                JSONObject objCapabilites = jsonObject.getJSONObject("Capabilities");
-//                                JSONArray jsonArray2 = objCapabilites.getJSONArray("Capabilities");
-//                                for (int j = 0 ; j < jsonArray2.length() ; j++){
-//                                    JSONObject objectInner = jsonArray.getJSONObject(j);
-//                                    String cpblDesc = objectInner.optString("CapabilitiesID");
-//                                }
-//                            }
-//                        }
                         Drawable photo = LoadImageFromWebOperations(image);
 
                         finalListHospital = String.valueOf(mHospitalList.size());
                         TextView newTextView = (TextView)findViewById(R.id.tvhospitalList);
                         newTextView.setText("Menampilkan "+finalListHospital+" instansi kesehatan di "+subDistricDescription+" yang menyediakan Dokter "+facilityName+".");
-
-                        hAdapter = new HospitalListAdapter(getApplicationContext(), mHospitalList);
-
-                        lvHospital.setAdapter(hAdapter);
-
-
+                    }
+                    hAdapter = new HospitalListAdapter(getApplicationContext(), mHospitalList);
+                    lvHospital.setAdapter(hAdapter);
+                    for(Hospital currentHospital : mHospitalList){
+                        new ImageDrawable(currentHospital).execute();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -346,5 +319,26 @@ public class HospitalList extends AppCompatActivity {
         protected void onCancelled() {
 
         }
+    }
+    public class ImageDrawable extends AsyncTask<String, Void, Drawable>{
+
+        Hospital hospital;
+        public ImageDrawable(Hospital hospital){
+            this.hospital  = hospital;
+        }
+        @Override
+        protected Drawable doInBackground(String... params) {
+            //return null;
+            Drawable imageDrawable = LoadImageFromWebOperations(hospital.getStringImg());
+            this.hospital.setHospital_pic_id(imageDrawable);
+
+            return imageDrawable;
+        }
+
+//        @Override
+//        protected void onPostExecute(Drawable drawable) {
+//            super.onPostExecute(drawable);
+//
+//        }
     }
 }
