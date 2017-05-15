@@ -12,6 +12,7 @@ public class JadwalDokter {
     private String detailProgramID;
     private String startDate;
     private String endDate;
+    //private String shiftSchedule;
 
     public JadwalDokter(String startDate, String endDate, String dayProdramID, String weekProgramID, String detailProgramID ){
         this.startDate = startDate;
@@ -19,6 +20,7 @@ public class JadwalDokter {
         this.dayProdramID = dayProdramID;
         this.weekProgramID = weekProgramID;
         this.detailProgramID = detailProgramID;
+        //this.shiftSchedule = shiftSchedule;
 
     }
 
@@ -60,6 +62,15 @@ public class JadwalDokter {
     public void setEndDate(String endDate) {
         this.endDate = endDate;
     }
+
+//    public String getShiftSchedule() {
+//        return shiftSchedule;
+//    }
+//
+//    public void setShiftSchedule(String shiftSchedule) {
+//        this.shiftSchedule = shiftSchedule;
+//    }
+
 
 
 

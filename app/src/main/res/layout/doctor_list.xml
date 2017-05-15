@@ -23,16 +23,29 @@
         android:focusable="false"
         android:weightSum="1">
 
-    <TextView
+        <TextView
+            android:id="@+id/tv_FrontTitleDr"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/MyCustomTextAppearance"
+            android:layout_alignTop="@+id/iv_doc_pic_list"
+            android:layout_marginLeft="10dp"
+            android:layout_toEndOf="@+id/iv_doc_pic_list"
+            android:layout_toRightOf="@+id/iv_doc_pic_list"
+            android:text="dr."
+            android:textColor="@color/blue_a400"
+            android:textSize="18sp" />
+
+        <TextView
         android:id="@+id/tv_list_drname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         style="@style/MyCustomTextAppearance"
         android:layout_alignTop="@+id/iv_doc_pic_list"
-        android:layout_marginLeft="10dp"
-        android:layout_toEndOf="@+id/iv_doc_pic_list"
-        android:layout_toRightOf="@+id/iv_doc_pic_list"
-        android:text="dr. Name"
+        android:layout_marginLeft="4dp"
+        android:layout_toEndOf="@+id/tv_FrontTitleDr"
+        android:layout_toRightOf="@+id/tv_FrontTitleDr"
+        android:text="Name"
         android:textColor="@color/blue_a400"
         android:textSize="18sp" />
 

@@ -9,17 +9,20 @@ import android.graphics.drawable.Drawable;
 public class Doctor {
     private String doc_id;
     private Drawable doc_pic_id;
+    private String frontTtlDoc;
     private String nameDoc;
     private String specialty;
+
 
 
 
     private String imageUrl;
 
     // Constructor
-    public Doctor(String doc_id, Drawable doc_pic_id, String nameDoc, String specialty, String imageUrl) {
+    public Doctor(String doc_id, Drawable doc_pic_id, String frontTtlDoc, String nameDoc, String specialty, String imageUrl) {
         this.doc_id = doc_id;
         this.doc_pic_id = doc_pic_id;
+        this.frontTtlDoc = frontTtlDoc;
         this.nameDoc = nameDoc;
         this.specialty = specialty;
         this.imageUrl = imageUrl;
@@ -49,6 +52,14 @@ public class Doctor {
 
     public void setDoc_pic_id(Drawable doc_pic_id) {
         this.doc_pic_id = doc_pic_id;
+    }
+
+    public String getFrontTtlDoc() {
+        return frontTtlDoc;
+    }
+
+    public void setFrontTtlDoc(String frontTtlDoc) {
+        this.frontTtlDoc = frontTtlDoc;
     }
 
     public String getNameDoc() {

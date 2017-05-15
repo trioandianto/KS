@@ -67,6 +67,7 @@ public class BookingActivity extends AppCompatActivity implements ListView.OnIte
     private Spinner spnHari;
     private String sequence="minggu 1";
     private ImageView imgDokter;
+    private TextView tvFirstTitle;
     private TextView tvNamaDokter;
     private TextView tvJenisSpesialisasi;
     private TextView tvDate;
@@ -80,6 +81,7 @@ public class BookingActivity extends AppCompatActivity implements ListView.OnIte
     private String namaDokter;
     private String idDokter;
     private String urlImage;
+    private String firstTitle;
     private String dokterSpesialisasi;
     private int seninMingguIni;
     private int selasaMingguIni;
@@ -100,16 +102,19 @@ public class BookingActivity extends AppCompatActivity implements ListView.OnIte
     private int mingguMingguDepan;
     private String weekProgramID;
     private String dayProgramID;
+    private String scheduleShift;
     private String programDetailID;
     private String rumahSakitID;
     private String facilityID;
     private String userID;
+    private String alamat;
     private String namaRumahSakit;
     private String date;
     private String namaDate;
     private int tanggala;
     private int bulan;
     private int tahun;
+    private String waktuBerobat;
     private String namaHari;
     private String[] praktekDokter;
     public Context contextInstance;
@@ -136,9 +141,11 @@ public class BookingActivity extends AppCompatActivity implements ListView.OnIte
             namaDokter = b.getString("namaDokter");
             idDokter = b.getString("idDokter");
             urlImage = b.getString("urlImage");
-            dokterSpesialisasi = "Dokter Umum";
+            firstTitle = b.getString("firstTtlDoc");
+            dokterSpesialisasi = b.getString("specialtyDoc");
             rumahSakitID = b.getString("rumahSakitID");
             facilityID = b.getString("facilityID");
+            alamat = b.getString("alamat");
             namaRumahSakit = b.getString("namaRumahSakit");
             praktekDokter = b.getStringArray("praktekDokter");
 
@@ -149,6 +156,8 @@ public class BookingActivity extends AppCompatActivity implements ListView.OnIte
         setSupportActionBar(newToolbar);
         getWindow().setStatusBarColor(ContextCompat.getColor(BookingActivity.this, R.color.colorPrimaryDark));
         imgDokter = (ImageView)findViewById(R.id.iv_doc_picdetail);
+        tvFirstTitle = (TextView) findViewById(R.id.tv_frontTitleDoc);
+        tvFirstTitle.setText(firstTitle);
         tvNamaDokter = (TextView) findViewById(R.id.tv_drname_detail);
         tvNamaDokter.setText(namaDokter);
         tvJenisSpesialisasi = (TextView)findViewById(R.id.tv_drspecialty_detail);
@@ -174,7 +183,7 @@ public class BookingActivity extends AppCompatActivity implements ListView.OnIte
         list.add("Sabtu");
         list.add("Minggu");
 
-        ArrayAdapter arrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,list);
+        ArrayAdapter arrayAdapter = new ArrayAdapter<String>(this,R.layout.spinner_dropdown_item,list);
         spnHari.setAdapter(arrayAdapter);
 
         Date dt = new Date();
@@ -1175,8 +1184,8 @@ public class BookingActivity extends AppCompatActivity implements ListView.OnIte
                 namaDokter = data.getStringExtra("namaDokter");
                 idDokter = data.getStringExtra("idDokter");
                 urlImage = data.getStringExtra("urlImage");
-                dokterSpesialisasi = "Dokter Umum";
-                namaHari = data.getStringExtra("namaHaari");
+                dokterSpesialisasi = data.getStringExtra("specialtyDoc");
+                namaHari = data.getStringExtra("namaHari");
                 rumahSakitID = data.getStringExtra("rumahSakitID");
                 facilityID = data.getStringExtra("facilityID");
                 namaRumahSakit = data.getStringExtra("namaRumahSakit");
@@ -1192,7 +1201,9 @@ public class BookingActivity extends AppCompatActivity implements ListView.OnIte
         String wpId = jadwalDokter.getWeekProgramID();
         String dpID = jadwalDokter.getDayProdramID();
         String dpdetail = jadwalDokter.getDetailProgramID();
-        String jam = jadwalDokter.getStartDate();
+        String waktuBerobat = scheduleShift;
+        String jamMulai = jadwalDokter.getStartDate();
+        String jamBerakhir = jadwalDokter.getEndDate();
         if(sequence=="minggu 1" && hariMingguini > day){
             Toast.makeText(getApplicationContext(), "Jadwal Kadaluarsa", Toast.LENGTH_SHORT).show();
         }
@@ -1203,15 +1214,21 @@ public class BookingActivity extends AppCompatActivity implements ListView.OnIte
             b.putString("WPID",wpId);
             b.putString("date", date);
             b.putString("DetailID",dpdetail);
+            b.putString("dokterSpesialisasi", dokterSpesialisasi);
             b.putString("namaHari", namaHari);
             b.putString("namaTanggal", namaDate);
             b.putString("personilID", personalID);
             b.putString("facilityID", facilityID);
             b.putString("programDetailID", programDetailID);
-            b.putString("jam", jam);
+            b.putString("waktuBerobat", waktuBerobat);
+            b.putString("jamMulai", jamMulai);
+            b.putString("jamBerakhir", jamBerakhir);
             b.putString("rumahSakitID", rumahSakitID);
+            b.putString("urlImage", urlImage);
             b.putString("idDokter", idDokter);
             b.putString("userID",userID);
+            b.putString("firstTitle", firstTitle);
+            b.putString("alamat", alamat);
             b.putString("namaDokter",namaDokter);
             b.putString("namaRumahSakit",namaRumahSakit);
             myIntent.putExtras(b);
@@ -1281,6 +1298,8 @@ public class BookingActivity extends AppCompatActivity implements ListView.OnIte
                                         programDetailID = c.getString("DPLineID");
                                         String starDate = c.getString("StartTime");
                                         String endDate = c.getString("EndTime");
+                                        scheduleShift = c.getJSONObject("ShiftSchedule").getString("ShiftScheduleCD");
+
                                         // Get date from string
                                         SimpleDateFormat dateFormatter = new SimpleDateFormat("HH:mm:ss");
                                         Date dateTimeStart = dateFormatter.parse(starDate);
@@ -1304,6 +1323,13 @@ public class BookingActivity extends AppCompatActivity implements ListView.OnIte
                                         programDetailID = c.getString("DPLineID");
                                         String starDate = c.getString("StartTime");
                                         String endDate = c.getString("EndTime");
+//                                        JSONArray shiftArray = c.getJSONArray("ShiftSchedule");
+//                                        for (int k = 0; k < shiftArray.length(); k++){
+//                                            JSONObject shiftObjectInner = shiftArray.getJSONObject(k);
+//                                            scheduleShift = shiftObjectInner.getString("ShiftScheduleCD");
+//                                        }
+                                        scheduleShift = c.getJSONObject("ShiftSchedule").getString("ShiftScheduleCD");
+
                                         // Get date from string
                                         SimpleDateFormat dateFormatter = new SimpleDateFormat("HH:mm:ss");
                                         Date dateTimeStart = dateFormatter.parse(starDate);
@@ -1326,6 +1352,8 @@ public class BookingActivity extends AppCompatActivity implements ListView.OnIte
                                         programDetailID = c.getString("DPLineID");
                                         String starDate = c.getString("StartTime");
                                         String endDate = c.getString("EndTime");
+                                        scheduleShift = c.getJSONObject("ShiftSchedule").getString("ShiftScheduleCD");
+
                                         // Get date from string
                                         SimpleDateFormat dateFormatter = new SimpleDateFormat("HH:mm:ss");
                                         Date dateTimeStart = dateFormatter.parse(starDate);
@@ -1348,6 +1376,8 @@ public class BookingActivity extends AppCompatActivity implements ListView.OnIte
                                         programDetailID = c.getString("DPLineID");
                                         String starDate = c.getString("StartTime");
                                         String endDate = c.getString("EndTime");
+                                        scheduleShift = c.getJSONObject("ShiftSchedule").getString("ShiftScheduleCD");
+
                                         // Get date from string
                                         SimpleDateFormat dateFormatter = new SimpleDateFormat("HH:mm:ss");
                                         Date dateTimeStart = dateFormatter.parse(starDate);
@@ -1370,6 +1400,8 @@ public class BookingActivity extends AppCompatActivity implements ListView.OnIte
                                         programDetailID = c.getString("DPLineID");
                                         String starDate = c.getString("StartTime");
                                         String endDate = c.getString("EndTime");
+                                        scheduleShift = c.getJSONObject("ShiftSchedule").getString("ShiftScheduleCD");
+
                                         // Get date from string
                                         SimpleDateFormat dateFormatter = new SimpleDateFormat("HH:mm:ss");
                                         Date dateTimeStart = dateFormatter.parse(starDate);
@@ -1392,6 +1424,8 @@ public class BookingActivity extends AppCompatActivity implements ListView.OnIte
                                         programDetailID = c.getString("DPLineID");
                                         String starDate = c.getString("StartTime");
                                         String endDate = c.getString("EndTime");
+                                        scheduleShift = c.getJSONObject("ShiftSchedule").getString("ShiftScheduleCD");
+
                                         // Get date from string
                                         SimpleDateFormat dateFormatter = new SimpleDateFormat("HH:mm:ss");
                                         Date dateTimeStart = dateFormatter.parse(starDate);
@@ -1414,6 +1448,8 @@ public class BookingActivity extends AppCompatActivity implements ListView.OnIte
                                         programDetailID = c.getString("DPLineID");
                                         String starDate = c.getString("StartTime");
                                         String endDate = c.getString("EndTime");
+                                        scheduleShift = c.getJSONObject("ShiftSchedule").getString("ShiftScheduleCD");
+
                                         // Get date from string
                                         SimpleDateFormat dateFormatter = new SimpleDateFormat("HH:mm:ss");
                                         Date dateTimeStart = dateFormatter.parse(starDate);

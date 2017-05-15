@@ -378,6 +378,7 @@
                         android:popupBackground="#ffffff"
                         android:textSize="13dp"
                         android:spinnerMode="dialog"
+                        android:clipToPadding="false"
                         android:layout_alignParentTop="true"
                         android:layout_alignParentStart="true" />
                     <ImageView

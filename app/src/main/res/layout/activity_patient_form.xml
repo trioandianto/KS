@@ -71,7 +71,7 @@
         android:layout_below="@id/lblFullName"
         android:text="Nama Depan"/>
         <AutoCompleteTextView
-            android:layout_width="wrap_content"
+            android:layout_width="160dp"
             android:textColor="@color/cardview_dark_background"
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
@@ -90,7 +90,7 @@
             android:text="Nama Belakang"
             android:layout_alignParentEnd="true"/>
         <AutoCompleteTextView
-            android:layout_width="wrap_content"
+            android:layout_width="160dp"
             android:layout_marginTop="2dp"
             android:textColor="@color/cardview_dark_background"
             android:layout_height="wrap_content"
