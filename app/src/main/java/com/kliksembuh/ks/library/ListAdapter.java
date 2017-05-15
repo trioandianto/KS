@@ -19,7 +19,6 @@ import java.util.List;
  */
 public class ListAdapter extends ArrayAdapter {
     private List<ListImage> listimages;
-    private int[] imageView = {R.drawable.dokter,R.drawable.dokter};
     private String[] namadokter={"TRIO","UCU"};
     private String[] alamat={"Brebes","Bogor"};
     private int resource;

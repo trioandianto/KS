@@ -11,26 +11,22 @@
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:id="@+id/imageview"
-            android:scaleType="centerCrop"
-            android:src="@drawable/welcome"/>
+            android:scaleType="centerCrop"/>
         <ImageView
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:id="@+id/imageview2"
-            android:scaleType="centerCrop"
-            android:src="@drawable/welcome2"/>
+            android:scaleType="centerCrop"/>
         <ImageView
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:id="@+id/imageview3"
-            android:scaleType="centerCrop"
-            android:src="@drawable/welcome3"/>
+            android:scaleType="centerCrop"/>
         <ImageView
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:id="@+id/imageview4"
-            android:scaleType="centerCrop"
-            android:src="@drawable/welcome4"/>
+            android:scaleType="centerCrop"/>
     </ViewFlipper>
     <Button
         android:id="@+id/btnnext"

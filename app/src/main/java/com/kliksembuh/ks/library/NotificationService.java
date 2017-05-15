@@ -63,7 +63,7 @@ public class NotificationService extends IntentService {
                 snoozeIntent, 0);
 
         builder = new NotificationCompat.Builder(this)
-                .setSmallIcon(R.drawable.dokter)
+                .setSmallIcon(R.drawable.logo2)
                 .setContentTitle(getString(R.string.notification))
                 .setContentText(getString(R.string.ping))
                 .setDefaults(Notification.DEFAULT_VIBRATE)
@@ -72,9 +72,9 @@ public class NotificationService extends IntentService {
                 .setSound(
                         Uri.parse("file:///sdcard/Notifications/hey_listen.mp3"))
                 .setStyle(new NotificationCompat.BigTextStyle().bigText(msg))
-                .addAction(R.drawable.dokter,
+                .addAction(R.drawable.logo2,
                         getString(R.string.cast_tracks_chooser_dialog_ok), piDismiss)
-                .addAction(R.drawable.dokter,
+                .addAction(R.drawable.logo2,
                         getString(R.string.snooze), piSnooze);
 
         Intent resultIntent = new Intent(this, HomeActivity.class);
