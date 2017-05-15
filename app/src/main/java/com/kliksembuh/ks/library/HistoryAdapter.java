@@ -50,6 +50,7 @@ public class HistoryAdapter extends BaseAdapter {
         ImageView imgDview = (ImageView)newHview.findViewById(R.id.ivDocPicHistory);
         TextView tvDrname = (TextView)newHview.findViewById(R.id.tv_Drname_History);
         TextView tvSpecialty = (TextView)newHview.findViewById(R.id.tv_SpecialtyHistory);
+        TextView tvAppointSchedule = (TextView) newHview.findViewById(R.id.tvBookSchedule);
         TextView tvStatusHistory = (TextView)newHview.findViewById(R.id.tvStatusHistory);
         TextView tvWaktuBerobat = (TextView)newHview.findViewById(R.id.tvWaktuBerobat);
         TextView tvTimeStart = (TextView)newHview.findViewById(R.id.tvTimeStart);
@@ -60,6 +61,7 @@ public class HistoryAdapter extends BaseAdapter {
         tvHistoryRumahSakit.setText(mHistory.get(position).getRumahSakit());
         imgDview.setImageDrawable(mHistory.get(position).getImgHistoryDoc());
         tvDrname.setText(mHistory.get(position).getNamaDokter());
+        tvAppointSchedule.setText(mHistory.get(position).getAppointmentDate());
         tvSpecialty.setText(mHistory.get(position).getSpecialtyDoc())   ;
         tvStatusHistory.setText(mHistory.get(position).getStatusHistory());
         String convColor = tvStatusHistory.getText().toString();
