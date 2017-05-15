@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.RadioButton;
@@ -27,6 +28,11 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.net.ssl.HttpsURLConnection;
 
@@ -52,7 +58,7 @@ public class PatientFormActivity extends AppCompatActivity {
     private String address ;
     private String closeRelativeName;
     private String closeRelativePhoneNbr;
-    private String birthOfDate;
+    private String birthOfDate = "";
     private String relativeStatus;
     private int personalInfoID;
 
@@ -94,6 +100,15 @@ public class PatientFormActivity extends AppCompatActivity {
         rbFemale = (RadioButton)findViewById(R.id.radioBtnJenisP);
         rbMale = (RadioButton)findViewById(R.id.radioBtnJenisL);
         spnStatusSaya = (Spinner)findViewById(R.id.spnStatusSaya);
+        List<String> list = new ArrayList<String>();
+        list.add("Pasien");
+        list.add("Anak");
+        list.add("Orang Tua");
+        list.add("Keluarga / Kerabat");
+        list.add("Lainnya");
+
+        ArrayAdapter arrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,list);
+        spnStatusSaya.setAdapter(arrayAdapter);
         spnStatusSaya.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -105,13 +120,6 @@ public class PatientFormActivity extends AppCompatActivity {
 
             }
         });
-        if (rbMale.isChecked()){
-            gender = "Male";
-        }
-        else {
-            gender = "Female";
-
-        }
 
         btnSimpan = (Button) findViewById(R.id.btnSimpanProfileForm);
         btnSimpan.setOnClickListener(new View.OnClickListener() {
@@ -134,10 +142,22 @@ public class PatientFormActivity extends AppCompatActivity {
             etMobile.setText(cellPhoneNbr);
         }
         if(birthOfDate!=null && birthOfDate!=""){
+            SimpleDateFormat dateFormatter = new SimpleDateFormat("MM:dd:yyyy");
+            try {
+                Date date = (Date) dateFormatter.parse(birthOfDate);
+
+            }catch (ParseException e){
+                e.printStackTrace();
+
+            }
+
             etTanggalLahir.setText(birthOfDate);
         }
         if(address!=null && address!=""){
             etAlamat.setText(address);
+        }
+        if(bPJSNbr!=null && bPJSNbr!=""){
+            etNoBPJSKes.setText(bPJSNbr);
         }
         if(closeRelativeName!=null && closeRelativeName!=""){
             etNamaKerabat.setText(closeRelativeName);
@@ -147,19 +167,19 @@ public class PatientFormActivity extends AppCompatActivity {
         }
         if(relativeStatus!=null && relativeStatus!="null"){
             if(relativeStatus == "Pasien"){
-                spnStatusSaya.setSelection(1);
+                spnStatusSaya.setSelection(0);
             }
             else if(relativeStatus == "Anak"){
-                spnStatusSaya.setSelection(2);
+                spnStatusSaya.setSelection(1);
             }
             else if(relativeStatus == "Orang Tua"){
+                spnStatusSaya.setSelection(2);
+            }
+            else if(relativeStatus=="Keluarga / Kerabat"){
                 spnStatusSaya.setSelection(3);
             }
-            else if(relativeStatus=="Keluarga"){
-                spnStatusSaya.setSelection(4);
-            }
             else{
-                spnStatusSaya.setSelection(5);
+                spnStatusSaya.setSelection(4);
             }
         }
         if(gender!=null && gender!="null"){
@@ -430,7 +450,7 @@ public class PatientFormActivity extends AppCompatActivity {
             NetworkInfo netInfo = cm.getActiveNetworkInfo();
             if (netInfo != null && netInfo.isConnected()) {
                 try{
-                    URL url = new URL("http://cloud.abyor.com:11080/KlikSembuhAPI/api/PersonalInfoes/PostPersonalInfo");
+                    URL url = new URL("http://cloud.abyor.com:11080/UserAPI/api/PersonalInfoes/PutPersonalInfoByUserID?UserID="+pUserID);
                     HttpURLConnection urlc = (HttpURLConnection) url.openConnection();
                     JSONObject jsonObject = new JSONObject();
                     jsonObject.put("personalInfoID",pPersonalInfoID);
@@ -503,13 +523,14 @@ public class PatientFormActivity extends AppCompatActivity {
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
             if(s!=""){
+                Toast.makeText(getApplicationContext(), "Update Data Berhasil", Toast.LENGTH_LONG).show();
                 Intent i = new Intent(getApplicationContext(), PatientProfileActivity.class);
                 Bundle b = new Bundle();
                 b.putString("userID", userID);
                 i.putExtras(b);
                 startActivityForResult(i, 1);
 
-                Toast.makeText(getApplicationContext(), "Simpan Data Berhasil", Toast.LENGTH_LONG).show();
+
             }
             else {
                 //TODO
