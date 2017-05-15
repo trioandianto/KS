@@ -147,9 +147,6 @@
                 android:text="Perempuan"/>
 
         </RadioGroup>
-
-
-
         <TextView
             android:layout_width="wrap_content"
             android:id="@+id/lblTanggalLahir"
@@ -162,10 +159,11 @@
             android:textColor="@color/cardview_dark_background"
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
+            android:clickable="true"
             android:id="@+id/etTanggalLahirForm"
             android:layout_below="@+id/lblTanggalLahir"
             android:textSize="20sp"
-            android:hint="18/09/1994"/>
+            android:hint="Pilih Tanggal"/>
 
 
         <AutoCompleteTextView
@@ -186,8 +184,6 @@
             android:textColor="@color/white"
             android:textStyle="bold"
             android:spinnerMode="dropdown"/>
-
-
         <TextView
             android:layout_width="wrap_content"
             android:id="@+id/lblNoBPJS"

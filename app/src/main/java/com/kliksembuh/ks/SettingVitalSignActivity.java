@@ -5,10 +5,25 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
-public class SettingVitalSignActivity extends Fragment {
+public class SettingVitalSignActivity extends Fragment implements View.OnClickListener {
+    private TextView tvVitalSign;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return super.onCreateView(inflater, container, savedInstanceState);
+
+        View newView = inflater.inflate(R.layout.activity_setting_vital_sign, container, false);
+        tvVitalSign = (TextView)newView.findViewById(R.id.tvVitalSign);
+        tvVitalSign.setOnClickListener(this);
+        return newView;
+    }
+
+    @Override
+    public void onClick(View v) {
+        int i = v.getId();
+        if(i==R.id.tvVitalSign){
+
+        }
+
     }
 }

@@ -450,7 +450,7 @@ public class PatientFormActivity extends AppCompatActivity {
             NetworkInfo netInfo = cm.getActiveNetworkInfo();
             if (netInfo != null && netInfo.isConnected()) {
                 try{
-                    URL url = new URL("http://cloud.abyor.com:11080/UserAPI/api/PersonalInfoes/PutPersonalInfoByUserID?UserID="+pUserID);
+                    URL url = new URL("http://cloud.abyor.com:11080/kliksembuhapi/api/PersonalInfoes/PutPersonalInfoByUserID?UserID="+pUserID);
                     HttpURLConnection urlc = (HttpURLConnection) url.openConnection();
                     JSONObject jsonObject = new JSONObject();
                     jsonObject.put("personalInfoID",pPersonalInfoID);
@@ -477,39 +477,14 @@ public class PatientFormActivity extends AppCompatActivity {
 
 
                     int responseCode=urlc.getResponseCode();
-                    if (responseCode == HttpsURLConnection.HTTP_CREATED) {
+                    if (responseCode == HttpsURLConnection.HTTP_OK) {
 
-                        BufferedReader in=new BufferedReader(
-                                new InputStreamReader(
-                                        urlc.getInputStream()));
-                        StringBuffer sb = new StringBuffer("");
-                        String line="";
-                        while((line = in.readLine()) != null) {
-                            sb.append(line);
-                            break;
-                        }
-                        in.close();
-                        os.flush();
-                        os.close();
-
-                        return sb.toString();
-
+                        return "OK";
                     }
                     else {
-//                        Toast.makeText(getApplicationContext(), "Gagal membuat janji.", Toast.LENGTH_LONG).show();
                         return "";
+
                     }
-                } catch (MalformedURLException e1) {
-                    // TODO Auto-generated catch block
-                    e1.printStackTrace();
-                    return "";
-                } catch (IOException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                    return "";
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                    return "";
                 } catch (Exception e) {
                     e.printStackTrace();
                     return "";
@@ -529,8 +504,7 @@ public class PatientFormActivity extends AppCompatActivity {
                 b.putString("userID", userID);
                 i.putExtras(b);
                 startActivityForResult(i, 1);
-
-
+                finish();
             }
             else {
                 //TODO

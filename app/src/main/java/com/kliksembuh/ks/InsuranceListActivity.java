@@ -6,11 +6,12 @@ import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
-import android.os.StrictMode;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.os.StrictMode;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.widget.GridView;
-import android.widget.ListView;
 
 import com.kliksembuh.ks.library.InsuranceListAdapter;
 import com.kliksembuh.ks.models.Insurance;
@@ -62,6 +63,11 @@ public class InsuranceListActivity extends AppCompatActivity {
             spesialisasi = b.getString("facilityID");
             instName = b.getString("Name");
         }
+        Toolbar newToolbar = (Toolbar)findViewById(R.id.toolbarInsurance);
+        setSupportActionBar(newToolbar);
+        newToolbar.setTitle(instName);
+        setSupportActionBar(newToolbar);
+        getWindow().setStatusBarColor(ContextCompat.getColor(InsuranceListActivity.this, R.color.colorPrimaryDark));
 
         gvInsurance = (GridView)findViewById(R.id.gv_InsuranceList);
         mInsuranceList = new ArrayList<>();
@@ -104,9 +110,8 @@ public class InsuranceListActivity extends AppCompatActivity {
             ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
             NetworkInfo netInfo = cm.getActiveNetworkInfo();
             if (netInfo != null && netInfo.isConnected()){
-                URL url = null;
                 try {
-                    url = new URL("http://cloud.abyor.com:11080/kliksembuhapi/api/Institutions/SearchInstitutionFromAfterLogin?subDistrict=" + mSubdistrict + "&facility=" + mSpesialisasi);
+                   URL url = new URL("http://cloud.abyor.com:11080/kliksembuhapi/api/Institutions/SearchInstitutionFromAfterLogin?subDistrict=" + mSubdistrict + "&facility=" + mSpesialisasi);
                     HttpURLConnection urlc = (HttpURLConnection) url.openConnection();
                     urlc.setRequestProperty("Content-Type", "application/json");
                     urlc.connect();
@@ -122,28 +127,19 @@ public class InsuranceListActivity extends AppCompatActivity {
                             break;
                         }
                         in.close();
-                        JSONArray jsonArray = new JSONArray(sb.toString());
-                        drawableInsurance = new Drawable[jsonArray.length()];
-                        String image;
-                        for (int i = 0; i < jsonArray.length(); i++) {
-                            JSONObject jsonObject = jsonArray.getJSONObject(i);
-                            image = jsonObject.getString("ImgUrl");
-                            drawableInsurance[i] = LoadImageFromWebOperations(image);
-                        }
-
                         return sb.toString();
 
                     }
                 } catch (MalformedURLException e) {
                     e.printStackTrace();
+                    return "";
                 } catch (IOException e) {
                     e.printStackTrace();
-                } catch (JSONException e) {
-                    e.printStackTrace();
+                    return "";
                 }
             }
 
-            return null;
+            return "";
         }
 
         @Override
@@ -156,14 +152,26 @@ public class InsuranceListActivity extends AppCompatActivity {
             if (success != ""){
                 try {
                     JSONArray jsonArray = new JSONArray(success);
-//                    instID = new String[jsonArray.length()];
-//                    instInsuranceID = new String[jsonArray.length()];
-//                    instName = new String[jsonArray.length()];
 
                     for (int i = 0; i < jsonArray.length(); i++ ){
                         JSONObject jsonObject = jsonArray.getJSONObject(i);
+                        String name = jsonObject.getString("InstitutionName");
+                        if(name.equals(instName)){
+                            JSONArray jsonArray1 = jsonObject.getJSONArray("Insurances");
+                            for(int j=0;j<jsonArray1.length();j++){
+                                JSONObject jsonObject1 = jsonArray1.getJSONObject(j);
+                                String image = jsonObject1.getString("ImageUrl");
+                                Drawable imgDrawable = LoadImageFromWebOperations(image);
+                                instID = jsonObject1.getString("InstitutionID");
+                                instInsuranceID = jsonObject1.getString("InstitutionInsuranceID");
+                                instName = jsonObject1.getString("Name");
+                                mInsuranceList.add(new Insurance(instID,instInsuranceID, instName, imgDrawable));
+                            }
+                        }
 
                     }
+                    insAdapter = new InsuranceListAdapter(getApplicationContext(),mInsuranceList);
+                    gvInsurance.setAdapter(insAdapter);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

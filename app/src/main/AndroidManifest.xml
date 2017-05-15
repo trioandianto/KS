@@ -285,7 +285,6 @@
         <!-- <activity android:name=".FacilityInsuranceActivity"></activity> -->
         <activity android:name=".EmailTerdaftarActivity" />
         <activity android:name=".InsuranceListActivity"
-            android:label="Daftar Rekanan Asuransi"
             android:parentActivityName=".HospitalList"
             android:theme="@style/AppTheme4">
         </activity>

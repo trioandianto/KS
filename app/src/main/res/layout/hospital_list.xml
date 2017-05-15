@@ -130,6 +130,7 @@
             android:text="Lihat Semua Asuransi (20)"
             style="@style/MyCustomTextAppearance"
             android:textSize="12sp"
+            android:clickable="true"
             android:textColor="@color/blue"
             android:layout_below="@+id/iv_bpjs_ic"
             android:layout_toRightOf="@+id/iv_hospital_pic"
