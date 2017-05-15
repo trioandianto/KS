@@ -169,7 +169,6 @@
             android:paddingLeft="1dp"
             android:paddingBottom="4dp"
             android:layout_below="@+id/lblDibuatTanggal"
-            android:src="@drawable/dr_ilma_suraya"
             android:adjustViewBounds="true"
             android:scaleType="fitXY" />
 

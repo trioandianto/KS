@@ -73,14 +73,6 @@ public class DoctorListActivity extends AppCompatActivity implements OnMapReadyC
 
 
 
-
-
-
-        layouts = new int[]{
-                R.drawable.doctorlist1,
-                R.drawable.doctorlist2,
-                R.drawable.doctorlist3};
-
         viewPagerAdapter = new ViewPagerAdapter(this);
         viewPager = (ViewPager)findViewById(R.id.view_pager_doctorlist);
         viewPager.setAdapter(viewPagerAdapter);

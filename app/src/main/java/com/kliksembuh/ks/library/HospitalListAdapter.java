@@ -58,6 +58,12 @@ public class HospitalListAdapter<T> extends BaseAdapter implements Filterable {
         // Text view for capabilities (on Backend there is no IGD, but BPJS)
         TextView tvIGD = (TextView) newView.findViewById(R.id.tv_IGD);
         TextView tv24hour = (TextView) newView.findViewById(R.id.tv_24hours);
+        TextView tvLihatSelengkapnya = (TextView)newView.findViewById(R.id.tv_moreinfo) ;
+        tvLihatSelengkapnya.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            }
+        });
 
 
         imgView.setImageDrawable(mHospitalList.get(position).getHospital_pic_id());

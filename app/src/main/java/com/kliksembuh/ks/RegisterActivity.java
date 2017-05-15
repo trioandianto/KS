@@ -386,7 +386,7 @@ public class RegisterActivity extends AppCompatActivity {
                 //:TODO
                 Intent i = new Intent(getApplicationContext(), EmailTerdaftarActivity.class);
                 Bundle b = new Bundle();
-                b.putString("Email", email);
+                b.putString("Email", mEmail);
                 i.putExtras(b);
                 startActivityForResult(i, 1);
 
