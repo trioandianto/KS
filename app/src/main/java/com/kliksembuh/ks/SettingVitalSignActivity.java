@@ -1,5 +1,6 @@
 package com.kliksembuh.ks;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -22,7 +23,8 @@ public class SettingVitalSignActivity extends Fragment implements View.OnClickLi
     public void onClick(View v) {
         int i = v.getId();
         if(i==R.id.tvVitalSign){
-
+            Intent editVitalSign = new Intent(v.getContext(), SettingVitalSignDetailActivity.class);
+            startActivity(editVitalSign);
         }
 
     }

@@ -126,26 +126,19 @@
         <TextView
             android:id="@+id/tvHistoryRumahSakit"
             style="@style/MyCustomTextAppearance"
-            android:layout_width="110dp"
+            android:layout_width="140dp"
             android:layout_height="wrap_content"
             android:background="@color/colorPrimary"
             android:padding="8dp"
             android:text="RS PMI BOGOR"
             android:textColor="@color/white"
-            android:textSize="12sp"
+            android:drawableLeft="@drawable/ic_place_blue_14dp"
+            android:drawablePadding="2dp"
+            android:drawableStart="@drawable/ic_place_blue_14dp"
+            android:textSize="13sp"
             android:textStyle="bold"
             android:layout_below="@+id/tvNoAppointmentHistory"
             android:layout_alignStart="@+id/tv_Drname_History" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="2dp"
-            android:layout_alignBaseline="@id/tvHistoryRumahSakit"
-            android:layout_toRightOf="@id/tvHistoryRumahSakit"
-            android:drawableLeft="@drawable/ic_place_blue_14dp"
-            android:drawablePadding="2dp"
-            android:drawableStart="@drawable/ic_place_blue_14dp" />
-
         <TextView
             android:id="@+id/tv_Drname_History"
             style="@style/MyCustomTextAppearance"
