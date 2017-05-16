@@ -117,6 +117,7 @@
             android:id="@+id/etEditMobileForm"
             android:layout_below="@+id/lblMobileForm"
             android:textSize="20sp"
+            android:inputType="number"
             android:hint="081318180994"/>
 
         <TextView
@@ -199,6 +200,7 @@
             android:id="@+id/etNoBPJSKesehatan"
             android:layout_below="@+id/lblNoBPJS"
             android:textSize="20sp"
+            android:inputType="number"
             android:hint="656217263"/>
 
 
