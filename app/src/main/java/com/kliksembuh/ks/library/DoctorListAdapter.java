@@ -53,11 +53,13 @@ public class DoctorListAdapter <T> extends BaseAdapter {
 
         // getView for Doctor List
         ImageView imgDview = (ImageView)newDview.findViewById(R.id.iv_doc_pic_list);
+        TextView tvFrontTitle = (TextView)newDview.findViewById(R.id.tv_FrontTitleDr);
         TextView tvDrname = (TextView)newDview.findViewById(R.id.tv_list_drname);
         TextView tvDrspecialty = (TextView)newDview.findViewById(R.id.tv_specialty_list);
 
         // Set text and image for View of Doctor
         imgDview.setImageDrawable(mDoctorList.get(position).getDoc_pic_id());
+        tvFrontTitle.setText(mDoctorList.get(position).getFrontTtlDoc());
         tvDrname.setText(mDoctorList.get(position).getNameDoc());
         tvDrspecialty.setText(mDoctorList.get(position).getSpecialty());
 

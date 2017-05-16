@@ -30,7 +30,7 @@
         android:orientation="vertical"
         android:id="@+id/linearLayout3">
 
-        <LinearLayout
+        <RelativeLayout
         android:layout_width="match_parent"
         android:background="@color/white"
         android:layout_height="wrap_content"
@@ -42,46 +42,74 @@
             android:id="@+id/lblBuatJanji"
             android:layout_marginTop="5dp"
             android:layout_height="wrap_content"
-            android:text="Jadwal Buat Janji:"
+            android:text="Anda mempunyai janji pada"
             android:textColor="@color/cardview_dark_background"/>
         <View
-            android:layout_width="100dp"
+            android:layout_width="150dp"
             android:layout_height="1dp"
-            android:layout_marginTop="5dp"
             android:layout_centerVertical="true"
+            android:layout_marginTop="2dp"
             android:layout_below="@id/lblBuatJanji"
             android:background="@color/light_grey"/>
 
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:id="@+id/tvNamaHari"
             android:layout_height="wrap_content"
-            android:text="Sabtu"
             android:textStyle="bold"
-            android:layout_marginTop="5dp"
-            android:textSize="20dp"
-            android:textColor="@color/blue"/>
+            android:layout_below="@id/lblBuatJanji"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="10dp"
+            android:textSize="16dp"
+            android:textColor="@color/black"/>
         <TextView
-            android:layout_width="match_parent"
-            android:textStyle="normal"
+            android:layout_width="wrap_content"
+            android:textStyle="bold"
             android:id="@+id/tvDetailTangal"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
-            android:textSize="15dp"
-            android:textColor="@color/blue"
+            android:layout_below="@id/lblBuatJanji"
+            android:layout_alignBaseline="@id/tvNamaHari"
+            android:layout_toRightOf="@id/tvNamaHari"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:id="@+id/tv_wktBerobat"
             android:layout_height="wrap_content"
-            android:text="25 Februari 2017 @ 10.00 Pagi"/>
+            android:textStyle="bold"
+            android:layout_below="@id/tvNamaHari"
+            android:layout_marginTop="2dp"
+            android:layout_marginRight="10dp"
+            android:textSize="16sp"
+            android:textColor="@color/black"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:id="@+id/tv_jamBerobat"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:layout_below="@id/tvNamaHari"
+            android:layout_toRightOf="@id/tv_wktBerobat"
+            android:layout_marginTop="2dp"
+            android:layout_marginRight="10dp"
+            android:textSize="16sp"
+            android:textColor="@color/black"/>
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
+            android:layout_marginTop="2dp"
             android:layout_marginBottom="8dp"
             android:layout_centerVertical="true"
+            android:layout_below="@id/tv_wktBerobat"
             android:background="@color/light_grey"/>
 
-    </LinearLayout>
+    </RelativeLayout>
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:background="@color/white"
             android:layout_height="wrap_content"
@@ -93,20 +121,45 @@
                 android:layout_height="wrap_content"
                 android:text="Dengan Dokter :"
                 android:textColor="@color/cardview_dark_background"/>
+            <ImageView
+                android:id="@+id/iv_DocPic_Confirm"
+                android:layout_below="@id/lblNamaDokter"
+                android:layout_width="70dp"
+                android:layout_height="80dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="15dp"
+                />
             <View
-                android:layout_width="100dp"
+                android:layout_width="80dp"
                 android:layout_height="1dp"
                 android:layout_marginTop="5dp"
+                android:layout_below="@id/lblNamaDokter"
                 android:layout_marginBottom="5dp"
                 android:layout_centerVertical="true"
                 android:background="@color/light_grey"/>
 
             <TextView
-                android:layout_width="match_parent"
+                android:id="@+id/tvtitleDokter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="dr."
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="4dp"
+                android:layout_below="@id/lblNamaDokter"
+                android:layout_toRightOf="@id/iv_DocPic_Confirm"
+                android:textStyle="bold"
+                android:textSize="20dp"
+                android:textColor="@color/blue"/>
+
+            <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Nama Dokter"
+                android:layout_below="@id/lblNamaDokter"
+                android:layout_toRightOf="@id/tvtitleDokter"
                 android:textStyle="bold"
                 android:id="@+id/tvnamaDokter"
+                android:layout_marginTop="15dp"
                 android:textSize="20dp"
                 android:textColor="@color/blue"/>
             <TextView
@@ -117,56 +170,77 @@
                 android:id="@+id/tvspesial"
                 android:text="Dokter Umum"
                 android:textSize="15dp"
+                android:layout_below="@+id/tvtitleDokter"
+                android:layout_toRightOf="@id/iv_DocPic_Confirm"
                 android:textColor="@color/black"/>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginBottom="8dp"
+                android:layout_marginTop="10dp"
                 android:layout_centerVertical="true"
-                android:background="@color/light_grey"/>
-        </LinearLayout>
-        <LinearLayout
+                android:background="@color/light_grey"
+                android:layout_below="@id/iv_DocPic_Confirm"/>
+        </RelativeLayout>
+        <RelativeLayout
             android:layout_width="match_parent"
             android:background="@color/white"
             android:layout_height="wrap_content"
             android:padding="8dp"
             android:orientation="vertical">
-
             <TextView
                 android:layout_width="wrap_content"
                 android:id="@+id/lblNamaRS"
                 android:layout_height="wrap_content"
                 android:text="Di Rumah Sakit :"
                 android:textColor="@color/cardview_dark_background"/>
+            <ImageView
+                android:layout_width="60dp"
+                android:layout_height="70dp"
+                android:id="@+id/iv_hospital_logo"
+                android:layout_below="@id/lblNamaRS"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="15dp"
+                android:src="@drawable/ic_hospital"/>
             <View
-                android:layout_width="100dp"
+                android:layout_width="90dp"
                 android:layout_height="1dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"
                 android:layout_centerVertical="true"
+                android:layout_below="@id/lblNamaRS"
                 android:background="@color/light_grey"/>
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Rumah Sakit PMI Bogor"
+                android:layout_toRightOf="@id/iv_hospital_logo"
+                android:layout_below="@id/lblNamaRS"
+                android:layout_marginTop="18dp"
                 android:textStyle="bold"
                 android:textSize="20dp"
                 android:id="@+id/tvnamaRumahSakit"
                 android:textColor="@color/blue"/>
             <TextView
+                android:id="@+id/tvAlamatRS"
                 android:layout_width="match_parent"
                 android:layout_marginTop="5dp"
                 android:layout_height="wrap_content"
                 android:text="Jalan Jendral Sudirman"
+                android:layout_toRightOf="@id/iv_hospital_logo"
+                android:layout_below="@id/tvnamaRumahSakit"
                 android:textSize="15dp"
                 android:textColor="@color/black"/>
             <TextView
+                android:id="@+id/tvLihatPeta"
                 android:layout_width="match_parent"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"
                 android:layout_height="wrap_content"
-                android:text="Jawa Barat 12494"
+                android:layout_below="@id/tvAlamatRS"
+                android:layout_toRightOf="@id/iv_hospital_logo"
+                android:text="Lihat Peta"
                 android:textSize="15dp"
                 android:textColor="@color/black"/>
 
@@ -175,10 +249,10 @@
                 android:layout_height="1dp"
                 android:layout_marginBottom="8dp"
                 android:layout_centerVertical="true"
+                android:layout_below="@id/tvLihatPeta"
+                android:layout_marginTop="10dp"
                 android:background="@color/light_grey"/>
-
-
-        </LinearLayout>
+        </RelativeLayout>
 
 
         <Button

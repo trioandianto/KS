@@ -2,6 +2,7 @@ package com.kliksembuh.ks;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
@@ -21,6 +22,7 @@ import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
@@ -32,10 +34,16 @@ public class KonfirmasiJanjiActivity extends AppCompatActivity {
     private Button btnBuatJanji;
     private ImageView editjadwal;
     private ImageView editdokter;
+    private ImageView ivDoc_Pic;
+    private ImageView ivHospital_Pic;
+    private TextView tvFirstTitleDoc;
     private TextView tvNamaDokter;
     private TextView tvSpesial;
     private TextView tvNamaRumahSakit;
+    private TextView tvAlamatRS;
     private TextView tvNamaHari;
+    private TextView tvWaktuBerobat;
+    private TextView tvJamBerobat;
     private TextView tvDetailTanggal;
     private String userID;
     private String customerID;
@@ -49,10 +57,16 @@ public class KonfirmasiJanjiActivity extends AppCompatActivity {
     private String dayProgramDetailID;
     private String personnelID;
     private String personnelCD;
+    private String specialtyDoc;
+    private String firstTitleDoc;
     private String namaDokter;
+    private String alamat;
     private String namaRumahSakit;
     private String namaHari;
-    private String jam;
+    private String waktuBerobat;
+    private String jamMulai;
+    private String jamBerakhir;
+    private String urlImg;
     private String detailTanggal;
     private boolean cek=false;
 
@@ -81,21 +95,38 @@ public class KonfirmasiJanjiActivity extends AppCompatActivity {
 //            dayProgramDetailID = b.getString("DetailID");
 
             dayProgramDetailID = b.getString("DetailID");
-            jam = b.getString("jam");
+            waktuBerobat = b.getString("waktuBerobat");
+            jamMulai = b.getString("jamMulai");
+            jamBerakhir = b.getString("jamBerakhir");
+            //jam = b.getString("jam");
+            specialtyDoc = b.getString("dokterSpesialisasi");
             personnelID = b.getString("idDokter");
             personnelCD = b.getString("personilID");
+            urlImg = b.getString("urlImage");
+            firstTitleDoc = b.getString("firstTitle");
             namaDokter = b.getString("namaDokter");
+            alamat = b.getString("alamat");
             namaRumahSakit = b.getString("namaRumahSakit");
         }
 
         tvNamaHari = (TextView)findViewById(R.id.tvNamaHari);
-        tvNamaHari.setText(namaHari);
+        tvNamaHari.setText(namaHari + ",");
         tvDetailTanggal = (TextView) findViewById(R.id.tvDetailTangal);
-        tvDetailTanggal.setText(detailTanggal+" @"+jam);
+        tvDetailTanggal.setText(detailTanggal);
+        tvWaktuBerobat = (TextView)findViewById(R.id.tv_wktBerobat);
+        tvWaktuBerobat.setText(waktuBerobat + ",");
+        tvJamBerobat = (TextView) findViewById(R.id.tv_jamBerobat);
+        tvJamBerobat.setText(jamMulai + " - " + jamBerakhir);
+        ivDoc_Pic = (ImageView)findViewById(R.id.iv_DocPic_Confirm);
+        tvFirstTitleDoc = (TextView) findViewById(R.id.tvtitleDokter);
+        new ImageDrawable(urlImg).execute();
+        tvFirstTitleDoc.setText(firstTitleDoc);
         tvNamaDokter = (TextView)findViewById(R.id.tvnamaDokter);
         tvNamaDokter.setText(namaDokter);
         tvSpesial =(TextView)findViewById(R.id.tvspesial);
-        tvSpesial.setText("Dokter Umum");
+        tvSpesial.setText(specialtyDoc);
+        tvAlamatRS = (TextView)findViewById(R.id.tvAlamatRS);
+        tvAlamatRS.setText(alamat);
         tvNamaRumahSakit=(TextView)findViewById(R.id.tvnamaRumahSakit);
         tvNamaRumahSakit.setText(namaRumahSakit);
         btnBuatJanji = (Button)findViewById(R.id.btnbuatjanji);
@@ -268,6 +299,39 @@ public class KonfirmasiJanjiActivity extends AppCompatActivity {
         }
         @Override
         protected void onCancelled() {
+
+        }
+    }
+
+    public Drawable LoadImageFromWebOperations(String url) {
+        try {
+            InputStream is = (InputStream) new URL(url).getContent();
+            Drawable d = Drawable.createFromStream(is, "src name");
+            return d;
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    public class ImageDrawable extends AsyncTask<String, Void, Drawable>{
+
+        String image;
+        public ImageDrawable(String image){
+            this.image  = image;
+        }
+        @Override
+        protected Drawable doInBackground(String... params) {
+            //return null;
+            Drawable imageDrawable = LoadImageFromWebOperations(image);
+
+            return imageDrawable;
+        }
+
+        @Override
+        protected void onPostExecute(Drawable drawable) {
+
+            super.onPostExecute(drawable);
+            ivDoc_Pic.setImageDrawable(drawable);
 
         }
     }

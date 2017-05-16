@@ -211,7 +211,9 @@ public class TestScroolView extends AppCompatActivity{
                 Object object = parent.getAdapter().getItem(position);
                 Doctor dokter = (Doctor) object;
                 String dokterID =  dokter.getDoc_id();
+                String firstTtlDoc = dokter.getFrontTtlDoc();
                 String namaDokter = dokter.getNameDoc();
+                String specialtyDoc = dokter.getSpecialty();
                 Drawable imageDr = dokter.getDoc_pic_id();
                 String urlImg = dokter.getImageUrl();
                 BookingActivity bookingActivity = new BookingActivity();
@@ -222,8 +224,11 @@ public class TestScroolView extends AppCompatActivity{
                 b.putString("idDokter", dokterID);
                 b.putString("userID", userID);
                 b.putString("personalID",idDokter[position]);
+                b.putString("firstTtlDoc", firstTtlDoc);
                 b.putString("namaDokter",namaDokter);
+                b.putString("specialtyDoc", specialtyDoc);
                 b.putString("urlImage",urlImg);
+                b.putString("alamat", alamat);
                 b.putString("rumahSakitID",rumahSakitID);
                 b.putString("facilityID", facility);
                 b.putString("namaRumahSakit", toolbarTitle);
@@ -379,6 +384,7 @@ public class TestScroolView extends AppCompatActivity{
                         String image = jsonObject.getString("ImgUrl");
 
                         idDokter[i]=personelCD;
+                        String frontTitle = jsonObject.getString("FrontTitle");
                         String name = jsonObject.getString("Name");
                         // to do; change alamat to Doctor Specialty
                         String spesiality = jsonObject.getString("HealthFacilityDesc");
@@ -405,7 +411,7 @@ public class TestScroolView extends AppCompatActivity{
                             tvNameHosp.setText(jsonObject1.getString("InstitutionName"));
                         }
 
-                        mDokterList.add(new Doctor(id, load, name, spesiality, image));
+                        mDokterList.add(new Doctor(id, load, frontTitle, name, spesiality, image));
 
 
                         
