@@ -224,7 +224,7 @@
                 android:textColor="@color/blue"/>
             <TextView
                 android:id="@+id/tvAlamatRS"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_marginTop="5dp"
                 android:layout_height="wrap_content"
                 android:text="Jalan Jendral Sudirman"
@@ -232,17 +232,22 @@
                 android:layout_below="@id/tvnamaRumahSakit"
                 android:textSize="15dp"
                 android:textColor="@color/black"/>
+
             <TextView
                 android:id="@+id/tvLihatPeta"
-                android:layout_width="match_parent"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:drawableLeft="@drawable/ic_place_blue_a400_alpha_24dp"
+                android:drawableStart="@drawable/ic_place_blue_a400_alpha_24dp"
+                android:drawablePadding="2dp"
+                android:scaleType="fitXY"
+                android:text="Lihat di peta"
+                android:textColor="@color/blue"
+                android:textSize="12sp"
                 android:layout_below="@id/tvAlamatRS"
                 android:layout_toRightOf="@id/iv_hospital_logo"
-                android:text="Lihat Peta"
-                android:textSize="15dp"
-                android:textColor="@color/black"/>
+                android:clickable="true"/>
 
             <View
                 android:layout_width="match_parent"

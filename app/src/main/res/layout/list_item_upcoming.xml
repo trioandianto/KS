@@ -22,75 +22,45 @@
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/lblAppointmentHistory"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_margin="10dp"
-            android:text="Appointment    :"
-            android:textColor="@color/black" />
-
-        <TextView
             android:id="@+id/tvNoAppointmentHistory"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
-            android:layout_toRightOf="@+id/lblAppointmentHistory"
+            android:layout_marginLeft="10dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
             android:text="# 4123123"
             android:textColor="@color/black"
-            android:textSize="15sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/lblStatusHistory"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="left"
-            android:layout_marginRight="78dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:layout_alignParentRight="true"
-            android:text="Status :"
-            android:textColor="@color/black"/>
+            android:textSize="12sp"/>
 
         <TextView
             android:id="@+id/tvStatusHistory"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/lblStatusHistory"
-            android:layout_marginLeft="248dp"
+            android:layout_marginTop="20dp"
+            android:layout_alignStart="@+id/tvWaktuBerobat"
             android:layout_marginBottom="6dp"
             android:layout_marginRight="5dp"
+            android:drawableLeft="@drawable/ic_event_note_24dp"
+            android:drawablePadding="2dp"
+            android:drawableStart="@drawable/ic_event_note_24dp"
             android:gravity="left"
             android:text="Menunggu Konfirmasi"
             android:textColor="@color/red"/>
 
         <TextView
-            android:id="@+id/lblWaktuBerobat"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tvStatusHistory"
-            android:layout_marginBottom="6dp"
-            android:layout_marginRight="26dp"
-            android:layout_alignParentRight="true"
-            android:gravity="left"
-            android:text="Waktu Berobat :"
-            android:textColor="@color/black" />
-
-        <TextView
             android:id="@+id/tvBookSchedule"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/lblWaktuBerobat"
+            android:layout_below="@id/tvStatusHistory"
             android:text="29 Jan 2019"
-            android:background="@drawable/shape"
             android:textColor="@color/black"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="43dp"
+            android:drawableLeft="@drawable/ic_access_time_blue_14dp"
+            android:drawablePadding="2dp"
+            android:drawableStart="@drawable/ic_access_time_blue_14dp"
+            android:layout_alignStart="@+id/tvWaktuBerobat"
             android:layout_marginBottom="5dp"
-            android:padding="3dp"
             />
 
         <TextView
@@ -143,32 +113,13 @@
             android:text="11.00"
             android:textColor="@color/black" />
 
-        <TextView
-            android:id="@+id/lblDibuatTanggal"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/lblAppointmentHistory"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:text="Dibuat Tanggal :"
-            android:textColor="@color/black" />
-        <TextView
-            android:id="@+id/tvDibuatTanggal"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/lblAppointmentHistory"
-            android:text="28-Jan-2017"
-            android:layout_toRightOf="@id/lblDibuatTanggal"
-            android:textColor="@color/black" />
-
         <ImageView
             android:id="@+id/ivDocPicHistory"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
             android:paddingLeft="1dp"
             android:paddingBottom="4dp"
-            android:layout_below="@+id/lblDibuatTanggal"
+            android:layout_below="@+id/tvNoAppointmentHistory"
             android:adjustViewBounds="true"
             android:scaleType="fitXY" />
 
@@ -183,7 +134,7 @@
             android:textColor="@color/white"
             android:textSize="12sp"
             android:textStyle="bold"
-            android:layout_below="@+id/lblDibuatTanggal"
+            android:layout_below="@+id/tvNoAppointmentHistory"
             android:layout_alignStart="@+id/tv_Drname_History" />
 
         <TextView

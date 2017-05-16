@@ -45,7 +45,7 @@ public class HistoryAdapter extends BaseAdapter {
 
 
         TextView tvAppointment = (TextView)newHview.findViewById(R.id.tvNoAppointmentHistory);
-        TextView tvDate = (TextView)newHview.findViewById(R.id.tvDibuatTanggal);
+        //TextView tvDate = (TextView)newHview.findViewById(R.id.tvDibuatTanggal);
         TextView tvHistoryRumahSakit = (TextView)newHview.findViewById(R.id.tvHistoryRumahSakit);
         ImageView imgDview = (ImageView)newHview.findViewById(R.id.ivDocPicHistory);
         TextView tvDrname = (TextView)newHview.findViewById(R.id.tv_Drname_History);
@@ -56,8 +56,11 @@ public class HistoryAdapter extends BaseAdapter {
         TextView tvTimeStart = (TextView)newHview.findViewById(R.id.tvTimeStart);
         TextView tvTimeEnd = (TextView)newHview.findViewById(R.id.tvTimeEnd);
 
-        tvAppointment.setText(mHistory.get(position).getNoAppointment());
-        tvDate.setText(mHistory.get(position).getTanggal());
+        String appointment = mHistory.get(position).getNoAppointment();
+        String createdDate = mHistory.get(position).getTanggal();
+
+        tvAppointment.setText("# " + appointment + " / " + createdDate );
+//        tvDate.setText(mHistory.get(position).getTanggal());
         tvHistoryRumahSakit.setText(mHistory.get(position).getRumahSakit());
         imgDview.setImageDrawable(mHistory.get(position).getImgHistoryDoc());
         tvDrname.setText(mHistory.get(position).getNamaDokter());
