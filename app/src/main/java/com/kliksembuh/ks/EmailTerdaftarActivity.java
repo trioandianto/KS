@@ -27,7 +27,7 @@ public class EmailTerdaftarActivity extends AppCompatActivity implements View.On
         if(b != null) {
             email = b.getString("Email");
         }
-        Toolbar newToolbar = (Toolbar)findViewById(R.id.toolbarInsurance);
+        Toolbar newToolbar = (Toolbar)findViewById(R.id.toolbarEmailTerdaftar);
         setSupportActionBar(newToolbar);
         newToolbar.setTitle("Akun Sudah Pernah Terdaftar");
         setSupportActionBar(newToolbar);
