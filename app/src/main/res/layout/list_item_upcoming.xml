@@ -136,6 +136,15 @@
             android:textStyle="bold"
             android:layout_below="@+id/tvNoAppointmentHistory"
             android:layout_alignStart="@+id/tv_Drname_History" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="2dp"
+            android:layout_alignBaseline="@id/tvHistoryRumahSakit"
+            android:layout_toRightOf="@id/tvHistoryRumahSakit"
+            android:drawableLeft="@drawable/ic_place_blue_14dp"
+            android:drawablePadding="2dp"
+            android:drawableStart="@drawable/ic_place_blue_14dp" />
 
         <TextView
             android:id="@+id/tv_Drname_History"
@@ -163,22 +172,8 @@
             android:layout_toRightOf="@+id/ivDocPicHistory"
             android:text="Dokter Umum"
             android:textColor="#5C5C5C"
+            android:layout_marginBottom="20dp"
             android:textSize="12sp" />
 
-        <!--<Button-->
-        <!--android:id="@+id/bookBtn_list"-->
-        <!--style="@style/MyCustomTextAppearance"-->
-        <!--android:layout_width="70dp"-->
-        <!--android:layout_height="30dp"-->
-        <!--android:background="@drawable/shape"-->
-        <!--android:backgroundTint="@color/login_color"-->
-        <!--android:text="BOOK"-->
-        <!--android:textColor="@color/white"-->
-        <!--android:textSize="14dp"-->
-        <!--android:layout_marginLeft="5dp"-->
-        <!--android:layout_marginRight="5dp"-->
-        <!--android:layout_marginEnd="0dp"-->
-        <!--android:layout_below="@+id/tv_clock_list"-->
-        <!--android:layout_alignParentEnd="true" />-->
     </RelativeLayout>
 </LinearLayout>
