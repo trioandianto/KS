@@ -2,7 +2,9 @@ package com.kliksembuh.ks;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -25,6 +27,11 @@ public class EmailTerdaftarActivity extends AppCompatActivity implements View.On
         if(b != null) {
             email = b.getString("Email");
         }
+        Toolbar newToolbar = (Toolbar)findViewById(R.id.toolbarEmailTerdaftar);
+        setSupportActionBar(newToolbar);
+        newToolbar.setTitle("Akun Sudah Pernah Terdaftar");
+        setSupportActionBar(newToolbar);
+        getWindow().setStatusBarColor(ContextCompat.getColor(EmailTerdaftarActivity.this, R.color.colorPrimaryDark));
         tvEmailMasuk = (TextView)findViewById(R.id.tvemailku);
         tvEmailMasuk.setOnClickListener(this);
         tvLupaPassword = (TextView)findViewById(R.id.tvLupaPassword);
@@ -35,7 +42,7 @@ public class EmailTerdaftarActivity extends AppCompatActivity implements View.On
         ivLupaPassword.setOnClickListener(this);
         ivEmail = (ImageView)findViewById(R.id.ivEmail);
         if(email != null && email!=""){
-            tvEmailTerdaftar.setText("Akun " +email+" sudah terdaftar.");
+            tvEmailTerdaftar.setText("Akun " +email+" sudah pernah terdaftar.");
             tvEmailMasuk.setText(email);
         }
     }
