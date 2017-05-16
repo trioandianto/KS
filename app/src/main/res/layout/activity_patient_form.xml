@@ -73,11 +73,13 @@
             android:layout_width="160dp"
             android:textColor="@color/cardview_dark_background"
             android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
             android:id="@+id/etFNameForm"
-            android:layout_below="@+id/lblFNameForm"
             android:textSize="20sp"
-            android:hint="Nama Depan"/>
+            android:hint="Nama Depan"
+            android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+            android:layout_alignBaseline="@+id/etLNameForm"
+            android:layout_alignBottom="@+id/etLNameForm"
+            android:layout_alignParentStart="true" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -93,6 +95,7 @@
             android:layout_marginTop="2dp"
             android:textColor="@color/cardview_dark_background"
             android:layout_height="wrap_content"
+            android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
             android:id="@+id/etLNameForm"
             android:layout_toRightOf="@+id/etFNameForm"
             android:layout_below="@+id/lblLName"
@@ -246,6 +249,7 @@
             android:id="@+id/etNamaKerabatForm"
             android:layout_below="@+id/lblNamaKerabat"
             android:textSize="20sp"
+            android:inputType="textCapCharacters"
             android:hint="Maulana"/>
 
 

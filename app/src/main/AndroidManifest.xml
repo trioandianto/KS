@@ -283,13 +283,15 @@
         <!-- <activity android:name=".FacilityServiceActivity" /> -->
         <!-- <activity android:name=".FacilityRatingActivity" /> -->
         <!-- <activity android:name=".FacilityInsuranceActivity"></activity> -->
-        <activity android:name=".EmailTerdaftarActivity"
-            android:theme="@style/AppTheme4">
-        </activity>
-        <activity android:name=".InsuranceListActivity"
+        <activity
+            android:name=".EmailTerdaftarActivity"
+            android:theme="@style/AppTheme4"></activity>
+        <activity
+            android:name=".InsuranceListActivity"
             android:parentActivityName=".HospitalList"
-            android:theme="@style/AppTheme4">
-        </activity>
+            android:theme="@style/AppTheme4"></activity>
+        <activity android:name=".SettingVitalSignDetailActivity"
+            android:theme="@style/AppTheme4"></activity>
     </application>
 
 </manifest>
