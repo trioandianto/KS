@@ -82,24 +82,14 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/lblUbahEmailKontak"
             android:text="Nama Depan"/>
-        <TextView
-            android:layout_width="wrap_content"
+        <AutoCompleteTextView
+            android:layout_width="160dp"
             android:textColor="@color/cardview_dark_background"
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
             android:id="@+id/tvFName"
             android:layout_below="@+id/lblFName"
-            android:textSize="20sp"
-            android:text="Annisa"/>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="2dp"
-            android:layout_marginRight="210dp"
-            android:layout_centerVertical="true"
-            android:layout_below="@id/tvFName"
-            android:background="@color/light_grey"
-            />
+            android:textSize="20sp"/>
         <TextView
             android:layout_width="wrap_content"
             android:id="@+id/lblLName"
@@ -110,7 +100,7 @@
             android:layout_marginLeft="102dp"
             android:text="Nama Belakang"
             android:layout_alignParentEnd="true"/>
-        <TextView
+        <AutoCompleteTextView
             android:layout_width="wrap_content"
             android:layout_marginTop="2dp"
             android:textColor="@color/cardview_dark_background"
@@ -118,19 +108,9 @@
             android:id="@+id/tvLName"
             android:layout_toRightOf="@+id/tvFName"
             android:layout_below="@+id/lblLName"
-            android:layout_marginLeft="120dp"
+            android:layout_marginLeft="10dp"
             android:textSize="20sp"
-            android:text="Mutiara"
             android:layout_alignParentEnd="true"/>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginLeft="180dp"
-            android:layout_marginTop="2dp"
-            android:layout_centerVertical="true"
-            android:layout_below="@id/tvLName"
-            android:background="@color/light_grey"
-            />
 
         <TextView
             android:layout_width="wrap_content"
@@ -147,18 +127,7 @@
             android:layout_marginTop="2dp"
             android:id="@+id/tvEditEmail"
             android:layout_below="@+id/lblEmail"
-            android:textSize="20sp"
-            android:text="wicahyanimutiara@gmail.com"/>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="2dp"
-            android:layout_centerVertical="true"
-            android:layout_below="@id/tvEditEmail"
-            android:background="@color/light_grey"
-            />
-
+            android:textSize="20sp"/>
         <TextView
             android:layout_width="wrap_content"
             android:id="@+id/lblMobile"
@@ -168,20 +137,20 @@
             android:text="Mobile"/>
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="160dp"
             android:textColor="@color/cardview_dark_background"
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
             android:id="@+id/tvEditMobile"
             android:layout_below="@+id/lblMobile"
             android:textSize="20sp"
-            android:text="081318180994"/>
+            android:maxLength="12"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_marginTop="5dp"
             android:textSize="16sp"
             android:textColor="#e61c23"
-            android:layout_marginLeft="120dp"
+            android:layout_marginLeft="10dp"
             android:gravity="left"
             android:layout_below="@+id/lblMobile"
             android:layout_toRightOf="@+id/tvEditMobile"
@@ -190,14 +159,6 @@
             android:clickable="true"
             android:onClick="onClick"
             android:text="Ubah Nomor"/>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="2dp"
-            android:layout_marginRight="110dp"
-            android:layout_centerVertical="true"
-            android:layout_below="@id/tvEditMobile"
-            android:background="@color/light_grey"/>
 
 
     </RelativeLayout>

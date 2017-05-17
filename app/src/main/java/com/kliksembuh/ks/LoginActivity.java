@@ -42,7 +42,6 @@ import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
-import com.google.android.gms.cast.framework.Session;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -126,6 +125,7 @@ public class LoginActivity extends BaseActivity implements LoaderCallbacks<Curso
     private GoogleApiClient mGoogleApiClient;
     private ProgressDialog mProgressDialog;
     private SignInButton btnSignGoogle;
+    private String email;
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private String googleClientId = "123183603892-ggmi3v04paa6jpjgd79msmt3utu30vd0.apps.googleusercontent.com";
@@ -147,6 +147,12 @@ public class LoginActivity extends BaseActivity implements LoaderCallbacks<Curso
 
         findViewById(R.id.gSign_in_button).setOnClickListener(this);
         Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
+
+        Bundle b = getIntent().getExtras();
+        if(b != null) {
+            email = b.getString("Email");
+        }
+
         mEmailSignInButton.setOnClickListener(this);
         TextView textView = (TextView) findViewById(R.id.linkforgotpassword);
         textView.setOnClickListener(this);
@@ -183,6 +189,9 @@ public class LoginActivity extends BaseActivity implements LoaderCallbacks<Curso
 
         // Set up the login form.
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
+        if(email!=null && email!="null"){
+            mEmailView.setText(email);
+        }
         populateAutoComplete();
 
         mPasswordView = (EditText) findViewById(R.id.password);

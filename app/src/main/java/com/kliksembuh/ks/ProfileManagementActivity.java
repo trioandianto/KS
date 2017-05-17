@@ -7,15 +7,19 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -28,10 +32,21 @@ import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.params.BasicHttpParams;
 import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.params.HttpParams;
+import org.json.JSONException;
+import org.json.JSONObject;
 
+import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Random;
+
+import javax.net.ssl.HttpsURLConnection;
 
 public class ProfileManagementActivity extends AppCompatActivity implements View.OnClickListener {
     private static final int RESULT_LOAD_IMAGE=1;
@@ -39,6 +54,7 @@ public class ProfileManagementActivity extends AppCompatActivity implements View
 
 
 
+    private String userID;
     private ImageView imageView;
     private TextView imageClick;
     private TextView editDataDiri;
@@ -61,12 +77,18 @@ public class ProfileManagementActivity extends AppCompatActivity implements View
     private AutoCompleteTextView suhuTubuh;
     private AutoCompleteTextView denyutNadi;
     private AutoCompleteTextView pernafasan;
+    private Button btnSimpanProfile;
     final Context context = this;
+    private UpdateProfileManagementTask mAuthTask = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_management);
+        Bundle b = getIntent().getExtras();
+        if(b != null) {
+            userID = b.getString("userID");
+        }
 
         imageView = (ImageView)findViewById(R.id.profile_image);
         imageClick = (TextView) findViewById(R.id.tv_AddPhotoProfile);
@@ -75,55 +97,14 @@ public class ProfileManagementActivity extends AppCompatActivity implements View
         editLname = (TextView)findViewById(R.id.tvLName);
         editEmail = (TextView)findViewById(R.id.tvEditEmail);
         editMobile = (TextView)findViewById(R.id.tvEditMobile);
-        //editVitalSign =(TextView)findViewById(R.id.tvEditVitalSignProfileManagement);
-        //gantiPassword = (TextView)findViewById(R.id.tvgantipassword);
-
-//        editDataDiri.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                final AlertDialog.Builder mBuilder = new AlertDialog.Builder(ProfileManagementActivity.this);
-//                View mView = getLayoutInflater().inflate(R.layout.profile_data_diri,null);
-//                datadiri = (TextView) mView.findViewById(R.id.tvdatadiri);
-//                email = (AutoCompleteTextView)mView.findViewById(R.id.tvemail);
-//                namadepan = (AutoCompleteTextView) mView.findViewById(R.id.tvnamadepan);
-//                namabelakang = (AutoCompleteTextView) mView.findViewById(R.id.tvnamabelakang);
-//                nohp = (AutoCompleteTextView) mView.findViewById(R.id.tvnohp);
-//                mBuilder.setView(mView);
-//                final AlertDialog dialog = mBuilder.create();
-//                dialog.show();
-//
-//                Button simpan = (Button) mView.findViewById(R.id.btnsimpandatadiri);
-//                simpan.setOnClickListener(new View.OnClickListener(){
-//                    @Override
-//                    public void onClick(View v) {
-//                        dialog.dismiss();
-//                    }
-//                });
-//            }
-//        });
-//        editVitalSign.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                AlertDialog.Builder mBuilder = new AlertDialog.Builder(ProfileManagementActivity.this);
-//                View mView = getLayoutInflater().inflate(R.layout.profile_vital_sign,null);
-//                vitalsign = (TextView) mView.findViewById(R.id.tvvitalsign);
-//                suhuTubuh = (AutoCompleteTextView) mView.findViewById(R.id.tvsuhu);
-//                denyutNadi = (AutoCompleteTextView) mView.findViewById(R.id.tvnadi);
-//                tekananDarah = (AutoCompleteTextView) mView.findViewById(R.id.tvtekanandarah);
-//                pernafasan = (AutoCompleteTextView)mView.findViewById(R.id.tvpernafasan);
-//
-//                mBuilder.setView(mView);
-//                final AlertDialog dialog = mBuilder.create();
-//                dialog.show();
-//                Button simpan = (Button) mView.findViewById(R.id.btnsimpandatadiri);
-//                simpan.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        dialog.dismiss();
-//                    }
-//                });
-//            }
-//        });
+        btnSimpanProfile = (Button)findViewById(R.id.btnSimpanProfile);
+        btnSimpanProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                attemUpdate();
+            }
+        });
+        new GetProfileManagementTask(userID).execute();
 
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -145,12 +126,7 @@ public class ProfileManagementActivity extends AppCompatActivity implements View
             }
         });
 
-//        gantiPassword.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
 //
-//            }
-//        });
 
     }
 
@@ -165,6 +141,7 @@ public class ProfileManagementActivity extends AppCompatActivity implements View
 
     @Override
     public void onClick(View v) {
+
 
 //        Intent i=new Intent();
 //        i.setClass(this,EditNumberProfileActivity.class);
@@ -216,6 +193,58 @@ public class ProfileManagementActivity extends AppCompatActivity implements View
         // show it
         alertDialog.show();
     }
+    public  void attemUpdate(){if (mAuthTask != null) {
+        return;
+    }
+        editFname.setError(null);
+        editLname.setError(null);
+        editEmail.setError(null);
+        editMobile.setError(null);
+
+        String fName = editFname.getText().toString();
+        String lName = editLname.getText().toString();
+        String mobile = editMobile.getText().toString();
+        String email = editEmail.getText().toString();
+
+        boolean cancel = false;
+        View focusView = null;
+
+        if(TextUtils.isEmpty(fName)){
+            editFname.setError(getString(R.string.not_null));
+            focusView = editFname;
+            cancel = true;
+
+        }
+        else if(TextUtils.isEmpty(lName)){
+            editLname.setError(getString(R.string.not_null));
+            focusView = editLname;
+            cancel = true;
+
+        }
+        else if(TextUtils.isEmpty(mobile)){
+            editMobile.setError(getString(R.string.not_null));
+            focusView = editMobile;
+            cancel = true;
+
+        }
+        else if(TextUtils.isEmpty(email)){
+            editEmail.setError(getString(R.string.not_null));
+            focusView = editEmail;
+            cancel = true;
+
+        }
+
+        if (cancel) {
+            // There was an error; don't attempt login and focus the first
+            // form field with an error.
+            focusView.requestFocus();
+        } else {
+
+            mAuthTask = new UpdateProfileManagementTask(userID,fName,lName,email,mobile);
+            mAuthTask.execute((String) null);
+
+
+        }}
 
     private class UploadImage extends AsyncTask<Void,Void,Void>{
         Bitmap  image;
@@ -255,5 +284,165 @@ public class ProfileManagementActivity extends AppCompatActivity implements View
         HttpConnectionParams.setConnectionTimeout(httpParams, 1000 * 30);
         HttpConnectionParams.setSoTimeout(httpParams, 1000 * 30);
         return httpParams;
+    }
+    private class GetProfileManagementTask extends AsyncTask<String, Void, String>{
+        private String uUserID;
+
+        public GetProfileManagementTask(String uUserID){
+            this.uUserID = uUserID;
+        }
+        @Override
+        protected String doInBackground(String... params) {
+            ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo netInfo = cm.getActiveNetworkInfo();
+            if (netInfo != null && netInfo.isConnected()) {
+                try{
+                    URL url = new URL("http://cloud.abyor.com:11080/KlikSembuhAPI/api/Users/GetUsers/"+uUserID);
+                    HttpURLConnection urlc = (HttpURLConnection) url.openConnection();
+                    urlc.setRequestProperty("Content-Type", "application/json");
+                    urlc.connect();
+                    int responseCode=urlc.getResponseCode();
+                    if (responseCode == HttpsURLConnection.HTTP_OK) {
+
+                        BufferedReader in=new BufferedReader(
+                                new InputStreamReader(
+                                        urlc.getInputStream()));
+                        StringBuffer sb = new StringBuffer("");
+                        String line="";
+                        while((line = in.readLine()) != null) {
+                            sb.append(line);
+                            break;
+                        }
+                        in.close();
+
+                        return sb.toString();
+
+                    }
+                    else {
+//                        Toast.makeText(getApplicationContext(), "Gagal membuat janji.", Toast.LENGTH_LONG).show();
+                        return "";
+                    }
+                } catch (MalformedURLException e1) {
+                    // TODO Auto-generated catch block
+                    e1.printStackTrace();
+                    return "";
+                } catch (IOException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                    return "";
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    return "";
+                }
+            }else {
+                return "";
+            }
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            if(s!=""){
+                try {
+                    JSONObject jsonObject = new JSONObject(s);
+                    String firstName = jsonObject.getString("FirstName");
+                    String lastName = jsonObject.getString("LastName");
+                    String email = jsonObject.getString("Email");
+                    String noHp = jsonObject.getString("PhoneNbr");
+                    editFname.setText(firstName);
+                    editLname.setText(lastName);
+                    editEmail.setText(email);
+                    editMobile.setText(noHp);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+    private class UpdateProfileManagementTask extends AsyncTask<String, Void, String>{
+        private String uFName;
+        private String uLName;
+        private String uEmail;
+        private String uNoHP;
+        private String uUserID;
+
+        public UpdateProfileManagementTask(String uUserID, String uFName, String uLName, String uEmail, String uNoHP){
+            this.uFName = uFName;
+            this.uLName = uLName;
+            this.uEmail = uEmail;
+            this.uNoHP = uNoHP;
+            this.uUserID = uUserID;
+
+        }
+        @Override
+        protected String doInBackground(String... params) {
+            ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo netInfo = cm.getActiveNetworkInfo();
+            if (netInfo != null && netInfo.isConnected()) {
+                try{
+                    URL url = new URL("http://cloud.abyor.com:11080/KlikSembuhAPI/api/Users/PatchUsers?UserID="+uUserID);
+                    HttpURLConnection urlc = (HttpURLConnection) url.openConnection();
+                    JSONObject jsonObject = new JSONObject();
+                    jsonObject.put("FirstName", uFName);
+                    jsonObject.put("LastName", uLName);
+                    jsonObject.put("Email", uEmail);
+                    jsonObject.put("082117461581", uNoHP);
+                    urlc.setConnectTimeout(3000);
+                    urlc.setRequestProperty("Content-Type","application/json");
+                    urlc.setRequestMethod("PATCH");
+                    urlc.setDoInput(true);
+                    urlc.setDoOutput(true);
+                    DataOutputStream os = new DataOutputStream(urlc.getOutputStream());
+
+                    os.writeBytes(jsonObject.toString());
+
+
+                    int responseCode=urlc.getResponseCode();
+                    if (responseCode == HttpsURLConnection.HTTP_OK) {
+
+                        BufferedReader in=new BufferedReader(
+                                new InputStreamReader(
+                                        urlc.getInputStream()));
+                        StringBuffer sb = new StringBuffer("");
+                        String line="";
+                        while((line = in.readLine()) != null) {
+                            sb.append(line);
+                            break;
+                        }
+                        in.close();
+                        os.flush();
+                        os.close();
+
+                        return sb.toString();
+
+                    }
+                    else {
+//                        Toast.makeText(getApplicationContext(), "Gagal membuat janji.", Toast.LENGTH_LONG).show();
+                        return "";
+                    }
+                } catch (MalformedURLException e1) {
+                    // TODO Auto-generated catch block
+                    e1.printStackTrace();
+                    return "";
+                } catch (IOException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                    return "";
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    return "";
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    return "";
+                }
+            }else {
+                return "";
+            }
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+        }
     }
 }
