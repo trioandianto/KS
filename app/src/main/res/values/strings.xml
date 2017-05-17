@@ -148,7 +148,6 @@ MENGGUNAKAN LAYANAN KAMI UNTUK PERTAMA KALI.</string>
     <string name="suhutubuh">Suhu Tubuh</string>
     <string name="darah">Tekanan Darah</string>
     <string name="Datadiri">Data Diri</string>
-    <string name="vitalsign">Vital Sign</string>
     <string name="error_length">No HP tidak valid</string>
     <string name="error_active_code_expiret">kode verifikasi tidak berlaku atau salah.</string>
     <string name="error_active_code_kirim">kode sudah tidak berlaku</string>
@@ -173,5 +172,14 @@ MENGGUNAKAN LAYANAN KAMI UNTUK PERTAMA KALI.</string>
     <string name="pengaturan_base">Pengaturan</string>
     <string name="string_label_formPasien">Data ini akan digunakan sebagai data pasien bagi instansi kesehatan, mohon isikan dengan benar.</string>
     <string name="string_feedback">*Tolong masukkan nomor appointment jika isu ini terkait dengan pelayanan Rumah Sakit.</string>
+
+    <!-- Strings related to Vital Sign-->
+    <string name="vitalsign">Ubah Vital Sign</string>
+    <string name="lbl_historyVitalSign">History Vital Sign</string>
+    <string name="lbl_tekDarah">Tekanan Darah (mmHg)</string>
+    <string name="lbl_suhu">Suhu Tubuh ºC</string>
+    <string name="lbl_denyutNadi">Denyut Nadi (Denyut/Min)</string>
+    <string name="lblPernafasan">Pernafasan (Frek/Min)</string>
+
 
 </resources>

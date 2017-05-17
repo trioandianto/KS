@@ -59,7 +59,7 @@
                 android:id="@+id/btnsort"
                 android:layout_width="match_parent"
                 android:layout_toRightOf="@id/btnpeta"
-                android:text="Urutkan Berdasarkan"
+                android:text="Urutkan"
                 android:drawableLeft="@drawable/ic_sorting_black_24dp"
                 android:drawableStart="@drawable/ic_sorting_black_24dp"
                 android:drawablePadding="18dp"
