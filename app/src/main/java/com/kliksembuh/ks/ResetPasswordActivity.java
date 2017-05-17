@@ -36,7 +36,14 @@ public class ResetPasswordActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reset_password);
+        Bundle b = getIntent().getExtras();
+        if(b != null) {
+            email = b.getString("Email");
+        }
         mEmailView = (AutoCompleteTextView)findViewById(R.id.forget_forgot_password_email);
+        if(email!=null && email!="null"){
+            mEmailView.setText(email);
+        }
         Button btnverify = (Button) findViewById(R.id.btnresetpassword);
         btnverify.setOnClickListener(new View.OnClickListener() {
             @Override

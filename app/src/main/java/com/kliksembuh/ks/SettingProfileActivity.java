@@ -44,7 +44,10 @@ public class SettingProfileActivity extends Fragment implements View.OnClickList
         int i = v.getId();
         if(i == R.id.tvEditEmailKontak){
             Intent editEmailKontak = new Intent(v.getContext(), ProfileManagementActivity.class);
-            startActivity(editEmailKontak);
+            Bundle b = new Bundle();
+            b.putString("userID", userID);
+            editEmailKontak.putExtras(b);
+            startActivityForResult(editEmailKontak, 1);
         }
         if(i == R.id.tvEditProfilPatient){
             Intent editProfilPatient = new Intent(v.getContext(), PatientProfileActivity.class);
@@ -55,7 +58,10 @@ public class SettingProfileActivity extends Fragment implements View.OnClickList
         }
         if(i == R.id.tvEditPasswordProf){
             Intent editPasswordProf = new Intent (v.getContext(), EditPasswordProfileActivity.class);
-            startActivity(editPasswordProf);
+            Bundle b = new Bundle();
+            b.putString("userID", userID);
+            editPasswordProf.putExtras(b);
+            startActivityForResult(editPasswordProf, 1);
         }
 
 
