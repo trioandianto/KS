@@ -92,8 +92,11 @@ public class SearchSpesializationActivity extends AppCompatActivity implements L
         b.putString("SubDistrictDescription",locationName);
         b.putString("userID", userID);
         b.putString("tab","0");
+        myIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        myIntent.putExtra("EXIT", true);
         myIntent.putExtras(b);
-        startActivityForResult(myIntent, 1);
+        startActivityForResult(myIntent,1);
+        this.finish();
 
     }
 
