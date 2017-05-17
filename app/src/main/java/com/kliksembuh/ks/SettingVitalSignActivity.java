@@ -10,6 +10,16 @@ import android.widget.TextView;
 
 public class SettingVitalSignActivity extends Fragment implements View.OnClickListener {
     private TextView tvVitalSign;
+    private String userID;
+
+
+    public String getUserID() {
+        return userID;
+    }
+
+    public void setUserID(String userID) {
+        this.userID = userID;
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -24,6 +34,9 @@ public class SettingVitalSignActivity extends Fragment implements View.OnClickLi
         int i = v.getId();
         if(i==R.id.tvVitalSign){
             Intent editVitalSign = new Intent(v.getContext(), SettingVitalSignDetailActivity.class);
+            Bundle b = new Bundle();
+            b.putString("userID", userID);
+            editVitalSign.putExtras(b);
             startActivity(editVitalSign);
         }
 
