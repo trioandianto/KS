@@ -3,7 +3,6 @@ package com.kliksembuh.ks;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.AssetManager;
 import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -23,7 +22,6 @@ import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
@@ -117,34 +115,11 @@ public class SearchLocationActivity extends AppCompatActivity implements ListVie
         b.putString("userID", userID);
         b.putString("tab","0");
         myIntent.putExtras(b);
-        startActivityForResult(myIntent, 1);
+        startActivityForResult(myIntent,1);
+        this.finish();
 
     }
-    public static String AssetJSONFile (String filename, Context context) throws IOException {
-        AssetManager manager = context.getAssets();
-        InputStream file = manager.open(filename);
-        byte[] formArray = new byte[file.available()];
-        file.read(formArray);
-        file.close();
-
-        return new String(formArray);
-    }
-    public String loadJSONFromAsset() {
-        String json = null;
-        try {
-            InputStream is = this.getAssets().open("location.json");
-            int size = is.available();
-            byte[] buffer = new byte[size];
-            is.read(buffer);
-            is.close();
-            json = new String(buffer, "UTF-8");
-        } catch (IOException ex) {
-            ex.printStackTrace();
-            return null;
-        }
-        return json;
-    }
-   private class GetContacts extends AsyncTask<String, Void, String> {
+    private class GetContacts extends AsyncTask<String, Void, String> {
         private Context context;
 //        @Override
 //        protected void onPreExecute() {

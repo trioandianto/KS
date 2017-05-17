@@ -53,6 +53,14 @@ public class SettingActivity extends AppCompatActivity{
                     return settingProfileActivity;
                 case 1:
                     SettingVitalSignActivity settingVitalSignActivity= new SettingVitalSignActivity();
+                    try{
+                        settingVitalSignActivity.setUserID(userID);
+                    }
+                    catch (Exception ex){
+
+                    }finally {
+
+                    }
                     return settingVitalSignActivity;
                 case 2:
                     SettingReminderActivity settingReminderActivity = new SettingReminderActivity();

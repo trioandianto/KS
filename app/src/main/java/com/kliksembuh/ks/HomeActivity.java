@@ -199,16 +199,17 @@ public class HomeActivity extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
-//        Intent homeIntent = new Intent(Intent.ACTION_MAIN);
-//            homeIntent.addCategory( Intent.CATEGORY_HOME );
-//            homeIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//            startActivity(homeIntent);
 
-        if (back_pressed_time + PERIOD > System.currentTimeMillis())
-            super.onBackPressed();
+        if (getIntent().getBooleanExtra("LOGOUT", false))
+        {
+            finish();
+        }
         else
+        {
             Toast.makeText(getBaseContext(), "Press once again to exit!", Toast.LENGTH_SHORT).show();
-        back_pressed_time = System.currentTimeMillis();
+            back_pressed_time = System.currentTimeMillis();
+        }
+
     }
 
     @Override

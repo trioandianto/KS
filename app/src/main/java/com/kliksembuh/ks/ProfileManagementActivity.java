@@ -193,9 +193,10 @@ public class ProfileManagementActivity extends AppCompatActivity implements View
         // show it
         alertDialog.show();
     }
-    public  void attemUpdate(){if (mAuthTask != null) {
+    public  void attemUpdate(){
+        if (mAuthTask != null) {
         return;
-    }
+        }
         editFname.setError(null);
         editLname.setError(null);
         editEmail.setError(null);
