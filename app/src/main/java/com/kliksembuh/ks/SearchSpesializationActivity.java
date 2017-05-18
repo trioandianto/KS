@@ -49,7 +49,6 @@ public class SearchSpesializationActivity extends AppCompatActivity implements L
         if(b!=null){
             locationID = b.getString("SubDistrictCD");
             locationName = b.getString("SubDistrictDescription");
-            userID = b.getString("userID");
         }
 
         searchView = (android.support.v7.widget.SearchView)findViewById(R.id.svSpesialization);

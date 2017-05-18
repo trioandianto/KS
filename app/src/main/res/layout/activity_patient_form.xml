@@ -46,9 +46,10 @@
             android:text="SAYA ADALAH"/>
         <Spinner
             android:id="@+id/spnStatusSaya"
-            android:layout_width="match_parent"
+            android:layout_width="160dp"
             android:layout_height="wrap_content"
             android:layout_below="@id/lblStatusSaya"
+            android:background="@drawable/custom_border"
             android:layout_marginTop="18dp"
             android:textColor="@color/white"
             android:textStyle="bold"
@@ -73,54 +74,43 @@
             android:textColor="@color/cardview_dark_background"
             android:layout_height="wrap_content"
             android:id="@+id/etFNameForm"
+            android:maxLength="12"
+            android:layout_marginTop="18dp"
             android:textSize="20sp"
-            android:hint="Nama Depan"
             android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-            android:layout_alignBaseline="@+id/etLNameForm"
-            android:layout_alignBottom="@+id/etLNameForm"
+            android:layout_below="@+id/lblFullName"
             android:layout_alignParentStart="true" />
-
         <TextView
             android:layout_width="wrap_content"
             android:id="@+id/lblLName"
             android:layout_height="wrap_content"
-            android:layout_below="@id/lblFullName"
-            android:layout_toRightOf="@+id/lblFNameForm"
-            android:layout_marginLeft="102dp"
-            android:text="Nama Belakang"
-            android:layout_alignParentEnd="true"/>
+            android:layout_below="@id/etFNameForm"
+            android:text="Nama Belakang"/>
         <AutoCompleteTextView
             android:layout_width="160dp"
-            android:layout_marginTop="2dp"
             android:textColor="@color/cardview_dark_background"
             android:layout_height="wrap_content"
             android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
             android:id="@+id/etLNameForm"
-            android:layout_toRightOf="@+id/etFNameForm"
+            android:layout_marginTop="18dp"
             android:layout_below="@+id/lblLName"
-            android:layout_marginLeft="20dp"
-            android:textSize="20sp"
-            android:hint="Nama Belakang"
-            android:layout_alignParentEnd="true"/>
-
+            android:textSize="20sp"/>
         <TextView
             android:layout_width="wrap_content"
             android:id="@+id/lblMobileForm"
             android:layout_height="wrap_content"
-            android:layout_marginTop="18dp"
-            android:layout_below="@id/etFNameForm"
+            android:layout_below="@id/etLNameForm"
             android:text="Mobile"/>
 
         <AutoCompleteTextView
-            android:layout_width="wrap_content"
+            android:layout_width="160dp"
             android:textColor="@color/cardview_dark_background"
             android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
+            android:layout_marginTop="18dp"
             android:id="@+id/etEditMobileForm"
             android:layout_below="@+id/lblMobileForm"
             android:textSize="20sp"
-            android:inputType="number"
-            android:hint="081318180994"/>
+            android:inputType="number"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -158,7 +148,7 @@
             android:layout_below="@id/rgGender"
             android:text="TANGGAL LAHIR"/>
         <AutoCompleteTextView
-            android:layout_width="wrap_content"
+            android:layout_width="160dp"
             android:textColor="@color/cardview_dark_background"
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
@@ -179,10 +169,11 @@
             android:layout_alignParentStart="true" />
         <Spinner
             android:id="@+id/spnAsuransi"
-            android:layout_width="match_parent"
+            android:layout_width="160dp"
             android:layout_height="wrap_content"
             android:layout_below="@id/lblAsuransiForm"
             android:layout_marginTop="5dp"
+            android:background="@drawable/custom_border"
             android:layout_marginBottom="10dp"
             android:entries="@array/insurance_name"
             android:textColor="@color/white"
@@ -196,15 +187,14 @@
             android:layout_below="@id/spnAsuransi"
             android:text="NO. BPJS KESEHATAN *"/>
         <AutoCompleteTextView
-            android:layout_width="wrap_content"
+            android:layout_width="160dp"
             android:textColor="@color/cardview_dark_background"
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
             android:id="@+id/etNoBPJSKesehatan"
             android:layout_below="@+id/lblNoBPJS"
             android:textSize="20sp"
-            android:inputType="number"
-            android:hint="656217263"/>
+            android:inputType="number"/>
 
 
         <TextView
@@ -221,8 +211,7 @@
             android:layout_marginTop="2dp"
             android:id="@+id/etAlamatForm"
             android:layout_below="@+id/lblAlamatForm"
-            android:textSize="20sp"
-            android:hint="Jalan Mawar 20"/>
+            android:textSize="20sp"/>
 
 
         <TextView
@@ -242,15 +231,15 @@
             android:layout_marginTop="2dp"
             android:text="Nama"/>
         <AutoCompleteTextView
-            android:layout_width="wrap_content"
+            android:layout_width="160dp"
             android:textColor="@color/cardview_dark_background"
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
             android:id="@+id/etNamaKerabatForm"
+            android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ"
             android:layout_below="@+id/lblNamaKerabat"
             android:textSize="20sp"
-            android:inputType="textCapCharacters"
-            android:hint="Maulana"/>
+            android:inputType="textCapCharacters"/>
 
 
         <TextView
@@ -258,23 +247,17 @@
             android:id="@+id/lblNoHPKerabat"
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
-            android:layout_below="@id/lblKontakKerabatForm"
-            android:layout_toRightOf="@+id/etNamaKerabatForm"
-            android:layout_marginLeft="80dp"
-            android:text="NO. HP"
-            android:layout_alignParentEnd="true"/>
+            android:layout_below="@id/etNamaKerabatForm"
+            android:text="NO. HP"/>
         <AutoCompleteTextView
-            android:layout_width="wrap_content"
+            android:layout_width="160dp"
             android:layout_marginTop="2dp"
             android:textColor="@color/cardview_dark_background"
             android:layout_height="wrap_content"
             android:id="@+id/etNoHPKerabat"
-            android:layout_toRightOf="@+id/etNamaKerabatForm"
+            android:inputType="number"
             android:layout_below="@+id/lblNoHPKerabat"
-            android:layout_marginLeft="80dp"
-            android:textSize="20sp"
-            android:hint="081213149581"
-            android:layout_alignParentEnd="true"/>
+            android:textSize="20sp"/>
 
 
     </RelativeLayout>

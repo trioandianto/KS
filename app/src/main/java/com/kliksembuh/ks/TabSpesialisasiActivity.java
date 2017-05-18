@@ -116,13 +116,13 @@ public class TabSpesialisasiActivity extends Fragment implements View.OnClickLis
 //            inputManager.hideSoftInputFromWindow(v.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
 
             Intent myIntent = new Intent(getActivity(),SearchLocationActivity.class);
-            Bundle b = new Bundle();
-            b.putString("userID", userID);
-            b.putString("SubDistrictCD",lokasiID);
-            b.putString("SubDistrictDescription",locasi);
-            b.putString("facilityID",spesialID);
-            b.putString("facilityName",spesial);
-            myIntent.putExtras(b);
+//            Bundle b = new Bundle();
+//            b.putString("userID", userID);
+//            b.putString("SubDistrictCD",lokasiID);
+//            b.putString("SubDistrictDescription",locasi);
+//            b.putString("facilityID",spesialID);
+//            b.putString("facilityName",spesial);
+//            myIntent.putExtras(b);
             startActivityForResult(myIntent,4);
 
         }
@@ -155,13 +155,13 @@ public class TabSpesialisasiActivity extends Fragment implements View.OnClickLis
 //            inputManager.hideSoftInputFromWindow(v.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
 //
             Intent myIntent = new Intent(getActivity(),SearchSpesializationActivity.class);
-            Bundle b = new Bundle();
-            b.putString("userID", userID);
-            b.putString("SubDistrictCD",lokasiID);
-            b.putString("facilityID",spesialID);
-            b.putString("facilityName",spesial);
-            b.putString("SubDistrictDescription",locasi);
-            myIntent.putExtras(b);
+//            Bundle b = new Bundle();
+//            b.putString("userID", userID);
+//            b.putString("SubDistrictCD",lokasiID);
+//            b.putString("facilityID",spesialID);
+//            b.putString("facilityName",spesial);
+//            b.putString("SubDistrictDescription",locasi);
+//            myIntent.putExtras(b);
             startActivityForResult(myIntent,5);
 
 

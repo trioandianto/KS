@@ -60,6 +60,7 @@ public class PatientFormActivity extends AppCompatActivity {
     private String birthOfDate = "";
     private String relativeStatus;
     private int personalInfoID;
+    private int idStatus;
 
     @Override
 
@@ -112,6 +113,7 @@ public class PatientFormActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 statusSaya = parent.getItemAtPosition(position).toString();
+                idStatus = position+1;
             }
 
             @Override
@@ -295,12 +297,12 @@ public class PatientFormActivity extends AppCompatActivity {
             // perform the user login attempt.
             if(personalInfoID>0){
                 mUpdateAuthTask = new UpdatePatientAsyncTask(personalInfoID,userID,fName,lName,gender,mobile,noBPJS,alamat,namaKerabat,
-                        noHPKerabat, tanggalLahir, relativeStatus);
+                        noHPKerabat, tanggalLahir, idStatus);
                 mUpdateAuthTask.execute((String) null);
             }
             else{
                 mAuthTask = new PatientAsyncTask(userID,fName,lName,gender,mobile,noBPJS,alamat,namaKerabat,
-                        noHPKerabat, tanggalLahir, relativeStatus);
+                        noHPKerabat, tanggalLahir, idStatus);
                 mAuthTask.execute((String) null);
             }
 
@@ -319,10 +321,10 @@ public class PatientFormActivity extends AppCompatActivity {
         String pCloseRelativeName;
         String pCloseRelativePhoneNbr;
         String pBirthOfDate;
-        String pRelativeStatus;
+        int pRelativeStatus;
 
         public PatientAsyncTask(String pUserID, String pFName,String pLName, String pGender, String pCellPhoneNbr, String pBPJSNbr, String pAddress,
-                           String pCloseRelativeName, String pCloseRelativePhoneNbr, String pBirthOfDate, String pRelativeStatus){
+                           String pCloseRelativeName, String pCloseRelativePhoneNbr, String pBirthOfDate, int pRelativeStatus){
             this.pUserID = pUserID;
             this.pFName = pFName;
             this.pLName = pLName;
@@ -440,10 +442,10 @@ public class PatientFormActivity extends AppCompatActivity {
         String pCloseRelativeName;
         String pCloseRelativePhoneNbr;
         String pBirthOfDate;
-        String pRelativeStatus;
+        int pRelativeStatus;
 
         public UpdatePatientAsyncTask(int pPersonalInfoID, String pUserID, String pFName,String pLName, String pGender, String pCellPhoneNbr, String pBPJSNbr, String pAddress,
-                                String pCloseRelativeName, String pCloseRelativePhoneNbr, String pBirthOfDate, String pRelativeStatus){
+                                String pCloseRelativeName, String pCloseRelativePhoneNbr, String pBirthOfDate, int pRelativeStatus){
             this.pPersonalInfoID = pPersonalInfoID;
             this.pUserID = pUserID;
             this.pFName = pFName;

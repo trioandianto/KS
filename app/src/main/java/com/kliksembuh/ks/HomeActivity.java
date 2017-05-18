@@ -426,18 +426,18 @@ public class HomeActivity extends AppCompatActivity
             switch (position){
                 case 0:
                     TabSpesialisasiActivity tabSpesialisasi= new TabSpesialisasiActivity();
-//                    try{
+                    try{
 //                        tabSpesialisasi.setSpesial(facilityName);
 //                        tabSpesialisasi.setSpesialID(facilityID);
-//                        tabSpesialisasi.setUserID(userID);
+                        tabSpesialisasi.setUserID(userID);
 //                        tabSpesialisasi.setLokasiID(locationID);
 //                        tabSpesialisasi.setLocasi(locationName);
-//                    }
-//                    catch (Exception ex){
-//
-//                    }finally {
-//
-//                    }
+                    }
+                    catch (Exception ex){
+
+                    }finally {
+
+                    }
 
 
                      return tabSpesialisasi;
