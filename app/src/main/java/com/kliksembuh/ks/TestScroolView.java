@@ -12,6 +12,7 @@ import android.os.Handler;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
@@ -55,6 +56,7 @@ public class TestScroolView extends AppCompatActivity{
     ViewPager viewPager;
     private Drawable[] layouts;
     private ScrollView scrollView;
+    private NestedScrollView nsDokter;
     private ObservableScrollView mScrollView;
     private LinearLayout dotsLayout;
     private TextView[] dots;
@@ -73,7 +75,7 @@ public class TestScroolView extends AppCompatActivity{
     private String [] idDokter;
     private String userID;
     private String [] praktekDokter;
-    private TextView ivMaps;
+    private android.support.design.widget.FloatingActionButton ivMaps;
     private Drawable load;
     private String alamat;
     // Slider for ViewPager
@@ -113,8 +115,9 @@ public class TestScroolView extends AppCompatActivity{
         mDokterList = new ArrayList<>();
         list = new ArrayList<String>();
         load = getResources().getDrawable(R.drawable.loading);
-//        nsDokter = (NestedScrollView)findViewById(R.id.nsDokter);
+        nsDokter = (NestedScrollView)findViewById(R.id.nsDokter);
 //        nsDokter.setFillViewport(true);
+//        nsDokter.getParent().requestChildFocus(nsDokter, nsDokter);
 //        nsDokter.setClickable(true);
 
         lvDokter = (ListView)findViewById(R.id.lvDetailRumahSakit);
@@ -156,7 +159,8 @@ public class TestScroolView extends AppCompatActivity{
                 startActivity(i);
             }
         });
-        ivMaps = (TextView)findViewById(R.id.ivMaps);
+
+        ivMaps = (android.support.design.widget.FloatingActionButton)findViewById(R.id.ivMaps);
         ivMaps.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -407,8 +411,8 @@ public class TestScroolView extends AppCompatActivity{
                             praktekDokter = new String[jsonArray1.length()];
                             JSONObject jsonObject1 = jsonArray1.getJSONObject(j);
                             praktekDokter[j] = jsonObject1.getString("InstitutionName");
-                            TextView tvNameHosp = (TextView)findViewById(R.id.tvHospitalName);
-                            tvNameHosp.setText(jsonObject1.getString("InstitutionName"));
+//                            TextView tvNameHosp = (TextView)findViewById(R.id.tvHospitalName);
+//                            tvNameHosp.setText(jsonObject1.getString("InstitutionName"));
                         }
 
                         mDokterList.add(new Doctor(id, load, frontTitle, name, spesiality, image));

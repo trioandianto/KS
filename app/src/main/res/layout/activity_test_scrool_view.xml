@@ -46,10 +46,12 @@
     </android.support.design.widget.AppBarLayout>
 
     <android.support.design.widget.FloatingActionButton
+        android:id="@+id/ivMaps"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
+        app:rippleColor="@color/black"
         app:layout_anchor="@id/appbar"
-        android:src="@drawable/ic_favorite_white_24dp"
+        android:src="@drawable/ic_place_blue_14dp"
         app:layout_anchorGravity="bottom|right|end"
         android:layout_margin="@dimen/fab_margin"
         android:clickable="true"/>
@@ -66,84 +68,7 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginBottom="5dp"
-                android:background="@color/white">
-                <ImageView
-                    android:id="@+id/ivHospitalIcon"
-                    android:padding="1dp"
-                    android:layout_alignParentStart="true"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:src="@drawable/ic_hospital"
-                    android:scaleType="fitXY"/>
-                <TextView
-                    android:id="@+id/tvHospitalName"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_toRightOf="@+id/ivHospitalIcon"
-                    android:padding="1dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginLeft="5dp"
-                    style="@style/MyCustomTextAppearance"
-                    android:textSize="18sp"
-                    android:textColor="@color/dark_purple"
-                    android:textStyle="bold"/>
-                <TextView
-                    android:id="@+id/ivMaps"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginLeft="10dp"
-                    android:drawableLeft="@drawable/ic_place_blue_a400_alpha_24dp"
-                    android:drawableStart="@drawable/ic_place_blue_a400_alpha_24dp"
-                    android:drawablePadding="2dp"
-                    android:scaleType="fitXY"
-                    android:text="Lihat di peta"
-                    android:textColor="@color/blue"
-                    android:textSize="11sp"
-                    android:clickable="true"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignBaseline="@+id/tvHospitalName"
-                    android:layout_toEndOf="@+id/tvHospitalName"/>
-                <TextView
-                    android:id="@+id/tv_IGDHospital"
-                    android:background="#7057ff"
-                    android:textAppearance="?android:textAppearanceMedium"
-                    android:layout_width="49dp"
-                    android:layout_height="20dp"
-                    android:layout_alignStart="@id/tvHospitalName"
-                    android:layout_below="@+id/tvHospitalName"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginLeft="2dp"
-                    android:layout_marginRight="3dp"
-                    android:layout_marginBottom="5dp"
-                    android:text="IGD"
-                    android:textSize="14dp"
-                    android:gravity="center"
-                    android:textColor="#ffffff"/>
-                <TextView
-                    android:id="@+id/tv_24hours"
-                    android:background="@color/google_color"
-                    android:textAppearance="?android:textAppearanceMedium"
-                    android:layout_width="49dp"
-                    android:layout_height="20dp"
-                    android:layout_below="@+id/tvHospitalName"
-                    android:layout_toRightOf="@+id/tv_IGDHospital"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginLeft="1dp"
-                    android:layout_marginRight="15dp"
-                    android:text="24"
-                    android:textSize="14dp"
-                    android:gravity="center"
-                    android:textColor="#ffffff"/>
-            </RelativeLayout>
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
