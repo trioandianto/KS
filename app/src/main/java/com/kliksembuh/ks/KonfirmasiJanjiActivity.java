@@ -217,6 +217,7 @@ public class KonfirmasiJanjiActivity extends AppCompatActivity {
                     jsonObject.put("dayProgramID",mDayProgramID);
                     jsonObject.put("dayProgramDetailID",mDayProgramDetailID);
                     jsonObject.put("personnelID",mPersonnelID);
+                    jsonObject.put("familyMemberType", 1);
 
                     urlc.setConnectTimeout(3000);
                     urlc.setRequestProperty("Content-Type","application/json");

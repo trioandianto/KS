@@ -55,7 +55,6 @@ public class SearchLocationActivity extends AppCompatActivity implements ListVie
         if(b!=null){
             nameSpesialisasi = b.getString("facilityName");
             idSpesialisasi = b.getString("facilityID");
-            userID = b.getString("userID");
         }
 
         //location = (AutoCompleteTextView)findViewById(R.id.tvlocation);
