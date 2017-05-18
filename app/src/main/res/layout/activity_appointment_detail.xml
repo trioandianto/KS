@@ -27,54 +27,122 @@
         android:layout_width="match_parent"
         android:layout_height="200dp" />
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="10dp"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/customborder"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/lblDetailAppointment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            android:gravity="left"
+            android:text="Detail Appointment"
+            android:textAllCaps="true"
+            android:textColor="@color/black"
+            android:textSize="13sp" />
+
+        <TextView
+            android:id="@+id/lblDetailAppointStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/lblDetailAppointment"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            android:gravity="left"
+            android:text="Status"
+            android:textColor="@color/black"
+            android:textSize="10sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@id/lblDetailAppointment"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="10dp"
+            android:background="@color/light_grey"></View>
+
+        <TextView
+            android:id="@+id/tvNoAppointmentInDetail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="15dp"
+            android:layout_below="@id/lblDetailAppointment"
+            android:gravity="left"
+            android:text="No. Appointment / Tanggal"
+            android:textColor="@color/black"
+            android:textSize="13sp" />
+
+        <ImageView
+            android:id="@+id/ivDocPicDetailAppoint"
+            android:layout_below="@id/tvNoAppointmentInDetail"
+            android:layout_width="70dp"
+            android:layout_height="80dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nama Dokter"
+            android:layout_below="@id/tvNoAppointmentInDetail"
+            android:layout_toRightOf="@id/ivDocPicDetailAppoint"
+            android:textStyle="bold"
+            android:id="@+id/tvNamaDoktAppointment"
+            android:layout_marginTop="15dp"
+            android:textSize="20dp"
+            android:textColor="@color/blue"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvSpecialtyInAppoint"
+            android:text="Dokter Umum"
+            android:textSize="15dp"
+            android:layout_below="@+id/tvNamaDoktAppointment"
+            android:layout_toRightOf="@id/ivDocPicDetailAppoint"
+            android:textColor="@color/black"/>
+
+        <TextView
+            android:id="@+id/tvAlamatRsInAppoint"
+            android:layout_width="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_height="wrap_content"
+            android:text="Jalan Jendral Sudirman"
+            android:layout_toRightOf="@id/ivDocPicDetailAppoint"
+            android:layout_below="@id/tvSpecialtyInAppoint"
+            android:textSize="15dp"
+            android:textColor="@color/black"/>
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
         android:orientation="vertical">
         <Button
             android:layout_width="match_parent"
-            style="@style/MyCustomTextAppearance"
-            android:layout_margin="10dp"
-            android:text="MENUNGGU KONFIRMASI"
-            android:textColor="@color/white"
             android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:text="Butuh Bantuan?"
+            android:textColor="@color/black"
             android:background="@drawable/shape"
-            android:backgroundTint="@color/red"/>
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <AutoCompleteTextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/tvNameDetailAppointment"
-                android:layout_marginRight="10dp"
-                android:layout_marginLeft="10dp">
-            </AutoCompleteTextView>
+            android:textAllCaps="false"
+            android:backgroundTint="@color/divider_grey"/>
 
-        </android.support.design.widget.TextInputLayout>
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <AutoCompleteTextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/tvDateDetailAppointment"
-                android:layout_marginRight="10dp"
-                android:layout_marginLeft="10dp">
-            </AutoCompleteTextView>
-        </android.support.design.widget.TextInputLayout>
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <AutoCompleteTextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/tvTimeDetailAppointment"
-                android:layout_marginRight="10dp"
-                android:layout_marginLeft="10dp">
-            </AutoCompleteTextView>
-        </android.support.design.widget.TextInputLayout>
-    </LinearLayout>
+    </RelativeLayout>
+
 
 </LinearLayout>

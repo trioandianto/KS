@@ -292,7 +292,8 @@
             android:theme="@style/AppTheme4" />
         <activity
             android:name=".SettingVitalSignDetailActivity"
-            android:theme="@style/AppTheme4" />
+            android:theme="@style/AppTheme4"
+            android:parentActivityName=".SettingActivity"/>
         <activity android:name=".MapsKonfirmasiJanji"
             android:launchMode="singleInstance"
             android:parentActivityName=".KonfirmasiJanjiActivity"
