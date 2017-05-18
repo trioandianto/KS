@@ -295,7 +295,7 @@ public class HospitalList extends AppCompatActivity {
                             JSONObject objectInner = jsonArray2.getJSONObject(j);
                             cpblDesc = objectInner.optString("CapabilitiesID");
                         }
-                        mHospitalList.add(new Hospital(id, photo, name, addres, phNumber, null, image));
+                        mHospitalList.add(new Hospital(id, load, name, addres, phNumber, null, image));
 
 
 
@@ -305,9 +305,9 @@ public class HospitalList extends AppCompatActivity {
                     }
                     hAdapter = new HospitalListAdapterNew(getApplicationContext(), mHospitalList);
                     lvHospital.setAdapter(hAdapter);
-//                    for(Hospital currentHospital : mHospitalList){
-//                        new ImageDrawable(currentHospital).execute();
-//                    }
+                    for(Hospital currentHospital : mHospitalList){
+                        new ImageDrawable(currentHospital).execute();
+                    }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

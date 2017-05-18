@@ -1,5 +1,6 @@
 package com.kliksembuh.ks;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
@@ -60,7 +61,7 @@ public class PatientFormActivity extends AppCompatActivity {
     private String birthOfDate = "";
     private String relativeStatus;
     private int personalInfoID;
-    private int idStatus;
+    private int idStatus, kodeAkses;
 
     @Override
 
@@ -82,6 +83,7 @@ public class PatientFormActivity extends AppCompatActivity {
             closeRelativePhoneNbr = b.getString("closeRelativePhoneNbr");
             birthOfDate = b.getString("birthOfDate");
             relativeStatus = b.getString("relativeStatus");
+            kodeAkses = b.getInt("kodeAkses");
 
         }
         spnStatus = (Spinner) findViewById(R.id.spnStatusSaya);
@@ -101,10 +103,10 @@ public class PatientFormActivity extends AppCompatActivity {
         rbMale = (RadioButton)findViewById(R.id.radioBtnJenisL);
         spnStatusSaya = (Spinner)findViewById(R.id.spnStatusSaya);
         List<String> list = new ArrayList<String>();
-        list.add("Pasien");
-        list.add("Anak");
-        list.add("Orang Tua");
-        list.add("Keluarga / Kerabat");
+        list.add("Pribadi");
+        list.add("Suami / Istri");
+        list.add("Anak 1");
+        list.add("Anak 2");
         list.add("Lainnya");
 
         ArrayAdapter arrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,list);
@@ -182,16 +184,16 @@ public class PatientFormActivity extends AppCompatActivity {
             etNoHPKerabat.setText(closeRelativePhoneNbr);
         }
         if(relativeStatus!=null && relativeStatus!="null"){
-            if(relativeStatus == "Pasien"){
+            if(relativeStatus.equals("Pribadi") ){
                 spnStatusSaya.setSelection(0);
             }
-            else if(relativeStatus == "Anak"){
+            else if(relativeStatus.equals("Suami / Istri")){
                 spnStatusSaya.setSelection(1);
             }
-            else if(relativeStatus == "Orang Tua"){
+            else if(relativeStatus.equals("Anak 1")){
                 spnStatusSaya.setSelection(2);
             }
-            else if(relativeStatus=="Keluarga / Kerabat"){
+            else if(relativeStatus.equals("Anak 2")){
                 spnStatusSaya.setSelection(3);
             }
             else{
@@ -416,13 +418,24 @@ public class PatientFormActivity extends AppCompatActivity {
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
             if(s!=""){
-                Intent i = new Intent(getApplicationContext(), PatientProfileActivity.class);
-                Bundle b = new Bundle();
-                b.putString("userID", userID);
-                i.putExtras(b);
-                startActivityForResult(i, 1);
+                if(kodeAkses>0){
+                    Intent i = new Intent();
+                    Bundle b = new Bundle();
+                    b.putString("userID", userID);
+                    i.putExtras(b);
+                    setResult(Activity.RESULT_OK, i);
+                    Toast.makeText(getApplicationContext(), "Simpan Data Berhasil", Toast.LENGTH_LONG).show();
+                    finish();
 
-                Toast.makeText(getApplicationContext(), "Simpan Data Berhasil", Toast.LENGTH_LONG).show();
+                }else{
+                    Intent i = new Intent(getApplicationContext(), PatientProfileActivity.class);
+                    Bundle b = new Bundle();
+                    b.putString("userID", userID);
+                    i.putExtras(b);
+                    startActivityForResult(i, 1);
+                    Toast.makeText(getApplicationContext(), "Simpan Data Berhasil", Toast.LENGTH_LONG).show();
+                }
+
             }
             else {
                 //TODO

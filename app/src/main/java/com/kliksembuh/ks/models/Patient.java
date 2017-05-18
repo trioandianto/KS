@@ -21,9 +21,13 @@ public class Patient {
 
 
 
+    private int patRelativeStatusID;
+
+
+
     // Constructor
     public Patient(int pat_id, String patCloseRelativeName, String patStatus, String firstName, String patLastName,
-                   String patMobile, String patGender, String patBirthday, String noBPJSInsurance, String patAddress, String patCloseRelativePhoneNbr) {
+                   String patMobile, String patGender, String patBirthday, String noBPJSInsurance, String patAddress, String patCloseRelativePhoneNbr, int relativeStatusID) {
         this.pat_id = pat_id;
         this.patCloseRelativeName = patCloseRelativeName;
         this.patRelativeStatus = patStatus;
@@ -35,6 +39,7 @@ public class Patient {
         this.patBPJSNbr = noBPJSInsurance;
         this.patAddress = patAddress;
         this.patCloseRelativePhoneNbr = patCloseRelativePhoneNbr;
+        this.patRelativeStatusID = relativeStatusID;
     }
 
     public int getPat_id() {
@@ -122,5 +127,12 @@ public class Patient {
 
     public void setPatCloseRelativePhoneNbr(String patCloseRelativePhoneNbr) {
         this.patCloseRelativePhoneNbr = patCloseRelativePhoneNbr;
+    }
+    public int getPatRelativeStatusID() {
+        return patRelativeStatusID;
+    }
+
+    public void setPatRelativeStatusID(int patRelativeStatusID) {
+        this.patRelativeStatusID = patRelativeStatusID;
     }
 }

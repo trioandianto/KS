@@ -51,17 +51,7 @@ public class PatientProfileActivity extends AppCompatActivity implements View.On
         btnAddPatient.setOnClickListener(this);
         mPatientList = new ArrayList<>();
 
-        // Add sample data
-        // We can get data by DB, or web service
-//        mPatientList.add(new Patient(1, 10920312, "Anak", "Sofi", "Fitria", 120, true, 1991, 123048, "Jl. Arzimar 3. No. A11. Bogor"));
-//        mPatientList.add(new Patient(2, 10920313, "Ayah", "Trio", "Andianto", 121, true, 1975, 123049, "Jl. Arzimar 3. No. A11. Bogor"));
-//        mPatientList.add(new Patient(3, 10920314, "Pribadi", "Adi", "Panggayuh", 122, true, 1988, 123050, "Jl. Arzimar 3. No. A11. Bogor"));
-//        mPatientList.add(new Patient(2, 10920313, "Ayah", "Trio", "Andianto", 6281234, 1, 28/01/71, 12983921, "Jl. Arzimar 3. No. A11. Bogor");
-//        mPatientList.add(new Patient(3, 10920314, "Pribadi", "Adie", "Panggayuh", 62812345, 1, 28/01/81, 12983922, "Jl. Arzimar 3. No. A11. Bogor");
 
-        // Test adapter
-//        pAdapter = new PatientListAdapter(getApplicationContext(), mPatientList);
-//        lvPatient.setAdapter(pAdapter);
         lvPatient.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -172,7 +162,6 @@ public class PatientProfileActivity extends AppCompatActivity implements View.On
                 return "";
             }
         }
-
         @Override
         protected void onPostExecute(String success) {
             super.onPostExecute(success);
@@ -191,10 +180,11 @@ public class PatientProfileActivity extends AppCompatActivity implements View.On
                         String closeRelativeName = jsonObject.getString("CloseRelativeName");
                         String closeRelativePhoneNbr = jsonObject.getString("CloseRelativePhoneNbr");
                         String birthOfDate = jsonObject.getString("BirthOfDate");
-                        String relativeStatus = jsonObject.getString("RelativeStatus");
+                        String relativeStatus = jsonObject.getString("relativeStatusDesc");
+                        int relativeStatusID = jsonObject.getInt("RelativeStatus");
 
                         mPatientList.add(new Patient(Integer.parseInt(personalInfoID),closeRelativeName,relativeStatus,fName,lName,
-                               cellPhoneNbr,gender,birthOfDate,bPJSNbr,address,closeRelativePhoneNbr));
+                               cellPhoneNbr,gender,birthOfDate,bPJSNbr,address,closeRelativePhoneNbr, relativeStatusID));
 
                     }
                     pAdapter = new PatientListAdapter(getApplicationContext(),mPatientList);

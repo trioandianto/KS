@@ -11,11 +11,15 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -27,28 +31,17 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.net.ssl.HttpsURLConnection;
 
 public class KonfirmasiJanjiActivity extends AppCompatActivity {
-    private Button btnBuatJanji;
+    private Button btnBuatJanji, btnTambahPasien;
     private ImageView ivDoc_Pic;
-    private TextView tvLihatPeta;
-    private TextView tvFirstTitleDoc;
-    private TextView tvNamaDokter;
-    private TextView tvSpesial;
-    private TextView tvNamaRumahSakit;
-    private TextView tvAlamatRS;
-    private TextView tvNamaHari;
-    private TextView tvWaktuBerobat;
-    private TextView tvJamBerobat;
-    private TextView tvDetailTanggal;
-    private String userID;
-    private String customerID;
-    private String facilityCategoryID;
-    private String facilityID;
-    private String status;
-    private String institutionID;;
+    private TextView tvLihatPeta,tvFirstTitleDoc,tvNamaDokter,tvSpesial,tvNamaRumahSakit,
+            tvAlamatRS,tvNamaHari,tvWaktuBerobat,tvJamBerobat,tvDetailTanggal,tvNamaPasien,tvNOHP;
+    private String userID, customerID, facilityCategoryID, facilityID, status, institutionID;
     private String date;
     private String weekProgramID;
     private String dayProgramID;
@@ -67,6 +60,12 @@ public class KonfirmasiJanjiActivity extends AppCompatActivity {
     private String urlImg;
     private String detailTanggal;
     private boolean cek=false;
+    private Spinner spnDataPasien;
+    private int [] idStatus;
+    private String[] namaPasien;
+    private String [] noHpPasien;
+    private int relativeStatusID;
+    private List<String> list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -140,6 +139,45 @@ public class KonfirmasiJanjiActivity extends AppCompatActivity {
         tvNamaRumahSakit=(TextView)findViewById(R.id.tvnamaRumahSakit);
         tvNamaRumahSakit.setText(namaRumahSakit);
         btnBuatJanji = (Button)findViewById(R.id.btnbuatjanji);
+        spnDataPasien = (Spinner)findViewById(R.id.spnDataPasien);
+        tvNOHP = (TextView)findViewById(R.id.tvNOHP);
+        tvNamaPasien = (TextView)findViewById(R.id.tvNamaPasien);
+        list = new ArrayList<String>();
+        list.add("Pilih pasien");
+        ArrayAdapter arrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,list);
+        btnTambahPasien = (Button)findViewById(R.id.btnTambahPasien);
+        btnTambahPasien.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), PatientFormActivity.class);
+                Bundle b = new Bundle();
+                b.putString("userID",userID);
+                b.putInt("kodeAkses",1);
+                intent.putExtras(b);
+                startActivityForResult(intent, 8);
+            }
+        });
+        spnDataPasien.setAdapter(arrayAdapter);
+        spnDataPasien.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(idStatus.length>0 && namaPasien.length>0&&noHpPasien.length>0){
+                    relativeStatusID = idStatus[position];
+                    tvNamaPasien.setText(namaPasien[position]);
+                    tvNOHP.setText(noHpPasien[position]);
+                    btnBuatJanji.setEnabled(true);
+                }
+                else{
+                    btnBuatJanji.setEnabled(false);
+                }
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 //        editdokter = (ImageView)findViewById(R.id.iveditdokter);
 //        editjadwal = (ImageView)findViewById(R.id.iveditjadwal);
 //        editdokter.setOnClickListener(new View.OnClickListener() {
@@ -161,12 +199,12 @@ public class KonfirmasiJanjiActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 new KonfirmasiJanjiTask(userID,customerID,facilityCategoryID,facilityID,status,institutionID,
-                        date,weekProgramID,dayProgramID,dayProgramDetailID,personnelID).execute();
-
+                        date,weekProgramID,dayProgramID,dayProgramDetailID,personnelID, relativeStatusID).execute();
 //                Intent myIntent = new Intent(view.getContext(), MyAppointmentActivity.class);
 //                startActivityForResult(myIntent, 0);
             }
         });
+        new PatientListAsyncTask(userID).execute();
     }
     public class KonfirmasiJanjiTask extends AsyncTask<String, Void, String> {
         private String mUserID;
@@ -180,9 +218,10 @@ public class KonfirmasiJanjiActivity extends AppCompatActivity {
         private String mDayProgramID;
         private String mDayProgramDetailID;
         private String mPersonnelID;
+        private int mFamilyMemberType;
         KonfirmasiJanjiTask(String userID, String customerID, String facilityCategoryID, String facilityID,
                             String status, String institutionID, String date, String weekProgramID, String dayProgramID,
-                            String dayProgramDetailID, String personnelID) {
+                            String dayProgramDetailID, String personnelID, int familyMemberType) {
             this.mUserID = userID;
             this.mCustomerID = customerID;
             this.mFacilityCategoryID = facilityCategoryID;
@@ -194,6 +233,7 @@ public class KonfirmasiJanjiActivity extends AppCompatActivity {
             this.mDayProgramID = dayProgramID;
             this.mDayProgramDetailID = dayProgramDetailID;
             this.mPersonnelID = personnelID;
+            this.mFamilyMemberType = familyMemberType;
         }
 
 
@@ -217,7 +257,7 @@ public class KonfirmasiJanjiActivity extends AppCompatActivity {
                     jsonObject.put("dayProgramID",mDayProgramID);
                     jsonObject.put("dayProgramDetailID",mDayProgramDetailID);
                     jsonObject.put("personnelID",mPersonnelID);
-                    jsonObject.put("familyMemberType", 1);
+                    jsonObject.put("familyMemberType", mFamilyMemberType);
 
                     urlc.setConnectTimeout(3000);
                     urlc.setRequestProperty("Content-Type","application/json");
@@ -349,11 +389,112 @@ public class KonfirmasiJanjiActivity extends AppCompatActivity {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 7) {
+        if (requestCode == 8) {
             if(resultCode == RESULT_OK) {
-                alamat = data.getStringExtra("SubDistrictCD");
-                namaRumahSakit = data.getStringExtra("SubDistrictDescription");
+                userID = data.getStringExtra("userID");
             }
+        }
+    }
+    public class PatientListAsyncTask extends AsyncTask<String, Void, String> {
+        String pUserID;
+
+
+        public PatientListAsyncTask(String pUserID){
+            this.pUserID = pUserID;
+
+
+        }
+        @Override
+        protected String doInBackground(String... params) {
+            ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo netInfo = cm.getActiveNetworkInfo();
+            if (netInfo != null && netInfo.isConnected()) {
+                try{
+                    URL url = new URL("http://cloud.abyor.com:11080/KlikSembuhAPI/api/PersonalInfoes/GetPersonalInfoByUserID?UserID="+userID);
+                    HttpURLConnection urlc = (HttpURLConnection) url.openConnection();
+                    urlc.setRequestProperty("Content-Type", "application/json");
+                    urlc.connect();
+                    int responseCode=urlc.getResponseCode();
+                    if (responseCode == HttpsURLConnection.HTTP_OK) {
+
+                        BufferedReader in=new BufferedReader(
+                                new InputStreamReader(
+                                        urlc.getInputStream()));
+                        StringBuffer sb = new StringBuffer("");
+                        String line="";
+                        while((line = in.readLine()) != null) {
+                            sb.append(line);
+                            break;
+                        }
+                        in.close();
+
+                        return sb.toString();
+                    }
+                    else {
+                        return "";
+
+                    }
+                } catch (MalformedURLException e1) {
+                    // TODO Auto-generated catch block
+                    e1.printStackTrace();
+                    return "";
+                } catch (IOException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                    return "";
+                }catch (Exception e) {
+                    e.printStackTrace();
+                    return "";
+                }
+            }else {
+                return "";
+            }
+        }
+
+        @Override
+        protected void onPostExecute(String success) {
+            super.onPostExecute(success);
+            list = new ArrayList<String>();
+            if(success!=""){
+                try{
+                    JSONArray jsonArray = new JSONArray(success);
+                    idStatus = new int[jsonArray.length()];
+                    namaPasien = new String[jsonArray.length()];
+                    noHpPasien = new String[jsonArray.length()];
+                    for (int i=0;i<jsonArray.length();i++) {
+                        JSONObject jsonObject = jsonArray.getJSONObject(i);
+                        String fName = jsonObject.getString("FirstName");
+                        String lName = jsonObject.getString("LastName");
+                        String closeRelativePhoneNbr = jsonObject.getString("CloseRelativePhoneNbr");
+                        String status = jsonObject.getString("relativeStatusDesc");
+                        int relativeStatus = jsonObject.getInt("RelativeStatus");
+                        idStatus [i]=relativeStatus;
+                        namaPasien [i]= fName + " " + lName;
+                        noHpPasien[i] = closeRelativePhoneNbr;
+                        if(list.contains(status)){
+                            //TODO
+                        }
+                        else{
+                            //TODO
+                            list.add(status);
+                        }
+                        ArrayAdapter arrayAdapter = new ArrayAdapter<String>(KonfirmasiJanjiActivity.this,android.R.layout.simple_spinner_item,list);
+                        spnDataPasien.setAdapter(arrayAdapter);
+
+                    }
+
+                }catch (JSONException e){
+                    e.printStackTrace();
+                }
+
+            }
+            else {
+                //TODO
+                list.add("Tidak ada data pasien");
+            }
+//            ArrayAdapter arrayAdapter = new ArrayAdapter<String>(getApplicationContext(),android.R.layout.simple_spinner_item,list);
+//            spnDataPasien.setAdapter(arrayAdapter);
+
         }
     }
 }
