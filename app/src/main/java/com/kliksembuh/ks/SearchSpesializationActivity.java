@@ -1,5 +1,6 @@
 package com.kliksembuh.ks;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -84,19 +85,14 @@ public class SearchSpesializationActivity extends AppCompatActivity implements L
         Spesialization spesialisasi = (Spesialization)object;
         String idSpesialisasi = spesialisasi.getId();
         String nameSpesialisasi = spesialisasi.getName();
-        Intent myIntent = new Intent(getApplicationContext(),HomeActivity.class);
+        Intent myIntent = new Intent();
         Bundle b = new Bundle();
         b.putString("facilityID", idSpesialisasi);
         b.putString("facilityName", nameSpesialisasi);
-        b.putString("SubDistrictCD",locationID);
-        b.putString("SubDistrictDescription",locationName);
-        b.putString("userID", userID);
         b.putString("tab","0");
-        myIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        myIntent.putExtra("EXIT", true);
         myIntent.putExtras(b);
-        startActivityForResult(myIntent,1);
-        this.finish();
+        setResult(Activity.RESULT_OK, myIntent);
+        finish();
 
     }
 

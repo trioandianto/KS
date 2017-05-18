@@ -49,8 +49,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/lblStatusSaya"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginTop="18dp"
             android:textColor="@color/white"
             android:textStyle="bold"
             android:spinnerMode="dropdown"/>
@@ -170,13 +169,14 @@
             android:hint="Pilih Tanggal"/>
 
 
-        <AutoCompleteTextView
+        <TextView
             android:layout_width="wrap_content"
             android:id="@+id/lblAsuransiForm"
-            android:layout_marginTop="18dp"
+            android:layout_marginTop="16dp"
             android:layout_height="wrap_content"
-            android:layout_below="@id/etTanggalLahirForm"
-            android:text="ASURANSI"/>
+            android:text="ASURANSI"
+            android:layout_below="@+id/etTanggalLahirForm"
+            android:layout_alignParentStart="true" />
         <Spinner
             android:id="@+id/spnAsuransi"
             android:layout_width="match_parent"

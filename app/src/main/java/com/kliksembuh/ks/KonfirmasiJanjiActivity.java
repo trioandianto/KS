@@ -32,10 +32,8 @@ import javax.net.ssl.HttpsURLConnection;
 
 public class KonfirmasiJanjiActivity extends AppCompatActivity {
     private Button btnBuatJanji;
-    private ImageView editjadwal;
-    private ImageView editdokter;
     private ImageView ivDoc_Pic;
-    private ImageView ivHospital_Pic;
+    private TextView tvLihatPeta;
     private TextView tvFirstTitleDoc;
     private TextView tvNamaDokter;
     private TextView tvSpesial;
@@ -119,6 +117,18 @@ public class KonfirmasiJanjiActivity extends AppCompatActivity {
         tvJamBerobat.setText(jamMulai + " - " + jamBerakhir);
         ivDoc_Pic = (ImageView)findViewById(R.id.iv_DocPic_Confirm);
         tvFirstTitleDoc = (TextView) findViewById(R.id.tvtitleDokter);
+        tvLihatPeta = (TextView)findViewById(R.id.tvLihatPeta);
+        tvLihatPeta.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent myIntent = new Intent(KonfirmasiJanjiActivity.this, MapsKonfirmasiJanji.class);
+                Bundle b = new Bundle();
+                b.putString("alamat",alamat);
+                b.putString("namaRumahSakit",namaRumahSakit);
+                myIntent.putExtras(b);
+                startActivityForResult(myIntent, 7);
+            }
+        });
         new ImageDrawable(urlImg).execute();
         tvFirstTitleDoc.setText(firstTitleDoc);
         tvNamaDokter = (TextView)findViewById(R.id.tvnamaDokter);
@@ -333,6 +343,16 @@ public class KonfirmasiJanjiActivity extends AppCompatActivity {
             super.onPostExecute(drawable);
             ivDoc_Pic.setImageDrawable(drawable);
 
+        }
+    }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 7) {
+            if(resultCode == RESULT_OK) {
+                alamat = data.getStringExtra("SubDistrictCD");
+                namaRumahSakit = data.getStringExtra("SubDistrictDescription");
+            }
         }
     }
 }

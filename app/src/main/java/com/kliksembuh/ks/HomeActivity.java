@@ -167,18 +167,7 @@ public class HomeActivity extends AppCompatActivity
 //        }
 //        startActivity(intent);
     }
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 1) {
-            if(resultCode == RESULT_OK) {
-                userID = data.getStringExtra("userID");
-                locationID = data.getStringExtra("subDistrict");
-                locationName = data.getStringExtra("SubDistrictDescription");
-                facilityID = data.getStringExtra("facilityID");
-                facilityName = data.getStringExtra("facilityName");
-            }
-        }
-    }
+
 
     private void addBottomDots(int position){
         dots = new TextView[layouts.length];
@@ -200,9 +189,9 @@ public class HomeActivity extends AppCompatActivity
     @Override
     public void onBackPressed() {
 
-        if (getIntent().getBooleanExtra("LOGOUT", false))
-        {
-            finish();
+        if(back_pressed_time + PERIOD > System.currentTimeMillis()){
+
+            super.onBackPressed();
         }
         else
         {
@@ -437,18 +426,18 @@ public class HomeActivity extends AppCompatActivity
             switch (position){
                 case 0:
                     TabSpesialisasiActivity tabSpesialisasi= new TabSpesialisasiActivity();
-                    try{
-                        tabSpesialisasi.setSpesial(facilityName);
-                        tabSpesialisasi.setSpesialID(facilityID);
-                        tabSpesialisasi.setUserID(userID);
-                        tabSpesialisasi.setLokasiID(locationID);
-                        tabSpesialisasi.setLocasi(locationName);
-                    }
-                    catch (Exception ex){
-
-                    }finally {
-
-                    }
+//                    try{
+//                        tabSpesialisasi.setSpesial(facilityName);
+//                        tabSpesialisasi.setSpesialID(facilityID);
+//                        tabSpesialisasi.setUserID(userID);
+//                        tabSpesialisasi.setLokasiID(locationID);
+//                        tabSpesialisasi.setLocasi(locationName);
+//                    }
+//                    catch (Exception ex){
+//
+//                    }finally {
+//
+//                    }
 
 
                      return tabSpesialisasi;
@@ -481,6 +470,11 @@ public class HomeActivity extends AppCompatActivity
         public void setText(String text){
 
         }
+    }
+    public void setLocation (String id, String name){
+        this.locationID = id;
+        this.locationName = name;
+
     }
 
 }

@@ -40,7 +40,7 @@ public class PatientFormActivity extends AppCompatActivity {
 
     private PatientAsyncTask mAuthTask = null;
     private UpdatePatientAsyncTask mUpdateAuthTask = null;
-    private Spinner spnStatus, spnAsuransi;
+    private Spinner spnStatus, spnAsuransi, spnStatusSaya;
     private RadioButton rbJenisKelaminL, rbJenisKelaminP;
     private AutoCompleteTextView etLname, etMobile, etFname, etTanggalLahir,etNoBPJSKes, etAlamat, etNamaKerabat, etNoHPKerabat;
     private Button btnSimpan;
@@ -49,7 +49,6 @@ public class PatientFormActivity extends AppCompatActivity {
     private RadioGroup radioGroup;
     private RadioButton rbMale;
     private RadioButton rbFemale;
-    private Spinner spnStatusSaya;
     private String statusSaya;
     private String fName;
     private String lName;
@@ -113,6 +112,21 @@ public class PatientFormActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 statusSaya = parent.getItemAtPosition(position).toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+        spnAsuransi = (Spinner)findViewById(R.id.spnAsuransi);
+        spnAsuransi.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                if(position>0){
+                    etNoBPJSKes.setEnabled(false);
+                }
             }
 
             @Override
@@ -499,7 +513,7 @@ public class PatientFormActivity extends AppCompatActivity {
             super.onPostExecute(s);
             if(s!=""){
                 Toast.makeText(getApplicationContext(), "Update Data Berhasil", Toast.LENGTH_LONG).show();
-                Intent i = new Intent(getApplicationContext(), PatientProfileActivity.class);
+                    Intent i = new Intent(getApplicationContext(), PatientProfileActivity.class);
                 Bundle b = new Bundle();
                 b.putString("userID", userID);
                 i.putExtras(b);

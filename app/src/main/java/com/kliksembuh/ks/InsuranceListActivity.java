@@ -65,7 +65,7 @@ public class InsuranceListActivity extends AppCompatActivity {
         }
         Toolbar newToolbar = (Toolbar)findViewById(R.id.toolbarInsurance);
         setSupportActionBar(newToolbar);
-        newToolbar.setTitle(instName);
+        newToolbar.setTitle("Asuransi "+instName);
         setSupportActionBar(newToolbar);
         getWindow().setStatusBarColor(ContextCompat.getColor(InsuranceListActivity.this, R.color.colorPrimaryDark));
 

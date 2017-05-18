@@ -27,6 +27,9 @@ public class TabSpesialisasiActivity extends Fragment implements View.OnClickLis
     private TextView location;
     private TextView spesialize;
     View focusView = null;
+    public TabSpesialisasiActivity(){
+
+    }
 
     public String getSpesial() {
         return spesial;
@@ -70,14 +73,11 @@ public class TabSpesialisasiActivity extends Fragment implements View.OnClickLis
         location.setText(locasi);
         spesialize = (TextView) rootView.findViewById(R.id.tvspesi);
         spesialize.setOnClickListener(this);
-        spesialize.setText(spesial);
+
 
         //Action Button
         Button btnsearch = (Button)rootView.findViewById(R.id.btnsearchspesialisasi);
         btnsearch.setOnClickListener(this);
-
-
-
         return rootView;
     }
 
@@ -86,11 +86,24 @@ public class TabSpesialisasiActivity extends Fragment implements View.OnClickLis
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 1) {
             if(resultCode == RESULT_OK) {
-                userID = data.getStringExtra("userID");
-                lokasiID = data.getStringExtra("subDistrict");
+                lokasiID = data.getStringExtra("SubDistrictCD");
                 locasi = data.getStringExtra("SubDistrictDescription");
                 spesialID = data.getStringExtra("facilityID");
                 spesial = data.getStringExtra("facilityName");
+            }
+        }
+        if (requestCode == 4) {
+            if(resultCode == RESULT_OK) {
+                lokasiID = data.getStringExtra("SubDistrictCD");
+                locasi = data.getStringExtra("SubDistrictDescription");
+                location.setText(locasi);
+            }
+        }
+        if (requestCode == 5) {
+            if(resultCode == RESULT_OK) {
+                spesialID = data.getStringExtra("facilityID");
+                spesial = data.getStringExtra("facilityName");
+                spesialize.setText(spesial);
             }
         }
     }
@@ -110,7 +123,7 @@ public class TabSpesialisasiActivity extends Fragment implements View.OnClickLis
             b.putString("facilityID",spesialID);
             b.putString("facilityName",spesial);
             myIntent.putExtras(b);
-            startActivityForResult(myIntent,1);
+            startActivityForResult(myIntent,4);
 
         }
         else if(i==R.id.btnsearchspesialisasi){
@@ -149,7 +162,7 @@ public class TabSpesialisasiActivity extends Fragment implements View.OnClickLis
             b.putString("facilityName",spesial);
             b.putString("SubDistrictDescription",locasi);
             myIntent.putExtras(b);
-            startActivityForResult(myIntent,1);
+            startActivityForResult(myIntent,5);
 
 
         }else{
@@ -157,4 +170,5 @@ public class TabSpesialisasiActivity extends Fragment implements View.OnClickLis
         }
 
     }
+
 }

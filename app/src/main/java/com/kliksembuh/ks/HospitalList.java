@@ -280,6 +280,7 @@ public class HospitalList extends AppCompatActivity {
                         String name = jsonObject.getString("InstitutionName");
                         nameRumahSakit[i] = name;
                         String image = jsonObject.getString("ImgUrl");
+                        Drawable photo = LoadImageFromWebOperations(image);
 
                         rumahSakitID[i] = id;
                         // Drawable image1 = LoadImageFromWebOperations(image);
@@ -294,9 +295,9 @@ public class HospitalList extends AppCompatActivity {
                             JSONObject objectInner = jsonArray2.getJSONObject(j);
                             cpblDesc = objectInner.optString("CapabilitiesID");
                         }
-                        mHospitalList.add(new Hospital(id, load, name, addres, phNumber, null, image));
+                        mHospitalList.add(new Hospital(id, photo, name, addres, phNumber, null, image));
 
-                        Drawable photo = LoadImageFromWebOperations(image);
+
 
                         finalListHospital = String.valueOf(mHospitalList.size());
                         TextView newTextView = (TextView)findViewById(R.id.tvhospitalList);
@@ -304,9 +305,9 @@ public class HospitalList extends AppCompatActivity {
                     }
                     hAdapter = new HospitalListAdapterNew(getApplicationContext(), mHospitalList);
                     lvHospital.setAdapter(hAdapter);
-                    for(Hospital currentHospital : mHospitalList){
-                        new ImageDrawable(currentHospital).execute();
-                    }
+//                    for(Hospital currentHospital : mHospitalList){
+//                        new ImageDrawable(currentHospital).execute();
+//                    }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
