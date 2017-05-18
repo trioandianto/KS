@@ -10,6 +10,9 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -42,9 +45,12 @@ public class AppointmentDetailActivity extends FragmentActivity implements OnMap
 
     private GoogleMap mMap;
     private ProgressDialog pDialog;
-    private AutoCompleteTextView tvName;
-    private AutoCompleteTextView tvDate;
-    private AutoCompleteTextView tvTime;
+    private ImageView ivDocPicDetail;
+    private TextView tvStatus;
+    private TextView tvNamaDokter;
+    private TextView tvSpesialis;
+    private TextView tvAlamat;
+    private Button btnNeedHelp;
     private String alamat;
     private String namaRumahSakit;
     private SupportMapFragment mapFragment;
@@ -61,9 +67,14 @@ public class AppointmentDetailActivity extends FragmentActivity implements OnMap
             transaksiID = b.getString("transaksiID");
         }
 
-        tvName = (AutoCompleteTextView)findViewById(R.id.tvNameDetailAppointment);
-        tvDate = (AutoCompleteTextView)findViewById(R.id.tvDateDetailAppointment);
-        tvTime = (AutoCompleteTextView) findViewById(R.id.tvTimeDetailAppointment);
+        ivDocPicDetail = (ImageView) findViewById(R.id.ivDocPicDetailAppoint);
+        tvStatus = (TextView) findViewById(R.id.lblDetailAppointStatus);
+        tvNamaDokter = (TextView) findViewById(R.id.tvNamaDoktAppointment);
+        tvSpesialis = (TextView) findViewById(R.id.tvSpecialtyInAppoint);
+        tvAlamat = (TextView) findViewById(R.id.tvAlamatRsInAppoint);
+        //tvName = (AutoCompleteTextView)findViewById(R.id.tvNameDetailAppointment);
+        //tvDate = (AutoCompleteTextView)findViewById(R.id.tvDateDetailAppointment);
+        //tvTime = (AutoCompleteTextView) findViewById(R.id.tvTimeDetailAppointment);
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -191,7 +202,7 @@ public class AppointmentDetailActivity extends FragmentActivity implements OnMap
                         for(int j=0;j<personalMedical.length();j++){
                             JSONObject jsonObject1 = personalMedical.getJSONObject(j);
                             String name = jsonObject1.getString("Name");
-                            tvName.setText(name);
+                            tvNamaDokter.setText(name);
                             JSONArray institute = jsonObject1.getJSONArray("Institute");
                             for (int k=0;k<institute.length();k++){
                                 JSONObject jsonObject2 = institute.getJSONObject(k);
@@ -205,13 +216,13 @@ public class AppointmentDetailActivity extends FragmentActivity implements OnMap
                             Date scheduleDate = schdlDateFormatter.parse(startTime);
                             SimpleDateFormat newSchdlFormat = new SimpleDateFormat("dd-MMM-yyyy");
                             String schdlDatePars = newSchdlFormat.format(scheduleDate);
-                            tvDate.setText(schdlDatePars);
+                            //tvDate.setText(schdlDatePars);
 
                         }
 
 
                         String jam = jsonObject.getString("EstimationTime");
-                        tvTime.setText(jam);
+                        //tvTime.setText(jam);
 
                     }
                 } catch (JSONException e) {

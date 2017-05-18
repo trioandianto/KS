@@ -57,9 +57,9 @@
         android:clickable="true"/>
 
     <android.support.v4.widget.NestedScrollView
+        android:id="@+id/nsDokter"
         android:layout_width="match_parent"
         android:layout_height="fill_parent"
-        android:id="@+id/nsDokter"
         android:fillViewport="true"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
@@ -72,288 +72,298 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
                 android:background="@color/white"
                 android:gravity="center_horizontal|center_vertical">
+
                 <TextView
+                    android:id="@+id/tv_Layanan"
                     android:layout_width="90dp"
                     android:layout_height="wrap_content"
-                    android:id="@+id/tv_Layanan"
-                    android:gravity="left"
-                    android:padding="8dp"
+                    android:drawableLeft="@drawable/ic_format_list_bulleted_black_24dp"
                     android:drawablePadding="6dp"
                     android:drawableStart="@drawable/ic_format_list_bulleted_black_24dp"
-                    android:drawableLeft="@drawable/ic_format_list_bulleted_black_24dp"
+                    android:gravity="left"
+                    android:padding="8dp"
                     android:text="50"
-                    android:textSize="13dp"
-                    android:textColor="#df4056"/>
+                    android:textColor="#df4056"
+                    android:textSize="13dp" />
+
                 <TextView
+                    android:id="@+id/lbl_Layanan"
                     android:layout_width="95dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
-                    android:id="@+id/lbl_Layanan"
                     android:layout_marginTop="25dp"
                     android:gravity="left"
                     android:text="Layanan"
                     android:textColor="@color/grey_light"
-                    android:textSize="14sp"/>
+                    android:textSize="14sp" />
+
                 <View
                     android:id="@+id/line_Layanan"
                     android:layout_width="1dp"
                     android:layout_height="25dp"
-                    android:layout_marginTop="11dp"
+                    android:layout_centerHorizontal="true"
                     android:layout_marginLeft="14dp"
                     android:layout_marginRight="10dp"
-                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="11dp"
                     android:layout_toRightOf="@+id/tv_Layanan"
-                    android:background="@color/light_grey"/>
+                    android:background="@color/light_grey" />
 
                 <TextView
+                    android:id="@+id/tv_Penilaian"
                     android:layout_width="90dp"
                     android:layout_height="wrap_content"
-                    android:id="@+id/tv_Penilaian"
-                    android:padding="8dp"
+                    android:layout_toRightOf="@+id/line_Layanan"
                     android:drawableLeft="@drawable/ic_sentiment_satisfied_24dp"
                     android:drawablePadding="6dp"
                     android:drawableStart="@drawable/ic_sentiment_satisfied_24dp"
-                    android:layout_toRightOf="@+id/line_Layanan"
+                    android:padding="8dp"
                     android:text="100"
-                    android:textSize="13dp"
-                    android:textColor="#df4056"/>
+                    android:textColor="#df4056"
+                    android:textSize="13dp" />
+
                 <TextView
+                    android:id="@+id/lbl_Penilaian"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="8dp"
-                    android:id="@+id/lbl_Penilaian"
                     android:layout_marginTop="25dp"
                     android:layout_toRightOf="@+id/line_Layanan"
                     android:gravity="left"
                     android:text="Penilaian"
                     android:textColor="@color/grey_light"
-                    android:textSize="14sp"/>
+                    android:textSize="14sp" />
+
                 <View
                     android:id="@+id/line_Rekanan"
                     android:layout_width="1dp"
                     android:layout_height="25dp"
-                    android:layout_marginTop="12dp"
+                    android:layout_centerHorizontal="true"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="16dp"
-                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="12dp"
                     android:layout_toRightOf="@+id/tv_Penilaian"
-                    android:background="@color/light_grey"/>
+                    android:background="@color/light_grey" />
 
                 <TextView
+                    android:id="@+id/tv_Rekanan"
                     android:layout_width="60dp"
                     android:layout_height="wrap_content"
-                    android:id="@+id/tv_Rekanan"
-                    android:gravity="left"
-                    android:padding="8dp"
+                    android:layout_toRightOf="@+id/line_Rekanan"
                     android:drawableLeft="@drawable/ic_sentiment_satisfied_24dp"
                     android:drawablePadding="6dp"
                     android:drawableStart="@drawable/ic_domain_black_24dp"
-                    android:layout_toRightOf="@+id/line_Rekanan"
+                    android:gravity="left"
+                    android:padding="8dp"
                     android:text="50"
-                    android:textSize="13dp"
-                    android:textColor="#df4056"/>
+                    android:textColor="#df4056"
+                    android:textSize="13dp" />
+
                 <TextView
+                    android:id="@+id/lbl_Rekanan"
                     android:layout_width="130dp"
                     android:layout_height="wrap_content"
-                    android:id="@+id/lbl_Rekanan"
-                    android:layout_marginTop="25dp"
                     android:layout_marginLeft="8dp"
+                    android:layout_marginTop="25dp"
                     android:layout_toRightOf="@+id/line_Rekanan"
                     android:gravity="left"
                     android:text="Rekanan Asuransi"
                     android:textColor="@color/grey_light"
-                    android:textSize="14sp"/>
+                    android:textSize="14sp" />
 
             </RelativeLayout>
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/white"
                 android:layout_marginBottom="5dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp">
+                android:background="@color/white">
 
                 <View
                     android:id="@+id/line_Fasilitas"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:layout_marginTop="5dp"
+                    android:layout_centerHorizontal="true"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
-                    android:layout_centerHorizontal="true"
-                    android:background="@color/light_grey"/>
+                    android:layout_marginTop="5dp"
+                    android:background="@color/light_grey" />
 
                 <TextView
+                    android:id="@+id/tvLihatFasilitas"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/tvLihatFasilitas"
-                    android:clickable="true"
-                    android:text="Lihat Fasilitas Lainnya"
                     android:layout_below="@id/line_Fasilitas"
-                    android:textColor="@color/blue"
-                    android:textSize="13sp"
+                    android:clickable="true"
+                    android:gravity="center"
                     android:padding="4dp"
-                    android:gravity="center"/>
+                    android:text="Lihat Fasilitas Lainnya"
+                    android:textColor="@color/blue"
+                    android:textSize="13sp" />
             </RelativeLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
-                android:layout_marginRight="10dp"
-                android:padding="2dp"
-                android:gravity="left"
-                android:layout_marginLeft="10dp"
-                android:background="@color/white">
+                android:background="@color/white"
+                android:gravity="center"
+                android:padding="2dp">
+
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/customborder"
-                    android:layout_marginRight="20dp">
+                    android:layout_marginRight="20dp"
+                    android:background="@drawable/customborder">
+
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
                         android:id="@+id/lbl_Liked"
-                        android:gravity="left"
-                        android:padding="8dp"
-                        android:drawablePadding="6dp"
-                        android:drawableLeft="@drawable/ic_favorite_24dp"
-                        android:text="Suka"
-                        android:textSize="13dp"
-                        android:textColor="#5C5C5C"
-                        android:layout_alignParentTop="true"
-                        android:layout_alignParentStart="true" />
-                    <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/tv_Liked"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:drawableLeft="@drawable/ic_favorite_24dp"
+                        android:drawablePadding="6dp"
                         android:gravity="left"
                         android:padding="8dp"
+                        android:text="Suka"
+                        android:textColor="#5C5C5C"
+                        android:textSize="13dp" />
+
+                    <TextView
+                        android:id="@+id/tv_Liked"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_toRightOf="@id/lbl_Liked"
+                        android:gravity="left"
+                        android:padding="8dp"
                         android:text="50"
-                        android:textSize="13dp"
-                        android:textColor="@color/grey_light"/>
+                        android:textColor="@color/grey_light"
+                        android:textSize="13dp" />
                 </LinearLayout>
+
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="110dp"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
                     android:background="@drawable/customborder">
+
                     <TextView
+                        android:id="@+id/tv_KirimPesan"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/tv_KirimPesan"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:drawableLeft="@drawable/ic_chat_black_24dp"
+                        android:drawablePadding="6dp"
                         android:gravity="left"
                         android:padding="8dp"
-                        android:drawablePadding="6dp"
-                        android:drawableLeft="@drawable/ic_chat_black_24dp"
                         android:text="Kirim Pesan"
-                        android:textSize="13dp"
                         android:textColor="@color/grey_light"
-                        android:layout_alignParentTop="true"
-                        android:layout_alignParentStart="true" />
+                        android:textSize="13dp" />
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="12dp"
                     android:background="@drawable/customborder">
+
                     <TextView
+                        android:id="@+id/tv_ShareHospital"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/tv_ShareHospital"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:drawableLeft="@drawable/ic_share_black_24dp"
+                        android:drawablePadding="6dp"
                         android:gravity="left"
                         android:padding="8dp"
-                        android:drawablePadding="6dp"
-                        android:drawableLeft="@drawable/ic_share_black_24dp"
                         android:text="Bagikan"
-                        android:textSize="13dp"
                         android:textColor="@color/grey_light"
-                        android:layout_alignParentTop="true"
-                        android:layout_alignParentStart="true" />
+                        android:textSize="13dp" />
                 </LinearLayout>
 
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="1dp"
-                android:layout_marginLeft="10dp"
                 android:layout_marginBottom="5dp"
-                android:layout_marginRight="10dp"
+                android:layout_marginTop="1dp"
                 android:background="#d4157e">
+
                 <RelativeLayout
                     android:id="@+id/relSpinner"
                     android:layout_width="160dp"
                     android:layout_height="wrap_content"
-                    android:background="#eb2698"
-                    android:layout_marginLeft="7dp"
-                    android:layout_gravity="center">
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="13dp"
+                    android:background="#eb2698">
+
                     <Spinner
+                        android:id="@+id/spn_SpecialtyDoc"
                         android:layout_width="match_parent"
                         android:layout_height="30dp"
-                        android:id="@+id/spn_SpecialtyDoc"
-                        android:gravity="left"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
                         android:background="@drawable/shape"
                         android:backgroundTint="@color/colorPrimary"
-                        android:popupBackground="#ffffff"
-                        android:textSize="13dp"
-                        android:spinnerMode="dialog"
                         android:clipToPadding="false"
-                        android:layout_alignParentTop="true"
-                        android:layout_alignParentStart="true" />
+                        android:gravity="left"
+                        android:popupBackground="#ffffff"
+                        android:spinnerMode="dialog"
+                        android:textSize="13dp" />
+
                     <ImageView
                         android:layout_width="40dp"
                         android:layout_height="30dp"
                         android:layout_alignParentRight="true"
-                        android:paddingBottom="2dp"
                         android:layout_gravity="center"
+                        android:paddingBottom="2dp"
                         android:src="@mipmap/drop_white" />
                 </RelativeLayout>
+
                 <RelativeLayout
                     android:layout_width="170dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
-                    android:padding="6dp"
-                    android:gravity="center">
+                    android:gravity="center"
+                    android:padding="6dp">
+
                     <TextView
+                        android:id="@+id/tv_FilterDoc"
+                        style="@style/MyCustomTextAppearance"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/tv_FilterDoc"
-                        android:text="Filter"
-                        android:drawablePadding="8dp"
-                        android:drawableLeft="@drawable/ic_sort_black_16dp"
-                        android:drawableStart="@drawable/ic_sort_black_16dp"
-                        android:gravity="center_vertical"
-                        android:textAllCaps="false"
-                        style="@style/MyCustomTextAppearance"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
                         android:background="@drawable/shape"
                         android:backgroundTint="#eb2698"
-                        android:padding="8dp"
+                        android:drawableLeft="@drawable/ic_sort_black_16dp"
+                        android:drawablePadding="8dp"
+                        android:drawableStart="@drawable/ic_sort_black_16dp"
+                        android:gravity="center_vertical"
                         android:inputType=""
                         android:maxLines="1"
-                        android:textSize="13dp"
+                        android:padding="8dp"
+                        android:text="Filter"
+                        android:textAllCaps="false"
                         android:textColor="@color/white"
-                        android:layout_alignParentTop="true"
-                        android:layout_alignParentStart="true" />
+                        android:textSize="13dp" />
                 </RelativeLayout>
             </LinearLayout>
 
             <ListView
+                android:id="@+id/lvDetailRumahSakit"
                 android:layout_width="match_parent"
-                android:divider="#00000000"
-                android:paddingRight="0dip"
-                android:paddingLeft="10dip"
-                android:paddingBottom="15dip"
-                android:clipToPadding="false"
-                android:background="@drawable/shape"
                 android:layout_height="fill_parent"
-                android:id="@+id/lvDetailRumahSakit">
-
+                android:background="@drawable/shape"
+                android:clipToPadding="false"
+                android:divider="#00000000"
+                android:paddingLeft="10dp"
+                android:paddingBottom="15dip">
             </ListView>
         </LinearLayout>
 
