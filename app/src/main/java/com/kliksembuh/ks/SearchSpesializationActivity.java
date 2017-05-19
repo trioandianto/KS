@@ -72,7 +72,9 @@ public class SearchSpesializationActivity extends AppCompatActivity implements L
             }
             @Override
             public boolean onQueryTextChange(String newText) {
-                searchAdapter.filter(newText);
+                if(searchAdapter!=null){
+                    searchAdapter.filter(newText);
+                }
                 return false;
             }
         });

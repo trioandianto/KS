@@ -161,7 +161,7 @@ public class KonfirmasiJanjiActivity extends AppCompatActivity {
         spnDataPasien.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if(idStatus.length>0 && namaPasien.length>0&&noHpPasien.length>0){
+                if(idStatus != null && namaPasien != null && noHpPasien!=null){
                     relativeStatusID = idStatus[position];
                     tvNamaPasien.setText(namaPasien[position]);
                     tvNOHP.setText(noHpPasien[position]);
@@ -392,6 +392,7 @@ public class KonfirmasiJanjiActivity extends AppCompatActivity {
         if (requestCode == 8) {
             if(resultCode == RESULT_OK) {
                 userID = data.getStringExtra("userID");
+                new PatientListAsyncTask(userID).execute();
             }
         }
     }
@@ -404,6 +405,12 @@ public class KonfirmasiJanjiActivity extends AppCompatActivity {
 
 
         }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
         @Override
         protected String doInBackground(String... params) {
             ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);

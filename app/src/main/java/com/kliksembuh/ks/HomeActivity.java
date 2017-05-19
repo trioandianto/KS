@@ -31,6 +31,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.Calendar;
 import java.util.HashMap;
 
 public class HomeActivity extends AppCompatActivity
@@ -84,6 +85,8 @@ public class HomeActivity extends AppCompatActivity
          * logged in
          * */
         session.checkLogin();
+        Calendar calendar = Calendar.getInstance();
+        int timeNow = calendar.get(Calendar.HOUR);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setDrawingCacheBackgroundColor(Color.TRANSPARENT);

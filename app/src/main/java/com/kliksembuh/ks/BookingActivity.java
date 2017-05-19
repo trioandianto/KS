@@ -114,6 +114,7 @@ public class BookingActivity extends AppCompatActivity implements ListView.OnIte
     private int tanggala;
     private int bulan;
     private int tahun;
+    private int timeNow;
     private String waktuBerobat;
     private String namaHari;
     private String[] praktekDokter;
@@ -196,6 +197,7 @@ public class BookingActivity extends AppCompatActivity implements ListView.OnIte
         cMonth = calendar.get(Calendar.MONTH);
         cYear = calendar.get(Calendar.YEAR);
         day = calendar.get(Calendar.DAY_OF_WEEK);
+        timeNow = calendar.get(Calendar.HOUR);
         hariMingguini = day;
         lastDay = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
 
@@ -1304,12 +1306,16 @@ public class BookingActivity extends AppCompatActivity implements ListView.OnIte
                                         SimpleDateFormat dateFormatter = new SimpleDateFormat("HH:mm:ss");
                                         Date dateTimeStart = dateFormatter.parse(starDate);
                                         Date dateTimeEnd = dateFormatter.parse(endDate);
+                                        int a = dateTimeStart.getHours();
+                                        if (sequence=="minggu 1" && hariMingguini >= day && timeNow > a){
 
-                                        // Get time from date
-                                        SimpleDateFormat timeFormatter = new SimpleDateFormat("HH:mm");
-                                        String timeStart = timeFormatter.format(dateTimeStart);
-                                        String timeEnd = timeFormatter.format(dateTimeEnd);
-                                        mJadwalDokterList.add(new JadwalDokter(timeStart, timeEnd,dayProgramID,weekProgramID,programDetailID));
+                                        }else {
+                                            SimpleDateFormat timeFormatter = new SimpleDateFormat("HH:mm");
+                                            String timeStart = timeFormatter.format(dateTimeStart);
+                                            String timeEnd = timeFormatter.format(dateTimeEnd);
+                                            mJadwalDokterList.add(new JadwalDokter(timeStart, timeEnd,dayProgramID,weekProgramID,programDetailID));
+
+                                        }
                                     }
 
 
@@ -1334,12 +1340,16 @@ public class BookingActivity extends AppCompatActivity implements ListView.OnIte
                                         SimpleDateFormat dateFormatter = new SimpleDateFormat("HH:mm:ss");
                                         Date dateTimeStart = dateFormatter.parse(starDate);
                                         Date dateTimeEnd = dateFormatter.parse(endDate);
+                                        int a = dateTimeStart.getHours();
+                                        if (sequence=="minggu 1" && hariMingguini >= day && timeNow > a){
 
-                                        // Get time from date
-                                        SimpleDateFormat timeFormatter = new SimpleDateFormat("HH:mm");
-                                        String timeStart = timeFormatter.format(dateTimeStart);
-                                        String timeEnd = timeFormatter.format(dateTimeEnd);
-                                        mJadwalDokterList.add(new JadwalDokter(timeStart, timeEnd,dayProgramID,weekProgramID,programDetailID));
+                                        }else {
+                                            SimpleDateFormat timeFormatter = new SimpleDateFormat("HH:mm");
+                                            String timeStart = timeFormatter.format(dateTimeStart);
+                                            String timeEnd = timeFormatter.format(dateTimeEnd);
+                                            mJadwalDokterList.add(new JadwalDokter(timeStart, timeEnd,dayProgramID,weekProgramID,programDetailID));
+
+                                        }
                                     }
                                 }
 
@@ -1358,12 +1368,16 @@ public class BookingActivity extends AppCompatActivity implements ListView.OnIte
                                         SimpleDateFormat dateFormatter = new SimpleDateFormat("HH:mm:ss");
                                         Date dateTimeStart = dateFormatter.parse(starDate);
                                         Date dateTimeEnd = dateFormatter.parse(endDate);
+                                        int a = dateTimeStart.getHours();
+                                        if (sequence=="minggu 1" && hariMingguini >= day && timeNow > a){
 
-                                        // Get time from date
-                                        SimpleDateFormat timeFormatter = new SimpleDateFormat("HH:mm");
-                                        String timeStart = timeFormatter.format(dateTimeStart);
-                                        String timeEnd = timeFormatter.format(dateTimeEnd);
-                                        mJadwalDokterList.add(new JadwalDokter(timeStart, timeEnd,dayProgramID,weekProgramID,programDetailID));
+                                        }else {
+                                            SimpleDateFormat timeFormatter = new SimpleDateFormat("HH:mm");
+                                            String timeStart = timeFormatter.format(dateTimeStart);
+                                            String timeEnd = timeFormatter.format(dateTimeEnd);
+                                            mJadwalDokterList.add(new JadwalDokter(timeStart, timeEnd,dayProgramID,weekProgramID,programDetailID));
+
+                                        }
                                     }
 
                                 }
@@ -1382,12 +1396,16 @@ public class BookingActivity extends AppCompatActivity implements ListView.OnIte
                                         SimpleDateFormat dateFormatter = new SimpleDateFormat("HH:mm:ss");
                                         Date dateTimeStart = dateFormatter.parse(starDate);
                                         Date dateTimeEnd = dateFormatter.parse(endDate);
+                                        int a = dateTimeStart.getHours();
+                                        if (sequence=="minggu 1" && hariMingguini >= day && timeNow > a){
 
-                                        // Get time from date
-                                        SimpleDateFormat timeFormatter = new SimpleDateFormat("HH:mm");
-                                        String timeStart = timeFormatter.format(dateTimeStart);
-                                        String timeEnd = timeFormatter.format(dateTimeEnd);
-                                        mJadwalDokterList.add(new JadwalDokter(timeStart, timeEnd,dayProgramID,weekProgramID,programDetailID));
+                                        }else {
+                                            SimpleDateFormat timeFormatter = new SimpleDateFormat("HH:mm");
+                                            String timeStart = timeFormatter.format(dateTimeStart);
+                                            String timeEnd = timeFormatter.format(dateTimeEnd);
+                                            mJadwalDokterList.add(new JadwalDokter(timeStart, timeEnd,dayProgramID,weekProgramID,programDetailID));
+
+                                        }
                                     }
 
                                 }
@@ -1406,12 +1424,16 @@ public class BookingActivity extends AppCompatActivity implements ListView.OnIte
                                         SimpleDateFormat dateFormatter = new SimpleDateFormat("HH:mm:ss");
                                         Date dateTimeStart = dateFormatter.parse(starDate);
                                         Date dateTimeEnd = dateFormatter.parse(endDate);
+                                        int a = dateTimeStart.getHours();
+                                        if (sequence=="minggu 1" && hariMingguini >= day && timeNow > a){
 
-                                        // Get time from date
-                                        SimpleDateFormat timeFormatter = new SimpleDateFormat("HH:mm");
-                                        String timeStart = timeFormatter.format(dateTimeStart);
-                                        String timeEnd = timeFormatter.format(dateTimeEnd);
-                                        mJadwalDokterList.add(new JadwalDokter(timeStart, timeEnd,dayProgramID,weekProgramID,programDetailID));
+                                        }else {
+                                            SimpleDateFormat timeFormatter = new SimpleDateFormat("HH:mm");
+                                            String timeStart = timeFormatter.format(dateTimeStart);
+                                            String timeEnd = timeFormatter.format(dateTimeEnd);
+                                            mJadwalDokterList.add(new JadwalDokter(timeStart, timeEnd,dayProgramID,weekProgramID,programDetailID));
+
+                                        }
                                     }
 
                                 }
@@ -1430,12 +1452,19 @@ public class BookingActivity extends AppCompatActivity implements ListView.OnIte
                                         SimpleDateFormat dateFormatter = new SimpleDateFormat("HH:mm:ss");
                                         Date dateTimeStart = dateFormatter.parse(starDate);
                                         Date dateTimeEnd = dateFormatter.parse(endDate);
+                                        int a = dateTimeStart.getHours();
+                                        if (sequence=="minggu 1" && hariMingguini >= day && timeNow > a){
+
+                                        }else {
+                                            SimpleDateFormat timeFormatter = new SimpleDateFormat("HH:mm");
+                                            String timeStart = timeFormatter.format(dateTimeStart);
+                                            String timeEnd = timeFormatter.format(dateTimeEnd);
+                                            mJadwalDokterList.add(new JadwalDokter(timeStart, timeEnd,dayProgramID,weekProgramID,programDetailID));
+
+                                        }
 
                                         // Get time from date
-                                        SimpleDateFormat timeFormatter = new SimpleDateFormat("HH:mm");
-                                        String timeStart = timeFormatter.format(dateTimeStart);
-                                        String timeEnd = timeFormatter.format(dateTimeEnd);
-                                        mJadwalDokterList.add(new JadwalDokter(timeStart, timeEnd,dayProgramID,weekProgramID,programDetailID));
+
                                     }
 
                                 }
@@ -1454,12 +1483,16 @@ public class BookingActivity extends AppCompatActivity implements ListView.OnIte
                                         SimpleDateFormat dateFormatter = new SimpleDateFormat("HH:mm:ss");
                                         Date dateTimeStart = dateFormatter.parse(starDate);
                                         Date dateTimeEnd = dateFormatter.parse(endDate);
+                                        int a = dateTimeStart.getHours();
+                                        if (sequence=="minggu 1" && hariMingguini >= day && timeNow > a){
 
-                                        // Get time from date
-                                        SimpleDateFormat timeFormatter = new SimpleDateFormat("HH:mm");
-                                        String timeStart = timeFormatter.format(dateTimeStart);
-                                        String timeEnd = timeFormatter.format(dateTimeEnd);
-                                        mJadwalDokterList.add(new JadwalDokter(timeStart, timeEnd,dayProgramID,weekProgramID,programDetailID));
+                                        }else {
+                                            SimpleDateFormat timeFormatter = new SimpleDateFormat("HH:mm");
+                                            String timeStart = timeFormatter.format(dateTimeStart);
+                                            String timeEnd = timeFormatter.format(dateTimeEnd);
+                                            mJadwalDokterList.add(new JadwalDokter(timeStart, timeEnd,dayProgramID,weekProgramID,programDetailID));
+
+                                        }
                                     }
 
                                 }

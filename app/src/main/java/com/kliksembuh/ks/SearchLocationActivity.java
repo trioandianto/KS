@@ -95,7 +95,9 @@ public class SearchLocationActivity extends AppCompatActivity implements ListVie
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                searchAdapter.filter(newText);
+                if(searchAdapter!=null){
+                    searchAdapter.filter(newText);
+                }
                 return false;
             }
         });
