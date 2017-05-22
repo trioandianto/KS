@@ -25,6 +25,7 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.kliksembuh.ks.models.Hospital;
+import com.kliksembuh.ks.models.Insurance;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -62,7 +63,13 @@ public class HospitalList extends AppCompatActivity {
     private String userID;
     private String alamat[];
     private String finalListHospital;
+    private String finalListInsurance = "";
     private Drawable load;
+
+    private List<Insurance> mInsuranceList;
+    private String instID;
+    private String instInsuranceID;
+    private String instName;
 
     RatingBar rb;
 
@@ -290,14 +297,26 @@ public class HospitalList extends AppCompatActivity {
                         String phNumber = jsonObject.getString("InstitutionPhoneNbr");
                         //phoneNbr[i] = phNumber;
                         String cpblDesc = "";
+
+                        JSONArray jsonArrayIns = jsonObject.getJSONArray("Insurances");
+
+                        for (int k = 0 ; k < jsonArrayIns.length() ; k++){
+//                            JSONObject objectIns = jsonArrayIns.getJSONObject(k);
+//                            String imageIns = objectIns.getString("ImageUrl");
+//                            Drawable imgDrawable = LoadImageFromWebOperations(image);
+//                            instID = objectIns.getString("InstitutionID");
+//                            instInsuranceID = objectIns.getString("InstitutionInsuranceID");
+//                            instName = objectIns.getString("Name");
+                            finalListInsurance = String.valueOf(jsonArrayIns.optInt(k));
+
+                        }
+
                         JSONArray jsonArray2 = jsonObject.getJSONArray("Capabilities");
                         for (int j = 0 ; j < jsonArray2.length() ; j++){
                             JSONObject objectInner = jsonArray2.getJSONObject(j);
                             cpblDesc = objectInner.optString("CapabilitiesID");
                         }
                         mHospitalList.add(new Hospital(id, load, name, addres, phNumber, null, image));
-
-
 
                         finalListHospital = String.valueOf(mHospitalList.size());
                         TextView newTextView = (TextView)findViewById(R.id.tvhospitalList);
@@ -386,6 +405,7 @@ public class HospitalList extends AppCompatActivity {
             TextView tvIGD = (TextView) newView.findViewById(R.id.tv_IGD);
             TextView tv24hour = (TextView) newView.findViewById(R.id.tv_24hours);
             TextView tvLihatSelengkapnya = (TextView)newView.findViewById(R.id.tv_moreinfo) ;
+            tvLihatSelengkapnya.setText("Lihat Semua Asuransi ("+finalListInsurance+")");
             tvLihatSelengkapnya.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

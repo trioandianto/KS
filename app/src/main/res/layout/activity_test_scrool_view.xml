@@ -56,7 +56,7 @@
         android:layout_margin="@dimen/fab_margin"
         android:clickable="true"/>
 
-    <android.support.v4.widget.NestedScrollView
+    <ScrollView
         android:id="@+id/nsDokter"
         android:layout_width="match_parent"
         android:layout_height="fill_parent"
@@ -72,8 +72,9 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:gravity="center_horizontal|center_vertical">
+                android:paddingLeft="20dp"
+                android:layout_marginTop="5dp"
+                android:background="@color/white">
 
                 <TextView
                     android:id="@+id/tv_Layanan"
@@ -104,7 +105,6 @@
                     android:layout_width="1dp"
                     android:layout_height="25dp"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginLeft="14dp"
                     android:layout_marginRight="10dp"
                     android:layout_marginTop="11dp"
                     android:layout_toRightOf="@+id/tv_Layanan"
@@ -125,7 +125,7 @@
 
                 <TextView
                     android:id="@+id/lbl_Penilaian"
-                    android:layout_width="wrap_content"
+                    android:layout_width="95dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="8dp"
                     android:layout_marginTop="25dp"
@@ -148,7 +148,7 @@
 
                 <TextView
                     android:id="@+id/tv_Rekanan"
-                    android:layout_width="60dp"
+                    android:layout_width="90dp"
                     android:layout_height="wrap_content"
                     android:layout_toRightOf="@+id/line_Rekanan"
                     android:drawableLeft="@drawable/ic_sentiment_satisfied_24dp"
@@ -162,15 +162,25 @@
 
                 <TextView
                     android:id="@+id/lbl_Rekanan"
-                    android:layout_width="130dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="8dp"
                     android:layout_marginTop="25dp"
                     android:layout_toRightOf="@+id/line_Rekanan"
                     android:gravity="left"
-                    android:text="Rekanan Asuransi"
+                    android:text="Asuransi"
                     android:textColor="@color/grey_light"
                     android:textSize="14sp" />
+                <View
+                    android:id="@+id/line_Fasilitas"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_below="@id/lbl_Layanan"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="5dp"
+                    android:background="@color/light_grey" />
 
             </RelativeLayout>
 
@@ -180,21 +190,10 @@
                 android:layout_marginBottom="5dp"
                 android:background="@color/white">
 
-                <View
-                    android:id="@+id/line_Fasilitas"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginTop="5dp"
-                    android:background="@color/light_grey" />
-
                 <TextView
                     android:id="@+id/tvLihatFasilitas"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/line_Fasilitas"
                     android:clickable="true"
                     android:gravity="center"
                     android:padding="4dp"
@@ -212,9 +211,9 @@
                 android:padding="2dp">
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="110dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="20dp"
+                    android:layout_marginRight="5dp"
                     android:background="@drawable/customborder">
 
                     <TextView
@@ -246,7 +245,6 @@
                 <LinearLayout
                     android:layout_width="110dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="10dp"
                     android:background="@drawable/customborder">
 
                     <TextView
@@ -265,9 +263,9 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="110dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="12dp"
+                    android:layout_marginLeft="5dp"
                     android:background="@drawable/customborder">
 
                     <TextView
@@ -286,6 +284,12 @@
                 </LinearLayout>
 
             </LinearLayout>
+
+            <!--<fragment-->
+                <!--android:id="@+id/mapListHospital"-->
+                <!--android:name="com.google.android.gms.maps.SupportMapFragment"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="200dp" />-->
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -367,6 +371,6 @@
             </ListView>
         </LinearLayout>
 
-    </android.support.v4.widget.NestedScrollView>
+    </ScrollView>
 
 </android.support.design.widget.CoordinatorLayout>

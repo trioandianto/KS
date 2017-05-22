@@ -2,6 +2,7 @@ package com.kliksembuh.ks;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
 import android.net.ConnectivityManager;
@@ -9,6 +10,7 @@ import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.view.View;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -56,6 +58,7 @@ public class AppointmentDetailActivity extends FragmentActivity implements OnMap
     private SupportMapFragment mapFragment;
     private String transaksiID;
     private String userID;
+    private Button BtnNeedHelp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +75,22 @@ public class AppointmentDetailActivity extends FragmentActivity implements OnMap
         tvNamaDokter = (TextView) findViewById(R.id.tvNamaDoktAppointment);
         tvSpesialis = (TextView) findViewById(R.id.tvSpecialtyInAppoint);
         tvAlamat = (TextView) findViewById(R.id.tvAlamatRsInAppoint);
+        btnNeedHelp = (Button) findViewById(R.id.btnMeedHelp);
+        btnNeedHelp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent myIntent = new Intent(AppointmentDetailActivity.this,ContactUsActivity.class);
+//                Bundle b = new Bundle();
+//                b.putString("userID", userID);
+//                b.putString("subDistrict",subDistrict);
+//                b.putString("facilityID",spesialisasi);
+//                b.putString("facilityName",facilityName);
+//                b.putString("SubDistrictDescription",subDistricDescription);
+//                myIntent.putExtras(b);
+                startActivityForResult(myIntent, 1);
+                //overridePendingTransition( R.anim.from_middle, R.anim.to_middle);
+            }
+        });
         //tvName = (AutoCompleteTextView)findViewById(R.id.tvNameDetailAppointment);
         //tvDate = (AutoCompleteTextView)findViewById(R.id.tvDateDetailAppointment);
         //tvTime = (AutoCompleteTextView) findViewById(R.id.tvTimeDetailAppointment);

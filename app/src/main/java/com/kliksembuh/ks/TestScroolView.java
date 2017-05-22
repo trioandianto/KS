@@ -27,6 +27,7 @@ import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.google.android.gms.maps.SupportMapFragment;
 import com.kliksembuh.ks.library.DoctorListAdapter;
 import com.kliksembuh.ks.library.ObservableScrollView;
 import com.kliksembuh.ks.models.Doctor;
@@ -85,6 +86,8 @@ public class TestScroolView extends AppCompatActivity{
     final long DELAY_MS = 5000;//delay in milliseconds before task is to be executed
     final long PERIOD_MS = 5000; // time in milliseconds between successive task executions.
 
+    // Google Maps
+    private SupportMapFragment mapFragment;
 
     int a = 0;
 
@@ -115,13 +118,14 @@ public class TestScroolView extends AppCompatActivity{
         mDokterList = new ArrayList<>();
         list = new ArrayList<String>();
         load = getResources().getDrawable(R.drawable.loading);
-        nsDokter = (NestedScrollView)findViewById(R.id.nsDokter);
+        //nsDokter = (NestedScrollView)findViewById(R.id.nsDokter);
 //        nsDokter.setFillViewport(true);
 //        nsDokter.getParent().requestChildFocus(nsDokter, nsDokter);
 //        nsDokter.setClickable(true);
 
         lvDokter = (ListView)findViewById(R.id.lvDetailRumahSakit);
         spinner = (Spinner)findViewById(R.id.spn_SpecialtyDoc);
+        //mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.mapListHospital);
         List<String> list = new ArrayList<String>();
         list.add(spesial);
         ArrayAdapter arrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,list);
@@ -432,6 +436,7 @@ public class TestScroolView extends AppCompatActivity{
                 }catch (JSONException e){
                     e.printStackTrace();
                 }
+                //mapFragment.getMapAsync(AppointmentDetailActivity.this);
 
             } else {
                 //:TODO
