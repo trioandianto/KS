@@ -52,8 +52,7 @@
                 android:maxLines="1"
                 android:textSize="16sp"
                 android:textColor="@color/black"
-                android:singleLine="true"
-                />
+                android:singleLine="true"/>
 
             <Button
                 android:id="@+id/btnsort"
