@@ -13,6 +13,7 @@ public class SettingActivity extends AppCompatActivity{
     private SettingActivity.SectionsPagerAdapter mSectionsPagerAdapter;
     private ViewPager mViewPager;
     private String userID;
+    private int positionTab;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,11 +21,14 @@ public class SettingActivity extends AppCompatActivity{
         Bundle b = getIntent().getExtras();
         if(b != null) {
             userID = b.getString("userID");
+            positionTab = b.getInt("tab");
+
         }
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
         mViewPager = (ViewPager) findViewById(R.id.containerSetting);
         mViewPager.setAdapter(mSectionsPagerAdapter);
+        mViewPager.setCurrentItem(positionTab);
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabSetting);
         tabLayout.setupWithViewPager(mViewPager);
 

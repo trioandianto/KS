@@ -237,6 +237,7 @@ public class HomeActivity extends AppCompatActivity
             Intent home = new Intent(this, SettingActivity.class);
             Bundle b = new Bundle();
             b.putString("userID", userID);
+            b.putInt("tab",0);
             home.putExtras(b);
             startActivityForResult(home, 1);
             //fragment = new SettingActivity();
@@ -275,6 +276,7 @@ public class HomeActivity extends AppCompatActivity
             Intent home = new Intent(this, SettingActivity.class);
             Bundle b = new Bundle();
             b.putString("userID", userID);
+            b.putInt("tab",1);
             home.putExtras(b);
             startActivityForResult(home, 1);
         }

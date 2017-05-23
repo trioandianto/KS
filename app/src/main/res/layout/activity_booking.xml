@@ -105,7 +105,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
@@ -124,18 +124,16 @@
 
             <Spinner
                 android:id="@+id/spnHari"
-                android:layout_width="match_parent"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:padding="8dp"
                 android:layout_alignBaseline="@id/tvText"
                 android:layout_margin="10dp"
-                android:popupTheme="@android:style/ThemeOverlay.Material.Light"
                 android:layout_toRightOf="@+id/tvText"
                 android:entries="@array/day_name"
                 android:textColor="@color/white"
-                android:textSize="14sp"
-                android:textStyle="bold"
-                android:spinnerMode="dialog"/>
+                android:textSize="16sp"
+                android:textStyle="bold"/>
 
 
         </LinearLayout>

@@ -41,7 +41,8 @@ public class PatientFormActivity extends AppCompatActivity {
 
     private PatientAsyncTask mAuthTask = null;
     private UpdatePatientAsyncTask mUpdateAuthTask = null;
-    private Spinner spnStatus, spnAsuransi, spnStatusSaya;
+    private Spinner spnStatus, spnAsuransi;
+    private Spinner spnStatusSaya;
     private RadioButton rbJenisKelaminL, rbJenisKelaminP;
     private AutoCompleteTextView etLname, etMobile, etFname, etTanggalLahir,etNoBPJSKes, etAlamat, etNamaKerabat, etNoHPKerabat;
     private Button btnSimpan;
@@ -72,21 +73,9 @@ public class PatientFormActivity extends AppCompatActivity {
         Bundle b = getIntent().getExtras();
         if(b != null) {
             userID = b.getString("userID");
-            personalInfoID = b.getInt("personalInfoID");
-            fName = b.getString("fName");//Your id
-            lName = b.getString("lName");
-            gender = b.getString("gender");
-            cellPhoneNbr = b.getString("cellPhoneNbr");
-            bPJSNbr = b.getString("bPJSNbr");
-            address = b.getString("address");
-            closeRelativeName = b.getString("closeRelativeName");
-            closeRelativePhoneNbr = b.getString("closeRelativePhoneNbr");
-            birthOfDate = b.getString("birthOfDate");
-            relativeStatus = b.getString("relativeStatus");
             kodeAkses = b.getInt("kodeAkses");
 
         }
-        spnStatus = (Spinner) findViewById(R.id.spnStatusSaya);
         spnAsuransi = (Spinner) findViewById(R.id.spnAsuransi);
         rbJenisKelaminL = (RadioButton) findViewById(R.id.radioBtnJenisL);
         rbJenisKelaminP = (RadioButton) findViewById(R.id.radioBtnJenisP);
@@ -108,14 +97,14 @@ public class PatientFormActivity extends AppCompatActivity {
         list.add("Anak 1");
         list.add("Anak 2");
         list.add("Lainnya");
-
-        ArrayAdapter arrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,list);
+        ArrayAdapter<String> arrayAdapter = new  ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item, list);
         spnStatusSaya.setAdapter(arrayAdapter);
         spnStatusSaya.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 statusSaya = parent.getItemAtPosition(position).toString();
                 idStatus = position+1;
+                new GetPatientListAsyncTask(userID).execute();
             }
 
             @Override
@@ -124,6 +113,15 @@ public class PatientFormActivity extends AppCompatActivity {
             }
         });
         spnAsuransi = (Spinner)findViewById(R.id.spnAsuransi);
+        List<String> list1 = new ArrayList<String>();
+        list1.add("BPJS");
+        list1.add("AXA Mandiri");
+        list1.add("Zurich");
+        list1.add("Sunlife");
+        list1.add("Prudential");
+        ArrayAdapter<CharSequence> arrayAdapter1 = ArrayAdapter.createFromResource(this,R.array.insurance_name,android.R.layout.simple_spinner_item);
+        arrayAdapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spnAsuransi.setAdapter(arrayAdapter1);
         spnAsuransi.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -146,7 +144,7 @@ public class PatientFormActivity extends AppCompatActivity {
                 attemptSubmit();
             }
         });
-        setData();
+//        setData();
 
     }
     private void setData(){
@@ -537,6 +535,113 @@ public class PatientFormActivity extends AppCompatActivity {
             }
             else {
                 //TODO
+            }
+
+        }
+    }
+    public class GetPatientListAsyncTask extends AsyncTask<String, Void, String> {
+        String pUserID;
+
+
+        public GetPatientListAsyncTask(String pUserID){
+            this.pUserID = pUserID;
+
+
+        }
+        @Override
+        protected String doInBackground(String... params) {
+            ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo netInfo = cm.getActiveNetworkInfo();
+            if (netInfo != null && netInfo.isConnected()) {
+                try{
+                    URL url = new URL("http://cloud.abyor.com:11080/KlikSembuhAPI/api/PersonalInfoes/GetPersonalInfoByUserIDAndRelationType?userID="+userID+"&relationTypeID="+idStatus);
+                    HttpURLConnection urlc = (HttpURLConnection) url.openConnection();
+                    urlc.setRequestProperty("Content-Type", "application/json");
+                    urlc.connect();
+                    int responseCode=urlc.getResponseCode();
+                    if (responseCode == HttpsURLConnection.HTTP_OK) {
+
+                        BufferedReader in=new BufferedReader(
+                                new InputStreamReader(
+                                        urlc.getInputStream()));
+                        StringBuffer sb = new StringBuffer("");
+                        String line="";
+                        while((line = in.readLine()) != null) {
+                            sb.append(line);
+                            break;
+                        }
+                        in.close();
+
+                        return sb.toString();
+                    }
+                    else {
+                        return "";
+
+                    }
+                } catch (MalformedURLException e1) {
+                    // TODO Auto-generated catch block
+                    e1.printStackTrace();
+                    return "";
+                } catch (IOException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                    return "";
+                }catch (Exception e) {
+                    e.printStackTrace();
+                    return "";
+                }
+            }else {
+                return "";
+            }
+        }
+        @Override
+        protected void onPostExecute(String success) {
+            super.onPostExecute(success);
+            if(success!=""){
+                try{
+                    JSONObject jsonObject = new JSONObject(success);
+                    personalInfoID = jsonObject.getInt("PersonalInfoID");
+                    fName = jsonObject.getString("FirstName");
+                    lName = jsonObject.getString("LastName");
+                    gender = jsonObject.getString("Gender");
+                    cellPhoneNbr = jsonObject.getString("CellPhoneNbr");
+                    bPJSNbr = jsonObject.getString("BPJSNbr");
+                    address = jsonObject.getString("Address");
+                    closeRelativeName = jsonObject.getString("CloseRelativeName");
+                    closeRelativePhoneNbr = jsonObject.getString("CloseRelativePhoneNbr");
+                    birthOfDate = jsonObject.getString("BirthOfDate");
+                    relativeStatus = jsonObject.getString("relativeStatusDesc");
+                    int relativeStatusID = jsonObject.getInt("RelativeStatus");
+                    if (relativeStatusID==idStatus){
+                        etFname.setText(fName);
+                        etLname.setText(lName);
+                        etMobile.setText(cellPhoneNbr);
+                        if(gender=="Male"){
+                            rbMale.setEnabled(true);
+                        }
+                        else {
+                            rbFemale.setEnabled(true);
+                        }
+                        etNoBPJSKes.setText(bPJSNbr);
+                        etAlamat.setText(address);
+                        etNamaKerabat.setText(closeRelativeName);
+                        etNoHPKerabat.setText(closeRelativePhoneNbr);
+                        etTanggalLahir.setText(birthOfDate);
+                    }
+                }catch (JSONException e){
+                    e.printStackTrace();
+                }
+
+            }
+            else {
+                etFname.setText(null);
+                etLname.setText(null);
+                rbMale.setEnabled(true);
+                etNoBPJSKes.setText(null);
+                etAlamat.setText(null);
+                etNamaKerabat.setText(null);
+                etNoHPKerabat.setText(null);
+                etTanggalLahir.setText(null);
             }
 
         }

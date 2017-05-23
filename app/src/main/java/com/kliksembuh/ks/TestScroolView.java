@@ -124,7 +124,7 @@ public class TestScroolView extends AppCompatActivity{
         spinner = (Spinner)findViewById(R.id.spn_SpecialtyDoc);
         List<String> list = new ArrayList<String>();
         list.add(spesial);
-        ArrayAdapter arrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,list);
+        ArrayAdapter arrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_dropdown_item_1line,list);
         spinner.setAdapter(arrayAdapter);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -386,6 +386,7 @@ public class TestScroolView extends AppCompatActivity{
                         String id = jsonObject.getString("MedicalPersonnelID");
                         String personelCD = jsonObject.getString("MedicalPersonnelCD");
                         String image = jsonObject.getString("ImgUrl");
+                        Drawable photo = LoadImageFromWebOperations(image);
 
                         idDokter[i]=personelCD;
                         String frontTitle = jsonObject.getString("FrontTitle");
@@ -415,7 +416,7 @@ public class TestScroolView extends AppCompatActivity{
 //                            tvNameHosp.setText(jsonObject1.getString("InstitutionName"));
                         }
 
-                        mDokterList.add(new Doctor(id, load, frontTitle, name, spesiality, image));
+                        mDokterList.add(new Doctor(id, photo, frontTitle, name, spesiality, image));
 
 
                         
@@ -424,9 +425,9 @@ public class TestScroolView extends AppCompatActivity{
                     dAdapter = new DoctorListAdapter(getApplicationContext(), mDokterList);
 //                        dAdapter.filter(spesial);
                     lvDokter.setAdapter(dAdapter);
-                    for (Doctor currentDokter : mDokterList) {
-                        new ImageDrawable(currentDokter).execute();
-                    }
+//                    for (Doctor currentDokter : mDokterList) {
+//                        new ImageDrawable(currentDokter).execute();
+//                    }
 
 
                 }catch (JSONException e){

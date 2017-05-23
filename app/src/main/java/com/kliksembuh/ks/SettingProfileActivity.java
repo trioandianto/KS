@@ -50,7 +50,7 @@ public class SettingProfileActivity extends Fragment implements View.OnClickList
             startActivityForResult(editEmailKontak, 1);
         }
         if(i == R.id.tvEditProfilPatient){
-            Intent editProfilPatient = new Intent(v.getContext(), PatientProfileActivity.class);
+            Intent editProfilPatient = new Intent(v.getContext(), PatientFormActivity.class);
             Bundle b = new Bundle();
             b.putString("userID", userID);
             editProfilPatient.putExtras(b);

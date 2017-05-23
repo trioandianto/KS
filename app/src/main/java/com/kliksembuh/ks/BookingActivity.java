@@ -174,7 +174,7 @@ public class BookingActivity extends AppCompatActivity implements ListView.OnIte
         mJadwalDokterList = new ArrayList<>();
         //lvPraktekDokter = (ListView)findViewById(R.id.lvRumahSakitDokter);
         mPraktekDokter = new ArrayList<>();
-        spnHari = (Spinner)findViewById(R.id.spnHari);
+        spnHari = (Spinner) findViewById(R.id.spnHari);
         List<String> list = new ArrayList<String>();
         list.add("Senin");
         list.add("Selasa");
@@ -197,7 +197,9 @@ public class BookingActivity extends AppCompatActivity implements ListView.OnIte
         cMonth = calendar.get(Calendar.MONTH);
         cYear = calendar.get(Calendar.YEAR);
         day = calendar.get(Calendar.DAY_OF_WEEK);
-        timeNow = calendar.get(Calendar.HOUR);
+        Date now = new Date();
+        SimpleDateFormat dateFormatter = new SimpleDateFormat("HH:mm:ss");
+        timeNow = now.getHours();
         hariMingguini = day;
         lastDay = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
 
@@ -604,7 +606,7 @@ public class BookingActivity extends AppCompatActivity implements ListView.OnIte
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 mJadwalDokterList = new ArrayList<>();
                 day = position+2;
-                namaHari = spnHari.getSelectedItem().toString();
+                namaHari = parent.getItemAtPosition(position).toString();
                 tahun = cYear;
                 if (sequence=="minggu 1"){
                     if(day ==8){

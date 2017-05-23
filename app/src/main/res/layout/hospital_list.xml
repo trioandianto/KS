@@ -99,7 +99,6 @@
             android:layout_toRightOf="@+id/iv_hospital_pic"
             android:layout_toEndOf="@+id/iv_hospital_pic"
             />
-
         <ImageView
             android:id="@+id/iv_axa_ic"
             android:src="@drawable/axa_ic"

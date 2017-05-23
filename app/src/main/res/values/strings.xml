@@ -117,10 +117,10 @@ MENGGUNAKAN LAYANAN KAMI UNTUK PERTAMA KALI.</string>
     </string-array>
 
     <string-array name="status_patient">
-        <item>Pasien</item>
-        <item>Anak</item>
-        <item>Orang Tua</item>
-        <item>Keluarga / Kerabat</item>
+        <item>Pribadi</item>
+        <item>Suami / Istri</item>
+        <item>Anak 1</item>
+        <item>Anak 2</item>
         <item>Lainnya</item>
     </string-array>
 

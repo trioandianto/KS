@@ -315,7 +315,6 @@
                     android:layout_height="40dp"
                     android:layout_marginBottom="5dp"
                     android:layout_marginRight="10dp"
-                    android:background="@drawable/custom_border"
                     android:textColor="@color/white"
                     android:textStyle="bold"
                     android:textSize="13dp"
@@ -370,7 +369,6 @@
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="10dp"
                     android:layout_toRightOf="@id/lblTekDarah"
-                    android:background="@drawable/custom_border"
                     android:textColor="@color/black"
                     android:textSize="13sp" />
 
@@ -405,7 +403,6 @@
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="10dp"
                     android:layout_toRightOf="@id/lblNOHp"
-                    android:background="@drawable/custom_border"
                     android:inputType="number"
                     android:textColor="@color/black"
                     android:textSize="13sp" />

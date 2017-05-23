@@ -13,10 +13,17 @@ public class Hospital {
     private String phoneNbr;
     private String capabilitiesDesc;
     private String stringImg;
+    private Drawable iv_image1;
+    private Drawable iv_image2;
+    private Drawable iv_image3;
+
+
+    private String moreInfoInsurance;
 
     // Constructor
 
-    public Hospital(String id, Drawable hospital_pic_id, String name, String address, String phoneNbr, String capabilitiesDesc, String stringImg) {
+    public Hospital(String id, Drawable hospital_pic_id, String name, String address, String phoneNbr, String capabilitiesDesc, String stringImg
+                    ) {
         this.id = id;
         this.hospital_pic_id = hospital_pic_id;
         this.name = name;
@@ -82,6 +89,37 @@ public class Hospital {
     public void setStringImg(String stringImg) {
         this.stringImg = stringImg;
     }
+    public Drawable getIv_image1() {
+        return iv_image1;
+    }
+
+    public void setIv_image1(Drawable iv_image1) {
+        this.iv_image1 = iv_image1;
+    }
+
+    public Drawable getIv_image2() {
+        return iv_image2;
+    }
+
+    public void setIv_image2(Drawable iv_image2) {
+        this.iv_image2 = iv_image2;
+    }
+
+    public Drawable getIv_image3() {
+        return iv_image3;
+    }
+
+    public void setIv_image3(Drawable iv_image3) {
+        this.iv_image3 = iv_image3;
+    }
+    public String getMoreInfoInsurance() {
+        return moreInfoInsurance;
+    }
+
+    public void setMoreInfoInsurance(String moreInfoInsurance) {
+        this.moreInfoInsurance = moreInfoInsurance;
+    }
+
 
 
 }

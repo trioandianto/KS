@@ -94,7 +94,6 @@ public class HospitalList extends AppCompatActivity {
         setSupportActionBar(newToolbar);
         getWindow().setStatusBarColor(ContextCompat.getColor(HospitalList.this, R.color.colorPrimaryDark));
         load = getResources().getDrawable(R.drawable.loading);
-
         lvHospital = (ListView)findViewById(R.id.listview_hospital);
         btnpeta = (Button)findViewById(R.id.btnpeta);
         btnpeta.setOnClickListener(new View.OnClickListener() {
@@ -281,6 +280,9 @@ public class HospitalList extends AppCompatActivity {
                         nameRumahSakit[i] = name;
                         String image = jsonObject.getString("ImgUrl");
                         Drawable photo = LoadImageFromWebOperations(image);
+                        Drawable img1=null;
+                        Drawable img2=null;
+                        Drawable img3=null;
 
                         rumahSakitID[i] = id;
                         // Drawable image1 = LoadImageFromWebOperations(image);
@@ -295,19 +297,43 @@ public class HospitalList extends AppCompatActivity {
                             JSONObject objectInner = jsonArray2.getJSONObject(j);
                             cpblDesc = objectInner.optString("CapabilitiesID");
                         }
-                        mHospitalList.add(new Hospital(id, load, name, addres, phNumber, null, image));
+                        JSONArray jsonArray1 = jsonObject.getJSONArray("Insurances");
+                        for (int k = 0; k<jsonArray.length();k++){
+                            try {
+                                JSONObject jsonObject1 = jsonArray1.getJSONObject(k);
+                                String img = jsonObject1.getString("ImageUrl");
+                                if(k==0){
+                                    img1 = LoadImageFromWebOperations(img);
+                                }
+                                else if (k==1){
+                                    img2 = LoadImageFromWebOperations(img);
 
+                                }else if(k==2){
+                                    img3 = LoadImageFromWebOperations(img);
 
+                                }
+                            }catch (Exception e){
 
-                        finalListHospital = String.valueOf(mHospitalList.size());
-                        TextView newTextView = (TextView)findViewById(R.id.tvhospitalList);
-                        newTextView.setText("Menampilkan "+finalListHospital+" instansi kesehatan di "+subDistricDescription+" yang menyediakan Dokter "+facilityName+".");
+                            }
+
+                        }
+                        String selengkapnya="";
+                        int arr = jsonArray1.length();
+                        if (arr > 2){
+                            selengkapnya = "Lihat Semua Asuransi ("+arr+").";
+                        }
+
+                        mHospitalList.add(new Hospital(id, photo, name, addres, phNumber, null, image));
+
                     }
+                    finalListHospital = String.valueOf(mHospitalList.size());
+                    TextView newTextView = (TextView)findViewById(R.id.tvhospitalList);
+                    newTextView.setText("Menampilkan "+finalListHospital+" instansi kesehatan di "+subDistricDescription+" yang menyediakan Dokter "+facilityName+".");
                     hAdapter = new HospitalListAdapterNew(getApplicationContext(), mHospitalList);
                     lvHospital.setAdapter(hAdapter);
-                    for(Hospital currentHospital : mHospitalList){
-                        new ImageDrawable(currentHospital).execute();
-                    }
+//                    for(Hospital currentHospital : mHospitalList){
+//                        new ImageDrawable(currentHospital).execute();
+//                    }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -382,6 +408,9 @@ public class HospitalList extends AppCompatActivity {
             TextView tvName = (TextView)newView.findViewById(R.id.tv_name);
             TextView tvAddress = (TextView)newView.findViewById(R.id.tv_address);
             TextView tvPhoneNbr = (TextView) newView.findViewById(R.id.tv_phone);
+            ImageView image1 = (ImageView)findViewById(R.id.iv_bpjs_ic);
+            ImageView image2 = (ImageView)findViewById(R.id.iv_axa_ic);
+            ImageView image3 = (ImageView)findViewById(R.id.iv_zurich_ic);
             // Text view for capabilities (on Backend there is no IGD, but BPJS)
             TextView tvIGD = (TextView) newView.findViewById(R.id.tv_IGD);
             TextView tv24hour = (TextView) newView.findViewById(R.id.tv_24hours);
@@ -407,6 +436,10 @@ public class HospitalList extends AppCompatActivity {
             tvName.setText(mHospitalList.get(position).getName());
             tvAddress.setText(mHospitalList.get(position).getAddress());
             tvPhoneNbr.setText(mHospitalList.get(position).getPhoneNbr());
+//            image1.setImageDrawable(mHospitalList.get(position).getIv_image1());
+//            image2.setImageDrawable(mHospitalList.get(position).getIv_image2());
+//            image3.setImageDrawable(mHospitalList.get(position).getIv_image3());
+//            tvLihatSelengkapnya.setText(mHospitalList.get(position).getMoreInfoInsurance());
             String getCapabilitiesID = mHospitalList.get(position).getCapabilitiesDesc();
 
             if(getCapabilitiesID == String.valueOf(1)){

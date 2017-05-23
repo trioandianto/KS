@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:fillViewport="true">
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
@@ -46,17 +46,15 @@
             android:text="SAYA ADALAH"/>
         <Spinner
             android:id="@+id/spnStatusSaya"
-            android:layout_width="160dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/custom_border"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="20dp"
             android:layout_below="@id/lblStatusSaya"
-            android:layout_marginTop="18dp"
-            android:textColor="@color/white"
-            android:textStyle="bold"
-            android:spinnerMode="dropdown"/>
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"/>
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:id="@+id/lblFullName"
+            android:gravity="center"
             android:layout_height="wrap_content"
             android:layout_below="@id/spnStatusSaya"
             android:layout_marginTop="10dp"
@@ -70,7 +68,7 @@
         android:layout_below="@id/lblFullName"
         android:text="Nama Depan"/>
         <AutoCompleteTextView
-            android:layout_width="160dp"
+            android:layout_width="match_parent"
             android:textColor="@color/cardview_dark_background"
             android:layout_height="wrap_content"
             android:id="@+id/etFNameForm"
@@ -81,13 +79,13 @@
             android:layout_below="@+id/lblFullName"
             android:layout_alignParentStart="true" />
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:id="@+id/lblLName"
             android:layout_height="wrap_content"
             android:layout_below="@id/etFNameForm"
             android:text="Nama Belakang"/>
         <AutoCompleteTextView
-            android:layout_width="160dp"
+            android:layout_width="match_parent"
             android:textColor="@color/cardview_dark_background"
             android:layout_height="wrap_content"
             android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
@@ -103,7 +101,7 @@
             android:text="Mobile"/>
 
         <AutoCompleteTextView
-            android:layout_width="160dp"
+            android:layout_width="match_parent"
             android:textColor="@color/cardview_dark_background"
             android:layout_height="wrap_content"
             android:layout_marginTop="18dp"
@@ -148,7 +146,7 @@
             android:layout_below="@id/rgGender"
             android:text="TANGGAL LAHIR"/>
         <AutoCompleteTextView
-            android:layout_width="160dp"
+            android:layout_width="match_parent"
             android:textColor="@color/cardview_dark_background"
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
@@ -169,16 +167,14 @@
             android:layout_alignParentStart="true" />
         <Spinner
             android:id="@+id/spnAsuransi"
-            android:layout_width="160dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/lblAsuransiForm"
             android:layout_marginTop="5dp"
             android:background="@drawable/custom_border"
             android:layout_marginBottom="10dp"
-            android:entries="@array/insurance_name"
             android:textColor="@color/white"
-            android:textStyle="bold"
-            android:spinnerMode="dropdown"/>
+            android:textStyle="bold"/>
         <TextView
             android:layout_width="wrap_content"
             android:id="@+id/lblNoBPJS"
@@ -187,7 +183,7 @@
             android:layout_below="@id/spnAsuransi"
             android:text="NO. BPJS KESEHATAN *"/>
         <AutoCompleteTextView
-            android:layout_width="160dp"
+            android:layout_width="match_parent"
             android:textColor="@color/cardview_dark_background"
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
@@ -205,7 +201,7 @@
             android:layout_below="@id/etNoBPJSKesehatan"
             android:text="ALAMAT"/>
         <AutoCompleteTextView
-            android:layout_width="160dp"
+            android:layout_width="match_parent"
             android:textColor="@color/cardview_dark_background"
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
@@ -231,15 +227,14 @@
             android:layout_marginTop="2dp"
             android:text="Nama"/>
         <AutoCompleteTextView
-            android:layout_width="160dp"
+            android:layout_width="match_parent"
             android:textColor="@color/cardview_dark_background"
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
             android:id="@+id/etNamaKerabatForm"
             android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ"
             android:layout_below="@+id/lblNamaKerabat"
-            android:textSize="20sp"
-            android:inputType="textCapCharacters"/>
+            android:textSize="20sp"/>
 
 
         <TextView
@@ -250,7 +245,7 @@
             android:layout_below="@id/etNamaKerabatForm"
             android:text="NO. HP"/>
         <AutoCompleteTextView
-            android:layout_width="160dp"
+            android:layout_width="match_parent"
             android:layout_marginTop="2dp"
             android:textColor="@color/cardview_dark_background"
             android:layout_height="wrap_content"
