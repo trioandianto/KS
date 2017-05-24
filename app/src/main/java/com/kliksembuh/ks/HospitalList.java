@@ -283,6 +283,13 @@ public class HospitalList extends AppCompatActivity {
                         Drawable img1=null;
                         Drawable img2=null;
                         Drawable img3=null;
+                        String selengkapnya="";
+                        String igd = "";
+                        String bpjs = "";
+                        String fct1 = "";
+                        String fct2 ="";
+                        String fct3 ="";
+                        String semua = "";
 
                         rumahSakitID[i] = id;
                         // Drawable image1 = LoadImageFromWebOperations(image);
@@ -291,14 +298,20 @@ public class HospitalList extends AppCompatActivity {
 
                         String phNumber = jsonObject.getString("InstitutionPhoneNbr");
                         //phoneNbr[i] = phNumber;
-                        String cpblDesc = "";
+                        int cpblDesc ;
                         JSONArray jsonArray2 = jsonObject.getJSONArray("Capabilities");
                         for (int j = 0 ; j < jsonArray2.length() ; j++){
                             JSONObject objectInner = jsonArray2.getJSONObject(j);
-                            cpblDesc = objectInner.optString("CapabilitiesID");
+                            cpblDesc = objectInner.getInt("CapabilitiesID");
+                            if (cpblDesc==1 && cpblDesc > 0){
+                                igd = objectInner.getString("CapabilitiesDesc");
+                            }
+                            else if(cpblDesc==2 && cpblDesc>0){
+                                bpjs = objectInner.getString("CapabilitiesDesc");
+                            }
                         }
                         JSONArray jsonArray1 = jsonObject.getJSONArray("Insurances");
-                        for (int k = 0; k<jsonArray.length();k++){
+                        for (int k = 0; k<jsonArray1.length();k++){
                             try {
                                 JSONObject jsonObject1 = jsonArray1.getJSONObject(k);
                                 String img = jsonObject1.getString("ImageUrl");
@@ -315,15 +328,37 @@ public class HospitalList extends AppCompatActivity {
                             }catch (Exception e){
 
                             }
-
                         }
-                        String selengkapnya="";
-                        int arr = jsonArray1.length();
-                        if (arr > 2){
-                            selengkapnya = "Lihat Semua Asuransi ("+arr+").";
+                        JSONArray jsonArray3 = jsonObject.getJSONArray("HealthFacilities");
+                        for (int l = 0; l<jsonArray3.length();l++){
+                            try {
+                                JSONObject jsonObject1 = jsonArray3.getJSONObject(l);
+                                String s = jsonObject1.getString("Name");
+                                if(l==0){
+                                    fct1 = "-"+s;
+                                }
+                                else if (l==1){
+                                    fct2 = "-"+s;
+                                }else if(l==2){
+                                    fct3 = "-"+s;
+                                }
+                            }catch (Exception e){
+
+                            }
                         }
 
-                        mHospitalList.add(new Hospital(id, photo, name, addres, phNumber, null, image));
+
+                        int asd = jsonObject.getInt("totalHealthFacilityNbr");
+                        String total = jsonObject.getString("TotalLikeNbr");
+
+                            semua ="Lihat Semua / Detail ("+asd+")";
+
+                        int arr = jsonObject.getInt("totalInsuranceNbr");
+
+                            selengkapnya = "Lihat Semua / Detail Asuransi ("+arr+").";
+
+
+                        mHospitalList.add(new Hospital(id, photo, name, addres, phNumber, null, image, img1, img2, img3, selengkapnya, igd,bpjs, fct1, fct2, fct3, semua, total));
 
                     }
                     finalListHospital = String.valueOf(mHospitalList.size());
@@ -408,13 +443,33 @@ public class HospitalList extends AppCompatActivity {
             TextView tvName = (TextView)newView.findViewById(R.id.tv_name);
             TextView tvAddress = (TextView)newView.findViewById(R.id.tv_address);
             TextView tvPhoneNbr = (TextView) newView.findViewById(R.id.tv_phone);
-            ImageView image1 = (ImageView)findViewById(R.id.iv_bpjs_ic);
-            ImageView image2 = (ImageView)findViewById(R.id.iv_axa_ic);
-            ImageView image3 = (ImageView)findViewById(R.id.iv_zurich_ic);
+            ImageView image1 = (ImageView)newView.findViewById(R.id.iv_bpjs_ic);
+            ImageView image2 = (ImageView)newView.findViewById(R.id.iv_axa_ic);
+            ImageView image3 = (ImageView)newView.findViewById(R.id.iv_zurich_ic);
             // Text view for capabilities (on Backend there is no IGD, but BPJS)
             TextView tvIGD = (TextView) newView.findViewById(R.id.tv_IGD);
             TextView tv24hour = (TextView) newView.findViewById(R.id.tv_24hours);
-            TextView tvLihatSelengkapnya = (TextView)newView.findViewById(R.id.tv_moreinfo) ;
+            TextView tvLihatSelengkapnya = (TextView)newView.findViewById(R.id.tv_moreinfo);
+            TextView like = (TextView)newView.findViewById(R.id.tv_favourite);
+            TextView fcl1 = (TextView)newView.findViewById(R.id.tv_doctorGigi);
+            TextView fcl2 = (TextView)newView.findViewById(R.id.tv_doctorKandungan);
+            TextView fcl3 = (TextView)newView.findViewById(R.id.tv_doctorTHT);
+            TextView semua = (TextView)newView.findViewById(R.id.tv_moreinfo2);
+            semua.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent myIntent = new Intent(HospitalList.this, FaciltyInstitutionActivity.class);
+                    Bundle b = new Bundle();
+                    b.putString("userID", userID);
+                    b.putString("subDistrict",subDistrict);
+                    b.putString("facilityID",spesialisasi);
+                    b.putString("facilityName",facilityName);
+                    b.putString("SubDistrictDescription",subDistricDescription);
+                    b.putString("Name",nameRumahSakit[position]);
+                    myIntent.putExtras(b);
+                    startActivityForResult(myIntent, 1);
+                }
+            });
             tvLihatSelengkapnya.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -436,22 +491,17 @@ public class HospitalList extends AppCompatActivity {
             tvName.setText(mHospitalList.get(position).getName());
             tvAddress.setText(mHospitalList.get(position).getAddress());
             tvPhoneNbr.setText(mHospitalList.get(position).getPhoneNbr());
-//            image1.setImageDrawable(mHospitalList.get(position).getIv_image1());
-//            image2.setImageDrawable(mHospitalList.get(position).getIv_image2());
-//            image3.setImageDrawable(mHospitalList.get(position).getIv_image3());
-//            tvLihatSelengkapnya.setText(mHospitalList.get(position).getMoreInfoInsurance());
-            String getCapabilitiesID = mHospitalList.get(position).getCapabilitiesDesc();
-
-            if(getCapabilitiesID == String.valueOf(1)){
-                tv24hour.setText("24");
-            }
-            if(getCapabilitiesID == String.valueOf(2)){
-                tvIGD.setText("BPJS");
-            }
-
-
-
-
+            image1.setImageDrawable(mHospitalList.get(position).getIv_image1());
+            image2.setImageDrawable(mHospitalList.get(position).getIv_image2());
+            image3.setImageDrawable(mHospitalList.get(position).getIv_image3());
+            tvLihatSelengkapnya.setText(mHospitalList.get(position).getMoreInfoInsurance());
+            tvIGD.setText(mHospitalList.get(position).getIgd());
+            tv24hour.setText(mHospitalList.get(position).getBpjs());
+            like.setText(mHospitalList.get(position).getLike());
+            fcl1.setText(mHospitalList.get(position).getFclt1());
+            fcl2.setText(mHospitalList.get(position).getFclt2());
+            fcl3.setText(mHospitalList.get(position).getFclt3());
+            semua.setText(mHospitalList.get(position).getSemua());
             // Save hospital id to tag
             newView.setTag(mHospitalList.get(position).getId());
 

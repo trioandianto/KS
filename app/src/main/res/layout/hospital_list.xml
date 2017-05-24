@@ -172,10 +172,12 @@
             android:text="Lihat Semua (50)"
             style="@style/MyCustomTextAppearance"
             android:textSize="11sp"
+            android:clickable="true"
             android:textColor="@color/blue"
+            android:layout_alignParentRight="true"
             android:layout_below="@+id/tv_doctorKandungan"
-            android:layout_toRightOf="@+id/tv_doctorGigi"
-            android:layout_toEndOf="@+id/tv_doctorGigi" />
+            android:layout_toRightOf="@+id/tv_doctorTHT"
+            android:layout_toEndOf="@+id/tv_doctorTHT" />
 
         <TextView
             android:id="@+id/tv_doctorTHT"
