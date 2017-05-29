@@ -10,6 +10,9 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/net.cachapa.expandablelayout" />
+            <option value="$PROJECT_DIR$/net.cachapa.expandablelayout/expandablelayout" />
+            <option value="$PROJECT_DIR$/net.cachapa.expandablelayout/expandablelayout/2.9.1" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

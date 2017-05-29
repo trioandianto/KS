@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingRight="10dp"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="20dp"
+        android:background="#fff3f3f3"
+        android:paddingLeft="10dp" >
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingTop="2dp"
+        android:orientation="vertical"
+        android:background="@drawable/border_listview"
+        android:focusable="false"
+        android:weightSum="1">
+
+        <TextView
+            android:id="@+id/tv_rmdrTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginBottom="5dp"
+            android:text="Fp penicillin 5dose"
+            style="@style/MyCustomTextAppearance"
+            android:textSize="14sp"
+            android:textColor="@color/black"/>
+
+        <TextView
+            android:id="@+id/tv_rmdrDosage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginBottom="5dp"
+            android:text="Fp penicillin 5dose"
+            android:layout_below="@id/tv_rmdrTitle"
+            style="@style/MyCustomTextAppearance"
+            android:textSize="12sp"
+            android:textColor="@color/grey_light"/>
+
+        <TextView
+            android:id="@+id/tv_rmdrDays"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginBottom="10dp"
+            android:text="Every 2 days | 2 PM, 10 PM"
+            android:layout_below="@id/tv_rmdrDosage"
+            style="@style/MyCustomTextAppearance"
+            android:textSize="12sp"
+            android:textColor="@color/grey_light"/>
+
+    </RelativeLayout>
+
+</LinearLayout>

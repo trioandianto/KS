@@ -119,7 +119,7 @@ public class TestScroolView extends AppCompatActivity{
 
         mDokterList = new ArrayList<>();
         list = new ArrayList<String>();
-        load = getResources().getDrawable(R.drawable.loading);
+        load = getResources().getDrawable(R.drawable.pic_loading_small);
         //nsDokter = (NestedScrollView)findViewById(R.id.nsDokter);
 //        nsDokter.setFillViewport(true);
 //        nsDokter.getParent().requestChildFocus(nsDokter, nsDokter);
