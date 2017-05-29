@@ -145,16 +145,29 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/rgGender"
             android:text="TANGGAL LAHIR"/>
-        <AutoCompleteTextView
+        <TextView
             android:layout_width="match_parent"
             android:textColor="@color/cardview_dark_background"
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
             android:clickable="true"
+            android:inputType=""
+            android:maxLines="1"
             android:id="@+id/etTanggalLahirForm"
             android:layout_below="@+id/lblTanggalLahir"
             android:textSize="20sp"
-            android:hint="Pilih Tanggal"/>
+            android:hint="Pilih Tanggal"
+            android:singleLine="true">
+            <requestFocus/>
+        </TextView>
+        <view
+            android:layout_width="match_parent"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_height="0.1dp"
+            android:layout_below="@+id/etTanggalLahirForm">
+
+        </view>
 
 
         <TextView

@@ -1,6 +1,7 @@
 package com.kliksembuh.ks;
 
 import android.app.Activity;
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
@@ -14,9 +15,11 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONException;
@@ -29,22 +32,25 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.net.ssl.HttpsURLConnection;
 
-public class PatientFormActivity extends AppCompatActivity {
+
+public class PatientFormActivity extends AppCompatActivity implements View.OnClickListener{
 
     private PatientAsyncTask mAuthTask = null;
     private UpdatePatientAsyncTask mUpdateAuthTask = null;
     private Spinner spnStatus, spnAsuransi;
     private Spinner spnStatusSaya;
     private RadioButton rbJenisKelaminL, rbJenisKelaminP;
-    private AutoCompleteTextView etLname, etMobile, etFname, etTanggalLahir,etNoBPJSKes, etAlamat, etNamaKerabat, etNoHPKerabat;
+    private AutoCompleteTextView etLname, etMobile, etFname, etNoBPJSKes, etAlamat, etNamaKerabat, etNoHPKerabat;
+    private TextView etTanggalLahir;
     private Button btnSimpan;
     private String userID;
     private String gender;
@@ -63,6 +69,7 @@ public class PatientFormActivity extends AppCompatActivity {
     private String relativeStatus;
     private int personalInfoID;
     private int idStatus, kodeAkses;
+    private int mYear, mMonth, mDay, mHour, mMinute;
 
     @Override
 
@@ -82,7 +89,7 @@ public class PatientFormActivity extends AppCompatActivity {
         etFname = (AutoCompleteTextView)findViewById(R.id.etFNameForm);
         etLname = (AutoCompleteTextView)findViewById(R.id.etLNameForm);
         etMobile= (AutoCompleteTextView)findViewById(R.id.etEditMobileForm);
-        etTanggalLahir = (AutoCompleteTextView) findViewById(R.id.etTanggalLahirForm);
+        etTanggalLahir = (TextView) findViewById(R.id.etTanggalLahirForm);
         etNoBPJSKes= (AutoCompleteTextView) findViewById(R.id.etNoBPJSKesehatan);
         etAlamat= (AutoCompleteTextView)findViewById(R.id.etAlamatForm);
         etNamaKerabat = (AutoCompleteTextView)findViewById(R.id.etNamaKerabatForm);
@@ -91,6 +98,10 @@ public class PatientFormActivity extends AppCompatActivity {
         rbFemale = (RadioButton)findViewById(R.id.radioBtnJenisP);
         rbMale = (RadioButton)findViewById(R.id.radioBtnJenisL);
         spnStatusSaya = (Spinner)findViewById(R.id.spnStatusSaya);
+
+        // DataPicker
+        etTanggalLahir.setOnClickListener(this);
+
         List<String> list = new ArrayList<String>();
         list.add("Pribadi");
         list.add("Suami / Istri");
@@ -159,15 +170,18 @@ public class PatientFormActivity extends AppCompatActivity {
         }
         if(birthOfDate!=null && birthOfDate!=""){
             SimpleDateFormat dateFormatter = new SimpleDateFormat("MM:dd:yyyy");
+            String timeStart="";
             try {
                 Date date = (Date) dateFormatter.parse(birthOfDate);
+                SimpleDateFormat timeFormatter = new SimpleDateFormat("MM:dd:yyyy");
+                timeStart = timeFormatter.format(date);
 
             }catch (ParseException e){
                 e.printStackTrace();
 
             }
 
-            etTanggalLahir.setText(birthOfDate);
+            etTanggalLahir.setText(timeStart);
         }
         if(address!=null && address!=""){
             etAlamat.setText(address);
@@ -308,6 +322,39 @@ public class PatientFormActivity extends AppCompatActivity {
 
         }
 
+    }
+
+    @Override
+    public void onClick(View v) {
+        int i = v.getId();
+        if(i==R.id.etTanggalLahirForm){
+            final SimpleDateFormat dateFormatter = new SimpleDateFormat("dd-MMM-yyyy");
+            Calendar c = Calendar.getInstance();
+            mYear = c.get(Calendar.YEAR);
+            mMonth = c.get(Calendar.MONTH);
+            mDay = c.get(Calendar.DAY_OF_MONTH);
+
+            DatePickerDialog datePickerDialog = new DatePickerDialog(this,android.R.style.Theme_Holo_Light_Dialog,
+                    new DatePickerDialog.OnDateSetListener() {
+
+                        @Override
+                        public void onDateSet(DatePicker view, int year,
+                                              int monthOfYear, int dayOfMonth) {
+                            int mont = monthOfYear+1;
+                            String newDate =year+"-"+mont+"-"+ dayOfMonth;
+                            String value="";
+                            SimpleDateFormat dateFormatter1 = new SimpleDateFormat("yyyy-MM-dd");
+                            try {
+                                Date date = dateFormatter1.parse(newDate);
+                                value = dateFormatter.format(date);
+                            } catch (ParseException e) {
+                                e.printStackTrace();
+                            }
+                            etTanggalLahir.setText(value);
+                        }
+                    },mYear, mMonth, mDay);
+            datePickerDialog.show();
+        }
     }
 
     public class PatientAsyncTask extends AsyncTask<String, Void, String>{
@@ -526,12 +573,6 @@ public class PatientFormActivity extends AppCompatActivity {
             super.onPostExecute(s);
             if(s!=""){
                 Toast.makeText(getApplicationContext(), "Update Data Berhasil", Toast.LENGTH_LONG).show();
-                    Intent i = new Intent(getApplicationContext(), PatientProfileActivity.class);
-                Bundle b = new Bundle();
-                b.putString("userID", userID);
-                i.putExtras(b);
-                startActivityForResult(i, 1);
-                finish();
             }
             else {
                 //TODO
@@ -626,7 +667,19 @@ public class PatientFormActivity extends AppCompatActivity {
                         etAlamat.setText(address);
                         etNamaKerabat.setText(closeRelativeName);
                         etNoHPKerabat.setText(closeRelativePhoneNbr);
-                        etTanggalLahir.setText(birthOfDate);
+                        SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+                        SimpleDateFormat timeFormatter = new SimpleDateFormat("dd-MMM-yyyy");
+                        String timeStart="";
+                        try {
+                            Date date = dateFormatter.parse(birthOfDate);
+                            timeStart = timeFormatter.format(date);
+
+                        }catch (ParseException e){
+                            e.printStackTrace();
+
+                        }
+
+                        etTanggalLahir.setText(timeStart);
                     }
                 }catch (JSONException e){
                     e.printStackTrace();
