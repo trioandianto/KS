@@ -185,5 +185,7 @@
         <item name="android:background">@drawable/background_spinner</item>
     </style>
 
+    <style name="datePicker" parent="Theme.AppCompat.Light.Dialog"></style>
+
 
 </resources>

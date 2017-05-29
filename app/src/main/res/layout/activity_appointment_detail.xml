@@ -1,4 +1,4 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:name="com.google.android.gms.maps.SupportMapFragment"
@@ -14,7 +14,7 @@
         android:fitsSystemWindows="true">
         <android.support.v7.widget.Toolbar
             android:layout_width="match_parent"
-            android:id="@+id/toolbarJadwalDokter"
+            android:id="@+id/toolbarAppointmentDetail"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
             app:navigationIcon="@drawable/ic_arrow_back_white_24dp"
@@ -23,6 +23,7 @@
     </android.support.design.widget.AppBarLayout>
     <fragment
         android:id="@+id/map"
+        android:layout_below="@+id/appbar"
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
         android:layout_height="200dp" />
@@ -31,6 +32,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="5dp"
+        android:id="@+id/data"
+        android:layout_below="@+id/map"
         android:layout_marginBottom="10dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
@@ -129,9 +132,23 @@
     </RelativeLayout>
     <RelativeLayout
         android:layout_width="match_parent"
+        android:layout_below="@+id/data"
         android:layout_height="wrap_content"
         android:padding="8dp"
         android:orientation="vertical">
+        <Button
+            android:id="@+id/btnCancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cancel"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:background="@drawable/shape"
+            android:textAllCaps="false"
+            android:textSize="18dp"
+            android:backgroundTint="@color/login_color"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true" />
         <Button
             android:id="@+id/btnMeedHelp"
             android:layout_width="match_parent"
@@ -146,4 +163,4 @@
     </RelativeLayout>
 
 
-</LinearLayout>
+</RelativeLayout>

@@ -121,24 +121,9 @@ public class MyAppointmentUpComingActivity extends Fragment implements ListView.
 
         Intent myIntent = new Intent(getApplicationContext(),AppointmentDetailActivity.class);
         Bundle b = new Bundle();
-//        String doctorName = jsonObject.getString("MedicalPersonName");
-//        String hospitalName =  jsonObject.getString("InstitutionName");
-//        String createdOn = jsonObject.getString("ScheduleDate");
-//        String trxNoAppointment = jsonObject.getString("TransactionID");
-//        String specialtyDoc = jsonObject.getString("FacilityDesc");
-//        String appointmentDate = jsonObject.getString("ScheduleDate");
-//        String imageDoc = jsonObject.getString("MedicalPersonnelImageUrl");
-//        private String [] namaDokter;
-//        private String [] namaRumahSakit;
-//        private String [] noAppointment;
         b.putString("userID",userID);
-//        b.putString("transaksiID", transaksiID);
-//        b.putString("noAppointment"), noAppointment;
-//        b.putString("namaRumahSakit"), namaRumahSakit;
-//        b.putString("image");
-        //.putExtra("userID",userID);
+        b.putString("transaksiID", transaksiID);
         myIntent.putExtras(b);
-        //.putExtra("userID",userID);
         startActivityForResult(myIntent, 1);
     }
 

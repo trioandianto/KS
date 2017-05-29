@@ -52,9 +52,6 @@ public class MapsKonfirmasiJanji extends AppCompatActivity implements OnMapReady
         BitmapDescriptor icon = BitmapDescriptorFactory.fromResource(R.drawable.hospitalbuilding);
         double latitude = 0;
         double longitude = 0;
-
-
-
         Geocoder geocoder = new Geocoder(this, Locale.getDefault());
         List<Address> addresses;
         try {
