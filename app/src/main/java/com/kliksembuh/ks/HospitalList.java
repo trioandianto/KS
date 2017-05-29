@@ -182,6 +182,7 @@ public class HospitalList extends AppCompatActivity {
             super.onPreExecute();
             // Showing progress dialog
             pDialog = new ProgressDialog(HospitalList.this);
+            pDialog.setProgress(R.drawable.pic_loading);
             pDialog.setMessage("Mohon Menunggu...");
             pDialog.setCancelable(false);
             pDialog.show();
@@ -376,9 +377,13 @@ public class HospitalList extends AppCompatActivity {
 
             } else {
                 //:TODO
+                ImageView imgPicNotFound = (ImageView) findViewById(R.id.ivPicNotFound);
+                imgPicNotFound.setImageResource(R.drawable.pic_notfound);
+                TextView tvHosNotFound = (TextView)findViewById(R.id.tvHospitalNotFound);
+                tvHosNotFound.setText("Oops hasil pencarian Anda tidak dapat ditemukan. Silahkan melakukan pencarian kembali dengan kata kunci lain.");
                 TextView newTextView = (TextView)findViewById(R.id.tvhospitalList);
+                newTextView.setVisibility(View.GONE);
                 //newTextView.setText("Tidak tersedia rumah sakit untuk daerah "+subDistricDescription+".");
-                newTextView.setText("Oops hasil pencarian Anda tidak dapat ditemukan. Silahkan melakukan pencarian kembali dengan kata kunci lain.");
             }
         }
         @Override
