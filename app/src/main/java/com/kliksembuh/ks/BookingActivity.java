@@ -102,7 +102,7 @@ public class BookingActivity extends AppCompatActivity implements ListView.OnIte
     private int mingguMingguDepan;
     private String weekProgramID;
     private String dayProgramID;
-    private String scheduleShift;
+    private String[] scheduleShift;
     private String programDetailID;
     private String rumahSakitID;
     private String facilityID;
@@ -1205,7 +1205,7 @@ public class BookingActivity extends AppCompatActivity implements ListView.OnIte
         String wpId = jadwalDokter.getWeekProgramID();
         String dpID = jadwalDokter.getDayProdramID();
         String dpdetail = jadwalDokter.getDetailProgramID();
-        String waktuBerobat = scheduleShift;
+        String waktuBerobat = scheduleShift[position];
         String jamMulai = jadwalDokter.getStartDate();
         String jamBerakhir = jadwalDokter.getEndDate();
         if(sequence=="minggu 1" && hariMingguini > day){
@@ -1297,25 +1297,27 @@ public class BookingActivity extends AppCompatActivity implements ListView.OnIte
                                     JSONObject sunday = (JSONObject) jsonObject.get("SundayDPID");
                                     dayProgramID = sunday.getString("Name");
                                     JSONArray detailArray = sunday.getJSONArray("DayProgramDetail");
+                                    scheduleShift = new String[detailArray.length()];
                                     for (int j=0;j<detailArray.length();j++){
                                         JSONObject c = detailArray.getJSONObject(j);
                                         programDetailID = c.getString("DPLineID");
                                         String starDate = c.getString("StartTime");
                                         String endDate = c.getString("EndTime");
-                                        scheduleShift = c.getJSONObject("ShiftSchedule").getString("ShiftScheduleCD");
+
 
                                         // Get date from string
                                         SimpleDateFormat dateFormatter = new SimpleDateFormat("HH:mm:ss");
                                         Date dateTimeStart = dateFormatter.parse(starDate);
                                         Date dateTimeEnd = dateFormatter.parse(endDate);
                                         int a = dateTimeStart.getHours();
-                                        if (sequence=="minggu 1" && hariMingguini >= day && timeNow > a){
+                                        if (sequence=="minggu 1" && (hariMingguini >= day || timeNow > a)){
 
                                         }else {
                                             SimpleDateFormat timeFormatter = new SimpleDateFormat("HH:mm");
                                             String timeStart = timeFormatter.format(dateTimeStart);
                                             String timeEnd = timeFormatter.format(dateTimeEnd);
                                             mJadwalDokterList.add(new JadwalDokter(timeStart, timeEnd,dayProgramID,weekProgramID,programDetailID));
+                                            scheduleShift[j] = c.getJSONObject("ShiftSchedule").getString("ShiftScheduleCD");
 
                                         }
                                     }
@@ -1326,6 +1328,7 @@ public class BookingActivity extends AppCompatActivity implements ListView.OnIte
                                     JSONObject monday = (JSONObject) jsonObject.get("MondayDPID");
                                     dayProgramID = monday.getString("Name");
                                     JSONArray detailArray = monday.getJSONArray("DayProgramDetail");
+                                    scheduleShift = new String[detailArray.length()];
                                     for (int j=0;j<detailArray.length();j++){
                                         JSONObject c = detailArray.getJSONObject(j);
                                         programDetailID = c.getString("DPLineID");
@@ -1336,21 +1339,21 @@ public class BookingActivity extends AppCompatActivity implements ListView.OnIte
 //                                            JSONObject shiftObjectInner = shiftArray.getJSONObject(k);
 //                                            scheduleShift = shiftObjectInner.getString("ShiftScheduleCD");
 //                                        }
-                                        scheduleShift = c.getJSONObject("ShiftSchedule").getString("ShiftScheduleCD");
+
 
                                         // Get date from string
                                         SimpleDateFormat dateFormatter = new SimpleDateFormat("HH:mm:ss");
                                         Date dateTimeStart = dateFormatter.parse(starDate);
                                         Date dateTimeEnd = dateFormatter.parse(endDate);
                                         int a = dateTimeStart.getHours();
-                                        if (sequence=="minggu 1" && hariMingguini >= day && timeNow > a){
+                                        if (sequence=="minggu 1" && (hariMingguini >= day || timeNow > a)){
 
                                         }else {
                                             SimpleDateFormat timeFormatter = new SimpleDateFormat("HH:mm");
                                             String timeStart = timeFormatter.format(dateTimeStart);
                                             String timeEnd = timeFormatter.format(dateTimeEnd);
                                             mJadwalDokterList.add(new JadwalDokter(timeStart, timeEnd,dayProgramID,weekProgramID,programDetailID));
-
+                                            scheduleShift[j] = c.getJSONObject("ShiftSchedule").getString("ShiftScheduleCD");
                                         }
                                     }
                                 }
@@ -1359,25 +1362,27 @@ public class BookingActivity extends AppCompatActivity implements ListView.OnIte
                                     JSONObject tuesday = (JSONObject) jsonObject.get("TuesdayDPID");
                                     dayProgramID = tuesday.getString("Name");
                                     JSONArray detailArray = tuesday.getJSONArray("DayProgramDetail");
+                                    scheduleShift = new String[detailArray.length()];
                                     for (int j=0;j<detailArray.length();j++){
                                         JSONObject c = detailArray.getJSONObject(j);
                                         programDetailID = c.getString("DPLineID");
                                         String starDate = c.getString("StartTime");
                                         String endDate = c.getString("EndTime");
-                                        scheduleShift = c.getJSONObject("ShiftSchedule").getString("ShiftScheduleCD");
+
 
                                         // Get date from string
                                         SimpleDateFormat dateFormatter = new SimpleDateFormat("HH:mm:ss");
                                         Date dateTimeStart = dateFormatter.parse(starDate);
                                         Date dateTimeEnd = dateFormatter.parse(endDate);
                                         int a = dateTimeStart.getHours();
-                                        if (sequence=="minggu 1" && hariMingguini >= day && timeNow > a){
+                                        if (sequence=="minggu 1" && (hariMingguini >= day || timeNow > a)){
 
                                         }else {
                                             SimpleDateFormat timeFormatter = new SimpleDateFormat("HH:mm");
                                             String timeStart = timeFormatter.format(dateTimeStart);
                                             String timeEnd = timeFormatter.format(dateTimeEnd);
                                             mJadwalDokterList.add(new JadwalDokter(timeStart, timeEnd,dayProgramID,weekProgramID,programDetailID));
+                                            scheduleShift[j] = c.getJSONObject("ShiftSchedule").getString("ShiftScheduleCD");
 
                                         }
                                     }
@@ -1387,24 +1392,26 @@ public class BookingActivity extends AppCompatActivity implements ListView.OnIte
                                     JSONObject wednesday = (JSONObject) jsonObject.get("WednesdayDPID");
                                     dayProgramID = wednesday.getString("Name");
                                     JSONArray detailArray = wednesday.getJSONArray("DayProgramDetail");
+                                    scheduleShift = new String[detailArray.length()];
                                     for (int j=0;j<detailArray.length();j++){
                                         JSONObject c = detailArray.getJSONObject(j);
                                         programDetailID = c.getString("DPLineID");
                                         String starDate = c.getString("StartTime");
                                         String endDate = c.getString("EndTime");
-                                        scheduleShift = c.getJSONObject("ShiftSchedule").getString("ShiftScheduleCD");
+
 
                                         // Get date from string
                                         SimpleDateFormat dateFormatter = new SimpleDateFormat("HH:mm:ss");
                                         Date dateTimeStart = dateFormatter.parse(starDate);
                                         Date dateTimeEnd = dateFormatter.parse(endDate);
                                         int a = dateTimeStart.getHours();
-                                        if (sequence=="minggu 1" && hariMingguini >= day && timeNow > a){
+                                        if (sequence=="minggu 1" && (hariMingguini >= day || timeNow > a)){
 
                                         }else {
                                             SimpleDateFormat timeFormatter = new SimpleDateFormat("HH:mm");
                                             String timeStart = timeFormatter.format(dateTimeStart);
                                             String timeEnd = timeFormatter.format(dateTimeEnd);
+                                            scheduleShift[j] = c.getJSONObject("ShiftSchedule").getString("ShiftScheduleCD");
                                             mJadwalDokterList.add(new JadwalDokter(timeStart, timeEnd,dayProgramID,weekProgramID,programDetailID));
 
                                         }
@@ -1415,24 +1422,26 @@ public class BookingActivity extends AppCompatActivity implements ListView.OnIte
                                     JSONObject thursday = (JSONObject) jsonObject.get("ThursdayDPID");
                                     dayProgramID = thursday.getString("Name");
                                     JSONArray detailArray = thursday.getJSONArray("DayProgramDetail");
+                                    scheduleShift = new String[detailArray.length()];
                                     for (int j=0;j<detailArray.length();j++){
                                         JSONObject c = detailArray.getJSONObject(j);
                                         programDetailID = c.getString("DPLineID");
                                         String starDate = c.getString("StartTime");
                                         String endDate = c.getString("EndTime");
-                                        scheduleShift = c.getJSONObject("ShiftSchedule").getString("ShiftScheduleCD");
+
 
                                         // Get date from string
                                         SimpleDateFormat dateFormatter = new SimpleDateFormat("HH:mm:ss");
                                         Date dateTimeStart = dateFormatter.parse(starDate);
                                         Date dateTimeEnd = dateFormatter.parse(endDate);
                                         int a = dateTimeStart.getHours();
-                                        if (sequence=="minggu 1" && hariMingguini >= day && timeNow > a){
+                                        if (sequence=="minggu 1" && (hariMingguini >= day || timeNow > a)){
 
                                         }else {
                                             SimpleDateFormat timeFormatter = new SimpleDateFormat("HH:mm");
                                             String timeStart = timeFormatter.format(dateTimeStart);
                                             String timeEnd = timeFormatter.format(dateTimeEnd);
+                                            scheduleShift[j] = c.getJSONObject("ShiftSchedule").getString("ShiftScheduleCD");
                                             mJadwalDokterList.add(new JadwalDokter(timeStart, timeEnd,dayProgramID,weekProgramID,programDetailID));
 
                                         }
@@ -1443,24 +1452,26 @@ public class BookingActivity extends AppCompatActivity implements ListView.OnIte
                                     JSONObject friday = (JSONObject) jsonObject.get("FridayDPID");
                                     dayProgramID = friday.getString("Name");
                                     JSONArray detailArray = friday.getJSONArray("DayProgramDetail");
+                                    scheduleShift = new String[detailArray.length()];
                                     for (int j=0;j<detailArray.length();j++){
                                         JSONObject c = detailArray.getJSONObject(j);
                                         programDetailID = c.getString("DPLineID");
                                         String starDate = c.getString("StartTime");
                                         String endDate = c.getString("EndTime");
-                                        scheduleShift = c.getJSONObject("ShiftSchedule").getString("ShiftScheduleCD");
+
 
                                         // Get date from string
                                         SimpleDateFormat dateFormatter = new SimpleDateFormat("HH:mm:ss");
                                         Date dateTimeStart = dateFormatter.parse(starDate);
                                         Date dateTimeEnd = dateFormatter.parse(endDate);
                                         int a = dateTimeStart.getHours();
-                                        if (sequence=="minggu 1" && hariMingguini >= day && timeNow > a){
+                                        if (sequence=="minggu 1" && (hariMingguini >= day || timeNow > a)){
 
                                         }else {
                                             SimpleDateFormat timeFormatter = new SimpleDateFormat("HH:mm");
                                             String timeStart = timeFormatter.format(dateTimeStart);
                                             String timeEnd = timeFormatter.format(dateTimeEnd);
+                                            scheduleShift[j] = c.getJSONObject("ShiftSchedule").getString("ShiftScheduleCD");
                                             mJadwalDokterList.add(new JadwalDokter(timeStart, timeEnd,dayProgramID,weekProgramID,programDetailID));
 
                                         }
@@ -1474,24 +1485,26 @@ public class BookingActivity extends AppCompatActivity implements ListView.OnIte
                                     JSONObject saturday = (JSONObject) jsonObject.get("SaturdayDPID");
                                     dayProgramID = saturday.getString("Name");
                                     JSONArray detailArray = saturday.getJSONArray("DayProgramDetail");
+                                    scheduleShift = new String[detailArray.length()];
                                     for (int j=0;j<detailArray.length();j++){
                                         JSONObject c = detailArray.getJSONObject(j);
                                         programDetailID = c.getString("DPLineID");
                                         String starDate = c.getString("StartTime");
                                         String endDate = c.getString("EndTime");
-                                        scheduleShift = c.getJSONObject("ShiftSchedule").getString("ShiftScheduleCD");
 
                                         // Get date from string
                                         SimpleDateFormat dateFormatter = new SimpleDateFormat("HH:mm:ss");
                                         Date dateTimeStart = dateFormatter.parse(starDate);
                                         Date dateTimeEnd = dateFormatter.parse(endDate);
                                         int a = dateTimeStart.getHours();
-                                        if (sequence=="minggu 1" && hariMingguini >= day && timeNow > a){
+                                        if (sequence=="minggu 1" && (hariMingguini >= day || timeNow > a)){
 
                                         }else {
                                             SimpleDateFormat timeFormatter = new SimpleDateFormat("HH:mm");
                                             String timeStart = timeFormatter.format(dateTimeStart);
                                             String timeEnd = timeFormatter.format(dateTimeEnd);
+                                            scheduleShift[j] = c.getJSONObject("ShiftSchedule").getString("ShiftScheduleCD");
+
                                             mJadwalDokterList.add(new JadwalDokter(timeStart, timeEnd,dayProgramID,weekProgramID,programDetailID));
 
                                         }

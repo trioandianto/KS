@@ -23,6 +23,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -56,6 +57,7 @@ public class TestScroolView extends AppCompatActivity{
 
     ViewPager viewPager;
     private Drawable[] layouts;
+    private String [] tvLayouts;
     private ScrollView scrollView;
     private NestedScrollView nsDokter;
     private ObservableScrollView mScrollView;
@@ -278,7 +280,9 @@ public class TestScroolView extends AppCompatActivity{
             View itemView = layoutInflater.inflate(R.layout.doctor_image_slide, container, false);
 
             ImageView imageView = (ImageView) itemView.findViewById(R.id.doctorImageView);
+            TextView tv_num_view =(TextView)itemView.findViewById(R.id.tv_num_view);
             imageView.setImageDrawable(layouts[position]);
+            tv_num_view.setText(tvLayouts[position]);
 
             container.addView(itemView);
 
@@ -298,7 +302,7 @@ public class TestScroolView extends AppCompatActivity{
 
         @Override
         public void destroyItem(ViewGroup container, int position, Object object) {
-            container.removeView((LinearLayout) object);
+            container.removeView((RelativeLayout) object);
         }
     }
 
@@ -509,11 +513,14 @@ public class TestScroolView extends AppCompatActivity{
                     for (int i=0;i<jsonArray.length();i++){
                         JSONObject jsonObject = jsonArray.getJSONObject(i);
                         JSONArray jsonArray1 = jsonObject.getJSONArray("InstitutionImages");
-                        layouts = new Drawable[jsonArray1.length()];
+                        int length = jsonArray1.length();
+                        layouts = new Drawable[length];
+                        tvLayouts = new String[length];
                         for (int j=0;j<jsonArray1.length();j++){
                             JSONObject jsonObject1 = jsonArray1.getJSONObject(j);
                             String img = jsonObject1.getString("ImagePath");
                             layouts[j] = LoadImageFromWebOperations(img);
+                            tvLayouts[j] = j+1 +"/"+ length;
                         }
                     }
                     viewPagerAdapter = new ViewPagerAdapter(TestScroolView.this);

@@ -66,6 +66,7 @@ public class KonfirmasiJanjiActivity extends AppCompatActivity {
     private String [] noHpPasien;
     private int relativeStatusID;
     private List<String> list;
+    private String shiftScheduleCD;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,6 +89,7 @@ public class KonfirmasiJanjiActivity extends AppCompatActivity {
             weekProgramID = b.getString("WPID");
             namaHari = b.getString("namaHari");
             dayProgramID = b.getString("DPID");
+            shiftScheduleCD = b.getString("ShiftScheduleCD");
             detailTanggal = b.getString("namaTanggal");
 //            dayProgramDetailID = b.getString("DetailID");
 
