@@ -95,11 +95,13 @@ public class MyAppointmentHistoryActivity extends Fragment implements ListView.O
         Object object = parent.getAdapter().getItem(position);
         HistoryUpComing historyUpComing = (HistoryUpComing) object;
         transaksiID = String.valueOf(historyUpComing.getIdHistoryUpComing());
+        String status = historyUpComing.getStatusHistory();
 
         Intent myIntent = new Intent(getApplicationContext(),AppointmentDetailActivity.class);
         Bundle b = new Bundle();
         b.putString("userID",userID);
         b.putString("transaksiID", transaksiID);
+        b.putString("status", status);
         //.putExtra("userID",userID);
         myIntent.putExtras(b);
         //.putExtra("userID",userID);
