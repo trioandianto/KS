@@ -56,7 +56,7 @@
         android:layout_margin="@dimen/fab_margin"
         android:clickable="true"/>
 
-    <ScrollView
+    <android.support.v4.widget.NestedScrollView
         android:id="@+id/nsDokter"
         android:layout_width="match_parent"
         android:layout_height="fill_parent"
@@ -371,6 +371,6 @@
             </ListView>
         </LinearLayout>
 
-    </ScrollView>
+    </android.support.v4.widget.NestedScrollView>
 
 </android.support.design.widget.CoordinatorLayout>

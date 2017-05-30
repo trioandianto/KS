@@ -266,14 +266,14 @@ public class HomeActivity extends AppCompatActivity
 
         }
         else if (i == R.id.nav_pengingat_minum){
-            Intent home = new Intent(this, SettingActivity.class);
+            Intent home = new Intent(this, SettingReminderDetailActivity.class);
             Bundle b = new Bundle();
             b.putString("userID", userID);
             home.putExtras(b);
             startActivityForResult(home, 1);
         }
         else if (i == R.id.nav_vital_sign){
-            Intent home = new Intent(this, SettingActivity.class);
+            Intent home = new Intent(this, SettingVitalSignDetailActivity.class);
             Bundle b = new Bundle();
             b.putString("userID", userID);
             b.putInt("tab",1);
@@ -288,18 +288,7 @@ public class HomeActivity extends AppCompatActivity
             startActivityForResult(home, 1);
         }
         else if (i == R.id.nav_keluar){
-//            Intent intent = new Intent(this, MainActivity.class);
-//            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//            intent.putExtra("Exit me", true);
-//            startActivity(intent);
-//            finish();
             logOutNav();
-//            onBackPressed();
-//            Intent homeIntent = new Intent(Intent.ACTION_MAIN);
-//            homeIntent.addCategory( Intent.CATEGORY_HOME );
-//            homeIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//            startActivity(homeIntent);
-
         }
         else{
             fragmentClass = HomeActivity.class;

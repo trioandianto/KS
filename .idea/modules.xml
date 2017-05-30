@@ -2,8 +2,11 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/net.cachapa.expandablelayout/expandablelayout/2.9.1/2.9.1.iml" filepath="$PROJECT_DIR$/net.cachapa.expandablelayout/expandablelayout/2.9.1/2.9.1.iml" />
       <module fileurl="file://$PROJECT_DIR$/KS.iml" filepath="$PROJECT_DIR$/KS.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/net.cachapa.expandablelayout/expandablelayout/expandablelayout.iml" filepath="$PROJECT_DIR$/net.cachapa.expandablelayout/expandablelayout/expandablelayout.iml" />
+      <module fileurl="file://$PROJECT_DIR$/net.cachapa.expandablelayout/net.cachapa.expandablelayout.iml" filepath="$PROJECT_DIR$/net.cachapa.expandablelayout/net.cachapa.expandablelayout.iml" />
     </modules>
   </component>
 </project>

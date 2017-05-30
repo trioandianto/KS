@@ -93,7 +93,7 @@ public class HospitalList extends AppCompatActivity {
         newToolbar.setTitle(subDistricDescription);
         setSupportActionBar(newToolbar);
         getWindow().setStatusBarColor(ContextCompat.getColor(HospitalList.this, R.color.colorPrimaryDark));
-        load = getResources().getDrawable(R.drawable.loading);
+        load = getResources().getDrawable(R.drawable.pic_loading_small);
         lvHospital = (ListView)findViewById(R.id.listview_hospital);
         btnpeta = (Button)findViewById(R.id.btnpeta);
         btnpeta.setOnClickListener(new View.OnClickListener() {
@@ -182,6 +182,7 @@ public class HospitalList extends AppCompatActivity {
             super.onPreExecute();
             // Showing progress dialog
             pDialog = new ProgressDialog(HospitalList.this);
+            
             pDialog.setProgress(R.drawable.pic_loading);
             pDialog.setMessage("Mohon Menunggu...");
             pDialog.setCancelable(false);

@@ -23,7 +23,7 @@
             android:layout_gravity="center">
         </de.hdodenhof.circleimageview.CircleImageView>
 
-        <TextView
+    <TextView
             android:layout_width="60dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="26dp"
@@ -38,10 +38,7 @@
             android:textStyle="bold"
             android:textSize="20sp"
             android:src="@drawable/camera"/>
-
     </RelativeLayout>
-
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:orientation="vertical"
@@ -162,7 +159,6 @@
 
 
     </RelativeLayout>
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:id="@+id/relativeLayout3"
@@ -193,8 +189,7 @@
             android:textAllCaps="false"
             android:textSize="18dp"
             android:background="@drawable/shape"
-            android:backgroundTint="@color/signup_color"
-            />
+            android:backgroundTint="@color/signup_color"/>
     </RelativeLayout>
 
 </RelativeLayout>

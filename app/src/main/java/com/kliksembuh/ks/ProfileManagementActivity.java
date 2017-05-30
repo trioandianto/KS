@@ -62,6 +62,7 @@ public class ProfileManagementActivity extends AppCompatActivity implements View
     private TextView editLname;
     private TextView editEmail;
     private TextView editMobile;
+    private TextView addPhoto;
     private TextView editVitalSign;
     private TextView gantiPassword;
     private AutoCompleteTextView namadepan;
@@ -97,6 +98,7 @@ public class ProfileManagementActivity extends AppCompatActivity implements View
         editLname = (TextView)findViewById(R.id.tvLName);
         editEmail = (TextView)findViewById(R.id.tvEditEmail);
         editMobile = (TextView)findViewById(R.id.tvEditMobile);
+        addPhoto = (TextView)findViewById(R.id.tv_AddPhotoProfile);
         btnSimpanProfile = (Button)findViewById(R.id.btnSimpanProfile);
         btnSimpanProfile.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -136,6 +138,7 @@ public class ProfileManagementActivity extends AppCompatActivity implements View
         if(requestCode==RESULT_LOAD_IMAGE && resultCode == RESULT_OK && data!=null){
             Uri selectedImage = data.getData();
             imageView.setImageURI(selectedImage);
+            addPhoto.setVisibility(View.GONE);
         }
     }
 

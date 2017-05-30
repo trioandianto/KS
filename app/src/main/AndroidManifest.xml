@@ -299,9 +299,17 @@
             android:launchMode="singleInstance"
             android:parentActivityName=".KonfirmasiJanjiActivity"
             android:theme="@style/AppTheme4" />
-        <activity android:name=".FaciltyInstitutionActivity"
+        <activity
+            android:name=".FaciltyInstitutionActivity"
             android:parentActivityName=".HospitalList"
-            android:theme="@style/AppTheme4"></activity>
+            android:theme="@style/AppTheme4" />
+        <activity
+            android:name=".SettingReminderDetailActivity"
+            android:label="@string/lbl_reminder"
+            android:launchMode="singleTop"
+            android:parentActivityName=".HomeActivity"
+            android:theme="@style/AppTheme3" />
+        <activity android:name=".ReminderListActivity"></activity>
     </application>
 
 </manifest>
