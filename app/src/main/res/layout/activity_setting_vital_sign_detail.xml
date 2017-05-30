@@ -92,9 +92,9 @@
             android:id="@+id/tv_ValueOfTekDarah"
             android:layout_width="85dp"
             android:layout_height="wrap_content"
-            android:hint="119"
             android:inputType="number"
             android:textSize="13sp"
+            android:maxLength="3"
             android:textColor="@color/black"
             android:layout_marginLeft="20dp"
             android:background="@drawable/custom_border"
@@ -118,8 +118,8 @@
             android:layout_width="85dp"
             android:inputType="number"
             android:layout_height="wrap_content"
-            android:hint="70"
             android:textSize="13sp"
+            android:maxLength="3"
             android:textColor="@color/black"
             android:background="@drawable/custom_border"
             android:layout_toRightOf="@id/lblSlash"
@@ -150,8 +150,8 @@
             android:id="@+id/tv_ValueOfSuhu"
             android:layout_width="80dp"
             android:layout_height="wrap_content"
-            android:hint="36"
             android:textSize="13sp"
+            android:maxLength="3"
             android:inputType="number"
             android:textColor="@color/black"
             android:layout_alignStart="@id/tv_ValueOfTekDarah"
@@ -187,9 +187,9 @@
             android:id="@+id/tv_ValueOfDenyutNadi"
             android:layout_width="80dp"
             android:layout_height="wrap_content"
-            android:hint="119"
             android:textSize="13sp"
             android:inputType="number"
+            android:maxLength="3"
             android:textColor="@color/black"
             android:layout_alignStart="@id/tv_ValueOfTekDarah"
             android:layout_alignEnd="@id/tv_ValueOfTekDarah2"
@@ -222,8 +222,8 @@
             android:id="@+id/tv_ValueOfPernafasan"
             android:layout_width="80dp"
             android:layout_height="wrap_content"
-            android:hint="119"
             android:textSize="13sp"
+            android:maxLength="3"
             android:inputType="number"
             android:textColor="@color/black"
             android:layout_alignStart="@id/tv_ValueOfTekDarah"
@@ -262,13 +262,12 @@
     </RelativeLayout>
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="fill_parent"
         android:layout_below="@id/relVitalSignBtn"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:layout_marginLeft="10dp"
         android:padding="5dp"
         android:layout_marginRight="10dp"
-        android:layout_marginBottom="10dp"
         android:orientation="vertical"
         android:weightSum="1">
         <TextView
@@ -276,7 +275,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:layout_marginLeft="5dp"
-            android:layout_marginBottom="15dp"
+            android:layout_marginBottom="5dp"
             android:gravity="left"
             android:textSize="13sp"
             android:textColor="@color/black"
@@ -284,33 +283,16 @@
             android:textAllCaps="true"
             android:text="@string/lbl_historyVitalSign"/>
 
-        <TextView
+        <ListView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginBottom="5dp"
-            android:layout_below="@id/lblHistoryVS"
-            android:gravity="left"
-            android:textSize="13sp"
-            android:background="@drawable/border_listview"
-            android:textColor="@color/black"
-            android:id="@+id/tv_ValueOfHistoryVS"
-            android:text="24 Mei 2017 / 17:00"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginLeft="5dp"
-            android:layout_below="@id/tv_ValueOfHistoryVS"
-            android:gravity="left"
-            android:textSize="13sp"
-            android:background="@drawable/border_listview"
-            android:textColor="@color/black"
-            android:id="@+id/tv_ValueOfHistoryVS2"
-            android:text="24 Mei 2017 / 17:00"/>
+            android:id="@+id/lvHistoryVitalSign"
+            android:layout_below="@+id/lblHistoryVS"
+            android:divider="@drawable/line_divider"
+            android:dividerHeight="1dp"
+            android:listSelector="@android:color/transparent"
+            android:layout_height="fill_parent">
+
+        </ListView>
     </RelativeLayout>
 
 </RelativeLayout>

@@ -88,11 +88,11 @@ public class AppointmentDetailActivity extends AppCompatActivity implements OnMa
         tvAlamat = (TextView) findViewById(R.id.tvAlamatRsInAppoint);
         btnNeedHelp = (Button) findViewById(R.id.btnMeedHelp);
         btnCancel = (Button)findViewById(R.id.btnCancel);
-        if(status=="Cancelled"){
-            btnCancel.setVisibility(View.INVISIBLE);
+        if(status.equals("Menunggu Konfirmasi")){
+            btnCancel.setVisibility(View.VISIBLE);
         }
         else{
-            btnCancel.setVisibility(View.VISIBLE);
+            btnCancel.setVisibility(View.INVISIBLE);
         }
         btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -213,6 +213,10 @@ public class AppointmentDetailActivity extends AppCompatActivity implements OnMa
                 btnCancel.setVisibility(View.INVISIBLE);
 
             }
+            else {
+                Toast.makeText(getApplicationContext(), "Cancel Gagal.", Toast.LENGTH_LONG).show();
+                btnCancel.setVisibility(View.VISIBLE);
+            }
         }
     }
     public class AppointmentAsync extends AsyncTask<String, Void, String> {
@@ -298,6 +302,7 @@ public class AppointmentDetailActivity extends AppCompatActivity implements OnMa
                                 alamat = jsonObject2.getString("InstitutionAddress");
                                 namaRumahSakit = jsonObject2.getString("InstitutionName");
                             }
+                            tvAlamat.setText(alamat);
                         }
                         String startTime = jsonObject.getString("ScheduleDate");
                         if(startTime!=null){
@@ -305,6 +310,8 @@ public class AppointmentDetailActivity extends AppCompatActivity implements OnMa
                             Date scheduleDate = schdlDateFormatter.parse(startTime);
                             SimpleDateFormat newSchdlFormat = new SimpleDateFormat("dd-MMM-yyyy");
                             String schdlDatePars = newSchdlFormat.format(scheduleDate);
+
+
                             //tvDate.setText(schdlDatePars);
 
                         }

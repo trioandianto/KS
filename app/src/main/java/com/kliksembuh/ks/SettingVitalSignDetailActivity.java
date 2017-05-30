@@ -10,9 +10,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import com.kliksembuh.ks.models.VitalSign;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -25,6 +32,11 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 import javax.net.ssl.HttpsURLConnection;
 
@@ -38,7 +50,11 @@ public class SettingVitalSignDetailActivity extends AppCompatActivity {
     private String userID;
     private int vitalSignID;
     private PostVitalSignTask postAuthTask = null;
-    private UpdateVitalSignTask updateAuthTask = null;
+    private DeleteVitalSignTask updateAuthTask = null;
+    private ListView lvHistory;
+    private HistoryAdapter historyAdapter;
+    private List<VitalSign> lVitalSign;
+    private TextView tvLastUpdateVtl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +70,7 @@ public class SettingVitalSignDetailActivity extends AppCompatActivity {
         newToolbar.setTitle("Pengaturan Vital Sign");
         setSupportActionBar(newToolbar);
         getWindow().setStatusBarColor(ContextCompat.getColor(SettingVitalSignDetailActivity.this, R.color.colorPrimaryDark));
+        lVitalSign = new ArrayList<>();
 
         etTekananDarahs = (EditText)findViewById(R.id.tv_ValueOfTekDarah);
         etTekananDarahD = (EditText)findViewById(R.id.tv_ValueOfTekDarah2);
@@ -61,6 +78,25 @@ public class SettingVitalSignDetailActivity extends AppCompatActivity {
         etDenyutNadi = (EditText)findViewById(R.id.tv_ValueOfDenyutNadi);
         etPernafasan = (EditText)findViewById(R.id.tv_ValueOfPernafasan);
         btnsimpanvitalsign = (Button)findViewById(R.id.btnsimpanvitalsign);
+        tvLastUpdateVtl = (TextView)findViewById(R.id.tvLastUpdateVtl);
+        lvHistory =(ListView)findViewById(R.id.lvHistoryVitalSign);
+        lvHistory.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Object object = parent.getAdapter().getItem(position);
+                VitalSign vitalSign = (VitalSign) object;
+                String tekananDarahS = vitalSign.getTekananDarahS();
+                String tekananDarahD = vitalSign.getTekananDarahD();
+                String suhuTubuh = vitalSign.getSuhuTubuh();
+                String denyutNadi = vitalSign.getDenyutNadi();
+                String pernafasan = vitalSign.getPernafasan();
+                etTekananDarahs.setText(tekananDarahS);
+                etTekananDarahD.setText(tekananDarahD);
+                etSuhuTubuh.setText(suhuTubuh);
+                etDenyutNadi.setText(denyutNadi);
+                etPernafasan.setText(pernafasan);
+            }
+        });
         btnsimpanvitalsign.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -128,6 +164,7 @@ public class SettingVitalSignDetailActivity extends AppCompatActivity {
 
     }
     private class GetVitalSignTask extends AsyncTask<String, Void, String> {
+
         private String uUserID;
 
         public GetVitalSignTask(String uUserID){
@@ -184,12 +221,16 @@ public class SettingVitalSignDetailActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
+
             if(s!=""){
                 try {
                     JSONArray jsonArray = new JSONArray(s);
+                    lVitalSign = new ArrayList<>();
                     if (jsonArray.length()==0) {
                     }
                     else {
+                        int a = 0;
+
                         for (int i = 0; i < jsonArray.length(); i++) {
                             JSONObject jsonObject = jsonArray.getJSONObject(i);
                             String tekananDarahS = jsonObject.getString("BloodPressureSiastolic");
@@ -197,39 +238,48 @@ public class SettingVitalSignDetailActivity extends AppCompatActivity {
                             String suhuTubuh = jsonObject.getString("BodyTemperature");
                             String denyutNadi = jsonObject.getString("Pulse");
                             String pernafasan = jsonObject.getString("Respiration");
-                            vitalSignID = jsonObject.getInt("VitalSignID");
-                            etTekananDarahs.setText(tekananDarahS);
-                            etTekananDarahD.setText(tekananDarahD);
-                            etSuhuTubuh.setText(suhuTubuh);
-                            etDenyutNadi.setText(denyutNadi);
-                            etPernafasan.setText(pernafasan);
+                            int id = jsonObject.getInt("VitalSignID");
+                            String date = jsonObject.getString("CreatedDateTime");
+                            SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+                            SimpleDateFormat timeFormatter = new SimpleDateFormat("dd-MM-yyyy");
+                            SimpleDateFormat time = new SimpleDateFormat("HH:mm");
+                            String detailDate="";
+                            Date date1 = dateFormatter.parse(date);
+                            String dateFormat = timeFormatter.format(date1);
+                            String timeFormat = time.format(date1);
+                            detailDate = dateFormat +"/ "+timeFormat;
 
+                            if(a>0){
+
+                            }
+                            else {
+                                tvLastUpdateVtl.setText("Last Update : "+detailDate);
+                                etTekananDarahs.setText(tekananDarahS);
+                                etTekananDarahD.setText(tekananDarahD);
+                                etSuhuTubuh.setText(suhuTubuh);
+                                etDenyutNadi.setText(denyutNadi);
+                                etPernafasan.setText(pernafasan);
+                                a=1;
+                            }
+                            lVitalSign.add(new VitalSign(id,tekananDarahS,tekananDarahD,denyutNadi,pernafasan,suhuTubuh, detailDate));
                         }
+                        historyAdapter = new HistoryAdapter(getApplicationContext(), lVitalSign);
+                        lvHistory.setAdapter(historyAdapter);
                     }
 
 
                 } catch (JSONException e) {
                     e.printStackTrace();
+                } catch (ParseException e) {
+                    e.printStackTrace();
                 }
             }
         }
     }
-    private class UpdateVitalSignTask extends AsyncTask<String, Void, String>{
+    private class DeleteVitalSignTask extends AsyncTask<String, Void, String>{
         int uVitalSignID;
-        String tekananDarahD ;
-        String tekananDarahS ;
-        String suhuTubuh ;
-        String denyutNadi;
-        String pernafasan;
-        String uUserID;
 
-        public UpdateVitalSignTask(int uVitalSignID, String tekananDarahD, String tekananDarahS, String suhuTubuh, String denyutNadi, String pernafasan, String  uUserID){
-            this.tekananDarahD = tekananDarahD;
-            this.tekananDarahS = tekananDarahS;
-            this.suhuTubuh = suhuTubuh;
-            this.denyutNadi = denyutNadi;
-            this.pernafasan = pernafasan;
-            this.uUserID = uUserID;
+        public DeleteVitalSignTask(int uVitalSignID){
             this.uVitalSignID = uVitalSignID;
 
         }
@@ -239,26 +289,16 @@ public class SettingVitalSignDetailActivity extends AppCompatActivity {
             NetworkInfo netInfo = cm.getActiveNetworkInfo();
             if (netInfo != null && netInfo.isConnected()) {
                 try{
-                    URL url = new URL("http://cloud.abyor.com:11080/UserAPI/api/VitalSigns/PutVitalSign/"+uVitalSignID);
+                    URL url = new URL("http://cloud.abyor.com:11080/KlikSembuhAPI/api/VitalSigns/DeleteVitalSign/"+uVitalSignID);
                     HttpURLConnection urlc = (HttpURLConnection) url.openConnection();
                     JSONObject jsonObject = new JSONObject();
-                    jsonObject.put("VitalSignID", uVitalSignID);
-                    jsonObject.put("UserID", uUserID);
-                    jsonObject.put("BloodPressureSiastolic", tekananDarahS);
-                    jsonObject.put("BloodPressureDiastolic", tekananDarahD);
-                    jsonObject.put("BodyTemperature", suhuTubuh);
-                    jsonObject.put("Pulse", denyutNadi);
-                    jsonObject.put("Respiration", pernafasan);
                     urlc.setConnectTimeout(3000);
                     urlc.setRequestProperty("Content-Type","application/json");
-                    urlc.setRequestMethod("PUT");
+                    urlc.setRequestMethod("DELETE");
                     urlc.setDoInput(true);
                     urlc.setDoOutput(true);
                     DataOutputStream os = new DataOutputStream(urlc.getOutputStream());
-
                     os.writeBytes(jsonObject.toString());
-
-
                     int responseCode=urlc.getResponseCode();
                     if (responseCode == HttpsURLConnection.HTTP_OK) {
 
@@ -279,7 +319,6 @@ public class SettingVitalSignDetailActivity extends AppCompatActivity {
 
                     }
                     else {
-//                        Toast.makeText(getApplicationContext(), "Gagal membuat janji.", Toast.LENGTH_LONG).show();
                         return "";
                     }
                 } catch (MalformedURLException e1) {
@@ -288,9 +327,6 @@ public class SettingVitalSignDetailActivity extends AppCompatActivity {
                     return "";
                 } catch (IOException e) {
                     // TODO Auto-generated catch block
-                    e.printStackTrace();
-                    return "";
-                } catch (JSONException e) {
                     e.printStackTrace();
                     return "";
                 } catch (Exception e) {
@@ -306,7 +342,8 @@ public class SettingVitalSignDetailActivity extends AppCompatActivity {
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
             if (s != "") {
-                Toast.makeText(getApplicationContext(), "Data Berhasil di Simpan.", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Data Berhasil di Hapus.", Toast.LENGTH_LONG).show();
+                new GetVitalSignTask(userID).execute();
 
             }
             else{
@@ -357,7 +394,7 @@ public class SettingVitalSignDetailActivity extends AppCompatActivity {
 
 
                     int responseCode=urlc.getResponseCode();
-                    if (responseCode == HttpsURLConnection.HTTP_OK) {
+                    if (responseCode == HttpsURLConnection.HTTP_CREATED) {
 
                         BufferedReader in=new BufferedReader(
                                 new InputStreamReader(
@@ -403,11 +440,52 @@ public class SettingVitalSignDetailActivity extends AppCompatActivity {
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
             if (s != "") {
+                Toast.makeText(getApplicationContext(), "Data Berhasil di Simpan.", Toast.LENGTH_LONG).show();
+                new GetVitalSignTask(userID).execute();
 
             }
             else{
                 postAuthTask = null;
             }
+        }
+    }
+    public class HistoryAdapter extends BaseAdapter{
+        private Context mContext;
+        private List<VitalSign> mVitalSign;
+        public HistoryAdapter (Context context, List<VitalSign> vitalSigns){
+            this.mContext = context;
+            this.mVitalSign = vitalSigns;
+        }
+
+        @Override
+        public int getCount() {
+            return mVitalSign.size();
+        }
+
+        @Override
+        public Object getItem(int position) {
+            return mVitalSign.get(position);
+        }
+        @Override
+        public long getItemId(int position) {
+            return position;
+        }
+        @Override
+        public View getView(final int position, View convertView, ViewGroup parent) {
+            View newView = View.inflate(mContext, R.layout.list_history_vs, null);
+            TextView tvName = (TextView)newView.findViewById(R.id.tvDetail);
+            TextView btnDelete = (TextView) newView.findViewById(R.id.tvDelete);
+            btnDelete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    new DeleteVitalSignTask(mVitalSign.get(position).getId()).execute();
+                }
+            });
+
+            tvName.setText(mVitalSign.get(position).getDate());
+            newView.setTag(mVitalSign.get(position).getId());
+
+            return newView;
         }
     }
 }
