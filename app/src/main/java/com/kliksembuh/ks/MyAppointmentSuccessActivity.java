@@ -92,11 +92,13 @@ public class MyAppointmentSuccessActivity extends Fragment implements ListView.O
         Object object = parent.getAdapter().getItem(position);
         HistoryUpComing historyUpComing = (HistoryUpComing) object;
         transaksiID = String.valueOf(historyUpComing.getIdHistoryUpComing());
+        String status =historyUpComing.getStatusHistory();
 
         Intent myIntent = new Intent(getApplicationContext(),AppointmentDetailActivity.class);
         Bundle b = new Bundle();
         b.putString("userID",userID);
         b.putString("transaksiID", transaksiID);
+        b.putString("status", status);
         //.putExtra("userID",userID);
         myIntent.putExtras(b);
         //.putExtra("userID",userID);
@@ -259,9 +261,7 @@ public class MyAppointmentSuccessActivity extends Fragment implements ListView.O
                                 historyUpComingList.add(new HistoryUpComing(Integer.parseInt(trxIDHistory), doctorName, null, hospitalName, schdlDatePars, trxNoAppointment, specialtyDoc, appointDatePars, statusDesc, shiftDesc, timeStartPars, timeEndPars));
                             }
                             else{
-                                if(statusID == String.valueOf(4)){
-                                    historyUpComingList.add(new HistoryUpComing(Integer.parseInt(trxIDHistory), doctorName, drawableDoctor[i], hospitalName, schdlDatePars, trxNoAppointment, specialtyDoc, appointDatePars, statusDesc, shiftDesc, timeStartPars, timeEndPars));
-                                }
+                                historyUpComingList.add(new HistoryUpComing(Integer.parseInt(trxIDHistory), doctorName, drawableDoctor[i], hospitalName, schdlDatePars, trxNoAppointment, specialtyDoc, appointDatePars, statusDesc, shiftDesc, timeStartPars, timeEndPars));
                                 histAdapter = new HistoryAdapter(globalContext.getApplicationContext(), historyUpComingList);
                                 lvUpcoming.setAdapter(histAdapter);
                             }

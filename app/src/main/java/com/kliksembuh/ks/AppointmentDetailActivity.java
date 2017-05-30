@@ -89,7 +89,7 @@ public class AppointmentDetailActivity extends AppCompatActivity implements OnMa
         btnNeedHelp = (Button) findViewById(R.id.btnMeedHelp);
         btnCancel = (Button)findViewById(R.id.btnCancel);
         if(status=="Cancelled"){
-            btnCancel.setVisibility(View.GONE);
+            btnCancel.setVisibility(View.INVISIBLE);
         }
         else{
             btnCancel.setVisibility(View.VISIBLE);
@@ -97,7 +97,7 @@ public class AppointmentDetailActivity extends AppCompatActivity implements OnMa
         btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new AppointmentCancel().execute();
+                new AppointmentCancel(transaksiID).execute();
             }
         });
         btnNeedHelp.setOnClickListener(new View.OnClickListener() {
@@ -154,7 +154,8 @@ public class AppointmentDetailActivity extends AppCompatActivity implements OnMa
     }
     public class AppointmentCancel extends AsyncTask<String, Void, String>{
         String mTransaksiID;
-        public AppointmentCancel(){
+        public AppointmentCancel(String mTransaksiID){
+            this.mTransaksiID=mTransaksiID;
 
         }
 
@@ -178,19 +179,10 @@ public class AppointmentDetailActivity extends AppCompatActivity implements OnMa
                     os.writeBytes(jsonObject.toString());
                     int responseCode = urlc.getResponseCode();
                     if (responseCode == HttpsURLConnection.HTTP_OK) {
-                        BufferedReader in = new BufferedReader(
-                                new InputStreamReader(
-                                        urlc.getInputStream()));
-                        StringBuffer sb = new StringBuffer("");
-                        String line = "";
-                        while ((line = in.readLine()) != null) {
-                            sb.append(line);
-                            break;
-                        }
-                        in.close();
+
                         os.flush();
                         os.close();
-                        return sb.toString();
+                        return "OK";
                     } else {
                         return "";
 
@@ -218,6 +210,7 @@ public class AppointmentDetailActivity extends AppCompatActivity implements OnMa
             super.onPostExecute(succes);
             if(succes!=""){
                 Toast.makeText(getApplicationContext(), "Cancel Berhasil.", Toast.LENGTH_LONG).show();
+                btnCancel.setVisibility(View.INVISIBLE);
 
             }
         }
