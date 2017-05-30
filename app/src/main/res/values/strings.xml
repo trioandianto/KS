@@ -165,6 +165,7 @@ MENGGUNAKAN LAYANAN KAMI UNTUK PERTAMA KALI.</string>
 
     <!-- Strings related to Reminder Setting-->
     <string name="lbl_reminder">Pengingat Minum Obat</string>
+    <string name="lbl_addreminder">Tambah Pengingat Minum Obat</string>
 
     <!-- Strings related to Setting Profile Nav -->
     <string name="email_nkontak">Email &amp; Kontak</string>

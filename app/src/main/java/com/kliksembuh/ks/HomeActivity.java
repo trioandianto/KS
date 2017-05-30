@@ -266,7 +266,7 @@ public class HomeActivity extends AppCompatActivity
 
         }
         else if (i == R.id.nav_pengingat_minum){
-            Intent home = new Intent(this, SettingReminderDetailActivity.class);
+            Intent home = new Intent(this, ReminderListActivity.class);
             Bundle b = new Bundle();
             b.putString("userID", userID);
             home.putExtras(b);
