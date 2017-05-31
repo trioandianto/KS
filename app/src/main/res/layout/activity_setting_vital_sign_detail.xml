@@ -234,7 +234,6 @@
 
 
     </RelativeLayout>
-
     <RelativeLayout
         android:id="@+id/relVitalSignBtn"
         android:layout_width="wrap_content"
