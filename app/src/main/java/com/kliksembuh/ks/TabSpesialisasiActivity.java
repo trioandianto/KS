@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -70,9 +72,40 @@ public class TabSpesialisasiActivity extends Fragment implements View.OnClickLis
         View rootView = inflater.inflate(R.layout.activity_tab_spesialis, container, false);
         location = (TextView) rootView.findViewById(R.id.tvsearchlocationspesialis) ;
         location.setOnClickListener(this);
+        location.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+            @Override
+            public void afterTextChanged(Editable s) {
+                location.setError(null);
+                location.clearFocus();
+
+            }
+        });
+
         location.setText(locasi);
         spesialize = (TextView) rootView.findViewById(R.id.tvspesi);
         spesialize.setOnClickListener(this);
+        spesialize.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+            @Override
+            public void afterTextChanged(Editable s) {
+                spesialize.setError(null);
+                spesialize.clearFocus();
+            }
+        });
 
 
         //Action Button
@@ -140,10 +173,12 @@ public class TabSpesialisasiActivity extends Fragment implements View.OnClickLis
                 startActivityForResult(myIntent,1);
             }else{
                 if(lokasiID==null){
+                    location.requestFocus();
                     location.setError("Silahkan Pilih Lokasi.");
                     focusView = location;
 
                 }else{
+                    spesialize.requestFocus();
                     spesialize.setError("Silahkan Pilih Spesialisasi.");
                     focusView = spesialize;
                 }

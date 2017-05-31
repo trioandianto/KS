@@ -365,7 +365,7 @@ public class HospitalList extends AppCompatActivity {
                     }
                     finalListHospital = String.valueOf(mHospitalList.size());
                     TextView newTextView = (TextView)findViewById(R.id.tvhospitalList);
-                    newTextView.setText("Menampilkan "+finalListHospital+" instansi kesehatan di "+subDistricDescription+" yang menyediakan Dokter "+facilityName+".");
+                    newTextView.setText("Menampilkan "+finalListHospital+" pencarian untuk "+facilityName+" di "+subDistricDescription+".");
                     hAdapter = new HospitalListAdapterNew(getApplicationContext(), mHospitalList);
                     lvHospital.setAdapter(hAdapter);
 //                    for(Hospital currentHospital : mHospitalList){
@@ -383,6 +383,16 @@ public class HospitalList extends AppCompatActivity {
                 TextView tvHosNotFound = (TextView)findViewById(R.id.tvHospitalNotFound);
                 tvHosNotFound.setText("Oops hasil pencarian Anda tidak dapat ditemukan. Silahkan melakukan pencarian kembali dengan kata kunci lain.");
                 TextView newTextView = (TextView)findViewById(R.id.tvhospitalList);
+                TextView btnNewSearch = (TextView) findViewById(R.id.btnNewSearch);
+                btnNewSearch.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent homeIntent = new Intent(HospitalList.this, HomeActivity.class);
+                        startActivityForResult(homeIntent, 1);
+                    }
+                });
+                btnNewSearch.setBackgroundColor(getResources().getColor(R.color.buttonBlue));
+                btnNewSearch.setText("Ganti Pencarian");
                 newTextView.setVisibility(View.GONE);
                 //newTextView.setText("Tidak tersedia rumah sakit untuk daerah "+subDistricDescription+".");
             }
