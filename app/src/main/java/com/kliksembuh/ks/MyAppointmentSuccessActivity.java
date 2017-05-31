@@ -260,8 +260,9 @@ public class MyAppointmentSuccessActivity extends Fragment implements ListView.O
                             if (drawableDoctor.length <= 0){
                                 historyUpComingList.add(new HistoryUpComing(Integer.parseInt(trxIDHistory), doctorName, null, hospitalName, schdlDatePars, trxNoAppointment, specialtyDoc, appointDatePars, statusDesc, shiftDesc, timeStartPars, timeEndPars));
                             }
-                            else{
+                            else{if(statusID == String.valueOf(4)){
                                 historyUpComingList.add(new HistoryUpComing(Integer.parseInt(trxIDHistory), doctorName, drawableDoctor[i], hospitalName, schdlDatePars, trxNoAppointment, specialtyDoc, appointDatePars, statusDesc, shiftDesc, timeStartPars, timeEndPars));
+                            }
                                 histAdapter = new HistoryAdapter(globalContext.getApplicationContext(), historyUpComingList);
                                 lvUpcoming.setAdapter(histAdapter);
                             }

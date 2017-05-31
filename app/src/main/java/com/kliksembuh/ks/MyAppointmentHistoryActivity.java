@@ -265,9 +265,7 @@ public class MyAppointmentHistoryActivity extends Fragment implements ListView.O
                                 historyUpComingList.add(new HistoryUpComing(Integer.parseInt(trxIDHistory), doctorName, null, hospitalName, schdlDatePars, trxNoAppointment, specialtyDoc, appointDatePars, statusDesc, shiftDesc, timeStartPars, timeEndPars));
                             }
                             else{
-                                if(statusID == String.valueOf(3)){
-                                    historyUpComingList.add(new HistoryUpComing(Integer.parseInt(trxIDHistory), doctorName, drawableDoctor[i], hospitalName, schdlDatePars, trxNoAppointment, specialtyDoc, appointDatePars, statusDesc, shiftDesc, timeStartPars, timeEndPars));
-                                }
+                                historyUpComingList.add(new HistoryUpComing(Integer.parseInt(trxIDHistory), doctorName, drawableDoctor[i], hospitalName, schdlDatePars, trxNoAppointment, specialtyDoc, appointDatePars, statusDesc, shiftDesc, timeStartPars, timeEndPars));
                                 histAdapter = new HistoryAdapter(globalContext.getApplicationContext(), historyUpComingList);
                                 lvUpcoming.setAdapter(histAdapter);
                             }
