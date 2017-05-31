@@ -76,7 +76,7 @@ public class BookingActivity extends AppCompatActivity implements ListView.OnIte
     private int cMonth;
     private int cYear;
     private int day;
-    private int lastDay;
+    private int lastDay, lastDayYesterday;
     private Date tanggal;
     private String namaDokter;
     private String idDokter;
@@ -92,7 +92,6 @@ public class BookingActivity extends AppCompatActivity implements ListView.OnIte
     private int mingguMingguIni;
     private int hariMingguini;
     private String bulanIni;
-    private int tahunIni;
     private int seninMingguDepan;
     private int selasaMingguDepan;
     private int rabuMingguDepan;
@@ -100,6 +99,21 @@ public class BookingActivity extends AppCompatActivity implements ListView.OnIte
     private int jumatMingguDepan;
     private int sabtuMingguDepan;
     private int mingguMingguDepan;
+    private int seninMingguIniBulan;
+    private int selasaMingguIniBulan;
+    private int rabuMingguIniBulan;
+    private int kamisMingguIniBulan;
+    private int jumatMingguIniBulan;
+    private int sabtuMingguIniBulan;
+    private int mingguMingguIniBulan;
+    private int hariMingguiniBulan;
+    private int seninMingguDepanBulan;
+    private int selasaMingguDepanBulan;
+    private int rabuMingguDepanBulan;
+    private int kamisMingguDepanBulan;
+    private int jumatMingguDepanBulan;
+    private int sabtuMingguDepanBulan;
+    private int mingguMingguDepanBulan;
     private String weekProgramID;
     private String dayProgramID;
     private String[] scheduleShift;
@@ -202,60 +216,92 @@ public class BookingActivity extends AppCompatActivity implements ListView.OnIte
         timeNow = now.getHours();
         hariMingguini = day;
         lastDay = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
+        Calendar calendar1 = Calendar.getInstance();
+        calendar1.set(cDay, cMonth-1,cYear);
+        lastDayYesterday = calendar1.getActualMaximum(Calendar.DAY_OF_MONTH);
+        lastDayYesterday = lastDayYesterday +1;
+        seninMingguIniBulan =cMonth+1;
+        selasaMingguIniBulan=cMonth+1;
+        rabuMingguIniBulan=cMonth+1;
+        kamisMingguIniBulan=cMonth+1;
+        jumatMingguIniBulan=cMonth+1;
+        sabtuMingguIniBulan=cMonth+1;
+        mingguMingguIniBulan=cMonth+1;
+        hariMingguiniBulan=cMonth+1;
+        seninMingguDepanBulan=cMonth+1;
+        selasaMingguDepanBulan=cMonth+1;
+        rabuMingguDepanBulan=cMonth+1;
+        kamisMingguDepanBulan=cMonth+1;
+        jumatMingguDepanBulan=cMonth+1;
+        sabtuMingguDepanBulan=cMonth+1;
+        mingguMingguDepanBulan=cMonth+1;
 
         if(day == 1){
             mingguMingguIni = cDay;
-            seninMingguIni = mingguMingguIni + 1;
-            if (seninMingguIni > lastDay){
-                seninMingguIni = seninMingguIni - lastDay;
+            sabtuMingguIni = mingguMingguIni - 1;
+            if (sabtuMingguIni < 1){
+                sabtuMingguIni = lastDayYesterday + sabtuMingguIni;
+                sabtuMingguIniBulan = cMonth;
             }
-            selasaMingguIni = seninMingguIni + 1;
-            if (selasaMingguIni > lastDay){
-                selasaMingguIni = selasaMingguIni - lastDay;
+            jumatMingguIni = mingguMingguIni - 2;
+            if (jumatMingguIni < 1){
+                jumatMingguIni = lastDayYesterday + sabtuMingguIni;
+                jumatMingguIniBulan =cMonth;
             }
-            rabuMingguIni = selasaMingguIni + 1;
-            if (rabuMingguIni > lastDay){
-                rabuMingguIni = rabuMingguIni - lastDay;
+            kamisMingguIni = mingguMingguIni - 3;
+            if (kamisMingguIni < 1){
+                kamisMingguIni = lastDayYesterday + sabtuMingguIni;
+                kamisMingguIniBulan =cMonth;
             }
-            kamisMingguIni = rabuMingguIni + 1;
-            if (kamisMingguIni > lastDay){
-                kamisMingguIni = kamisMingguIni - lastDay;
+            rabuMingguIni = mingguMingguIni - 4;
+            if (rabuMingguIni < 1){
+                rabuMingguIni = lastDayYesterday + rabuMingguIni;
+                rabuMingguIniBulan =cMonth;
             }
-            jumatMingguIni = kamisMingguIni + 1;
-            if (jumatMingguIni > lastDay){
-                jumatMingguIni = jumatMingguIni - lastDay;
+            selasaMingguIni = mingguMingguIni - 5;
+            if (selasaMingguIni < 1){
+                selasaMingguIni =  lastDayYesterday + selasaMingguIni;
+                selasaMingguIniBulan =cMonth;
             }
-            sabtuMingguIni = jumatMingguIni + 1;
-            if (sabtuMingguIni > lastDay){
-                sabtuMingguIni = sabtuMingguIni - lastDay;
+            seninMingguIni = mingguMingguIni - 6;
+            if (seninMingguIni < 1){
+                seninMingguIni = lastDayYesterday + seninMingguIni;
+                seninMingguIniBulan =cMonth;
             }
-            mingguMingguDepan = sabtuMingguIni + 1;
-            if (mingguMingguDepan > lastDay){
-                mingguMingguDepan = mingguMingguDepan - lastDay;
-            }
-            seninMingguDepan = mingguMingguDepan + 1;
+            seninMingguDepan = mingguMingguIni + 1;
             if (seninMingguDepan > lastDay){
                 seninMingguDepan = seninMingguDepan - lastDay;
+                seninMingguDepanBulan = cMonth + 2;
             }
             selasaMingguDepan = seninMingguDepan + 1;
             if (seninMingguIni > lastDay){
                 selasaMingguDepan = selasaMingguDepan - lastDay;
+                selasaMingguDepanBulan = cMonth +2;
             }
             rabuMingguDepan = selasaMingguDepan + 1;
             if (rabuMingguDepan > lastDay){
                 rabuMingguDepan = rabuMingguDepan - lastDay;
+                rabuMingguDepanBulan = cMonth + 2;
             }
             kamisMingguDepan = rabuMingguDepan+ 1;
             if (kamisMingguDepan > lastDay){
                 kamisMingguDepan = kamisMingguDepan - lastDay;
+                kamisMingguDepanBulan = cMonth + 2;
             }
             jumatMingguDepan = kamisMingguDepan + 1;
             if (jumatMingguDepan > lastDay){
                 jumatMingguDepan = jumatMingguDepan - lastDay;
+                jumatMingguDepanBulan = cMonth + 2;
             }
             sabtuMingguDepan = jumatMingguDepan + 1;
             if (sabtuMingguDepan > lastDay){
                 sabtuMingguDepan = sabtuMingguDepan - lastDay;
+                sabtuMingguDepanBulan = cMonth + 2;
+            }
+            mingguMingguDepan = sabtuMingguDepan + 1;
+            if (mingguMingguDepan > lastDay){
+                mingguMingguDepan = mingguMingguDepan - lastDay;
+                jumatMingguDepanBulan = cMonth + 2;
             }
 
         }
@@ -288,30 +334,37 @@ public class BookingActivity extends AppCompatActivity implements ListView.OnIte
             seninMingguDepan = mingguMingguIni + 1;
             if (seninMingguDepan > lastDay){
                 seninMingguDepan = seninMingguDepan - lastDay;
+                seninMingguDepanBulan = cMonth + 2;
             }
             selasaMingguDepan = seninMingguDepan + 1;
             if (seninMingguIni > lastDay){
                 selasaMingguDepan = selasaMingguDepan - lastDay;
+                selasaMingguDepanBulan = cMonth +2;
             }
             rabuMingguDepan = selasaMingguDepan + 1;
             if (rabuMingguDepan > lastDay){
                 rabuMingguDepan = rabuMingguDepan - lastDay;
+                rabuMingguDepanBulan = cMonth + 2;
             }
             kamisMingguDepan = rabuMingguDepan+ 1;
             if (kamisMingguDepan > lastDay){
                 kamisMingguDepan = kamisMingguDepan - lastDay;
+                kamisMingguDepanBulan = cMonth + 2;
             }
             jumatMingguDepan = kamisMingguDepan + 1;
             if (jumatMingguDepan > lastDay){
                 jumatMingguDepan = jumatMingguDepan - lastDay;
+                jumatMingguDepanBulan = cMonth + 2;
             }
             sabtuMingguDepan = jumatMingguDepan + 1;
             if (sabtuMingguDepan > lastDay){
                 sabtuMingguDepan = sabtuMingguDepan - lastDay;
+                sabtuMingguDepanBulan = cMonth + 2;
             }
             mingguMingguDepan = sabtuMingguDepan + 1;
-            if(mingguMingguDepan > lastDay){
+            if (mingguMingguDepan > lastDay){
                 mingguMingguDepan = mingguMingguDepan - lastDay;
+                jumatMingguDepanBulan = cMonth + 2;
             }
         }
         else if(day == 3){
@@ -319,6 +372,7 @@ public class BookingActivity extends AppCompatActivity implements ListView.OnIte
             seninMingguIni = selasaMingguIni - 1;
             if (seninMingguIni < 1){
                 seninMingguIni = seninMingguIni - lastDay;
+                seninMingguIniBulan = cMonth;
             }
             rabuMingguIni = selasaMingguIni + 1;
             if (rabuMingguIni > lastDay){
@@ -343,41 +397,50 @@ public class BookingActivity extends AppCompatActivity implements ListView.OnIte
             seninMingguDepan = mingguMingguIni + 1;
             if (seninMingguDepan > lastDay){
                 seninMingguDepan = seninMingguDepan - lastDay;
+                seninMingguDepanBulan = cMonth + 2;
             }
             selasaMingguDepan = seninMingguDepan + 1;
             if (seninMingguIni > lastDay){
                 selasaMingguDepan = selasaMingguDepan - lastDay;
+                selasaMingguDepanBulan = cMonth +2;
             }
             rabuMingguDepan = selasaMingguDepan + 1;
             if (rabuMingguDepan > lastDay){
                 rabuMingguDepan = rabuMingguDepan - lastDay;
+                rabuMingguDepanBulan = cMonth + 2;
             }
             kamisMingguDepan = rabuMingguDepan+ 1;
             if (kamisMingguDepan > lastDay){
                 kamisMingguDepan = kamisMingguDepan - lastDay;
+                kamisMingguDepanBulan = cMonth + 2;
             }
             jumatMingguDepan = kamisMingguDepan + 1;
             if (jumatMingguDepan > lastDay){
                 jumatMingguDepan = jumatMingguDepan - lastDay;
+                jumatMingguDepanBulan = cMonth + 2;
             }
             sabtuMingguDepan = jumatMingguDepan + 1;
             if (sabtuMingguDepan > lastDay){
                 sabtuMingguDepan = sabtuMingguDepan - lastDay;
+                sabtuMingguDepanBulan = cMonth + 2;
             }
             mingguMingguDepan = sabtuMingguDepan + 1;
-            if(mingguMingguDepan > lastDay){
+            if (mingguMingguDepan > lastDay){
                 mingguMingguDepan = mingguMingguDepan - lastDay;
+                jumatMingguDepanBulan = cMonth + 2;
             }
         }
         else if(day == 4){
             rabuMingguIni = cDay;
             selasaMingguIni = rabuMingguIni - 1;
             if (selasaMingguIni < 1){
-                selasaMingguIni = selasaMingguIni - lastDay;
+                selasaMingguIni = selasaMingguIni + lastDay;
+                selasaMingguIniBulan = cMonth;
             }
-            seninMingguIni = selasaMingguIni - 1;
+            seninMingguIni = rabuMingguIni - 2;
             if (seninMingguIni < 1){
-                seninMingguIni = seninMingguIni - lastDay;
+                seninMingguIni = seninMingguIni + lastDay;
+                seninMingguDepanBulan = cMonth;
             }
             kamisMingguIni = rabuMingguIni+ 1;
             if (kamisMingguIni > lastDay){
@@ -398,30 +461,37 @@ public class BookingActivity extends AppCompatActivity implements ListView.OnIte
             seninMingguDepan = mingguMingguIni + 1;
             if (seninMingguDepan > lastDay){
                 seninMingguDepan = seninMingguDepan - lastDay;
+                seninMingguDepanBulan = cMonth + 2;
             }
             selasaMingguDepan = seninMingguDepan + 1;
             if (seninMingguIni > lastDay){
                 selasaMingguDepan = selasaMingguDepan - lastDay;
+                selasaMingguDepanBulan = cMonth +2;
             }
             rabuMingguDepan = selasaMingguDepan + 1;
             if (rabuMingguDepan > lastDay){
                 rabuMingguDepan = rabuMingguDepan - lastDay;
+                rabuMingguDepanBulan = cMonth + 2;
             }
             kamisMingguDepan = rabuMingguDepan+ 1;
             if (kamisMingguDepan > lastDay){
                 kamisMingguDepan = kamisMingguDepan - lastDay;
+                kamisMingguDepanBulan = cMonth + 2;
             }
             jumatMingguDepan = kamisMingguDepan + 1;
             if (jumatMingguDepan > lastDay){
                 jumatMingguDepan = jumatMingguDepan - lastDay;
+                jumatMingguDepanBulan = cMonth + 2;
             }
             sabtuMingguDepan = jumatMingguDepan + 1;
             if (sabtuMingguDepan > lastDay){
                 sabtuMingguDepan = sabtuMingguDepan - lastDay;
+                sabtuMingguDepanBulan = cMonth + 2;
             }
             mingguMingguDepan = sabtuMingguDepan + 1;
-            if(mingguMingguDepan > lastDay){
+            if (mingguMingguDepan > lastDay){
                 mingguMingguDepan = mingguMingguDepan - lastDay;
+                jumatMingguDepanBulan = cMonth + 2;
             }
 
         }
@@ -429,15 +499,18 @@ public class BookingActivity extends AppCompatActivity implements ListView.OnIte
             kamisMingguIni =cDay;
             rabuMingguIni = kamisMingguIni - 1;
             if (rabuMingguIni < 1){
-                rabuMingguIni = rabuMingguIni - lastDay;
+                rabuMingguIni = lastDayYesterday + rabuMingguIni;
+                rabuMingguIniBulan = cMonth;
             }
-            selasaMingguIni = rabuMingguIni - 1;
+            selasaMingguIni = kamisMingguIni - 2;
             if (selasaMingguIni < 1){
-                selasaMingguIni = selasaMingguIni - lastDay;
+                selasaMingguIni = lastDayYesterday + selasaMingguIni;
+                selasaMingguIniBulan =cMonth;
             }
-            seninMingguIni = selasaMingguIni - 1;
+            seninMingguIni = kamisMingguIni - 3;
             if (seninMingguIni < 1){
-                seninMingguIni = seninMingguIni - lastDay;
+                seninMingguIni = lastDayYesterday + seninMingguIni;
+                seninMingguIniBulan = cMonth;
             }
             jumatMingguIni = kamisMingguIni + 1;
             if (jumatMingguIni > lastDay){
@@ -454,30 +527,37 @@ public class BookingActivity extends AppCompatActivity implements ListView.OnIte
             seninMingguDepan = mingguMingguIni + 1;
             if (seninMingguDepan > lastDay){
                 seninMingguDepan = seninMingguDepan - lastDay;
+                seninMingguDepanBulan = cMonth + 2;
             }
             selasaMingguDepan = seninMingguDepan + 1;
             if (seninMingguIni > lastDay){
                 selasaMingguDepan = selasaMingguDepan - lastDay;
+                selasaMingguDepanBulan = cMonth +2;
             }
             rabuMingguDepan = selasaMingguDepan + 1;
             if (rabuMingguDepan > lastDay){
                 rabuMingguDepan = rabuMingguDepan - lastDay;
+                rabuMingguDepanBulan = cMonth + 2;
             }
             kamisMingguDepan = rabuMingguDepan+ 1;
             if (kamisMingguDepan > lastDay){
                 kamisMingguDepan = kamisMingguDepan - lastDay;
+                kamisMingguDepanBulan = cMonth + 2;
             }
             jumatMingguDepan = kamisMingguDepan + 1;
             if (jumatMingguDepan > lastDay){
                 jumatMingguDepan = jumatMingguDepan - lastDay;
+                jumatMingguDepanBulan = cMonth + 2;
             }
             sabtuMingguDepan = jumatMingguDepan + 1;
             if (sabtuMingguDepan > lastDay){
                 sabtuMingguDepan = sabtuMingguDepan - lastDay;
+                sabtuMingguDepanBulan = cMonth + 2;
             }
             mingguMingguDepan = sabtuMingguDepan + 1;
-            if(mingguMingguDepan > lastDay){
+            if (mingguMingguDepan > lastDay){
                 mingguMingguDepan = mingguMingguDepan - lastDay;
+                mingguMingguDepanBulan = cMonth + 2;
             }
 
         }
@@ -485,19 +565,23 @@ public class BookingActivity extends AppCompatActivity implements ListView.OnIte
             jumatMingguIni = cDay;
             kamisMingguIni = jumatMingguIni - 1;
             if (kamisMingguIni < 1){
-                kamisMingguIni = kamisMingguIni - lastDay;
+                kamisMingguIni = lastDay - kamisMingguIni;
+                kamisMingguIniBulan = cMonth;
             }
-            rabuMingguIni = kamisMingguIni - 1;
+            rabuMingguIni = jumatMingguIni - 2;
             if (rabuMingguIni < 1){
-                rabuMingguIni = rabuMingguIni - lastDay;
+                rabuMingguIni = lastDayYesterday - rabuMingguIni;
+                rabuMingguIniBulan = cMonth;
             }
-            selasaMingguIni = rabuMingguIni - 1;
+            selasaMingguIni = jumatMingguIni - 3;
             if (selasaMingguIni < 1){
-                selasaMingguIni = selasaMingguIni - lastDay;
+                selasaMingguIni = lastDayYesterday - selasaMingguIni;
+                selasaMingguIniBulan = cMonth;
             }
-            seninMingguIni = selasaMingguIni - 1;
+            seninMingguIni = jumatMingguIni - 4;
             if (seninMingguIni < 1){
-                seninMingguIni = seninMingguIni - lastDay;
+                seninMingguIni = lastDayYesterday - selasaMingguIni;
+                seninMingguIniBulan = cMonth;
             }
             sabtuMingguIni = jumatMingguIni + 1;
             if (sabtuMingguIni > lastDay){
@@ -510,30 +594,37 @@ public class BookingActivity extends AppCompatActivity implements ListView.OnIte
             seninMingguDepan = mingguMingguIni + 1;
             if (seninMingguDepan > lastDay){
                 seninMingguDepan = seninMingguDepan - lastDay;
+                seninMingguDepanBulan = cMonth + 2;
             }
             selasaMingguDepan = seninMingguDepan + 1;
             if (seninMingguIni > lastDay){
                 selasaMingguDepan = selasaMingguDepan - lastDay;
+                selasaMingguDepanBulan = cMonth +2;
             }
             rabuMingguDepan = selasaMingguDepan + 1;
             if (rabuMingguDepan > lastDay){
                 rabuMingguDepan = rabuMingguDepan - lastDay;
+                rabuMingguDepanBulan = cMonth + 2;
             }
             kamisMingguDepan = rabuMingguDepan+ 1;
             if (kamisMingguDepan > lastDay){
                 kamisMingguDepan = kamisMingguDepan - lastDay;
+                kamisMingguDepanBulan = cMonth + 2;
             }
             jumatMingguDepan = kamisMingguDepan + 1;
             if (jumatMingguDepan > lastDay){
                 jumatMingguDepan = jumatMingguDepan - lastDay;
+                jumatMingguDepanBulan = cMonth + 2;
             }
             sabtuMingguDepan = jumatMingguDepan + 1;
             if (sabtuMingguDepan > lastDay){
                 sabtuMingguDepan = sabtuMingguDepan - lastDay;
+                sabtuMingguDepanBulan = cMonth + 2;
             }
             mingguMingguDepan = sabtuMingguDepan + 1;
-            if(mingguMingguDepan > lastDay){
+            if (mingguMingguDepan > lastDay){
                 mingguMingguDepan = mingguMingguDepan - lastDay;
+                jumatMingguDepanBulan = cMonth + 2;
             }
 
         }
@@ -541,55 +632,68 @@ public class BookingActivity extends AppCompatActivity implements ListView.OnIte
             sabtuMingguIni = cDay;
             jumatMingguIni = sabtuMingguIni - 1;
             if (jumatMingguIni < 1){
-                jumatMingguIni = jumatMingguIni - lastDay;
+                jumatMingguIni = lastDayYesterday + jumatMingguIni;
+                jumatMingguIniBulan = cMonth;
             }
-            kamisMingguIni = jumatMingguIni - 1;
+            kamisMingguIni = sabtuMingguIni - 2;
             if (kamisMingguIni < 1){
-                kamisMingguIni = kamisMingguIni - lastDay;
+                kamisMingguIni = lastDayYesterday + kamisMingguIni;
+                kamisMingguIniBulan = cMonth;
             }
-            rabuMingguIni = kamisMingguIni - 1;
+            rabuMingguIni = sabtuMingguIni - 3;
             if (rabuMingguIni < 1){
-                rabuMingguIni = rabuMingguIni - lastDay;
+                rabuMingguIni = lastDayYesterday + rabuMingguIni;
+                rabuMingguIniBulan =cMonth;
             }
-            selasaMingguIni = rabuMingguIni - 1;
+            selasaMingguIni = sabtuMingguIni - 4;
             if (selasaMingguIni < 1){
-                selasaMingguIni = selasaMingguIni - lastDay;
+                selasaMingguIni = lastDayYesterday + selasaMingguIni;
+                selasaMingguIniBulan =cMonth;
             }
-            seninMingguIni = selasaMingguIni - 1;
+            seninMingguIni = sabtuMingguIni - 5;
             if (seninMingguIni < 1){
-                seninMingguIni = seninMingguIni - lastDay;
+                seninMingguIni = lastDayYesterday + seninMingguIni;
+                seninMingguIniBulan =cMonth;
             }
             mingguMingguIni = sabtuMingguIni + 1;
             if(mingguMingguIni > lastDay){
                 mingguMingguIni = mingguMingguIni - lastDay;
+                mingguMingguIniBulan = cMonth +2;
             }
             seninMingguDepan = mingguMingguIni + 1;
             if (seninMingguDepan > lastDay){
                 seninMingguDepan = seninMingguDepan - lastDay;
+                seninMingguDepanBulan = cMonth + 2;
             }
             selasaMingguDepan = seninMingguDepan + 1;
             if (seninMingguIni > lastDay){
                 selasaMingguDepan = selasaMingguDepan - lastDay;
+                selasaMingguDepanBulan = cMonth +2;
             }
             rabuMingguDepan = selasaMingguDepan + 1;
             if (rabuMingguDepan > lastDay){
                 rabuMingguDepan = rabuMingguDepan - lastDay;
+                rabuMingguDepanBulan = cMonth + 2;
             }
             kamisMingguDepan = rabuMingguDepan+ 1;
             if (kamisMingguDepan > lastDay){
                 kamisMingguDepan = kamisMingguDepan - lastDay;
+                kamisMingguDepanBulan = cMonth + 2;
             }
             jumatMingguDepan = kamisMingguDepan + 1;
             if (jumatMingguDepan > lastDay){
                 jumatMingguDepan = jumatMingguDepan - lastDay;
+                jumatMingguDepanBulan = cMonth + 2;
             }
             sabtuMingguDepan = jumatMingguDepan + 1;
             if (sabtuMingguDepan > lastDay){
                 sabtuMingguDepan = sabtuMingguDepan - lastDay;
+                sabtuMingguDepanBulan = cMonth + 2;
             }
             mingguMingguDepan = sabtuMingguDepan + 1;
-            if(mingguMingguDepan > lastDay){
+            if (mingguMingguDepan > lastDay){
                 mingguMingguDepan = mingguMingguDepan - lastDay;
+                jumatMingguDepanBulan = cMonth + 2;
             }
 
         }
@@ -610,149 +714,81 @@ public class BookingActivity extends AppCompatActivity implements ListView.OnIte
                 tahun = cYear;
                 if (sequence=="minggu 1"){
                     if(day ==8){
+                        bulan = mingguMingguIniBulan;
                         tanggala = mingguMingguIni;
-                        bulan = cMonth+ 1;
-                        if(tanggala > lastDay){
-                            bulan = bulan + 1;
-                        }
-                        else if (tanggala < 1){
-                            bulan = bulan -1;
-                        }
                     }
                     else if(day ==2){
+                        bulan = seninMingguIniBulan;
                         tanggala = seninMingguIni;
-                        bulan = cMonth+ 1;
-                        if(tanggala > lastDay){
-                            bulan = bulan + 1;
-                        }
-                        else if (tanggala < 1){
-                            bulan = bulan -1;
-                        }
                     }
                     else if(day ==3){
+                        bulan = selasaMingguIniBulan;
                         tanggala = selasaMingguIni;
-                        bulan = cMonth+ 1;
-                        if(tanggala > lastDay){
-                            bulan = bulan + 1;
-                        }
-                        else if (tanggala < 1){
-                            bulan = bulan -1;
-                        }
+
                     }
                     else if(day ==4){
+                        bulan = rabuMingguIniBulan;
                         tanggala = rabuMingguIni;
-                        bulan = cMonth+ 1;
-                        if(tanggala > lastDay){
-                            bulan = bulan + 1;
-                        }
-                        else if (tanggala < 1){
-                            bulan = bulan -1;
-                        }
                     }
                     else if(day ==5){
+                        bulan = kamisMingguIniBulan;
                         tanggala = kamisMingguIni;
-                        bulan = cMonth+ 1;
-                        if(tanggala > lastDay){
-                            bulan = bulan + 1;
-                        }
-                        else if (tanggala < 1){
-                            bulan = bulan -1;
-                        }
+
+
                     }
                     else if(day ==6){
+                        bulan = jumatMingguIniBulan;
                         tanggala = jumatMingguIni;
-                        bulan = cMonth+ 1;
-                        if(tanggala > lastDay){
-                            bulan = bulan + 1;
-                        }
-                        else if (tanggala < 1){
-                            bulan = bulan -1;
-                        }
+
+
                     }
                     else{
+                        bulan = sabtuMingguIniBulan;
                         tanggala = sabtuMingguIni;
-                        bulan = cMonth+ 1;
-                        if(tanggala > lastDay){
-                            bulan = bulan + 1;
-                        }
-                        else if (tanggala < 1){
-                            bulan = bulan -1;
-                        }
                     }
                 }
                 else{
                     if(day ==1){
+                        bulan = mingguMingguDepanBulan;
                         tanggala = mingguMingguDepan;
-                        bulan = cMonth+ 1;
-                        if(tanggala > lastDay){
-                            bulan = bulan + 1;
-                        }
-                        else if (tanggala < 1){
-                            bulan = bulan -1;
-                        }
+
+
                     }
                     else if(day ==2){
-                        tanggala = seninMingguDepan;
-                        bulan = cMonth+ 1;
-                        if(tanggala > lastDay){
-                            bulan = bulan + 1;
-                        }
-                        else if (tanggala < 1){
-                            bulan = bulan -1;
-                        }
+                        bulan = seninMingguDepan;
+                        tanggala = seninMingguDepanBulan;
+
+
                     }
                     else if(day ==3){
+                        bulan = selasaMingguDepanBulan;
                         tanggala = selasaMingguDepan;
-                        bulan = cMonth+ 1;
-                        if(tanggala > lastDay){
-                            bulan = bulan + 1;
-                        }
-                        else if (tanggala < 1){
-                            bulan = bulan -1;
-                        }
+
+
                     }
                     else if(day ==4){
+                        bulan = rabuMingguDepanBulan;
                         tanggala = rabuMingguDepan;
-                        bulan = cMonth+ 1;
-                        if(tanggala > lastDay){
-                            bulan = bulan + 1;
-                        }
-                        else if (tanggala < 1){
-                            bulan = bulan -1;
-                        }
+
+
                     }
                     else if(day ==5){
+                        bulan = kamisMingguDepanBulan;
                         tanggala = kamisMingguDepan;
-                        bulan = cMonth+ 1;
-                        if(tanggala > lastDay){
-                            bulan = bulan + 1;
-                        }
-                        else if (tanggala < 1){
-                            bulan = bulan -1;
-                        }
-
-
                     }
                     else if(day ==6){
+                        bulan = jumatMingguDepanBulan;
                         tanggala = jumatMingguDepan;
-                        bulan = cMonth+ 1;
-                        if(tanggala > lastDay){
-                            bulan = bulan + 1;
-                        }
-                        else if (tanggala < 1){
-                            bulan = bulan -1;
-                        }
 
 
                     }
-                    else {
+                    else if(day==7){
+                        bulan = sabtuMingguDepanBulan;
                         tanggala = sabtuMingguDepan;
-                        bulan = cMonth + 1;
-                        if (tanggala > lastDay) {
-                            bulan = bulan + 1;
-                        } else if (tanggala < 1) {
-                            bulan = bulan - 1;
-                        }
+                    }
+                    else {
+                        bulan = mingguMingguDepanBulan;
+                        tanggala = mingguMingguDepan;
                     }
 
                 }
@@ -774,10 +810,32 @@ public class BookingActivity extends AppCompatActivity implements ListView.OnIte
 
                     bulanIni ="Mei";
                 }
-                else {
+                else if(bulan==6){
                     bulanIni ="Juni";
 
                 }
+                else if(bulan==7){
+                    bulanIni ="Juni";
+
+                }else if(bulan==8){
+                    bulanIni ="Juli";
+
+                }else if(bulan==9){
+                    bulanIni ="Agustus";
+
+                }
+                else if(bulan==10){
+                    bulanIni ="September";
+
+                }
+                else if(bulan==11){
+                    bulanIni ="Oktober";
+
+                }else{
+                    bulanIni ="Desember";
+                }
+
+
                 tvDate.setText(tanggala+" "+bulanIni+" "+tahun);
                 namaDate = tanggala+" "+bulanIni+" "+tahun;
                 date = bulan+"-"+tanggala+"-"+tahun;
@@ -799,154 +857,40 @@ public class BookingActivity extends AppCompatActivity implements ListView.OnIte
             public void onClick(View v) {
                 mJadwalDokterList = new ArrayList<>();
                 sequence = "minggu 1";
-                if (sequence=="minggu 1"){
-                    if(day ==8){
-                        tanggala = mingguMingguIni;
-                        bulan = cMonth+ 1;
-                        if(tanggala > lastDay){
-                            bulan = bulan + 1;
-                        }
-                        else if (tanggala < 1){
-                            bulan = bulan -1;
-                        }
-                    }
-                    else if(day ==2){
-                        tanggala = seninMingguIni;
-                        bulan = cMonth+ 1;
-                        if(tanggala > lastDay){
-                            bulan = bulan + 1;
-                        }
-                        else if (tanggala < 1){
-                            bulan = bulan -1;
-                        }
-                    }
-                    else if(day ==3){
-                        tanggala = selasaMingguIni;
-                        bulan = cMonth+ 1;
-                        if(tanggala > lastDay){
-                            bulan = bulan + 1;
-                        }
-                        else if (tanggala < 1){
-                            bulan = bulan -1;
-                        }
-                    }
-                    else if(day ==4){
-                        tanggala = rabuMingguIni;
-                        bulan = cMonth+ 1;
-                        if(tanggala > lastDay){
-                            bulan = bulan + 1;
-                        }
-                        else if (tanggala < 1){
-                            bulan = bulan -1;
-                        }
-                    }
-                    else if(day ==5){
-                        tanggala = kamisMingguIni;
-                        bulan = cMonth+ 1;
-                        if(tanggala > lastDay){
-                            bulan = bulan + 1;
-                        }
-                        else if (tanggala < 1){
-                            bulan = bulan -1;
-                        }
-                    }
-                    else if(day ==6){
-                        tanggala = jumatMingguIni;
-                        bulan = cMonth+ 1;
-                        if(tanggala > lastDay){
-                            bulan = bulan + 1;
-                        }
-                        else if (tanggala < 1){
-                            bulan = bulan -1;
-                        }
-                    }
-                    else{
-                        tanggala = sabtuMingguIni;
-                        bulan = cMonth+ 1;
-                        if(tanggala > lastDay){
-                            bulan = bulan + 1;
-                        }
-                        else if (tanggala < 1){
-                            bulan = bulan -1;
-                        }
-                    }
+                if(day ==8){
+                    bulan = mingguMingguIniBulan;
+                    tanggala = mingguMingguIni;
+                }
+                else if(day ==2){
+                    bulan = seninMingguIniBulan;
+                    tanggala = seninMingguIni;
+                }
+                else if(day ==3){
+                    bulan = selasaMingguIniBulan;
+                    tanggala = selasaMingguIni;
+
+                }
+                else if(day ==4){
+                    bulan = rabuMingguIniBulan;
+                    tanggala = rabuMingguIni;
+                }
+                else if(day ==5){
+                    bulan = kamisMingguIniBulan;
+                    tanggala = kamisMingguIni;
+
+
+                }
+                else if(day ==6){
+                    bulan = jumatMingguIniBulan;
+                    tanggala = jumatMingguIni;
+
+
                 }
                 else{
-                    if(day ==1){
-                        tanggala = mingguMingguDepan;
-                        bulan = cMonth+ 1;
-                        if(tanggala > lastDay){
-                            bulan = bulan + 1;
-                        }
-                        else if (tanggala < 1){
-                            bulan = bulan -1;
-                        }
-                    }
-                    else if(day ==2){
-                        tanggala = seninMingguDepan;
-                        bulan = cMonth+ 1;
-                        if(tanggala > lastDay){
-                            bulan = bulan + 1;
-                        }
-                        else if (tanggala < 1){
-                            bulan = bulan -1;
-                        }
-                    }
-                    else if(day ==3){
-                        tanggala = selasaMingguDepan;
-                        bulan = cMonth+ 1;
-                        if(tanggala > lastDay){
-                            bulan = bulan + 1;
-                        }
-                        else if (tanggala < 1){
-                            bulan = bulan -1;
-                        }
-                    }
-                    else if(day ==4){
-                        tanggala = rabuMingguDepan;
-                        bulan = cMonth+ 1;
-                        if(tanggala > lastDay){
-                            bulan = bulan + 1;
-                        }
-                        else if (tanggala < 1){
-                            bulan = bulan -1;
-                        }
-                    }
-                    else if(day ==5){
-                        tanggala = kamisMingguDepan;
-                        bulan = cMonth+ 1;
-                        if(tanggala > lastDay){
-                            bulan = bulan + 1;
-                        }
-                        else if (tanggala < 1){
-                            bulan = bulan -1;
-                        }
-
-
-                    }
-                    else if(day ==6){
-                        tanggala = jumatMingguDepan;
-                        bulan = cMonth+ 1;
-                        if(tanggala > lastDay){
-                            bulan = bulan + 1;
-                        }
-                        else if (tanggala < 1){
-                            bulan = bulan -1;
-                        }
-
-
-                    }
-                    else {
-                        tanggala = sabtuMingguDepan;
-                        bulan = cMonth + 1;
-                        if (tanggala > lastDay) {
-                            bulan = bulan + 1;
-                        } else if (tanggala < 1) {
-                            bulan = bulan - 1;
-                        }
-                    }
-
+                    bulan = sabtuMingguIniBulan;
+                    tanggala = sabtuMingguIni;
                 }
+
                 if (bulan ==1){
                     bulanIni ="Januari";
                 }
@@ -965,9 +909,29 @@ public class BookingActivity extends AppCompatActivity implements ListView.OnIte
 
                     bulanIni ="Mei";
                 }
-                else {
+                else if(bulan==6){
                     bulanIni ="Juni";
 
+                }
+                else if(bulan==7){
+                    bulanIni ="Juni";
+
+                }else if(bulan==8){
+                    bulanIni ="Juli";
+
+                }else if(bulan==9){
+                    bulanIni ="Agustus";
+
+                }
+                else if(bulan==10){
+                    bulanIni ="September";
+
+                }
+                else if(bulan==11){
+                    bulanIni ="Oktober";
+
+                }else{
+                    bulanIni ="Desember";
                 }
                 tvDate.setText(tanggala+" "+bulanIni+" "+tahun);
                 namaDate = tanggala+" "+bulanIni+" "+tahun;
@@ -989,153 +953,37 @@ public class BookingActivity extends AppCompatActivity implements ListView.OnIte
                 btnMingguIni.setBackgroundTintList(ContextCompat.getColorStateList(BookingActivity.this, R.color.frameBackground));
                 btnMingguDepan.setBackgroundTintList(ContextCompat.getColorStateList(BookingActivity.this, R.color.signup_color));
                 sequence = "minggu 2";
-                if (sequence=="minggu 1"){
-                    if(day ==8){
-                        tanggala = mingguMingguIni;
-                        bulan = cMonth+ 1;
-                        if(tanggala > lastDay){
-                            bulan = bulan + 1;
-                        }
-                        else if (tanggala < 1){
-                            bulan = bulan -1;
-                        }
-                    }
-                    else if(day ==2){
-                        tanggala = seninMingguIni;
-                        bulan = cMonth+ 1;
-                        if(tanggala > lastDay){
-                            bulan = bulan + 1;
-                        }
-                        else if (tanggala < 1){
-                            bulan = bulan -1;
-                        }
-                    }
-                    else if(day ==3){
-                        tanggala = selasaMingguIni;
-                        bulan = cMonth+ 1;
-                        if(tanggala > lastDay){
-                            bulan = bulan + 1;
-                        }
-                        else if (tanggala < 1){
-                            bulan = bulan -1;
-                        }
-                    }
-                    else if(day ==4){
-                        tanggala = rabuMingguIni;
-                        bulan = cMonth+ 1;
-                        if(tanggala > lastDay){
-                            bulan = bulan + 1;
-                        }
-                        else if (tanggala < 1){
-                            bulan = bulan -1;
-                        }
-                    }
-                    else if(day ==5){
-                        tanggala = kamisMingguIni;
-                        bulan = cMonth+ 1;
-                        if(tanggala > lastDay){
-                            bulan = bulan + 1;
-                        }
-                        else if (tanggala < 1){
-                            bulan = bulan -1;
-                        }
-                    }
-                    else if(day ==6){
-                        tanggala = jumatMingguIni;
-                        bulan = cMonth+ 1;
-                        if(tanggala > lastDay){
-                            bulan = bulan + 1;
-                        }
-                        else if (tanggala < 1){
-                            bulan = bulan -1;
-                        }
-                    }
-                    else{
-                        tanggala = sabtuMingguIni;
-                        bulan = cMonth+ 1;
-                        if(tanggala > lastDay){
-                            bulan = bulan + 1;
-                        }
-                        else if (tanggala < 1){
-                            bulan = bulan -1;
-                        }
-                    }
+                if(day ==1){
+                    bulan = mingguMingguDepanBulan;
+                    tanggala = mingguMingguDepan;
+                }
+                else if(day ==2){
+                    bulan = seninMingguDepan;
+                    tanggala = seninMingguDepanBulan;
+                }
+                else if(day ==3){
+                    bulan = selasaMingguDepanBulan;
+                    tanggala = selasaMingguDepan;
+                }
+                else if(day ==4){
+                    bulan = rabuMingguDepanBulan;
+                    tanggala = rabuMingguDepan;
+                }
+                else if(day ==5){
+                    bulan = kamisMingguDepanBulan;
+                    tanggala = kamisMingguDepan;
+                }
+                else if(day ==6){
+                    bulan = jumatMingguDepanBulan;
+                    tanggala = jumatMingguDepan;
+                }
+                else if (day==7){
+                    bulan = sabtuMingguDepanBulan;
+                    tanggala = sabtuMingguDepan;
                 }
                 else{
-                    if(day ==1){
-                        tanggala = mingguMingguDepan;
-                        bulan = cMonth+ 1;
-                        if(tanggala > lastDay){
-                            bulan = bulan + 1;
-                        }
-                        else if (tanggala < 1){
-                            bulan = bulan -1;
-                        }
-                    }
-                    else if(day ==2){
-                        tanggala = seninMingguDepan;
-                        bulan = cMonth+ 1;
-                        if(tanggala > lastDay){
-                            bulan = bulan + 1;
-                        }
-                        else if (tanggala < 1){
-                            bulan = bulan -1;
-                        }
-                    }
-                    else if(day ==3){
-                        tanggala = selasaMingguDepan;
-                        bulan = cMonth+ 1;
-                        if(tanggala > lastDay){
-                            bulan = bulan + 1;
-                        }
-                        else if (tanggala < 1){
-                            bulan = bulan -1;
-                        }
-                    }
-                    else if(day ==4){
-                        tanggala = rabuMingguDepan;
-                        bulan = cMonth+ 1;
-                        if(tanggala > lastDay){
-                            bulan = bulan + 1;
-                        }
-                        else if (tanggala < 1){
-                            bulan = bulan -1;
-                        }
-                    }
-                    else if(day ==5){
-                        tanggala = kamisMingguDepan;
-                        bulan = cMonth+ 1;
-                        if(tanggala > lastDay){
-                            bulan = bulan + 1;
-                        }
-                        else if (tanggala < 1){
-                            bulan = bulan -1;
-                        }
-
-
-                    }
-                    else if(day ==6){
-                        tanggala = jumatMingguDepan;
-                        bulan = cMonth+ 1;
-                        if(tanggala > lastDay){
-                            bulan = bulan + 1;
-                        }
-                        else if (tanggala < 1){
-                            bulan = bulan -1;
-                        }
-
-
-                    }
-                    else {
-                        tanggala = sabtuMingguDepan;
-                        bulan = cMonth + 1;
-                        if (tanggala > lastDay) {
-                            bulan = bulan + 1;
-                        } else if (tanggala < 1) {
-                            bulan = bulan - 1;
-                        }
-                    }
-
+                    bulan = mingguMingguDepanBulan;
+                    tanggala = mingguMingguDepan;
                 }
                 if (bulan ==1){
                     bulanIni ="Januari";
@@ -1155,9 +1003,29 @@ public class BookingActivity extends AppCompatActivity implements ListView.OnIte
 
                     bulanIni ="Mei";
                 }
-                else {
+                else if(bulan==6){
                     bulanIni ="Juni";
 
+                }
+                else if(bulan==7){
+                    bulanIni ="Juni";
+
+                }else if(bulan==8){
+                    bulanIni ="Juli";
+
+                }else if(bulan==9){
+                    bulanIni ="Agustus";
+
+                }
+                else if(bulan==10){
+                    bulanIni ="September";
+
+                }
+                else if(bulan==11){
+                    bulanIni ="Oktober";
+
+                }else{
+                    bulanIni ="Desember";
                 }
                 tvDate.setText(tanggala+" "+bulanIni+" "+tahun);
                 namaDate = tanggala+" "+bulanIni+" "+tahun;
