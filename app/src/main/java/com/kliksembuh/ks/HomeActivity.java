@@ -273,7 +273,7 @@ public class HomeActivity extends AppCompatActivity
             startActivityForResult(home, 1);
         }
         else if (i == R.id.nav_vital_sign){
-            Intent home = new Intent(this, SettingVitalSignDetailActivity.class);
+            Intent home = new Intent(this, SettingActivity.class);
             Bundle b = new Bundle();
             b.putString("userID", userID);
             b.putInt("tab",1);

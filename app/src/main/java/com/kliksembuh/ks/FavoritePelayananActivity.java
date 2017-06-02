@@ -9,9 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
 import com.kliksembuh.ks.library.HttpHandler;
@@ -48,7 +46,7 @@ public class FavoritePelayananActivity extends Fragment {
         contactList = new ArrayList<>();
         lv = (ListView) rootView.findViewById(R.id.list);
 
-        new GetContacts().execute();
+        //new GetContacts().execute();
 
         return rootView;
     }
