@@ -26,6 +26,7 @@
     </android.support.design.widget.AppBarLayout>
 
     <ScrollView
+        android:padding="5dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true">
@@ -35,36 +36,30 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
+            android:weightSum="1"
             android:orientation="vertical">
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
-                android:orientation="vertical"
-                android:padding="6dp">
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/lblBuatJanji"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
+                    android:layout_marginLeft="6dp"
                     android:text="Anda mempunyai janji pada"
                     android:textColor="@color/cardview_dark_background" />
-
-                <View
-                    android:layout_width="150dp"
-                    android:layout_height="1dp"
-                    android:layout_below="@id/lblBuatJanji"
-                    android:layout_centerVertical="true"
-                    android:layout_marginTop="2dp"
-                    android:background="@color/light_grey" />
 
                 <TextView
                     android:id="@+id/tvNamaHari"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/lblBuatJanji"
+                    android:layout_marginLeft="6dp"
                     android:layout_marginRight="10dp"
                     android:layout_marginTop="15dp"
                     android:textColor="@color/black"
@@ -89,6 +84,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/tvNamaHari"
+                    android:layout_marginLeft="6dp"
                     android:layout_marginRight="10dp"
                     android:layout_marginTop="2dp"
                     android:textColor="@color/black"
@@ -122,14 +118,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
-                android:orientation="vertical"
-                android:padding="8dp">
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/lblNamaDokter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Dengan Dokter :"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="6dp"
+                    android:text="Dengan :"
                     android:textColor="@color/cardview_dark_background" />
 
                 <ImageView
@@ -137,17 +134,9 @@
                     android:layout_width="70dp"
                     android:layout_height="80dp"
                     android:layout_below="@id/lblNamaDokter"
+                    android:layout_marginLeft="6dp"
                     android:layout_marginRight="10dp"
                     android:layout_marginTop="15dp" />
-
-                <View
-                    android:layout_width="80dp"
-                    android:layout_height="1dp"
-                    android:layout_below="@id/lblNamaDokter"
-                    android:layout_centerVertical="true"
-                    android:layout_marginBottom="5dp"
-                    android:layout_marginTop="5dp"
-                    android:background="@color/light_grey" />
 
                 <TextView
                     android:id="@+id/tvtitleDokter"
@@ -200,14 +189,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
-                android:orientation="vertical"
-                android:padding="8dp">
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/lblNamaRS"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Di Rumah Sakit :"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="6dp"
+                    android:text="Lokasi :"
                     android:textColor="@color/cardview_dark_background" />
 
                 <ImageView
@@ -215,18 +205,10 @@
                     android:layout_width="60dp"
                     android:layout_height="70dp"
                     android:layout_below="@id/lblNamaRS"
+                    android:layout_marginLeft="6dp"
                     android:layout_marginRight="10dp"
                     android:layout_marginTop="15dp"
                     android:src="@drawable/ic_hospital" />
-
-                <View
-                    android:layout_width="90dp"
-                    android:layout_height="1dp"
-                    android:layout_below="@id/lblNamaRS"
-                    android:layout_centerVertical="true"
-                    android:layout_marginBottom="5dp"
-                    android:layout_marginTop="5dp"
-                    android:background="@color/light_grey" />
 
                 <TextView
                     android:id="@+id/tvnamaRumahSakit"
@@ -272,7 +254,6 @@
                     android:layout_height="1dp"
                     android:layout_below="@id/tvLihatPeta"
                     android:layout_centerVertical="true"
-                    android:layout_marginBottom="8dp"
                     android:layout_marginTop="10dp"
                     android:background="@color/light_grey" />
             </RelativeLayout>
@@ -282,10 +263,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/appbar"
-                android:background="@drawable/customborder"
-                android:orientation="vertical"
-                android:paddingTop="20dp"
-                android:weightSum="1">
+                android:paddingTop="10dp"
+                android:background="@android:color/transparent"
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/lbltypeDataPasien"

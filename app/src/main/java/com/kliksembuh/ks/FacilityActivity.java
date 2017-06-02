@@ -46,17 +46,25 @@ public class FacilityActivity extends AppCompatActivity {
         public Fragment getItem(int position) {
             switch (position){
                 case 0:
-                    FacilityServiceActivity facilityServiceActivity= new FacilityServiceActivity();
+                    FacilityServiceActivity facilityServiceActivity = new FacilityServiceActivity();
                     facilityServiceActivity.setUserID(userID);
                     return facilityServiceActivity;
                 case 1:
-                    FacilityRatingActivity facilityRatingActivity= new FacilityRatingActivity();
+                    FacilityRatingActivity facilityRatingActivity = new FacilityRatingActivity();
                     facilityRatingActivity.setUserID(userID);
                     return facilityRatingActivity;
                 case 2:
-                    FacilityInsuranceActivity facilityInsuranceActivity= new FacilityInsuranceActivity();
+                    FacilityInsuranceActivity facilityInsuranceActivity = new FacilityInsuranceActivity();
                     facilityInsuranceActivity.setUserID(userID);
                     return facilityInsuranceActivity;
+                case 3:
+                    FacilityFacilitiesActivity facilityFacilitiesActivity = new FacilityFacilitiesActivity();
+                    facilityFacilitiesActivity.setUserID(userID);
+                    return facilityFacilitiesActivity;
+                case 4:
+                    FacilityPromotionActivity facilityPromotionActivity = new FacilityPromotionActivity();
+                    facilityPromotionActivity.setUserID(userID);
+                    return facilityPromotionActivity;
                 default:
                     return null;
             }
@@ -64,8 +72,8 @@ public class FacilityActivity extends AppCompatActivity {
 
         @Override
         public int getCount() {
-            // Show 4 total pages.
-            return 3;
+            // Show 5 total pages.
+            return 5;
         }
 
         @Override
@@ -76,7 +84,11 @@ public class FacilityActivity extends AppCompatActivity {
                 case 1:
                     return "Penilaian";
                 case 2:
-                    return "Rekanan Asuransi";
+                    return "Asuransi";
+                case 3:
+                    return "Fasilitas";
+                case 4:
+                    return "Promosi";
             }
             return null;
         }
