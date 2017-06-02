@@ -23,6 +23,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.kliksembuh.ks.models.Hospital;
 
@@ -63,6 +64,7 @@ public class HospitalList extends AppCompatActivity {
     private String alamat[];
     private String finalListHospital;
     private Drawable load;
+    private int cekNull=0;
 
     RatingBar rb;
 
@@ -99,15 +101,20 @@ public class HospitalList extends AppCompatActivity {
         btnpeta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent myIntent = new Intent(HospitalList.this,ListMapActivity.class);
-                Bundle b = new Bundle();
-                b.putString("userID", userID);
-                b.putString("subDistrict",subDistrict);
-                b.putString("facilityID",spesialisasi);
-                b.putString("facilityName",facilityName);
-                b.putString("SubDistrictDescription",subDistricDescription);
-                myIntent.putExtras(b);
-                startActivityForResult(myIntent, 1);
+                if(cekNull==0){
+                    Intent myIntent = new Intent(HospitalList.this,ListMapActivity.class);
+                    Bundle b = new Bundle();
+                    b.putString("userID", userID);
+                    b.putString("subDistrict",subDistrict);
+                    b.putString("facilityID",spesialisasi);
+                    b.putString("facilityName",facilityName);
+                    b.putString("SubDistrictDescription",subDistricDescription);
+                    myIntent.putExtras(b);
+                    startActivityForResult(myIntent, 1);
+                }else{
+                    Toast.makeText(getApplicationContext(), "Silahkan melakukan pencarian kembali.", Toast.LENGTH_LONG).show();
+                }
+
                 //overridePendingTransition( R.anim.from_middle, R.anim.to_middle);
             }
         });
@@ -394,6 +401,7 @@ public class HospitalList extends AppCompatActivity {
                 btnNewSearch.setBackgroundColor(getResources().getColor(R.color.buttonBlue));
                 btnNewSearch.setText("Ganti Pencarian");
                 newTextView.setVisibility(View.GONE);
+                cekNull = 1;
                 //newTextView.setText("Tidak tersedia rumah sakit untuk daerah "+subDistricDescription+".");
             }
         }

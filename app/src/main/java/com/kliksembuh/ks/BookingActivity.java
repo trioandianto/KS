@@ -565,22 +565,22 @@ public class BookingActivity extends AppCompatActivity implements ListView.OnIte
             jumatMingguIni = cDay;
             kamisMingguIni = jumatMingguIni - 1;
             if (kamisMingguIni < 1){
-                kamisMingguIni = lastDay - kamisMingguIni;
+                kamisMingguIni = lastDayYesterday + kamisMingguIni;
                 kamisMingguIniBulan = cMonth;
             }
             rabuMingguIni = jumatMingguIni - 2;
             if (rabuMingguIni < 1){
-                rabuMingguIni = lastDayYesterday - rabuMingguIni;
+                rabuMingguIni = lastDayYesterday + rabuMingguIni;
                 rabuMingguIniBulan = cMonth;
             }
             selasaMingguIni = jumatMingguIni - 3;
             if (selasaMingguIni < 1){
-                selasaMingguIni = lastDayYesterday - selasaMingguIni;
+                selasaMingguIni = lastDayYesterday + selasaMingguIni;
                 selasaMingguIniBulan = cMonth;
             }
             seninMingguIni = jumatMingguIni - 4;
             if (seninMingguIni < 1){
-                seninMingguIni = lastDayYesterday - selasaMingguIni;
+                seninMingguIni = lastDayYesterday + seninMingguIni;
                 seninMingguIniBulan = cMonth;
             }
             sabtuMingguIni = jumatMingguIni + 1;
@@ -597,7 +597,7 @@ public class BookingActivity extends AppCompatActivity implements ListView.OnIte
                 seninMingguDepanBulan = cMonth + 2;
             }
             selasaMingguDepan = seninMingguDepan + 1;
-            if (seninMingguIni > lastDay){
+            if (selasaMingguDepan > lastDay){
                 selasaMingguDepan = selasaMingguDepan - lastDay;
                 selasaMingguDepanBulan = cMonth +2;
             }
@@ -666,7 +666,7 @@ public class BookingActivity extends AppCompatActivity implements ListView.OnIte
                 seninMingguDepanBulan = cMonth + 2;
             }
             selasaMingguDepan = seninMingguDepan + 1;
-            if (seninMingguIni > lastDay){
+            if (selasaMingguDepan > lastDay){
                 selasaMingguDepan = selasaMingguDepan - lastDay;
                 selasaMingguDepanBulan = cMonth +2;
             }
@@ -958,8 +958,8 @@ public class BookingActivity extends AppCompatActivity implements ListView.OnIte
                     tanggala = mingguMingguDepan;
                 }
                 else if(day ==2){
-                    bulan = seninMingguDepan;
-                    tanggala = seninMingguDepanBulan;
+                    bulan = seninMingguDepanBulan;
+                    tanggala = seninMingguDepan;
                 }
                 else if(day ==3){
                     bulan = selasaMingguDepanBulan;
@@ -1178,7 +1178,7 @@ public class BookingActivity extends AppCompatActivity implements ListView.OnIte
                                         Date dateTimeStart = dateFormatter.parse(starDate);
                                         Date dateTimeEnd = dateFormatter.parse(endDate);
                                         int a = dateTimeStart.getHours();
-                                        if (sequence=="minggu 1" && (hariMingguini >= day || timeNow > a)){
+                                        if ((sequence=="minggu 1" && hariMingguini >= day && timeNow > a)||(hariMingguini > day && sequence=="minggu 1")){
 
                                         }else {
                                             SimpleDateFormat timeFormatter = new SimpleDateFormat("HH:mm");
@@ -1214,7 +1214,7 @@ public class BookingActivity extends AppCompatActivity implements ListView.OnIte
                                         Date dateTimeStart = dateFormatter.parse(starDate);
                                         Date dateTimeEnd = dateFormatter.parse(endDate);
                                         int a = dateTimeStart.getHours();
-                                        if (sequence=="minggu 1" && (hariMingguini >= day || timeNow > a)){
+                                        if ((sequence=="minggu 1" && hariMingguini >= day && timeNow > a)||(hariMingguini > day && sequence=="minggu 1")){
 
                                         }else {
                                             SimpleDateFormat timeFormatter = new SimpleDateFormat("HH:mm");
@@ -1243,7 +1243,7 @@ public class BookingActivity extends AppCompatActivity implements ListView.OnIte
                                         Date dateTimeStart = dateFormatter.parse(starDate);
                                         Date dateTimeEnd = dateFormatter.parse(endDate);
                                         int a = dateTimeStart.getHours();
-                                        if (sequence=="minggu 1" && (hariMingguini >= day || timeNow > a)){
+                                        if ((sequence=="minggu 1" && hariMingguini >= day && timeNow > a)||(hariMingguini > day && sequence=="minggu 1")){
 
                                         }else {
                                             SimpleDateFormat timeFormatter = new SimpleDateFormat("HH:mm");
@@ -1273,7 +1273,7 @@ public class BookingActivity extends AppCompatActivity implements ListView.OnIte
                                         Date dateTimeStart = dateFormatter.parse(starDate);
                                         Date dateTimeEnd = dateFormatter.parse(endDate);
                                         int a = dateTimeStart.getHours();
-                                        if (sequence=="minggu 1" && (hariMingguini >= day || timeNow > a)){
+                                        if ((sequence=="minggu 1" && hariMingguini >= day && timeNow > a)||(hariMingguini > day && sequence=="minggu 1")){
 
                                         }else {
                                             SimpleDateFormat timeFormatter = new SimpleDateFormat("HH:mm");
@@ -1303,7 +1303,7 @@ public class BookingActivity extends AppCompatActivity implements ListView.OnIte
                                         Date dateTimeStart = dateFormatter.parse(starDate);
                                         Date dateTimeEnd = dateFormatter.parse(endDate);
                                         int a = dateTimeStart.getHours();
-                                        if (sequence=="minggu 1" && (hariMingguini >= day || timeNow > a)){
+                                        if ((sequence=="minggu 1" && hariMingguini >= day && timeNow > a)||(hariMingguini > day && sequence=="minggu 1")){
 
                                         }else {
                                             SimpleDateFormat timeFormatter = new SimpleDateFormat("HH:mm");
@@ -1333,7 +1333,7 @@ public class BookingActivity extends AppCompatActivity implements ListView.OnIte
                                         Date dateTimeStart = dateFormatter.parse(starDate);
                                         Date dateTimeEnd = dateFormatter.parse(endDate);
                                         int a = dateTimeStart.getHours();
-                                        if (sequence=="minggu 1" && (hariMingguini >= day || timeNow > a)){
+                                        if ((sequence=="minggu 1" && hariMingguini >= day && timeNow > a)||(hariMingguini > day && sequence=="minggu 1")){
 
                                         }else {
                                             SimpleDateFormat timeFormatter = new SimpleDateFormat("HH:mm");
@@ -1365,7 +1365,7 @@ public class BookingActivity extends AppCompatActivity implements ListView.OnIte
                                         Date dateTimeStart = dateFormatter.parse(starDate);
                                         Date dateTimeEnd = dateFormatter.parse(endDate);
                                         int a = dateTimeStart.getHours();
-                                        if (sequence=="minggu 1" && (hariMingguini >= day || timeNow > a)){
+                                        if ((sequence=="minggu 1" && hariMingguini >= day && timeNow > a)||(hariMingguini > day && sequence=="minggu 1")){
 
                                         }else {
                                             SimpleDateFormat timeFormatter = new SimpleDateFormat("HH:mm");
