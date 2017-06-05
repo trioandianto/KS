@@ -324,12 +324,8 @@ public class KonfirmasiJanjiActivity extends AppCompatActivity {
             if (success!="") {
                 Toast.makeText(getApplicationContext(), "Telah berhasil membuat janji.", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(getApplicationContext(), MyAppointmentActivity.class);
-
                 Bundle b = new Bundle();
                 b.putString("userID",userID);
-//                Bundle b = new Bundle();
-//                b.putString("userID", userID);
-//                startActivityForResult(i, 1);
                 intent.putExtras(b);
                 startActivity(intent);
                 finish();

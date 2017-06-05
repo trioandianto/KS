@@ -1410,12 +1410,16 @@ public class BookingActivity extends AppCompatActivity implements ListView.OnIte
             if (pDialog.isShowing())
                 pDialog.dismiss();
             if (success!="") {
+                ImageView imgPicNotFound = (ImageView) findViewById(R.id.ivPicNotFounds);
+                TextView tvHosNotFound = (TextView)findViewById(R.id.tvScheduleNotFounds);
                 // To Do
                 // mJadwalDokterList.size == 0, buat notif tidak ada jadwal, tapi untuk hari ini, selalu dapet balikan
                 // success != null, tapi jadwalnya kosong
                 if(mJadwalDokterList.size()>0){
                     jAdapter = new JadwalDokterAdapter(getApplicationContext(),mJadwalDokterList);
                     lvJadwal.setAdapter(jAdapter);
+                    imgPicNotFound.setImageDrawable(null);
+                    tvHosNotFound.setText(null);
                 }
                 else{
                     mJadwalDokterList = new ArrayList<>();
@@ -1423,10 +1427,8 @@ public class BookingActivity extends AppCompatActivity implements ListView.OnIte
                     lvJadwal.setAdapter(jAdapter);
 
                     //:View for Schedule not Found
-                    ImageView imgPicNotFound = (ImageView) findViewById(R.id.ivPicNotFounds);
                     imgPicNotFound.setImageResource(R.drawable.pic_notfound);
-                    TextView tvHosNotFound = (TextView)findViewById(R.id.tvScheduleNotFounds);
-                    tvHosNotFound.setText("Maaf, jadwal tidak dapat ditemukan.");
+                    tvHosNotFound.setText("Maaf, jadwal tidak tersedia.");
                 }
 
             } else {
