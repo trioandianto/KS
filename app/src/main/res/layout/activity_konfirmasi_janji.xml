@@ -63,8 +63,7 @@
                     android:layout_marginRight="10dp"
                     android:layout_marginTop="15dp"
                     android:textColor="@color/black"
-                    android:textSize="16dp"
-                    android:textStyle="bold" />
+                    android:textSize="16dp"/>
 
                 <TextView
                     android:id="@+id/tvDetailTangal"
@@ -76,8 +75,7 @@
                     android:layout_marginTop="5dp"
                     android:layout_toRightOf="@id/tvNamaHari"
                     android:textColor="@color/black"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
+                    android:textSize="16sp"/>
 
                 <TextView
                     android:id="@+id/tv_wktBerobat"
@@ -88,8 +86,7 @@
                     android:layout_marginRight="10dp"
                     android:layout_marginTop="2dp"
                     android:textColor="@color/black"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
+                    android:textSize="16sp"/>
 
                 <TextView
                     android:id="@+id/tv_jamBerobat"
@@ -100,8 +97,7 @@
                     android:layout_marginTop="2dp"
                     android:layout_toRightOf="@id/tv_wktBerobat"
                     android:textColor="@color/black"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
+                    android:textSize="16sp"/>
 
                 <View
                     android:layout_width="match_parent"
@@ -294,7 +290,7 @@
                     android:layout_width="130dp"
                     android:layout_height="40dp"
                     android:layout_marginBottom="5dp"
-                    android:layout_marginRight="10dp"
+                    android:layout_marginRight="5dp"
                     android:textColor="@color/white"
                     android:textStyle="bold"
                     android:textSize="13dp"
@@ -302,21 +298,29 @@
                     android:clipToPadding="false"
                     android:layout_alignStart="@+id/tvNamaPasien"
                     android:layout_alignParentTop="true" />
-                <Button
+                <TextView
                     android:id="@+id/btnTambahPasien"
                     style="@style/MyCustomTextAppearance"
-                    android:layout_width="80dp"
-                    android:layout_height="40dp"
-                    android:background="@drawable/shape"
-                    android:backgroundTint="@color/login_color"
-                    android:text="Tambah Pasien"
-                    android:textAllCaps="false"
-                    android:textColor="@color/white"
-                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:clickable="true"
+                    android:background="@drawable/customborder"
+                    android:drawableStart="@drawable/ic_add_circle_pink_24dp"
                     android:layout_alignBottom="@+id/spnDataPasien"
                     android:layout_alignParentTop="true"
-                    android:layout_alignEnd="@+id/tvNamaPasien" />
-
+                    android:layout_alignEnd="@+id/tvNamaPasien"/>
+                <TextView
+                    android:id="@+id/tvEditPasien"
+                    style="@style/MyCustomTextAppearance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:layout_toRightOf="@id/spnDataPasien"
+                    android:background="@drawable/customborder"
+                    android:drawableStart="@drawable/ic_edit_pink_24dp"
+                    android:layout_alignBottom="@+id/spnDataPasien"
+                    android:layout_alignParentTop="true"/>
                 <TextView
                     android:id="@+id/lblTekDarah"
                     android:layout_width="100dp"
@@ -344,10 +348,11 @@
                 <TextView
                     android:id="@+id/tvNamaPasien"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="20dp"
                     android:layout_alignBaseline="@id/lblTekDarah"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="10dp"
+                    android:background="@color/white"
                     android:layout_toRightOf="@id/lblTekDarah"
                     android:textColor="@color/black"
                     android:textSize="13sp" />
@@ -378,8 +383,9 @@
                 <TextView
                     android:id="@+id/tvNOHP"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="20dp"
                     android:layout_alignBaseline="@id/lblNOHp"
+                    android:background="@color/white"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="10dp"
                     android:layout_toRightOf="@id/lblNOHp"

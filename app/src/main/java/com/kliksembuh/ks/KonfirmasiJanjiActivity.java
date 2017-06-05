@@ -37,7 +37,8 @@ import java.util.List;
 import javax.net.ssl.HttpsURLConnection;
 
 public class KonfirmasiJanjiActivity extends AppCompatActivity {
-    private Button btnBuatJanji, btnTambahPasien;
+    private Button btnBuatJanji;
+    private TextView tvTambahPasien, tvEditPasien;
     private ImageView ivDoc_Pic;
     private TextView tvLihatPeta,tvFirstTitleDoc,tvNamaDokter,tvSpesial,tvNamaRumahSakit,
             tvAlamatRS,tvNamaHari,tvWaktuBerobat,tvJamBerobat,tvDetailTanggal,tvNamaPasien,tvNOHP;
@@ -147,8 +148,8 @@ public class KonfirmasiJanjiActivity extends AppCompatActivity {
         list = new ArrayList<String>();
         list.add("Pilih pasien");
         ArrayAdapter arrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,list);
-        btnTambahPasien = (Button)findViewById(R.id.btnTambahPasien);
-        btnTambahPasien.setOnClickListener(new View.OnClickListener() {
+        tvTambahPasien = (TextView)findViewById(R.id.btnTambahPasien);
+        tvTambahPasien.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), PatientFormActivity.class);
