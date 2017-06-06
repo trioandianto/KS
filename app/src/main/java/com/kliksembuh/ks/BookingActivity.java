@@ -22,6 +22,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -198,7 +199,8 @@ public class BookingActivity extends AppCompatActivity implements ListView.OnIte
         list.add("Sabtu");
         list.add("Minggu");
 
-        ArrayAdapter arrayAdapter = new ArrayAdapter<String>(this,R.layout.spinner_dropdown_item,list);
+        ArrayAdapter arrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,list);
+        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spnHari.setAdapter(arrayAdapter);
 
         Date dt = new Date();
@@ -755,8 +757,8 @@ public class BookingActivity extends AppCompatActivity implements ListView.OnIte
 
                     }
                     else if(day ==2){
-                        bulan = seninMingguDepan;
-                        tanggala = seninMingguDepanBulan;
+                        bulan = seninMingguDepanBulan;
+                        tanggala = seninMingguDepan;
 
 
                     }
@@ -1412,12 +1414,15 @@ public class BookingActivity extends AppCompatActivity implements ListView.OnIte
             if (success!="") {
                 ImageView imgPicNotFound = (ImageView) findViewById(R.id.ivPicNotFounds);
                 TextView tvHosNotFound = (TextView)findViewById(R.id.tvScheduleNotFounds);
+                RelativeLayout rvImageBooking = (RelativeLayout)findViewById(R.id.rvImageBooking);
+
                 // To Do
                 // mJadwalDokterList.size == 0, buat notif tidak ada jadwal, tapi untuk hari ini, selalu dapet balikan
                 // success != null, tapi jadwalnya kosong
                 if(mJadwalDokterList.size()>0){
                     jAdapter = new JadwalDokterAdapter(getApplicationContext(),mJadwalDokterList);
                     lvJadwal.setAdapter(jAdapter);
+                    rvImageBooking.setVisibility(View.INVISIBLE);
                     imgPicNotFound.setImageDrawable(null);
                     tvHosNotFound.setText(null);
                 }
@@ -1427,6 +1432,7 @@ public class BookingActivity extends AppCompatActivity implements ListView.OnIte
                     lvJadwal.setAdapter(jAdapter);
 
                     //:View for Schedule not Found
+                    rvImageBooking.setVisibility(View.VISIBLE);
                     imgPicNotFound.setImageResource(R.drawable.pic_notfound);
                     tvHosNotFound.setText("Maaf, jadwal tidak tersedia.");
                 }

@@ -130,7 +130,8 @@ public class TestScroolView extends AppCompatActivity{
         //mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.mapListHospital);
         List<String> list = new ArrayList<String>();
         list.add(spesial);
-        ArrayAdapter arrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_dropdown_item_1line,list);
+        ArrayAdapter arrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,list);
+        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(arrayAdapter);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override

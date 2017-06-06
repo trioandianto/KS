@@ -39,6 +39,14 @@ public class MyAppointmentActivity extends AppCompatActivity {
             }
         }
     }
+    public void onBackPressed() {
+        Intent startMain = new Intent(getApplicationContext(),HomeActivity.class);
+        Bundle b = new Bundle();
+        b.putString("userID",userID);
+        startMain.putExtras(b);
+        startActivity(startMain);
+
+    }
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
         public SectionsPagerAdapter(FragmentManager fm) {

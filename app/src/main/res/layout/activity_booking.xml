@@ -2,7 +2,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:fitsSystemWindows="true"
     android:orientation="vertical"
@@ -126,11 +126,11 @@
                 android:id="@+id/spnHari"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:padding="8dp"
+                android:drawSelectorOnTop="true"
                 android:layout_alignBaseline="@id/tvText"
                 android:layout_margin="10dp"
                 android:layout_toRightOf="@+id/tvText"
-                android:entries="@array/day_name"
+                android:prompt="@string/pilih_hari"
                 android:textColor="@color/white"
                 android:textSize="16sp"
                 android:textStyle="bold"/>
@@ -194,7 +194,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:background="@drawable/shape_listview"
             android:orientation="vertical">
@@ -205,51 +205,54 @@
                 android:id="@+id/lvjadwal">
 
             </ListView>
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center|center_horizontal|center_vertical">
 
-                <ImageView
-                    android:id="@+id/ivPicNotFounds"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_centerHorizontal="true"
-                    android:layout_gravity="center" />
-
-                <TextView
-                    android:id="@+id/tvScheduleNotFounds"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/ivPicNotFounds"
-                    android:layout_centerInParent="true"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginTop="10dp"
-                    android:gravity="center"
-                    android:textAlignment="gravity"
-                    android:textColor="#5C5C5C"
-                    android:textSize="12sp"
-                    android:textStyle="normal" />
-
-                <TextView
-                    android:id="@+id/btnNewSearch"
-                    style="@style/MyCustomTextAppearance"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/tvScheduleNotFounds"
-                    android:layout_centerInParent="true"
-                    android:layout_margin="10dp"
-                    android:layout_marginTop="10dp"
-                    android:padding="5dp"
-                    android:textAllCaps="false"
-                    android:textColor="@color/white"
-                    android:textSize="10dp" />
-
-            </RelativeLayout>
 
         </LinearLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:id="@+id/rvImageBooking"
+            android:layout_gravity="center|center_horizontal|center_vertical">
+
+            <ImageView
+                android:id="@+id/ivPicNotFounds"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center" />
+
+            <TextView
+                android:id="@+id/tvScheduleNotFounds"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/ivPicNotFounds"
+                android:layout_centerInParent="true"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:textAlignment="gravity"
+                android:textColor="#5C5C5C"
+                android:textSize="12sp"
+                android:textStyle="normal" />
+
+            <TextView
+                android:id="@+id/btnNewSearch"
+                style="@style/MyCustomTextAppearance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvScheduleNotFounds"
+                android:layout_centerInParent="true"
+                android:layout_margin="10dp"
+                android:layout_marginTop="10dp"
+                android:padding="5dp"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="10dp" />
+
+        </RelativeLayout>
 
     </LinearLayout>
 

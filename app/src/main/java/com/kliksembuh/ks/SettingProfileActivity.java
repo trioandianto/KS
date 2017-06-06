@@ -8,6 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.kliksembuh.ks.models.Patient;
+
 public class SettingProfileActivity extends Fragment implements View.OnClickListener{
 
     private TextView editEmailkontak;

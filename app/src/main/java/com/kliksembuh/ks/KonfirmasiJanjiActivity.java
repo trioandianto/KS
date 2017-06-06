@@ -148,6 +148,7 @@ public class KonfirmasiJanjiActivity extends AppCompatActivity {
         list = new ArrayList<String>();
         list.add("Pilih pasien");
         ArrayAdapter arrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,list);
+        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         tvTambahPasien = (TextView)findViewById(R.id.btnTambahPasien);
         tvTambahPasien.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -329,7 +330,6 @@ public class KonfirmasiJanjiActivity extends AppCompatActivity {
                 b.putString("userID",userID);
                 intent.putExtras(b);
                 startActivity(intent);
-                finish();
 
             } else {
                 //:TODO

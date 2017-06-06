@@ -184,6 +184,7 @@ MENGGUNAKAN LAYANAN KAMI UNTUK PERTAMA KALI.</string>
     <string name="lbl_suhu">Suhu Tubuh ºC</string>
     <string name="lbl_denyutNadi">Denyut Nadi (Denyut/Min)</string>
     <string name="lblPernafasan">Pernafasan (Frek/Min)</string>
+    <string name="pilih_hari">Pilih Hari</string>
 
 
 </resources>

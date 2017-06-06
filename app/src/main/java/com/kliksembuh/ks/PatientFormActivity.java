@@ -108,7 +108,8 @@ public class PatientFormActivity extends AppCompatActivity implements View.OnCli
         list.add("Anak 1");
         list.add("Anak 2");
         list.add("Lainnya");
-        ArrayAdapter<String> arrayAdapter = new  ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item, list);
+        ArrayAdapter<String> arrayAdapter = new  ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, list);
+        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spnStatusSaya.setAdapter(arrayAdapter);
         spnStatusSaya.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -130,7 +131,7 @@ public class PatientFormActivity extends AppCompatActivity implements View.OnCli
         list1.add("Zurich");
         list1.add("Sunlife");
         list1.add("Prudential");
-        ArrayAdapter<CharSequence> arrayAdapter1 = ArrayAdapter.createFromResource(this,R.array.insurance_name,android.R.layout.simple_spinner_item);
+        ArrayAdapter arrayAdapter1 = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,list1);
         arrayAdapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spnAsuransi.setAdapter(arrayAdapter1);
         spnAsuransi.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -328,7 +329,7 @@ public class PatientFormActivity extends AppCompatActivity implements View.OnCli
     public void onClick(View v) {
         int i = v.getId();
         if(i==R.id.etTanggalLahirForm){
-            final SimpleDateFormat dateFormatter = new SimpleDateFormat("dd-MMM-yyyy");
+            final SimpleDateFormat dateFormatter = new SimpleDateFormat("dd MMMM yyyy");
             Calendar c = Calendar.getInstance();
             mYear = c.get(Calendar.YEAR);
             mMonth = c.get(Calendar.MONTH);
@@ -695,6 +696,8 @@ public class PatientFormActivity extends AppCompatActivity implements View.OnCli
                 etNamaKerabat.setText(null);
                 etNoHPKerabat.setText(null);
                 etTanggalLahir.setText(null);
+                etMobile.setText(null);
+                personalInfoID=0;
             }
 
         }
