@@ -68,7 +68,7 @@ public class PatientFormActivity extends AppCompatActivity implements View.OnCli
     private String birthOfDate = "";
     private String relativeStatus;
     private int personalInfoID;
-    private int idStatus, kodeAkses;
+    private int idStatus, kodeAkses, asuransi;
     private int mYear, mMonth, mDay, mHour, mMinute;
 
     @Override
@@ -140,6 +140,11 @@ public class PatientFormActivity extends AppCompatActivity implements View.OnCli
 
                 if(position>0){
                     etNoBPJSKes.setEnabled(false);
+                    asuransi =0;
+                }
+                else {
+                    etNoBPJSKes.setEnabled(true);
+                    asuransi = 1;
                 }
             }
 
@@ -244,6 +249,7 @@ public class PatientFormActivity extends AppCompatActivity implements View.OnCli
         String noBPJS = etNoBPJSKes.getText().toString();
         String noHPKerabat = etNoHPKerabat.getText().toString();
         String tanggalLahir = etTanggalLahir.getText().toString();
+
         String relativeStatus = statusSaya;
         if(rbFemale.isChecked()){
             gender = "Female";
@@ -285,7 +291,7 @@ public class PatientFormActivity extends AppCompatActivity implements View.OnCli
             cancel = true;
 
         }
-        else if(TextUtils.isEmpty(noBPJS)){
+        else if(TextUtils.isEmpty(noBPJS)&&asuransi > 0){
             etNoBPJSKes.setError(getString(R.string.not_null));
             focusView = etNoBPJSKes;
             cancel = true;
@@ -316,6 +322,14 @@ public class PatientFormActivity extends AppCompatActivity implements View.OnCli
                 mUpdateAuthTask.execute((String) null);
             }
             else{
+                SimpleDateFormat dateFormatter1 = new SimpleDateFormat("yyyy-MM-dd");
+                SimpleDateFormat dateFormatter = new SimpleDateFormat("dd MMMM yyyy");
+                try {
+                    Date as = dateFormatter.parse(tanggalLahir);
+                    tanggalLahir = dateFormatter1.format(as);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
                 mAuthTask = new PatientAsyncTask(userID,fName,lName,gender,mobile,noBPJS,alamat,namaKerabat,
                         noHPKerabat, tanggalLahir, idStatus);
                 mAuthTask.execute((String) null);
@@ -474,11 +488,6 @@ public class PatientFormActivity extends AppCompatActivity implements View.OnCli
                     finish();
 
                 }else{
-                    Intent i = new Intent(getApplicationContext(), PatientProfileActivity.class);
-                    Bundle b = new Bundle();
-                    b.putString("userID", userID);
-                    i.putExtras(b);
-                    startActivityForResult(i, 1);
                     Toast.makeText(getApplicationContext(), "Simpan Data Berhasil", Toast.LENGTH_LONG).show();
                 }
 
