@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:layout_above="@+id/relLayoutReminder">
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -14,10 +19,7 @@
         android:focusable="true"
         android:focusableInTouchMode="true">
     </LinearLayout>
-    <ScrollView
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_above="@+id/relLayoutReminder">
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:orientation="vertical"
@@ -162,7 +164,7 @@
                 android:layout_below="@id/spnDuration"
                 android:background="@color/light_grey"/>
         </RelativeLayout>
-    </ScrollView>
+
     <RelativeLayout
         android:id="@+id/relLayoutReminder"
         android:layout_width="match_parent"
@@ -173,7 +175,7 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true">
         <Button
-            android:id="@+id/btnSimpanProfile"
+            android:id="@+id/btnSimpanReminder"
             style="@style/MyCustomTextAppearance"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -185,4 +187,6 @@
             android:backgroundTint="@color/signup_color"/>
     </RelativeLayout>
 
+
 </RelativeLayout>
+</ScrollView>

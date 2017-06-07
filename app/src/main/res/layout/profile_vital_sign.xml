@@ -94,7 +94,7 @@
             android:weightSum="1">
 
             <Button
-                android:id="@+id/btnsimpanvitalsign"
+                android:id="@+id/btnsimpanvitalsign_detail"
                 style="@style/MyCustomTextAppearance"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

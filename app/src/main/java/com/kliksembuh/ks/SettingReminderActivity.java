@@ -8,7 +8,6 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.StrictMode;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,14 +34,17 @@ import java.util.List;
 
 import javax.net.ssl.HttpsURLConnection;
 
+import static com.facebook.FacebookSdk.getApplicationContext;
 
-public class SettingReminderActivity extends Fragment implements View.OnClickListener, ListView.OnItemClickListener{
+
+public class SettingReminderActivity extends Fragment implements ListView.OnItemClickListener{
     private ListView lvReminder;
     private ReminderListAdapter rAdapter;
     private List<Reminder> mReminderList;
     private ProgressDialog pDialog;
     private Button btnAddReminder;
     private Context globalContext = null;
+    private String userID;
 
     public String getUserID() {
         return userID;
@@ -52,41 +54,34 @@ public class SettingReminderActivity extends Fragment implements View.OnClickLis
         this.userID = userID;
     }
 
-    private String userID;
 
-    private Drawable image = getResources().getDrawable(R.drawable.paracetamol);
+
+    private Drawable image = null;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View newView = inflater.inflate(R.layout.activity_reminder_list, container, false);
-        if (android.os.Build.VERSION.SDK_INT > 9) {
-            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-            StrictMode.setThreadPolicy(policy);
-        }
+        View newView = inflater.inflate(R.layout.activity_setting_reminder, container, false);
         globalContext = this.getActivity();
         lvReminder = (ListView) newView.findViewById(R.id.listview_reminder);
         lvReminder.setOnItemClickListener(this);
         btnAddReminder = (Button) newView.findViewById(R.id.btn_addReminder);
-        btnAddReminder.setOnClickListener(this);
+        image = getResources().getDrawable(R.drawable.paracetamol);
+        btnAddReminder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent addRmdrIntent = new Intent(getActivity(), SettingReminderDetailActivity.class);
+                Bundle b = new Bundle();
+                b.putString("userID", userID);
+                addRmdrIntent.putExtras(b);
+                startActivityForResult(addRmdrIntent, 1);
+            }
+        });
         mReminderList = new ArrayList<>();
         new ReminderListAsync(userID).execute();
 
         return newView;
     }
 
-
-    @Override
-    public void onClick(View v) {
-        int i = v.getId();
-        if(i==R.id.btn_addReminder){
-            Intent addRmdrIntent = new Intent(getActivity(), SettingReminderDetailActivity.class);
-            Bundle b = new Bundle();
-            b.putString("userID", userID);
-            addRmdrIntent.putExtras(b);
-            startActivityForResult(addRmdrIntent, 1);
-        }
-
-    }
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -102,7 +97,7 @@ public class SettingReminderActivity extends Fragment implements View.OnClickLis
         String rmdDuration = reminder.getRmdrDuration();
 
 
-        Intent myIntent = new Intent(getActivity(),SettingReminderDetailActivity.class);
+        Intent myIntent = new Intent(getApplicationContext(),SettingReminderDetailActivity.class);
         Bundle b = new Bundle();
         b.putString("userID",userID);
         myIntent.putExtras(b);
@@ -175,6 +170,8 @@ public class SettingReminderActivity extends Fragment implements View.OnClickLis
 
         @Override
         protected void onPostExecute(String s) {
+            if (pDialog.isShowing())
+                pDialog.dismiss();
             if(s != ""){
                 try {
                     JSONArray jsonArray = new JSONArray(s);

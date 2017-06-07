@@ -72,14 +72,14 @@ public class SettingVitalSignDetailActivity extends AppCompatActivity {
         getWindow().setStatusBarColor(ContextCompat.getColor(SettingVitalSignDetailActivity.this, R.color.colorPrimaryDark));
         lVitalSign = new ArrayList<>();
 
-        etTekananDarahs = (EditText)findViewById(R.id.tv_ValueOfTekDarah);
-        etTekananDarahD = (EditText)findViewById(R.id.tv_ValueOfTekDarah2);
-        etSuhuTubuh = (EditText)findViewById(R.id.tv_ValueOfSuhu);
-        etDenyutNadi = (EditText)findViewById(R.id.tv_ValueOfDenyutNadi);
-        etPernafasan = (EditText)findViewById(R.id.tv_ValueOfPernafasan);
-        btnsimpanvitalsign = (Button)findViewById(R.id.btnsimpanvitalsign);
+        etTekananDarahs = (EditText)findViewById(R.id.tv_ValueOfTekDarah_detail);
+        etTekananDarahD = (EditText)findViewById(R.id.tv_ValueOfTekDarah2_detail);
+        etSuhuTubuh = (EditText)findViewById(R.id.tv_ValueOfSuhu_detail);
+        etDenyutNadi = (EditText)findViewById(R.id.tv_ValueOfDenyutNadi_detail);
+        etPernafasan = (EditText)findViewById(R.id.tv_ValueOfPernafasan_detail);
+        btnsimpanvitalsign = (Button)findViewById(R.id.btnsimpanvitalsign_detail);
         tvLastUpdateVtl = (TextView)findViewById(R.id.tvLastUpdateVtl);
-        lvHistory =(ListView)findViewById(R.id.lvHistoryVitalSign);
+        lvHistory =(ListView)findViewById(R.id.lvHistoryVitalSign_detail);
         lvHistory.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

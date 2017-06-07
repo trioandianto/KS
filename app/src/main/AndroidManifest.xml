@@ -20,6 +20,13 @@
     <permission
         android:name="com.kliksembuh.ks.permission.MAPS_RECEIVE"
         android:protectionLevel="signature" />
+    <service
+        android:name=".GCM.PushNotificationService"
+        android:exported="false">
+        <intent-filter android:priority="10000">
+            <action android:name="com.google.android.c2dm.intent.RECEIVE"/>
+        </intent-filter>
+    </service>
 
     <uses-permission android:name="com.kliksembuh.ks.permission.MAPS_RECEIVE" />
 
@@ -241,9 +248,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.kliksembuh.ks.HomeActivity" />
         </activity>
-        <!-- <activity android:name=".SettingProfileActivity" /> -->
-        <!-- <activity android:name=".SettingVitalSignActivity" /> -->
-        <!-- <activity android:name=".SettingReminderActivity" /> -->
         <activity
             android:name=".PatientProfileActivity"
             android:label="@string/pengaturan_profil"
@@ -308,6 +312,15 @@
             android:name=".FaciltyInstitutionActivity"
             android:parentActivityName=".HospitalList"
             android:theme="@style/AppTheme4" />
+        <activity android:name=".SettingReminderDetailActivity"
+            android:label="Pengingat"
+            android:theme="@style/AppTheme3"
+            android:parentActivityName=".SettingActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.kliksembuh.ks.SettingActivity" />
+
+        </activity>
     </application>
 
 </manifest>

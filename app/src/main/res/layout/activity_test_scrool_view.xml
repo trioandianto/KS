@@ -20,14 +20,6 @@
             app:contentScrim="?attr/colorPrimary"
             app:expandedTitleMarginStart="48dp"
             app:expandedTitleMarginEnd="64dp">
-            <android.support.v4.view.ViewPager
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/detail_backdrop_height"
-                android:scaleType="centerCrop"
-                android:fitsSystemWindows="true"
-                app:layout_collapseMode="parallax"
-                android:id="@+id/backdrop">
-            </android.support.v4.view.ViewPager>
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"
@@ -40,6 +32,14 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/backdrop"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/detail_backdrop_height"
+                android:fitsSystemWindows="true"
+                android:scaleType="centerCrop"
+                app:layout_collapseMode="parallax"></android.support.v4.view.ViewPager>
 
         </android.support.design.widget.CollapsingToolbarLayout>
 
@@ -72,9 +72,9 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingLeft="20dp"
                 android:layout_marginTop="5dp"
-                android:background="@color/white">
+                android:background="@color/white"
+                android:paddingLeft="20dp">
 
                 <TextView
                     android:id="@+id/tv_Layanan"
@@ -171,13 +171,14 @@
                     android:text="Asuransi"
                     android:textColor="@color/grey_light"
                     android:textSize="14sp" />
+
                 <View
                     android:id="@+id/line_Fasilitas"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
+                    android:layout_below="@id/lbl_Layanan"
                     android:layout_centerHorizontal="true"
                     android:layout_marginLeft="10dp"
-                    android:layout_below="@id/lbl_Layanan"
                     android:layout_marginRight="10dp"
                     android:layout_marginTop="5dp"
                     android:background="@color/light_grey" />
@@ -286,16 +287,17 @@
             </LinearLayout>
 
             <!--<fragment-->
-                <!--android:id="@+id/mapListHospital"-->
-                <!--android:name="com.google.android.gms.maps.SupportMapFragment"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="200dp" />-->
+            <!--android:id="@+id/mapListHospital"-->
+            <!--android:name="com.google.android.gms.maps.SupportMapFragment"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="200dp" />-->
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
                 android:layout_marginTop="1dp"
+
                 android:background="#d4157e">
 
                 <RelativeLayout
@@ -343,13 +345,13 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentStart="true"
                         android:layout_alignParentTop="true"
-                        android:background="@drawable/shape"
                         android:backgroundTint="#eb2698"
                         android:drawableLeft="@drawable/ic_sort_black_16dp"
                         android:drawablePadding="8dp"
                         android:drawableStart="@drawable/ic_sort_black_16dp"
                         android:gravity="center_vertical"
                         android:inputType=""
+                        android:background="@drawable/shape"
                         android:maxLines="1"
                         android:padding="8dp"
                         android:text="Filter"
@@ -366,9 +368,8 @@
                 android:background="@drawable/shape"
                 android:clipToPadding="false"
                 android:divider="#00000000"
-                android:paddingLeft="10dp"
-                android:paddingBottom="15dip">
-            </ListView>
+                android:paddingBottom="15dip"
+                android:paddingLeft="10dp"></ListView>
         </LinearLayout>
 
     </android.support.v4.widget.NestedScrollView>
