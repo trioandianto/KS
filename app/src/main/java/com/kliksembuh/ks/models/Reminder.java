@@ -1,5 +1,7 @@
 package com.kliksembuh.ks.models;
 
+import android.graphics.drawable.Drawable;
+
 /**
  * Created by Ucu Nurul Ulum on 29/05/2017.
  */
@@ -12,8 +14,9 @@ public class Reminder {
     private String rmdrTimings;
     private String rmdrDays;
     private String rmdrDuration;
+    private Drawable rmdImage;
 
-    public Reminder(int rmdr_id, String rmdrTitle, String rmdrType, String rmdrDosage, String rmdrTimings, String rmdrDays, String rmdrDuration) {
+    public Reminder(int rmdr_id, String rmdrTitle, String rmdrType, String rmdrDosage, String rmdrTimings, String rmdrDays, String rmdrDuration, Drawable rmdImage) {
 
         this.rmdr_id = rmdr_id;
         this.rmdrTitle = rmdrTitle;
@@ -22,6 +25,7 @@ public class Reminder {
         this.rmdrTimings = rmdrTimings;
         this.rmdrDays = rmdrDays;
         this.rmdrDuration = rmdrDuration;
+        this.rmdImage = rmdImage;
     }
 
     public int getRmdr_id() {
@@ -78,6 +82,13 @@ public class Reminder {
 
     public void setRmdrDuration(String rmdrDuration) {
         this.rmdrDuration = rmdrDuration;
+    }
+    public Drawable getRmdImage() {
+        return rmdImage;
+    }
+
+    public void setRmdImage(Drawable rmdImage) {
+        this.rmdImage = rmdImage;
     }
 
 }

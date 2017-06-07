@@ -10,7 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 
 
 public class SettingActivity extends AppCompatActivity{
-    private SettingActivity.SectionsPagerAdapter mSectionsPagerAdapter;
+    private SectionsPagerAdapter mSectionsPagerAdapter;
     private ViewPager mViewPager;
     private String userID;
     private int positionTab;
@@ -28,7 +28,6 @@ public class SettingActivity extends AppCompatActivity{
 
         mViewPager = (ViewPager) findViewById(R.id.containerSetting);
         mViewPager.setAdapter(mSectionsPagerAdapter);
-        mViewPager.setCurrentItem(positionTab);
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabSetting);
         tabLayout.setupWithViewPager(mViewPager);
 
@@ -46,28 +45,20 @@ public class SettingActivity extends AppCompatActivity{
             switch (position){
                 case 0:
                     SettingProfileActivity settingProfileActivity= new SettingProfileActivity();
-                    try{
+                    try {
                         settingProfileActivity.setUserID(userID);
-                    }
-                    catch (Exception ex){
-
-                    }finally {
+                    }catch (Exception e){
 
                     }
+
                     return settingProfileActivity;
                 case 1:
                     SettingVitalSignActivity settingVitalSignActivity= new SettingVitalSignActivity();
-                    try{
-                        settingVitalSignActivity.setUserID(userID);
-                    }
-                    catch (Exception ex){
-
-                    }finally {
-
-                    }
+                    settingVitalSignActivity.setUserID(userID);
                     return settingVitalSignActivity;
                 case 2:
                     SettingReminderActivity settingReminderActivity = new SettingReminderActivity();
+                    settingReminderActivity.setUserID(userID);
                     return settingReminderActivity;
                 default:
                     return null;

@@ -39,8 +39,6 @@ import java.util.List;
 
 import javax.net.ssl.HttpsURLConnection;
 
-import static com.facebook.FacebookSdk.getApplicationContext;
-
 public class SettingVitalSignActivity extends Fragment {
     private EditText etTekananDarahs;
     private EditText etTekananDarahD;
@@ -56,6 +54,7 @@ public class SettingVitalSignActivity extends Fragment {
     private HistoryAdapter historyAdapter;
     private List<VitalSign> lVitalSign;
     private TextView tvLastUpdateVtl;
+    private Context globalContext = null;
 
 
     public String getUserID() {
@@ -68,6 +67,7 @@ public class SettingVitalSignActivity extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View newView = inflater.inflate(R.layout.activity_setting_vital_sign, container, false);
+        globalContext = this.getActivity();
 
         lVitalSign = new ArrayList<>();
 
@@ -264,7 +264,7 @@ public class SettingVitalSignActivity extends Fragment {
                             }
                             lVitalSign.add(new VitalSign(id,tekananDarahS,tekananDarahD,denyutNadi,pernafasan,suhuTubuh, detailDate));
                         }
-                        historyAdapter = new HistoryAdapter(getApplicationContext(), lVitalSign);
+                        historyAdapter = new HistoryAdapter(globalContext.getApplicationContext(), lVitalSign);
                         lvHistory.setAdapter(historyAdapter);
                     }
 
@@ -343,7 +343,7 @@ public class SettingVitalSignActivity extends Fragment {
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
             if (s != "") {
-                Toast.makeText(getApplicationContext(), "Data Berhasil di Hapus.", Toast.LENGTH_LONG).show();
+                Toast.makeText(globalContext.getApplicationContext(), "Data Berhasil di Hapus.", Toast.LENGTH_LONG).show();
                 new GetVitalSignTask(userID).execute();
 
             }
@@ -441,7 +441,7 @@ public class SettingVitalSignActivity extends Fragment {
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
             if (s != "") {
-                Toast.makeText(getApplicationContext(), "Data Berhasil di Simpan.", Toast.LENGTH_LONG).show();
+                Toast.makeText(globalContext.getApplicationContext(), "Data Berhasil di Simpan.", Toast.LENGTH_LONG).show();
                 new GetVitalSignTask(userID).execute();
 
             }

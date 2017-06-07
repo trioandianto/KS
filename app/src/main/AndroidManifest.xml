@@ -235,9 +235,12 @@
         <activity
             android:name=".SettingActivity"
             android:label="@string/pengaturan_base"
-            android:launchMode="singleTop"
             android:parentActivityName=".HomeActivity"
-            android:theme="@style/AppTheme3" />
+            android:theme="@style/AppTheme3" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.kliksembuh.ks.HomeActivity" />
+        </activity>
         <!-- <activity android:name=".SettingProfileActivity" /> -->
         <!-- <activity android:name=".SettingVitalSignActivity" /> -->
         <!-- <activity android:name=".SettingReminderActivity" /> -->
@@ -305,18 +308,6 @@
             android:name=".FaciltyInstitutionActivity"
             android:parentActivityName=".HospitalList"
             android:theme="@style/AppTheme4" />
-        <activity
-            android:name=".SettingReminderDetailActivity"
-            android:label="@string/lbl_addreminder"
-            android:launchMode="singleTop"
-            android:parentActivityName=".ReminderListActivity"
-            android:theme="@style/AppTheme3" />
-        <activity
-            android:name=".ReminderListActivity"
-            android:label="@string/lbl_reminder"
-            android:launchMode="singleTop"
-            android:parentActivityName=".HomeActivity"
-            android:theme="@style/AppTheme3" />
     </application>
 
 </manifest>

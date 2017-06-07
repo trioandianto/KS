@@ -266,9 +266,10 @@ public class HomeActivity extends AppCompatActivity
 
         }
         else if (i == R.id.nav_pengingat_minum){
-            Intent home = new Intent(this, ReminderListActivity.class);
+            Intent home = new Intent(this, SettingActivity.class);
             Bundle b = new Bundle();
             b.putString("userID", userID);
+            b.putInt("tab",2);
             home.putExtras(b);
             startActivityForResult(home, 1);
         }
@@ -437,6 +438,18 @@ public class HomeActivity extends AppCompatActivity
                      return tabSpesialisasi;
                 case 1:
                     TabPelayananActivity tabPelayanan = new TabPelayananActivity();
+                    try{
+//                        tabSpesialisasi.setSpesial(facilityName);
+//                        tabSpesialisasi.setSpesialID(facilityID);
+                        tabPelayanan.setUserID(userID);
+//                        tabSpesialisasi.setLokasiID(locationID);
+//                        tabSpesialisasi.setLocasi(locationName);
+                    }
+                    catch (Exception ex){
+
+                    }finally {
+
+                    }
                     return tabPelayanan;
 
                 default:

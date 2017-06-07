@@ -15,6 +15,16 @@ import android.widget.Button;
 public class TabPelayananActivity extends Fragment{
     int year, month, day;
     private AutoCompleteTextView location;
+
+    public String getUserID() {
+        return userID;
+    }
+
+    public void setUserID(String userID) {
+        this.userID = userID;
+    }
+
+    private String userID;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle saveInstanceState) {
