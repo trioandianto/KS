@@ -55,7 +55,7 @@
                 android:layout_below="@id/tvEditTitleRemidner"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"
-                android:text="Type of Reminder"/>
+                android:text="Jenis Peningat"/>
             <Spinner
                 android:id="@+id/spnReminderType"
                 android:layout_marginTop="5dp"
@@ -78,7 +78,7 @@
                 android:layout_below="@id/line_ReminderType"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"
-                android:text="Dosage"/>
+                android:text="Takaran"/>
             <Spinner
                 android:id="@+id/spnDosage"
                 android:layout_marginTop="5dp"
@@ -101,7 +101,7 @@
                 android:layout_below="@id/line_Dosage"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"
-                android:text="Timings"/>
+                android:text="Waktu"/>
             <Spinner
                 android:id="@+id/spnTimings"
                 android:layout_marginTop="5dp"
@@ -124,7 +124,7 @@
                 android:layout_below="@id/line_Timinga"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"
-                android:text="Days"/>
+                android:text="Hari"/>
             <Spinner
                 android:id="@+id/spnDays"
                 android:layout_marginTop="5dp"
@@ -147,7 +147,7 @@
                 android:layout_below="@id/line_Days"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"
-                android:text="Duration"/>
+                android:text="Durasi"/>
             <Spinner
                 android:id="@+id/spnDuration"
                 android:layout_marginTop="5dp"

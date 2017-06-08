@@ -71,7 +71,7 @@ public class TestScroolView extends AppCompatActivity{
     private DoctorListAdapter dAdapter;
     private ProgressDialog pDialog;
     private String spesial;
-    private Spinner spinner;
+    private Spinner spinner, spnFilter;
     private String rumahSakitID;
     private String facility;
     private String toolbarTitle;
@@ -127,6 +127,15 @@ public class TestScroolView extends AppCompatActivity{
 
         lvDokter = (ListView)findViewById(R.id.lvDetailRumahSakit);
         spinner = (Spinner)findViewById(R.id.spn_SpecialtyDoc);
+        spnFilter = (Spinner)findViewById(R.id.spn_filter);
+        List<String> list1 = new ArrayList<String>();
+        list1.add("Urutkan");
+        list1.add("A-Z");
+        list1.add("Z-A");
+        ArrayAdapter arrayAdapter1 = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,list1);
+        arrayAdapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spnFilter.setAdapter(arrayAdapter1);
+
         //mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.mapListHospital);
         List<String> list = new ArrayList<String>();
         list.add(spesial);
