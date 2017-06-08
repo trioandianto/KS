@@ -13,7 +13,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.kliksembuh.ks.library.HistoryAdapter;
 import com.kliksembuh.ks.models.HistoryUpComing;
@@ -60,6 +63,9 @@ public class MyAppointmentHistoryActivity extends Fragment implements ListView.O
     public String getUserID() {
         return userID;
     }
+    private ImageView imgPicNotFound;
+    private TextView tvHosNotFound;
+    private RelativeLayout rvImageBooking;
 
     public void setUserID(String userID) {
         this.userID = userID;
@@ -70,6 +76,9 @@ public class MyAppointmentHistoryActivity extends Fragment implements ListView.O
                              Bundle saveInstanceState) {
         View rootView = inflater.inflate(R.layout.activity_my_appointment_history, container, false);
         globalContext = this.getActivity();
+        imgPicNotFound = (ImageView) rootView.findViewById(R.id.ivPicNotFoundsHCompleted);
+        tvHosNotFound = (TextView)rootView.findViewById(R.id.tvScheduleNotFoundsHCompleted);
+        rvImageBooking = (RelativeLayout)rootView.findViewById(R.id.rvImageHistoryComplete);
 
         lvUpcoming = (ListView)rootView.findViewById(R.id.lvHistoryCompleted);
         lvUpcoming.setOnItemClickListener(this);
@@ -84,6 +93,8 @@ public class MyAppointmentHistoryActivity extends Fragment implements ListView.O
             if(resultCode == RESULT_OK) {
                 userID = data.getStringExtra("userID");
                 transaksiID = data.getStringExtra("transaksiID");
+                new HistoryAppoinmentAsync(userID).execute();
+
 
             }
         }
@@ -113,16 +124,7 @@ public class MyAppointmentHistoryActivity extends Fragment implements ListView.O
             mUserID = userID;
         }
 
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            // Showing progress dialog
-            pDialog = new ProgressDialog(getContext());
-            pDialog.setProgress(R.drawable.pic_loading);
-            pDialog.setMessage("Mohon menunggu...");
-            pDialog.setCancelable(false);
-            pDialog.show();
-        }
+
         @Override
         protected String doInBackground(String... params) {
             ConnectivityManager cm = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -180,9 +182,6 @@ public class MyAppointmentHistoryActivity extends Fragment implements ListView.O
 
         @Override
         protected void onPostExecute(final String success) {
-            if (pDialog.isShowing())
-                pDialog.dismiss();
-
             if (success!="") {
                 try {
                     JSONArray jsonArray = new JSONArray(success);
@@ -241,13 +240,23 @@ public class MyAppointmentHistoryActivity extends Fragment implements ListView.O
                             }
                             else{
                                 historyUpComingList.add(new HistoryUpComing(Integer.parseInt(trxIDHistory), doctorName, drawableDoctor[i], hospitalName, schdlDatePars, trxNoAppointment, specialtyDoc, appointDatePars, statusDesc, shiftDesc, timeStartPars, timeEndPars));
-                                histAdapter = new HistoryAdapter(globalContext.getApplicationContext(), historyUpComingList);
-                                lvUpcoming.setAdapter(histAdapter);
                             }
 
 
                         }catch (ParseException e){
                             e.printStackTrace();
+                        }
+                        if(historyUpComingList.size()>0){
+                            histAdapter = new HistoryAdapter(globalContext.getApplicationContext(), historyUpComingList);
+                            lvUpcoming.setAdapter(histAdapter);
+
+                            rvImageBooking.setVisibility(View.INVISIBLE);
+                            imgPicNotFound.setImageDrawable(null);
+                            tvHosNotFound.setText(null);
+                        }else{
+                            rvImageBooking.setVisibility(View.VISIBLE);
+                            imgPicNotFound.setImageResource(R.drawable.pic_notfound);
+                            tvHosNotFound.setText("Tidak ada History.");
                         }
 
                     }
@@ -258,6 +267,9 @@ public class MyAppointmentHistoryActivity extends Fragment implements ListView.O
 
             } else {
                 //:TODO
+                rvImageBooking.setVisibility(View.VISIBLE);
+                imgPicNotFound.setImageResource(R.drawable.pic_notfound);
+                tvHosNotFound.setText("Tidak ada History.");
             }
         }
         @Override

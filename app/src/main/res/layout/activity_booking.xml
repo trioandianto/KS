@@ -167,10 +167,9 @@
                 android:layout_height="50dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="5dp"
-                android:background="@drawable/shape"
-                android:backgroundTint="@color/signup_color"
+                android:background="@drawable/customborder"
                 android:text="Minggu Ini"
-                android:textColor="@color/white"
+                android:textColor="@color/black"
                 android:textStyle="bold" />
 
             <Button
@@ -184,10 +183,9 @@
                 android:layout_below="@+id/tvText"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="10dp"
-                android:background="@drawable/shape"
-                android:backgroundTint="@color/signup_color"
+                android:background="@drawable/customborder"
                 android:text="Minggu Depan"
-                android:textColor="@color/white"
+                android:textColor="@color/black"
                 android:textStyle="bold" />
 
         </LinearLayout>

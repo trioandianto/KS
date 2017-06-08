@@ -851,7 +851,8 @@ public class BookingActivity extends AppCompatActivity implements ListView.OnIte
         });
 //        new JadwalDokterAsync(personalID, year, week).execute();
         btnMingguIni = (Button)findViewById(R.id.btnMingguIni);
-        btnMingguIni.setBackgroundTintList(ContextCompat.getColorStateList(BookingActivity.this, R.color.signup_color));
+        btnMingguIni.setBackgroundTintList(ContextCompat.getColorStateList(BookingActivity.this, R.color.colorPrimary));
+        btnMingguIni.setTextColor(getApplication().getResources().getColor(R.color.white));
         btnMingguDepan = (Button)findViewById(R.id.btnMingguDepan);
 
         btnMingguIni.setOnClickListener(new Button.OnClickListener() {
@@ -939,21 +940,26 @@ public class BookingActivity extends AppCompatActivity implements ListView.OnIte
                 namaDate = tanggala+" "+bulanIni+" "+tahun;
                 date = bulan+"-"+tanggala+"-"+tahun;
                 new JadwalDokterAsync(personalID, year, week).execute();
-                btnMingguIni.setBackgroundTintList(ContextCompat.getColorStateList(BookingActivity.this, R.color.signup_color));
-                btnMingguDepan.setBackgroundTintList(ContextCompat.getColorStateList(BookingActivity.this, R.color.frameBackground));
+                btnMingguIni.setBackgroundTintList(ContextCompat.getColorStateList(BookingActivity.this, R.color.colorPrimary));
+                btnMingguDepan.setBackgroundTintList(ContextCompat.getColorStateList(BookingActivity.this, R.color.white));
+                btnMingguIni.setTextColor(getApplication().getResources().getColor(R.color.white));
+                btnMingguDepan.setTextColor(getApplication().getResources().getColor(R.color.black));
 
 
             }
         });
 
 
-        btnMingguDepan.setBackgroundTintList(ContextCompat.getColorStateList(BookingActivity.this, R.color.frameBackground));
+        btnMingguDepan.setBackgroundTintList(ContextCompat.getColorStateList(BookingActivity.this, R.color.white));
+        btnMingguDepan.setTextColor(getApplication().getResources().getColor(R.color.black));
         btnMingguDepan.setOnClickListener(new Button.OnClickListener(){
             @Override
             public void onClick(View v) {
                 mJadwalDokterList = new ArrayList<>();
-                btnMingguIni.setBackgroundTintList(ContextCompat.getColorStateList(BookingActivity.this, R.color.frameBackground));
-                btnMingguDepan.setBackgroundTintList(ContextCompat.getColorStateList(BookingActivity.this, R.color.signup_color));
+                btnMingguIni.setBackgroundTintList(ContextCompat.getColorStateList(BookingActivity.this, R.color.white));
+                btnMingguDepan.setBackgroundTintList(ContextCompat.getColorStateList(BookingActivity.this, R.color.colorPrimary));
+                btnMingguIni.setTextColor(getApplication().getResources().getColor(R.color.black));
+                btnMingguDepan.setTextColor(getApplication().getResources().getColor(R.color.white));
                 sequence = "minggu 2";
                 if(day ==1){
                     bulan = mingguMingguDepanBulan;
