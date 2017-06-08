@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -56,6 +57,13 @@ public class DoctorListAdapter <T> extends BaseAdapter {
         TextView tvFrontTitle = (TextView)newDview.findViewById(R.id.tv_FrontTitleDr);
         TextView tvDrname = (TextView)newDview.findViewById(R.id.tv_list_drname);
         TextView tvDrspecialty = (TextView)newDview.findViewById(R.id.tv_specialty_list);
+        Button btnKualiifikasi = (Button)newDview.findViewById(R.id.btn_kualiifikasi);
+        btnKualiifikasi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
 
         // Set text and image for View of Doctor
         imgDview.setImageDrawable(mDoctorList.get(position).getDoc_pic_id());

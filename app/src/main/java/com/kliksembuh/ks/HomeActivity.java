@@ -286,7 +286,7 @@ public class HomeActivity extends AppCompatActivity
             Bundle b = new Bundle();
             b.putString("userID", userID);
             home.putExtras(b);
-            startActivityForResult(home, 1);
+            startActivity(home);
         }
         else if (i == R.id.nav_keluar){
             logOutNav();
