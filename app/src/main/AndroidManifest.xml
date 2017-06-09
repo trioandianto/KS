@@ -54,6 +54,8 @@
         <activity
             android:name=".LoginActivity"
             android:launchMode="singleInstance"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustPan" />
         <activity
@@ -131,6 +133,8 @@
         <activity
             android:name=".HomeActivity"
             android:launchMode="singleInstance"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".FavoriteActivity"
@@ -145,6 +149,8 @@
             android:name=".MyAppointmentActivity"
             android:label="@string/action_myappointment"
             android:launchMode="singleInstance"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden"
             android:parentActivityName=".HomeActivity"
             android:theme="@style/AppTheme3">
             <meta-data
@@ -167,10 +173,14 @@
             android:name=".AppointmentDetailActivity"
             android:label="Detail Appointment"
             android:launchMode="singleInstance"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden"
             android:parentActivityName=".MyAppointmentActivity"
             android:theme="@style/AppTheme4" />
         <activity
             android:name=".LoginWithFacebook"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -188,6 +198,8 @@
 
         <activity
             android:name=".HospitalList"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden"
             android:launchMode="singleInstance"
             android:parentActivityName=".HomeActivity"
             android:theme="@style/AppTheme4" />
@@ -195,21 +207,29 @@
         <activity android:name=".DoctorListActivity" />
         <activity
             android:name=".BookingActivity"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden"
             android:launchMode="singleInstance"
             android:parentActivityName=".TestScroolView"
             android:theme="@style/AppTheme4" />
         <activity
             android:name=".TestScroolView"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden"
             android:launchMode="singleInstance"
             android:parentActivityName=".HospitalList"
             android:theme="@style/AppTheme2" />
         <activity
             android:name=".KonfirmasiJanjiActivity"
             android:launchMode="singleInstance"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden"
             android:parentActivityName=".BookingActivity"
             android:theme="@style/AppTheme4" />
         <activity
             android:name=".ListMapActivity"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden"
             android:launchMode="singleTop"
             android:parentActivityName=".HospitalList"
             android:theme="@style/AppTheme4">
@@ -219,6 +239,8 @@
         </activity>
         <activity
             android:name=".ProfileManagementActivity"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden"
             android:label="@string/pengaturan_email"
             android:launchMode="singleTop"
             android:parentActivityName=".SettingActivity"
@@ -226,6 +248,8 @@
         <activity android:name=".ReviewActivity" />
         <activity
             android:name=".SearchLocationActivity"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateVisible">
             <intent-filter>
@@ -234,6 +258,8 @@
         </activity>
         <activity
             android:name=".SearchSpesializationActivity"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateVisible">
             <intent-filter>
@@ -242,6 +268,8 @@
         </activity>
         <activity
             android:name=".SettingActivity"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden"
             android:label="@string/pengaturan_base"
             android:parentActivityName=".HomeActivity"
             android:theme="@style/AppTheme3" >
@@ -251,18 +279,24 @@
         </activity>
         <activity
             android:name=".PatientProfileActivity"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden"
             android:label="@string/pengaturan_profil"
             android:launchMode="singleTop"
             android:parentActivityName=".SettingActivity"
             android:theme="@style/AppTheme3" />
         <activity
             android:name=".EditPasswordProfileActivity"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden"
             android:label="@string/pengaturan_password"
             android:launchMode="singleTop"
             android:parentActivityName=".SettingActivity"
             android:theme="@style/AppTheme3" />
         <activity
             android:name=".PatientFormActivity"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden"
             android:label="@string/tambah_profil_pasien"
             android:launchMode="singleTop"
             android:parentActivityName=".SettingActivity"
@@ -274,6 +308,8 @@
         <!--<activity android:name=".FacilityPromotionActivity"></activity>-->
         <activity
             android:name=".ContactUsActivity"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden"
             android:label="Hubungi Kami"
             android:parentActivityName=".HomeActivity"
             android:theme="@style/AppTheme3"
@@ -284,12 +320,16 @@
         </activity>
         <activity
             android:name=".MapsDetailHospitalActivity"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden"
             android:launchMode="singleInstance"
             android:parentActivityName=".TestScroolView"
             android:theme="@style/AppTheme4" />
         <activity
             android:name=".FacilityActivity"
             android:label="@string/lbl_facility"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden"
             android:launchMode="singleTop"
             android:parentActivityName=".TestScroolView"
             android:theme="@style/AppTheme3"
@@ -299,27 +339,39 @@
         <!-- <activity android:name=".FacilityInsuranceActivity"></activity> -->
         <activity
             android:name=".EmailTerdaftarActivity"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden"
             android:theme="@style/AppTheme4" />
         <activity
             android:name=".InsuranceListActivity"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden"
             android:parentActivityName=".HospitalList"
             android:theme="@style/AppTheme4" />
         <activity
             android:name=".SettingVitalSignDetailActivity"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden"
             android:parentActivityName=".SettingActivity"
             android:theme="@style/AppTheme4" />
         <activity
             android:name=".MapsKonfirmasiJanji"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden"
             android:launchMode="singleInstance"
             android:parentActivityName=".KonfirmasiJanjiActivity"
             android:theme="@style/AppTheme4" />
         <activity
             android:name=".FaciltyInstitutionActivity"
             android:parentActivityName=".HospitalList"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden"
             android:theme="@style/AppTheme4" />
         <activity android:name=".SettingReminderDetailActivity"
             android:label="Pengingat"
             android:theme="@style/AppTheme3"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden"
             android:parentActivityName=".SettingActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
