@@ -404,6 +404,7 @@ public class TestScroolView extends AppCompatActivity{
                         String id = jsonObject.getString("MedicalPersonnelID");
                         String personelCD = jsonObject.getString("MedicalPersonnelCD");
                         String image = jsonObject.getString("ImgUrl");
+                        String tittle = "MSC, Sp. MK";
                         Drawable photo = LoadImageFromWebOperations(image);
 
                         idDokter[i]=personelCD;
@@ -434,7 +435,7 @@ public class TestScroolView extends AppCompatActivity{
 //                            tvNameHosp.setText(jsonObject1.getString("InstitutionName"));
                         }
 
-                        mDokterList.add(new Doctor(id, photo, frontTitle, name, spesiality, image,"Lihat Kualifikasi"));
+                        mDokterList.add(new Doctor(id, photo, frontTitle, name, spesiality, image,"Lihat Kualifikasi",tittle));
 
 
                         

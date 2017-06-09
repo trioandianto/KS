@@ -57,8 +57,9 @@ public class DoctorListAdapter <T> extends BaseAdapter {
         // getView for Doctor List
         ImageView imgDview = (ImageView)newDview.findViewById(R.id.iv_doc_pic_list);
         TextView tvFrontTitle = (TextView)newDview.findViewById(R.id.tv_FrontTitleDr);
+        TextView tvTittle = (TextView)newDview.findViewById(R.id.tv_specialty_list) ;
         TextView tvDrname = (TextView)newDview.findViewById(R.id.tv_list_drname);
-        TextView tvDrspecialty = (TextView)newDview.findViewById(R.id.tv_specialty_list);
+        TextView tvDrspecialty = (TextView)newDview.findViewById(R.id.tv_tittle_list);
         TextView btnKualiifikasi = (TextView) newDview.findViewById(R.id.btn_kualiifikasi);
         btnKualiifikasi.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,6 +74,7 @@ public class DoctorListAdapter <T> extends BaseAdapter {
         tvDrname.setText(mDoctorList.get(position).getNameDoc());
         tvDrspecialty.setText(mDoctorList.get(position).getSpecialty());
         btnKualiifikasi.setText(mDoctorList.get(position).getKualifikasi());
+        tvTittle.setText(mDoctorList.get(position).getTittle());
 
         // Save hospital id to tag
         newDview.setTag(mDoctorList.get(position).getDoc_id());
