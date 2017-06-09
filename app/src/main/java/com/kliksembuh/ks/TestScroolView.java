@@ -434,7 +434,7 @@ public class TestScroolView extends AppCompatActivity{
 //                            tvNameHosp.setText(jsonObject1.getString("InstitutionName"));
                         }
 
-                        mDokterList.add(new Doctor(id, photo, frontTitle, name, spesiality, image));
+                        mDokterList.add(new Doctor(id, photo, frontTitle, name, spesiality, image,"Lihat Kualifikasi"));
 
 
                         

@@ -12,20 +12,18 @@ public class Doctor {
     private String frontTtlDoc;
     private String nameDoc;
     private String specialty;
-
-
-
-
+    private String kualifikasi;
     private String imageUrl;
 
     // Constructor
-    public Doctor(String doc_id, Drawable doc_pic_id, String frontTtlDoc, String nameDoc, String specialty, String imageUrl) {
+    public Doctor(String doc_id, Drawable doc_pic_id, String frontTtlDoc, String nameDoc, String specialty, String imageUrl, String kualifikasi) {
         this.doc_id = doc_id;
         this.doc_pic_id = doc_pic_id;
         this.frontTtlDoc = frontTtlDoc;
         this.nameDoc = nameDoc;
         this.specialty = specialty;
         this.imageUrl = imageUrl;
+        this.kualifikasi = kualifikasi;
     }
 
 
@@ -77,4 +75,13 @@ public class Doctor {
     public void setSpecialty(String specialty) {
         this.specialty = specialty;
     }
+    public String getKualifikasi() {
+        return kualifikasi;
+    }
+
+    public void setKualifikasi(String kualifikasi) {
+        this.kualifikasi = kualifikasi;
+    }
+
+
 }

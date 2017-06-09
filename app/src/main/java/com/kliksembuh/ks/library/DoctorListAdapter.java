@@ -4,9 +4,9 @@ import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.kliksembuh.ks.R;
 import com.kliksembuh.ks.models.Doctor;
@@ -14,6 +14,8 @@ import com.kliksembuh.ks.models.Doctor;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+
+import static com.facebook.FacebookSdk.getApplicationContext;
 
 /**
  * Created by Ucu Nurul Ulum on 06/02/2017.
@@ -57,11 +59,11 @@ public class DoctorListAdapter <T> extends BaseAdapter {
         TextView tvFrontTitle = (TextView)newDview.findViewById(R.id.tv_FrontTitleDr);
         TextView tvDrname = (TextView)newDview.findViewById(R.id.tv_list_drname);
         TextView tvDrspecialty = (TextView)newDview.findViewById(R.id.tv_specialty_list);
-        Button btnKualiifikasi = (Button)newDview.findViewById(R.id.btn_kualiifikasi);
+        TextView btnKualiifikasi = (TextView) newDview.findViewById(R.id.btn_kualiifikasi);
         btnKualiifikasi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Toast.makeText(getApplicationContext(), "Masih dalam pengembangan.", Toast.LENGTH_LONG).show();
             }
         });
 
@@ -70,6 +72,7 @@ public class DoctorListAdapter <T> extends BaseAdapter {
         tvFrontTitle.setText(mDoctorList.get(position).getFrontTtlDoc());
         tvDrname.setText(mDoctorList.get(position).getNameDoc());
         tvDrspecialty.setText(mDoctorList.get(position).getSpecialty());
+        btnKualiifikasi.setText(mDoctorList.get(position).getKualifikasi());
 
         // Save hospital id to tag
         newDview.setTag(mDoctorList.get(position).getDoc_id());
