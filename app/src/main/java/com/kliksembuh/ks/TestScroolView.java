@@ -132,7 +132,7 @@ public class TestScroolView extends AppCompatActivity{
         list1.add("Urutkan");
         list1.add("A-Z");
         list1.add("Z-A");
-        ArrayAdapter arrayAdapter1 = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,list1);
+        ArrayAdapter arrayAdapter1 = new ArrayAdapter<String>(this,R.layout.spinner_style,list1);
         arrayAdapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spnFilter.setAdapter(arrayAdapter1);
 

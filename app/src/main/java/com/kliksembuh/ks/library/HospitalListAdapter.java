@@ -79,9 +79,6 @@ public class HospitalListAdapter<T> extends BaseAdapter implements Filterable {
             tvIGD.setText("BPJS");
         }
 
-
-
-
         // Save hospital id to tag
         newView.setTag(mHospitalList.get(position).getId());
 

@@ -83,6 +83,7 @@ public class TabSpesialisasiActivity extends Fragment implements View.OnClickLis
             }
             @Override
             public void afterTextChanged(Editable s) {
+                location.setTextColor(getResources().getColor(R.color.black));
                 location.setError(null);
                 location.clearFocus();
 
@@ -102,6 +103,7 @@ public class TabSpesialisasiActivity extends Fragment implements View.OnClickLis
             }
             @Override
             public void afterTextChanged(Editable s) {
+                spesialize.setTextColor(getResources().getColor(R.color.black));
                 spesialize.setError(null);
                 spesialize.clearFocus();
             }

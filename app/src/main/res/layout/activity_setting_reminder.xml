@@ -48,7 +48,8 @@
         android:layout_below="@id/listview_reminder"
         android:layout_alignParentStart="true"
         android:background="@color/signup_color"
-        android:text="Add a reminder"
+        android:text="Tambahkan Pengingat"
+        android:textSize="18dp"
         android:textAllCaps="false"
         android:textColor="@color/white"/>
 

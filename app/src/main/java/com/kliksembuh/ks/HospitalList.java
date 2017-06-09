@@ -344,12 +344,12 @@ public class HospitalList extends AppCompatActivity {
                                 JSONObject jsonObject1 = jsonArray3.getJSONObject(l);
                                 String s = jsonObject1.getString("Name");
                                 if(l==0){
-                                    fct1 = "-"+s;
+                                    fct1 = "● " +s;
                                 }
                                 else if (l==1){
-                                    fct2 = "-"+s;
+                                    fct2 = "● " +s;
                                 }else if(l==2){
-                                    fct3 = "-"+s;
+                                    fct3 = "● " +s;
                                 }
                             }catch (Exception e){
 
@@ -364,7 +364,7 @@ public class HospitalList extends AppCompatActivity {
 
                         int arr = jsonObject.getInt("totalInsuranceNbr");
 
-                            selengkapnya = "Lihat Semua Asuransi ("+arr+").";
+                            selengkapnya = "Lihat Semua Asuransi ("+arr+")";
 
 
                         mHospitalList.add(new Hospital(id, photo, name, addres, phNumber, null, image, img1, img2, img3, selengkapnya, igd,bpjs, fct1, fct2, fct3, semua, total));

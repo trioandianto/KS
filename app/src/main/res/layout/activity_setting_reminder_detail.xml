@@ -34,7 +34,7 @@
                 android:layout_width="wrap_content"
                 android:id="@+id/lblTitleReminder"
                 android:layout_height="wrap_content"
-                android:text="Title"/>
+                android:text="Judul"/>
             <AutoCompleteTextView
                 android:id="@+id/tvEditTitleRemidner"
                 android:layout_marginBottom="12dp"
@@ -168,12 +168,12 @@
     <RelativeLayout
         android:id="@+id/relLayoutReminder"
         android:layout_width="match_parent"
+        android:layout_marginTop="10dp"
         android:layout_marginRight="6dp"
         android:layout_marginLeft="6dp"
         android:background="@color/white"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true">
+        android:layout_below="@+id/relativeLayout2">
         <Button
             android:id="@+id/btnSimpanReminder"
             style="@style/MyCustomTextAppearance"

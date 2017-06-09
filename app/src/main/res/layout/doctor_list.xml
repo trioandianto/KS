@@ -66,7 +66,7 @@
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:id="@+id/btn_kualiifikasi"
-            android:text="Lihat Kualifaikasi"
+            android:text="Lihat Kualifikasi"
             android:padding="5dp"
             android:layout_marginTop="10dp"
             android:layout_marginLeft="10dp"
@@ -76,19 +76,19 @@
             android:layout_alignTop="@+id/tvAppointmentNow"
             android:layout_toEndOf="@+id/iv_doc_pic_list" />
 
-    <TextView
+    <Button
         android:id="@+id/tvAppointmentNow"
-        android:layout_width="75dp"
-        android:layout_height="24dp"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
         android:text="Book"
         android:textAllCaps="false"
+        android:backgroundTint="#7057ff"
         android:textColor="@color/white"
         android:layout_alignTop="@+id/tv_specialty_list"
-        android:layout_marginTop="22dp"
+        android:layout_marginTop="20dp"
         android:layout_marginRight="8dp"
-        android:padding="4dp"
         android:gravity="center"
-        android:background="#7057ff"
+        android:background="@drawable/shape"
         android:layout_alignParentRight="true"
         android:textSize="14dp" />
 
