@@ -29,6 +29,7 @@ public class SettingActivity extends AppCompatActivity{
         mViewPager = (ViewPager) findViewById(R.id.containerSetting);
         mViewPager.setAdapter(mSectionsPagerAdapter);
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabSetting);
+        mViewPager.setCurrentItem(positionTab);
         tabLayout.setupWithViewPager(mViewPager);
 
     }
