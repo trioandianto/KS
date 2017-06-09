@@ -263,7 +263,6 @@ public class HomeActivity extends AppCompatActivity
             b.putString("userID",userID);
             appointment.putExtras(b);
             startActivityForResult(appointment, 1);
-
         }
         else if (i == R.id.nav_pengingat_minum){
             Intent home = new Intent(this, SettingActivity.class);
