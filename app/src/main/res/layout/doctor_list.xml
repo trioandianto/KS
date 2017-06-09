@@ -62,17 +62,17 @@
         android:text="Dokter Umum"
         android:textColor="#5C5C5C"
         android:textSize="14dp" />
-        <Button
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:id="@+id/btn_kualiifikasi"
             android:text="Lihat Kualifaikasi"
-            android:padding="5dp"
+            android:padding="10dp"
+            android:clickable="true"
+            android:background="@color/com_facebook_button_border_color_focused"
             android:layout_marginTop="10dp"
             android:layout_marginLeft="10dp"
             android:textColor="@color/black"
-            android:textAllCaps="false"
-            android:background="@drawable/customborder"
             android:layout_alignTop="@+id/tvAppointmentNow"
             android:layout_toEndOf="@+id/iv_doc_pic_list" />
 
