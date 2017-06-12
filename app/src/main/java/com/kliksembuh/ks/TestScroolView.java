@@ -111,11 +111,8 @@ public class TestScroolView extends AppCompatActivity{
         }
         setContentView(R.layout.activity_test_scrool_view);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
         toolbar.setTitle(toolbarTitle);
         setSupportActionBar(toolbar);
-
 
         mDokterList = new ArrayList<>();
         list = new ArrayList<String>();

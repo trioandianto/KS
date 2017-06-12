@@ -218,7 +218,7 @@
             android:configChanges="orientation|keyboardHidden"
             android:launchMode="singleInstance"
             android:parentActivityName=".HospitalList"
-            android:theme="@style/AppTheme2" />
+            android:theme="@style/AppTheme4" />
         <activity
             android:name=".KonfirmasiJanjiActivity"
             android:launchMode="singleInstance"
