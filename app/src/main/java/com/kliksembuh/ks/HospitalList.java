@@ -138,7 +138,7 @@ public class HospitalList extends AppCompatActivity {
                 String nameHospital = hospital.getName();
                 String alamat = hospital.getAddress();
 
-                Intent myIntent = new Intent(getApplicationContext(),TestScroolView.class);
+                Intent myIntent = new Intent(getApplicationContext(),DoctorListActivity.class);
                 Bundle b = new Bundle();
                 b.putString("institution", idHospital);
                 b.putString("tittle", nameHospital);//Your id

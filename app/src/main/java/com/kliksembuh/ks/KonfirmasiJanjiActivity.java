@@ -187,7 +187,7 @@ public class KonfirmasiJanjiActivity extends AppCompatActivity {
 //        editdokter.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View view) {
-//                Intent myIntent = new Intent(view.getContext(), TestScroolView.class);
+//                Intent myIntent = new Intent(view.getContext(), DoctorListActivity.class);
 //                startActivityForResult(myIntent, 0);
 //            }
 //        });

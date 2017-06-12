@@ -3,10 +3,12 @@ package com.kliksembuh.ks;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.app.AlertDialog;
 import android.app.LoaderManager.LoaderCallbacks;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.CursorLoader;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.Loader;
 import android.content.pm.PackageManager;
@@ -54,7 +56,6 @@ import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
-import com.kliksembuh.ks.library.ConnectionCheck;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -66,10 +67,9 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.net.URLEncoder;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
+
 
 import javax.net.ssl.HttpsURLConnection;
 
@@ -113,6 +113,7 @@ public class LoginActivity extends BaseActivity implements LoaderCallbacks<Curso
      * Keep track of the login task to ensure we can cancel it if requested.
      */
     private UserLoginTask mAuthTask = null;
+    private ProgressDialog pDialog;
 
     // UI references.
     private AutoCompleteTextView mEmailView;
@@ -131,7 +132,7 @@ public class LoginActivity extends BaseActivity implements LoaderCallbacks<Curso
     private String googleClientId = "123183603892-ggmi3v04paa6jpjgd79msmt3utu30vd0.apps.googleusercontent.com";
 
     // Alert Dialog Manager
-    AlertDialogManager alert = new AlertDialogManager();
+//    AlertDialogManager alert = new AlertDialogManager();
 
     // Sesion Manager Class
     SessionManagement session;
@@ -233,30 +234,6 @@ public class LoginActivity extends BaseActivity implements LoaderCallbacks<Curso
 
             }
         });
-
-        // Login Google
-        // Updated by Ucu (13032017)
-//
-//        btnSignGoogle = (SignInButton) findViewById(R.id.btnloginwihtgoogle);
-//        btnSignGoogle.setOnClickListener(new OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                signIn();
-//            }
-//
-//            GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-//                    .requestEmail()
-//                    .build();
-//
-////            mGoogleApiClient = new GoogleApiClient.Builder(this)
-////                    .enableAutoManage(this, this)
-////            .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
-////            .build();
-//
-//
-//
-//
-//        });
 
 
     }
@@ -388,38 +365,6 @@ public class LoginActivity extends BaseActivity implements LoaderCallbacks<Curso
 
         }
     }
-
-    public void onLogin(View view) {
-        String email = mEmailView.getText().toString();
-        String password = mPasswordView.getText().toString();
-        String type = "login";
-        ConnectionCheck connectionCheck = new ConnectionCheck(this);
-        connectionCheck.execute(type, email, password);
-
-    }
-
-//    private void initializeControls() {
-//        btnsign = (SignInButton) findViewById(R.id.btnwithgplus);
-//        btnsign.setOnClickListener((OnClickListener) this);
-//    }
-
-
-//    private void updateUI(FirebaseUser user) {
-//        hideProgressDialog();
-//        if (user != null) {
-//            mStatusTextView.setText(getString(R.string.google_status_fmt, user.getEmail()));
-//            mDetailTextView.setText(getString(R.string.firebase_status_fmt, user.getUid()));
-//
-//            findViewById(R.id.sign_in_button).setVisibility(View.GONE);
-//            findViewById(R.id.sign_out_and_disconnect).setVisibility(View.VISIBLE);
-//        } else {
-//            mStatusTextView.setText(R.string.signed_out);
-//            mDetailTextView.setText(null);
-//
-//            findViewById(R.id.sign_in_button).setVisibility(View.VISIBLE);
-//            findViewById(R.id.sign_out_and_disconnect).setVisibility(View.GONE);
-//        }
-//    }
 
     private void handleSignInResult(GoogleSignInResult result) {
         Log.d(TAG, "handleSignInResult:" + result.isSuccess());
@@ -694,6 +639,17 @@ public class LoginActivity extends BaseActivity implements LoaderCallbacks<Curso
         }
 
         @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            pDialog = new ProgressDialog(getApplicationContext());
+            pDialog.setProgress(R.drawable.pic_loading);
+            pDialog.setMessage("Mohon Menunggu...");
+            pDialog.setCancelable(false);
+            pDialog.show();
+
+        }
+
+        @Override
         protected String doInBackground(String ... params) {
             // TODO: attempt authentication against a network service.
             ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -759,35 +715,12 @@ public class LoginActivity extends BaseActivity implements LoaderCallbacks<Curso
 
 
         }
-        public String getPostDataString(JSONObject params) throws Exception {
-
-            StringBuilder result = new StringBuilder();
-            boolean first = true;
-
-            Iterator<String> itr = params.keys();
-
-            while(itr.hasNext()){
-
-                String key= itr.next();
-                Object value = params.get(key);
-
-                if (first)
-                    first = false;
-                else
-                    result.append("&");
-
-                result.append(URLEncoder.encode(key, "UTF-8"));
-                result.append("=");
-                result.append(URLEncoder.encode(value.toString(), "UTF-8"));
-
-            }
-            return result.toString();
-        }
 
         @Override
         protected void onPostExecute(final String success) {
             mAuthTask = null;
-            showProgress(false);
+            if (pDialog.isShowing())
+                pDialog.dismiss();
             if (success!="") {
                 try{
                     JSONObject jsonObj = new JSONObject(success);
@@ -828,7 +761,18 @@ public class LoginActivity extends BaseActivity implements LoaderCallbacks<Curso
             }
 
             else {
-                alert.showAlertDialog(LoginActivity.this, "Login gagal", "Email atau Password yang anda masukkan salah.", false);
+                AlertDialog alertDialog = new AlertDialog.Builder(
+                        LoginActivity.this).create();
+                alertDialog.setTitle("Login Gagal");
+                alertDialog.setMessage("Email atau Password yang anda masukkan salah.");
+                // Setting OK Button
+                alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+                alertDialog.show();
+
                 //mPasswordView.setError(getString(R.string.error_incorrect_password));
                 //mPasswordView.requestFocus();
             }
@@ -837,7 +781,8 @@ public class LoginActivity extends BaseActivity implements LoaderCallbacks<Curso
         @Override
         protected void onCancelled() {
             mAuthTask = null;
-            showProgress(false);
+            if (pDialog.isShowing())
+                pDialog.dismiss();
         }
     }
 
