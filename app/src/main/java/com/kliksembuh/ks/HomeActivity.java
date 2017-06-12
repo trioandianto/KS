@@ -66,7 +66,7 @@ public class HomeActivity extends AppCompatActivity
     }
 
     // Alert Dialog Manager
-    AlertDialogManager alert = new AlertDialogManager();
+//    AlertDialogManager alert = new AlertDialogManager();
 
     // Session Manager Class
     SessionManagement session;

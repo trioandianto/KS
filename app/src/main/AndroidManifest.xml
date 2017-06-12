@@ -203,17 +203,15 @@
             android:launchMode="singleInstance"
             android:parentActivityName=".HomeActivity"
             android:theme="@style/AppTheme4" />
-        <activity android:name=".CobaListJSON" />
-        <activity android:name=".DoctorListActivity" />
         <activity
             android:name=".BookingActivity"
             android:screenOrientation="portrait"
             android:configChanges="orientation|keyboardHidden"
             android:launchMode="singleInstance"
-            android:parentActivityName=".TestScroolView"
+            android:parentActivityName=".DoctorListActivity"
             android:theme="@style/AppTheme4" />
         <activity
-            android:name=".TestScroolView"
+            android:name=".DoctorListActivity"
             android:screenOrientation="portrait"
             android:configChanges="orientation|keyboardHidden"
             android:launchMode="singleInstance"
@@ -323,7 +321,7 @@
             android:screenOrientation="portrait"
             android:configChanges="orientation|keyboardHidden"
             android:launchMode="singleInstance"
-            android:parentActivityName=".TestScroolView"
+            android:parentActivityName=".DoctorListActivity"
             android:theme="@style/AppTheme4" />
         <activity
             android:name=".FacilityActivity"
@@ -331,7 +329,7 @@
             android:screenOrientation="portrait"
             android:configChanges="orientation|keyboardHidden"
             android:launchMode="singleTop"
-            android:parentActivityName=".TestScroolView"
+            android:parentActivityName=".DoctorListActivity"
             android:theme="@style/AppTheme3"
             android:windowSoftInputMode="adjustPan" />
         <!-- <activity android:name=".FacilityServiceActivity" /> -->
