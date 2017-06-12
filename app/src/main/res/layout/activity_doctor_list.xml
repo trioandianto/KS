@@ -15,7 +15,7 @@
             android:id="@+id/collapsing_toolbar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
             android:fitsSystemWindows="true"
             app:contentScrim="?attr/colorPrimary"
             app:expandedTitleMarginStart="48dp"
@@ -24,10 +24,9 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
                 app:layout_collapseMode="pin"
-                app:navigationIcon="@drawable/ic_arrow_back_white_24dp"
-                app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+                android:navigationIcon="@drawable/ic_arrow_back_white_24dp"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
 
             <android.support.v4.view.ViewPager
                 android:id="@+id/backdrop"
@@ -58,7 +57,8 @@
         android:layout_width="match_parent"
         android:layout_height="fill_parent"
         android:fillViewport="true"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        android:clipToPadding="false"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -302,7 +302,7 @@
                     android:layout_width="160dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginLeft="20dp"
+                    android:layout_marginLeft="10dp"
                     android:background="#eb2698">
 
                     <Spinner

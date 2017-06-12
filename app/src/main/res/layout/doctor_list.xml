@@ -88,7 +88,7 @@
             android:layout_toEndOf="@+id/iv_doc_pic_list"
             android:layout_below="@+id/tvAppointmentNow" />
 
-    <Button
+    <TextView
         android:id="@+id/tvAppointmentNow"
         android:layout_width="75dp"
         android:layout_height="28dp"

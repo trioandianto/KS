@@ -70,14 +70,40 @@
                 android:layout_alignParentTop="true"/>
 
             <TextView
+                android:id="@+id/tv_specialty_detail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_drname_detail"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="10dp"
+                android:text="MS. CSks."
+                android:textColor="#5C5C5C"
+                android:textSize="14dp" />
+
+            <TextView
                 android:id="@+id/tv_drspecialty_detail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
+                android:layout_marginTop="5dp"
                 android:textSize="14dp"
                 android:textColor="#5C5C5C"
                 android:text="Umum"
-                android:layout_below="@+id/tv_frontTitleDoc" />
+                android:layout_below="@+id/tv_specialty_detail" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_kualiifikasi"
+                android:text="Lihat Kualifikasi"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:padding="6dp"
+                android:clickable="true"
+                android:textSize="10sp"
+                android:background="@color/divider_grey"
+                android:layout_below="@id/tv_drspecialty_detail"
+                android:layout_marginLeft="10dp"
+                android:textColor="@color/black"/>
         </RelativeLayout>
 
     </LinearLayout>
