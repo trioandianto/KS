@@ -76,12 +76,13 @@
             android:textSize="14dp" />
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="40dp"
+            android:layout_height="wrap_content"
             android:id="@+id/btn_kualiifikasi"
             android:text="Lihat Kualifikasi"
-            android:padding="10dp"
+            android:padding="6dp"
             android:clickable="true"
-            android:background="@color/com_facebook_button_border_color_focused"
+            android:textSize="10sp"
+            android:background="@color/divider_grey"
             android:layout_marginLeft="10dp"
             android:textColor="@color/black"
             android:layout_toEndOf="@+id/iv_doc_pic_list"
@@ -90,16 +91,16 @@
     <TextView
         android:id="@+id/tvAppointmentNow"
         android:layout_width="75dp"
-        android:layout_height="24dp"
+        android:layout_height="28dp"
         android:text="Book"
         android:textAllCaps="false"
         android:textColor="@color/white"
         android:layout_alignTop="@+id/tv_specialty_list"
         android:layout_marginTop="22dp"
         android:layout_marginRight="8dp"
-        android:padding="4dp"
         android:gravity="center"
-        android:background="#7057ff"
+        android:background="@drawable/shape"
+        android:backgroundTint="#7057ff"
         android:layout_alignParentRight="true"
         android:textSize="14dp" />
 

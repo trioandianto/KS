@@ -360,7 +360,7 @@ public class HospitalList extends AppCompatActivity {
                         int asd = jsonObject.getInt("totalHealthFacilityNbr");
                         String total = jsonObject.getString("TotalLikeNbr");
 
-                            semua ="Lihat Semua Spesialisasi ("+asd+")";
+                            semua ="Selengkapnya ("+asd+")";
 
                         int arr = jsonObject.getInt("totalInsuranceNbr");
 

@@ -186,5 +186,8 @@ MENGGUNAKAN LAYANAN KAMI UNTUK PERTAMA KALI.</string>
     <string name="lblPernafasan">Pernafasan (Frek/Min)</string>
     <string name="pilih_hari">Pilih Hari</string>
 
+    <!--String copyright-->
+    <string name="copyright">Copyright © 2017 KlikSembuh</string>
+
 
 </resources>
