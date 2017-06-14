@@ -1,7 +1,5 @@
 package com.kliksembuh.ks;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.AlertDialog;
 import android.app.LoaderManager.LoaderCallbacks;
@@ -56,6 +54,7 @@ import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.kliksembuh.ks.library.ConnectionCheck;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -69,7 +68,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-
 
 import javax.net.ssl.HttpsURLConnection;
 
@@ -235,6 +233,30 @@ public class LoginActivity extends BaseActivity implements LoaderCallbacks<Curso
             }
         });
 
+        // Login Google
+        // Updated by Ucu (13032017)
+//
+//        btnSignGoogle = (SignInButton) findViewById(R.id.btnloginwihtgoogle);
+//        btnSignGoogle.setOnClickListener(new OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                signIn();
+//            }
+//
+//            GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+//                    .requestEmail()
+//                    .build();
+//
+////            mGoogleApiClient = new GoogleApiClient.Builder(this)
+////                    .enableAutoManage(this, this)
+////            .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
+////            .build();
+//
+//
+//
+//
+//        });
+
 
     }
 
@@ -366,6 +388,38 @@ public class LoginActivity extends BaseActivity implements LoaderCallbacks<Curso
         }
     }
 
+    public void onLogin(View view) {
+        String email = mEmailView.getText().toString();
+        String password = mPasswordView.getText().toString();
+        String type = "login";
+        ConnectionCheck connectionCheck = new ConnectionCheck(this);
+        connectionCheck.execute(type, email, password);
+
+    }
+
+//    private void initializeControls() {
+//        btnsign = (SignInButton) findViewById(R.id.btnwithgplus);
+//        btnsign.setOnClickListener((OnClickListener) this);
+//    }
+
+
+//    private void updateUI(FirebaseUser user) {
+//        hideProgressDialog();
+//        if (user != null) {
+//            mStatusTextView.setText(getString(R.string.google_status_fmt, user.getEmail()));
+//            mDetailTextView.setText(getString(R.string.firebase_status_fmt, user.getUid()));
+//
+//            findViewById(R.id.sign_in_button).setVisibility(View.GONE);
+//            findViewById(R.id.sign_out_and_disconnect).setVisibility(View.VISIBLE);
+//        } else {
+//            mStatusTextView.setText(R.string.signed_out);
+//            mDetailTextView.setText(null);
+//
+//            findViewById(R.id.sign_in_button).setVisibility(View.VISIBLE);
+//            findViewById(R.id.sign_out_and_disconnect).setVisibility(View.GONE);
+//        }
+//    }
+
     private void handleSignInResult(GoogleSignInResult result) {
         Log.d(TAG, "handleSignInResult:" + result.isSuccess());
         if (result.isSuccess()) {
@@ -483,7 +537,6 @@ public class LoginActivity extends BaseActivity implements LoaderCallbacks<Curso
             } else {
                 // Show a progress spinner, and kick off a background task to
                 // perform the user login attempt.
-                showProgress(true);
                 mAuthTask = new UserLoginTask(email, password);
                 mAuthTask.execute((String) null);
             }
@@ -521,37 +574,7 @@ public class LoginActivity extends BaseActivity implements LoaderCallbacks<Curso
      * Shows the progress UI and hides the login form.
      */
     @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
-    private void showProgress(final boolean show) {
-        // On Honeycomb MR2 we have the ViewPropertyAnimator APIs, which allow
-        // for very easy animations. If available, use these APIs to fade-in
-        // the progress spinner.
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
-            int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
 
-            mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
-            mLoginFormView.animate().setDuration(shortAnimTime).alpha(
-                    show ? 0 : 1).setListener(new AnimatorListenerAdapter() {
-                @Override
-                public void onAnimationEnd(Animator animation) {
-                    mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
-                }
-            });
-
-            mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
-            mProgressView.animate().setDuration(shortAnimTime).alpha(
-                    show ? 1 : 0).setListener(new AnimatorListenerAdapter() {
-                @Override
-                public void onAnimationEnd(Animator animation) {
-                    mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
-                }
-            });
-        } else {
-            // The ViewPropertyAnimator APIs are not available, so simply show
-            // and hide the relevant UI components.
-            mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
-            mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
-        }
-    }
 
     @Override
     public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
@@ -637,16 +660,14 @@ public class LoginActivity extends BaseActivity implements LoaderCallbacks<Curso
             mEmail = email;
             mPassword = password;
         }
-
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            pDialog = new ProgressDialog(getApplicationContext());
-            pDialog.setProgress(R.drawable.pic_loading);
+            // Showing progress dialog
+            pDialog = new ProgressDialog(LoginActivity.this);
             pDialog.setMessage("Mohon Menunggu...");
             pDialog.setCancelable(false);
             pDialog.show();
-
         }
 
         @Override
@@ -768,6 +789,7 @@ public class LoginActivity extends BaseActivity implements LoaderCallbacks<Curso
                 // Setting OK Button
                 alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
+                        // Write your code here to execute after dialog closed
 
                     }
                 });

@@ -112,9 +112,10 @@ public class DoctorListActivity extends AppCompatActivity{
         setContentView(R.layout.activity_doctor_list);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
+        collapsingToolbarLayout.setTitle(toolbarTitle);
 
-        toolbar.setTitle(toolbarTitle);
-        setSupportActionBar(toolbar);
 
 
         mDokterList = new ArrayList<>();
