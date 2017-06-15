@@ -11,6 +11,8 @@ import android.widget.Toast;
 import com.kliksembuh.ks.R;
 import com.kliksembuh.ks.models.Doctor;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -25,6 +27,8 @@ public class DoctorListAdapter <T> extends BaseAdapter {
     private Context mContext;
     private List<Doctor> mDoctorList;
     private ArrayList<Doctor> mOriginalValues;
+    private Boolean isClick = false;
+    private int countClick = 0;
 
     // Constructor
     public DoctorListAdapter(Context mContext, List<Doctor> mDoctorList) {
@@ -61,6 +65,28 @@ public class DoctorListAdapter <T> extends BaseAdapter {
         TextView tvDrname = (TextView)newDview.findViewById(R.id.tv_list_drname);
         TextView tvDrspecialty = (TextView)newDview.findViewById(R.id.tv_tittle_list);
         TextView btnKualiifikasi = (TextView) newDview.findViewById(R.id.btn_kualiifikasi);
+
+        final TextView tvFavDoc = (TextView) newDview.findViewById(R.id.tvFavDoc);
+        final TextView tvValueOfDoc = (TextView) newDview.findViewById(R.id.tvValueOfFavDoc);
+        tvFavDoc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!isClick){
+                    tvFavDoc.setBackgroundResource(R.drawable.ic_favorite_24dp);
+                    countClick++;
+                    tvValueOfDoc.setText(String.valueOf(countClick));
+                    isClick=true;
+                }
+                else{
+                    tvFavDoc.setBackgroundResource(R.drawable.ic_favorite_border_black_14dp);
+                    countClick--;
+                    tvValueOfDoc.setText(String.valueOf(countClick));
+                    isClick=false;
+                }
+            }
+        });
+        //TextView tvFavoriteDoc = (TextView) newDview.findViewById(R.id.tvFavouriteDoc);
+
         btnKualiifikasi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
