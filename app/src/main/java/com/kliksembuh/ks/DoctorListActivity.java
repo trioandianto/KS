@@ -111,8 +111,12 @@ public class DoctorListActivity extends AppCompatActivity{
         }
         setContentView(R.layout.activity_doctor_list);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle(toolbarTitle);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
+        collapsingToolbarLayout.setTitle(toolbarTitle);
+
+
 
         mDokterList = new ArrayList<>();
         list = new ArrayList<String>();
@@ -201,7 +205,7 @@ public class DoctorListActivity extends AppCompatActivity{
         };
 
         timer = new Timer(); // This will create a new Thread
-        timer.schedule(new TimerTask() { // task to be scheduled
+        timer .schedule(new TimerTask() { // task to be scheduled
 
             @Override
             public void run() {
@@ -333,7 +337,7 @@ public class DoctorListActivity extends AppCompatActivity{
             super.onPreExecute();
             // Showing progress dialog
             pDialog = new ProgressDialog(DoctorListActivity.this);
-            pDialog.setMessage("Please wait...");
+            pDialog.setMessage("Mohon menunggu...");
             pDialog.setCancelable(false);
             pDialog.show();
         }

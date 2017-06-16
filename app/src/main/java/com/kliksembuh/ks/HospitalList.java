@@ -38,9 +38,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.net.URLEncoder;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.net.ssl.HttpsURLConnection;
@@ -191,8 +189,6 @@ public class HospitalList extends AppCompatActivity {
             super.onPreExecute();
             // Showing progress dialog
             pDialog = new ProgressDialog(HospitalList.this);
-            
-            pDialog.setProgress(R.drawable.pic_loading);
             pDialog.setMessage("Mohon Menunggu...");
             pDialog.setCancelable(false);
             pDialog.show();
@@ -243,30 +239,6 @@ public class HospitalList extends AppCompatActivity {
             }
         }
 
-        public String getPostDataString(JSONObject params) throws Exception {
-
-            StringBuilder result = new StringBuilder();
-            boolean first = true;
-
-            Iterator<String> itr = params.keys();
-
-            while(itr.hasNext()){
-
-                String key= itr.next();
-                Object value = params.get(key);
-
-                if (first)
-                    first = false;
-                else
-                    result.append("&");
-
-                result.append(URLEncoder.encode(key, "UTF-8"));
-                result.append("=");
-                result.append(URLEncoder.encode(value.toString(), "UTF-8"));
-
-            }
-            return result.toString();
-        }
         @Override
         protected void onPostExecute(final String success) {
             if (pDialog.isShowing())
