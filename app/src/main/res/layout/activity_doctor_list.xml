@@ -291,8 +291,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
                 android:layout_marginTop="1dp"
-                android:padding="6dp"
-                android:background="#d4157e">
+                android:background="#d4157e"
+                android:padding="6dp">
 
                 <RelativeLayout
                     android:id="@+id/relSpinner"
@@ -329,57 +329,60 @@
                     android:layout_width="160dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
-                    android:gravity="center"
-                    android:background="#eb2698">
+                    android:layout_marginRight="20dp"
+                    android:background="#eb2698"
+                    android:gravity="center">
+
                     <Spinner
                         android:id="@+id/spn_filter"
                         android:layout_width="match_parent"
                         android:layout_height="30dp"
                         android:layout_alignParentStart="true"
                         android:layout_alignParentTop="true"
+                        android:layout_centerInParent="true"
                         android:background="@drawable/shape"
                         android:backgroundTint="@color/colorPrimary"
                         android:clipToPadding="false"
-                        android:layout_centerInParent="true"
                         android:popupBackground="#ffffff"
                         android:spinnerMode="dialog"
                         android:textSize="13dp" />
+
                     <ImageView
+                        android:id="@+id/sds"
                         android:layout_width="40dp"
                         android:layout_height="30dp"
-                        android:id="@+id/sds"
                         android:layout_alignParentRight="true"
                         android:layout_gravity="center"
                         android:paddingBottom="2dp"
                         android:src="@drawable/ic_sort_black_16dp" />
 
                     <!--<ImageView-->
-                        <!--android:layout_width="40dp"-->
-                        <!--android:layout_height="30dp"-->
-                        <!--android:layout_alignParentRight="true"-->
-                        <!--android:layout_gravity="center"-->
-                        <!--android:paddingBottom="2dp"-->
-                        <!--android:src="@mipmap/drop_white" />-->
+                    <!--android:layout_width="40dp"-->
+                    <!--android:layout_height="30dp"-->
+                    <!--android:layout_alignParentRight="true"-->
+                    <!--android:layout_gravity="center"-->
+                    <!--android:paddingBottom="2dp"-->
+                    <!--android:src="@mipmap/drop_white" />-->
 
                     <!--<TextView-->
-                        <!--android:id="@+id/tv_FilterDoc"-->
-                        <!--android:layout_width="match_parent"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:layout_alignParentStart="true"-->
-                        <!--android:layout_alignParentTop="true"-->
-                        <!--android:backgroundTint="#eb2698"-->
-                        <!--android:drawableLeft="@drawable/ic_sort_black_16dp"-->
-                        <!--android:drawablePadding="8dp"-->
-                        <!--android:drawableStart="@drawable/ic_sort_black_16dp"-->
-                        <!--android:gravity="center_vertical"-->
-                        <!--android:inputType=""-->
-                        <!--android:background="@drawable/shape"-->
-                        <!--android:maxLines="1"-->
-                        <!--android:padding="8dp"-->
-                        <!--android:text="Filter"-->
-                        <!--android:textAllCaps="false"-->
-                        <!--android:textColor="@color/white"-->
-                        <!--android:textSize="13dp" />-->
+                    <!--android:id="@+id/tv_FilterDoc"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_alignParentStart="true"-->
+                    <!--android:layout_alignParentTop="true"-->
+                    <!--android:backgroundTint="#eb2698"-->
+                    <!--android:drawableLeft="@drawable/ic_sort_black_16dp"-->
+                    <!--android:drawablePadding="8dp"-->
+                    <!--android:drawableStart="@drawable/ic_sort_black_16dp"-->
+                    <!--android:gravity="center_vertical"-->
+                    <!--android:inputType=""-->
+                    <!--android:background="@drawable/shape"-->
+                    <!--android:maxLines="1"-->
+                    <!--android:padding="8dp"-->
+                    <!--android:text="Filter"-->
+                    <!--android:textAllCaps="false"-->
+                    <!--android:textColor="@color/white"-->
+                    <!--android:textSize="13dp" />-->
                 </RelativeLayout>
             </LinearLayout>
 

@@ -337,7 +337,7 @@ public class DoctorListActivity extends AppCompatActivity{
             super.onPreExecute();
             // Showing progress dialog
             pDialog = new ProgressDialog(DoctorListActivity.this);
-            pDialog.setMessage("Please wait...");
+            pDialog.setMessage("Mohon menunggu...");
             pDialog.setCancelable(false);
             pDialog.show();
         }
