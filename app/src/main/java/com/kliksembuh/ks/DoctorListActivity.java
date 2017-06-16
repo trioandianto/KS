@@ -140,7 +140,7 @@ public class DoctorListActivity extends AppCompatActivity{
         //mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.mapListHospital);
         List<String> list = new ArrayList<String>();
         list.add(spesial);
-        ArrayAdapter arrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,list);
+        ArrayAdapter arrayAdapter = new ArrayAdapter<String>(this,R.layout.spinner_style,list);
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(arrayAdapter);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -423,9 +423,8 @@ public class DoctorListActivity extends AppCompatActivity{
                             list.add(spesiality);
                         }
 
-                        ArrayAdapter arrayAdapter = new ArrayAdapter<String>(getApplicationContext(),R.layout.spinner_style,list);
-                        arrayAdapter.setDropDownViewResource
-                                (R.layout.spinner_dropdown_item);
+                        ArrayAdapter arrayAdapter = new ArrayAdapter<String>(DoctorListActivity.this,R.layout.spinner_style,list);
+                        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                         spinner.setAdapter(arrayAdapter);
                         JSONArray jsonArray1 = jsonObject.getJSONArray("Institute");
                         for (int j=0;j<jsonArray1.length();j++){
