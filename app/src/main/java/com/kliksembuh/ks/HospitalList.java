@@ -485,20 +485,20 @@ public class HospitalList extends AppCompatActivity {
             tvFavHosp.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    int tot = mHospitalList.get(position).getLike();
+                    int resultLike = mHospitalList.get(position).getLike();
                     if(!isClick){
                         tvFavHosp.setBackgroundResource(R.drawable.ic_favorite_24dp);
-                        tot++;
-                        like.setText(String.valueOf(tot));
+                        resultLike++;
+                        like.setText(String.valueOf(resultLike));
                         isClick = true;
-                        mHospitalList.get(position).setLike(tot);
+                        mHospitalList.get(position).setLike(resultLike);
                     }
                     else{
                         tvFavHosp.setBackgroundResource(R.drawable.ic_favorite_border_black_14dp);
-                        tot--;
-                        like.setText(String.valueOf(tot));
+                        resultLike--;
+                        like.setText(String.valueOf(resultLike));
                         isClick = false;
-                        mHospitalList.get(position).setLike(tot);
+                        mHospitalList.get(position).setLike(resultLike);
                     }
                 }
             });
