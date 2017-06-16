@@ -23,14 +23,14 @@ public class Hospital {
     private String fclt2;
     private String fclt3;
     private String semua;
-    private String like;
+    private int like;
 
 
     // Constructor
 
     public Hospital(String id, Drawable hospital_pic_id, String name, String address, String phoneNbr, String capabilitiesDesc, String stringImg,
                     Drawable img1, Drawable img2, Drawable img3,String moreInfoInsurance, String igd, String bpjs, String fclt1,
-                    String fclt2, String fclt3, String semua, String like) {
+                    String fclt2, String fclt3, String semua, int like) {
         this.id = id;
         this.hospital_pic_id = hospital_pic_id;
         this.name = name;
@@ -183,11 +183,11 @@ public class Hospital {
     public void setSemua(String semua) {
         this.semua = semua;
     }
-    public String getLike() {
+    public int getLike() {
         return like;
     }
 
-    public void setLike(String like) {
+    public void setLike(int like) {
         this.like = like;
     }
 }

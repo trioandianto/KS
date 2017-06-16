@@ -65,6 +65,8 @@ public class HospitalList extends AppCompatActivity {
     private String finalListHospital;
     private Drawable load;
     private int cekNull=0;
+    private int total;
+    private Boolean isClick = false;
 
     RatingBar rb;
 
@@ -358,7 +360,7 @@ public class HospitalList extends AppCompatActivity {
 
 
                         int asd = jsonObject.getInt("totalHealthFacilityNbr");
-                        String total = jsonObject.getString("TotalLikeNbr");
+                        total = jsonObject.getInt("TotalLikeNbr");
 
                             semua ="Selengkapnya ("+asd+")";
 
@@ -462,6 +464,7 @@ public class HospitalList extends AppCompatActivity {
 
         @Override
         public View getView(final int position, View convertView, ViewGroup parent) {
+
             View newView = View.inflate(mContext, R.layout.hospital_list, null);
             ImageView imgView = (ImageView)newView.findViewById(R.id.iv_hospital_pic);
             TextView tvName = (TextView)newView.findViewById(R.id.tv_name);
@@ -474,10 +477,32 @@ public class HospitalList extends AppCompatActivity {
             TextView tvIGD = (TextView) newView.findViewById(R.id.tv_IGD);
             TextView tv24hour = (TextView) newView.findViewById(R.id.tv_24hours);
             TextView tvLihatSelengkapnya = (TextView)newView.findViewById(R.id.tv_moreinfo);
-            TextView like = (TextView)newView.findViewById(R.id.tv_favourite);
+            final TextView like = (TextView)newView.findViewById(R.id.tvValueOfFavHosp);
             TextView fcl1 = (TextView)newView.findViewById(R.id.tv_doctorGigi);
             TextView fcl2 = (TextView)newView.findViewById(R.id.tv_doctorKandungan);
             TextView fcl3 = (TextView)newView.findViewById(R.id.tv_doctorTHT);
+            final TextView tvFavHosp= (TextView) newView.findViewById(R.id.tvFavHosp);
+            tvFavHosp.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int tot = mHospitalList.get(position).getLike();
+                    if(!isClick){
+                        tvFavHosp.setBackgroundResource(R.drawable.ic_favorite_24dp);
+                        tot++;
+                        like.setText(String.valueOf(tot));
+                        isClick = true;
+                        mHospitalList.get(position).setLike(tot);
+                    }
+                    else{
+                        tvFavHosp.setBackgroundResource(R.drawable.ic_favorite_border_black_14dp);
+                        tot--;
+                        like.setText(String.valueOf(tot));
+                        isClick = false;
+                        mHospitalList.get(position).setLike(tot);
+                    }
+                }
+            });
+
             TextView semua = (TextView)newView.findViewById(R.id.tv_moreinfo2);
             semua.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -521,7 +546,7 @@ public class HospitalList extends AppCompatActivity {
             tvLihatSelengkapnya.setText(mHospitalList.get(position).getMoreInfoInsurance());
             tvIGD.setText(mHospitalList.get(position).getIgd());
             tv24hour.setText(mHospitalList.get(position).getBpjs());
-            like.setText(mHospitalList.get(position).getLike());
+            like.setText(String.valueOf(mHospitalList.get(position).getLike()));
             fcl1.setText(mHospitalList.get(position).getFclt1());
             fcl2.setText(mHospitalList.get(position).getFclt2());
             fcl3.setText(mHospitalList.get(position).getFclt3());
