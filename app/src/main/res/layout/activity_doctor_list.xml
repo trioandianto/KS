@@ -356,33 +356,6 @@
                         android:paddingBottom="2dp"
                         android:src="@drawable/ic_sort_black_16dp" />
 
-                    <!--<ImageView-->
-                    <!--android:layout_width="40dp"-->
-                    <!--android:layout_height="30dp"-->
-                    <!--android:layout_alignParentRight="true"-->
-                    <!--android:layout_gravity="center"-->
-                    <!--android:paddingBottom="2dp"-->
-                    <!--android:src="@mipmap/drop_white" />-->
-
-                    <!--<TextView-->
-                    <!--android:id="@+id/tv_FilterDoc"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_alignParentStart="true"-->
-                    <!--android:layout_alignParentTop="true"-->
-                    <!--android:backgroundTint="#eb2698"-->
-                    <!--android:drawableLeft="@drawable/ic_sort_black_16dp"-->
-                    <!--android:drawablePadding="8dp"-->
-                    <!--android:drawableStart="@drawable/ic_sort_black_16dp"-->
-                    <!--android:gravity="center_vertical"-->
-                    <!--android:inputType=""-->
-                    <!--android:background="@drawable/shape"-->
-                    <!--android:maxLines="1"-->
-                    <!--android:padding="8dp"-->
-                    <!--android:text="Filter"-->
-                    <!--android:textAllCaps="false"-->
-                    <!--android:textColor="@color/white"-->
-                    <!--android:textSize="13dp" />-->
                 </RelativeLayout>
             </LinearLayout>
 

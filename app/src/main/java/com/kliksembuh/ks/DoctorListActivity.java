@@ -41,7 +41,6 @@ import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
@@ -59,7 +58,7 @@ public class DoctorListActivity extends AppCompatActivity{
     public static final String EXTRA_NAME = "cheese_name";
 
     ViewPager viewPager;
-    private Drawable[] layouts;
+    private String[] layouts;
     private String [] tvLayouts;
     private ScrollView scrollView;
     private NestedScrollView nsDokter;
@@ -234,7 +233,7 @@ public class DoctorListActivity extends AppCompatActivity{
 
 //        new GetContacts().execute();
         new DokterListAsync(rumahSakitID).execute();
-//        lvDokter.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//        lvDokter.clic(new AdapterView.OnItemClickListener() {
 //            @Override
 //            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 //                Object object = parent.getAdapter().getItem(position);
@@ -283,7 +282,6 @@ public class DoctorListActivity extends AppCompatActivity{
             }
         }
     }
-
     public class ViewPagerAdapter extends PagerAdapter {
 
         private LayoutInflater layoutInflater;
@@ -300,7 +298,7 @@ public class DoctorListActivity extends AppCompatActivity{
 
             ImageView imageView = (ImageView) itemView.findViewById(R.id.doctorImageView);
             TextView tv_num_view =(TextView)itemView.findViewById(R.id.tv_num_view);
-            imageView.setImageDrawable(layouts[position]);
+            Picasso.with(context).load(layouts[position]).into(imageView);
             tv_num_view.setText(tvLayouts[position]);
 
             container.addView(itemView);
@@ -322,16 +320,6 @@ public class DoctorListActivity extends AppCompatActivity{
         @Override
         public void destroyItem(ViewGroup container, int position, Object object) {
             container.removeView((RelativeLayout) object);
-        }
-    }
-
-    public Drawable LoadImageFromWebOperations(String url) {
-        try {
-            InputStream is = (InputStream) new URL(url).getContent();
-            Drawable d = Drawable.createFromStream(is, "src name");
-            return d;
-        } catch (Exception e) {
-            return null;
         }
     }
     public class DokterListAsync extends AsyncTask<String, Void, String> {
@@ -414,8 +402,6 @@ public class DoctorListActivity extends AppCompatActivity{
                         String personelCD = jsonObject.getString("MedicalPersonnelCD");
                         String image = jsonObject.getString("ImgUrl");
                         String tittle = "MSC, Sp. MK";
-                        Drawable photo = LoadImageFromWebOperations(image);
-
                         idDokter[i]=personelCD;
                         String frontTitle = jsonObject.getString("FrontTitle");
                         String name = jsonObject.getString("Name");
@@ -533,12 +519,12 @@ public class DoctorListActivity extends AppCompatActivity{
                         JSONObject jsonObject = jsonArray.getJSONObject(i);
                         JSONArray jsonArray1 = jsonObject.getJSONArray("InstitutionImages");
                         int length = jsonArray1.length();
-                        layouts = new Drawable[length];
+                        layouts = new String[length];
                         tvLayouts = new String[length];
                         for (int j=0;j<jsonArray1.length();j++){
                             JSONObject jsonObject1 = jsonArray1.getJSONObject(j);
                             String img = jsonObject1.getString("ImagePath");
-                            layouts[j] = LoadImageFromWebOperations(img);
+                            layouts[j] = img;
                             tvLayouts[j] = j+1 +"/"+ length;
                         }
                     }
@@ -556,40 +542,19 @@ public class DoctorListActivity extends AppCompatActivity{
 
         }
     }
-    public class ImageDrawable extends AsyncTask<String, Void, Drawable>{
-
-        Doctor doctor;
-        public ImageDrawable(Doctor doctor){
-            this.doctor  = doctor;
-        }
-        @Override
-        protected Drawable doInBackground(String... params) {
-            //return null;
-            Drawable imageDrawable = LoadImageFromWebOperations(doctor.getImageUrl());
-            //this.doctor.setDoc_pic_id(imageDrawable);
-
-            return imageDrawable;
-        }
-
-//        @Override
-//        protected void onPostExecute(Drawable drawable) {
-//            super.onPostExecute(drawable);
-//
-//        }
-    }
     public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.DoctorViewHolder> {
         private List<Doctor> mDoctorList;
         private Context context;
         private ArrayList<Doctor> mOriginalValues;
+
         public RecycleAdapter (Context context,List<Doctor> mDoctorList){
             this.mDoctorList = mDoctorList;
             this.context = context;
             this.mOriginalValues = new ArrayList<Doctor>();
             this.mOriginalValues.addAll(mDoctorList);
-
         }
 
-        public class DoctorViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+        public class DoctorViewHolder extends RecyclerView.ViewHolder {
             public ImageView imgDview ;
             public TextView tvFrontTitle;
             public TextView tvTittle;
@@ -606,18 +571,54 @@ public class DoctorListActivity extends AppCompatActivity{
                 tvDrspecialty = (TextView)newDview.findViewById(R.id.tv_tittle_list);
                 btnKualiifikasi = (TextView) newDview.findViewById(R.id.btn_kualiifikasi);
             }
-            @Override
-            public void onClick(View v) {
 
-            }
         }
 
         @Override
-        public DoctorViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        public DoctorViewHolder onCreateViewHolder(final ViewGroup parent, final int viewType) {
+
 
             LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
             View listItem= layoutInflater.inflate(R.layout.doctor_list, parent, false);
-            DoctorViewHolder viewHolder = new DoctorViewHolder(listItem);
+            final DoctorViewHolder viewHolder = new DoctorViewHolder(listItem);
+            listItem.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int i = viewHolder.getAdapterPosition();
+                    Object object = mDoctorList.get(i);
+                    Doctor dokter = (Doctor) object;
+                    String dokterID =  dokter.getDoc_id();
+                    String firstTtlDoc = dokter.getFrontTtlDoc();
+                    String namaDokter = dokter.getNameDoc();
+                    String specialtyDoc = dokter.getSpecialty();
+                    //Drawable imageDr = dokter.getDoc_pic_id();
+                    String urlImg = dokter.getImageUrl();
+                    BookingActivity bookingActivity = new BookingActivity();
+                    //bookingActivity.setImageDokter(imageDr);
+
+                    Intent myIntent = new Intent(DoctorListActivity.this ,BookingActivity.class);
+                    Bundle b = new Bundle();
+                    b.putString("idDokter", dokterID);
+                    b.putString("userID", userID);
+                    b.putString("personalID",dokterID);
+                    b.putString("firstTtlDoc", firstTtlDoc);
+                    b.putString("namaDokter",namaDokter);
+                    b.putString("specialtyDoc", specialtyDoc);
+                    b.putString("urlImage",urlImg);
+                    b.putString("alamat", alamat);
+                    b.putString("rumahSakitID",rumahSakitID);
+                    b.putString("facilityID", facility);
+                    b.putString("namaRumahSakit", toolbarTitle);
+                    b.putStringArray("praktekDokter", praktekDokter);
+                    //Your id
+                    //.putExtra("userID",userID);
+                    myIntent.putExtras(b);
+                    //.putExtra("userID",userID);
+                    startActivityForResult(myIntent, 1);
+
+                }
+            });
+
             return viewHolder;
         }
 
@@ -633,6 +634,10 @@ public class DoctorListActivity extends AppCompatActivity{
             holder.btnKualiifikasi.setText(mDoctorList.get(position).getKualifikasi());
             holder.tvTittle.setText(mDoctorList.get(position).getTittle());
 
+        }
+        @Override
+        public long getItemId(int position) {
+            return position;
         }
 
         @Override

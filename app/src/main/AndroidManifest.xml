@@ -377,7 +377,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.kliksembuh.ks.SettingActivity" />
         </activity>
-        <activity android:name=".RecycleViewActivity"></activity>
     </application>
 
 </manifest>

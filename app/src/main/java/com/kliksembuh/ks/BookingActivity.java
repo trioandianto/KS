@@ -30,13 +30,13 @@ import android.widget.Toast;
 import com.kliksembuh.ks.library.JadwalDokterAdapter;
 import com.kliksembuh.ks.models.JadwalDokter;
 import com.kliksembuh.ks.models.PraktekDokter;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
@@ -172,6 +172,7 @@ public class BookingActivity extends AppCompatActivity implements ListView.OnIte
         setSupportActionBar(newToolbar);
         getWindow().setStatusBarColor(ContextCompat.getColor(BookingActivity.this, R.color.colorPrimaryDark));
         imgDokter = (ImageView)findViewById(R.id.iv_doc_picdetail);
+        Picasso.with(getApplicationContext()).load(urlImage).into(imgDokter);
         tvFirstTitle = (TextView) findViewById(R.id.tv_frontTitleDoc);
         tvFirstTitle.setText(firstTitle);
         tvNamaDokter = (TextView) findViewById(R.id.tv_drname_detail);
@@ -179,8 +180,6 @@ public class BookingActivity extends AppCompatActivity implements ListView.OnIte
         tvJenisSpesialisasi = (TextView)findViewById(R.id.tv_drspecialty_detail);
         tvJenisSpesialisasi.setText(dokterSpesialisasi);
         tvDate = (TextView)findViewById(R.id.tvDate);
-
-        new ImageDrawable(urlImage).execute();
 
 
 
@@ -1457,37 +1456,6 @@ public class BookingActivity extends AppCompatActivity implements ListView.OnIte
         }
         @Override
         protected void onCancelled() {
-
-        }
-    }
-    public Drawable LoadImageFromWebOperations(String url) {
-        try {
-            InputStream is = (InputStream) new URL(url).getContent();
-            Drawable d = Drawable.createFromStream(is, "src name");
-            return d;
-        } catch (Exception e) {
-            return null;
-        }
-    }
-    public class ImageDrawable extends AsyncTask<String, Void, Drawable>{
-
-        String image;
-        public ImageDrawable(String image){
-            this.image  = image;
-        }
-        @Override
-        protected Drawable doInBackground(String... params) {
-            //return null;
-            Drawable imageDrawable = LoadImageFromWebOperations(image);
-
-            return imageDrawable;
-        }
-
-        @Override
-        protected void onPostExecute(Drawable drawable) {
-
-            super.onPostExecute(drawable);
-            imgDokter.setImageDrawable(drawable);
 
         }
     }
