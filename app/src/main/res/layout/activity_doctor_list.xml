@@ -386,15 +386,16 @@
                 </RelativeLayout>
             </LinearLayout>
 
-            <ListView
-                android:id="@+id/lvDetailRumahSakit"
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rvDetailRumahSakit"
                 android:layout_width="match_parent"
                 android:layout_height="fill_parent"
                 android:background="@drawable/shape"
                 android:clipToPadding="false"
                 android:divider="#00000000"
                 android:paddingBottom="15dip"
-                android:paddingLeft="10dp"></ListView>
+                android:paddingLeft="10dp">
+            </android.support.v7.widget.RecyclerView>
         </LinearLayout>
 
     </android.support.v4.widget.NestedScrollView>

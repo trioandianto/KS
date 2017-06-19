@@ -10,8 +10,7 @@ import android.widget.Toast;
 
 import com.kliksembuh.ks.R;
 import com.kliksembuh.ks.models.Doctor;
-
-import org.w3c.dom.Text;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -95,7 +94,8 @@ public class DoctorListAdapter <T> extends BaseAdapter {
         });
 
         // Set text and image for View of Doctor
-        imgDview.setImageDrawable(mDoctorList.get(position).getDoc_pic_id());
+//        imgDview.setImageDrawable(mDoctorList.get(position).getDoc_pic_id());
+        Picasso.with(mContext).load(mDoctorList.get(position).getDoc_pic_id()).resize(80, 90).into(imgDview);
         tvFrontTitle.setText(mDoctorList.get(position).getFrontTtlDoc());
         tvDrname.setText(mDoctorList.get(position).getNameDoc());
         tvDrspecialty.setText(mDoctorList.get(position).getSpecialty());

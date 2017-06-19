@@ -14,6 +14,9 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,16 +25,15 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.google.android.gms.maps.SupportMapFragment;
-import com.kliksembuh.ks.library.DoctorListAdapter;
 import com.kliksembuh.ks.library.ObservableScrollView;
 import com.kliksembuh.ks.models.Doctor;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -46,6 +48,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -67,8 +70,8 @@ public class DoctorListActivity extends AppCompatActivity{
     List<String> list;
     private ViewPagerAdapter viewPagerAdapter;
     private CollapsingToolbarLayout collapsingToolbarLayout;
-    private ListView lvDokter;
-    private DoctorListAdapter dAdapter;
+    private RecyclerView lvDokter;
+    private RecycleAdapter rAdapter;
     private ProgressDialog pDialog;
     private String spesial;
     private Spinner spinner, spnFilter;
@@ -126,7 +129,12 @@ public class DoctorListActivity extends AppCompatActivity{
 //        nsDokter.getParent().requestChildFocus(nsDokter, nsDokter);
 //        nsDokter.setClickable(true);
 
-        lvDokter = (ListView)findViewById(R.id.lvDetailRumahSakit);
+        lvDokter = (RecyclerView)findViewById(R.id.rvDetailRumahSakit);
+        rAdapter = new RecycleAdapter(getApplicationContext(), mDokterList);
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
+        lvDokter.setLayoutManager(mLayoutManager);
+        lvDokter.setItemAnimator(new DefaultItemAnimator());
+        lvDokter.setAdapter(rAdapter);
         spinner = (Spinner)findViewById(R.id.spn_SpecialtyDoc);
         spnFilter = (Spinner)findViewById(R.id.spn_filter);
         List<String> list1 = new ArrayList<String>();
@@ -147,9 +155,9 @@ public class DoctorListActivity extends AppCompatActivity{
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 spesial =  parent.getItemAtPosition(position).toString();
-                if (dAdapter!=null){
-                    dAdapter.filter(spesial);
-                    lvDokter.setAdapter(dAdapter);
+                if (rAdapter!=null){
+                    rAdapter.filter(spesial);
+                    lvDokter.setAdapter(rAdapter);
                 }
             }
 
@@ -226,41 +234,41 @@ public class DoctorListActivity extends AppCompatActivity{
 
 //        new GetContacts().execute();
         new DokterListAsync(rumahSakitID).execute();
-        lvDokter.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Object object = parent.getAdapter().getItem(position);
-                Doctor dokter = (Doctor) object;
-                String dokterID =  dokter.getDoc_id();
-                String firstTtlDoc = dokter.getFrontTtlDoc();
-                String namaDokter = dokter.getNameDoc();
-                String specialtyDoc = dokter.getSpecialty();
-                Drawable imageDr = dokter.getDoc_pic_id();
-                String urlImg = dokter.getImageUrl();
-                BookingActivity bookingActivity = new BookingActivity();
-                bookingActivity.setImageDokter(imageDr);
-
-                Intent myIntent = new Intent(DoctorListActivity.this ,BookingActivity.class);
-                Bundle b = new Bundle();
-                b.putString("idDokter", dokterID);
-                b.putString("userID", userID);
-                b.putString("personalID",idDokter[position]);
-                b.putString("firstTtlDoc", firstTtlDoc);
-                b.putString("namaDokter",namaDokter);
-                b.putString("specialtyDoc", specialtyDoc);
-                b.putString("urlImage",urlImg);
-                b.putString("alamat", alamat);
-                b.putString("rumahSakitID",rumahSakitID);
-                b.putString("facilityID", facility);
-                b.putString("namaRumahSakit", toolbarTitle);
-                b.putStringArray("praktekDokter", praktekDokter);
-                //Your id
-                //.putExtra("userID",userID);
-                myIntent.putExtras(b);
-                //.putExtra("userID",userID);
-                startActivityForResult(myIntent, 1);
-            }
-        });
+//        lvDokter.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                Object object = parent.getAdapter().getItem(position);
+//                Doctor dokter = (Doctor) object;
+//                String dokterID =  dokter.getDoc_id();
+//                String firstTtlDoc = dokter.getFrontTtlDoc();
+//                String namaDokter = dokter.getNameDoc();
+//                String specialtyDoc = dokter.getSpecialty();
+//                //Drawable imageDr = dokter.getDoc_pic_id();
+//                String urlImg = dokter.getImageUrl();
+//                BookingActivity bookingActivity = new BookingActivity();
+//               // bookingActivity.setImageDokter(imageDr);
+//
+//                Intent myIntent = new Intent(DoctorListActivity.this ,BookingActivity.class);
+//                Bundle b = new Bundle();
+//                b.putString("idDokter", dokterID);
+//                b.putString("userID", userID);
+//                b.putString("personalID",idDokter[position]);
+//                b.putString("firstTtlDoc", firstTtlDoc);
+//                b.putString("namaDokter",namaDokter);
+//                b.putString("specialtyDoc", specialtyDoc);
+//                b.putString("urlImage",urlImg);
+//                b.putString("alamat", alamat);
+//                b.putString("rumahSakitID",rumahSakitID);
+//                b.putString("facilityID", facility);
+//                b.putString("namaRumahSakit", toolbarTitle);
+//                b.putStringArray("praktekDokter", praktekDokter);
+//                //Your id
+//                //.putExtra("userID",userID);
+//                myIntent.putExtras(b);
+//                //.putExtra("userID",userID);
+//                startActivityForResult(myIntent, 1);
+//            }
+//        });
 
 
     }
@@ -435,15 +443,15 @@ public class DoctorListActivity extends AppCompatActivity{
 //                            tvNameHosp.setText(jsonObject1.getString("InstitutionName"));
                         }
 
-                        mDokterList.add(new Doctor(id, photo, frontTitle, name, spesiality, image,"Lihat Kualifikasi",tittle));
+                        mDokterList.add(new Doctor(id, image, frontTitle, name, spesiality, image,"Lihat Kualifikasi",tittle));
 
 
                         
 //                        new ImageDrawable(mDokterList).execute();
                     }
-                    dAdapter = new DoctorListAdapter(getApplicationContext(), mDokterList);
+                    rAdapter = new RecycleAdapter(getApplicationContext(), mDokterList);
 //                        dAdapter.filter(spesial);
-                    lvDokter.setAdapter(dAdapter);
+                    lvDokter.setAdapter(rAdapter);
 //                    for (Doctor currentDokter : mDokterList) {
 //                        new ImageDrawable(currentDokter).execute();
 //                    }
@@ -558,7 +566,7 @@ public class DoctorListActivity extends AppCompatActivity{
         protected Drawable doInBackground(String... params) {
             //return null;
             Drawable imageDrawable = LoadImageFromWebOperations(doctor.getImageUrl());
-            this.doctor.setDoc_pic_id(imageDrawable);
+            //this.doctor.setDoc_pic_id(imageDrawable);
 
             return imageDrawable;
         }
@@ -567,6 +575,88 @@ public class DoctorListActivity extends AppCompatActivity{
 //        protected void onPostExecute(Drawable drawable) {
 //            super.onPostExecute(drawable);
 //
+//        }
+    }
+    public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.DoctorViewHolder> {
+        private List<Doctor> mDoctorList;
+        private Context context;
+        private ArrayList<Doctor> mOriginalValues;
+        public RecycleAdapter (Context context,List<Doctor> mDoctorList){
+            this.mDoctorList = mDoctorList;
+            this.context = context;
+            this.mOriginalValues = new ArrayList<Doctor>();
+            this.mOriginalValues.addAll(mDoctorList);
+
+        }
+
+        public class DoctorViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+            public ImageView imgDview ;
+            public TextView tvFrontTitle;
+            public TextView tvTittle;
+            public TextView tvDrname;
+            public TextView tvDrspecialty;
+            public TextView btnKualiifikasi;
+
+            public DoctorViewHolder(View newDview) {
+                super(newDview);
+                imgDview = (ImageView)newDview.findViewById(R.id.iv_doc_pic_list);
+                tvFrontTitle = (TextView)newDview.findViewById(R.id.tv_FrontTitleDr);
+                tvTittle = (TextView)newDview.findViewById(R.id.tv_specialty_list) ;
+                tvDrname = (TextView)newDview.findViewById(R.id.tv_list_drname);
+                tvDrspecialty = (TextView)newDview.findViewById(R.id.tv_tittle_list);
+                btnKualiifikasi = (TextView) newDview.findViewById(R.id.btn_kualiifikasi);
+            }
+            @Override
+            public void onClick(View v) {
+
+            }
+        }
+
+        @Override
+        public DoctorViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+
+            LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
+            View listItem= layoutInflater.inflate(R.layout.doctor_list, parent, false);
+            DoctorViewHolder viewHolder = new DoctorViewHolder(listItem);
+            return viewHolder;
+        }
+
+
+        @Override
+        public void onBindViewHolder(DoctorViewHolder holder, int position) {
+//            holder.imgDview.setImageDrawable(mDoctorList.get(position).getDoc_pic_id());
+
+            Picasso.with(context).load(mDoctorList.get(position).getDoc_pic_id()).into(holder.imgDview);
+            holder.tvFrontTitle.setText(mDoctorList.get(position).getFrontTtlDoc());
+            holder.tvDrname.setText(mDoctorList.get(position).getNameDoc());
+            holder.tvDrspecialty.setText(mDoctorList.get(position).getSpecialty());
+            holder.btnKualiifikasi.setText(mDoctorList.get(position).getKualifikasi());
+            holder.tvTittle.setText(mDoctorList.get(position).getTittle());
+
+        }
+
+        @Override
+        public int getItemCount() {
+            return mDoctorList.size();
+        }
+        public void filter(String charText) {
+            charText = charText.toLowerCase(Locale.getDefault());
+            mDoctorList.clear();
+            if (charText.length() == 0) {
+                mDoctorList.addAll(mOriginalValues);
+            } else {
+                for (Doctor wp : mOriginalValues) {
+                    if (wp.getSpecialty().toLowerCase(Locale.getDefault()).contains(charText)) {
+                        mDoctorList.add(wp);
+                    }
+                }
+            }
+            notifyDataSetChanged();
+        }
+
+//        @Override
+//        public void onAttachedToRecyclerView(RecyclerView recyclerView) {
+//            super.onAttachedToRecyclerView(recyclerView);
 //        }
     }
 }

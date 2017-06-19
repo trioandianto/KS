@@ -1,14 +1,12 @@
 package com.kliksembuh.ks.models;
 
-import android.graphics.drawable.Drawable;
-
 /**
  * Created by Trio Andianto on 2/6/2017.
  */
 
 public class Doctor {
     private String doc_id;
-    private Drawable doc_pic_id;
+    private String doc_pic_id;
     private String frontTtlDoc;
     private String nameDoc;
     private String specialty;
@@ -19,7 +17,7 @@ public class Doctor {
 
 
     // Constructor
-    public Doctor(String doc_id, Drawable doc_pic_id, String frontTtlDoc, String nameDoc, String specialty,
+    public Doctor(String doc_id, String doc_pic_id, String frontTtlDoc, String nameDoc, String specialty,
                   String imageUrl, String kualifikasi, String tittle) {
         this.doc_id = doc_id;
         this.doc_pic_id = doc_pic_id;
@@ -56,11 +54,11 @@ public class Doctor {
         this.doc_id = doc_id;
     }
 
-    public Drawable getDoc_pic_id() {
+    public String getDoc_pic_id() {
         return doc_pic_id;
     }
 
-    public void setDoc_pic_id(Drawable doc_pic_id) {
+    public void setDoc_pic_id(String doc_pic_id) {
         this.doc_pic_id = doc_pic_id;
     }
 

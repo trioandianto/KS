@@ -44,7 +44,7 @@ public class TabPelayananActivity extends Fragment{
             @Override
             public void onClick(View view) {
 //                Intent myIntent = new Intent(view.getContext(),DoctorListActivity.class);
-                Intent myIntent = new Intent(view.getContext(),PatientFormActivity.class);
+                Intent myIntent = new Intent(view.getContext(),RecycleViewActivity.class);
                 startActivityForResult(myIntent, 0);
             }
         });
