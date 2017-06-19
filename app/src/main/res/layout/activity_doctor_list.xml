@@ -299,7 +299,7 @@
                     android:layout_width="160dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginLeft="20dp"
+                    android:layout_marginLeft="9dp"
                     android:background="#eb2698">
 
                     <Spinner
