@@ -1,21 +1,19 @@
 package com.kliksembuh.ks.models;
 
-import android.graphics.drawable.Drawable;
-
 /**
  * Created by Trio Andianto on 2/1/2017.
  */
 public class Hospital {
     private String id;
-    private Drawable hospital_pic_id;
+    private String hospital_pic_id;
     private String name;
     private String address;
     private String phoneNbr;
     private String capabilitiesDesc;
     private String stringImg;
-    private Drawable iv_image1;
-    private Drawable iv_image2;
-    private Drawable iv_image3;
+    private String iv_image1;
+    private String iv_image2;
+    private String iv_image3;
     private String moreInfoInsurance;
     private String igd;
     private String bpjs;
@@ -28,8 +26,8 @@ public class Hospital {
 
     // Constructor
 
-    public Hospital(String id, Drawable hospital_pic_id, String name, String address, String phoneNbr, String capabilitiesDesc, String stringImg,
-                    Drawable img1, Drawable img2, Drawable img3,String moreInfoInsurance, String igd, String bpjs, String fclt1,
+    public Hospital(String id, String hospital_pic_id, String name, String address, String phoneNbr, String capabilitiesDesc, String stringImg,
+                    String img1, String img2, String img3,String moreInfoInsurance, String igd, String bpjs, String fclt1,
                     String fclt2, String fclt3, String semua, int like) {
         this.id = id;
         this.hospital_pic_id = hospital_pic_id;
@@ -61,11 +59,11 @@ public class Hospital {
         this.id = id;
     }
 
-    public Drawable getHospital_pic_id() {
+    public String getHospital_pic_id() {
         return hospital_pic_id;
     }
 
-    public void setHospital_pic_id(Drawable hospital_pic_id) {
+    public void setHospital_pic_id(String hospital_pic_id) {
         this.hospital_pic_id = hospital_pic_id;
     }
 
@@ -107,27 +105,27 @@ public class Hospital {
     public void setStringImg(String stringImg) {
         this.stringImg = stringImg;
     }
-    public Drawable getIv_image1() {
+    public String getIv_image1() {
         return iv_image1;
     }
 
-    public void setIv_image1(Drawable iv_image1) {
+    public void setIv_image1(String iv_image1) {
         this.iv_image1 = iv_image1;
     }
 
-    public Drawable getIv_image2() {
+    public String getIv_image2() {
         return iv_image2;
     }
 
-    public void setIv_image2(Drawable iv_image2) {
+    public void setIv_image2(String iv_image2) {
         this.iv_image2 = iv_image2;
     }
 
-    public Drawable getIv_image3() {
+    public String getIv_image3() {
         return iv_image3;
     }
 
-    public void setIv_image3(Drawable iv_image3) {
+    public void setIv_image3(String iv_image3) {
         this.iv_image3 = iv_image3;
     }
     public String getMoreInfoInsurance() {

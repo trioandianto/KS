@@ -66,7 +66,7 @@ public class HospitalListAdapter<T> extends BaseAdapter implements Filterable {
         });
 
 
-        imgView.setImageDrawable(mHospitalList.get(position).getHospital_pic_id());
+        //imgView.setImageDrawable(mHospitalList.get(position).getHospital_pic_id());
         tvName.setText(mHospitalList.get(position).getName());
         tvAddress.setText(mHospitalList.get(position).getAddress());
         tvPhoneNbr.setText(mHospitalList.get(position).getPhoneNbr());

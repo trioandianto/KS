@@ -26,6 +26,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.kliksembuh.ks.models.Hospital;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -33,7 +34,6 @@ import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
@@ -167,16 +167,6 @@ public class HospitalList extends AppCompatActivity {
             }
         }
     }
-    public Drawable LoadImageFromWebOperations(String url) {
-        try {
-            InputStream is = (InputStream) new URL(url).getContent();
-            Drawable d = Drawable.createFromStream(is, "src name");
-            return d;
-        } catch (Exception e) {
-            return null;
-        }
-
-    }
     public class HospitalListAsync extends AsyncTask<String, Void, String> {
         private String mSubdistrict;
         private String mSpesialisai;
@@ -262,10 +252,10 @@ public class HospitalList extends AppCompatActivity {
                         String name = jsonObject.getString("InstitutionName");
                         nameRumahSakit[i] = name;
                         String image = jsonObject.getString("ImgUrl");
-                        Drawable photo = LoadImageFromWebOperations(image);
-                        Drawable img1=null;
-                        Drawable img2=null;
-                        Drawable img3=null;
+
+                        String img1=null;
+                        String img2=null;
+                        String img3=null;
                         String selengkapnya="";
                         String igd = "";
                         String bpjs = "";
@@ -299,13 +289,13 @@ public class HospitalList extends AppCompatActivity {
                                 JSONObject jsonObject1 = jsonArray1.getJSONObject(k);
                                 String img = jsonObject1.getString("ImageUrl");
                                 if(k==0){
-                                    img1 = LoadImageFromWebOperations(img);
+                                    img1 = img;
                                 }
                                 else if (k==1){
-                                    img2 = LoadImageFromWebOperations(img);
+                                    img2 = img;
 
                                 }else if(k==2){
-                                    img3 = LoadImageFromWebOperations(img);
+                                    img3 = img;
 
                                 }
                             }catch (Exception e){
@@ -341,7 +331,7 @@ public class HospitalList extends AppCompatActivity {
                             selengkapnya = "Lihat Semua Asuransi ("+arr+")";
 
 
-                        mHospitalList.add(new Hospital(id, photo, name, addres, phNumber, null, image, img1, img2, img3, selengkapnya, igd,bpjs, fct1, fct2, fct3, semua, total));
+                        mHospitalList.add(new Hospital(id, image, name, addres, phNumber, null, image, img1, img2, img3, selengkapnya, igd,bpjs, fct1, fct2, fct3, semua, total));
 
                     }
                     finalListHospital = String.valueOf(mHospitalList.size());
@@ -383,27 +373,6 @@ public class HospitalList extends AppCompatActivity {
         protected void onCancelled() {
 
         }
-    }
-    public class ImageDrawable extends AsyncTask<String, Void, Drawable>{
-
-        Hospital hospital;
-        public ImageDrawable(Hospital hospital){
-            this.hospital  = hospital;
-        }
-        @Override
-        protected Drawable doInBackground(String... params) {
-            //return null;
-            Drawable imageDrawable = LoadImageFromWebOperations(hospital.getStringImg());
-            this.hospital.setHospital_pic_id(imageDrawable);
-
-            return imageDrawable;
-        }
-
-//        @Override
-//        protected void onPostExecute(Drawable drawable) {
-//            super.onPostExecute(drawable);
-//
-//        }
     }
     public class HospitalListAdapterNew<T> extends BaseAdapter implements Filterable {
         private Context mContext;
@@ -508,13 +477,13 @@ public class HospitalList extends AppCompatActivity {
             });
 
 
-            imgView.setImageDrawable(mHospitalList.get(position).getHospital_pic_id());
+            Picasso.with(mContext).load(mHospitalList.get(position).getHospital_pic_id()).into(imgView);
             tvName.setText(mHospitalList.get(position).getName());
             tvAddress.setText(mHospitalList.get(position).getAddress());
             tvPhoneNbr.setText(mHospitalList.get(position).getPhoneNbr());
-            image1.setImageDrawable(mHospitalList.get(position).getIv_image1());
-            image2.setImageDrawable(mHospitalList.get(position).getIv_image2());
-            image3.setImageDrawable(mHospitalList.get(position).getIv_image3());
+            Picasso.with(mContext).load(mHospitalList.get(position).getIv_image1()).into(image1);
+            Picasso.with(mContext).load(mHospitalList.get(position).getIv_image2()).into(image2);
+            Picasso.with(mContext).load(mHospitalList.get(position).getIv_image3()).into(image3);
             tvLihatSelengkapnya.setText(mHospitalList.get(position).getMoreInfoInsurance());
             tvIGD.setText(mHospitalList.get(position).getIgd());
             tv24hour.setText(mHospitalList.get(position).getBpjs());

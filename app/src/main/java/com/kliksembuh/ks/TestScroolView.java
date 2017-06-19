@@ -231,10 +231,10 @@ public class TestScroolView extends AppCompatActivity{
                 String firstTtlDoc = dokter.getFrontTtlDoc();
                 String namaDokter = dokter.getNameDoc();
                 String specialtyDoc = dokter.getSpecialty();
-                Drawable imageDr = dokter.getDoc_pic_id();
+                //Drawable imageDr = dokter.getDoc_pic_id();
                 String urlImg = dokter.getImageUrl();
                 BookingActivity bookingActivity = new BookingActivity();
-                bookingActivity.setImageDokter(imageDr);
+                //bookingActivity.setImageDokter(imageDr);
 
                 Intent myIntent = new Intent(TestScroolView.this ,BookingActivity.class);
                 Bundle b = new Bundle();
@@ -432,7 +432,7 @@ public class TestScroolView extends AppCompatActivity{
 //                            tvNameHosp.setText(jsonObject1.getString("InstitutionName"));
                         }
 
-                        mDokterList.add(new Doctor(id, photo, frontTitle, name, spesiality, image,"Lihat Kualifikasi",tittle));
+                        mDokterList.add(new Doctor(id, image, frontTitle, name, spesiality, image,"Lihat Kualifikasi",tittle));
 
 
                         
@@ -555,7 +555,7 @@ public class TestScroolView extends AppCompatActivity{
         protected Drawable doInBackground(String... params) {
             //return null;
             Drawable imageDrawable = LoadImageFromWebOperations(doctor.getImageUrl());
-            this.doctor.setDoc_pic_id(imageDrawable);
+            //this.doctor.setDoc_pic_id(imageDrawable);
 
             return imageDrawable;
         }
