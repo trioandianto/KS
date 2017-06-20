@@ -3,7 +3,6 @@ package com.kliksembuh.ks;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
@@ -27,7 +26,6 @@ import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
@@ -54,7 +52,7 @@ public class MyAppointmentConfirmedActivity extends Fragment implements ListView
     private List<HistoryUpComing> historyUpComingList;
     private Context globalContext = null;
     private int imageId;
-    private Drawable drawableDoctor[];
+    private String drawableDoctor[];
     private ProgressDialog pDialog;
     private TextView tvStatusConfirmed;
     private String userID;
@@ -143,12 +141,12 @@ public class MyAppointmentConfirmedActivity extends Fragment implements ListView
                         }
                         in.close();
                         JSONArray jsonArray = new JSONArray(sb.toString());
-                        drawableDoctor = new Drawable[jsonArray.length()];
+                        drawableDoctor = new String[jsonArray.length()];
                         String imageDoc;
                         for (int i = 0; i < jsonArray.length(); i++){
                             JSONObject jsonObject = jsonArray.getJSONObject(i);
                             imageDoc = jsonObject.getString("MedicalPersonnelImageUrl");
-                            drawableDoctor[i] = LoadImageFromWebOperations(imageDoc);
+                            drawableDoctor[i] = imageDoc;
                         }
 
                         return sb.toString();
@@ -271,15 +269,6 @@ public class MyAppointmentConfirmedActivity extends Fragment implements ListView
         @Override
         protected void onCancelled() {
 
-        }
-        public Drawable LoadImageFromWebOperations(String url) {
-            try {
-                InputStream is = (InputStream) new URL(url).getContent();
-                Drawable d = Drawable.createFromStream(is, "src name");
-                return d;
-            } catch (Exception e) {
-                return null;
-            }
         }
 
         public String getTime(String Vertrektijd){

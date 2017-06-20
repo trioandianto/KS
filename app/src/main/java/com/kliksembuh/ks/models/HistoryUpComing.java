@@ -1,7 +1,5 @@
 package com.kliksembuh.ks.models;
 
-import android.graphics.drawable.Drawable;
-
 /**
  * Created by Trio Andianto on 4/12/2017.
  */
@@ -9,7 +7,7 @@ import android.graphics.drawable.Drawable;
 public class HistoryUpComing {
     private int idHistoryUpComing;
     private String namaDokter;
-    private Drawable imgHistoryDoc;
+    private String imgHistoryDoc;
     private String rumahSakit;
     private String tanggal;
     // private String alamat;
@@ -24,7 +22,7 @@ public class HistoryUpComing {
     private String timeStart;
     private String timeEnd;
 
-    public HistoryUpComing(int idHistoryUpComing, String namaDokter, Drawable imgHistoryDoc, String rumahSakit, String tanggal,
+    public HistoryUpComing(int idHistoryUpComing, String namaDokter, String imgHistoryDoc, String rumahSakit, String tanggal,
                            String noAppointment, String specialtyDoc, String appointmentDate, String statusHistory, String waktuBerobat, String timeStart, String timeEnd) {
 
         this.idHistoryUpComing = idHistoryUpComing;
@@ -58,11 +56,11 @@ public class HistoryUpComing {
         this.namaDokter = namaDokter;
     }
 
-    public Drawable getImgHistoryDoc() {
+    public String getImgHistoryDoc() {
         return imgHistoryDoc;
     }
 
-    public void setImgHistoryDoc(Drawable imgHistoryDoc) {
+    public void setImgHistoryDoc(String imgHistoryDoc) {
         this.imgHistoryDoc = imgHistoryDoc;
     }
 

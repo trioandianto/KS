@@ -43,8 +43,7 @@ public class TabPelayananActivity extends Fragment{
         btnsearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Intent myIntent = new Intent(view.getContext(),DoctorListActivity.class);
-                Intent myIntent = new Intent(view.getContext(),RecycleViewActivity.class);
+                Intent myIntent = new Intent(view.getContext(),DoctorListActivity.class);
                 startActivityForResult(myIntent, 0);
             }
         });

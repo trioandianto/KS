@@ -57,7 +57,7 @@ public class MyAppointmentUpComingActivity extends Fragment implements ListView.
     private List<HistoryUpComing> historyUpComingList;
     private Context globalContext = null;
     private int imageId;
-    private Drawable drawableDoctor[];
+    private String drawableDoctor[];
     private ProgressDialog pDialog;
     private String userID;
     private String transaksiID;
@@ -167,12 +167,12 @@ public class MyAppointmentUpComingActivity extends Fragment implements ListView.
                         }
                         in.close();
                         JSONArray jsonArray = new JSONArray(sb.toString());
-                        drawableDoctor = new Drawable[jsonArray.length()];
+                        drawableDoctor = new String[jsonArray.length()];
                         String imageDoc;
                         for (int i = 0; i < jsonArray.length(); i++){
                             JSONObject jsonObject = jsonArray.getJSONObject(i);
                             imageDoc = jsonObject.getString("MedicalPersonnelImageUrl");
-                            drawableDoctor[i] = LoadImageFromWebOperations(imageDoc);
+                            drawableDoctor[i] = imageDoc;
                         }
 
                         return sb.toString();

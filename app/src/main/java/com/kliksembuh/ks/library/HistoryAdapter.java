@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.kliksembuh.ks.R;
 import com.kliksembuh.ks.models.HistoryUpComing;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -62,7 +63,7 @@ public class HistoryAdapter extends BaseAdapter {
         tvAppointment.setText("# " + appointment + " / " + createdDate );
 //        tvDate.setText(mHistory.get(position).getTanggal());
         tvHistoryRumahSakit.setText(mHistory.get(position).getRumahSakit());
-        imgDview.setImageDrawable(mHistory.get(position).getImgHistoryDoc());
+        Picasso.with(mContext).load(mHistory.get(position).getImgHistoryDoc()).into(imgDview);
         tvDrname.setText(mHistory.get(position).getNamaDokter());
         tvAppointSchedule.setText(mHistory.get(position).getAppointmentDate());
         tvSpecialty.setText(mHistory.get(position).getSpecialtyDoc())   ;
