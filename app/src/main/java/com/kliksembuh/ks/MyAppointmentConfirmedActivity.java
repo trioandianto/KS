@@ -270,22 +270,5 @@ public class MyAppointmentConfirmedActivity extends Fragment implements ListView
         protected void onCancelled() {
 
         }
-
-        public String getTime(String Vertrektijd){
-            final SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
-            Date dateObj;
-            String newDateStr = null;
-            try
-            {
-                dateObj = df.parse(Vertrektijd);
-                SimpleDateFormat fd = new SimpleDateFormat("HH:mm");
-                newDateStr = fd.format(dateObj);
-            }
-            catch (Exception e)
-            {
-                e.printStackTrace();
-            }
-            return newDateStr;
-        }
     }
 }
