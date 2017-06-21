@@ -1,6 +1,7 @@
 package com.kliksembuh.ks.library;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,45 +10,53 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.kliksembuh.ks.R;
-import com.kliksembuh.ks.models.Doctor;
+import com.kliksembuh.ks.models.HistoryUpComing;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 /**
  * Created by Trio Andianto on 6/20/2017.
  */
 
 public class HistoryAdapterRecycler extends RecyclerView.Adapter<HistoryAdapterRecycler.DoctorViewHolder>{
-    private List<Doctor> mDoctorList;
+    private List<HistoryUpComing> mHistory;
     private Context context;
-    private ArrayList<Doctor> mOriginalValues;
+    private ArrayList<HistoryUpComing> mOriginalValues;
 
-    public HistoryAdapterRecycler (Context context,List<Doctor> mDoctorList){
-        this.mDoctorList = mDoctorList;
+    public HistoryAdapterRecycler (Context context,List<HistoryUpComing> mHistory){
+        this.mHistory = mHistory;
         this.context = context;
-        this.mOriginalValues = new ArrayList<Doctor>();
-        this.mOriginalValues.addAll(mDoctorList);
+        this.mOriginalValues = new ArrayList<HistoryUpComing>();
+        this.mOriginalValues.addAll(mHistory);
     }
 
     public class DoctorViewHolder extends RecyclerView.ViewHolder {
-        public ImageView imgDview ;
-        public TextView tvFrontTitle;
-        public TextView tvTittle;
-        public TextView tvDrname;
-        public TextView tvDrspecialty;
-        public TextView btnKualiifikasi;
+        TextView tvAppointment;
 
-        public DoctorViewHolder(View newDview) {
-            super(newDview);
-            imgDview = (ImageView)newDview.findViewById(R.id.iv_doc_pic_list);
-            tvFrontTitle = (TextView)newDview.findViewById(R.id.tv_FrontTitleDr);
-            tvTittle = (TextView)newDview.findViewById(R.id.tv_specialty_list) ;
-            tvDrname = (TextView)newDview.findViewById(R.id.tv_list_drname);
-            tvDrspecialty = (TextView)newDview.findViewById(R.id.tv_tittle_list);
-            btnKualiifikasi = (TextView) newDview.findViewById(R.id.btn_kualiifikasi);
+        TextView tvHistoryRumahSakit;
+        ImageView imgDview;
+        TextView tvDrname ;
+        TextView tvSpecialty;
+        TextView tvAppointSchedule;
+        TextView tvStatusHistory;
+        TextView tvWaktuBerobat;
+        TextView tvTimeStart;
+        TextView tvTimeEnd;
+
+        public DoctorViewHolder(View newHview) {
+            super(newHview);
+            tvAppointment = (TextView)newHview.findViewById(R.id.tvNoAppointmentHistory);
+            tvHistoryRumahSakit = (TextView)newHview.findViewById(R.id.tvHistoryRumahSakit);
+            imgDview = (ImageView)newHview.findViewById(R.id.ivDocPicHistory);
+            tvDrname = (TextView)newHview.findViewById(R.id.tv_Drname_History);
+            tvSpecialty = (TextView)newHview.findViewById(R.id.tv_SpecialtyHistory);
+            tvAppointSchedule = (TextView) newHview.findViewById(R.id.tvBookSchedule);
+            tvStatusHistory = (TextView)newHview.findViewById(R.id.tvStatusHistory);
+            tvWaktuBerobat = (TextView)newHview.findViewById(R.id.tvWaktuBerobat);
+            tvTimeStart = (TextView)newHview.findViewById(R.id.tvTimeStart);
+            tvTimeEnd = (TextView)newHview.findViewById(R.id.tvTimeEnd);
         }
 
     }
@@ -74,13 +83,31 @@ public class HistoryAdapterRecycler extends RecyclerView.Adapter<HistoryAdapterR
     @Override
     public void onBindViewHolder(DoctorViewHolder holder, int position) {
 //            holder.imgDview.setImageDrawable(mDoctorList.get(position).getDoc_pic_id());
+        String appointment = mHistory.get(position).getNoAppointment();
+        String createdDate = mHistory.get(position).getTanggal();
 
-        Picasso.with(context).load(mDoctorList.get(position).getDoc_pic_id()).into(holder.imgDview);
-        holder.tvFrontTitle.setText(mDoctorList.get(position).getFrontTtlDoc());
-        holder.tvDrname.setText(mDoctorList.get(position).getNameDoc());
-        holder.tvDrspecialty.setText(mDoctorList.get(position).getSpecialty());
-        holder.btnKualiifikasi.setText(mDoctorList.get(position).getKualifikasi());
-        holder.tvTittle.setText(mDoctorList.get(position).getTittle());
+        holder.tvAppointment.setText("# " + appointment + " / " + createdDate );
+//        tvDate.setText(mHistory.get(position).getTanggal());
+        holder.tvHistoryRumahSakit.setText(mHistory.get(position).getRumahSakit());
+
+        Picasso.with(context).load(mHistory.get(position).getImgHistoryDoc()).into(holder.imgDview);
+        holder.tvDrname.setText(mHistory.get(position).getNamaDokter());
+        holder.tvAppointSchedule.setText(mHistory.get(position).getAppointmentDate());
+        holder.tvSpecialty.setText(mHistory.get(position).getSpecialtyDoc())   ;
+        holder.tvStatusHistory.setText(mHistory.get(position).getStatusHistory());
+        String convColor = holder.tvStatusHistory.getText().toString();
+        if(convColor.equals("Menunggu Konfirmasi")){
+//            tvStatusHistory.setBackgroundResource(R.color.red);}
+            holder.tvStatusHistory.setTextColor(Color.parseColor("#d50000"));}
+        if(convColor.equals("Dikonfirmasi")){
+            holder.tvStatusHistory.setTextColor(Color.parseColor("#eb3812"));}
+        if(convColor.equals("Telah diulas")){
+            holder.tvStatusHistory.setTextColor(Color.parseColor("#FF9800"));}
+        if(convColor.equals("Selesai")){
+            holder.tvStatusHistory.setTextColor(Color.parseColor("#2e7d32"));}
+        holder.tvWaktuBerobat.setText(mHistory.get(position).getWaktuBerobat());
+        holder.tvTimeStart.setText(mHistory.get(position).getTimeStart());
+        holder.tvTimeEnd.setText(mHistory.get(position).getTimeEnd());
 
     }
     @Override
@@ -90,20 +117,6 @@ public class HistoryAdapterRecycler extends RecyclerView.Adapter<HistoryAdapterR
 
     @Override
     public int getItemCount() {
-        return mDoctorList.size();
-    }
-    public void filter(String charText) {
-        charText = charText.toLowerCase(Locale.getDefault());
-        mDoctorList.clear();
-        if (charText.length() == 0) {
-            mDoctorList.addAll(mOriginalValues);
-        } else {
-            for (Doctor wp : mOriginalValues) {
-                if (wp.getSpecialty().toLowerCase(Locale.getDefault()).contains(charText)) {
-                    mDoctorList.add(wp);
-                }
-            }
-        }
-        notifyDataSetChanged();
+        return mHistory.size();
     }
 }

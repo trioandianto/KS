@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:orientation="vertical"
     android:layout_height="wrap_content">
-    <android.support.v7.widget.RecyclerView
+    <ListView
         android:layout_width="match_parent"
         android:divider="#00000000"
         android:paddingRight="0dip"
@@ -13,7 +13,7 @@
         android:background="@drawable/shape"
         android:layout_height="wrap_content"
         android:id="@+id/lvHistoryCompleted">
-    </android.support.v7.widget.RecyclerView>
+    </ListView>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

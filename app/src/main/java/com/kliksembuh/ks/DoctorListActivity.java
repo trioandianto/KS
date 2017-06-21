@@ -14,7 +14,6 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -135,7 +134,6 @@ public class DoctorListActivity extends AppCompatActivity{
         rAdapter = new RecycleAdapter(getApplicationContext(), mDokterList);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         lvDokter.setLayoutManager(mLayoutManager);
-        lvDokter.setItemAnimator(new DefaultItemAnimator());
         lvDokter.setAdapter(rAdapter);
         spinner = (Spinner)findViewById(R.id.spn_SpecialtyDoc);
         spnFilter = (Spinner)findViewById(R.id.spn_filter);
