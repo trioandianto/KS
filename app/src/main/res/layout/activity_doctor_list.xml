@@ -251,6 +251,7 @@
                         android:drawableLeft="@drawable/ic_chat_black_24dp"
                         android:drawablePadding="6dp"
                         android:gravity="left"
+                        android:clickable="true"
                         android:padding="8dp"
                         android:text="Kirim Pesan"
                         android:textColor="@color/grey_light"

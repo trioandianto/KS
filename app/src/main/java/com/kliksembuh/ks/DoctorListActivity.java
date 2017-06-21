@@ -46,6 +46,8 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Timer;
@@ -64,8 +66,8 @@ public class DoctorListActivity extends AppCompatActivity{
     private NestedScrollView nsDokter;
     private ObservableScrollView mScrollView;
     private LinearLayout dotsLayout;
-    private TextView[] dots;
-    private List<Doctor> mDokterList;
+    private TextView tvPesan;
+    private ArrayList<Doctor> mDokterList;
     List<String> list;
     private ViewPagerAdapter viewPagerAdapter;
     private CollapsingToolbarLayout collapsingToolbarLayout;
@@ -82,6 +84,7 @@ public class DoctorListActivity extends AppCompatActivity{
     private String [] praktekDokter;
     private android.support.design.widget.FloatingActionButton ivMaps;
     private Drawable load;
+    private int sorting;
     private String alamat;
     // Slider for ViewPager
     int currentPage = 0;
@@ -137,12 +140,26 @@ public class DoctorListActivity extends AppCompatActivity{
         spinner = (Spinner)findViewById(R.id.spn_SpecialtyDoc);
         spnFilter = (Spinner)findViewById(R.id.spn_filter);
         List<String> list1 = new ArrayList<String>();
-        list1.add("Urutkan");
         list1.add("A-Z");
         list1.add("Z-A");
         ArrayAdapter arrayAdapter1 = new ArrayAdapter<String>(this,R.layout.spinner_style,list1);
         arrayAdapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spnFilter.setAdapter(arrayAdapter1);
+        spnFilter.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                sorting = position;
+                if(rAdapter!=null){
+                    rAdapter.filterAndSorting(position, spesial);
+                    lvDokter.setAdapter(rAdapter);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
         //mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.mapListHospital);
         List<String> list = new ArrayList<String>();
@@ -155,7 +172,7 @@ public class DoctorListActivity extends AppCompatActivity{
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 spesial =  parent.getItemAtPosition(position).toString();
                 if (rAdapter!=null){
-                    rAdapter.filter(spesial);
+                    rAdapter.filterAndSorting(sorting, spesial);
                     lvDokter.setAdapter(rAdapter);
                 }
             }
@@ -269,6 +286,14 @@ public class DoctorListActivity extends AppCompatActivity{
 //            }
 //        });
 
+        // Kirim Pesan
+        tvPesan = (TextView)findViewById(R.id.tv_KirimPesan);
+        tvPesan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
 
     }
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -435,6 +460,13 @@ public class DoctorListActivity extends AppCompatActivity{
                         
 //                        new ImageDrawable(mDokterList).execute();
                     }
+                    Collections.sort(mDokterList, new Comparator<Doctor>(){
+                        @Override
+                        public int compare(Doctor lhs, Doctor rhs) {
+                            return lhs.getNameDoc().compareTo(rhs.getNameDoc());
+                        }
+
+                    });
                     rAdapter = new RecycleAdapter(getApplicationContext(), mDokterList);
 //                        dAdapter.filter(spesial);
                     lvDokter.setAdapter(rAdapter);
@@ -543,12 +575,12 @@ public class DoctorListActivity extends AppCompatActivity{
         }
     }
     public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.DoctorViewHolder> {
-        private List<Doctor> mDoctorList;
+        private List<Doctor> mDoctorListAdaper;
         private Context context;
         private ArrayList<Doctor> mOriginalValues;
 
         public RecycleAdapter (Context context,List<Doctor> mDoctorList){
-            this.mDoctorList = mDoctorList;
+            this.mDoctorListAdaper = mDoctorList;
             this.context = context;
             this.mOriginalValues = new ArrayList<Doctor>();
             this.mOriginalValues.addAll(mDoctorList);
@@ -585,7 +617,7 @@ public class DoctorListActivity extends AppCompatActivity{
                 @Override
                 public void onClick(View v) {
                     int i = viewHolder.getAdapterPosition();
-                    Object object = mDoctorList.get(i);
+                    Object object = mDoctorListAdaper.get(i);
                     Doctor dokter = (Doctor) object;
                     String dokterID =  dokter.getDoc_id();
                     String firstTtlDoc = dokter.getFrontTtlDoc();
@@ -627,12 +659,12 @@ public class DoctorListActivity extends AppCompatActivity{
         public void onBindViewHolder(DoctorViewHolder holder, int position) {
 //            holder.imgDview.setImageDrawable(mDoctorList.get(position).getDoc_pic_id());
 
-            Picasso.with(context).load(mDoctorList.get(position).getDoc_pic_id()).into(holder.imgDview);
-            holder.tvFrontTitle.setText(mDoctorList.get(position).getFrontTtlDoc());
-            holder.tvDrname.setText(mDoctorList.get(position).getNameDoc());
-            holder.tvDrspecialty.setText(mDoctorList.get(position).getSpecialty());
-            holder.btnKualiifikasi.setText(mDoctorList.get(position).getKualifikasi());
-            holder.tvTittle.setText(mDoctorList.get(position).getTittle());
+            Picasso.with(context).load(mDoctorListAdaper.get(position).getDoc_pic_id()).into(holder.imgDview);
+            holder.tvFrontTitle.setText(mDoctorListAdaper.get(position).getFrontTtlDoc());
+            holder.tvDrname.setText(mDoctorListAdaper.get(position).getNameDoc());
+            holder.tvDrspecialty.setText(mDoctorListAdaper.get(position).getSpecialty());
+            holder.btnKualiifikasi.setText(mDoctorListAdaper.get(position).getKualifikasi());
+            holder.tvTittle.setText(mDoctorListAdaper.get(position).getTittle());
 
         }
         @Override
@@ -642,21 +674,42 @@ public class DoctorListActivity extends AppCompatActivity{
 
         @Override
         public int getItemCount() {
-            return mDoctorList.size();
+            return mDoctorListAdaper.size();
         }
-        public void filter(String charText) {
-            charText = charText.toLowerCase(Locale.getDefault());
-            mDoctorList.clear();
-            if (charText.length() == 0) {
-                mDoctorList.addAll(mOriginalValues);
-            } else {
-                for (Doctor wp : mOriginalValues) {
-                    if (wp.getSpecialty().toLowerCase(Locale.getDefault()).contains(charText)) {
-                        mDoctorList.add(wp);
+        public void filterAndSorting (int sort, String spesial){
+            spesial = spesial.toLowerCase(Locale.getDefault());
+            mDoctorListAdaper.clear();
+            if (spesial.length() == 0) {
+                mDoctorListAdaper.addAll(mOriginalValues);
+            }
+            else{
+                for (Doctor wp : mOriginalValues){
+                    if (wp.getSpecialty().toLowerCase(Locale.getDefault()).contains(spesial)) {
+                        mDoctorListAdaper.add(wp);
                     }
                 }
             }
+            if(sort == 0){
+
+                Collections.sort(mDoctorListAdaper, new Comparator<Doctor>(){
+                    @Override
+                    public int compare(Doctor lhs, Doctor rhs) {
+                        return lhs.getNameDoc().compareTo(rhs.getNameDoc());
+                    }
+
+                });
+            }
+            else{
+                Collections.sort(mDoctorListAdaper, new Comparator<Doctor>(){
+                    @Override
+                    public int compare(Doctor lhs, Doctor rhs) {
+                        return rhs.getNameDoc().compareTo(lhs.getNameDoc());
+                    }
+
+                });
+            }
             notifyDataSetChanged();
+
         }
 
 //        @Override
