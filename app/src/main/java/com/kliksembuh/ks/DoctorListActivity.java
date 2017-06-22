@@ -17,6 +17,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.telephony.SmsManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,6 +29,7 @@ import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.SupportMapFragment;
 import com.kliksembuh.ks.library.ObservableScrollView;
@@ -96,10 +98,6 @@ public class DoctorListActivity extends AppCompatActivity{
     private SupportMapFragment mapFragment;
 
     int a = 0;
-
-    private static final String[]paths = {"Dokter Umum", "Dokter Gigi", "Dokter Mata"};
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -186,9 +184,6 @@ public class DoctorListActivity extends AppCompatActivity{
 //        lvDokter.setNestedScrollingEnabled(true);
 
         lvDokter.setNestedScrollingEnabled(true);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(DoctorListActivity.this,
-                android.R.layout.simple_spinner_item,paths);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         TextView tvLhtFasilitas = (TextView) findViewById(R.id.tvLihatFasilitas);
         tvLhtFasilitas.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -290,9 +285,23 @@ public class DoctorListActivity extends AppCompatActivity{
             @Override
             public void onClick(View v) {
 
+                sendSMS("085280065285","Coba coba aja.!");
             }
         });
 
+    }
+    // Send message
+    public void sendSMS(String phoneNo, String msg) {
+        try {
+            SmsManager smsManager = SmsManager.getDefault();
+            smsManager.sendTextMessage(phoneNo, null, msg, null, null);
+            Toast.makeText(getApplicationContext(), "Message Sent",
+                    Toast.LENGTH_LONG).show();
+        } catch (Exception ex) {
+            Toast.makeText(getApplicationContext(),ex.getMessage().toString(),
+                    Toast.LENGTH_LONG).show();
+            ex.printStackTrace();
+        }
     }
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -452,7 +461,7 @@ public class DoctorListActivity extends AppCompatActivity{
 //                            tvNameHosp.setText(jsonObject1.getString("InstitutionName"));
                         }
 
-                        mDokterList.add(new Doctor(id, image, frontTitle, name, spesiality, image,"Lihat Kualifikasi",tittle));
+                        mDokterList.add(new Doctor(personelCD, image, frontTitle, name, spesiality, image,"Lihat Kualifikasi",tittle));
 
 
                         
