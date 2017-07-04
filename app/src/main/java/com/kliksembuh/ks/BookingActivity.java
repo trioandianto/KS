@@ -816,21 +816,21 @@ public class BookingActivity extends AppCompatActivity implements ListView.OnIte
 
                 }
                 else if(bulan==7){
-                    bulanIni ="Juni";
-
-                }else if(bulan==8){
                     bulanIni ="Juli";
 
-                }else if(bulan==9){
+                }else if(bulan==8){
                     bulanIni ="Agustus";
 
-                }
-                else if(bulan==10){
+                }else if(bulan==9){
                     bulanIni ="September";
 
                 }
-                else if(bulan==11){
+                else if(bulan==10){
                     bulanIni ="Oktober";
+
+                }
+                else if(bulan==11){
+                    bulanIni ="November";
 
                 }else{
                     bulanIni ="Desember";
@@ -916,21 +916,21 @@ public class BookingActivity extends AppCompatActivity implements ListView.OnIte
 
                 }
                 else if(bulan==7){
-                    bulanIni ="Juni";
-
-                }else if(bulan==8){
                     bulanIni ="Juli";
 
-                }else if(bulan==9){
+                }else if(bulan==8){
                     bulanIni ="Agustus";
 
-                }
-                else if(bulan==10){
+                }else if(bulan==9){
                     bulanIni ="September";
 
                 }
-                else if(bulan==11){
+                else if(bulan==10){
                     bulanIni ="Oktober";
+
+                }
+                else if(bulan==11){
+                    bulanIni ="November";
 
                 }else{
                     bulanIni ="Desember";
