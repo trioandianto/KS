@@ -130,8 +130,13 @@ public class DoctorListActivity extends AppCompatActivity{
 
         lvDokter = (RecyclerView)findViewById(R.id.rvDetailRumahSakit);
         rAdapter = new RecycleAdapter(getApplicationContext(), mDokterList);
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
+        //RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
+        RecyclerView.LayoutManager mLayoutManager = new  LinearLayoutManager(getApplicationContext());
         lvDokter.setLayoutManager(mLayoutManager);
+        lvDokter.setHasFixedSize(true);
+        lvDokter.scrollToPosition(rAdapter.NON_VISIBLE_ITEMS);
+        lvDokter.setNestedScrollingEnabled(false);
+       //lvDokter.setLayoutManager(mLayoutManager);
         lvDokter.setAdapter(rAdapter);
         spinner = (Spinner)findViewById(R.id.spn_SpecialtyDoc);
         spnFilter = (Spinner)findViewById(R.id.spn_filter);
@@ -585,6 +590,8 @@ public class DoctorListActivity extends AppCompatActivity{
         private List<Doctor> mDoctorListAdaper;
         private Context context;
         private ArrayList<Doctor> mOriginalValues;
+        public static final int VISIBLE_ITEMS = 7;
+        public static final int NON_VISIBLE_ITEMS = 150;
 
         public RecycleAdapter (Context context,List<Doctor> mDoctorList){
             this.mDoctorListAdaper = mDoctorList;
