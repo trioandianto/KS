@@ -461,7 +461,7 @@ public class DoctorListActivity extends AppCompatActivity{
 //                            tvNameHosp.setText(jsonObject1.getString("InstitutionName"));
                         }
 
-                        mDokterList.add(new Doctor(personelCD, image, frontTitle, name, spesiality, image,"Lihat Kualifikasi",tittle));
+                        mDokterList.add(new Doctor(id, image, frontTitle, name, spesiality, image,"Lihat Kualifikasi",tittle));
 
 
                         
